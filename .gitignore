@@ -1,0 +1,31 @@
+# Visual Studio workspace caches and per-user settings
+.vs/
+*.suo
+*.user
+
+# .NET / Java build output
+bin/
+obj/
+build/
+target/
+.gradle/
+.vscode-java-bin/
+*.class
+
+# Published Virtual MCS packages
+/VirtualMCS/dist/
+/VirtualMCS/dist-*/
+/VirtualMCS/artifacts/
+/VirtualMCS/KukaVirtualMCS*-win-x64.zip
+
+# Build command output
+build_*.log
+*-build.log
+
+# Python bytecode and local test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
