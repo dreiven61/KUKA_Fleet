@@ -1,0 +1,65 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.laser.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.laser.v1alpha1";
+option java_outer_classname = "SickMicroscan3DiagnosticDataProto";
+option java_multiple_files = true;
+
+// This message represents the diagnostic data received by a Sick MicroScan3 scanner.
+// It contains warning and error indicators (such as whether the scanner is dirty or not)
+// and information about which protection field setting (monitoring case) is currently active.
+message SickMicroscan3DiagnosticData
+{
+  // ID of the laser
+  int32 laser_id = 1;
+
+  // Obtained from byte 0 bit 2 of general system state scanner data.
+  // Signalizes whether the optics cover is dirty.
+  bool contamination_warning = 2;
+
+  // Obtained from byte 0 bit 3 of general system state scanner data.
+  // Signalizes whether the optics cover is dirty. If so, all safety outputs are in the OFF state.
+  bool contamination_error = 3;
+
+  // Obtained from byte 15 bit 1 of general system state scanner data.
+  // Signalizes whether an application error (critical error) is present, causing the safety function to be paused.
+  bool device_error = 4;
+
+  // Obtained from byte 0 bit 5 of general system state scanner data.
+  // Signalizes if manipulation has been detected and the safety outputs are therefore in the OFF state,
+  // for example because the device has not detected an object over a long period of time.
+  bool manipulation_error = 5;
+
+  // Obtained from byte 15 bit 5 of general system state scanner data.
+  // Signalizes whether an application error is present, causing the safety function to be paused.
+  bool application_error = 6;
+
+  // In the range (1-4)
+  // obtained from Byte 10-13 from general system state scanner data.
+  int32 active_monitoring_case = 7;
+
+  // The state of the safety/protection fields. They can be violated or not.
+  enum SafetyFieldState
+    {
+    // Unspecified. If this value is used, then the state of the safety field is not available in the system.
+    UNSPECIFIED = 0;
+
+    // The safety field is free, there is no obstacle detected.
+    FREE = 1;
+
+    // The safety field is violated, there are obstacles on the way.
+    VIOLATED = 2;
+  }
+
+  // The state of the safety fields.
+  // Obtained from Byte 1 (SafeCutOffPath01-08) from general system state scanner data.
+  repeated SafetyFieldState safety_field_states = 8;
+}

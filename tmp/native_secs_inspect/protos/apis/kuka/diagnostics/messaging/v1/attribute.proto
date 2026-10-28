@@ -1,0 +1,57 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.diagnostics.messaging.v1;
+
+import "google/protobuf/any.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "AttributeProto";
+option java_package = "com.kuka.diagnostics.messaging.v1";
+
+// Type to describe generic metadata attributes.
+message Attribute {
+  // The kind of value.
+  oneof value {
+    // Represents an integer value.
+    sint64 integer_value = 1;
+    // Represents a floating point value.
+    double floatingpoint_value = 2;
+    // Represents a string value.
+    string string_value = 3;
+
+    // Represents a list of integer values.
+    RepeatedInt integer_values = 4;
+    // Represents a list of floating point values.
+    RepeatedDouble floatingpoint_values = 5;
+    // Represents a list of string values.
+    RepeatedString string_values = 6;
+
+    // Represents a custom value of type Any
+    google.protobuf.Any custom_value = 7;
+  }
+
+  // Type to describe a list of integers.
+  message RepeatedInt {
+    // List of integer values.
+    repeated sint64 values = 1;
+  }
+
+  // Type to describe a list of doubles.
+  message RepeatedDouble {
+    // List of double values.
+    repeated double values = 1;
+  }
+
+  // Type to describe a list of strings.
+  message RepeatedString {
+    // List of string values.
+    repeated string values = 1;
+  }
+}

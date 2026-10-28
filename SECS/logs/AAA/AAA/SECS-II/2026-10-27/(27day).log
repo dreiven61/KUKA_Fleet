@@ -1,0 +1,618 @@
+[2026-10-27 08:54:58.134] INFO (AAA) (PROCID:23612) (VER:2.1.1.15 20160127) 89729765 
+[2026-10-27 08:54:58.132] HSMS DISCONNECTED
+[2026-10-27 08:55:26.907] HSMS CONNECTED
+[2026-10-27 08:55:26.924] HSMS SELECTED
+[2026-10-27 08:55:35.445] HSMS DISCONNECTED
+[2026-10-27 08:56:02.637] HSMS CONNECTED
+[2026-10-27 08:56:02.656] HSMS SELECTED
+[2026-10-27 08:56:03.649] HSMS DISCONNECTED
+[2026-10-27 08:56:16.199] HSMS CONNECTED
+[2026-10-27 08:56:16.221] HSMS SELECTED
+[2026-10-27 08:56:54.531] HSMS DISCONNECTED
+[2026-10-27 08:57:07.142] HSMS CONNECTED
+[2026-10-27 08:57:07.159] HSMS SELECTED
+[2026-10-27 10:03:55.807] HSMS DISCONNECTED
+[2026-10-27 10:15:21.913] HSMS CONNECTED
+[2026-10-27 10:15:21.941] HSMS SELECTED
+[2026-10-27 10:15:59.329] INFO CONNECTION RESET BY SECOMPLUGIN(INVOKE TERMINATE)
+[2026-10-27 10:15:59.330] HSMS DISCONNECTED
+[2026-10-27 10:15:59.332] INFO TERMINATE  (AAA) (PROCID:23612) (VER:2.1.1.15 20160127)
+[2026-10-27 10:16:00.119] INFO INITIALIZE (AAA) (PROCID:23612) (VER:2.1.1.15 20160127)
+[2026-10-27 10:16:00.126] HSMS CONNECTED
+[2026-10-27 10:16:00.153] HSMS SELECTED
+[2026-10-27 10:16:09.618] SEND Transfer89To97:S2F49 W SystemBytes=1:
+                               <L,4
+                                   <U4,1 '0' [DATAID]>
+                                   <A,0 '' [OBJSPEC]>
+                                   <A,8 'TRANSFER' [RCMD]>
+                                   <L,2 [PARAMETERS]
+                                       <L,2
+                                           <A,11 'COMMANDINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'COMMANDID' [CPNAME]>
+                                                   <A,11 'TR_TEST_001' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'PRIORITY' [CPNAME]>
+                                                   <U2,1 '1' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,7 'REPLACE' [CPNAME]>
+                                                   <U2,1 '0' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                       <L,2
+                                           <A,12 'TRANSFERINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'CARRIERID' [CPNAME]>
+                                                   <A,13 'SIM_CARGO_001' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,10 'SOURCEPORT' [CPNAME]>
+                                                   <A,7 'PORT_89' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'DESTPORT' [CPNAME]>
+                                                   <A,7 'PORT_97' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                   >
+                               >.
+[2026-10-27 10:16:09.664] RECV S2F50 SystemBytes=1:
+                               <B,1 '0'>.
+[2026-10-27 10:19:40.133] HSMS DISCONNECTED
+[2026-10-27 10:28:10.502] HSMS CONNECTED
+[2026-10-27 10:28:10.522] HSMS SELECTED
+[2026-10-27 10:29:16.985] SEND Transfer97To89:S2F49 W SystemBytes=1:
+                               <L,4
+                                   <U4,1 '0' [DATAID]>
+                                   <A,0 '' [OBJSPEC]>
+                                   <A,8 'TRANSFER' [RCMD]>
+                                   <L,2 [PARAMETERS]
+                                       <L,2
+                                           <A,11 'COMMANDINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'COMMANDID' [CPNAME]>
+                                                   <A,11 'TR_TEST_002' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'PRIORITY' [CPNAME]>
+                                                   <U2,1 '1' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,7 'REPLACE' [CPNAME]>
+                                                   <U2,1 '0' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                       <L,2
+                                           <A,12 'TRANSFERINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'CARRIERID' [CPNAME]>
+                                                   <A,13 'SIM_CARGO_001' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,10 'SOURCEPORT' [CPNAME]>
+                                                   <A,7 'PORT_97' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'DESTPORT' [CPNAME]>
+                                                   <A,7 'PORT_89' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                   >
+                               >.
+[2026-10-27 10:29:17.000] RECV S2F50 SystemBytes=1:
+                               <B,1 '0'>.
+[2026-10-27 10:45:33.303] HSMS DISCONNECTED
+[2026-10-27 13:12:30.173] HSMS CONNECTED
+[2026-10-27 13:12:30.203] HSMS SELECTED
+[2026-10-27 13:12:50.445] SEND Transfer89To97:S2F49 W SystemBytes=1:
+                               <L,4
+                                   <U4,1 '0' [DATAID]>
+                                   <A,0 '' [OBJSPEC]>
+                                   <A,8 'TRANSFER' [RCMD]>
+                                   <L,2 [PARAMETERS]
+                                       <L,2
+                                           <A,11 'COMMANDINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'COMMANDID' [CPNAME]>
+                                                   <A,11 'TR_TEST_001' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'PRIORITY' [CPNAME]>
+                                                   <U2,1 '1' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,7 'REPLACE' [CPNAME]>
+                                                   <U2,1 '0' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                       <L,2
+                                           <A,12 'TRANSFERINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'CARRIERID' [CPNAME]>
+                                                   <A,13 'SIM_CARGO_001' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,10 'SOURCEPORT' [CPNAME]>
+                                                   <A,7 'PORT_89' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'DESTPORT' [CPNAME]>
+                                                   <A,7 'PORT_97' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                   >
+                               >.
+[2026-10-27 13:12:50.492] RECV S2F50 SystemBytes=1:
+                               <B,1 '0'>.
+[2026-10-27 13:12:51.176] RECV S6F11 W SystemBytes=196608001:
+                               <L,3
+                                   <U4,1 '1'>
+                                   <U2,1 '208'>
+                                   <L,1
+                                       <L,2
+                                           <U2,1 '2'>
+                                           <L,3
+                                               <A,11 'TR_TEST_001'>
+                                               <L,1
+                                                   <L,2
+                                                       <L,3
+                                                           <A,13 'SIM_CARGO_001'>
+                                                           <A,7 'PORT_89'>
+                                                           <A,7 'PORT_97'>
+                                                       >
+                                                       <A,7 'PORT_89'>
+                                                   >
+                                               >
+                                               <U2,1 '0'>
+                                           >
+                                       >
+                                   >
+                               >.
+[2026-10-27 13:12:51.459] SEND S6F12:S6F12 SystemBytes=196608001:
+                               <B,1 '0' [ACKC6]>.
+[2026-10-27 13:16:55.227] HSMS DISCONNECTED
+[2026-10-27 14:03:29.575] HSMS CONNECTED
+[2026-10-27 14:03:29.606] HSMS SELECTED
+[2026-10-27 14:05:47.974] INFO CONNECTION RESET BY SECOMPLUGIN(INVOKE TERMINATE)
+[2026-10-27 14:05:47.976] HSMS DISCONNECTED
+[2026-10-27 14:05:47.976] INFO TERMINATE  (AAA) (PROCID:23612) (VER:2.1.1.15 20160127)
+[2026-10-27 14:05:48.731] INFO INITIALIZE (AAA) (PROCID:23612) (VER:2.1.1.15 20160127)
+[2026-10-27 14:05:48.735] HSMS CONNECTED
+[2026-10-27 14:05:48.764] HSMS SELECTED
+[2026-10-27 14:06:11.861] SEND Transfer97To89:S2F49 W SystemBytes=1:
+                               <L,4
+                                   <U4,1 '0' [DATAID]>
+                                   <A,0 '' [OBJSPEC]>
+                                   <A,8 'TRANSFER' [RCMD]>
+                                   <L,2 [PARAMETERS]
+                                       <L,2
+                                           <A,11 'COMMANDINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'COMMANDID' [CPNAME]>
+                                                   <A,11 'TR_TEST_002' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'PRIORITY' [CPNAME]>
+                                                   <U2,1 '1' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,7 'REPLACE' [CPNAME]>
+                                                   <U2,1 '0' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                       <L,2
+                                           <A,12 'TRANSFERINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'CARRIERID' [CPNAME]>
+                                                   <A,13 'SIM_CARGO_001' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,10 'SOURCEPORT' [CPNAME]>
+                                                   <A,7 'PORT_97' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'DESTPORT' [CPNAME]>
+                                                   <A,7 'PORT_89' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                   >
+                               >.
+[2026-10-27 14:06:12.018] RECV S2F50 SystemBytes=1:
+                               <B,1 '0'>.
+[2026-10-27 14:57:32.125] SEND Transfer97To89:S2F49 W SystemBytes=2:
+                               <L,4
+                                   <U4,1 '0' [DATAID]>
+                                   <A,0 '' [OBJSPEC]>
+                                   <A,8 'TRANSFER' [RCMD]>
+                                   <L,2 [PARAMETERS]
+                                       <L,2
+                                           <A,11 'COMMANDINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'COMMANDID' [CPNAME]>
+                                                   <A,11 'TR_TEST_002' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'PRIORITY' [CPNAME]>
+                                                   <U2,1 '1' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,7 'REPLACE' [CPNAME]>
+                                                   <U2,1 '0' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                       <L,2
+                                           <A,12 'TRANSFERINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'CARRIERID' [CPNAME]>
+                                                   <A,13 'SIM_CARGO_001' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,10 'SOURCEPORT' [CPNAME]>
+                                                   <A,7 'PORT_97' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'DESTPORT' [CPNAME]>
+                                                   <A,7 'PORT_89' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                   >
+                               >.
+[2026-10-27 14:57:32.173] RECV S2F50 SystemBytes=2:
+                               <B,1 '0'>.
+[2026-10-27 15:00:02.353] SEND Transfer97To89:S2F49 W SystemBytes=3:
+                               <L,4
+                                   <U4,1 '0' [DATAID]>
+                                   <A,0 '' [OBJSPEC]>
+                                   <A,8 'TRANSFER' [RCMD]>
+                                   <L,2 [PARAMETERS]
+                                       <L,2
+                                           <A,11 'COMMANDINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'COMMANDID' [CPNAME]>
+                                                   <A,11 'TR_TEST_003' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'PRIORITY' [CPNAME]>
+                                                   <U2,1 '1' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,7 'REPLACE' [CPNAME]>
+                                                   <U2,1 '0' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                       <L,2
+                                           <A,12 'TRANSFERINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'CARRIERID' [CPNAME]>
+                                                   <A,13 'SIM_CARGO_001' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,10 'SOURCEPORT' [CPNAME]>
+                                                   <A,7 'PORT_97' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'DESTPORT' [CPNAME]>
+                                                   <A,7 'PORT_89' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                   >
+                               >.
+[2026-10-27 15:00:02.400] RECV S2F50 SystemBytes=3:
+                               <B,1 '0'>.
+[2026-10-27 15:00:03.702] RECV S6F11 W SystemBytes=196608001:
+                               <L,3
+                                   <U4,1 '1'>
+                                   <U2,1 '208'>
+                                   <L,1
+                                       <L,2
+                                           <U2,1 '2'>
+                                           <L,3
+                                               <A,11 'TR_TEST_003'>
+                                               <L,1
+                                                   <L,2
+                                                       <L,3
+                                                           <A,13 'SIM_CARGO_001'>
+                                                           <A,7 'PORT_97'>
+                                                           <A,7 'PORT_89'>
+                                                       >
+                                                       <A,7 'PORT_97'>
+                                                   >
+                                               >
+                                               <U2,1 '0'>
+                                           >
+                                       >
+                                   >
+                               >.
+[2026-10-27 15:00:04.044] SEND S6F12:S6F12 SystemBytes=196608001:
+                               <B,1 '0' [ACKC6]>.
+[2026-10-27 15:00:19.359] RECV S6F11 W SystemBytes=196608002:
+                               <L,3
+                                   <U4,1 '1'>
+                                   <U2,1 '211'>
+                                   <L,1
+                                       <L,2
+                                           <U2,1 '2'>
+                                           <L,3
+                                               <A,11 'TR_TEST_003'>
+                                               <L,1
+                                                   <L,2
+                                                       <L,3
+                                                           <A,13 'SIM_CARGO_001'>
+                                                           <A,7 'PORT_97'>
+                                                           <A,7 'PORT_89'>
+                                                       >
+                                                       <A,7 'PORT_97'>
+                                                   >
+                                               >
+                                               <U2,1 '0'>
+                                           >
+                                       >
+                                   >
+                               >.
+[2026-10-27 15:00:19.630] SEND S6F12:S6F12 SystemBytes=196608002:
+                               <B,1 '0' [ACKC6]>.
+[2026-10-27 15:00:29.941] RECV S6F11 W SystemBytes=196608003:
+                               <L,3
+                                   <U4,1 '1'>
+                                   <U2,1 '207'>
+                                   <L,1
+                                       <L,2
+                                           <U2,1 '2'>
+                                           <L,3
+                                               <A,11 'TR_TEST_003'>
+                                               <L,1
+                                                   <L,2
+                                                       <L,3
+                                                           <A,13 'SIM_CARGO_001'>
+                                                           <A,7 'PORT_97'>
+                                                           <A,7 'PORT_89'>
+                                                       >
+                                                       <A,7 'PORT_89'>
+                                                   >
+                                               >
+                                               <U2,1 '0'>
+                                           >
+                                       >
+                                   >
+                               >.
+[2026-10-27 15:00:30.206] SEND S6F12:S6F12 SystemBytes=196608003:
+                               <B,1 '0' [ACKC6]>.
+[2026-10-27 15:00:51.784] SEND Transfer89To97:S2F49 W SystemBytes=4:
+                               <L,4
+                                   <U4,1 '0' [DATAID]>
+                                   <A,0 '' [OBJSPEC]>
+                                   <A,8 'TRANSFER' [RCMD]>
+                                   <L,2 [PARAMETERS]
+                                       <L,2
+                                           <A,11 'COMMANDINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'COMMANDID' [CPNAME]>
+                                                   <A,11 'TR_TEST_001' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'PRIORITY' [CPNAME]>
+                                                   <U2,1 '1' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,7 'REPLACE' [CPNAME]>
+                                                   <U2,1 '0' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                       <L,2
+                                           <A,12 'TRANSFERINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'CARRIERID' [CPNAME]>
+                                                   <A,13 'SIM_CARGO_001' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,10 'SOURCEPORT' [CPNAME]>
+                                                   <A,7 'PORT_89' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'DESTPORT' [CPNAME]>
+                                                   <A,7 'PORT_97' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                   >
+                               >.
+[2026-10-27 15:00:51.833] RECV S2F50 SystemBytes=4:
+                               <B,1 '0'>.
+[2026-10-27 15:01:30.605] SEND Transfer89To97:S2F49 W SystemBytes=5:
+                               <L,4
+                                   <U4,1 '0' [DATAID]>
+                                   <A,0 '' [OBJSPEC]>
+                                   <A,8 'TRANSFER' [RCMD]>
+                                   <L,2 [PARAMETERS]
+                                       <L,2
+                                           <A,11 'COMMANDINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'COMMANDID' [CPNAME]>
+                                                   <A,11 'TR_TEST_004' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'PRIORITY' [CPNAME]>
+                                                   <U2,1 '1' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,7 'REPLACE' [CPNAME]>
+                                                   <U2,1 '0' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                       <L,2
+                                           <A,12 'TRANSFERINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'CARRIERID' [CPNAME]>
+                                                   <A,13 'SIM_CARGO_001' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,10 'SOURCEPORT' [CPNAME]>
+                                                   <A,7 'PORT_89' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'DESTPORT' [CPNAME]>
+                                                   <A,7 'PORT_97' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                   >
+                               >.
+[2026-10-27 15:01:30.634] RECV S2F50 SystemBytes=5:
+                               <B,1 '0'>.
+[2026-10-27 15:01:31.296] RECV S6F11 W SystemBytes=196608004:
+                               <L,3
+                                   <U4,1 '1'>
+                                   <U2,1 '208'>
+                                   <L,1
+                                       <L,2
+                                           <U2,1 '2'>
+                                           <L,3
+                                               <A,11 'TR_TEST_004'>
+                                               <L,1
+                                                   <L,2
+                                                       <L,3
+                                                           <A,13 'SIM_CARGO_001'>
+                                                           <A,7 'PORT_89'>
+                                                           <A,7 'PORT_97'>
+                                                       >
+                                                       <A,7 'PORT_89'>
+                                                   >
+                                               >
+                                               <U2,1 '0'>
+                                           >
+                                       >
+                                   >
+                               >.
+[2026-10-27 15:01:31.551] SEND S6F12:S6F12 SystemBytes=196608004:
+                               <B,1 '0' [ACKC6]>.
+[2026-10-27 15:01:36.772] RECV S6F11 W SystemBytes=196608005:
+                               <L,3
+                                   <U4,1 '1'>
+                                   <U2,1 '211'>
+                                   <L,1
+                                       <L,2
+                                           <U2,1 '2'>
+                                           <L,3
+                                               <A,11 'TR_TEST_004'>
+                                               <L,1
+                                                   <L,2
+                                                       <L,3
+                                                           <A,13 'SIM_CARGO_001'>
+                                                           <A,7 'PORT_89'>
+                                                           <A,7 'PORT_97'>
+                                                       >
+                                                       <A,7 'PORT_89'>
+                                                   >
+                                               >
+                                               <U2,1 '0'>
+                                           >
+                                       >
+                                   >
+                               >.
+[2026-10-27 15:01:37.023] SEND S6F12:S6F12 SystemBytes=196608005:
+                               <B,1 '0' [ACKC6]>.
+[2026-10-27 15:01:47.178] RECV S6F11 W SystemBytes=196608006:
+                               <L,3
+                                   <U4,1 '1'>
+                                   <U2,1 '207'>
+                                   <L,1
+                                       <L,2
+                                           <U2,1 '2'>
+                                           <L,3
+                                               <A,11 'TR_TEST_004'>
+                                               <L,1
+                                                   <L,2
+                                                       <L,3
+                                                           <A,13 'SIM_CARGO_001'>
+                                                           <A,7 'PORT_89'>
+                                                           <A,7 'PORT_97'>
+                                                       >
+                                                       <A,7 'PORT_97'>
+                                                   >
+                                               >
+                                               <U2,1 '0'>
+                                           >
+                                       >
+                                   >
+                               >.
+[2026-10-27 15:01:47.430] SEND S6F12:S6F12 SystemBytes=196608006:
+                               <B,1 '0' [ACKC6]>.
+[2026-10-27 15:02:02.805] SEND Transfer97To89:S2F49 W SystemBytes=6:
+                               <L,4
+                                   <U4,1 '0' [DATAID]>
+                                   <A,0 '' [OBJSPEC]>
+                                   <A,8 'TRANSFER' [RCMD]>
+                                   <L,2 [PARAMETERS]
+                                       <L,2
+                                           <A,11 'COMMANDINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'COMMANDID' [CPNAME]>
+                                                   <A,11 'TR_TEST_003' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'PRIORITY' [CPNAME]>
+                                                   <U2,1 '1' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,7 'REPLACE' [CPNAME]>
+                                                   <U2,1 '0' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                       <L,2
+                                           <A,12 'TRANSFERINFO' [CPNAME]>
+                                           <L,3 [CPVAL]
+                                               <L,2
+                                                   <A,9 'CARRIERID' [CPNAME]>
+                                                   <A,13 'SIM_CARGO_001' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,10 'SOURCEPORT' [CPNAME]>
+                                                   <A,7 'PORT_97' [CPVAL]>
+                                               >
+                                               <L,2
+                                                   <A,8 'DESTPORT' [CPNAME]>
+                                                   <A,7 'PORT_89' [CPVAL]>
+                                               >
+                                           >
+                                       >
+                                   >
+                               >.
+[2026-10-27 15:02:02.852] RECV S2F50 SystemBytes=6:
+                               <B,1 '0'>.
+[2026-10-27 15:21:55.170] INFO CONNECTION RESET BY SECOMPLUGIN(INVOKE TERMINATE)
+[2026-10-27 15:21:55.172] HSMS DISCONNECTED
+[2026-10-27 15:21:55.174] INFO TERMINATE  (AAA) (PROCID:23612) (VER:2.1.1.15 20160127)

@@ -1,0 +1,38 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.safety.dataprovider.v1;
+
+option csharp_namespace = "Kuka.Mobilerobotics.Safety.DataProvider.V1";
+option java_multiple_files = true;
+option java_outer_classname = "SafetyVelocityDataProto";
+option java_package = "com.kuka.mobilerobotics.safety.dataprovider.v1";
+
+// message to send Safety velocity data 
+message SafetyVelocityData
+{
+  // The allowed velocity in X positive direction [m/s].
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double allowedVelocityTransXPos = 1;
+  // The allowed velocity in X negative direction [m/s].
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double allowedVelocityTransXNeg = 2;
+  // The allowed velocity in Y positive direction [m/s].
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double allowedVelocityTransYPos = 3;
+  // The allowed velocity in Y negative direction [m/s].
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double allowedVelocityTransYNeg = 4;
+  // The allowed velocity in Theta positive direction [rad/s].
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double allowedVelocityRotPos = 5;
+  // The allowed velocity in Theta negative direction [rad/s].
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double allowedVelocityRotNeg = 6;
+}

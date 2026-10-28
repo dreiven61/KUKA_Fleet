@@ -1,0 +1,37 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motion.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.motion.v1alpha1";
+option java_outer_classname = "QuinticBezierCurveProto";
+option java_multiple_files = true;
+
+// Defines a quintic Bezier curve. The parameters are the six control points
+// of this curve.
+message QuinticBezierCurve
+{
+  // The first control point (start point of the curve).
+  double p_0 = 1;
+
+  // The second control point.
+  double p_1 = 2;
+
+  // The third control point.
+  double p_2 = 3;
+
+  // The fourth control point.
+  double p_3 = 4;
+
+  // The fifth control point.
+  double p_4 = 5;
+
+  // The sixth control point (end point of the curve).
+  double p_5 = 6;
+}

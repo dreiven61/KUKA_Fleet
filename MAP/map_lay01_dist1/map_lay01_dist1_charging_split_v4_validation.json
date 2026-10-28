@@ -1,0 +1,115 @@
+{
+  "source": "map_lay01_dist1_89j.json",
+  "source_sha256": "6b122e01faa4cf6dd674bfb871c8179f96be037aa7cb1b7d8719f746075d6191",
+  "output": "map_lay01_dist1_charging_split_v4.json",
+  "output_sha256": "e2af4b50d9352836c4cf2063ff327dc208ee0d7419fa5274f0f39380797f32a3",
+  "node_count": 29,
+  "directed_edge_count": 72,
+  "main_grid_spacing_m": 2,
+  "charging_approach_segment_m": 1,
+  "existing_node_identities_and_positions_preserved": true,
+  "queue_function_count": 0,
+  "normal_main_nodes": [
+    "62",
+    "64"
+  ],
+  "charging_branches": [
+    [
+      "62",
+      "99",
+      "88"
+    ],
+    [
+      "64",
+      "100",
+      "87"
+    ]
+  ],
+  "charging_device_ids_and_headings_preserved": true,
+  "directed_edge_length_counts": {
+    "2m": 64,
+    "1m": 8
+  },
+  "static_directional_path_checks": 812,
+  "business_paths_without_any_charging_nodes": {
+    "89->97": {
+      "nodes": [
+        "89",
+        "68",
+        "65",
+        "62",
+        "59",
+        "56",
+        "97"
+      ],
+      "distance_m": 12.0
+    },
+    "97->89": {
+      "nodes": [
+        "97",
+        "56",
+        "59",
+        "62",
+        "65",
+        "68",
+        "89"
+      ],
+      "distance_m": 12.0
+    },
+    "84->86": {
+      "nodes": [
+        "84",
+        "69",
+        "66",
+        "63",
+        "60",
+        "57",
+        "86"
+      ],
+      "distance_m": 12.0
+    },
+    "86->84": {
+      "nodes": [
+        "86",
+        "57",
+        "60",
+        "63",
+        "66",
+        "69",
+        "84"
+      ],
+      "distance_m": 12.0
+    },
+    "94->96": {
+      "nodes": [
+        "94",
+        "67",
+        "64",
+        "61",
+        "96"
+      ],
+      "distance_m": 8.0
+    },
+    "96->94": {
+      "nodes": [
+        "96",
+        "61",
+        "64",
+        "67",
+        "94"
+      ],
+      "distance_m": 8.0
+    }
+  },
+  "native_import_verified": false,
+  "live_routing_verified": false,
+  "limits": [
+    "Charging-entry points cannot be generic Move targets in the observed Fleet UI.",
+    "That UI validation alone does not prove transit through an entry is prohibited.",
+    "This patch removes charging entry functions from the main grid; actual detour reduction needs live verification.",
+    "The WCS logs contain no internal graph-planner reason for avoiding node 62.",
+    "Areas, dynamic planner blacklists, workflow bindings and running missions are outside this map file.",
+    "Existing missions and current robot/container states are not changed.",
+    "Virtual simulation only; physical docking and clearance are not qualified."
+  ]
+}

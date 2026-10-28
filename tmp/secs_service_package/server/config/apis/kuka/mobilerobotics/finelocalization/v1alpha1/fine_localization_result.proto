@@ -1,0 +1,34 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.finelocalization.v1alpha1;
+
+import "kuka/core/geometry/v1/matrix_nxm.proto";
+import "kuka/core/geometry/v1/transform_2d.proto";
+
+option java_package = "com.kuka.mobilerobotics.finelocalization.v1alpha1";
+option java_outer_classname = "FineLocalizationResultProto";
+option java_multiple_files = true;
+
+
+// Contains the result for the fine localization command.
+message FineLocalizationResult {
+	
+  // The pose of the robot relative to the location. To move the robot to the location call RelativeMotionCommand with inverted pose.
+  kuka.core.geometry.v1.Transform2D pose_offset = 1;
+	
+  // The covariance matrix of the pose offset.
+  kuka.core.geometry.v1.MatrixNxM covariance = 2;
+	
+  // The score of the offset respect to the max. allowed offset (rotational and translational), between 0 and 1. The higher, the better.
+  double offset_score = 3;
+	
+  // The score of the covariance matrix with respect to the max. allowed uncertainty radius, between 0 and 1. The higher, the better.
+  double covariance_score = 4;
+}

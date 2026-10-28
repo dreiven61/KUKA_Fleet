@@ -1,0 +1,371 @@
+Compiled from "MultiActionExecutorClient.java"
+public class com.kuka.mobilerobotics.secs.handlers.MultiActionExecutorClient extends com.kuka.mobilerobotics.secs.core.ComponentAccessor {
+  private final java.util.Map<java.lang.String, com.kuka.mobilerobotics.actionexecutor.ActionExecutorClient> aeClients;
+
+  private static final java.lang.String RESPONSE_ACK;
+
+  protected org.slf4j.Logger _log;
+
+  public com.kuka.mobilerobotics.secs.handlers.MultiActionExecutorClient(com.kuka.mobilerobotics.secs.interfaces.LibComponents);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #1                  // Method com/kuka/mobilerobotics/secs/core/ComponentAccessor."<init>":(Lcom/kuka/mobilerobotics/secs/interfaces/LibComponents;)V
+       5: aload_0
+       6: new           #7                  // class java/util/concurrent/ConcurrentHashMap
+       9: dup
+      10: invokespecial #9                  // Method java/util/concurrent/ConcurrentHashMap."<init>":()V
+      13: putfield      #12                 // Field aeClients:Ljava/util/Map;
+      16: aload_0
+      17: aload_0
+      18: invokevirtual #18                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      21: invokestatic  #24                 // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+      24: putfield      #30                 // Field _log:Lorg/slf4j/Logger;
+      27: return
+
+  public void shutdown();
+    Code:
+       0: aload_0
+       1: getfield      #12                 // Field aeClients:Ljava/util/Map;
+       4: invokeinterface #34,  1           // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+       9: invokedynamic #40,  0             // InvokeDynamic #0:accept:()Ljava/util/function/Consumer;
+      14: invokeinterface #44,  2           // InterfaceMethod java/util/Collection.forEach:(Ljava/util/function/Consumer;)V
+      19: return
+
+  public void shutdownNow();
+    Code:
+       0: aload_0
+       1: getfield      #12                 // Field aeClients:Ljava/util/Map;
+       4: invokeinterface #34,  1           // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+       9: invokedynamic #50,  0             // InvokeDynamic #1:accept:()Ljava/util/function/Consumer;
+      14: invokeinterface #44,  2           // InterfaceMethod java/util/Collection.forEach:(Ljava/util/function/Consumer;)V
+      19: return
+
+  public com.kuka.mobilerobotics.actionexecutor.ActionExecutorClient getActionExecutorClient(java.lang.String);
+    Code:
+       0: aload_0
+       1: invokevirtual #51                 // Method getComponents:()Lcom/kuka/mobilerobotics/secs/interfaces/LibComponents;
+       4: invokeinterface #55,  1           // InterfaceMethod com/kuka/mobilerobotics/secs/interfaces/LibComponents.getSecsConfig:()Lcom/kuka/mobilerobotics/secs/service/SecsServiceConfig;
+       9: invokevirtual #61                 // Method com/kuka/mobilerobotics/secs/service/SecsServiceConfig.getCommandExecutors:()Lcom/kuka/mobilerobotics/secs/service/SecsServiceConfig$CommandExecutorConfig;
+      12: astore_2
+      13: aload_2
+      14: aload_1
+      15: invokeinterface #67,  2           // InterfaceMethod com/kuka/mobilerobotics/secs/service/SecsServiceConfig$CommandExecutorConfig.getOrDefault:(Ljava/lang/String;)Ljava/lang/String;
+      20: astore_3
+      21: aload_3
+      22: ifnonnull     27
+      25: aconst_null
+      26: areturn
+      27: aload_0
+      28: getfield      #12                 // Field aeClients:Ljava/util/Map;
+      31: aload_3
+      32: aload_3
+      33: invokedynamic #73,  0             // InvokeDynamic #2:apply:(Ljava/lang/String;)Ljava/util/function/BiFunction;
+      38: invokeinterface #77,  3           // InterfaceMethod java/util/Map.compute:(Ljava/lang/Object;Ljava/util/function/BiFunction;)Ljava/lang/Object;
+      43: checkcast     #81                 // class com/kuka/mobilerobotics/actionexecutor/ActionExecutorClient
+      46: areturn
+
+  public com.kuka.mobilerobotics.secs.handlers.MultiActionExecutorClient$SubmitResult submitCommand(java.lang.String, com.google.protobuf.Message, java.util.function.BiConsumer<com.kuka.actionexecutor.v1alpha1.Action, java.lang.Throwable>);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aconst_null
+       3: aload_2
+       4: aload_3
+       5: invokevirtual #83                 // Method submitCommand:(Ljava/lang/String;Ljava/lang/String;Lcom/google/protobuf/Message;Ljava/util/function/BiConsumer;)Lcom/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient$SubmitResult;
+       8: areturn
+
+  public com.kuka.mobilerobotics.secs.handlers.MultiActionExecutorClient$SubmitResult submitCommand(java.lang.String, java.lang.String, com.google.protobuf.Message, java.util.function.BiConsumer<com.kuka.actionexecutor.v1alpha1.Action, java.lang.Throwable>);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #87                 // Method getActionExecutorClient:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/actionexecutor/ActionExecutorClient;
+       5: astore        5
+       7: aload         5
+       9: ifnonnull     45
+      12: aload_0
+      13: getfield      #30                 // Field _log:Lorg/slf4j/Logger;
+      16: ldc           #91                 // String No command executor found for {}!
+      18: aload_1
+      19: invokeinterface #93,  3           // InterfaceMethod org/slf4j/Logger.debug:(Ljava/lang/String;Ljava/lang/Object;)V
+      24: new           #99                 // class com/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient$SubmitResult
+      27: dup
+      28: aload_0
+      29: iconst_1
+      30: aconst_null
+      31: new           #101                // class com/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException
+      34: dup
+      35: getstatic     #103                // Field com/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException$HandlerExceptionCode.UNKNOWN_COMMAND:Lcom/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException$HandlerExceptionCode;
+      38: invokespecial #109                // Method com/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException."<init>":(Lcom/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException$HandlerExceptionCode;)V
+      41: invokespecial #112                // Method com/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient$SubmitResult."<init>":(Lcom/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient;ZLcom/google/rpc/Status;Ljava/lang/Exception;)V
+      44: areturn
+      45: aload_0
+      46: getfield      #30                 // Field _log:Lorg/slf4j/Logger;
+      49: ldc           #115                // String submitting command {} ({}) to handler {}: message: {}
+      51: iconst_4
+      52: anewarray     #19                 // class java/lang/Object
+      55: dup
+      56: iconst_0
+      57: aload_1
+      58: aastore
+      59: dup
+      60: iconst_1
+      61: aload_3
+      62: invokeinterface #117,  1          // InterfaceMethod com/google/protobuf/Message.getDescriptorForType:()Lcom/google/protobuf/Descriptors$Descriptor;
+      67: invokevirtual #123                // Method com/google/protobuf/Descriptors$Descriptor.getFullName:()Ljava/lang/String;
+      70: aastore
+      71: dup
+      72: iconst_2
+      73: aload         5
+      75: invokevirtual #129                // Method com/kuka/mobilerobotics/actionexecutor/ActionExecutorClient.getChannel:()Lio/grpc/ManagedChannel;
+      78: invokevirtual #133                // Method io/grpc/ManagedChannel.authority:()Ljava/lang/String;
+      81: aastore
+      82: dup
+      83: iconst_3
+      84: aload_3
+      85: aastore
+      86: invokeinterface #138,  3          // InterfaceMethod org/slf4j/Logger.debug:(Ljava/lang/String;[Ljava/lang/Object;)V
+      91: aload_2
+      92: ifnull        99
+      95: aload_2
+      96: goto          105
+      99: invokestatic  #141                // Method java/util/UUID.randomUUID:()Ljava/util/UUID;
+     102: invokevirtual #147                // Method java/util/UUID.toString:()Ljava/lang/String;
+     105: astore_2
+     106: aload         5
+     108: aload_2
+     109: iconst_1
+     110: aload         4
+     112: invokevirtual #150                // Method com/kuka/mobilerobotics/actionexecutor/ActionExecutorClient.installSelfRemovingActionListener:(Ljava/lang/String;ZLjava/util/function/BiConsumer;)Lcom/kuka/mobilerobotics/actionexecutor/ActionExecutorClient$SelfRemovingSingleActionListener;
+     115: astore        6
+     117: aload         5
+     119: aload_3
+     120: invokestatic  #154                // Method com/google/protobuf/Any.pack:(Lcom/google/protobuf/Message;)Lcom/google/protobuf/Any;
+     123: aload_2
+     124: aconst_null
+     125: invokevirtual #160                // Method com/kuka/mobilerobotics/actionexecutor/ActionExecutorClient.submitCommand:(Lcom/google/protobuf/Any;Ljava/lang/String;Ljava/lang/String;)Lcom/google/rpc/Status;
+     128: astore        7
+     130: aload_0
+     131: getfield      #30                 // Field _log:Lorg/slf4j/Logger;
+     134: ldc           #163                // String submitted command {} ({}) to handler {} - status code: {}\n status message: {}\nstatus details: {}
+     136: bipush        6
+     138: anewarray     #19                 // class java/lang/Object
+     141: dup
+     142: iconst_0
+     143: aload_1
+     144: aastore
+     145: dup
+     146: iconst_1
+     147: aload_3
+     148: invokeinterface #117,  1          // InterfaceMethod com/google/protobuf/Message.getDescriptorForType:()Lcom/google/protobuf/Descriptors$Descriptor;
+     153: invokevirtual #123                // Method com/google/protobuf/Descriptors$Descriptor.getFullName:()Ljava/lang/String;
+     156: aastore
+     157: dup
+     158: iconst_2
+     159: aload         5
+     161: invokevirtual #129                // Method com/kuka/mobilerobotics/actionexecutor/ActionExecutorClient.getChannel:()Lio/grpc/ManagedChannel;
+     164: invokevirtual #133                // Method io/grpc/ManagedChannel.authority:()Ljava/lang/String;
+     167: aastore
+     168: dup
+     169: iconst_3
+     170: aload         7
+     172: invokevirtual #165                // Method com/google/rpc/Status.getCode:()I
+     175: invokestatic  #171                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     178: aastore
+     179: dup
+     180: iconst_4
+     181: aload         7
+     183: invokevirtual #177                // Method com/google/rpc/Status.getMessage:()Ljava/lang/String;
+     186: aastore
+     187: dup
+     188: iconst_5
+     189: aload         7
+     191: invokevirtual #180                // Method com/google/rpc/Status.getDetailsList:()Ljava/util/List;
+     194: aastore
+     195: invokeinterface #138,  3          // InterfaceMethod org/slf4j/Logger.debug:(Ljava/lang/String;[Ljava/lang/Object;)V
+     200: aload         7
+     202: invokevirtual #177                // Method com/google/rpc/Status.getMessage:()Ljava/lang/String;
+     205: ifnull        216
+     208: aload         7
+     210: invokevirtual #177                // Method com/google/rpc/Status.getMessage:()Ljava/lang/String;
+     213: goto          218
+     216: ldc           #184                // String NO MESSAGE TEXT
+     218: astore        8
+     220: aload         7
+     222: invokevirtual #165                // Method com/google/rpc/Status.getCode:()I
+     225: lookupswitch  { // 2
+                     0: 252
+                     3: 294
+               default: 521
+          }
+     252: aload         6
+     254: invokevirtual #186                // Method com/kuka/mobilerobotics/actionexecutor/ActionExecutorClient$SelfRemovingSingleActionListener.getLastReceivedAction:()Lcom/kuka/actionexecutor/v1alpha1/Action;
+     257: astore        9
+     259: new           #99                 // class com/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient$SubmitResult
+     262: dup
+     263: aload_0
+     264: aload         9
+     266: ifnull        287
+     269: aload         9
+     271: invokevirtual #192                // Method com/kuka/actionexecutor/v1alpha1/Action.getState:()Lcom/kuka/actionexecutor/v1alpha1/ActionState;
+     274: invokevirtual #198                // Method com/kuka/actionexecutor/v1alpha1/ActionState.getActionState:()Lcom/kuka/actionexecutor/v1alpha1/ActionState$State;
+     277: getstatic     #204                // Field com/kuka/actionexecutor/v1alpha1/ActionState$State.FINISHED:Lcom/kuka/actionexecutor/v1alpha1/ActionState$State;
+     280: if_acmpne     287
+     283: iconst_1
+     284: goto          288
+     287: iconst_0
+     288: aload         7
+     290: invokespecial #210                // Method com/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient$SubmitResult."<init>":(Lcom/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient;ZLcom/google/rpc/Status;)V
+     293: areturn
+     294: aload         6
+     296: invokevirtual #213                // Method com/kuka/mobilerobotics/actionexecutor/ActionExecutorClient$SelfRemovingSingleActionListener.removeListener:()V
+     299: aload         8
+     301: ldc           #216                // String :
+     303: invokevirtual #218                // Method java/lang/String.indexOf:(Ljava/lang/String;)I
+     306: istore        10
+     308: iload         10
+     310: iconst_m1
+     311: if_icmpeq     521
+     314: aload         8
+     316: iconst_0
+     317: iload         10
+     319: invokevirtual #224                // Method java/lang/String.substring:(II)Ljava/lang/String;
+     322: astore        11
+     324: aload         8
+     326: iload         10
+     328: iconst_1
+     329: iadd
+     330: invokevirtual #228                // Method java/lang/String.substring:(I)Ljava/lang/String;
+     333: astore        12
+     335: aload         11
+     337: astore        13
+     339: iconst_m1
+     340: istore        14
+     342: aload         13
+     344: invokevirtual #231                // Method java/lang/String.hashCode:()I
+     347: lookupswitch  { // 1
+            -779575192: 364
+               default: 377
+          }
+     364: aload         13
+     366: ldc           #234                // String ResponseAck
+     368: invokevirtual #236                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     371: ifeq          377
+     374: iconst_0
+     375: istore        14
+     377: iload         14
+     379: lookupswitch  { // 1
+                     0: 396
+               default: 429
+          }
+     396: aload         12
+     398: invokevirtual #240                // Method java/lang/String.trim:()Ljava/lang/String;
+     401: invokestatic  #243                // Method java/lang/Integer.parseInt:(Ljava/lang/String;)I
+     404: istore        15
+     406: new           #99                 // class com/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient$SubmitResult
+     409: dup
+     410: aload_0
+     411: iconst_1
+     412: aload         7
+     414: new           #101                // class com/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException
+     417: dup
+     418: iload         15
+     420: aload         8
+     422: invokespecial #246                // Method com/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException."<init>":(ILjava/lang/String;)V
+     425: invokespecial #112                // Method com/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient$SubmitResult."<init>":(Lcom/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient;ZLcom/google/rpc/Status;Ljava/lang/Exception;)V
+     428: areturn
+     429: aload         11
+     431: invokestatic  #249                // Method java/lang/Class.forName:(Ljava/lang/String;)Ljava/lang/Class;
+     434: astore        16
+     436: aload         16
+     438: iconst_1
+     439: anewarray     #250                // class java/lang/Class
+     442: dup
+     443: iconst_0
+     444: ldc           #219                // class java/lang/String
+     446: aastore
+     447: invokevirtual #255                // Method java/lang/Class.getConstructor:([Ljava/lang/Class;)Ljava/lang/reflect/Constructor;
+     450: iconst_1
+     451: anewarray     #19                 // class java/lang/Object
+     454: dup
+     455: iconst_0
+     456: aload         12
+     458: aastore
+     459: invokevirtual #259                // Method java/lang/reflect/Constructor.newInstance:([Ljava/lang/Object;)Ljava/lang/Object;
+     462: checkcast     #265                // class java/lang/Exception
+     465: astore        17
+     467: new           #99                 // class com/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient$SubmitResult
+     470: dup
+     471: aload_0
+     472: iconst_1
+     473: aload         7
+     475: aload         17
+     477: invokespecial #112                // Method com/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient$SubmitResult."<init>":(Lcom/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient;ZLcom/google/rpc/Status;Ljava/lang/Exception;)V
+     480: areturn
+     481: astore        13
+     483: aload_0
+     484: getfield      #30                 // Field _log:Lorg/slf4j/Logger;
+     487: ldc_w         #267                // String Failed to decode the status message {} of the action executor {}/{}!
+     490: iconst_4
+     491: anewarray     #19                 // class java/lang/Object
+     494: dup
+     495: iconst_0
+     496: aload         8
+     498: aastore
+     499: dup
+     500: iconst_1
+     501: aload_1
+     502: aastore
+     503: dup
+     504: iconst_2
+     505: aload         5
+     507: invokevirtual #269                // Method com/kuka/mobilerobotics/actionexecutor/ActionExecutorClient.getClientId:()Ljava/lang/String;
+     510: aastore
+     511: dup
+     512: iconst_3
+     513: aload         13
+     515: aastore
+     516: invokeinterface #138,  3          // InterfaceMethod org/slf4j/Logger.debug:(Ljava/lang/String;[Ljava/lang/Object;)V
+     521: aload         6
+     523: invokevirtual #213                // Method com/kuka/mobilerobotics/actionexecutor/ActionExecutorClient$SelfRemovingSingleActionListener.removeListener:()V
+     526: new           #99                 // class com/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient$SubmitResult
+     529: dup
+     530: aload_0
+     531: iconst_1
+     532: aload         7
+     534: new           #101                // class com/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException
+     537: dup
+     538: getstatic     #272                // Field com/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException$HandlerExceptionCode.CURRENTLY_UNAVAILABLE:Lcom/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException$HandlerExceptionCode;
+     541: aload         8
+     543: invokespecial #275                // Method com/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException."<init>":(Lcom/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException$HandlerExceptionCode;Ljava/lang/String;)V
+     546: invokespecial #112                // Method com/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient$SubmitResult."<init>":(Lcom/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient;ZLcom/google/rpc/Status;Ljava/lang/Exception;)V
+     549: areturn
+    Exception table:
+       from    to  target type
+         335   428   481   Class java/lang/Exception
+         429   480   481   Class java/lang/Exception
+
+  private static com.kuka.mobilerobotics.actionexecutor.ActionExecutorClient lambda$getActionExecutorClient$0(java.lang.String, java.lang.String, com.kuka.mobilerobotics.actionexecutor.ActionExecutorClient);
+    Code:
+       0: aload_2
+       1: ifnull        14
+       4: aload_2
+       5: invokevirtual #129                // Method com/kuka/mobilerobotics/actionexecutor/ActionExecutorClient.getChannel:()Lio/grpc/ManagedChannel;
+       8: invokevirtual #278                // Method io/grpc/ManagedChannel.isShutdown:()Z
+      11: ifeq          37
+      14: new           #81                 // class com/kuka/mobilerobotics/actionexecutor/ActionExecutorClient
+      17: dup
+      18: aload_1
+      19: aload_0
+      20: invokespecial #282                // Method com/kuka/mobilerobotics/actionexecutor/ActionExecutorClient."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      23: astore_3
+      24: aload_3
+      25: ldc2_w        #285                // long 5000l
+      28: invokevirtual #287                // Method com/kuka/mobilerobotics/actionexecutor/ActionExecutorClient.setOnReconnectionSleep:(J)V
+      31: aload_3
+      32: invokevirtual #291                // Method com/kuka/mobilerobotics/actionexecutor/ActionExecutorClient.subscribeOnActions:()V
+      35: aload_3
+      36: areturn
+      37: aload_2
+      38: areturn
+}

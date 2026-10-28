@@ -1,0 +1,21 @@
+{
+  "action": {
+    "uuid": "2a45993b-d226-4cd3-80e0-2b27cf0ba5ac",
+    "timestamp": "2026-10-26T01:37:46.236Z",
+    "command": {
+      "@type": "type.googleapis.com/kuka.mobilerobotics.station.v1alpha1.ManageStationDataCommand",
+      "type": "INSERT",
+      "data": {
+        "uuid": "SECS_ST_97",
+        "name": "SECS test port at node 97",
+        "capacity": {
+          "compartments": [
+            {
+              "uuid": "PORT_97"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,145 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.controller.v1alpha1;
+
+import "google/rpc/status.proto";
+import "kuka/controller/v1alpha1/command.proto";
+import "kuka/controller/v1alpha1/controller_state.proto";
+import "kuka/core/v1/message_header.proto";
+
+option java_package = "com.kuka.controller.v1alpha1";
+option java_outer_classname = "ControllerServiceProto";
+option java_multiple_files = true;
+
+// Service for a controller.
+// It is responsible for a control system and provides a generalized interface to control it.
+service ControllerService {
+  // The system is initialized and made ready (e.g. powered-up) to execute commands.
+  // At the time of the call, the service state is switched to "INITIALIZING"
+  // and will be switched to "RUNNING" after this call is executed successfully.
+  rpc StartControl(StartControlRequest) returns (StartControlResponse);
+
+  // The system is stopped and brought back to an idle state.
+  // At the time of the call, the service state is switched to "STOPPING"
+  // and will be switched to "STOPPED" after this call is executed successfully.
+  // If the controller has already been stopped, the stop request does not have any effect.
+  rpc StopControl(StopControlRequest) returns (StopControlResponse);
+
+  // Sends a stream of commands to be executed.
+  rpc UpdateCommand (stream UpdateCommandRequest) returns (stream UpdateCommandResponse);
+
+  // Returns the state of the controller.
+  rpc GetControllerState(GetControllerStateRequest) returns (GetControllerStateResponse);
+
+  // Returns the Protobuf full names corresponding to the types of commands provided by this service.
+  rpc GetCommandTypes(GetCommandTypesRequest) returns (GetCommandTypesResponse);
+}
+
+message StartControlRequest {
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // A unique identifier designating the owner of the control instance.
+  // This id must be provided with the UpdateCommand and the StopControl calls to ensure the single point of control.
+  string control_uuid = 2;
+
+  // Type of the command. It should match with one of commands supported by the controller.
+  string command_type = 3;
+}
+
+message StartControlResponse {
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // Whether the controller service was initialized successfully.
+  bool ready_to_control = 2;
+
+  // If no error occurs this field is empty.
+  // The following errors can occur with error code Code.INVALID_ARGUMENT:
+  // 1. The given command type is not supported by the controller.
+  google.rpc.Status error = 3;
+}
+
+message StopControlRequest {
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // A unique identifier designating the owner of the control instance.
+  // This id must be provided with the StopControl call to ensure the single point of control.
+  string control_uuid = 2;
+}
+
+message StopControlResponse {
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // If no error occurs this field is empty.
+  // The following errors can occur with error code Code.INVALID_ARGUMENT:
+  // 1. The given control uuid does not match with the control uuid passed with StartControlRequest.
+  google.rpc.Status error = 2;
+}
+
+message UpdateCommandRequest {
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // A unique identifier designating the owner of the control instance.
+  // This id must be provided with the UpdateCommand call to ensure the single point of control.
+  string control_uuid = 2;
+
+  // The command that should be updated.
+  Command command = 3;
+}
+
+message UpdateCommandResponse {
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // The updated command which is executed by the controller. It might contain adjustments of the controller (e.g. device constraints).
+  Command updated_command = 2;
+
+  // If no error occurs this field is empty.
+  // The following errors can occur with error code Code.INVALID_ARGUMENT:
+  // 1. No command with the given type is supported by the controller.
+  // 2. The requested command update introduces a cycle.
+  // 3. The given control uuid does not match with the control uuid passed with StartControlRequest call.
+  // 4. The type of the given command does not match with the command type specified in StartControlRequest call.
+  //
+  // The following errors can occur with error code Code.INTERNAL:
+  // 1. A corrupt set of command parameters is set in the command.
+  google.rpc.Status error = 3;
+}
+
+message GetControllerStateRequest {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+}
+
+message GetControllerStateResponse {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // Current state of the controller service.
+  ControllerState controller_state = 2;
+}
+
+message GetCommandTypesRequest {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+}
+
+message GetCommandTypesResponse {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // Protobuf message full names corresponding to the types of the commands.
+  // This is the command type that must be provided with a Command message.
+  repeated string command_types = 2;
+}

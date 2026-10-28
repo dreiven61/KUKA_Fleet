@@ -1,0 +1,40 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.graph.v1alpha1;
+
+import "kuka/core/geometry/v1/vector_2d.proto";
+import "kuka/mobilerobotics/graph/v1alpha1/graph_property.proto";
+
+option java_package = "com.kuka.mobilerobotics.graph.v1alpha1";
+option java_outer_classname = "TopologyNodeProto";
+option java_multiple_files = true;
+
+// A node which are located in a topology graph. 
+message TopologyNode 
+{
+  // Defines the unique identifier.
+  string uuid = 1;
+	
+  // The graph's unique identifier.
+  string graph_uuid = 2;
+
+  // The node id which are visible in the graph UI.
+  int32 id = 3;
+	
+  // Defines the node name.
+  // Optional. 
+  string name = 4;
+	
+  // Defines the node's position. 
+  kuka.core.geometry.v1.Vector2D position = 5;
+	
+  // Defines a list of node properties. 
+  repeated GraphProperty properties = 6;
+}

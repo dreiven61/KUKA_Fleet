@@ -1,0 +1,79 @@
+// This material is the exclusive property of KUKA Deutschland GmbH.
+// Except as expressly permitted by separate agreement, this material may only
+// be used by members of the development department of KUKA Deutschland GmbH for
+// internal development purposes of KUKA Deutschland GmbH.
+//
+// Copyright (C)
+// KUKA Deutschland GmbH, Germany. All Rights Reserved.
+
+syntax = "proto3";
+
+package battery.management.v1;
+
+import "google/protobuf/wrappers.proto";
+import "battery/management/v1/global_definitions.proto";
+
+option java_package = "com.battery.management.v1";
+option java_outer_classname = "OperationModeProto";
+option java_multiple_files = true;
+
+
+// Provides information about the state of a battery.
+service OperationModeService
+{
+    rpc SubscribeOperationModeRequestButton(SubscribeButtonStateRequest) returns (stream OperationModeRequestButton);
+
+    rpc SetOperationMode(SetOperationModeRequest) returns (SetOperationModeResponse);
+
+    rpc GetOperationMode(GetOperationModeRequest) returns (GetOperationModeResponse);
+}
+
+
+message SubscribeButtonStateRequest
+{
+    // empty
+}
+
+message SetOperationModeResponse
+{
+    // empty
+}
+
+message GetOperationModeRequest
+{
+    // empty
+}
+
+message SetOperationModeRequest
+{
+    // Operation Mode requested by the AGV controller.
+    battery.management.v1.OperationMode operation_mode = 1;
+
+    // Time to switch the current operation mode to the requested operation mode.
+    // Unit of measurement [s]
+    google.protobuf.UInt32Value time_to_switch = 2;
+
+}
+
+message GetOperationModeResponse
+{
+    // Current operation mode of the battery.
+    // Not all operation modes can be sent as there is no communication in OFF or SLEEP mode.
+    battery.management.v1.OperationMode operation_mode = 1;
+
+    // Time to switch the current operation mode to the requested operation mode.
+    // Unit of measurement [s]
+    google.protobuf.UInt32Value time_to_switch = 2;
+
+    // Next operation mode of the battery.
+    // Not all operation modes can be sent as there is no communication in OFF or SLEEP mode.
+    battery.management.v1.OperationMode next_operation_mode = 3;
+
+}
+
+message OperationModeRequestButton
+{
+    // Operation Mode requested by the operation mode request button.
+    battery.management.v1.OperationMode request_button_state = 1;
+
+}

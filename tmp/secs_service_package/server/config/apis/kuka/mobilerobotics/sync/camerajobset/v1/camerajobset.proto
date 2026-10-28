@@ -1,0 +1,22 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.sync.camerajobset.v1;
+
+option csharp_namespace = "Kuka.MobileRobotics.Sync.CameraJobset.V1";
+option java_multiple_files = true;
+option java_outer_classname = "CameraJobsetProto";
+option java_package = "com.kuka.mobilerobotics.sync.camerajobset.v1";
+
+// A message used to store a camera jobset.
+message CameraJobset
+{
+  // The contents of the camera jobset file.
+  bytes data = 1;
+}

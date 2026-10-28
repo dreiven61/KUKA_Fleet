@@ -1,0 +1,68 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.order.events.v1alpha1;
+
+import "kuka/mobilerobotics/order/events/v1alpha1/command_specification.proto";
+
+option java_package = "com.kuka.mobilerobotics.order.events.v1alpha1";
+option java_outer_classname = "TransportEventProto";
+option java_multiple_files = true;
+
+// Event message regarding general transport command handling
+message TransportEvent {
+	enum TransportEventType {
+	  UNSPECIFIED = 0;
+	  
+	  //set an error code to the transfer (command_id), but no state machines update
+	  ERROR_CODE_SET = 1;
+	  
+	  // the robot moves carrier_id from fromPort to vehicle_payload_compartment_id (in pursuit of command_id)
+	  PICK_STARTED = 2;
+	  PICK_FINISHED = 3;
+	  PICK_FAILED = 4;
+	  
+	  // the robot moves carrier_id from vehicle_payload_compartment_id to toPort (in pursuit of command_id)
+	  PUT_STARTED = 5;
+	  PUT_FINISHED = 6;
+	  PUT_FAILED = 7;
+	  
+	  // moving vehicleId from fromPort to toPort (in pursuit of command_id, which handles carrier_id)
+	  MOVE_STARTED = 8;
+	  MOVE_FINISHED = 9;
+	  
+	  //force the removal of a carrier_id from the system
+	  CARRIER_REMOVED = 10;
+	  
+	  // the transfer has been replaced, e.g. due to an automatic error resolution procedure
+	  TRANSFER_REPLACED = 11;
+	}
+	
+  // event reason
+  TransportEventType action = 1;
+
+  // Specifies the command this event refers to
+  // If this event is part of an action runtime update, then this field is not required
+  CommandSpecification command_specification = 2;
+
+  // the carrier ID
+  string carrier_id = 3;
+
+  // the vehicle ID
+  string vehicle_id = 4;
+
+  // the vehicle payload compartment ID
+  string vehicle_payload_compartment_id = 5;
+
+  // the equipment port ID (fromPort or toPort)
+  string equipment_port_id = 6;
+
+  // some error code, if != 0
+  int32 error_code = 7;
+}

@@ -1,0 +1,56 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motion.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.motion.v1alpha1";
+option java_outer_classname = "MotionRecoveryProto";
+option java_multiple_files = true;
+
+// A recovery that will lead the AGV back onto the path, as long as
+// it is still within the recovery bounds defined by the translational
+// and rotational distance to the path.
+message PathRecovery
+{
+  // The maximum translational distance for the recovery in meters. 
+  // The value must be greater than or equal to 0.
+  double max_translational_distance = 1;
+	
+  // The maximum rotational difference for the recovery in radians. 
+  // The value must be within the range [0.0, pi].
+  double max_rotational_distance = 2;
+}
+
+// A recovery that will lead the AGV back to the start pose, as long as
+// it is still within the recovery bounds defined by the translational
+// and rotational distance to the start pose.
+message StartPoseRecovery
+{
+  // The maximum translational distance for the recovery in meters. 
+  // The value must be greater than or equal to 0.
+  double max_translational_distance = 1;
+	
+  // The maximum rotational difference for the recovery in radians. 
+  // The value must be within the range [0.0, pi].
+  double max_rotational_distance = 2;
+}
+
+// Specifies a motion recovery.
+message MotionRecovery
+{
+  // The recovery type.
+  oneof recovery
+	{
+    // A path recovery.
+    PathRecovery path_recovery = 1;
+
+    // A start pose recovery.
+    StartPoseRecovery start_pose_recovery = 2;
+  }
+}

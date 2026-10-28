@@ -1,0 +1,40 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.objectdetection.v1alpha1;
+
+import "kuka/mobilerobotics/objectdetection/v1alpha1/search_space.proto";
+import "kuka/mobilerobotics/objects/v1alpha1/shape_2d_layers.proto";
+
+option java_package = "com.kuka.mobilerobotics.objectdetection.v1alpha1";
+option java_outer_classname = "ObjectDetectionCommandProto";
+option java_multiple_files = true;
+
+// Defines an object detection command, that will search for the specified
+// object in the optionally specified search region relative to the robot.
+// The detected objects are returned with their pose in the robot coordinate system in a ObjectDetectionResult message.
+message ObjectDetectionCommand {
+
+  // The definition of the search space.
+  // Optional.
+  SearchSpace search_space_filter = 1;
+  
+  // object shapes can be provided within this message or reference to a stored model in the service 
+  oneof object_shapes
+  {
+    // The definition of the object's shapes as a list of circles and polygons.
+    // each entry is a layer 
+    // "detectionModel" for the model definition that need to be detected
+    // "freespaceModel" for areas that needs free of obstacles 
+    kuka.mobilerobotics.objects.v1alpha1.Shape2DLayers shapes = 2;
+    // The definition of the object's shapes as a list of circles and polygons stored in the objectmodel database.
+    string model_uuid = 3;
+  }
+
+}

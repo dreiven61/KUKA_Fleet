@@ -1,0 +1,38 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.core.v1;
+
+option csharp_namespace = "Kuka.Core.V1";
+option java_package = "com.kuka.core.v1";
+option java_outer_classname = "LockResultProto";
+option java_multiple_files = true;
+
+// The response while a process tries to take the ownership of a module. 
+enum LockResult
+{
+  // Unknown result state
+  NOT_SPECIFIED = 0;
+
+  // A process successufully obtained the ownership of a module
+  CONTROL_OBTAINED = 1;
+	
+  // While making an update/interaction call, this response symbolizes that the process still 
+  // owns the module
+  CONTROL_PERSISTED = 2;
+	
+  // A process with equal priority is currently owning the module. The calling process got rejected.
+  CONTROL_ALREADY_ACTIVE = 3;
+	
+  // A process with a higher priority is currently owning the module. The calling process got rejected.
+  HIGHER_CONTROL_PRIORITY_ACTIVE = 4;
+	
+  // The module is not ready to be controlled.
+  CONTROL_UNAVAILABLE = 5;
+}

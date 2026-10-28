@@ -1,0 +1,31 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.actionexecutor.v1alpha1;
+
+import "kuka/actionexecutor/v1alpha1/action_description.proto";
+import "kuka/actionexecutor/v1alpha1/action_runtime.proto";
+import "kuka/actionexecutor/v1alpha1/action_state.proto";
+
+option java_package = "com.kuka.actionexecutor.v1alpha1";
+option java_outer_classname = "ActionProto";
+option java_multiple_files = true;
+
+// Represents an action that is managed by the action executor.
+// It contains the action's description, runtime information and the action's state.
+message Action {
+  // The action description containing the latest commanded parameters.   
+  ActionDescription description = 1;
+
+  // The state of the action.
+  ActionState state = 2;
+	
+  // Contains runtime information about this action.
+  ActionRuntime runtime = 3;
+}

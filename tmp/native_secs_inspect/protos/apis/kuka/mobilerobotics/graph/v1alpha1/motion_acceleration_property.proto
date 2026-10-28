@@ -1,0 +1,38 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.graph.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+import "kuka/core/geometry/v1/acceleration_2d.proto";
+
+option java_package = "com.kuka.mobilerobotics.graph.v1alpha1";
+option java_outer_classname = "MotionAccelerationPropertyProto";
+option java_multiple_files = true;
+
+// Definition of the motion parameter which can be set for a node or edge.
+// Note that if absolute and percentage values are set, then first the absolute value and 
+// then the percent value of the absolute value is used 
+//(e.g. absolute is 0.5 m/s^2 and percentage is 0.5 then the resulting acceleration is 0.25 m/s^2).
+message MotionAccelerationProperty
+{
+  // The maximum allowed absolute acceleration [m/s^2] in the x-axis direction 
+  // of the vehicle.
+  // The maximum allowed absolute acceleration [m/s^2] in the y-axis direction 
+  // of the vehicle.
+  // The maximum allowed absolute rotational acceleration [rad/s^2].
+  kuka.core.geometry.v1.Acceleration2D max_acceleration_absolute = 1;
+	
+  // Scale-down factor for the maximum allowed translational acceleration. 
+  // The allowed range for this value is (0,1]. It scales down the maximum 
+  // vehicle x-, y- acceleration and rotational acceleration, after limiting it by the parameters 
+  // max_x_acceleration_meter_per_second_per_second, max_y_acceleration_meter_per_second_per_second and
+  // max_rotational_acceleration_rad_per_second_per_second.
+  google.protobuf.DoubleValue max_acceleration_percent = 2;
+}

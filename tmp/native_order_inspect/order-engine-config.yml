@@ -1,0 +1,81 @@
+# Configures the expected average speed for all robots.
+# The mean speed is used to estimate the duration until a robot arrives at a
+# task's target node. It is affected by rotations, obstacle avoidance and
+# communication with periphery, so it is lower than the normal speed.
+# unit: meters per second [m/s]
+# type: float
+# range: (0; ∞)
+meanRobotSpeed: 0.5
+
+# Configures the battery threshold below which a robot is in a critical state.
+# Robots with a critical battery are not used for order processing. Ongoing 
+# tasks are canceled.
+# unit: 
+# type: float
+# range: [0; 1]
+criticalBatteryState: 0.1
+
+# Configures the battery threshold below which a robot is in a low state.
+# Robots with a low battery that are not charging are avoided to be used for
+# new orders. They can finish their scheduled tasks.
+# Robots with a low battery that are charging are not used until their state
+# of charge passes this threshold.
+# unit: 
+# type: float
+# range: [0; 1]
+lowBatteryState: 0.25
+
+# Configures the battery threshold until which a robot will try to charge.
+# Robots with a lower battery state that are charging are avoided to be used
+# for orders.
+# unit: 
+# type: float
+# range: [0; 1]
+targetBatteryState: 0.9
+  
+# Configures the dispatch strategy for tasks.
+# The dispatch strategy determines when tasks will be dispatched to the WCS.
+# Dispatched tasks are not optimized any longer, but robots can start path
+# planning and task execution.
+# The possible strategies are ordered by the point in time when a task is 
+# dispatched, from latest to earliest. LAZY and EAGER are discouraged.
+# range: [LAZY, RELUCTANT, RELUCTANT2, RELUCTANT3, EAGER]
+# !!! EXPERIMENTAL !!!
+dispatchStrategy: RELUCTANT
+
+# Configures the expected mean base duration for task types.
+# The base duration is the duration needed to execute the arm application or 
+# lift motion. It does not include the travel duration of the robot.
+# unit: seconds [s]
+# type: int
+# range: [0; ∞)
+taskBaseDuration:
+  pick: 10
+  drop: 10
+
+# Configures the custom actions that are executed on arrival for pick and drop 
+# tasks. At runtime, this template is filled with detailed information about 
+# the corresponding task, by replacing the following substrings:
+#   $station$: the uuid of the station where the action is executed
+#   $payload$: the uuid of the payload that is picked or dropped
+#   $stationCompartment$: uuid of the involved compartment at the station
+#   $robotCompartment$: uuid of the involved compartment on the robot
+# Additionally, the cost field is always set to the estimated time.
+# type: kuka.amr.fleet.v1alpha1.CustomizedActionCommand
+actionOnArrived:
+  pick:
+    - command:
+        typeUrl: type.googleapis.com/kuka.mobilerobotics.transfer.v1alpha1.PickCommand
+        value:
+          payloadUuid: "$payload$"
+          stationUuid: "$station$"
+          stationCompartmentUuid: "$stationCompartment$"
+          robotCompartmentUuid: "$robotCompartment$"
+  drop:
+    - command:
+        typeUrl: type.googleapis.com/kuka.mobilerobotics.transfer.v1alpha1.DropCommand
+        value:
+          payloadUuid: "$payload$"
+          stationUuid: "$station$"
+          stationCompartmentUuid: "$stationCompartment$"
+          robotCompartmentUuid: "$robotCompartment$"

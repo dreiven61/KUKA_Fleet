@@ -1,0 +1,35 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.objects.v1alpha1;
+
+import "kuka/mobilerobotics/objects/v1alpha1/shape_2d_layers.proto";
+
+option java_package = "com.kuka.mobilerobotics.objects.v1alpha1";
+option java_outer_classname = "ObjectModelProto";
+option java_multiple_files = true;
+
+// An object model is a point of interest for a robot. It is mostly used for
+// positioning, for example close to a station or near a charging plate.
+// Therefore object model data consists of a set of geometric shapes that can be
+// compared to live laser data to compute an offset between a robot and
+// this point of interest (See also: fine localization).
+
+
+message ObjectModel
+{
+    // The object's unique identifier.
+    string uuid = 1;
+
+    // A human readable name for this object model. The name does not have to be unique.
+    string name = 2;
+
+    // The geometric shape defined by coordinates relative to the center of the object.
+    kuka.mobilerobotics.objects.v1alpha1.Shape2DLayers shapes = 3;
+}

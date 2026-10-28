@@ -1,0 +1,25 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.graph.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.graph.v1alpha1";
+option java_outer_classname = "MotionBlendingPropertyProto";
+option java_multiple_files = true;
+
+// Definition of the motion blending cart which can be set on 
+// an edge or a target node. If blending is set on an edge and 
+// on the target node of this edge, the blending cart of the 
+// edge is used.
+message MotionBlendingProperty
+{
+  // Describes the distance from the blending point to the 
+  // motion target in meters.
+  double blending_cart_meters = 1;
+}

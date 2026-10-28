@@ -1,0 +1,32 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.transfer.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.transfer.v1alpha1";
+option java_outer_classname = "PickCommandProto";
+option java_multiple_files = true;
+
+// Describes a command that picks a payload from a station onto the robot.
+message PickCommand {
+
+  // The uuid of the payload to pick.
+  // The payload is currently placed on the station_uuid, in the station_compartment_uuid.
+  string payload_uuid = 1;
+
+  // The uuid of the station from where to pick the payload.
+  string station_uuid = 2;
+
+  // The uuid of the station's compartment from where to pick the payload.
+  string station_compartment_uuid = 3;
+
+  // The uuid of the robot's compartment where the payload shall be placed.
+  string robot_compartment_uuid = 4;
+
+}

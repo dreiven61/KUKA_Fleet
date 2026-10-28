@@ -1,0 +1,209 @@
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+10�� 28, 2026 1:05:15 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:05:15 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:05:15 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:05:15 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:05:15 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:05:15 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:05:15 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:05:15 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:05:15 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:05:15 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:05:16 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:05:16 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:05:16 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:05:16 ���� servostar.fleet.transfer.NativeHostService start
+INFO: Native SECS passive listener started on 8750, session 3000. No automatic transport submission.
+SECS TEST 2026-10-28T13:05:16.239  HSMS-SS Passive Try-Bind
+/127.0.0.1:8750, binded:false
+SECS TEST 2026-10-28T13:05:16.240  HSMS-SS Passive Binded
+/127.0.0.1:8750, binded:true
+SECS TEST 2026-10-28T13:05:16.242  HSMS-SS Accepted
+local:/127.0.0.1:8750, remote:/127.0.0.1:8751, connecting:true
+SECS TEST 2026-10-28T13:05:16.256  Receive HSMS-Message
+[FF FF|00 00|00 01|00 00 00 01]
+SECS TEST 2026-10-28T13:05:16.257  Try-Send HSMS-Message
+[FF FF|00 00|00 02|00 00 00 01]
+SECS TEST 2026-10-28T13:05:16.257  Sended HSMS-Message
+[FF FF|00 00|00 02|00 00 00 01]
+SECS TEST 2026-10-28T13:05:16.300  Receive HSMS-Message
+[0B B8|81 0D|00 00|00 00 00 02]
+S1F13 W
+<L [0]
+>.
+SECS TEST 2026-10-28T13:05:16.301  Try-Send HSMS-Message
+[0B B8|01 0E|00 00|00 00 00 02]
+S1F14
+<L [2]
+  <B [1] 0x00>
+  <L [2]
+    <A [5] "FLEET">
+    <A [5] "1.0.0">
+  >
+>.
+SECS TEST 2026-10-28T13:05:16.302  Sended HSMS-Message
+[0B B8|01 0E|00 00|00 00 00 02]
+S1F14
+<L [2]
+  <B [1] 0x00>
+  <L [2]
+    <A [5] "FLEET">
+    <A [5] "1.0.0">
+  >
+>.
+SECS TEST 2026-10-28T13:05:16.305  Receive HSMS-Message
+[0B B8|82 31|00 00|00 00 00 03]
+S2F49 W
+<L [4]
+  <U4 [1] 0>
+  <A [0] "">
+  <A [8] "TRANSFER">
+  <L [2]
+    <L [2]
+      <A [11] "COMMANDINFO">
+      <L [3]
+        <L [2]
+          <A [9] "COMMANDID">
+          <A [11] "TR_TEST_001">
+        >
+        <L [2]
+          <A [8] "PRIORITY">
+          <U2 [1] 1>
+        >
+        <L [2]
+          <A [7] "REPLACE">
+          <U2 [1] 0>
+        >
+      >
+    >
+    <L [2]
+      <A [12] "TRANSFERINFO">
+      <L [3]
+        <L [2]
+          <A [9] "CARRIERID">
+          <A [13] "SIM_CARGO_001">
+        >
+        <L [2]
+          <A [10] "SOURCEPORT">
+          <A [7] "PORT_89">
+        >
+        <L [2]
+          <A [8] "DESTPORT">
+          <A [7] "PORT_97">
+        >
+      >
+    >
+  >
+>.
+SECS TEST 2026-10-28T13:05:16.315  Try-Send HSMS-Message
+[0B B8|02 32|00 00|00 00 00 03]
+S2F50
+<L [2]
+  <B [1] 0x04>
+  <L [0]
+  >
+>.
+SECS TEST 2026-10-28T13:05:16.315  Sended HSMS-Message
+[0B B8|02 32|00 00|00 00 00 03]
+S2F50
+<L [2]
+  <B [1] 0x04>
+  <L [0]
+  >
+>.
+SECS TEST 2026-10-28T13:05:16.317  Receive HSMS-Message
+[0B B8|82 31|00 00|00 00 00 04]
+S2F49 W
+<L [4]
+  <U4 [1] 0>
+  <A [0] "">
+  <A [8] "TRANSFER">
+  <L [2]
+    <L [2]
+      <A [11] "COMMANDINFO">
+      <L [3]
+        <L [2]
+          <A [9] "COMMANDID">
+          <A [11] "TR_TEST_001">
+        >
+        <L [2]
+          <A [8] "PRIORITY">
+          <U2 [1] 1>
+        >
+        <L [2]
+          <A [7] "REPLACE">
+          <U2 [1] 0>
+        >
+      >
+    >
+    <L [2]
+      <A [12] "TRANSFERINFO">
+      <L [3]
+        <L [2]
+          <A [9] "CARRIERID">
+          <A [13] "SIM_CARGO_001">
+        >
+        <L [2]
+          <A [10] "SOURCEPORT">
+          <A [7] "PORT_89">
+        >
+        <L [2]
+          <A [8] "DESTPORT">
+          <A [7] "PORT_97">
+        >
+      >
+    >
+  >
+>.
+SECS TEST 2026-10-28T13:05:16.317  Try-Send HSMS-Message
+[0B B8|02 32|00 00|00 00 00 04]
+S2F50
+<L [2]
+  <B [1] 0x05>
+  <L [0]
+  >
+>.
+SECS TEST 2026-10-28T13:05:16.317  Sended HSMS-Message
+[0B B8|02 32|00 00|00 00 00 04]
+S2F50
+<L [2]
+  <B [1] 0x05>
+  <L [0]
+  >
+>.
+WIRE STATUS {enabled=true, communicating=true, state={healthy=true, tsc=AUTO, reports=[{dataId=1, kind=TRANSFER, ceid=208, commandId=TR_TEST_001, state=PENDING, attempts=0, error=}], jobCount=1}}
+SECS TEST 2026-10-28T13:05:35.874  Receive HSMS-Message
+[FF FF|00 00|00 09|00 00 00 05]
+SECS TEST 2026-10-28T13:05:35.875  HSMS-SS Channel-Closed
+local:/127.0.0.1:8750, remote:/127.0.0.1:8751, connecting:false
+Exception in thread "main" java.lang.AssertionError: Negative host ACK blocks outbox
+	at servostar.fleet.transfer.NativeHostTest.check(NativeHostTest.java:18)
+	at servostar.fleet.transfer.NativeHostTest.waitFor(NativeHostTest.java:20)
+	at servostar.fleet.transfer.NativeHostTest.wire(NativeHostTest.java:130)
+	at servostar.fleet.transfer.NativeHostTest.main(NativeHostTest.java:111)

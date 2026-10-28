@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "jobCode": "TR_TEST_001",
+      "workflowId": 6837,
+      "containerCode": "SIM_CARGO_001",
+      "robotId": "1",
+      "status": 30,
+      "workflowName": null,
+      "workflowCode": null,
+      "workflowPriority": 1,
+      "mapCode": "lay01",
+      "targetCellCode": "lay01-dist1-97",
+      "beginCellCode": "lay01-dist1-89",
+      "targetCellCodeForeign": "SECS_ST_97",
+      "beginCellCodeForeign": "SECS_ST_89",
+      "finalNodeCode": "lay01-dist1-97",
+      "warnFlag": 0,
+      "warnCode": null,
+      "completeTime": "2026-10-27 13:13:03",
+      "spendTime": 12,
+      "createUsername": null,
+      "createTime": "2026-10-27 13:12:50",
+      "source": "UNIVERSAL",
+      "materialsInfo": "-"
+    }
+  ],
+  "code": null,
+  "message": null,
+  "success": true
+}

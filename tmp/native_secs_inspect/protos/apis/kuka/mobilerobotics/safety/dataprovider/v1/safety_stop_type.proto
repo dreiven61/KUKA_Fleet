@@ -1,0 +1,35 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.safety.dataprovider.v1;
+
+option csharp_namespace = "Kuka.Mobilerobotics.Safety.DataProvider.V1";
+option java_multiple_files = true;
+option java_outer_classname = "SafetyStopTypeProto";
+option java_package = "com.kuka.mobilerobotics.safety.dataprovider.v1";
+
+// message to send Safety Stop types 
+message SafetyStopType
+{
+  // Emergency Stop Button(s) pressed.
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  bool emergencyStopPressed = 1;
+  // Predefined velocity limit(s) exceeded.
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  bool velocityLimitExceeded = 2;
+  // Safe brake ramp was violated (STOP 0).
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  bool safeBrakeRampViolated = 3;
+  // Monitored Protection field(s) violated.
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  bool protectionFieldViolated = 4;
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  // Connected hardware component(s) error.
+  bool hardwareDeviceError = 5;
+}

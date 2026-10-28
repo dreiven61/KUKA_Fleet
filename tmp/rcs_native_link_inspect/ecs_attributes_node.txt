@@ -1,0 +1,273 @@
+Compiled from "TbMsgAttributesNode.java"
+public class org.thingsboard.rule.engine.telemetry.TbMsgAttributesNode implements org.thingsboard.rule.engine.api.TbNode {
+  private static final org.slf4j.Logger log;
+
+  private org.thingsboard.rule.engine.telemetry.TbMsgAttributesNodeConfiguration config;
+
+  public org.thingsboard.rule.engine.telemetry.TbMsgAttributesNode();
+    Code:
+       0: aload_0
+       1: invokespecial #2                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public void init(org.thingsboard.rule.engine.api.TbContext, org.thingsboard.rule.engine.api.TbNodeConfiguration) throws org.thingsboard.rule.engine.api.TbNodeException;
+    Code:
+       0: aload_0
+       1: aload_2
+       2: ldc           #3                  // class org/thingsboard/rule/engine/telemetry/TbMsgAttributesNodeConfiguration
+       4: invokestatic  #4                  // Method org/thingsboard/rule/engine/api/util/TbNodeUtils.convert:(Lorg/thingsboard/rule/engine/api/TbNodeConfiguration;Ljava/lang/Class;)Ljava/lang/Object;
+       7: checkcast     #3                  // class org/thingsboard/rule/engine/telemetry/TbMsgAttributesNodeConfiguration
+      10: putfield      #5                  // Field config:Lorg/thingsboard/rule/engine/telemetry/TbMsgAttributesNodeConfiguration;
+      13: aload_0
+      14: getfield      #5                  // Field config:Lorg/thingsboard/rule/engine/telemetry/TbMsgAttributesNodeConfiguration;
+      17: invokevirtual #6                  // Method org/thingsboard/rule/engine/telemetry/TbMsgAttributesNodeConfiguration.getNotifyDevice:()Ljava/lang/Boolean;
+      20: ifnonnull     34
+      23: aload_0
+      24: getfield      #5                  // Field config:Lorg/thingsboard/rule/engine/telemetry/TbMsgAttributesNodeConfiguration;
+      27: iconst_1
+      28: invokestatic  #7                  // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      31: invokevirtual #8                  // Method org/thingsboard/rule/engine/telemetry/TbMsgAttributesNodeConfiguration.setNotifyDevice:(Ljava/lang/Boolean;)V
+      34: aload_0
+      35: getfield      #5                  // Field config:Lorg/thingsboard/rule/engine/telemetry/TbMsgAttributesNodeConfiguration;
+      38: invokevirtual #9                  // Method org/thingsboard/rule/engine/telemetry/TbMsgAttributesNodeConfiguration.getScope:()Ljava/lang/String;
+      41: invokestatic  #10                 // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+      44: ifeq          56
+      47: aload_0
+      48: getfield      #5                  // Field config:Lorg/thingsboard/rule/engine/telemetry/TbMsgAttributesNodeConfiguration;
+      51: ldc           #11                 // String CLIENT_SCOPE
+      53: invokevirtual #12                 // Method org/thingsboard/rule/engine/telemetry/TbMsgAttributesNodeConfiguration.setScope:(Ljava/lang/String;)V
+      56: return
+
+  public void onMsg(org.thingsboard.rule.engine.api.TbContext, org.thingsboard.server.common.msg.TbMsg);
+    Code:
+       0: aload_2
+       1: invokevirtual #13                 // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+       4: ldc           #14                 // String msgSourceTypeKey
+       6: aload_1
+       7: invokeinterface #15,  1           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.getSelf:()Lorg/thingsboard/server/common/data/rule/RuleNode;
+      12: invokevirtual #16                 // Method org/thingsboard/server/common/data/rule/RuleNode.getType:()Ljava/lang/String;
+      15: invokevirtual #17                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+      18: aload_2
+      19: invokevirtual #13                 // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      22: ldc           #18                 // String ecsTaskId
+      24: invokestatic  #19                 // Method java/util/UUID.randomUUID:()Ljava/util/UUID;
+      27: invokevirtual #20                 // Method java/util/UUID.toString:()Ljava/lang/String;
+      30: invokevirtual #17                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+      33: aload_2
+      34: invokevirtual #21                 // Method org/thingsboard/server/common/msg/TbMsg.getType:()Ljava/lang/String;
+      37: getstatic     #22                 // Field org/thingsboard/server/common/msg/session/SessionMsgType.POST_ATTRIBUTES_REQUEST:Lorg/thingsboard/server/common/msg/session/SessionMsgType;
+      40: invokevirtual #23                 // Method org/thingsboard/server/common/msg/session/SessionMsgType.name:()Ljava/lang/String;
+      43: invokevirtual #24                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      46: ifne          86
+      49: aload_1
+      50: aload_2
+      51: new           #25                 // class java/lang/IllegalArgumentException
+      54: dup
+      55: new           #26                 // class java/lang/StringBuilder
+      58: dup
+      59: invokespecial #27                 // Method java/lang/StringBuilder."<init>":()V
+      62: ldc           #28                 // String Unsupported msg type:
+      64: invokevirtual #29                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      67: aload_2
+      68: invokevirtual #21                 // Method org/thingsboard/server/common/msg/TbMsg.getType:()Ljava/lang/String;
+      71: invokevirtual #29                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      74: invokevirtual #30                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      77: invokespecial #31                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      80: invokeinterface #32,  3           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.tellFailure:(Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/Throwable;)V
+      85: return
+      86: aload_2
+      87: invokevirtual #33                 // Method org/thingsboard/server/common/msg/TbMsg.getData:()Ljava/lang/String;
+      90: astore_3
+      91: aload_0
+      92: aload_1
+      93: aload_2
+      94: invokespecial #34                 // Method v2MsgAddGroupNameToInterfaceNode:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;)V
+      97: aload_3
+      98: invokestatic  #35                 // Method org/apache/commons/lang3/StringUtils.isNotBlank:(Ljava/lang/CharSequence;)Z
+     101: ifeq          214
+     104: new           #36                 // class com/google/gson/JsonParser
+     107: dup
+     108: invokespecial #37                 // Method com/google/gson/JsonParser."<init>":()V
+     111: aload_3
+     112: invokevirtual #38                 // Method com/google/gson/JsonParser.parse:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+     115: invokestatic  #39                 // Method org/thingsboard/server/common/transport/adaptor/JsonConverter.convertToAttributes:(Lcom/google/gson/JsonElement;)Ljava/util/Set;
+     118: astore        4
+     120: aload_2
+     121: invokevirtual #13                 // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     124: ldc           #40                 // String notifyDevice
+     126: invokevirtual #41                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getValue:(Ljava/lang/String;)Ljava/lang/String;
+     129: astore        5
+     131: aload_1
+     132: invokeinterface #42,  1           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.getTelemetryService:()Lorg/thingsboard/rule/engine/api/RuleEngineTelemetryService;
+     137: aload_1
+     138: invokeinterface #43,  1           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.getTenantId:()Lorg/thingsboard/server/common/data/id/TenantId;
+     143: aload_2
+     144: invokevirtual #44                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     147: aload_0
+     148: getfield      #5                  // Field config:Lorg/thingsboard/rule/engine/telemetry/TbMsgAttributesNodeConfiguration;
+     151: invokevirtual #9                  // Method org/thingsboard/rule/engine/telemetry/TbMsgAttributesNodeConfiguration.getScope:()Ljava/lang/String;
+     154: new           #45                 // class java/util/ArrayList
+     157: dup
+     158: aload         4
+     160: invokespecial #46                 // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+     163: aload_0
+     164: getfield      #5                  // Field config:Lorg/thingsboard/rule/engine/telemetry/TbMsgAttributesNodeConfiguration;
+     167: invokevirtual #6                  // Method org/thingsboard/rule/engine/telemetry/TbMsgAttributesNodeConfiguration.getNotifyDevice:()Ljava/lang/Boolean;
+     170: invokevirtual #47                 // Method java/lang/Boolean.booleanValue:()Z
+     173: ifne          192
+     176: aload         5
+     178: invokestatic  #10                 // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+     181: ifne          192
+     184: aload         5
+     186: invokestatic  #48                 // Method java/lang/Boolean.parseBoolean:(Ljava/lang/String;)Z
+     189: ifeq          196
+     192: iconst_1
+     193: goto          197
+     196: iconst_0
+     197: new           #49                 // class org/thingsboard/rule/engine/telemetry/TelemetryNodeCallback
+     200: dup
+     201: aload_1
+     202: aload_2
+     203: invokespecial #50                 // Method org/thingsboard/rule/engine/telemetry/TelemetryNodeCallback."<init>":(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;)V
+     206: invokeinterface #51,  7           // InterfaceMethod org/thingsboard/rule/engine/api/RuleEngineTelemetryService.saveAndNotify:(Lorg/thingsboard/server/common/data/id/TenantId;Lorg/thingsboard/server/common/data/id/EntityId;Ljava/lang/String;Ljava/util/List;ZLcom/google/common/util/concurrent/FutureCallback;)V
+     211: goto          221
+     214: aload_1
+     215: aload_2
+     216: invokeinterface #52,  2           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.tellSuccess:(Lorg/thingsboard/server/common/msg/TbMsg;)V
+     221: return
+
+  private void v2MsgAddGroupNameToInterfaceNode(org.thingsboard.rule.engine.api.TbContext, org.thingsboard.server.common.msg.TbMsg);
+    Code:
+       0: aload_2
+       1: invokevirtual #53                 // Method org/thingsboard/server/common/msg/TbMsg.isV2Device:()Z
+       4: ifeq          304
+       7: aload_2
+       8: invokevirtual #13                 // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      11: ldc           #55                 // String groupIndex
+      13: invokevirtual #41                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getValue:(Ljava/lang/String;)Ljava/lang/String;
+      16: invokestatic  #56                 // Method java/lang/Integer.parseInt:(Ljava/lang/String;)I
+      19: istore_3
+      20: aload_1
+      21: invokeinterface #57,  1           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.getDeviceService:()Lorg/thingsboard/server/dao/device/DeviceService;
+      26: invokestatic  #58                 // Method org/thingsboard/server/common/data/id/TenantId.defaultId:()Lorg/thingsboard/server/common/data/id/TenantId;
+      29: aload_2
+      30: invokevirtual #44                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+      33: checkcast     #59                 // class org/thingsboard/server/common/data/id/DeviceId
+      36: invokeinterface #60,  3           // InterfaceMethod org/thingsboard/server/dao/device/DeviceService.findDeviceById:(Lorg/thingsboard/server/common/data/id/TenantId;Lorg/thingsboard/server/common/data/id/DeviceId;)Lorg/thingsboard/server/common/data/Device;
+      41: astore        4
+      43: aload         4
+      45: invokevirtual #61                 // Method org/thingsboard/server/common/data/Device.getType:()Lorg/thingsboard/server/common/data/DeviceTransportType;
+      48: getstatic     #62                 // Field org/thingsboard/server/common/data/DeviceTransportType.MODBUS:Lorg/thingsboard/server/common/data/DeviceTransportType;
+      51: if_acmpne     175
+      54: aload         4
+      56: invokevirtual #63                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+      59: invokevirtual #64                 // Method org/thingsboard/server/common/data/device/data/DeviceData.getConnector:()Lcom/fasterxml/jackson/databind/JsonNode;
+      62: invokestatic  #65                 // Method org/thingsboard/server/common/data/device/connector/modbus/ModbusDeviceConnector.parseFromJsonNode:(Lcom/fasterxml/jackson/databind/JsonNode;)Lorg/thingsboard/server/common/data/device/connector/modbus/ModbusDeviceConnector;
+      65: astore        5
+      67: aload         5
+      69: invokevirtual #66                 // Method org/thingsboard/server/common/data/device/connector/modbus/ModbusDeviceConnector.getDevice:()Lorg/thingsboard/server/common/data/device/connector/modbus/ModbusDeviceConfig;
+      72: invokevirtual #67                 // Method org/thingsboard/server/common/data/device/connector/modbus/ModbusDeviceConfig.getGroups:()Ljava/util/List;
+      75: iload_3
+      76: invokeinterface #68,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+      81: checkcast     #69                 // class org/thingsboard/server/common/data/device/connector/modbus/ModbusConfigGroup
+      84: astore        6
+      86: aload         6
+      88: invokevirtual #70                 // Method org/thingsboard/server/common/data/device/connector/modbus/ModbusConfigGroup.getName:()Ljava/lang/String;
+      91: astore        7
+      93: aload_2
+      94: invokevirtual #13                 // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      97: ldc           #71                 // String groupName
+      99: aload         7
+     101: invokevirtual #17                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     104: aload_2
+     105: aload         6
+     107: invokevirtual #72                 // Method org/thingsboard/server/common/data/device/connector/modbus/ModbusConfigGroup.getId:()Ljava/lang/String;
+     110: invokestatic  #73                 // Method org/thingsboard/server/common/data/id/ChildDeviceId.fromString:(Ljava/lang/String;)Lorg/thingsboard/server/common/data/id/ChildDeviceId;
+     113: invokevirtual #74                 // Method org/thingsboard/server/common/msg/TbMsg.setChildDeviceId:(Lorg/thingsboard/server/common/data/id/ChildDeviceId;)V
+     116: aload_2
+     117: invokevirtual #13                 // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     120: ldc           #75                 // String cellNode
+     122: aload         6
+     124: invokevirtual #76                 // Method org/thingsboard/server/common/data/device/connector/modbus/ModbusConfigGroup.getCellNode:()Ljava/lang/String;
+     127: invokevirtual #17                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     130: aload_2
+     131: invokevirtual #13                 // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     134: ldc           #77                 // String warehouseCode
+     136: aload         4
+     138: invokevirtual #78                 // Method org/thingsboard/server/common/data/Device.getWarehouseInfo:()Lorg/thingsboard/server/common/data/device/data/WarehouseInfo;
+     141: invokevirtual #79                 // Method org/thingsboard/server/common/data/device/data/WarehouseInfo.getCode:()Ljava/lang/String;
+     144: invokevirtual #17                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     147: aload_2
+     148: invokevirtual #13                 // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     151: ldc           #80                 // String deviceTransportType
+     153: aload         4
+     155: invokevirtual #63                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+     158: invokevirtual #81                 // Method org/thingsboard/server/common/data/device/data/DeviceData.getTransportConfiguration:()Lorg/thingsboard/server/common/data/device/data/DeviceTransportConfiguration;
+     161: invokeinterface #82,  1           // InterfaceMethod org/thingsboard/server/common/data/device/data/DeviceTransportConfiguration.getType:()Lorg/thingsboard/server/common/data/DeviceTransportType;
+     166: invokevirtual #83                 // Method org/thingsboard/server/common/data/DeviceTransportType.name:()Ljava/lang/String;
+     169: invokevirtual #17                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     172: goto          304
+     175: aload         4
+     177: invokevirtual #61                 // Method org/thingsboard/server/common/data/Device.getType:()Lorg/thingsboard/server/common/data/DeviceTransportType;
+     180: getstatic     #84                 // Field org/thingsboard/server/common/data/DeviceTransportType.S7:Lorg/thingsboard/server/common/data/DeviceTransportType;
+     183: if_acmpne     304
+     186: aload         4
+     188: invokevirtual #63                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+     191: invokevirtual #64                 // Method org/thingsboard/server/common/data/device/data/DeviceData.getConnector:()Lcom/fasterxml/jackson/databind/JsonNode;
+     194: invokestatic  #85                 // Method org/thingsboard/server/common/data/device/connector/s7/S7DeviceConnector.parseFromJsonNode:(Lcom/fasterxml/jackson/databind/JsonNode;)Lorg/thingsboard/server/common/data/device/connector/s7/S7DeviceConnector;
+     197: astore        5
+     199: aload         5
+     201: invokevirtual #86                 // Method org/thingsboard/server/common/data/device/connector/s7/S7DeviceConnector.getDevice:()Lorg/thingsboard/server/common/data/device/connector/s7/S7DeviceConfig;
+     204: invokevirtual #87                 // Method org/thingsboard/server/common/data/device/connector/s7/S7DeviceConfig.getGroups:()Ljava/util/List;
+     207: iload_3
+     208: invokeinterface #68,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     213: checkcast     #88                 // class org/thingsboard/server/common/data/device/connector/s7/S7ConfigGroup
+     216: astore        6
+     218: aload         6
+     220: invokevirtual #89                 // Method org/thingsboard/server/common/data/device/connector/s7/S7ConfigGroup.getName:()Ljava/lang/String;
+     223: astore        7
+     225: aload_2
+     226: invokevirtual #13                 // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     229: ldc           #71                 // String groupName
+     231: aload         7
+     233: invokevirtual #17                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     236: aload_2
+     237: aload         6
+     239: invokevirtual #90                 // Method org/thingsboard/server/common/data/device/connector/s7/S7ConfigGroup.getId:()Ljava/lang/String;
+     242: invokestatic  #73                 // Method org/thingsboard/server/common/data/id/ChildDeviceId.fromString:(Ljava/lang/String;)Lorg/thingsboard/server/common/data/id/ChildDeviceId;
+     245: invokevirtual #74                 // Method org/thingsboard/server/common/msg/TbMsg.setChildDeviceId:(Lorg/thingsboard/server/common/data/id/ChildDeviceId;)V
+     248: aload_2
+     249: invokevirtual #13                 // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     252: ldc           #75                 // String cellNode
+     254: aload         6
+     256: invokevirtual #91                 // Method org/thingsboard/server/common/data/device/connector/s7/S7ConfigGroup.getCellNode:()Ljava/lang/String;
+     259: invokevirtual #17                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     262: aload_2
+     263: invokevirtual #13                 // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     266: ldc           #77                 // String warehouseCode
+     268: aload         4
+     270: invokevirtual #78                 // Method org/thingsboard/server/common/data/Device.getWarehouseInfo:()Lorg/thingsboard/server/common/data/device/data/WarehouseInfo;
+     273: invokevirtual #79                 // Method org/thingsboard/server/common/data/device/data/WarehouseInfo.getCode:()Ljava/lang/String;
+     276: invokevirtual #17                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     279: aload_2
+     280: invokevirtual #13                 // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     283: ldc           #80                 // String deviceTransportType
+     285: aload         4
+     287: invokevirtual #63                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+     290: invokevirtual #81                 // Method org/thingsboard/server/common/data/device/data/DeviceData.getTransportConfiguration:()Lorg/thingsboard/server/common/data/device/data/DeviceTransportConfiguration;
+     293: invokeinterface #82,  1           // InterfaceMethod org/thingsboard/server/common/data/device/data/DeviceTransportConfiguration.getType:()Lorg/thingsboard/server/common/data/DeviceTransportType;
+     298: invokevirtual #83                 // Method org/thingsboard/server/common/data/DeviceTransportType.name:()Ljava/lang/String;
+     301: invokevirtual #17                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     304: return
+
+  public void destroy();
+    Code:
+       0: return
+
+  static {};
+    Code:
+       0: ldc           #92                 // class org/thingsboard/rule/engine/telemetry/TbMsgAttributesNode
+       2: invokestatic  #93                 // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #94                 // Field log:Lorg/slf4j/Logger;
+       8: return
+}

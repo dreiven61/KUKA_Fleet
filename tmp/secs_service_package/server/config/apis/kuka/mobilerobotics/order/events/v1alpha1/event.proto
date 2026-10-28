@@ -1,0 +1,42 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.order.events.v1alpha1;
+
+import "kuka/mobilerobotics/order/events/v1alpha1/aborting_event.proto";
+import "kuka/mobilerobotics/order/events/v1alpha1/system_event.proto";
+import "kuka/mobilerobotics/order/events/v1alpha1/terminate_event.proto";
+import "kuka/mobilerobotics/order/events/v1alpha1/transport_event.proto";
+import "kuka/mobilerobotics/order/events/v1alpha1/vehicle_event.proto";
+
+option java_package = "com.kuka.mobilerobotics.order.events.v1alpha1";
+option java_outer_classname = "EventProto";
+option java_multiple_files = true;
+
+// An Event message ocurres in conjunction with a system state change that needs to be reported to a secs host (MCS).
+message Event {
+  oneof type {
+  
+    // Command abortion has been initiated
+    AbortingEvent aborting_event = 1;
+	
+    // Notification about some system event
+    SystemEvent system_event =  2;
+	
+    // Command has been terminated in an unusual way
+    TerminateEvent terminate_event = 3;
+	
+    // Event message regarding transport command handling
+    TransportEvent transport_event = 4;
+	
+    // Vehicle event notification (vehicle installed - available for dipatching commands)
+    VehicleEvent vehicle_event = 5;
+  }
+}
+

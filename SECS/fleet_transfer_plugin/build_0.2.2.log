@@ -1,0 +1,29 @@
+Note: C:\work\KUKA\SECS\fleet_transfer_plugin\src\servostar\fleet\transfer\TransferJournal.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+Bundled 7327 gRPC runtime files from the supplied SDK.
+Note: C:\work\KUKA\SECS\fleet_transfer_plugin\test\TransferTest.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+PASS: 36 validation, wire-format, auth, preview, deduplication and uncertain-outcome checks; loopback mock only.
+10�� 27, 2026 2:53:12 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 42 reporting checks; captured WCS replay, final-state fixtures, duplicates, gaps, cancellation and restart. No live calls.
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+10�� 27, 2026 2:53:13 ���� servostar.fleet.transfer.WcsStatusMonitor watchTransport
+INFO: WCS status transport ready; progress/completion still require observed events
+10�� 27, 2026 2:53:13 ���� servostar.fleet.transfer.WcsStatusMonitor lost
+WARNING: WCS status subscription lost (UNAVAILABLE); incomplete commands blocked; reconnect in 5 seconds
+10�� 27, 2026 2:53:18 ���� servostar.fleet.transfer.WcsStatusMonitor watchTransport
+INFO: WCS status transport ready; progress/completion still require observed events
+10�� 27, 2026 2:53:18 ���� servostar.fleet.transfer.WcsStatusMonitor lost
+WARNING: WCS status subscription lost (UNAVAILABLE); incomplete commands blocked; reconnect in 5 seconds
+PASS: 16 status monitor checks. Loopback RPC and mock transport only; no Fleet calls.
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+PASS: isolated gRPC runtime, transport provider and WCS stub loaded; no RPC sent.
+PASS: SBP/PF4J loaded packaged JAR, started child context, registered four routes. WCS connection disabled in test.
+PASS: plugin stop removed its routes.
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          33598D9C5331B274E227A58E938E9CF16D9719E5F987CC30E8B3E2E536E7A023       C:\work\KUKA\SECS\fleet_transfer…
+

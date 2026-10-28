@@ -1,0 +1,95 @@
+[
+    {
+        "Id": "sha256:82b4528e407f564c5429dfb15742f170e77addba1c410a0af18c262e99b7042e",
+        "RepoTags": [
+            "docker.pkg.rd.kuka.com/kuka/mobilerobotics/nav-secs:2.3.0",
+            "localhost:5001/nav-secs:kmres"
+        ],
+        "RepoDigests": [
+            "docker.pkg.rd.kuka.com/kuka/mobilerobotics/nav-secs@sha256:aebf7c83e08f725107c7db84f8fde4ff77e0a2c16b22444c5466c34b58816b1f"
+        ],
+        "Parent": "",
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2025-07-07T08:41:52.080117107Z",
+        "DockerVersion": "",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "50230/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/jattach/"
+            ],
+            "Cmd": null,
+            "Image": "",
+            "Volumes": null,
+            "WorkingDir": "/opt/nav/robot/libs",
+            "Entrypoint": [
+                "bash",
+                "-c",
+                "/opt/nav/robot/bin/startService.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "com.azure.dev.image.build.buildnumber": "20250707.1",
+                "com.azure.dev.image.build.builduri": "vstfs:///Build/Build/1297579",
+                "com.azure.dev.image.build.definitionname": "nav-secs",
+                "com.azure.dev.image.build.repository.name": "nav-secs",
+                "com.azure.dev.image.build.repository.uri": "https://kuka@dev.azure.com/kuka/Mobile%20Robotics/_git/nav-secs",
+                "com.azure.dev.image.build.sourcebranchname": "2.3.0",
+                "com.azure.dev.image.build.sourceversion": "1175eb8ff96f11e71ae01e44d9ceb21db46f27d4",
+                "com.azure.dev.image.system.teamfoundationcollectionuri": "https://dev.azure.com/kuka/",
+                "com.azure.dev.image.system.teamproject": "Mobile Robotics",
+                "image.base.digest": "sha256:7965de949bb497ad344e20161655fb35d69f681a5fe1906f1c65c2fc0760709a",
+                "image.base.ref.name": "docker.pkg.rd.kuka.com/kuka/mobilerobotics/java-runtime:jre17-latest",
+                "project": "SECS Service Image"
+            }
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 398534800,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/8aed0c749f119f42bebc38c1fb7561b379adfb4bfab3af4d9c1d3949e2553be2/diff:/var/lib/docker/overlay2/d99bdfa3e456b8b21681d7375ba61385c6a6b5ab260e23151c9a6aa9cb33d8ad/diff:/var/lib/docker/overlay2/e2f995c1c8bc6cb16bd50977f60e2ec49b9c0ef29ff71d0fa8d5ec21f45caab3/diff:/var/lib/docker/overlay2/3580dbaf34cb25e043eb134b32b1c324aa8d429cc9456398ac4d957b8ef75e24/diff:/var/lib/docker/overlay2/7927787462fe34d21287e2f92dec9df8a1e98315045ad701b340f858b59abc32/diff:/var/lib/docker/overlay2/6dd54dfe55f83615a2d168013d784ce5d954c35a6f6d187a16bd189966191331/diff:/var/lib/docker/overlay2/b2def50c695755f246439ccf275af5a56ee3294b0b245cacf8b013f173b43fa5/diff:/var/lib/docker/overlay2/893d64ab91e4aeb85da8eac02f5ef376cb118a09ded2a4c919617d60a7593458/diff:/var/lib/docker/overlay2/c9c98a295bafb665146c212547d8dc715acd7d835f023f232551b6a36fa51d2e/diff:/var/lib/docker/overlay2/3d7c2d4dde3cd9fb60fb76dc88e7ce310fb2b7decbafffeca8f711f6cb7e9981/diff:/var/lib/docker/overlay2/54731bff2f36e291174b0464961789744da8787504151a6ea6a0bb6614c574e9/diff:/var/lib/docker/overlay2/e5353a1840094c6b4074894f9e12faec48d4771cf6098cfed484d4918f9d43f9/diff:/var/lib/docker/overlay2/6b8334da9510ab99c97298308a753a108885cd72e0708663c346b160d97ebda7/diff:/var/lib/docker/overlay2/d0c64fcac6a186d59325177f6bf16cda57d1916b3a8319f6c7b9950956e536e1/diff:/var/lib/docker/overlay2/46d40998190cd9a6aa30eefc6955352c1825463dfc11f7bf39a7f1e1508782df/diff:/var/lib/docker/overlay2/412818cf01159e7e56e91de32cfc734199823601ef55389808936191bc6fe492/diff",
+                "MergedDir": "/var/lib/docker/overlay2/b637b29bc33c3addeb746282b5d6aea454dd82e62ea94e1b27791f2a0f884ff1/merged",
+                "UpperDir": "/var/lib/docker/overlay2/b637b29bc33c3addeb746282b5d6aea454dd82e62ea94e1b27791f2a0f884ff1/diff",
+                "WorkDir": "/var/lib/docker/overlay2/b637b29bc33c3addeb746282b5d6aea454dd82e62ea94e1b27791f2a0f884ff1/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:2f7436e79a0bc6cdec6536da54ae6a5863c8e3b5f145e0f8ac0b96306baddbc9",
+                "sha256:97f63251c195ad4a22caaac0c2c5df9ff9f0148a920f52c65120f62d4f2c54bf",
+                "sha256:3e5490010a9f6d00a2279256e9400275e1eb0bee7bf0bb7904b386a51d94d9e5",
+                "sha256:1df8afd46de4ca1124fdd16b3a589ebf69ba2d90cc542b2625b0b776725bdd6f",
+                "sha256:7fe2642437aa4c86c00ad5f35dc245c4de806772ab6153f6ef659c02e1f0c336",
+                "sha256:c394eb877c490b915eafe05d8408befb3e6be55a93fd153a2e13720d2d3b09e7",
+                "sha256:770b2e38d86c4b2b8229147b9bb4451d6ed36614aff65bc274926e374518c20b",
+                "sha256:d1226087b079d025559a35d2c0043165e6aa242aae41b4c1e7a0ce7de6dc3013",
+                "sha256:f9478a8f65f342d1c5b02f6db384f21aa5ecc912e84edcca88cf05c09f72c657",
+                "sha256:0ce122a527f58d76d2e9b627685064b72b22f4e97255145644bc5b3251568538",
+                "sha256:e2d29383012999deb03cbb53792ea7e8b61bd973b8ec5efc357b51622e9ca8cf",
+                "sha256:f9ffaa3f4d1a94aba875cf223842d42ec8eb88c1bdc5d56165e77f94162ba096",
+                "sha256:5f7a273593cf8c6fac7249a55832aadb510f9745e505bbb9280d30ebf75e6ed2",
+                "sha256:ae704109bc339741777a3a7033567e9128537edcba5b5b4e9dd04c672e87023a",
+                "sha256:a035d1d0485a4ea1375b1654f6ef19007faa575b604832d2e8b9d0e3860624c5",
+                "sha256:9e7ba01804bbebb912a23e88ed3b640c2dcf119bed88c7f3a339dd64921f956a",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-07-03T16:49:32.627393993Z"
+        }
+    }
+]

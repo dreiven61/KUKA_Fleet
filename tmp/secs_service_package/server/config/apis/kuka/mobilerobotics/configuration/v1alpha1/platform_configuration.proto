@@ -1,0 +1,74 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.configuration.v1alpha1;
+
+import "kuka/core/geometry/v1/transform_2d.proto";
+import "kuka/core/geometry/v1/velocity_2d.proto";
+import "kuka/core/geometry/v1/acceleration_2d.proto";
+
+
+import "google/protobuf/wrappers.proto";
+
+option java_package = "com.kuka.mobilerobotics.configuration.v1alpha1";
+option java_outer_classname = "PlatformConfigurationProto";
+option java_multiple_files = true;
+
+// Contains the platform configuration values. 
+message PlatformConfiguration {
+	
+  // Name of the robot
+  string type_name = 1;
+
+  // Driving type of the robot
+  DriveType drive_type = 2;
+
+  // Mass of the robot [kg]
+  double mass = 3;
+
+  // Translational velocity (meight be slower than the norm of x and y components). [m/s]
+  double max_translational_velocity = 4;
+	
+  // Maximum velocity in x and y direction and around the theta axis. [m/s] [rad/s]
+  kuka.core.geometry.v1.Velocity2D max_velocity = 5;
+
+  // Maximum acceleration in x and y direction and around the theta axis. [m/s²] [rad/s²]
+  kuka.core.geometry.v1.Acceleration2D max_acceleration = 6;
+
+  // Maximum deccelaration in x and y direction and around the theta axis. [m/s²] [rad/s²]
+  kuka.core.geometry.v1.Acceleration2D max_decelaration = 7;
+
+  // Flag indicating that backward motion is permitted
+  bool  backward_motion_permitted = 8;
+
+  // Robot shape reference (Corner points of the vehicle), e.g. '0.775, 0.425, 0.775,-0.425, -0.775,-0.425, -0.775, 0.425' [m]
+  google.protobuf.StringValue shape_reference = 9;
+
+  // Height of the robot [m]
+  double height = 10;
+
+  // Odomoetry center offset in x and y direction. [m]
+  kuka.core.geometry.v1.Transform2D odometry_center_offset = 11;
+
+  // Mass center offset in x, y and z direction. [m]
+  kuka.core.geometry.v1.Transform2D mass_center_offset = 12;
+
+  // Different robot driving types
+  enum DriveType
+    {
+    // Unspecified.
+    UNSPECIFIED = 0;
+
+    // The vehicle is a holonomic robot.
+    HOLONOMIC = 1;
+
+    // The vehicle is differential wheeled robot.
+    DIFFERENTIAL = 2;
+  }
+}

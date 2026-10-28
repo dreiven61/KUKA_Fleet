@@ -1,0 +1,38 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.ledstripe.actionexecutor.v1alpha1;
+
+import "kuka/mobilerobotics/ledstripe/actionexecutor/v1alpha1/ledstrip_action_constants.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.LedStripe.ActionExecutor.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "SetBlinkingEffectActionProto";
+option java_package = "com.kuka.mobilerobotics.ledstripe.actionexecutor.v1alpha1";
+
+// Provides method for applying custom visualization on the LED strip.
+// It can override the default behavior of the LED strip, but it is
+// independent from SetBackgroundColorAction action.
+// This action applies blinking effect to the LED strip and
+// can be revoked with the ResetEffectAction method.
+message SetBlinkingEffectCommand
+{
+  // Segments to apply the effect to.
+  SegmentGroup.Enum segment = 1;
+
+  // The color to be set on segment.
+  SegmentColor.Enum color = 2;
+
+  // Time period to elapse before switching state. [millisecond]
+  uint32 period = 3;
+
+  // State of blinking is the previous active state color, or OFF color.
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  bool forceOffColor = 4;
+}

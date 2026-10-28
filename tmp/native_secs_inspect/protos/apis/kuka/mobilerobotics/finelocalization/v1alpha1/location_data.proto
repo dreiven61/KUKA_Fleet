@@ -1,0 +1,22 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.finelocalization.v1alpha1;
+
+import "kuka/mobilerobotics/finelocalization/v1alpha1/location.proto";
+
+option java_package = "com.kuka.mobilerobotics.finelocalization.v1alpha1";
+option java_outer_classname = "LocationDataProto";
+option java_multiple_files = true;
+
+// Contains a list of locations. See "Location" for more information.
+message LocationData
+{
+  repeated Location locations = 1;
+}

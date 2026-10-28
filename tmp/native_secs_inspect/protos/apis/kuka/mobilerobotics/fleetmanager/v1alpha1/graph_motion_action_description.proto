@@ -1,0 +1,32 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.fleetmanager.v1alpha1;
+
+import "google/protobuf/any.proto";
+import "google/protobuf/duration.proto";
+
+option java_package = "com.kuka.mobilerobotics.fleetmanager.v1alpha1";
+option java_outer_classname = "GraphMotionActionDescriptionProto";
+option java_multiple_files = true;
+
+// Represents a description of an action that will be executed during a graph motion.
+message GraphMotionActionDescription
+{
+  // The uuid of the resource to execute this action.
+  // optional: if not set, the action will be executed by the robot, which is executing the graph motion.
+  string resource_uuid = 1;
+
+  // The estimated duration.
+  // optional: if not set, a default value is used. (0 second for node actions; the shortest travel time, using the robots' max. speed, for edge actions)
+  google.protobuf.Duration estimated_duration = 2;
+
+  // The action command with all its parameters.
+  google.protobuf.Any command = 3;
+}

@@ -1,0 +1,52 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.fleetmanager.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+import "kuka/mobilerobotics/graph/v1alpha1/topology_node_reference.proto";
+import "kuka/mobilerobotics/fleetmanager/v1alpha1/goal_node.proto";
+
+option java_package = "com.kuka.mobilerobotics.fleetmanager.v1alpha1";
+option java_outer_classname = "GraphMotionCommandProto";
+option java_multiple_files = true;
+
+
+// A graph motion which can be commanded by fleet manager is a motion from the robot's current pose
+// to a given goal node in an existing topology graph.
+message GraphMotionCommand
+{
+  // The uuid of the robot which should execute the graph motion.
+  string robot_uuid = 1;
+
+  // List containing all nodes that must be visited in the given order.
+  // The same goal node may be containen multiple times. (e.g. 1,2,3,2,3,4)
+  // The list must contain at least one item.
+  repeated kuka.mobilerobotics.fleetmanager.v1alpha1.GoalNode goal_nodes = 2;
+
+  // If a whitelist is set, then any plan which is found for this motion must only 
+  // visit the nodes that are contained in this list.
+  // Note, the whitelist and the blacklist are mutually exclusive. 
+  // optional
+  repeated kuka.mobilerobotics.graph.v1alpha1.TopologyNodeReference white_list = 3;
+	
+  // If a blacklist is set, then any plan found for this graph motion must not visit 
+  // any node which is contained in this list.
+  // Note, the whitelist and the blacklist are mutually exclusive. 
+  // optional
+  repeated kuka.mobilerobotics.graph.v1alpha1.TopologyNodeReference black_list = 4;
+	
+  // The priority of this graph motion. Used to decide which robot can move first 
+  // in case several graph motions are conflicting during execution in the graph.
+  // By default the last commanded graph motion has the lowest possible priority. 
+  // With this parameter it is possible to set a higher priority. 
+  // optional
+  google.protobuf.Int32Value priority = 5;
+	
+}

@@ -1,0 +1,8 @@
+{
+  "offline_tests": 8,
+  "native_parameter_encoding": "compatible",
+  "simulator_library": "XML/schema counts and SECS encoding validated",
+  "live_SECS_roundtrip": "not_run",
+  "Fleet_configuration": "not_changed",
+  "robot_commands_sent_this_turn": 0
+}

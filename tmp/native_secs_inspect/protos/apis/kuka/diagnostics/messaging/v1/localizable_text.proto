@@ -1,0 +1,36 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.diagnostics.messaging.v1;
+
+import "kuka/diagnostics/messaging/v1/attribute.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "LocalizableTextProto";
+option java_package = "com.kuka.diagnostics.messaging.v1";
+
+// Type to describe a localizable text that should be translated to a specific
+// language.
+message LocalizableText {
+  // The key to be used for the translation, defined as "<module name>.<message name>".
+  // Example: "motion_framework.BufferBatteryVoltageTooLow"
+  string translation_key = 1;
+
+  // A developer text in English.
+  //
+  // It is used as fallback when then 'translation_key' field could not be resolved.
+  // The fallback text may contain placeholders based on the 'attributes' field
+  // using the format {attribute_key}.
+  string text = 2;
+
+  // Optional. The arguments of the text.
+  //
+  // The map key must match the following regex: [a-zA-Z_][a-zA-Z0-9_]*
+  map<string, kuka.diagnostics.messaging.v1.Attribute> arguments = 3;
+}

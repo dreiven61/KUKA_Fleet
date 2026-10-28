@@ -1,0 +1,63 @@
+Compiled from "GraphManager.java"
+final class com.kuka.mobilerobotics.orderengine.data.GraphManager implements com.kuka.mobilerobotics.orderengine.data.provider.DataChangeListener<com.kuka.mobilerobotics.graph.v1alpha1.GraphData> {
+  private final com.kuka.mobilerobotics.orderengine.data.provider.GraphDataProvider _graphData;
+
+  private final com.kuka.mobilerobotics.orderengine.allocate.TaskAllocator _allocator;
+
+  private final com.kuka.mobilerobotics.orderengine.plan.TaskPlanner _planner;
+
+  com.kuka.mobilerobotics.orderengine.data.GraphManager(com.kuka.mobilerobotics.orderengine.data.provider.GraphDataProvider, com.kuka.mobilerobotics.orderengine.allocate.TaskAllocator, com.kuka.mobilerobotics.orderengine.plan.TaskPlanner);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field _graphData:Lcom/kuka/mobilerobotics/orderengine/data/provider/GraphDataProvider;
+       9: aload_0
+      10: aload_2
+      11: putfield      #13                 // Field _allocator:Lcom/kuka/mobilerobotics/orderengine/allocate/TaskAllocator;
+      14: aload_0
+      15: aload_3
+      16: putfield      #17                 // Field _planner:Lcom/kuka/mobilerobotics/orderengine/plan/TaskPlanner;
+      19: return
+
+  void activate();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field _graphData:Lcom/kuka/mobilerobotics/orderengine/data/provider/GraphDataProvider;
+       4: aload_0
+       5: invokeinterface #21,  2           // InterfaceMethod com/kuka/mobilerobotics/orderengine/data/provider/GraphDataProvider.addAndCallListener:(Lcom/kuka/mobilerobotics/orderengine/data/provider/DataChangeListener;)V
+      10: return
+
+  public void onDataChange(com.kuka.core.v1.MessageHeader, com.kuka.mobilerobotics.graph.v1alpha1.GraphData, com.kuka.mobilerobotics.graph.v1alpha1.GraphData);
+    Code:
+       0: aload_3
+       1: invokestatic  #27                 // Method com/kuka/mobilerobotics/orderengine/model/schedule/PlantGraph.from:(Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphData;)Lcom/kuka/mobilerobotics/orderengine/model/schedule/PlantGraph;
+       4: astore        4
+       6: aload_0
+       7: getfield      #13                 // Field _allocator:Lcom/kuka/mobilerobotics/orderengine/allocate/TaskAllocator;
+      10: new           #33                 // class com/kuka/mobilerobotics/orderengine/allocate/change/UpdateGraphFactChange
+      13: dup
+      14: aload         4
+      16: invokespecial #35                 // Method com/kuka/mobilerobotics/orderengine/allocate/change/UpdateGraphFactChange."<init>":(Lcom/kuka/mobilerobotics/orderengine/model/schedule/PlantGraph;)V
+      19: invokeinterface #38,  2           // InterfaceMethod com/kuka/mobilerobotics/orderengine/allocate/TaskAllocator.addProblemFactChange:(Lcom/kuka/mobilerobotics/orderengine/allocate/change/AbstractTaskScheduleChange;)V
+      24: aload_0
+      25: getfield      #17                 // Field _planner:Lcom/kuka/mobilerobotics/orderengine/plan/TaskPlanner;
+      28: new           #44                 // class com/kuka/mobilerobotics/orderengine/plan/change/UpdateGraphChange
+      31: dup
+      32: aload         4
+      34: invokespecial #46                 // Method com/kuka/mobilerobotics/orderengine/plan/change/UpdateGraphChange."<init>":(Lcom/kuka/mobilerobotics/orderengine/model/schedule/PlantGraph;)V
+      37: invokeinterface #47,  2           // InterfaceMethod com/kuka/mobilerobotics/orderengine/plan/TaskPlanner.addTaskPlanChange:(Lcom/kuka/mobilerobotics/orderengine/plan/change/TaskPlanChange;)V
+      42: return
+
+  public void onDataChange(com.kuka.core.v1.MessageHeader, com.google.protobuf.Message, com.google.protobuf.Message);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: checkcast     #53                 // class com/kuka/mobilerobotics/graph/v1alpha1/GraphData
+       6: aload_3
+       7: checkcast     #53                 // class com/kuka/mobilerobotics/graph/v1alpha1/GraphData
+      10: invokevirtual #55                 // Method onDataChange:(Lcom/kuka/core/v1/MessageHeader;Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphData;Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphData;)V
+      13: return
+}

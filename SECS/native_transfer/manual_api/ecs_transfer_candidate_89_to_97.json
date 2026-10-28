@@ -1,0 +1,35 @@
+{
+  "orgId": "UNIVERSAL",
+  "requestId": "SECS_CANDIDATE_89_97_REVIEW_ONLY",
+  "missionCode": "SECS_CANDIDATE_89_97_REVIEW_ONLY",
+  "missionType": "RACK_MOVE",
+  "robotType": "LIFT",
+  "robotIds": ["1"],
+  "robotModels": ["KMP1500I"],
+  "priority": 1,
+  "containerCode": "SIM_CARGO_001",
+  "containerModelCode": "SIM_TRAY_001",
+  "lockRobotAfterFinish": false,
+  "missionData": [
+    {
+      "sequence": 1,
+      "position": "lay01-dist1-89",
+      "type": "NODE_POINT",
+      "passStrategy": "AUTO",
+      "actionType": "UP_CONTAINER",
+      "waitingMillis": 0,
+      "actionConfirm": false,
+      "actionInform": false
+    },
+    {
+      "sequence": 2,
+      "position": "lay01-dist1-97",
+      "type": "NODE_POINT",
+      "passStrategy": "AUTO",
+      "actionType": "DOWN_CONTAINER",
+      "waitingMillis": 0,
+      "actionConfirm": false,
+      "actionInform": false
+    }
+  ]
+}

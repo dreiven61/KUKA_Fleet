@@ -1,0 +1,32 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.graph.v1alpha1;
+
+import "kuka/mobilerobotics/graph/v1alpha1/graph_property.proto";
+
+option java_package = "com.kuka.mobilerobotics.graph.v1alpha1";
+option java_outer_classname = "TopologyEdgeProto";
+option java_multiple_files = true;
+
+// A edge which is located in a topology graph. Is is a directed connection between 2 nodes.  
+message TopologyEdge
+{
+  // Defines the unique identifier.
+  string uuid = 1;
+
+  // Defines the uuid of the start node. 
+  string start_node_uuid = 2;
+	
+  // Defines the uuid of the target node. 
+  string target_node_uuid = 3;
+	
+  // Defines a list of edge properties.
+  repeated GraphProperty properties = 4;
+}

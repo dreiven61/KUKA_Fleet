@@ -1,0 +1,92 @@
+{
+  "source_sha256": "2af7d0c3a11c11a77f60792875dd6994569683c6d1a16a32c138da4eb8d8a876",
+  "source_nodes": 27,
+  "source_directed_edges": 68,
+  "result_nodes": 27,
+  "result_directed_edges": 64,
+  "workstations": [
+    "84",
+    "86",
+    "89",
+    "90",
+    "93",
+    "94",
+    "95",
+    "96",
+    "97",
+    "98"
+  ],
+  "container_model": "SIM_TRAY_001",
+  "charge_entry_to_dock": {
+    "62": "88",
+    "64": "87"
+  },
+  "grid_spacing_m": 2,
+  "coordinate_changes": {
+    "84": [
+      14,
+      23
+    ],
+    "86": [
+      14,
+      11
+    ],
+    "87": [
+      18,
+      17
+    ],
+    "88": [
+      10,
+      17
+    ],
+    "89": [
+      12,
+      23
+    ],
+    "90": [
+      16,
+      23
+    ],
+    "93": [
+      10,
+      19
+    ],
+    "94": [
+      18,
+      19
+    ],
+    "95": [
+      10,
+      15
+    ],
+    "96": [
+      18,
+      15
+    ],
+    "97": [
+      12,
+      11
+    ],
+    "98": [
+      16,
+      11
+    ]
+  },
+  "checks": [
+    "JSON round trip",
+    "unique node identities and coordinates",
+    "all graph edges axis aligned and exactly 2m",
+    "all graph edges bidirectional",
+    "non-dock graph connected",
+    "all function references exist",
+    "source bytes unchanged"
+  ],
+  "limits": [
+    "Fleet import not tested",
+    "KMP1500I robotTypeCode assumed from model label; confirm in Fleet",
+    "charging settings assembled from documented types and existing function defaults; confirm after import",
+    "charge entries are not REST_POINT automatic parking nodes",
+    "background map is a local reference; imported floor has laserMapId=-1",
+    "aligned terminal 90 may overlap a mapped obstacle; inspect preview before any real motion"
+  ]
+}

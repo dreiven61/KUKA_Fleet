@@ -1,0 +1,32 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motioncontrol.odometry.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+import "kuka/core/geometry/v1/transform_2d.proto";
+import "kuka/core/geometry/v1/velocity_2d.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.MotionControl.Odometry.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "OdometryProto";
+option java_package = "com.kuka.mobilerobotics.motioncontrol.odometry.v1alpha1";
+
+// Contains odometry information of a mobile robot.
+message Odometry
+{
+  // A timestamp as close as possible to the source of the contained data.
+  google.protobuf.Timestamp timestamp = 1;
+
+  // (x, y, theta) odometry pose of the mobile robot, in meters.
+  kuka.core.geometry.v1.Transform2D pose = 2;
+
+  // (x, y, theta) odometry velocity of the mobile robot. Respectively in m/s, m/s and rad/s.
+  kuka.core.geometry.v1.Velocity2D velocity = 3;
+}

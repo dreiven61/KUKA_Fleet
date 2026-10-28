@@ -1,0 +1,31 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.finelocalization.v1alpha1;
+
+import "kuka/mobilerobotics/finelocalization/v1alpha1/fine_localization_parameters.proto";
+
+option java_package = "com.kuka.mobilerobotics.finelocalization.v1alpha1";
+option java_outer_classname = "FineLocalizationLocationCommandProto";
+option java_multiple_files = true;
+
+// Contains information for the fine localization command which determines the pose of the robot 
+// with respect to a previously taught location.
+message FineLocalizationLocationCommand
+{	
+  // The reference location ID.
+  string location_uuid = 1;
+
+  // Optional set of parameters for fine localization fine tuning.
+  // If this field is not set, default parameters are used. Default parameters shall support the
+  // most common use-cases.
+  FineLocalizationParameters parameters = 2;
+}
+
+

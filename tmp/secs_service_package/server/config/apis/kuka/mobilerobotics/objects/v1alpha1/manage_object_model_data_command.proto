@@ -1,0 +1,28 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.objects.v1alpha1;
+
+import "kuka/mobilerobotics/objects/v1alpha1/object_model.proto";
+import "kuka/database/v1alpha1/manage_data_command_type.proto";
+
+option java_package = "com.kuka.mobilerobotics.objects.v1alpha1";
+option java_outer_classname = "ManageObjectModelDataCommandProto";
+option java_multiple_files = true;
+
+// Manages a object model data element in the Object model service. Provides a way to import, update and delete an object model.
+message ManageObjectModelDataCommand
+{
+    // Type field. Please see the enum "ManageDataCommandType" description.
+    kuka.database.v1alpha1.ManageDataCommandType type = 1;
+
+    // The new object models's data.
+    // Please refer to the "kuka.database.v1alpha1.ManageDataCommandType" enum description for details about how the object model data is used.
+    ObjectModel data = 2;
+}

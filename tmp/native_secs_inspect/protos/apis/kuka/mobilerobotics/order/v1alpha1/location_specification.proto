@@ -1,0 +1,29 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.order.v1alpha1;
+
+import "kuka/mobilerobotics/order/v1alpha1/robot_specification.proto";
+import "kuka/mobilerobotics/order/v1alpha1/station_specification.proto";
+
+option java_package = "com.kuka.mobilerobotics.order.v1alpha1";
+option java_outer_classname = "LocationSpecificationProto";
+option java_multiple_files = true;
+
+// Specifies whera a payload is located.
+message LocationSpecification
+{
+  oneof location {
+    // Specifies a robot as location of a payload.
+    RobotSpecification robot = 1;
+    
+    // Specifies a station as location of a payload.
+    StationSpecification station = 2;
+  }
+}

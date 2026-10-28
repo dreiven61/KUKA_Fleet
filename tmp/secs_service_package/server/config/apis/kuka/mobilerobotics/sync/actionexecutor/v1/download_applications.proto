@@ -1,0 +1,25 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+// protolint:disable INDENT
+
+package kuka.mobilerobotics.sync.actionexecutor.v1;
+
+option csharp_namespace = "Kuka.MobileRobotics.Sync.ActionExecutor.V1";
+option java_multiple_files = true;
+option java_outer_classname = "DownloadApplicationsActionProto";
+option java_package = "com.kuka.mobilerobotics.sync.actionexecutor.v1";
+
+// Downloads the application data from the navigation server to KRC
+message DownloadApplications {
+   // True if the KRL applications and linked frames shall be downloaded
+   bool sync_apps_and_frames = 1;
+   // True if the camera jobs shall be downloaded
+   bool sync_camera_jobs = 2;
+}

@@ -1,0 +1,38 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motion.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/goal_accuracy.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/tracking_accuracy.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/velocity_constraints.proto";
+
+option java_package = "com.kuka.mobilerobotics.motion.v1alpha1";
+option java_outer_classname = "CommonMotionParametersProto";
+option java_multiple_files = true;
+
+// The velocity constraints that need to be respected during a motion.
+message CommonMotionParameters
+{
+  // The timeout (in seconds) for this motion. If the motion takes longer than the 
+  // given timeout, the AGV will be stopped and the motion fails.
+  // Optional.
+  google.protobuf.DoubleValue timeout = 2;
+
+  // The velocity constraints that need to be respected.
+  // Optional.
+  VelocityConstraints velocity_constraints = 3;
+
+  // The tracking accuracy that needs to be respected.
+  TrackingAccuracy tracking_accuracy = 4;
+
+  // The goal accuracy that needs to be respected.
+  GoalAccuracy goal_accuracy = 5;
+}

@@ -1,0 +1,44 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motioncontrol.motion.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+import "kuka/core/geometry/v1/velocity_2d.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.MotionControl.Motion.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "MotionCommandProto";
+option java_package = "com.kuka.mobilerobotics.motioncontrol.motion.v1alpha1";
+
+// The MotionCommand message contains the command information to move the platform.
+// It contains the message header and
+message MotionCommand
+{
+  // The timestamp corresponding to the time of the creation of this motion command.
+  google.protobuf.Timestamp timestamp = 1;
+
+  // contains the actual command to be executed.
+  oneof command
+  {
+    // velocity control
+    VelocityCommand velocity_command = 2;
+  }
+}
+
+// Contains the payload of a velocity motion command, i.e. a velocity for x, y and theta components.
+// Specifies the duration of the command, which corresponds to its time validity.
+message VelocityCommand
+{
+  // velocity command (x,y,theta) [m/s m/s rad/s]
+  kuka.core.geometry.v1.Velocity2D command = 1;
+
+  // maximum validity of this command [s]
+  double duration = 2;
+}

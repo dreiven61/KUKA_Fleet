@@ -1,0 +1,45 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.graph.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+import "kuka/core/geometry/v1/matrix_nxm.proto";
+
+option java_package = "com.kuka.mobilerobotics.graph.v1alpha1";
+option java_outer_classname = "GraphTransitionPropertyProto";
+option java_multiple_files = true;
+
+// Defines the connection between 2 graphs. This property cannot be used 
+// as a default property for all nodes. 
+message GraphTransitionProperty 
+{
+  // Defines the uuid of the connected graph.
+  string graph_uuid = 1;
+	
+  // Defines the uuid of the connected node.
+  string node_uuid = 2;
+	
+  // Defines the orientation between 2 graphs in radians. 
+  google.protobuf.DoubleValue orientation_in_radians = 3;
+
+  // Defines the initial translational (in meters) and
+  // rotational (in radians) standard deviation of the localizer.
+  // The default reliability matrix is the following 3x3 covariance matrix:
+  // | st^2 0 0 |
+  // | 0 st^2 0 |
+  // | 0 0 sr^2 |
+  // with st = 0.1 and sr = 0.0872665,
+  // which indicates 0.1m translational and 5° rotational standard deviation.
+  // optional (if it is not set, the default value is used)
+  kuka.core.geometry.v1.MatrixNxM pose_covariance_matrix = 4;
+
+}
+
+

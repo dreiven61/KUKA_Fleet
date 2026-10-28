@@ -1,0 +1,39 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.laser.v1alpha1;
+
+import "kuka/core/geometry/v1/transform_2d.proto";
+
+option java_package = "com.kuka.mobilerobotics.laser.v1alpha1";
+option java_outer_classname = "LaserConfigurationDataProto";
+option java_multiple_files = true;
+
+// The hardware configuration of a laser scanner, including information about the device
+// type and its physical properties.
+message LaserConfigurationData
+{
+  // the kind of laser, e.g. Sick MicroScan3
+  string laser_type = 1;
+
+  // angle of the first beam relative to the center of the laser (in rad)
+  double start_angle = 2;
+
+  // field of view of the laser (in rad)
+  double field_of_view = 3;
+
+  // angular resolution of the laser (in rad)
+  double angular_resolution = 4;
+
+  // maximum range of the laser readings (in m)
+  double maximum_range = 5;
+
+  // The calibrated pose of the scanner relative to the robot's odometry center
+  kuka.core.geometry.v1.Transform2D local_pose = 6;
+}

@@ -1,0 +1,44 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.core.v1;
+
+option java_package = "com.kuka.core.v1";
+option java_outer_classname = "ReliabilityProto";
+option java_multiple_files = true;
+
+
+// Represents the quality of an estimation.
+enum Reliability
+{
+  // Unknown. This is the defualt value.
+  UNKNOWN_RELIABILITY = 0;
+
+  // The estimated state can be considered reliable.
+  RELIABLE = 1;
+    
+  // The quality of the estimated state has not been determined.
+  UNDECIDED = 2;
+    
+  // The estimated state should not be relied upon.
+  UNRELIABLE = 3;
+}
+
+// The type of a pose reliability.
+enum ReliabilityMatrixType
+{
+  // Unknown. This is the defualt value.
+  UNKNOWN_RELIABILITY_MATRIX_TYPE = 0;
+
+  // covariance matrix.
+  COVARIANCE = 1;
+    
+  // information matrix.
+  INFORMATION = 2;
+}

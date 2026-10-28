@@ -1,0 +1,29 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.graph.v1alpha1;
+
+import "google/protobuf/any.proto";
+import "kuka/mobilerobotics/graph/v1alpha1/resource_group.proto";
+
+option java_package = "com.kuka.mobilerobotics.graph.v1alpha1";
+option java_outer_classname = "GraphPropertyProto";
+option java_multiple_files = true;
+
+// A graph property is defined for a specific resource group (or for all).
+message GraphProperty 
+{
+  // Defines a list of default node properties which are set to each node.
+  google.protobuf.Any property = 6;
+	
+  // Group of resources, which can have specific capabilities or constraints.
+  // If the resource_group is not set, the property is defined for all types.
+  // Optional. 
+  repeated ResourceGroup resource_group = 2;
+}

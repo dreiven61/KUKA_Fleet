@@ -1,0 +1,40 @@
+{
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "containerModel": "SIM_TRAY_001",
+  "robots": [
+    {
+      "id": "90101",
+      "startNode": 68,
+      "route": [
+        89,
+        97
+      ],
+      "container": "SIM_CARGO_001"
+    },
+    {
+      "id": "90102",
+      "startNode": 69,
+      "route": [
+        84,
+        86
+      ],
+      "container": "SIM_CARGO_002"
+    },
+    {
+      "id": "90103",
+      "startNode": 67,
+      "route": [
+        94,
+        96
+      ],
+      "container": "SIM_CARGO_003"
+    }
+  ],
+  "live_run_verified": false,
+  "virtual_robot_creation_verified_live": false,
+  "server": "http://192.168.0.45:5000",
+  "dispatch": "/apimm/api/mission/dispatch",
+  "missionTemplate": "T1",
+  "simulatorIdentityCheck": "/apisim/api/v1/simu/getRobotStatus"
+}

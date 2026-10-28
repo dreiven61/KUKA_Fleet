@@ -1,0 +1,5 @@
+{
+  "data": {
+    "@type": "type.googleapis.com/kuka.mobilerobotics.station.v1alpha1.StationData"
+  }
+}

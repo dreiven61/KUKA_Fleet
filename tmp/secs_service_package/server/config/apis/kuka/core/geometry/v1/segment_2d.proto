@@ -1,0 +1,28 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.core.geometry.v1;
+
+import "kuka/core/geometry/v1/vector_2d.proto";
+
+option csharp_namespace = "Kuka.Core.Geometry.V1";
+option java_package = "com.kuka.core.geometry.v1";
+option java_outer_classname = "Segment2DProto";
+option java_multiple_files = true;
+
+
+// Represents a segment in 2D space.
+message Segment2D 
+{
+  // The start position of the segment
+  kuka.core.geometry.v1.Vector2D start = 1;
+
+  // The end position of the segment
+  kuka.core.geometry.v1.Vector2D end = 2;
+}

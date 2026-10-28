@@ -1,0 +1,21 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package apis.kuka.mobilerobotics.graph.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.graph.v1alpha1";
+option java_outer_classname = "StationPropertyProto";
+option java_multiple_files = true;
+
+// Definition of a property that links a node to a station.
+message StationProperty
+{
+  // The station's uuid.
+  string station_uuid = 1;
+}

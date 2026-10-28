@@ -1,0 +1,31 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.wirelessadapter;
+
+option csharp_namespace = "Kuka.Mobilerobotics.Wirelessadapter";
+option java_multiple_files = true;
+option java_outer_classname = "NetworkConnectionDataProto";
+option java_package = "com.kuka.mobilerobotics.wirelessadapter";
+
+// Connection data for connecting a wireless network.
+message NetworkConnectionData
+{
+  // IP address for the device on a wireless network to connect.
+  string ip_address = 1;
+
+  // Subnet mask.
+  string subnet_mask = 2;
+
+  // SSID of the wireless network the connection device shall connect to device.
+  string ssid = 3;
+
+  // Password of the SSID of the wireless network to the connection.
+  string password =4;
+}

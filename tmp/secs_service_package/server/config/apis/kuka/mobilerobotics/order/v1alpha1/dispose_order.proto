@@ -1,0 +1,35 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.order.v1alpha1;
+
+import "kuka/mobilerobotics/order/v1alpha1/payload_specification.proto";
+import "kuka/mobilerobotics/order/v1alpha1/robot_specification.proto";
+import "kuka/mobilerobotics/order/v1alpha1/station_specification.proto";
+
+option java_package = "com.kuka.mobilerobotics.order.v1alpha1";
+option java_outer_classname = "DisposeOrderProto";
+option java_multiple_files = true;
+
+// An order that removes a payload from the system.
+message DisposeOrder
+{
+  // Specifies the payload to be disposed.
+  PayloadSpecification payload = 1;
+
+  // Specifies where the payload must be disposed.
+  // [optional] If not specified, a suitable dispose station is chosen automatically.
+  // If the target is not a dispose station, the order fails.
+  StationSpecification target = 2;
+
+  // Specifies the robot that must transfer the payload.
+  // [optional] If not specified, a suitable robot is chosen automatically.
+  // If the robot's compartment is already used by a different payload, the order fails.
+  RobotSpecification robot = 3;
+}

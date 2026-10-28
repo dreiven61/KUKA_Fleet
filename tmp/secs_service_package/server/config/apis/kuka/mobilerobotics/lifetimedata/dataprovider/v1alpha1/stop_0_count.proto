@@ -1,0 +1,30 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.lifetimedata.dataprovider.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.LifetimeData.DataProvider.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "Stop0CountProto";
+option java_package = "com.kuka.mobilerobotics.lifetimedata.dataprovider.v1alpha1";
+
+// The count of emergency stop events, when safety had to operate the brakes while the vehicle was in movement.
+message Stop0Count
+{
+  // The number of emergency stop events since the commissioning.
+  int32 stop0_count = 1;
+
+  // The number of emergency stop events since the last replacement of the brakes.
+  int32 stop0_count_since_last_brake_replacement = 2;
+
+  // The timestamp of the last brake replacement.
+  google.protobuf.Timestamp last_brake_replacement_date = 3;
+}

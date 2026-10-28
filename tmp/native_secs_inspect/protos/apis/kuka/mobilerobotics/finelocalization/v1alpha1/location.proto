@@ -1,0 +1,60 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.finelocalization.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+import "kuka/core/geometry/v1/shape_2d.proto";
+import "kuka/core/geometry/v1/transform_2d.proto";
+import "kuka/mobilerobotics/laser/v1alpha1/laser_data.proto";
+
+option java_package = "com.kuka.mobilerobotics.finelocalization.v1alpha1";
+option java_outer_classname = "LocationProto";
+option java_multiple_files = true;
+
+// A location is a point of interest for a robot. It is mostly used for
+// positioning, for example close to a station or near a charging plate.
+// Therefore location data consists of a set of laser scans that can be
+// compared to live laser data to compute an offset between a robot and
+// this point of interest (See also: fine localization).
+message Location
+{
+  // The location's unique identifier.
+  string uuid = 1;
+
+  // The timestamp at which the location was taught. This information can be used
+  // to track the age of the laser data. Over time, 
+  // the environment around a location may change. 
+  // Thus, it is more likely for laser scans of older locations 
+  // to deviate from the actual environment.
+  google.protobuf.Timestamp timestamp = 2;
+
+  // A human readable name for this location. The name does not have to be unique.
+  string name = 3;
+
+  // Contains the UUID of the map on which the location is taught.
+  string map_uuid = 4;
+
+  // The location's pose in the map coordinate system.
+  kuka.core.geometry.v1.Transform2D pose = 5;
+
+  // The list of all laser scan data collected for this location.
+  repeated kuka.mobilerobotics.laser.v1alpha1.LaserData scans = 6;
+
+  // List of zones describing the location of relevant laser data from the scans.
+  // The shapes are defined by coordinates relative to the center of the robot.
+  // If this list is empty, the full scans are considered.
+  repeated kuka.core.geometry.v1.Shape2D zone_shapes = 7;
+
+  // The UUID of the robot used to teach this location.
+  // This information is relevant when using a fleet of robots: different robots
+  // have different scanner mounting tolerance and thus the results of a fine
+  // localization relative to reference scanner data may vary within the fleet.
+  string robot_uuid = 8;
+}

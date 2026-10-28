@@ -1,0 +1,655 @@
+Compiled from "TaskManager.java"
+public class com.kuka.interfaces.plugin.services.TaskManager {
+  private static final org.slf4j.Logger log;
+
+  private com.kuka.interfaces.plugin.services.MoveTaskService moveTaskService;
+
+  private com.kuka.interfaces.plugin.services.NodeActionService nodeActionService;
+
+  private com.kuka.interfaces.plugin.handle.NodeActionHandleFactory nodeActionHandleFactory;
+
+  private com.kuka.interfaces.plugin.services.WcsGrpcAdapterService wcsGrpcAdapterService;
+
+  private org.springframework.jdbc.datasource.DataSourceTransactionManager transactionManager;
+
+  public com.kuka.interfaces.plugin.services.TaskManager();
+    Code:
+       0: aload_0
+       1: invokespecial #2                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public com.kuka.interfaces.plugin.common.ResponseResult submit(com.kuka.interfaces.plugin.entity.AgvTaskDto);
+    Code:
+       0: aload_1
+       1: invokevirtual #3                  // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getRequestId:()Ljava/lang/String;
+       4: astore_2
+       5: invokestatic  #4                  // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest.newBuilder:()Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+       8: aload_1
+       9: invokevirtual #3                  // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getRequestId:()Ljava/lang/String;
+      12: invokevirtual #5                  // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.setRequestId:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+      15: aload_1
+      16: invokevirtual #6                  // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getOrgId:()Ljava/lang/String;
+      19: invokevirtual #7                  // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.setTaskSource:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+      22: aload_1
+      23: invokevirtual #8                  // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getMissionCode:()Ljava/lang/String;
+      26: invokevirtual #9                  // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.setTaskCode:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+      29: aload_0
+      30: aload_1
+      31: invokevirtual #10                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getRobotType:()Ljava/lang/String;
+      34: aload_1
+      35: invokevirtual #11                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getMissionType:()Ljava/lang/String;
+      38: invokespecial #12                 // Method getTaskType:(Ljava/lang/String;Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/TaskTypeGto;
+      41: invokevirtual #13                 // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.setTaskType:(Lcom/kuka/wcs/grpc/mission/TaskTypeGto;)Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+      44: aload_1
+      45: invokevirtual #14                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getPriority:()Ljava/lang/Integer;
+      48: invokestatic  #15                 // Method java/util/Objects.nonNull:(Ljava/lang/Object;)Z
+      51: ifeq          64
+      54: aload_1
+      55: invokevirtual #14                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getPriority:()Ljava/lang/Integer;
+      58: invokevirtual #16                 // Method java/lang/Integer.intValue:()I
+      61: goto          65
+      64: iconst_1
+      65: invokevirtual #17                 // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.setPriority:(I)Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+      68: aload_1
+      69: invokevirtual #18                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getLockRobotAfterFinish:()Ljava/lang/Boolean;
+      72: invokevirtual #19                 // Method java/lang/Boolean.booleanValue:()Z
+      75: invokevirtual #20                 // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.setLockRobotAfterFinish:(Z)Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+      78: aload_0
+      79: aload_1
+      80: invokespecial #21                 // Method buildNodes:(Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;)Ljava/util/List;
+      83: invokevirtual #22                 // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.addAllNode:(Ljava/lang/Iterable;)Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+      86: astore_3
+      87: aload_0
+      88: aload_1
+      89: aload_3
+      90: invokespecial #23                 // Method fillOtherFields:(Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;)V
+      93: aload_3
+      94: invokevirtual #24                 // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.build:()Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest;
+      97: astore        4
+      99: aload_0
+     100: getfield      #25                 // Field wcsGrpcAdapterService:Lcom/kuka/interfaces/plugin/services/WcsGrpcAdapterService;
+     103: aload         4
+     105: invokevirtual #26                 // Method com/kuka/interfaces/plugin/services/WcsGrpcAdapterService.submit:(Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+     108: astore        5
+     110: getstatic     #27                 // Field log:Lorg/slf4j/Logger;
+     113: ldc           #28                 // String missionRequest:[{}],result:[{}]
+     115: aload         4
+     117: aload         5
+     119: invokeinterface #29,  4           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+     124: aload         5
+     126: invokevirtual #30                 // Method com/kuka/interfaces/plugin/common/ResponseResult.getSuccess:()Ljava/lang/Boolean;
+     129: invokevirtual #19                 // Method java/lang/Boolean.booleanValue:()Z
+     132: ifeq          152
+     135: aload_0
+     136: getfield      #31                 // Field moveTaskService:Lcom/kuka/interfaces/plugin/services/MoveTaskService;
+     139: aload_1
+     140: invokevirtual #8                  // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getMissionCode:()Ljava/lang/String;
+     143: getstatic     #32                 // Field com/kuka/interfaces/plugin/common/State.PUSHED:Lcom/kuka/interfaces/plugin/common/State;
+     146: invokevirtual #33                 // Method com/kuka/interfaces/plugin/services/MoveTaskService.updateMoveTaskState:(Ljava/lang/String;Lcom/kuka/interfaces/plugin/common/State;)V
+     149: goto          163
+     152: aload_0
+     153: getfield      #31                 // Field moveTaskService:Lcom/kuka/interfaces/plugin/services/MoveTaskService;
+     156: aload_2
+     157: getstatic     #34                 // Field com/kuka/interfaces/plugin/common/State.FAIL:Lcom/kuka/interfaces/plugin/common/State;
+     160: invokevirtual #35                 // Method com/kuka/interfaces/plugin/services/MoveTaskService.updateMoveTaskStateByRequestId:(Ljava/lang/String;Lcom/kuka/interfaces/plugin/common/State;)V
+     163: aload         5
+     165: areturn
+     166: astore_3
+     167: getstatic     #27                 // Field log:Lorg/slf4j/Logger;
+     170: ldc           #37                 // String submit task error
+     172: aload_3
+     173: invokeinterface #38,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     178: getstatic     #39                 // Field com/kuka/interfaces/plugin/common/ErrorCode.API_REQUEST_ID_IS_DUPLICATE:Ljava/lang/String;
+     181: new           #40                 // class java/lang/StringBuilder
+     184: dup
+     185: invokespecial #41                 // Method java/lang/StringBuilder."<init>":()V
+     188: ldc           #42                 // String RequestId:[
+     190: invokevirtual #43                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     193: aload_2
+     194: invokevirtual #43                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     197: ldc           #44                 // String ] is already used
+     199: invokevirtual #43                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     202: invokevirtual #45                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     205: invokestatic  #46                 // Method com/kuka/interfaces/plugin/common/ResponseResult.error:(Ljava/lang/String;Ljava/lang/String;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+     208: areturn
+     209: astore_3
+     210: getstatic     #27                 // Field log:Lorg/slf4j/Logger;
+     213: ldc           #48                 // String missionRequest error:[{}]
+     215: aload_1
+     216: invokevirtual #8                  // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getMissionCode:()Ljava/lang/String;
+     219: aload_3
+     220: invokeinterface #49,  4           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+     225: aload_0
+     226: getfield      #31                 // Field moveTaskService:Lcom/kuka/interfaces/plugin/services/MoveTaskService;
+     229: aload_2
+     230: getstatic     #34                 // Field com/kuka/interfaces/plugin/common/State.FAIL:Lcom/kuka/interfaces/plugin/common/State;
+     233: invokevirtual #35                 // Method com/kuka/interfaces/plugin/services/MoveTaskService.updateMoveTaskStateByRequestId:(Ljava/lang/String;Lcom/kuka/interfaces/plugin/common/State;)V
+     236: aload_3
+     237: invokevirtual #50                 // Method java/lang/Exception.toString:()Ljava/lang/String;
+     240: invokestatic  #51                 // Method com/kuka/interfaces/plugin/common/ResponseResult.error:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+     243: areturn
+    Exception table:
+       from    to  target type
+           5   165   166   Class org/springframework/dao/DuplicateKeyException
+           5   165   209   Class java/lang/Exception
+
+  public com.kuka.interfaces.plugin.common.ResponseResult changeTarget(com.kuka.interfaces.plugin.entity.RedirectMissionDto);
+    Code:
+       0: aload_1
+       1: invokevirtual #52                 // Method com/kuka/interfaces/plugin/entity/RedirectMissionDto.getMissionCode:()Ljava/lang/String;
+       4: astore_2
+       5: aload_1
+       6: invokevirtual #53                 // Method com/kuka/interfaces/plugin/entity/RedirectMissionDto.getTargetPosition:()Ljava/lang/String;
+       9: astore_3
+      10: aload_0
+      11: getfield      #31                 // Field moveTaskService:Lcom/kuka/interfaces/plugin/services/MoveTaskService;
+      14: aload_2
+      15: invokevirtual #54                 // Method com/kuka/interfaces/plugin/services/MoveTaskService.selectTaskByMission:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO;
+      18: astore        4
+      20: aload         4
+      22: invokestatic  #55                 // Method java/util/Objects.isNull:(Ljava/lang/Object;)Z
+      25: ifeq          59
+      28: ldc           #56                 // String redown error: no related executing job with jobId(%s)
+      30: iconst_1
+      31: anewarray     #57                 // class java/lang/Object
+      34: dup
+      35: iconst_0
+      36: aload_2
+      37: aastore
+      38: invokestatic  #58                 // Method java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+      41: astore        5
+      43: getstatic     #27                 // Field log:Lorg/slf4j/Logger;
+      46: aload         5
+      48: invokeinterface #59,  2           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;)V
+      53: aload         5
+      55: invokestatic  #51                 // Method com/kuka/interfaces/plugin/common/ResponseResult.error:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+      58: areturn
+      59: aload_2
+      60: getstatic     #60                 // Field com/kuka/interfaces/plugin/common/LockType.MISSION:Lcom/kuka/interfaces/plugin/common/LockType;
+      63: invokestatic  #61                 // Method com/kuka/interfaces/plugin/common/SingletonLocalLock.valueOf:(Ljava/lang/String;Lcom/kuka/interfaces/plugin/common/LockType;)Lcom/kuka/interfaces/plugin/common/SingletonLocalLock;
+      66: astore        5
+      68: aload         5
+      70: invokevirtual #62                 // Method com/kuka/interfaces/plugin/common/SingletonLocalLock.writeLock:()Ljava/util/concurrent/locks/ReentrantReadWriteLock$WriteLock;
+      73: invokevirtual #63                 // Method java/util/concurrent/locks/ReentrantReadWriteLock$WriteLock.lock:()V
+      76: aload_0
+      77: aload_2
+      78: aload_3
+      79: aload_3
+      80: getstatic     #64                 // Field com/kuka/wcs/grpc/mission/ActionTypeGto.DOWN_CONTAINER:Lcom/kuka/wcs/grpc/mission/ActionTypeGto;
+      83: iconst_1
+      84: invokespecial #65                 // Method buildActionForRedirect:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/kuka/wcs/grpc/mission/ActionTypeGto;I)Lcom/kuka/wcs/grpc/mission/NodeGto;
+      87: astore        6
+      89: getstatic     #27                 // Field log:Lorg/slf4j/Logger;
+      92: ldc           #66                 // String RESUME mission:[{}] redirect to :[{}]
+      94: aload_2
+      95: aload_3
+      96: invokeinterface #29,  4           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+     101: aload_0
+     102: getfield      #25                 // Field wcsGrpcAdapterService:Lcom/kuka/interfaces/plugin/services/WcsGrpcAdapterService;
+     105: aload_2
+     106: ldc           #67                 // String RESUME
+     108: aload         6
+     110: invokevirtual #68                 // Method com/kuka/interfaces/plugin/services/WcsGrpcAdapterService.pauseResumeMission:(Ljava/lang/String;Ljava/lang/String;Lcom/kuka/wcs/grpc/mission/NodeGto;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+     113: astore        7
+     115: aload         7
+     117: invokevirtual #30                 // Method com/kuka/interfaces/plugin/common/ResponseResult.getSuccess:()Ljava/lang/Boolean;
+     120: invokevirtual #19                 // Method java/lang/Boolean.booleanValue:()Z
+     123: ifne          141
+     126: aload         7
+     128: astore        8
+     130: aload         5
+     132: invokevirtual #62                 // Method com/kuka/interfaces/plugin/common/SingletonLocalLock.writeLock:()Ljava/util/concurrent/locks/ReentrantReadWriteLock$WriteLock;
+     135: invokevirtual #69                 // Method java/util/concurrent/locks/ReentrantReadWriteLock$WriteLock.unlock:()V
+     138: aload         8
+     140: areturn
+     141: aload         5
+     143: invokevirtual #62                 // Method com/kuka/interfaces/plugin/common/SingletonLocalLock.writeLock:()Ljava/util/concurrent/locks/ReentrantReadWriteLock$WriteLock;
+     146: invokevirtual #69                 // Method java/util/concurrent/locks/ReentrantReadWriteLock$WriteLock.unlock:()V
+     149: goto          190
+     152: astore        6
+     154: getstatic     #27                 // Field log:Lorg/slf4j/Logger;
+     157: ldc           #70                 // String changeTarget handle error
+     159: aload         6
+     161: invokeinterface #38,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     166: aload         5
+     168: invokevirtual #62                 // Method com/kuka/interfaces/plugin/common/SingletonLocalLock.writeLock:()Ljava/util/concurrent/locks/ReentrantReadWriteLock$WriteLock;
+     171: invokevirtual #69                 // Method java/util/concurrent/locks/ReentrantReadWriteLock$WriteLock.unlock:()V
+     174: goto          190
+     177: astore        9
+     179: aload         5
+     181: invokevirtual #62                 // Method com/kuka/interfaces/plugin/common/SingletonLocalLock.writeLock:()Ljava/util/concurrent/locks/ReentrantReadWriteLock$WriteLock;
+     184: invokevirtual #69                 // Method java/util/concurrent/locks/ReentrantReadWriteLock$WriteLock.unlock:()V
+     187: aload         9
+     189: athrow
+     190: invokestatic  #71                 // Method com/kuka/interfaces/plugin/common/ResponseResult.ok:()Lcom/kuka/interfaces/plugin/common/ResponseResult;
+     193: areturn
+    Exception table:
+       from    to  target type
+          68   130   152   Class java/lang/Exception
+          68   130   177   any
+         152   166   177   any
+         177   179   177   any
+
+  private com.kuka.wcs.grpc.mission.NodeGto buildActionForRedirect(java.lang.String, java.lang.String, java.lang.String, com.kuka.wcs.grpc.mission.ActionTypeGto, int);
+    Code:
+       0: invokestatic  #72                 // Method com/kuka/wcs/grpc/mission/NodeGto.newBuilder:()Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+       3: iload         5
+       5: invokevirtual #73                 // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.setSequence:(I)Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+       8: iconst_1
+       9: invokevirtual #74                 // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.setLockRobot:(Z)Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+      12: aload_3
+      13: invokevirtual #75                 // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.setCode:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+      16: aload         4
+      18: invokestatic  #55                 // Method java/util/Objects.isNull:(Ljava/lang/Object;)Z
+      21: ifeq          30
+      24: getstatic     #76                 // Field com/kuka/wcs/grpc/mission/NodeTypeGto.NODE_AREA:Lcom/kuka/wcs/grpc/mission/NodeTypeGto;
+      27: goto          33
+      30: getstatic     #77                 // Field com/kuka/wcs/grpc/mission/NodeTypeGto.NODE_POINT:Lcom/kuka/wcs/grpc/mission/NodeTypeGto;
+      33: invokevirtual #78                 // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.setType:(Lcom/kuka/wcs/grpc/mission/NodeTypeGto;)Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+      36: aload_2
+      37: aload_3
+      38: invokevirtual #79                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      41: ifeq          50
+      44: getstatic     #80                 // Field com/kuka/wcs/grpc/mission/PassStrategyGto.AUTO:Lcom/kuka/wcs/grpc/mission/PassStrategyGto;
+      47: goto          53
+      50: getstatic     #81                 // Field com/kuka/wcs/grpc/mission/PassStrategyGto.MANUAL:Lcom/kuka/wcs/grpc/mission/PassStrategyGto;
+      53: invokevirtual #82                 // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.setPassStrategy:(Lcom/kuka/wcs/grpc/mission/PassStrategyGto;)Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+      56: astore        6
+      58: aload         4
+      60: invokestatic  #15                 // Method java/util/Objects.nonNull:(Ljava/lang/Object;)Z
+      63: ifeq          173
+      66: iconst_1
+      67: istore        7
+      69: ldc           #83                 // String ACTION-REDOWN-%s-%s-%s
+      71: iconst_3
+      72: anewarray     #57                 // class java/lang/Object
+      75: dup
+      76: iconst_0
+      77: aload_1
+      78: aastore
+      79: dup
+      80: iconst_1
+      81: iload         5
+      83: invokestatic  #84                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      86: aastore
+      87: dup
+      88: iconst_2
+      89: iload         7
+      91: invokestatic  #84                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      94: aastore
+      95: invokestatic  #58                 // Method java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+      98: astore        8
+     100: invokestatic  #85                 // Method com/kuka/wcs/grpc/mission/ActionGto.newBuilder:()Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     103: aload         8
+     105: invokevirtual #86                 // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setActionId:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     108: aload         4
+     110: invokevirtual #87                 // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setType:(Lcom/kuka/wcs/grpc/mission/ActionTypeGto;)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     113: iload         7
+     115: invokevirtual #88                 // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setSequence:(I)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     118: astore        9
+     120: getstatic     #89                 // Field com/kuka/wcs/grpc/mission/ActionTypeGto.DEVICE_ACTION:Lcom/kuka/wcs/grpc/mission/ActionTypeGto;
+     123: aload         4
+     125: if_acmpne     152
+     128: aload         9
+     130: ldc           #90                 // String %s_%s
+     132: iconst_2
+     133: anewarray     #57                 // class java/lang/Object
+     136: dup
+     137: iconst_0
+     138: aload_3
+     139: aastore
+     140: dup
+     141: iconst_1
+     142: ldc           #91                 // String arrive
+     144: aastore
+     145: invokestatic  #58                 // Method java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+     148: invokevirtual #92                 // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setActionCode:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     151: pop
+     152: aload         6
+     154: iconst_1
+     155: anewarray     #93                 // class com/kuka/wcs/grpc/mission/ActionGto
+     158: dup
+     159: iconst_0
+     160: aload         9
+     162: invokevirtual #94                 // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.build:()Lcom/kuka/wcs/grpc/mission/ActionGto;
+     165: aastore
+     166: invokestatic  #95                 // Method com/google/common/collect/Lists.newArrayList:([Ljava/lang/Object;)Ljava/util/ArrayList;
+     169: invokevirtual #96                 // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.addAllActionOnArrived:(Ljava/lang/Iterable;)Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+     172: pop
+     173: aload         6
+     175: invokevirtual #97                 // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.build:()Lcom/kuka/wcs/grpc/mission/NodeGto;
+     178: areturn
+
+  private void fillOtherFields(com.kuka.interfaces.plugin.entity.AgvTaskDto, com.kuka.wcs.grpc.mission.WcsGenerateMissionRequest$Builder);
+    Code:
+       0: aload_1
+       1: invokevirtual #98                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getTemplateCode:()Ljava/lang/String;
+       4: invokestatic  #99                 // Method com/kuka/interfaces/plugin/common/MisUtils.isNotBlank:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/function/PresentHandler;
+       7: aload_2
+       8: invokedynamic #100,  0            // InvokeDynamic #0:accept:(Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;)Ljava/util/function/Consumer;
+      13: invokeinterface #101,  2          // InterfaceMethod com/kuka/interfaces/plugin/function/PresentHandler.presentHandle:(Ljava/util/function/Consumer;)V
+      18: aload_1
+      19: invokevirtual #10                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getRobotType:()Ljava/lang/String;
+      22: invokestatic  #102                // Method com/kuka/interfaces/plugin/common/MisUtils.null2Default:(Ljava/lang/Object;)Lcom/kuka/interfaces/plugin/function/NullToDefaultHandler;
+      25: aload_1
+      26: invokedynamic #103,  0            // InvokeDynamic #1:run:(Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;)Ljava/lang/Runnable;
+      31: invokeinterface #104,  2          // InterfaceMethod com/kuka/interfaces/plugin/function/NullToDefaultHandler.nullToDefaultHandle:(Ljava/lang/Runnable;)V
+      36: aload_2
+      37: aload_1
+      38: invokevirtual #10                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getRobotType:()Ljava/lang/String;
+      41: invokestatic  #105                // Method com/kuka/wcs/grpc/mission/RobotFunctionTypeGto.valueOf:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/RobotFunctionTypeGto;
+      44: invokevirtual #106                // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.setRobotFunctionType:(Lcom/kuka/wcs/grpc/mission/RobotFunctionTypeGto;)Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+      47: pop
+      48: aload_1
+      49: invokevirtual #107                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getContainerCode:()Ljava/lang/String;
+      52: invokestatic  #99                 // Method com/kuka/interfaces/plugin/common/MisUtils.isNotBlank:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/function/PresentHandler;
+      55: aload_2
+      56: invokedynamic #108,  0            // InvokeDynamic #2:accept:(Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;)Ljava/util/function/Consumer;
+      61: invokeinterface #101,  2          // InterfaceMethod com/kuka/interfaces/plugin/function/PresentHandler.presentHandle:(Ljava/util/function/Consumer;)V
+      66: aload_1
+      67: invokevirtual #109                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getViewBoardType:()Ljava/lang/String;
+      70: invokestatic  #99                 // Method com/kuka/interfaces/plugin/common/MisUtils.isNotBlank:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/function/PresentHandler;
+      73: aload_2
+      74: invokedynamic #110,  0            // InvokeDynamic #3:accept:(Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;)Ljava/util/function/Consumer;
+      79: invokeinterface #101,  2          // InterfaceMethod com/kuka/interfaces/plugin/function/PresentHandler.presentHandle:(Ljava/util/function/Consumer;)V
+      84: aload_1
+      85: invokevirtual #111                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getContainerModelCode:()Ljava/lang/String;
+      88: invokestatic  #99                 // Method com/kuka/interfaces/plugin/common/MisUtils.isNotBlank:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/function/PresentHandler;
+      91: aload_2
+      92: invokedynamic #112,  0            // InvokeDynamic #4:accept:(Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;)Ljava/util/function/Consumer;
+      97: invokeinterface #101,  2          // InterfaceMethod com/kuka/interfaces/plugin/function/PresentHandler.presentHandle:(Ljava/util/function/Consumer;)V
+     102: aload_1
+     103: invokevirtual #113                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getUnlockRobotId:()Ljava/lang/String;
+     106: invokestatic  #99                 // Method com/kuka/interfaces/plugin/common/MisUtils.isNotBlank:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/function/PresentHandler;
+     109: aload_2
+     110: invokedynamic #114,  0            // InvokeDynamic #5:accept:(Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;)Ljava/util/function/Consumer;
+     115: invokeinterface #101,  2          // InterfaceMethod com/kuka/interfaces/plugin/function/PresentHandler.presentHandle:(Ljava/util/function/Consumer;)V
+     120: aload_1
+     121: invokevirtual #115                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getUnlockMissionCode:()Ljava/lang/String;
+     124: invokestatic  #99                 // Method com/kuka/interfaces/plugin/common/MisUtils.isNotBlank:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/function/PresentHandler;
+     127: aload_2
+     128: invokedynamic #116,  0            // InvokeDynamic #6:accept:(Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;)Ljava/util/function/Consumer;
+     133: invokeinterface #101,  2          // InterfaceMethod com/kuka/interfaces/plugin/function/PresentHandler.presentHandle:(Ljava/util/function/Consumer;)V
+     138: aload_1
+     139: invokevirtual #117                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getRobotModels:()Ljava/util/List;
+     142: invokestatic  #118                // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+     145: ifne          157
+     148: aload_2
+     149: aload_1
+     150: invokevirtual #117                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getRobotModels:()Ljava/util/List;
+     153: invokevirtual #119                // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.addAllRobotModel:(Ljava/lang/Iterable;)Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+     156: pop
+     157: aload_1
+     158: invokevirtual #120                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getRobotIds:()Ljava/util/List;
+     161: invokestatic  #118                // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+     164: ifne          176
+     167: aload_2
+     168: aload_1
+     169: invokevirtual #120                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getRobotIds:()Ljava/util/List;
+     172: invokevirtual #121                // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.addAllRobotId:(Ljava/lang/Iterable;)Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+     175: pop
+     176: return
+
+  private com.kuka.wcs.grpc.mission.TaskTypeGto getTaskType(java.lang.String, java.lang.String);
+    Code:
+       0: getstatic     #122                // Field com/kuka/interfaces/plugin/common/ConfigConstants.MISSION_TYPE_MOVE:Ljava/lang/String;
+       3: aload_2
+       4: invokevirtual #79                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       7: ifne          20
+      10: getstatic     #123                // Field com/kuka/interfaces/plugin/common/ConfigConstants.MISSION_TYPE_PICK:Ljava/lang/String;
+      13: aload_2
+      14: invokevirtual #79                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      17: ifeq          24
+      20: getstatic     #124                // Field com/kuka/wcs/grpc/mission/TaskTypeGto.UNLOAD:Lcom/kuka/wcs/grpc/mission/TaskTypeGto;
+      23: areturn
+      24: getstatic     #125                // Field com/kuka/wcs/grpc/mission/TaskTypeGto.LOAD:Lcom/kuka/wcs/grpc/mission/TaskTypeGto;
+      27: areturn
+
+  private java.util.List<com.kuka.wcs.grpc.mission.NodeGto> buildNodes(com.kuka.interfaces.plugin.entity.AgvTaskDto);
+    Code:
+       0: aload_1
+       1: invokevirtual #98                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getTemplateCode:()Ljava/lang/String;
+       4: invokestatic  #126                // Method org/springframework/util/StringUtils.hasText:(Ljava/lang/String;)Z
+       7: ifeq          40
+      10: getstatic     #27                 // Field log:Lorg/slf4j/Logger;
+      13: ldc           #127                // String no need build task nodes for template:[{}]
+      15: aload_1
+      16: invokevirtual #98                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getTemplateCode:()Ljava/lang/String;
+      19: invokeinterface #128,  3          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      24: aload_0
+      25: aload_1
+      26: aconst_null
+      27: invokevirtual #129                // Method saveTask2Db:(Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;Ljava/util/List;)Ljava/lang/Boolean;
+      30: invokevirtual #19                 // Method java/lang/Boolean.booleanValue:()Z
+      33: ifeq          40
+      36: invokestatic  #130                // Method com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;
+      39: areturn
+      40: invokestatic  #130                // Method com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;
+      43: astore_2
+      44: aload_1
+      45: invokevirtual #11                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getMissionType:()Ljava/lang/String;
+      48: astore_3
+      49: aload_0
+      50: getfield      #131                // Field nodeActionHandleFactory:Lcom/kuka/interfaces/plugin/handle/NodeActionHandleFactory;
+      53: aload_3
+      54: invokevirtual #132                // Method com/kuka/interfaces/plugin/handle/NodeActionHandleFactory.get:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/handle/INodeActionHandle;
+      57: astore        4
+      59: aload         4
+      61: aload_1
+      62: invokeinterface #133,  2          // InterfaceMethod com/kuka/interfaces/plugin/handle/INodeActionHandle.handle:(Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;)Ljava/util/List;
+      67: astore        5
+      69: aload_0
+      70: aload_1
+      71: aload         5
+      73: invokevirtual #129                // Method saveTask2Db:(Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;Ljava/util/List;)Ljava/lang/Boolean;
+      76: invokevirtual #19                 // Method java/lang/Boolean.booleanValue:()Z
+      79: ifeq          92
+      82: aload         4
+      84: aload         5
+      86: invokeinterface #134,  2          // InterfaceMethod com/kuka/interfaces/plugin/handle/INodeActionHandle.buildNodeGto:(Ljava/util/List;)Ljava/util/List;
+      91: areturn
+      92: aload_2
+      93: areturn
+
+  public java.lang.Boolean saveTask2Db(com.kuka.interfaces.plugin.entity.AgvTaskDto, java.util.List<com.kuka.interfaces.plugin.entity.NodeActionDO>);
+    Code:
+       0: invokestatic  #135                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO.builder:()Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+       3: aload_1
+       4: invokevirtual #6                  // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getOrgId:()Ljava/lang/String;
+       7: invokestatic  #136                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      10: invokevirtual #137                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.orgId:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+      13: aload_1
+      14: invokevirtual #3                  // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getRequestId:()Ljava/lang/String;
+      17: invokevirtual #138                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.requestId:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+      20: aload_1
+      21: invokevirtual #8                  // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getMissionCode:()Ljava/lang/String;
+      24: invokevirtual #139                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.taskCode:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+      27: aload_1
+      28: invokevirtual #11                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getMissionType:()Ljava/lang/String;
+      31: invokevirtual #140                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.taskType:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+      34: aload_1
+      35: invokevirtual #10                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getRobotType:()Ljava/lang/String;
+      38: invokevirtual #141                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.robotType:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+      41: aload_1
+      42: invokevirtual #109                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getViewBoardType:()Ljava/lang/String;
+      45: invokevirtual #142                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.viewBoardType:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+      48: aload_1
+      49: invokevirtual #107                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getContainerCode:()Ljava/lang/String;
+      52: invokevirtual #143                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.containerCode:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+      55: aload_0
+      56: aload_1
+      57: invokespecial #144                // Method computeContainerOperation:(Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;)Ljava/lang/Integer;
+      60: invokevirtual #145                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.containerOperation:(Ljava/lang/Integer;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+      63: aload_1
+      64: invokevirtual #111                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getContainerModelCode:()Ljava/lang/String;
+      67: invokevirtual #146                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.containerModelCode:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+      70: aload_1
+      71: invokevirtual #120                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getRobotIds:()Ljava/util/List;
+      74: invokestatic  #118                // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+      77: ifeq          85
+      80: ldc           #147                // String
+      82: goto          94
+      85: ldc           #148                // String ,
+      87: aload_1
+      88: invokevirtual #120                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getRobotIds:()Ljava/util/List;
+      91: invokestatic  #149                // Method java/lang/String.join:(Ljava/lang/CharSequence;Ljava/lang/Iterable;)Ljava/lang/String;
+      94: invokevirtual #150                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.robotCodeList:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+      97: aload_1
+      98: invokevirtual #117                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getRobotModels:()Ljava/util/List;
+     101: invokestatic  #118                // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+     104: ifeq          112
+     107: ldc           #147                // String
+     109: goto          121
+     112: ldc           #148                // String ,
+     114: aload_1
+     115: invokevirtual #117                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getRobotModels:()Ljava/util/List;
+     118: invokestatic  #149                // Method java/lang/String.join:(Ljava/lang/CharSequence;Ljava/lang/Iterable;)Ljava/lang/String;
+     121: invokevirtual #151                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.robotModelList:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+     124: aload_1
+     125: invokevirtual #98                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getTemplateCode:()Ljava/lang/String;
+     128: invokevirtual #152                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.templateCode:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+     131: aload_1
+     132: invokevirtual #115                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getUnlockMissionCode:()Ljava/lang/String;
+     135: invokevirtual #153                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.lastTaskCode:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+     138: aload_1
+     139: invokevirtual #18                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getLockRobotAfterFinish:()Ljava/lang/Boolean;
+     142: invokevirtual #19                 // Method java/lang/Boolean.booleanValue:()Z
+     145: invokevirtual #154                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.lockRobot:(Z)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+     148: aload_1
+     149: invokevirtual #155                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getIdleNode:()Ljava/lang/String;
+     152: invokevirtual #156                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.idleNode:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+     155: aload_1
+     156: invokevirtual #14                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getPriority:()Ljava/lang/Integer;
+     159: invokevirtual #157                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.priority:(Ljava/lang/Integer;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+     162: aload_1
+     163: invokevirtual #113                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getUnlockRobotId:()Ljava/lang/String;
+     166: invokevirtual #158                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.robotCode:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder;
+     169: invokevirtual #159                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO$MoveTaskDOBuilder.build:()Lcom/kuka/interfaces/plugin/entity/MoveTaskDO;
+     172: astore_3
+     173: aload_2
+     174: invokestatic  #118                // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+     177: ifeq          194
+     180: aload_0
+     181: getfield      #31                 // Field moveTaskService:Lcom/kuka/interfaces/plugin/services/MoveTaskService;
+     184: aload_3
+     185: invokevirtual #160                // Method com/kuka/interfaces/plugin/services/MoveTaskService.insert:(Lcom/kuka/interfaces/plugin/entity/MoveTaskDO;)I
+     188: pop
+     189: iconst_1
+     190: invokestatic  #161                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     193: areturn
+     194: aload_0
+     195: getfield      #162                // Field transactionManager:Lorg/springframework/jdbc/datasource/DataSourceTransactionManager;
+     198: aload_0
+     199: aload_3
+     200: aload_2
+     201: invokedynamic #163,  0            // InvokeDynamic #7:run:(Lcom/kuka/interfaces/plugin/services/TaskManager;Lcom/kuka/interfaces/plugin/entity/MoveTaskDO;Ljava/util/List;)Ljava/lang/Runnable;
+     206: invokestatic  #164                // Method com/kuka/interfaces/plugin/common/MisUtils.doInTransaction:(Lorg/springframework/jdbc/datasource/DataSourceTransactionManager;Ljava/lang/Runnable;)V
+     209: aconst_null
+     210: aload_2
+     211: iconst_0
+     212: invokeinterface #165,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     217: checkcast     #166                // class com/kuka/interfaces/plugin/entity/NodeActionDO
+     220: invokevirtual #167                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getId:()Ljava/lang/Long;
+     223: if_acmpeq     231
+     226: iconst_1
+     227: invokestatic  #161                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     230: areturn
+     231: iconst_0
+     232: invokestatic  #161                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     235: areturn
+
+  private java.lang.Integer computeContainerOperation(com.kuka.interfaces.plugin.entity.AgvTaskDto);
+    Code:
+       0: iconst_0
+       1: invokestatic  #84                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       4: areturn
+
+  private void lambda$saveTask2Db$8(com.kuka.interfaces.plugin.entity.MoveTaskDO, java.util.List);
+    Code:
+       0: aload_0
+       1: getfield      #31                 // Field moveTaskService:Lcom/kuka/interfaces/plugin/services/MoveTaskService;
+       4: aload_1
+       5: invokevirtual #160                // Method com/kuka/interfaces/plugin/services/MoveTaskService.insert:(Lcom/kuka/interfaces/plugin/entity/MoveTaskDO;)I
+       8: pop
+       9: aload_2
+      10: aload_0
+      11: aload_1
+      12: invokedynamic #168,  0            // InvokeDynamic #8:accept:(Lcom/kuka/interfaces/plugin/services/TaskManager;Lcom/kuka/interfaces/plugin/entity/MoveTaskDO;)Ljava/util/function/Consumer;
+      17: invokeinterface #169,  2          // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      22: return
+
+  private void lambda$null$7(com.kuka.interfaces.plugin.entity.MoveTaskDO, com.kuka.interfaces.plugin.entity.NodeActionDO);
+    Code:
+       0: aload_2
+       1: aload_1
+       2: invokevirtual #170                // Method com/kuka/interfaces/plugin/entity/MoveTaskDO.getId:()Ljava/lang/Long;
+       5: invokevirtual #171                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.setMoveTaskId:(Ljava/lang/Long;)V
+       8: aload_0
+       9: getfield      #172                // Field nodeActionService:Lcom/kuka/interfaces/plugin/services/NodeActionService;
+      12: aload_2
+      13: invokevirtual #173                // Method com/kuka/interfaces/plugin/services/NodeActionService.insert:(Lcom/kuka/interfaces/plugin/entity/NodeActionDO;)I
+      16: pop
+      17: return
+
+  private static void lambda$fillOtherFields$6(com.kuka.wcs.grpc.mission.WcsGenerateMissionRequest$Builder, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #174                // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.setUnlockTaskCode:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+       5: pop
+       6: return
+
+  private static void lambda$fillOtherFields$5(com.kuka.wcs.grpc.mission.WcsGenerateMissionRequest$Builder, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #175                // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.setUnlockRobotId:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+       5: pop
+       6: return
+
+  private static void lambda$fillOtherFields$4(com.kuka.wcs.grpc.mission.WcsGenerateMissionRequest$Builder, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #176                // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.setContainerModelCode:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+       5: pop
+       6: return
+
+  private static void lambda$fillOtherFields$3(com.kuka.wcs.grpc.mission.WcsGenerateMissionRequest$Builder, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #177                // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.setTaskDetailType:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+       5: pop
+       6: return
+
+  private static void lambda$fillOtherFields$2(com.kuka.wcs.grpc.mission.WcsGenerateMissionRequest$Builder, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #178                // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.setContainerCode:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+       5: pop
+       6: return
+
+  private static void lambda$fillOtherFields$1(com.kuka.interfaces.plugin.entity.AgvTaskDto);
+    Code:
+       0: aload_0
+       1: ldc           #179                // String LIFT
+       3: invokevirtual #180                // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.setRobotType:(Ljava/lang/String;)V
+       6: return
+
+  private static void lambda$fillOtherFields$0(com.kuka.wcs.grpc.mission.WcsGenerateMissionRequest$Builder, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #181                // Method com/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder.setTemplateCode:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/WcsGenerateMissionRequest$Builder;
+       5: pop
+       6: return
+
+  static {};
+    Code:
+       0: ldc           #182                // class com/kuka/interfaces/plugin/services/TaskManager
+       2: invokestatic  #183                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #27                 // Field log:Lorg/slf4j/Logger;
+       8: return
+}

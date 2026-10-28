@@ -1,0 +1,37 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.fleetmanager.v1alpha1;
+
+import "kuka/mobilerobotics/fleetmanager/v1alpha1/plan_step.proto";
+
+option java_package = "com.kuka.mobilerobotics.fleetmanager.v1alpha1";
+option java_outer_classname = "GraphMotionRuntimeInformationProto";
+option java_multiple_files = true;
+
+// The response of a GraphMotionCommand.
+message GraphMotionRuntimeInformation
+{
+  // The list of nodes to be visited in the planned path.
+  repeated PlanStep plan = 1;
+	
+  // the index of the plan step of this plan which will be reached by the robot after all currently
+  // queued motions have successfully been finished.
+  int32 last_queued_index = 2;
+	
+  // Execution of the graph motion has been paused for tentative planning or re-planning and needs to be resumed by
+  // the application.	
+  bool pending = 3;
+	
+  // Execution of the graph motion cannot be continued until another vehicle has freed an area of conflict (e.g., an
+  // intersection).
+  bool waiting = 4;
+}
+
+

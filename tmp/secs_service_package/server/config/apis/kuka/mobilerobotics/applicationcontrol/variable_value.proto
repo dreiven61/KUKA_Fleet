@@ -1,0 +1,63 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.applicationcontrol;
+
+option csharp_namespace = "Kuka.MobileRobotics.ApplicationControl";
+option java_multiple_files = true;
+option java_outer_classname = "VariableValueProto";
+option java_package = "com.kuka.mobilerobotics.applicationcontrol";
+
+// Proto describing variable value, based on Kuka.RuntimeManagement.Grpc.RuntimeManagementService
+message VariableValue
+{
+  // Value
+  oneof value
+  {
+    // Int value
+    int32 int_value = 1;
+    // Double value
+    double double_value = 2;
+    // Bool value
+    bool bool_value = 3;
+    // String value
+    string string_value = 4;
+    // KRL enum value
+    VariableEnumValue enum_value = 5;
+    // KRL structure value
+    VariableStructureValue structure_value = 6;
+    // KRL array value
+    VariableArrayValue array_value = 7;
+  }
+}
+
+// Comment
+message VariableEnumValue
+{
+  // Comment
+  string value = 1;
+}
+
+// Comment
+message VariableStructureValue
+{
+  // Comment
+  string type_name = 1;
+  // Comment
+  map<string, VariableValue> map = 2;
+}
+
+// Comment
+message VariableArrayValue
+{
+  // Comment
+  string type_name = 1;
+  // Comment
+  repeated VariableValue values = 2;
+}

@@ -1,0 +1,30 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.applicationcontrol;
+
+import "kuka/mobilerobotics/applicationcontrol/krl_variable.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.ApplicationControl";
+option java_multiple_files = true;
+option java_outer_classname = "ExecuteKrlApplicationActionProto";
+option java_package = "com.kuka.mobilerobotics.applicationcontrol";
+
+// Proto describing a command to start a krl application
+message ExecuteKrlApplicationAction
+{
+  // The name of the application to execute.
+  string application_name = 1;
+
+  // Input values for existing KRL variables
+  repeated KrlVariable input_variable_values = 2;
+
+  // Names of variables whose value changes will be reported during execution
+  repeated string variables_to_watch = 3;
+}

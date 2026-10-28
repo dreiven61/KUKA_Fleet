@@ -1,0 +1,82 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motion.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+import "kuka/core/geometry/v1/transform_2d.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/common_motion_parameters.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/motion_recovery.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/motion_reference_frame.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/orientation_mode.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/collision_avoidance.proto";
+
+option java_package = "com.kuka.mobilerobotics.motion.v1alpha1";
+option java_outer_classname = "VirtualLineMotionCommandProto";
+option java_multiple_files = true;
+
+// A virtual line motion that results in a straight-line motion from the
+// start pose to the goal pose.
+// 
+// For holonomic AGVs: 
+// If commanded with orientation_mode VARIABLE: 
+// If the theta angles differ in the start and end pose,
+// then the AGV will turn to the goal orientation while driving along the
+// line (or rotate on the spot, if the start and goal positions are the
+// same).
+// If commanded with orientation_mode FIXED:
+// The AGV will first turn to the orientation of the end pose and then 
+// execute the translational part of the virtual line while maintaining 
+// this orientation.
+//
+// For differential AGVs:
+// The AGV will first rotate to the driving direction (the orientation it needs
+// for following the virtual line), execute the translational part of the virtual
+// line, and then rotate again to reach the orienation of the goal pose.
+
+
+message VirtualLineMotionCommand
+{
+  // The common motion parameters (max velocity, tracking accuracy, etc.)
+  // If this value is not provided, then a platform-specific default parameters
+  // will be used.
+  CommonMotionParameters common_motion_parameters = 1;
+
+  // The reference frame in which this motion is defined. Currently, only 
+  // 'map', 'object' and 'odometry' is supported. If this parameters is null, 
+  // then 'map' will be used.
+  // Optional.
+  MotionReferenceFrame motion_reference_frame = 2;
+
+  // The start pose.
+  // If the motion reference frame is OBJECT, the start pose can be set as the inverse of the
+  // result of the ObjectDetectionCommand, which is the current robot pose in object coordinates.
+  kuka.core.geometry.v1.Transform2D start_pose = 3;
+	
+  // The goal pose. It indicates the target pose that must be reached by the platform at the end of the motion.
+  // Note: The platform uses the shortest path to reach the goal. The goal pose does not define the driving direction
+  // nor the turning direction used to reach the goal.
+  kuka.core.geometry.v1.Transform2D goal_pose = 4;
+
+  // The blending parameter in [m]. If the parameter is not set, then 
+  // blending to the next motion is forbidden.
+  // Optional.
+  google.protobuf.DoubleValue blending_cart = 5;
+
+  // The allowed recoveries. If several recoveries are applicable during a recovery attempt,
+  // then the recovery with lowest index will be chosen.
+  repeated MotionRecovery recoveries = 6;
+
+  // The orientation mode.
+  OrientationMode.Enum orientation_mode = 7;
+
+  // The collision avoidance parameters
+  // Optional: if the field is not set, collision avoidance won't be executed.
+   CollisionAvoidance collision_avoidance = 8;
+}

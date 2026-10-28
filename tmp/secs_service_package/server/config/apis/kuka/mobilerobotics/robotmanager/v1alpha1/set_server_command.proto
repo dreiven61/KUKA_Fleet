@@ -1,0 +1,28 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.robotmanager.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+
+option java_package = "com.kuka.mobilerobotics.robotmanager.v1alpha1";
+option java_outer_classname = "SetServerCommandProto";
+option java_multiple_files = true;
+
+// Command to set the remote navigation server to which to connect.
+message SetServerCommand
+{
+  // The server host as IP address.
+  string host = 1;
+
+  // The port of the mqtt broker.
+  // [optional] If not set, a default port is used.
+  google.protobuf.Int32Value port = 2;
+
+}

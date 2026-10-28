@@ -1,0 +1,28 @@
+// This material is the exclusive property of KUKA Deutschland GmbH.
+// Except as expressly permitted by separate agreement, this material may only
+// be used by members of the development department of KUKA Deutschland GmbH for
+// internal development purposes of KUKA Deutschland GmbH.
+//
+// Copyright (C)
+// KUKA Deutschland GmbH, Germany. All Rights Reserved.
+
+syntax = "proto3";
+
+package battery.management.v1;
+
+import "google/protobuf/any.proto";
+
+option java_package = "com.battery.management.v1";
+option java_outer_classname = "GlobalDefinitions";
+option java_multiple_files = true;
+
+// Operation Mode enumeration
+enum OperationMode
+{
+   OFF = 0;
+   SLEEP = 1;
+   STANDBY = 2;
+   CHARGE_ONLY_INDUCTIVE = 3;
+   CHARGE_ONLY_EXTERNAL = 4;
+   ON = 5;
+}

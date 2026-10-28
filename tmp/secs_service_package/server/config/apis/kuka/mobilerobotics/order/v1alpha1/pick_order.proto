@@ -1,0 +1,29 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.order.v1alpha1;
+
+import "kuka/mobilerobotics/order/v1alpha1/payload_specification.proto";
+import "kuka/mobilerobotics/order/v1alpha1/robot_specification.proto";
+
+option java_package = "com.kuka.mobilerobotics.order.v1alpha1";
+option java_outer_classname = "PickOrderProto";
+option java_multiple_files = true;
+
+// An order that moves a payload onto a robot.
+message PickOrder
+{
+  // Specifies the payload to be picked.
+  PayloadSpecification payload = 1;
+
+  // Specifies the robot that must pick the payload.
+  // [optional] If not specified, a suitable robot is chosen automatically.
+  // If the robot's compartment is already used by a different payload, the order fails.
+  RobotSpecification robot = 2;
+}

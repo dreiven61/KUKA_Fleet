@@ -1,0 +1,77 @@
+{
+  "status": "PREPARED_NOT_APPLIED",
+  "stations": [
+    {
+      "rpc_command_type": "kuka.mobilerobotics.station.v1alpha1.ManageStationDataCommand",
+      "endpoint": "station:50110",
+      "request": {
+        "type": "INSERT",
+        "data": {
+          "uuid": "SECS_ST_89",
+          "name": "SECS test port at node 89",
+          "capacity": {
+            "compartments": [
+              {
+                "uuid": "PORT_89"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "rpc_command_type": "kuka.mobilerobotics.station.v1alpha1.ManageStationDataCommand",
+      "endpoint": "station:50110",
+      "request": {
+        "type": "INSERT",
+        "data": {
+          "uuid": "SECS_ST_97",
+          "name": "SECS test port at node 97",
+          "capacity": {
+            "compartments": [
+              {
+                "uuid": "PORT_97"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "payload_type": {
+    "rpc_command_type": "kuka.mobilerobotics.payload.v1alpha1.ManagePayloadTypeDataCommand",
+    "endpoint": "payload:50120",
+    "request": {
+      "type": "INSERT",
+      "data": {
+        "uuid": "SECS"
+      }
+    }
+  },
+  "node_links_reference_only": [
+    {
+      "graphUuid": "lay01-dist1",
+      "nodeUuid": "lay01-dist1-89",
+      "appendGraphProperty": {
+        "property": {
+          "@type": "type.googleapis.com/apis.kuka.mobilerobotics.graph.v1alpha1.StationProperty",
+          "stationUuid": "SECS_ST_89"
+        },
+        "resourceGroup": []
+      }
+    },
+    {
+      "graphUuid": "lay01-dist1",
+      "nodeUuid": "lay01-dist1-97",
+      "appendGraphProperty": {
+        "property": {
+          "@type": "type.googleapis.com/apis.kuka.mobilerobotics.graph.v1alpha1.StationProperty",
+          "stationUuid": "SECS_ST_97"
+        },
+        "resourceGroup": []
+      }
+    }
+  ],
+  "graph_update_status": "GraphEditorService/UpsertNodes is UNIMPLEMENTED on the current basic-data endpoint; do not apply an assumed graph import",
+  "robot_integration_status": "Existing KMP1500i New Sims are not present in native RobotData; setup path remains unverified"
+}

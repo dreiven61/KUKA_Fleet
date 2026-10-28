@@ -1,0 +1,22 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.lifetimedata.dataprovider.v1alpha1;
+
+option csharp_namespace = "Kuka.MobileRobotics.LifetimeData.DataProvider.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "OverallOperatingHoursProto";
+option java_package = "com.kuka.mobilerobotics.lifetimedata.dataprovider.v1alpha1";
+
+// The combined operating hours registered by BatteryManagement service for the different battery packs.
+message OverallOperatingHours
+{
+  // The combined operating hours.
+  int32 overall_operating_hours = 1;
+}

@@ -1,0 +1,53 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.ledstripe.actionexecutor.v1alpha1;
+
+option csharp_namespace = "Kuka.MobileRobotics.LedStripe.ActionExecutor.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "LEDStripActionDataProto";
+option java_package = "com.kuka.mobilerobotics.ledstripe.actionexecutor.v1alpha1";
+
+// Predefined LED strip segment groups.
+message SegmentGroup
+{
+  // Predefined LED strip segment groups.
+  enum Enum
+  {
+    // protolint:disable:next ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
+    ALL = 0;
+    FRONT = 1;
+    REAR = 2;
+    LEFT = 3;
+    RIGHT = 4;
+    FRONT_LEFT = 5;
+    FRONT_RIGHT = 6;
+    REAR_LEFT = 7;
+    REAR_RIGHT = 8;
+  }
+}
+
+// Predefined LED strip segment colors.
+message SegmentColor
+{
+  // Predefined LED strip segment colors.
+  enum Enum
+  {
+    // protolint:disable:next ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
+    OFF = 0;
+    RED = 1;
+    GREEN = 2;
+    BLUE = 3;
+    YELLOW = 4;
+    CYAN = 5;
+    MAGENTA = 6;
+    WHITE = 7;
+    KUKA = 8;
+  }
+}

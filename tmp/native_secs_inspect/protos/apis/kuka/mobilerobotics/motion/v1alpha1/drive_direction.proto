@@ -1,0 +1,35 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motion.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.motion.v1alpha1";
+option java_outer_classname = "DriveDirectionProto";
+option java_multiple_files = true;
+
+// Defines the drive direction of the AGV.
+message DriveDirection
+{
+  DirectionType direction = 1;
+
+  enum DirectionType
+	{
+    // Unspecified drive direction. This should not be used.
+    UNSPECIFIED = 0;
+
+    // The AGV drives in forward direction, i.e. it has the same
+    // orientation as the path tangent of a path.
+    FORWARD = 1;
+
+    // The AGV drives in backward direction, i.e. it has an
+    // orientation rotated by 180 degrees relative to the path tangent
+    // of a path.
+    BACKWARD = 2;
+  }
+}

@@ -1,0 +1,46 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.graph.v1alpha1;
+
+import "kuka/mobilerobotics/graph/v1alpha1/motion_orientation.proto";
+import "kuka/mobilerobotics/graph/v1alpha1/motion_orientation_mode_property.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/goal_accuracy.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/tracking_accuracy.proto";
+
+option java_package = "com.kuka.mobilerobotics.graph.v1alpha1";
+option java_outer_classname = "VirtualLineMotionPropertyProto";
+option java_multiple_files = true;
+
+// Defines mobile robotics specific parameters of virtual line properties which can be set for an edge.
+message VirtualLineMotionProperty
+{
+
+  // Defines the allowed goal orientations in radians. The orientation can be set relative to map or edge (or both). 
+  MotionOrientation motion_orientation = 1;
+	
+  // Defines whether rotation is allowed on the edge.
+  MotionOrientationModeProperty motion_orientation_mode = 2;
+	
+  // The maximum allowed translational difference (in meters) and the maximum 
+  // allowed rotational difference (in radians) at the goal.
+  // If this value is not provided, then a platform-specific default parameter
+  // will be used.
+  // Optional.	
+  kuka.mobilerobotics.motion.v1alpha1.GoalAccuracy goal_accuracy = 3;
+	
+  // The maximum allowed translational difference (in meters) and the maximum 
+  // allowed rotational difference (in radians) on the path.
+  // If this value is not provided, then a platform-specific default parameter
+  // will be used.
+  // Optional.	
+  kuka.mobilerobotics.motion.v1alpha1.TrackingAccuracy tracking_accuracy = 4;
+}
+
+

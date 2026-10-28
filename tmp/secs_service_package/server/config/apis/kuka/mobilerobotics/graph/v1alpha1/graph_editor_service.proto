@@ -1,0 +1,168 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.graph.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+import "kuka/mobilerobotics/graph/v1alpha1/topology_edge.proto";
+import "kuka/mobilerobotics/graph/v1alpha1/topology_graph.proto";
+import "kuka/mobilerobotics/graph/v1alpha1/topology_node.proto";
+
+option java_package = "com.kuka.mobilerobotics.graph.v1alpha1";
+option java_outer_classname = "GraphEditorServiceProto";
+option java_multiple_files = true;
+
+// The graph editor service for adding, updating, removing graphs and 
+// its nodes and edges with properties. 
+service GraphEditorService 
+{
+  // Adds or updates a list of topology graphs. 
+  rpc UpsertGraphs(UpsertGraphsRequest) returns (UpsertGraphsResponse);
+	
+  // Removes a list of topology graphs. 
+  rpc RemoveGraphs(RemoveGraphsRequest) returns (RemoveGraphsResponse); 
+	
+  // Adds or updates a list of topology nodes. 
+  rpc UpsertNodes(UpsertNodesRequest) returns (UpsertNodesResponse);
+	
+  // Removes a list of topology nodes. 
+  rpc RemoveNodes(RemoveNodesRequest) returns (RemoveNodesResponse);
+	
+  // Adds or updates a list of topology edges.
+  rpc UpsertEdges(UpsertEdgesRequest) returns (UpsertEdgesResponse);
+	
+  // Removes a list of topology edges. 
+  rpc RemoveEdges(RemoveEdgesRequest) returns (RemoveEdgesResponse);
+	
+  // Splits an edge (or both directions). A new node is created. The old edge (or both old edges)
+  // is / are deleted. 2 or 4 new edges are created. 
+  rpc SplitEdge(SplitEdgeRequest) returns (SplitEdgeResponse);
+}
+
+// Request for adding or updating of the list of the topology graphs.
+message UpsertGraphsRequest
+{
+  // A protobuf defined topology graphs.
+  repeated TopologyGraph graphs = 1;
+}
+
+// Response containing a list of the new and updated graph uuids. 
+message UpsertGraphsResponse
+{
+  // new graph uuids.
+  repeated string graph_uuids = 1;
+}
+
+// Request a remove topology graphs. 
+message RemoveGraphsRequest
+{
+  // A list of graph uuids for deletion. 
+  repeated string graph_uuids = 1;
+}
+
+// Response remove topology graphs. 
+message RemoveGraphsResponse 
+{
+	// empty
+}
+
+// Request for adding or updating of the list of the topology nodes to a graph. 
+message UpsertNodesRequest
+{
+  // The graph uuid where all given nodes must be located.
+  string graph_uuid = 1;
+	
+  // A protobuf defined topology nodes.
+  repeated TopologyNode nodes = 2;
+}
+
+// Response containing a list of the new and updated node uuids. 
+message UpsertNodesResponse 
+{
+  repeated string node_uuids = 1;
+}
+
+// Request a remove topology nodes. 
+message RemoveNodesRequest
+{
+  // The graph uuid where all given nodes must be located.
+  string graph_uuid = 1;
+
+  // A list of node uuids for deletion.
+  repeated string node_uuids = 2;
+}
+
+// Response remove topology nodes. 
+message RemoveNodesResponse 
+{
+	// empty
+}
+
+// Request for splitting an edge and adding a new node. If an edge in both directions exist both 
+// directions will be splitted. 
+message SplitEdgeRequest 
+{
+  // The graph uuid where all given nodes must be located.
+  string graph_uuid = 1;
+	
+  // start node uuid of the edge which should be splitted. 
+  string start_node_uuid = 2;
+	
+  // target node uuid of the edge which should be splitted. 
+  string target_node_uuid = 3;
+	
+  // Defines the relative position where the new node splits the edge. 
+  // The percentage starts from the position of the given start node. 
+  // The value must be between [0,1].
+  // The default position is the middle (0.5). 
+  // Optional. 
+  google.protobuf.DoubleValue node_position_percentage = 4;
+}
+
+// Response the split edge request with the node uuid. 
+message SplitEdgeResponse
+{
+  // The uuid of the new created node. 
+  string intermediate_node_uuid = 1;
+	
+  // The 2 or 4 new created edge uuids.
+  repeated string edge_uuids = 2;
+}
+
+// Request for adding or updating of the list of the topology edges. 
+message UpsertEdgesRequest
+{
+  // The graph uuid where all given edge must be located.
+  string graph_uuid = 1;
+	
+  // A protobuf defined topology edges.
+  repeated TopologyEdge edges = 2;
+}
+
+// Response containing a list of the new and updated edge uuids. 
+message UpsertEdgesResponse 
+{
+  repeated string edge_uuids = 1;
+}
+
+// Request a remove topology edges. 
+message RemoveEdgesRequest
+{
+  // The graph uuid where all given edge must be located.
+  string graph_uuid = 1;
+
+  // A list of edge uuids for deletion.
+  repeated string edge_uuids = 2;
+}
+
+// Response remove topology edges. 
+message RemoveEdgesResponse 
+{
+	// empty
+}

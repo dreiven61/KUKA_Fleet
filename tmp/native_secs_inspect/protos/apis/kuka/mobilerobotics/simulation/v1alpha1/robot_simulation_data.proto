@@ -1,0 +1,39 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.simulation.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+import "kuka/core/geometry/v1/transform_2d.proto";
+
+option java_package = "com.kuka.mobilerobotics.simulation.v1alpha1";
+option java_outer_classname = "RobotSimulationDataProto";
+option java_multiple_files = true;
+
+// Contains information for about the simulated robots.
+message RobotSimulationData
+{
+	// The robots's unique identifier.
+    string uuid = 1;
+
+    // A human readable name for this robot. The name does not have to be unique.
+    google.protobuf.StringValue name = 2;
+
+	// The type of the robot, i.e. KMR iiBot.
+    string type = 3;
+
+	// The simulated robot pose.
+	kuka.core.geometry.v1.Transform2D pose = 5;
+
+	// The map uuid of the simulated robot
+	google.protobuf.StringValue map_uuid = 6;
+	
+	// The simulated odometry pose
+	kuka.core.geometry.v1.Transform2D odometry_pose = 7;
+}

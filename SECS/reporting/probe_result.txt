@@ -1,0 +1,26 @@
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+PASS: all 14 reference trees constructed with installed Secs2 typed factories.
+PASS: six candidate HTTP/report configurations parsed by installed TbNodeUtils.
+TRANSFER_INITIATED (TransferInitiated) => BODY_CREATED
+VEHICLE_ASSIGNED (VehicleAssigned) => NULL_BODY
+VEHICLE_ARRIVED (VehicleArrived) => NULL_BODY
+TRANSFERRING (Transferring) => NULL_BODY
+VEHICLE_ACQUIRE_STARTED (VehicleAcquireStarted) => NULL_BODY
+CARRIER_INSTALLED (CarrierInstalled) => NULL_BODY
+VEHICLE_ACQUIRE_COMPLETED (VehicleAcquireCompleted) => NULL_BODY
+VEHICLE_DEPARTED (VehicleDeparted) => NULL_BODY
+VEHICLE_DEPOSIT_STARTED (VehicleDepositStarted) => NULL_BODY
+CARRIER_REMOVED (CarrierRemoved) => NULL_BODY
+VEHICLE_DEPOSIT_COMPLETED (VehicleDeposit-Completed) => NULL_BODY
+VEHICLE_UNASSIGNED (VehicleUnassigned) => NULL_BODY
+TRANSFER_COMPLETED (TransferCompleted) => NULL_BODY
+ALARM_SET (AlarmSet) => NULL_BODY
+ALARM_CLEARED (AlarmCleared) => NULL_BODY
+COMPATIBILITY PROBE: TransferInitiated branch preserves full S6F11_211_Transferring body; not a live send.
+COMPATIBILITY PROBE: TransferInitiated branch preserves full S6F11_207_TransferCompleted_OK body; not a live send.
+PASS: Reports03 five HTTP configs and four RPTID5 serializers including actual dynamic parameter substitution; no send.
+PASS: Reports04 RPTID3 301/302 typed body order and dynamic command/cargo/location substitution; no send.
+PASS: Reports05 ten HTTP configs and five lifecycle RPTID5 payloads including source/dest601 and dynamic substitution; no send.
+PASS: Reports06 actual ECS response mapper -> metadata -> 33 SECS vehicle bodies for AMR1/2/3; ten HTTP configs; no sends.
+CONFIRMED: U2 ${RESULTCODE} is rejected by numeric parsing (KecsException wrapper).
+PASS: installed EventReportSend switch: 1 body-producing event, 14 null-body events. NO NETWORK CALLS.

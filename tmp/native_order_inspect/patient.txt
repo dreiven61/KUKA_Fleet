@@ -1,0 +1,130 @@
+Compiled from "PatientClientSubscriber.java"
+class com.kuka.mobilerobotics.orderengine.data.provider.PatientClientSubscriber implements com.kuka.mobilerobotics.orderengine.data.provider.DataChangeListener<com.kuka.mobilerobotics.robotmanager.v1alpha1.RobotData> {
+  private static final org.slf4j.Logger LOG;
+
+  private final com.kuka.mobilerobotics.orderengine.data.provider.RobotDataProvider _robotDataProvider;
+
+  private final com.kuka.mobilerobotics.orderengine.data.provider.AbstractDataProviderClientGrpc<?> _client;
+
+  private com.kuka.mobilerobotics.orderengine.data.provider.PatientClientSubscriber(com.kuka.mobilerobotics.orderengine.data.provider.RobotDataProvider, com.kuka.mobilerobotics.orderengine.data.provider.AbstractDataProviderClientGrpc<?>);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field _robotDataProvider:Lcom/kuka/mobilerobotics/orderengine/data/provider/RobotDataProvider;
+       9: aload_0
+      10: aload_2
+      11: putfield      #13                 // Field _client:Lcom/kuka/mobilerobotics/orderengine/data/provider/AbstractDataProviderClientGrpc;
+      14: return
+
+  static void initializeWhenAvailable(com.kuka.mobilerobotics.orderengine.data.provider.RobotDataProvider, com.kuka.mobilerobotics.orderengine.data.provider.AbstractDataProviderClientGrpc<?>);
+    Code:
+       0: new           #8                  // class com/kuka/mobilerobotics/orderengine/data/provider/PatientClientSubscriber
+       3: dup
+       4: aload_0
+       5: aload_1
+       6: invokespecial #17                 // Method "<init>":(Lcom/kuka/mobilerobotics/orderengine/data/provider/RobotDataProvider;Lcom/kuka/mobilerobotics/orderengine/data/provider/AbstractDataProviderClientGrpc;)V
+       9: astore_2
+      10: getstatic     #20                 // Field LOG:Lorg/slf4j/Logger;
+      13: ldc           #24                 // String Waiting for a data provider for type {}.
+      15: aload_1
+      16: invokevirtual #26                 // Method com/kuka/mobilerobotics/orderengine/data/provider/AbstractDataProviderClientGrpc.dataType:()Ljava/lang/String;
+      19: invokeinterface #32,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      24: aload_0
+      25: aload_2
+      26: invokeinterface #38,  2           // InterfaceMethod com/kuka/mobilerobotics/orderengine/data/provider/RobotDataProvider.addAndCallListener:(Lcom/kuka/mobilerobotics/orderengine/data/provider/DataChangeListener;)V
+      31: return
+
+  public void onDataChange(com.kuka.core.v1.MessageHeader, com.kuka.mobilerobotics.robotmanager.v1alpha1.RobotData, com.kuka.mobilerobotics.robotmanager.v1alpha1.RobotData);
+    Code:
+       0: aload_2
+       1: aload_0
+       2: getfield      #13                 // Field _client:Lcom/kuka/mobilerobotics/orderengine/data/provider/AbstractDataProviderClientGrpc;
+       5: invokevirtual #26                 // Method com/kuka/mobilerobotics/orderengine/data/provider/AbstractDataProviderClientGrpc.dataType:()Ljava/lang/String;
+       8: invokestatic  #44                 // Method hasDatatype:(Lcom/kuka/mobilerobotics/robotmanager/v1alpha1/RobotData;Ljava/lang/String;)Z
+      11: istore        4
+      13: aload_3
+      14: aload_0
+      15: getfield      #13                 // Field _client:Lcom/kuka/mobilerobotics/orderengine/data/provider/AbstractDataProviderClientGrpc;
+      18: invokevirtual #26                 // Method com/kuka/mobilerobotics/orderengine/data/provider/AbstractDataProviderClientGrpc.dataType:()Ljava/lang/String;
+      21: invokestatic  #44                 // Method hasDatatype:(Lcom/kuka/mobilerobotics/robotmanager/v1alpha1/RobotData;Ljava/lang/String;)Z
+      24: istore        5
+      26: iload         4
+      28: ifne          53
+      31: iload         5
+      33: ifeq          53
+      36: aload_0
+      37: getfield      #13                 // Field _client:Lcom/kuka/mobilerobotics/orderengine/data/provider/AbstractDataProviderClientGrpc;
+      40: invokevirtual #48                 // Method com/kuka/mobilerobotics/orderengine/data/provider/AbstractDataProviderClientGrpc.initialize:()V
+      43: aload_0
+      44: getfield      #7                  // Field _robotDataProvider:Lcom/kuka/mobilerobotics/orderengine/data/provider/RobotDataProvider;
+      47: aload_0
+      48: invokeinterface #51,  2           // InterfaceMethod com/kuka/mobilerobotics/orderengine/data/provider/RobotDataProvider.removeListener:(Lcom/kuka/mobilerobotics/orderengine/data/provider/DataChangeListener;)V
+      53: return
+
+  private static boolean hasDatatype(com.kuka.mobilerobotics.robotmanager.v1alpha1.RobotData, java.lang.String);
+    Code:
+       0: aload_0
+       1: invokevirtual #54                 // Method com/kuka/mobilerobotics/robotmanager/v1alpha1/RobotData.getRobotsList:()Ljava/util/List;
+       4: invokeinterface #60,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+       9: aload_1
+      10: invokedynamic #66,  0             // InvokeDynamic #0:test:(Ljava/lang/String;)Ljava/util/function/Predicate;
+      15: invokeinterface #70,  2           // InterfaceMethod java/util/stream/Stream.anyMatch:(Ljava/util/function/Predicate;)Z
+      20: ireturn
+
+  private static boolean hasDatatype(com.kuka.mobilerobotics.robotmanager.v1alpha1.Robot, java.lang.String);
+    Code:
+       0: aload_0
+       1: invokevirtual #76                 // Method com/kuka/mobilerobotics/robotmanager/v1alpha1/Robot.getDataTypesList:()Lcom/google/protobuf/ProtocolStringList;
+       4: invokeinterface #82,  1           // InterfaceMethod com/google/protobuf/ProtocolStringList.stream:()Ljava/util/stream/Stream;
+       9: aload_1
+      10: invokedynamic #85,  0             // InvokeDynamic #1:test:(Ljava/lang/String;)Ljava/util/function/Predicate;
+      15: invokeinterface #70,  2           // InterfaceMethod java/util/stream/Stream.anyMatch:(Ljava/util/function/Predicate;)Z
+      20: ireturn
+
+  public java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokevirtual #86                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: invokevirtual #90                 // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+       7: aload_0
+       8: invokestatic  #95                 // Method java/lang/System.identityHashCode:(Ljava/lang/Object;)I
+      11: aload_0
+      12: getfield      #13                 // Field _client:Lcom/kuka/mobilerobotics/orderengine/data/provider/AbstractDataProviderClientGrpc;
+      15: invokevirtual #26                 // Method com/kuka/mobilerobotics/orderengine/data/provider/AbstractDataProviderClientGrpc.dataType:()Ljava/lang/String;
+      18: invokedynamic #101,  0            // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;ILjava/lang/String;)Ljava/lang/String;
+      23: areturn
+
+  public void onDataChange(com.kuka.core.v1.MessageHeader, com.google.protobuf.Message, com.google.protobuf.Message);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: checkcast     #55                 // class com/kuka/mobilerobotics/robotmanager/v1alpha1/RobotData
+       6: aload_3
+       7: checkcast     #55                 // class com/kuka/mobilerobotics/robotmanager/v1alpha1/RobotData
+      10: invokevirtual #105                // Method onDataChange:(Lcom/kuka/core/v1/MessageHeader;Lcom/kuka/mobilerobotics/robotmanager/v1alpha1/RobotData;Lcom/kuka/mobilerobotics/robotmanager/v1alpha1/RobotData;)V
+      13: return
+
+  private static boolean lambda$hasDatatype$1(java.lang.String, java.lang.String);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: invokevirtual #109                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       5: ireturn
+
+  private static boolean lambda$hasDatatype$0(java.lang.String, com.kuka.mobilerobotics.robotmanager.v1alpha1.Robot);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: invokestatic  #115                // Method hasDatatype:(Lcom/kuka/mobilerobotics/robotmanager/v1alpha1/Robot;Ljava/lang/String;)Z
+       5: ireturn
+
+  static {};
+    Code:
+       0: ldc           #8                  // class com/kuka/mobilerobotics/orderengine/data/provider/PatientClientSubscriber
+       2: invokestatic  #118                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #20                 // Field LOG:Lorg/slf4j/Logger;
+       8: return
+}

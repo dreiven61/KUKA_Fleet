@@ -1,0 +1,22 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.safety.actionexecutor.v1;
+
+option csharp_namespace = "Kuka.Mobilerobotics.Safety.ActionExecutor.V1";
+option java_multiple_files = true;
+option java_outer_classname = "SwitchAutoRecoveryCommandProto";
+option java_package = "com.kuka.mobilerobotics.safety.actionexecutor.v1";
+
+// Switch automatic motion recovery on/off (bActivateMotionAutoRestart in MrctoPsc struct).
+message SwitchAutoRecoveryCommand
+{
+  // True, if the auto recovery shall be enabled, false otherwise.
+  bool enable = 1;
+}

@@ -1,0 +1,51 @@
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+10�� 28, 2026 1:17:11 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:17:11 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:17:11 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:17:11 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:17:11 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:17:11 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:17:11 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:17:11 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:17:11 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:17:11 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:17:11 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:17:11 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:17:11 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:17:11 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:17:11 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 1:17:11 ���� servostar.fleet.transfer.NativeHostService start
+INFO: Native SECS passive listener started on 7563, session 3000. No automatic transport submission.
+10�� 28, 2026 1:17:12 ���� servostar.fleet.transfer.NativeHostService deliver
+WARNING: Report DATAID 1 blocked by host ACK; explicit report retry required
+PASS: 64 native SECS acceptance/control/alarm/restart/ACK checks; local fixtures and loopback sockets only.

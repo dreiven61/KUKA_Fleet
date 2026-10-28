@@ -1,0 +1,47 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motioncontrol.motion.v1alpha1;
+
+option csharp_namespace = "Kuka.MobileRobotics.MotionControl.Motion.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "MotionControlStateProto";
+option java_package = "com.kuka.mobilerobotics.motioncontrol.motion.v1alpha1";
+
+// Represents the detailed state of the motion control motion.
+message MotionControlState
+{
+  // An enumeration contains the motion control states.
+  enum State
+  {
+    // The state is unknown.
+    // protolint:disable:next ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
+    UNKNOWN = 0;
+
+    // Motion control is stopped and ready to receive commands.
+    STOPPED = 1;
+
+    // Motion control is blocked by another active device. It cannot execute its function.
+    NOT_AVAILABLE = 3;
+
+    // Motion control is initializing. In this state, the system performs operations such as
+    // for example releasing brakes.
+    INITIALIZING = 4;
+
+    // Motion control is active and the platform may execute motion commands.
+    RUNNING = 6;
+
+    // Execution is stopping. The platform is slowing down and performing operations such as
+    // for example activating brakes.
+    STOPPING = 7;
+  }
+
+  // The current state.
+  State state = 1;
+}

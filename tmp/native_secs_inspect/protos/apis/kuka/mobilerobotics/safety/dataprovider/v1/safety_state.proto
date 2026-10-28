@@ -1,0 +1,121 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.safety.dataprovider.v1;
+
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Kuka.Mobilerobotics.Safety.DataProvider.V1";
+option java_multiple_files = true;
+option java_outer_classname = "SafetyStateProto";
+option java_package = "com.kuka.mobilerobotics.safety.dataprovider.v1";
+
+// Represents the safety state of a device.
+//
+// In detail this message contains information about
+// the sources of safety and safety-related signals in
+// the field _sources_ (e.g. laser scanner, e-stop button,
+// acknowledge button) and an aggregated view, i.e. the
+// "worst state" of all safety sources in the field
+// _aggregated_.
+message SafetyState
+{
+  // The aggregated view of all safety source, i.e.
+  // the "worst state" of all safety sources.
+  SafetySource aggregated = 2;
+
+  // Map containing information about all safety
+  // and safety-related sources. The key in the map
+  // is the name of the safety source (SafetySource.name).
+  map<string, SafetySource> sources = 3;
+
+  // A timestamp as close as possible to the source of the contained data.
+  // This corresponds to the newest timestamp of the data contained in
+  // the 'sources' map.
+  google.protobuf.Timestamp timestamp = 4;
+}
+
+// Represents the source of safety or safety-related signals,
+// like laser scanners, e-stop buttons, acknowledge buttons.
+message SafetySource
+{
+  // The role of the safety source (e.g. left-front-laser).
+  // The value must be unique within in the module providing
+  // the aggregated SafetyState.
+  string name = 1;
+
+  // Some unique id of the safety source.
+  //
+  // For a safety source corresponding to a hardware component
+  // this field could be (or contain) the hardware's serial number
+  // (e.g. SICK_L300_1234567890).
+  // For software sources this could contain the software's version
+  // (e.g. com.kuka.mobilerobotics.acknowledge.button_1.2.3).
+  string id = 2;
+
+  // A unique identifier for a message instance.
+  // The value will change to a new value on each change of
+  // any field in this message.
+  string event_uuid = 6;
+
+  // A timestamp as close as possible to the source of the contained data.
+  google.protobuf.Timestamp timestamp = 7;
+
+  // The safety level of this source.<br/><br/>
+  // For example: safety laser scanners:<br/>
+  // - NORMAL: No field of the scanner is violated;<br/>
+  // - WARNING: Any of the currently active warning fields is violated;<br/>
+  // - STOP: Any of the currently active protective fields is violated.
+  SafetyLevel level = 3;
+
+  // The recovery behavior of this safety source in state STOP:<br/>
+  // - SELF_RECOVERY: The source will change to state NORMAL or WARNING by itself;<br/>
+  // - EXTERNAL_RECOVERY: The source cannot change to state NORMAL or WARNING by
+  //   itself. Someone else (i.e. software or hardware) must recover.
+  RecoveryBehavior recovery = 4;
+
+  // Contains additional information about this safety source.
+  repeated google.protobuf.Any details = 5;
+}
+
+// The safety level of a safety source.
+enum SafetyLevel
+{
+  // The safety level is not known.
+  // protolint:disable:next ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
+  UNKNOWN_SAFETY_STATE = 0;
+
+  // No safety violations is active.
+  NORMAL = 1;
+
+  // No safety violations is active but close to.
+  WARNING = 2;
+
+  // A safety violation is active.
+  STOP = 3;
+}
+
+// The internal view of the corresponding safety source about itself
+// recovery behavior, i.e. whether the source can change from STOP
+// to NORMAL or WARNING by itself or whether some external action
+// is required.
+enum RecoveryBehavior
+{
+  // The recovery behavior is not known.
+  // protolint:disable:next ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
+  UNKNOWN_RECOVERY_BEHAVIOR = 0;
+
+  // The source will change to state NORMAL or WARNING by itself.
+  SELF_RECOVERY = 1;
+
+  // The source cannot change to state NORMAL or WARNING by
+  // itself. Someone else (i.e. software or hardware) must recover.
+  EXTERNAL_RECOVERY = 2;
+}

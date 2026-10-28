@@ -1,0 +1,288 @@
+Compiled from "BezierCurveTopologyGraphUtil.java"
+public class com.kuka.rcs.as.pathplanner.fleet.base.bezier.BezierCurveTopologyGraphUtil {
+  public static com.kuka.rcs.as.pathplanner.fleet.base.bezier.BezierCurveConfig config;
+
+  public com.kuka.rcs.as.pathplanner.fleet.base.bezier.BezierCurveTopologyGraphUtil();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public void init();
+    Code:
+       0: ldc           #2                  // class com/kuka/rcs/as/pathplanner/fleet/base/bezier/BezierCurveConfig
+       2: invokestatic  #3                  // Method com/kuka/rcs/as/pathplanner/config/BeanHolder.getBean:(Ljava/lang/Class;)Ljava/lang/Object;
+       5: checkcast     #2                  // class com/kuka/rcs/as/pathplanner/fleet/base/bezier/BezierCurveConfig
+       8: putstatic     #4                  // Field config:Lcom/kuka/rcs/as/pathplanner/fleet/base/bezier/BezierCurveConfig;
+      11: return
+
+  public static com.kuka.rcs.as.pathplanner.share.bezier.BezierCurve<com.kuka.rcs.as.pathplanner.nav.Pose> getBezierCurve(com.kuka.rcs.as.pathplanner.fleet.base.graph.TopologyEdge, com.kuka.rcs.as.pathplanner.fleet.base.graph.properties.EdgeBezierCurveProperty);
+    Code:
+       0: new           #5                  // class java/util/ArrayList
+       3: dup
+       4: invokespecial #6                  // Method java/util/ArrayList."<init>":()V
+       7: astore_2
+       8: aload_2
+       9: aload_0
+      10: invokevirtual #7                  // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge.getSource:()Ljava/lang/Object;
+      13: checkcast     #8                  // class com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyNode
+      16: invokevirtual #9                  // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyNode.getPosition:()Lcom/kuka/rcs/as/pathplanner/nav/Position;
+      19: invokeinterface #10,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      24: pop
+      25: aload_2
+      26: aload_1
+      27: invokevirtual #11                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty.getControlNodeList:()Ljava/util/List;
+      30: invokeinterface #12,  2           // InterfaceMethod java/util/List.addAll:(Ljava/util/Collection;)Z
+      35: pop
+      36: aload_2
+      37: aload_0
+      38: invokevirtual #13                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge.getTarget:()Ljava/lang/Object;
+      41: checkcast     #8                  // class com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyNode
+      44: invokevirtual #9                  // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyNode.getPosition:()Lcom/kuka/rcs/as/pathplanner/nav/Position;
+      47: invokeinterface #10,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      52: pop
+      53: new           #14                 // class com/kuka/rcs/as/pathplanner/share/bezier/BezierCurve
+      56: dup
+      57: aload_2
+      58: invokedynamic #15,  0             // InvokeDynamic #0:get:()Lcom/kuka/rcs/as/pathplanner/share/bezier/BezierCurve$PoseFactory;
+      63: invokespecial #16                 // Method com/kuka/rcs/as/pathplanner/share/bezier/BezierCurve."<init>":(Ljava/util/List;Lcom/kuka/rcs/as/pathplanner/share/bezier/BezierCurve$PoseFactory;)V
+      66: areturn
+
+  public static double distance(com.kuka.rcs.as.pathplanner.share.bezier.BezierCurve<com.kuka.rcs.as.pathplanner.nav.Pose>, double, double);
+    Code:
+       0: new           #17                 // class com/kuka/rcs/as/pathplanner/nav/Position
+       3: dup
+       4: dload_1
+       5: dload_3
+       6: invokespecial #18                 // Method com/kuka/rcs/as/pathplanner/nav/Position."<init>":(DD)V
+       9: astore        5
+      11: aload_0
+      12: aload         5
+      14: invokestatic  #19                 // Method locate:(Lcom/kuka/rcs/as/pathplanner/share/bezier/BezierCurve;Lcom/kuka/rcs/as/pathplanner/nav/Position;)D
+      17: dstore        6
+      19: aload_0
+      20: dload         6
+      22: invokevirtual #20                 // Method com/kuka/rcs/as/pathplanner/share/bezier/BezierCurve.getPoint:(D)Lcom/kuka/rcs/as/pathplanner/nav/Position;
+      25: astore        8
+      27: aload         5
+      29: aload         8
+      31: invokevirtual #21                 // Method com/kuka/rcs/as/pathplanner/nav/Position.distance:(Lcom/kuka/rcs/as/pathplanner/nav/Position;)D
+      34: dreturn
+
+  public static double distance(com.kuka.rcs.as.pathplanner.fleet.base.graph.TopologyEdge, com.kuka.rcs.as.pathplanner.nav.Position);
+    Code:
+       0: aload_0
+       1: invokevirtual #22                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge.getProperties:()Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+       4: ldc           #23                 // class com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty
+       6: invokeinterface #24,  2           // InterfaceMethod com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder.get:(Ljava/lang/Class;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/Property;
+      11: checkcast     #23                 // class com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty
+      14: astore_2
+      15: aload_2
+      16: ifnull        36
+      19: aload_0
+      20: aload_2
+      21: invokestatic  #25                 // Method getBezierCurve:(Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge;Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty;)Lcom/kuka/rcs/as/pathplanner/share/bezier/BezierCurve;
+      24: aload_1
+      25: invokevirtual #26                 // Method com/kuka/rcs/as/pathplanner/nav/Position.getX:()D
+      28: aload_1
+      29: invokevirtual #27                 // Method com/kuka/rcs/as/pathplanner/nav/Position.getY:()D
+      32: invokestatic  #28                 // Method distance:(Lcom/kuka/rcs/as/pathplanner/share/bezier/BezierCurve;DD)D
+      35: dreturn
+      36: aload_1
+      37: aload_0
+      38: invokevirtual #7                  // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge.getSource:()Ljava/lang/Object;
+      41: checkcast     #8                  // class com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyNode
+      44: invokevirtual #9                  // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyNode.getPosition:()Lcom/kuka/rcs/as/pathplanner/nav/Position;
+      47: aload_0
+      48: invokevirtual #13                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge.getTarget:()Ljava/lang/Object;
+      51: checkcast     #8                  // class com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyNode
+      54: invokevirtual #9                  // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyNode.getPosition:()Lcom/kuka/rcs/as/pathplanner/nav/Position;
+      57: invokestatic  #29                 // Method straightEdgeDistance:(Lcom/kuka/rcs/as/pathplanner/nav/Position;Lcom/kuka/rcs/as/pathplanner/nav/Position;Lcom/kuka/rcs/as/pathplanner/nav/Position;)D
+      60: dreturn
+
+  public static double straightEdgeDistance(com.kuka.rcs.as.pathplanner.nav.Position, com.kuka.rcs.as.pathplanner.nav.Position, com.kuka.rcs.as.pathplanner.nav.Position);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokestatic  #30                 // Method com/kuka/rcs/as/pathplanner/nav/NavUtil.locationOnEdge:(Lcom/kuka/rcs/as/pathplanner/nav/Position;Lcom/kuka/rcs/as/pathplanner/nav/Position;Lcom/kuka/rcs/as/pathplanner/nav/Position;)D
+       6: dstore_3
+       7: dload_3
+       8: dconst_0
+       9: dcmpg
+      10: ifgt          19
+      13: aload_0
+      14: aload_1
+      15: invokestatic  #31                 // Method com/kuka/rcs/as/pathplanner/nav/NavUtil.distance:(Lcom/kuka/rcs/as/pathplanner/nav/Position;Lcom/kuka/rcs/as/pathplanner/nav/Position;)D
+      18: dreturn
+      19: dload_3
+      20: dconst_1
+      21: dcmpl
+      22: iflt          31
+      25: aload_0
+      26: aload_2
+      27: invokestatic  #31                 // Method com/kuka/rcs/as/pathplanner/nav/NavUtil.distance:(Lcom/kuka/rcs/as/pathplanner/nav/Position;Lcom/kuka/rcs/as/pathplanner/nav/Position;)D
+      30: dreturn
+      31: aload_0
+      32: aload_1
+      33: aload_2
+      34: invokestatic  #32                 // Method com/kuka/rcs/as/pathplanner/nav/NavUtil.distance:(Lcom/kuka/rcs/as/pathplanner/nav/Position;Lcom/kuka/rcs/as/pathplanner/nav/Position;Lcom/kuka/rcs/as/pathplanner/nav/Position;)D
+      37: dreturn
+
+  private static double locate(com.kuka.rcs.as.pathplanner.share.bezier.BezierCurve<com.kuka.rcs.as.pathplanner.nav.Pose>, com.kuka.rcs.as.pathplanner.nav.Position);
+    Code:
+       0: aload_0
+       1: dup
+       2: invokevirtual #33                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       5: pop
+       6: invokedynamic #34,  0             // InvokeDynamic #1:apply:(Lcom/kuka/rcs/as/pathplanner/share/bezier/BezierCurve;)Ljava/util/function/Function;
+      11: aload_1
+      12: invokestatic  #35                 // Method com/kuka/rcs/as/pathplanner/share/bezier/BezierCurveLocateUtil.locateWithSample:(Ljava/util/function/Function;Lcom/kuka/rcs/as/pathplanner/nav/Position;)D
+      15: dreturn
+
+  public static double getBezierTangentAngle(com.kuka.rcs.as.pathplanner.fleet.base.graph.TopologyEdge, com.kuka.rcs.as.pathplanner.fleet.base.graph.properties.EdgeBezierCurveProperty, com.kuka.rcs.as.pathplanner.nav.Position);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #25                 // Method getBezierCurve:(Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge;Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty;)Lcom/kuka/rcs/as/pathplanner/share/bezier/BezierCurve;
+       5: astore_3
+       6: aload_3
+       7: aload_2
+       8: invokestatic  #19                 // Method locate:(Lcom/kuka/rcs/as/pathplanner/share/bezier/BezierCurve;Lcom/kuka/rcs/as/pathplanner/nav/Position;)D
+      11: dstore        4
+      13: aload_3
+      14: dload         4
+      16: invokevirtual #36                 // Method com/kuka/rcs/as/pathplanner/share/bezier/BezierCurve.getTangentAngle:(D)D
+      19: dreturn
+
+  public static com.kuka.rcs.as.pathplanner.nav.Position getBezierPosition(com.kuka.rcs.as.pathplanner.fleet.base.graph.TopologyEdge, com.kuka.rcs.as.pathplanner.fleet.base.graph.properties.EdgeBezierCurveProperty, com.kuka.rcs.as.pathplanner.nav.Position);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #25                 // Method getBezierCurve:(Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge;Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty;)Lcom/kuka/rcs/as/pathplanner/share/bezier/BezierCurve;
+       5: astore_3
+       6: aload_3
+       7: aload_2
+       8: invokestatic  #19                 // Method locate:(Lcom/kuka/rcs/as/pathplanner/share/bezier/BezierCurve;Lcom/kuka/rcs/as/pathplanner/nav/Position;)D
+      11: dstore        4
+      13: aload_3
+      14: dload         4
+      16: invokevirtual #20                 // Method com/kuka/rcs/as/pathplanner/share/bezier/BezierCurve.getPoint:(D)Lcom/kuka/rcs/as/pathplanner/nav/Position;
+      19: areturn
+
+  public static void getNewBezierCurve(com.kuka.rcs.as.pathplanner.fleet.base.graph.TopologyEdge, com.kuka.rcs.as.pathplanner.fleet.base.graph.TopologyEdge, com.kuka.rcs.as.pathplanner.fleet.base.graph.TopologyNode);
+    Code:
+       0: aload_0
+       1: invokevirtual #22                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge.getProperties:()Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+       4: ldc           #23                 // class com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty
+       6: invokeinterface #24,  2           // InterfaceMethod com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder.get:(Ljava/lang/Class;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/Property;
+      11: checkcast     #23                 // class com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty
+      14: astore_3
+      15: aload_0
+      16: aload_2
+      17: invokestatic  #37                 // Method getSubCurve:(Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge;Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyNode;)Lcom/kuka/rcs/as/pathplanner/share/bezier/BezierCurve;
+      20: astore        4
+      22: aload         4
+      24: invokevirtual #38                 // Method com/kuka/rcs/as/pathplanner/share/bezier/BezierCurve.getPoints:()Ljava/util/List;
+      27: iconst_1
+      28: aload         4
+      30: invokevirtual #38                 // Method com/kuka/rcs/as/pathplanner/share/bezier/BezierCurve.getPoints:()Ljava/util/List;
+      33: invokeinterface #39,  1           // InterfaceMethod java/util/List.size:()I
+      38: iconst_1
+      39: isub
+      40: invokeinterface #40,  3           // InterfaceMethod java/util/List.subList:(II)Ljava/util/List;
+      45: astore        5
+      47: new           #23                 // class com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty
+      50: dup
+      51: aload_3
+      52: invokevirtual #41                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty.getEdgeLength:()D
+      55: invokestatic  #42                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      58: aload         5
+      60: invokespecial #43                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty."<init>":(Ljava/lang/Double;Ljava/util/List;)V
+      63: astore        6
+      65: aload_1
+      66: invokevirtual #22                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge.getProperties:()Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+      69: ldc           #23                 // class com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty
+      71: invokeinterface #44,  2           // InterfaceMethod com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder.remove:(Ljava/lang/Class;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+      76: pop
+      77: aload_1
+      78: invokevirtual #22                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge.getProperties:()Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+      81: aload         6
+      83: invokeinterface #45,  2           // InterfaceMethod com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder.add:(Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/Property;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+      88: pop
+      89: return
+
+  public static com.kuka.rcs.as.pathplanner.share.bezier.BezierCurve<com.kuka.rcs.as.pathplanner.nav.Pose> getSubCurve(com.kuka.rcs.as.pathplanner.fleet.base.graph.TopologyEdge, com.kuka.rcs.as.pathplanner.fleet.base.graph.TopologyNode);
+    Code:
+       0: aload_0
+       1: invokevirtual #22                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge.getProperties:()Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+       4: ldc           #23                 // class com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty
+       6: invokeinterface #24,  2           // InterfaceMethod com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder.get:(Ljava/lang/Class;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/Property;
+      11: checkcast     #23                 // class com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty
+      14: astore_2
+      15: aload_0
+      16: aload_2
+      17: invokestatic  #25                 // Method getBezierCurve:(Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge;Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty;)Lcom/kuka/rcs/as/pathplanner/share/bezier/BezierCurve;
+      20: astore_3
+      21: aload_3
+      22: dup
+      23: invokevirtual #33                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: pop
+      27: invokedynamic #34,  0             // InvokeDynamic #1:apply:(Lcom/kuka/rcs/as/pathplanner/share/bezier/BezierCurve;)Ljava/util/function/Function;
+      32: aload_1
+      33: invokevirtual #9                  // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyNode.getPosition:()Lcom/kuka/rcs/as/pathplanner/nav/Position;
+      36: invokestatic  #35                 // Method com/kuka/rcs/as/pathplanner/share/bezier/BezierCurveLocateUtil.locateWithSample:(Ljava/util/function/Function;Lcom/kuka/rcs/as/pathplanner/nav/Position;)D
+      39: dstore        4
+      41: aload_3
+      42: dload         4
+      44: iconst_0
+      45: invokestatic  #46                 // Method com/kuka/rcs/as/pathplanner/share/bezier/BezierCurveSplitUtil.getSubCurve:(Lcom/kuka/rcs/as/pathplanner/share/bezier/BezierCurve;DZ)Lcom/kuka/rcs/as/pathplanner/share/bezier/BezierCurve;
+      48: areturn
+
+  public static void getNewReversedBezierCurve(com.kuka.rcs.as.pathplanner.fleet.base.graph.TopologyEdge, com.kuka.rcs.as.pathplanner.fleet.base.graph.TopologyEdge);
+    Code:
+       0: aload_0
+       1: invokevirtual #22                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge.getProperties:()Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+       4: ldc           #23                 // class com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty
+       6: invokeinterface #24,  2           // InterfaceMethod com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder.get:(Ljava/lang/Class;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/Property;
+      11: checkcast     #23                 // class com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty
+      14: astore_2
+      15: new           #5                  // class java/util/ArrayList
+      18: dup
+      19: invokespecial #6                  // Method java/util/ArrayList."<init>":()V
+      22: astore_3
+      23: aload_3
+      24: aload_2
+      25: invokevirtual #11                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty.getControlNodeList:()Ljava/util/List;
+      28: invokeinterface #12,  2           // InterfaceMethod java/util/List.addAll:(Ljava/util/Collection;)Z
+      33: pop
+      34: aload_3
+      35: invokestatic  #47                 // Method java/util/Collections.reverse:(Ljava/util/List;)V
+      38: new           #23                 // class com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty
+      41: dup
+      42: aload_2
+      43: invokevirtual #41                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty.getEdgeLength:()D
+      46: invokestatic  #42                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      49: aload_3
+      50: invokespecial #43                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty."<init>":(Ljava/lang/Double;Ljava/util/List;)V
+      53: astore        4
+      55: aload_1
+      56: invokevirtual #22                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge.getProperties:()Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+      59: ldc           #23                 // class com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty
+      61: invokeinterface #44,  2           // InterfaceMethod com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder.remove:(Ljava/lang/Class;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+      66: pop
+      67: aload_1
+      68: invokevirtual #22                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge.getProperties:()Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+      71: aload         4
+      73: invokeinterface #45,  2           // InterfaceMethod com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder.add:(Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/Property;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+      78: pop
+      79: return
+
+  static {};
+    Code:
+       0: new           #2                  // class com/kuka/rcs/as/pathplanner/fleet/base/bezier/BezierCurveConfig
+       3: dup
+       4: invokespecial #48                 // Method com/kuka/rcs/as/pathplanner/fleet/base/bezier/BezierCurveConfig."<init>":()V
+       7: putstatic     #4                  // Field config:Lcom/kuka/rcs/as/pathplanner/fleet/base/bezier/BezierCurveConfig;
+      10: return
+}

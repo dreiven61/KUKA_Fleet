@@ -1,0 +1,60 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.core.v1;
+
+import "google/protobuf/timestamp.proto";
+import "kuka/core/v1/owner.proto";
+
+option csharp_namespace = "Kuka.Core.V1";
+option java_package = "com.kuka.core.v1";
+option java_outer_classname = "MessageHeaderProto";
+option java_multiple_files = true;
+
+
+// A Message Header contains some general information about a message, and is included into every message sent.
+message MessageHeader
+{
+  // Signature of the message type. This information is static and does not contain any version information (see 
+  // message_version field). You can simply set if to the full message name (e.g. kuka.core.v1.MessageHeader).
+  string message_type_uri = 1;
+    
+  // Version of the message schema.
+  string message_type_version = 2;
+    
+  // The publisher of the message.
+  Owner publisher = 3;
+    
+  // A sequence number indicating the offset to the first message of corresponding type.
+  // The initial value must be 0, for each PATCH or FULL message the value must be incremented by 1.
+  uint64 seq = 4;
+    
+  // Enum representing the type of the message.
+  enum UpdateType
+    {
+    // The message contains only a partial update of the state
+    // of the corresponding entity.
+    PATCH = 0;
+        
+    // The message contains the full state of the
+    // corresponding entity.
+    FULL = 1;
+  }
+    
+  // Specifies whether the message is a full or partial update.
+  // If it is a full update all fields including repeated fields
+  // and maps contain the full state of the corresponding entity.
+  // If it is a partial update (PATCH) all valid fields are
+  // specified in the field mask of the header and all repeated
+  // fields and maps need to be merged.
+  UpdateType update_type = 5;
+    
+  // A timestamp as close as possible to the source of the contained data.
+  google.protobuf.Timestamp timestamp = 6;
+}

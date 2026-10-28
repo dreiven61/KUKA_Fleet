@@ -1,0 +1,22 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.lifetimedata.dataprovider.v1alpha1;
+
+option csharp_namespace = "Kuka.MobileRobotics.LifetimeData.DataProvider.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "UnderVoltageCountProto";
+option java_package = "com.kuka.mobilerobotics.lifetimedata.dataprovider.v1alpha1";
+
+// The count of under voltage errors registered by BatteryManagement service.
+message UnderVoltageCount
+{
+  // The count of under voltage errors.
+  int32 under_voltage_count = 1;
+}

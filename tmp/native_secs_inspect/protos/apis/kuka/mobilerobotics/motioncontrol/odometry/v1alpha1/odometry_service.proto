@@ -1,0 +1,96 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motioncontrol.odometry.v1alpha1;
+
+import "kuka/core/v1/message_header.proto";
+import "kuka/mobilerobotics/motioncontrol/odometry/v1alpha1/odometry.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.MotionControl.Odometry.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "OdometryDataServiceProto";
+option java_package = "com.kuka.mobilerobotics.motioncontrol.odometry.v1alpha1";
+
+// Service for the odometry data provider.
+service OdometryDataService
+{
+  // Returns the latest odometry state.
+  rpc GetOdometryData(GetOdometryDataRequest) returns (GetOdometryDataResponse);
+
+  // Starts a stream which provides odometry information.
+  rpc SubscribeOdometryData(SubscribeOdometryDataRequest) returns (stream SubscribeOdometryDataResponse);
+
+  // Resets the current odometry of the mobile platform to the provided value.
+  // A user is allowed to call this method in state running.
+  // When called state change from RUNNING to RUNNING is triggered.
+  rpc UpdateOdometryData(UpdateOdometryDataRequest) returns (UpdateOdometryDataResponse);
+}
+
+// GetOdometryDataRequest
+message GetOdometryDataRequest
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  reserved 2;
+}
+
+// GetOdometryDataResponse
+message GetOdometryDataResponse
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  reserved 2;
+
+  // The actual odometry data.
+  Odometry data = 3;
+}
+
+// SubscribeOdometryDataRequest
+message SubscribeOdometryDataRequest
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  reserved 2;
+}
+
+// SubscribeOdometryDataResponse
+message SubscribeOdometryDataResponse
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  reserved 2;
+
+  // The actual odometry data.
+  Odometry data = 3;
+}
+
+// UpdateOdometryDataRequest
+message UpdateOdometryDataRequest
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  reserved 2;
+
+  // The new odometry to set.
+  Odometry odometry = 3;
+}
+
+// UpdateOdometryDataResponse
+message UpdateOdometryDataResponse
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  reserved 2;
+}

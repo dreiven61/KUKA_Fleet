@@ -1,0 +1,22 @@
+{
+  "verified_at_utc": "2026-10-26T02:25:12.576939+00:00",
+  "nodes": [
+    {
+      "graph_uuid": "lay01-dist1",
+      "node_uuid": "lay01-dist1-89",
+      "station_uuids": [
+        "SECS_ST_89"
+      ],
+      "property_count": 4
+    },
+    {
+      "graph_uuid": "lay01-dist1",
+      "node_uuid": "lay01-dist1-97",
+      "station_uuids": [
+        "SECS_ST_97"
+      ],
+      "property_count": 4
+    }
+  ],
+  "transport_order_sent": false
+}

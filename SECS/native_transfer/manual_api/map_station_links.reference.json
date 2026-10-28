@@ -1,0 +1,123 @@
+{
+  "graphUuid": "lay01-dist1",
+  "nodes": [
+    {
+      "uuid": "lay01-dist1-89",
+      "graphUuid": "lay01-dist1",
+      "name": "89",
+      "position": {
+        "x": 12.0,
+        "y": 23.0
+      },
+      "properties": [
+        {
+          "property": {
+            "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+            "recovery": {
+              "pathRecovery": {
+                "maxTranslationalDistance": 0.5,
+                "maxRotationalDistance": 10.0
+              }
+            }
+          }
+        },
+        {
+          "property": {
+            "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+            "maxVelocityAbsolute": {
+              "x": 60.0,
+              "y": 60.0
+            }
+          }
+        },
+        {
+          "property": {
+            "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+            "motionOrientation": {
+              "pathOrientationsRadians": [
+                0.0,
+                3.141592653589793
+              ]
+            },
+            "motionOrientationMode": {
+              "allowRotation": true
+            },
+            "goalAccuracy": {
+              "translationalGoalAccuracy": 0.03,
+              "rotationalGoalAccuracy": 3.0
+            },
+            "trackingAccuracy": {
+              "translationalTrackingAccuracy": 0.1,
+              "rotationalTrackingAccuracy": 4.0
+            }
+          }
+        },
+        {
+          "property": {
+            "@type": "type.googleapis.com/apis.kuka.mobilerobotics.graph.v1alpha1.StationProperty",
+            "stationUuid": "SECS_ST_89"
+          }
+        }
+      ]
+    },
+    {
+      "uuid": "lay01-dist1-97",
+      "graphUuid": "lay01-dist1",
+      "name": "97",
+      "position": {
+        "x": 12.0,
+        "y": 11.0
+      },
+      "properties": [
+        {
+          "property": {
+            "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+            "recovery": {
+              "pathRecovery": {
+                "maxTranslationalDistance": 0.5,
+                "maxRotationalDistance": 10.0
+              }
+            }
+          }
+        },
+        {
+          "property": {
+            "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+            "maxVelocityAbsolute": {
+              "x": 60.0,
+              "y": 60.0
+            }
+          }
+        },
+        {
+          "property": {
+            "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+            "motionOrientation": {
+              "pathOrientationsRadians": [
+                0.0,
+                3.141592653589793
+              ]
+            },
+            "motionOrientationMode": {
+              "allowRotation": true
+            },
+            "goalAccuracy": {
+              "translationalGoalAccuracy": 0.03,
+              "rotationalGoalAccuracy": 3.0
+            },
+            "trackingAccuracy": {
+              "translationalTrackingAccuracy": 0.1,
+              "rotationalTrackingAccuracy": 4.0
+            }
+          }
+        },
+        {
+          "property": {
+            "@type": "type.googleapis.com/apis.kuka.mobilerobotics.graph.v1alpha1.StationProperty",
+            "stationUuid": "SECS_ST_97"
+          }
+        }
+      ]
+    }
+  ]
+}

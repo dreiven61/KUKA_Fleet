@@ -1,0 +1,39 @@
+{
+  "checked_at_utc": "2026-10-26T01:43:09.268197+00:00",
+  "station_registration": [
+    {
+      "station": "SECS_ST_89",
+      "port": "PORT_89",
+      "state": "ALREADY_PRESENT"
+    },
+    {
+      "station": "SECS_ST_97",
+      "port": "PORT_97",
+      "state": "ALREADY_PRESENT"
+    }
+  ],
+  "graph_nodes": [
+    {
+      "node_uuid": "lay01-dist1-89",
+      "property_types": [
+        "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty"
+      ],
+      "station_link_present": false
+    },
+    {
+      "node_uuid": "lay01-dist1-97",
+      "property_types": [
+        "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty"
+      ],
+      "station_link_present": false
+    }
+  ],
+  "native_robot_ids": [
+    "00000000-0000-0000-0000-000000000000"
+  ],
+  "transport_order_sent": false
+}

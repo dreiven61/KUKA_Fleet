@@ -1,0 +1,28 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.fleetmanager.v1alpha1;
+
+import "kuka/mobilerobotics/graph/v1alpha1/topology_node_reference.proto";
+
+option java_package = "com.kuka.mobilerobotics.fleetmanager.v1alpha1";
+option java_outer_classname = "AssignToGraphCommandProto";
+option java_multiple_files = true;
+
+
+// An assign to graph command which can be executed by fleet manager. It assigns the robot to the graph's node.
+message AssignToGraphCommand
+{
+  // The uuid of the robot which should be assigned to the graph's node.
+  string robot_uuid = 1;
+
+  // The graph uuid and node uuid to which the robot should be assigned. If no node reference is set,
+  // the robot will be removed from the graph.
+  kuka.mobilerobotics.graph.v1alpha1.TopologyNodeReference node_reference = 2;
+}

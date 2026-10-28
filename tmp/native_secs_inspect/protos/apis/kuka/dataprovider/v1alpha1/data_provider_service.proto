@@ -1,0 +1,102 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.dataprovider.v1alpha1;
+
+import "google/protobuf/any.proto";
+import "kuka/core/v1/message_header.proto";
+
+option java_package = "com.kuka.dataprovider.v1alpha1";
+option java_outer_classname = "DataProviderServiceProto";
+option java_multiple_files = true;
+
+// Service for a data provider.
+// It is responsible for handling data requests in the form of a single request or a subscription at
+// a defined frequency.
+service DataProviderService
+{
+  // Returns the latest data managed by the data provider.
+  rpc GetData(GetDataRequest) returns (GetDataResponse);
+
+  // Starts a stream which provides data at a configured frequency.
+  rpc SubscribeData(SubscribeDataRequest) returns (stream SubscribeDataResponse);
+
+  // Returns the Protobuf URIs corresponding to the types of data provided by this service.
+  rpc GetDataTypes(GetDataTypesRequest) returns (GetDataTypesResponse);
+}
+
+message GetDataRequest
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // Protobuf message URI corresponding to the type of data being requested.
+  // The data type must match with the type returned by "GetDataType".
+  string data_type = 2;
+	
+  // Optional filters reducing the scope of the request.
+  // Please refer to the documentation of the component being accessed for a list of supported filters.
+  repeated google.protobuf.Any filters = 3;
+}
+
+message GetDataResponse
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // The requested data.
+  google.protobuf.Any data = 2;
+}
+
+message SubscribeDataRequest
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // Protobuf message URI corresponding to the type of data being requested.
+  // The data type must match with the type returned by "GetDataType".
+  string data_type = 2;
+
+  // The requested frequency of the data subscription (in Hertz).
+  // If set to zero, data shall be published whenever it changes. Note that updates may be sent even if no change in 
+  // subscribed data has occurred. The caller is responsible to check for changes.
+  // If set to a value unequal to zero, the service shall provide the data with a frequency as close to the requested value
+  // as possible.
+  // If negative values are commanded, then the subscription fails.
+  double frequency = 3;
+	
+  // Optional filters reducing the scope of the request.
+  // Please refer to the documentation of the component being accessed for a list of supported filters.
+  repeated google.protobuf.Any filters = 4;
+}
+
+message SubscribeDataResponse
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // The requested data.
+  google.protobuf.Any data = 2;
+}
+
+message GetDataTypesRequest
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+}
+
+message GetDataTypesResponse
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // Protobuf message URIs corresponding to the types of the requested data.
+  // This is the data type name that must be provided with a SubscribeDataRequest or GetDataRequest.
+  repeated string data_types = 2;
+}

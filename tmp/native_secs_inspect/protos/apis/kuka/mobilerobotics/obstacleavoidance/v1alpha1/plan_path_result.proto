@@ -1,0 +1,31 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.obstacleavoidance.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/annotated_spline_segment.proto";
+
+option java_package = "com.kuka.mobilerobotics.obstacleavoidance.v1alpha1";
+option java_outer_classname = "PlanPathResultProto";
+option java_multiple_files = true;
+
+
+// Contains planned path information
+message PlanPathResult {
+
+  // Signalizes whether a collision occured on the original planned path
+  bool collision_detected = 1;
+
+  // Start of the collision on the given hint spline. It is only set when a collision is deteced. 
+  google.protobuf.DoubleValue collision_start = 2;
+
+  // The collision free result path to the given goal pose as a sequence of spline segments.
+  repeated kuka.mobilerobotics.motion.v1alpha1.AnnotatedSplineSegment annotated_spline_segments = 3;
+}

@@ -1,0 +1,573 @@
+Compiled from "MapGraphMapper.java"
+public class com.kuka.rcs.bd.iisy.data.mapper.MapGraphMapper {
+  private static final org.slf4j.Logger log;
+
+  private com.kuka.rcs.bd.map.service.INodeService nodeService;
+
+  private com.kuka.rcs.bd.map.service.IEdgeService edgeService;
+
+  public com.kuka.rcs.bd.iisy.data.mapper.MapGraphMapper();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public com.kuka.mobilerobotics.graph.v1alpha1.TopologyGraph map2Graph(com.kuka.rcs.bd.map.model.MapFloorDto);
+    Code:
+       0: invokestatic  #2                  // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph$Builder;
+       3: astore_2
+       4: aload_1
+       5: invokestatic  #3                  // Method com/kuka/rcs/bd/iisy/data/utils/ConvertGraphUtils.generateGraphUuid:(Lcom/kuka/rcs/bd/map/model/MapFloorDto;)Ljava/lang/String;
+       8: astore_3
+       9: aload_2
+      10: aload_1
+      11: invokevirtual #4                  // Method com/kuka/rcs/bd/map/model/MapFloorDto.getLaserMapPath:()Ljava/lang/String;
+      14: invokestatic  #5                  // Method com/kuka/rcs/bd/iisy/data/utils/ConvertGraphUtils.getMapUuidByPath:(Ljava/lang/String;)Ljava/lang/String;
+      17: invokevirtual #6                  // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph$Builder.setMapUuid:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph$Builder;
+      20: pop
+      21: aload_2
+      22: aload_3
+      23: invokevirtual #7                  // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph$Builder.setUuid:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph$Builder;
+      26: pop
+      27: aload_2
+      28: aload_3
+      29: invokevirtual #8                  // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph$Builder.setName:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph$Builder;
+      32: pop
+      33: aload_0
+      34: getfield      #9                  // Field nodeService:Lcom/kuka/rcs/bd/map/service/INodeService;
+      37: aload_1
+      38: invokevirtual #10                 // Method com/kuka/rcs/bd/map/model/MapFloorDto.getMapCode:()Ljava/lang/String;
+      41: aload_1
+      42: invokevirtual #11                 // Method com/kuka/rcs/bd/map/model/MapFloorDto.getFloorNumber:()Ljava/lang/String;
+      45: invokeinterface #12,  3           // InterfaceMethod com/kuka/rcs/bd/map/service/INodeService.getNodesByFloor:(Ljava/lang/String;Ljava/lang/String;)Ljava/util/List;
+      50: astore        4
+      52: aload_0
+      53: getfield      #13                 // Field edgeService:Lcom/kuka/rcs/bd/map/service/IEdgeService;
+      56: aload_1
+      57: invokevirtual #10                 // Method com/kuka/rcs/bd/map/model/MapFloorDto.getMapCode:()Ljava/lang/String;
+      60: aload_1
+      61: invokevirtual #11                 // Method com/kuka/rcs/bd/map/model/MapFloorDto.getFloorNumber:()Ljava/lang/String;
+      64: invokeinterface #14,  3           // InterfaceMethod com/kuka/rcs/bd/map/service/IEdgeService.getEdgesByFloor:(Ljava/lang/String;Ljava/lang/String;)Ljava/util/List;
+      69: astore        5
+      71: aload         4
+      73: invokestatic  #15                 // Method org/apache/commons/collections/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+      76: ifne          87
+      79: aload         5
+      81: invokestatic  #15                 // Method org/apache/commons/collections/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+      84: ifeq          102
+      87: getstatic     #16                 // Field log:Lorg/slf4j/Logger;
+      90: ldc           #17                 // String edge or node is empty
+      92: invokeinterface #18,  2           // InterfaceMethod org/slf4j/Logger.debug:(Ljava/lang/String;)V
+      97: aload_2
+      98: invokevirtual #19                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph$Builder.build:()Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph;
+     101: areturn
+     102: aload         4
+     104: invokeinterface #20,  1           // InterfaceMethod java/util/List.size:()I
+     109: invokestatic  #21                 // Method com/google/common/collect/Lists.newArrayListWithCapacity:(I)Ljava/util/ArrayList;
+     112: astore        6
+     114: invokestatic  #22                 // Method com/google/common/collect/Maps.newHashMap:()Ljava/util/HashMap;
+     117: astore        7
+     119: aload         4
+     121: invokeinterface #23,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     126: astore        8
+     128: aload         8
+     130: invokeinterface #24,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+     135: ifeq          260
+     138: aload         8
+     140: invokeinterface #25,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     145: checkcast     #26                 // class com/kuka/rcs/bd/map/model/NodeDto
+     148: astore        9
+     150: invokestatic  #27                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder;
+     153: astore        10
+     155: aload         10
+     157: aload_3
+     158: invokevirtual #28                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder.setGraphUuid:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder;
+     161: pop
+     162: aload         10
+     164: aload         9
+     166: invokevirtual #29                 // Method com/kuka/rcs/bd/map/model/NodeDto.getNodeUuid:()Ljava/lang/String;
+     169: invokevirtual #30                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder.setUuid:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder;
+     172: pop
+     173: aload         10
+     175: aload         9
+     177: invokevirtual #31                 // Method com/kuka/rcs/bd/map/model/NodeDto.getNodeLabel:()Ljava/lang/String;
+     180: invokevirtual #32                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder.setName:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder;
+     183: pop
+     184: aload         10
+     186: invokestatic  #33                 // Method com/kuka/core/geometry/v1/Vector2D.newBuilder:()Lcom/kuka/core/geometry/v1/Vector2D$Builder;
+     189: aload         9
+     191: invokevirtual #34                 // Method com/kuka/rcs/bd/map/model/NodeDto.getXCoordinate:()Ljava/lang/Double;
+     194: invokevirtual #35                 // Method java/lang/Double.doubleValue:()D
+     197: invokevirtual #36                 // Method com/kuka/core/geometry/v1/Vector2D$Builder.setX:(D)Lcom/kuka/core/geometry/v1/Vector2D$Builder;
+     200: aload         9
+     202: invokevirtual #37                 // Method com/kuka/rcs/bd/map/model/NodeDto.getYCoordinate:()Ljava/lang/Double;
+     205: invokevirtual #35                 // Method java/lang/Double.doubleValue:()D
+     208: invokevirtual #38                 // Method com/kuka/core/geometry/v1/Vector2D$Builder.setY:(D)Lcom/kuka/core/geometry/v1/Vector2D$Builder;
+     211: invokevirtual #39                 // Method com/kuka/core/geometry/v1/Vector2D$Builder.build:()Lcom/kuka/core/geometry/v1/Vector2D;
+     214: invokevirtual #40                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder.setPosition:(Lcom/kuka/core/geometry/v1/Vector2D;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder;
+     217: pop
+     218: aload_0
+     219: aload         10
+     221: aload         9
+     223: invokespecial #41                 // Method setNodeProperties:(Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder;Lcom/kuka/rcs/bd/map/model/NodeDto;)V
+     226: aload         6
+     228: aload         10
+     230: invokevirtual #42                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder.build:()Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode;
+     233: invokeinterface #43,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     238: pop
+     239: aload         7
+     241: aload         9
+     243: invokevirtual #44                 // Method com/kuka/rcs/bd/map/model/NodeDto.getId:()Ljava/lang/Long;
+     246: aload         9
+     248: invokevirtual #29                 // Method com/kuka/rcs/bd/map/model/NodeDto.getNodeUuid:()Ljava/lang/String;
+     251: invokeinterface #45,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     256: pop
+     257: goto          128
+     260: aload         5
+     262: invokeinterface #20,  1           // InterfaceMethod java/util/List.size:()I
+     267: invokestatic  #21                 // Method com/google/common/collect/Lists.newArrayListWithCapacity:(I)Ljava/util/ArrayList;
+     270: astore        8
+     272: aload         5
+     274: invokeinterface #23,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     279: astore        9
+     281: aload         9
+     283: invokeinterface #24,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+     288: ifeq          403
+     291: aload         9
+     293: invokeinterface #25,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     298: checkcast     #46                 // class com/kuka/rcs/bd/map/model/EdgeDto
+     301: astore        10
+     303: invokestatic  #47                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder;
+     306: astore        11
+     308: aload         10
+     310: invokevirtual #48                 // Method com/kuka/rcs/bd/map/model/EdgeDto.getBeginNodeId:()Ljava/lang/Long;
+     313: astore        12
+     315: aload         10
+     317: invokevirtual #49                 // Method com/kuka/rcs/bd/map/model/EdgeDto.getEndNodeId:()Ljava/lang/Long;
+     320: astore        13
+     322: aload         7
+     324: aload         12
+     326: invokeinterface #50,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     331: checkcast     #51                 // class java/lang/String
+     334: astore        14
+     336: aload         7
+     338: aload         13
+     340: invokeinterface #50,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     345: checkcast     #51                 // class java/lang/String
+     348: astore        15
+     350: aload         11
+     352: aload         14
+     354: aload         15
+     356: invokestatic  #52                 // Method com/kuka/rcs/bd/iisy/data/utils/ConvertGraphUtils.generateEdgeUuid:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+     359: invokevirtual #53                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder.setUuid:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder;
+     362: pop
+     363: aload         11
+     365: aload         14
+     367: invokevirtual #54                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder.setStartNodeUuid:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder;
+     370: pop
+     371: aload         11
+     373: aload         15
+     375: invokevirtual #55                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder.setTargetNodeUuid:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder;
+     378: pop
+     379: aload_0
+     380: aload         11
+     382: aload         10
+     384: invokespecial #56                 // Method setEdgeProperties:(Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder;Lcom/kuka/rcs/bd/map/model/EdgeDto;)V
+     387: aload         8
+     389: aload         11
+     391: invokevirtual #57                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder.build:()Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge;
+     394: invokeinterface #43,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     399: pop
+     400: goto          281
+     403: aload_2
+     404: aload         6
+     406: invokevirtual #58                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph$Builder.addAllNodes:(Ljava/lang/Iterable;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph$Builder;
+     409: pop
+     410: aload_2
+     411: aload         8
+     413: invokevirtual #59                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph$Builder.addAllEdges:(Ljava/lang/Iterable;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph$Builder;
+     416: pop
+     417: aload_2
+     418: invokevirtual #19                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph$Builder.build:()Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph;
+     421: areturn
+
+  private void setEdgeProperties(com.kuka.mobilerobotics.graph.v1alpha1.TopologyEdge$Builder, com.kuka.rcs.bd.map.model.EdgeDto);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #60                 // Method setMotionVelocityProperty:(Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder;Lcom/kuka/rcs/bd/map/model/EdgeDto;)V
+       6: aload_0
+       7: aload_1
+       8: aload_2
+       9: invokespecial #61                 // Method setMotionBlendingProperty:(Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder;Lcom/kuka/rcs/bd/map/model/EdgeDto;)V
+      12: aload_0
+      13: aload_1
+      14: aload_2
+      15: invokespecial #62                 // Method setMotionOrientation:(Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder;Lcom/kuka/rcs/bd/map/model/EdgeDto;)V
+      18: aload_0
+      19: aload_1
+      20: aload_2
+      21: invokespecial #63                 // Method setMotionRecoveryProperty:(Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder;Lcom/kuka/rcs/bd/map/model/EdgeDto;)V
+      24: return
+
+  private void setNodeProperties(com.kuka.mobilerobotics.graph.v1alpha1.TopologyNode$Builder, com.kuka.rcs.bd.map.model.NodeDto);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #64                 // Method setMotionRecoveryProperty:(Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder;Lcom/kuka/rcs/bd/map/model/NodeDto;)V
+       6: aload_0
+       7: aload_1
+       8: aload_2
+       9: invokespecial #65                 // Method setMotionVelocityProperty:(Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder;Lcom/kuka/rcs/bd/map/model/NodeDto;)V
+      12: aload_0
+      13: aload_1
+      14: aload_2
+      15: invokespecial #66                 // Method setVirtualLineMotionProperty:(Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder;Lcom/kuka/rcs/bd/map/model/NodeDto;)V
+      18: aload_0
+      19: aload_1
+      20: aload_2
+      21: invokespecial #67                 // Method setStationProperty:(Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder;Lcom/kuka/rcs/bd/map/model/NodeDto;)V
+      24: return
+
+  private void setMotionBlendingProperty(com.kuka.mobilerobotics.graph.v1alpha1.TopologyEdge$Builder, com.kuka.rcs.bd.map.model.EdgeDto);
+    Code:
+       0: invokestatic  #68                 // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionBlendingProperty.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionBlendingProperty$Builder;
+       3: aload_2
+       4: invokevirtual #69                 // Method com/kuka/rcs/bd/map/model/EdgeDto.getBlendingCart:()Ljava/lang/Double;
+       7: invokevirtual #35                 // Method java/lang/Double.doubleValue:()D
+      10: invokevirtual #70                 // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionBlendingProperty$Builder.setBlendingCartMeters:(D)Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionBlendingProperty$Builder;
+      13: invokevirtual #71                 // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionBlendingProperty$Builder.build:()Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionBlendingProperty;
+      16: astore_3
+      17: aload_1
+      18: invokestatic  #72                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;
+      21: aload_3
+      22: invokestatic  #73                 // Method com/google/protobuf/Any.pack:(Lcom/google/protobuf/Message;)Lcom/google/protobuf/Any;
+      25: invokevirtual #74                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder.setProperty:(Lcom/google/protobuf/Any;)Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;
+      28: invokevirtual #75                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder.addProperties:(Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder;
+      31: pop
+      32: return
+
+  private void setMotionVelocityProperty(com.kuka.mobilerobotics.graph.v1alpha1.TopologyEdge$Builder, com.kuka.rcs.bd.map.model.EdgeDto);
+    Code:
+       0: invokestatic  #76                 // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionVelocityProperty.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionVelocityProperty$Builder;
+       3: invokestatic  #77                 // Method com/kuka/core/geometry/v1/Velocity2D.newBuilder:()Lcom/kuka/core/geometry/v1/Velocity2D$Builder;
+       6: aload_2
+       7: invokevirtual #78                 // Method com/kuka/rcs/bd/map/model/EdgeDto.getMaxVelocity:()Ljava/lang/Double;
+      10: invokevirtual #35                 // Method java/lang/Double.doubleValue:()D
+      13: invokevirtual #79                 // Method com/kuka/core/geometry/v1/Velocity2D$Builder.setX:(D)Lcom/kuka/core/geometry/v1/Velocity2D$Builder;
+      16: aload_2
+      17: invokevirtual #78                 // Method com/kuka/rcs/bd/map/model/EdgeDto.getMaxVelocity:()Ljava/lang/Double;
+      20: invokevirtual #35                 // Method java/lang/Double.doubleValue:()D
+      23: invokevirtual #80                 // Method com/kuka/core/geometry/v1/Velocity2D$Builder.setY:(D)Lcom/kuka/core/geometry/v1/Velocity2D$Builder;
+      26: invokevirtual #81                 // Method com/kuka/core/geometry/v1/Velocity2D$Builder.build:()Lcom/kuka/core/geometry/v1/Velocity2D;
+      29: invokevirtual #82                 // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionVelocityProperty$Builder.setMaxVelocityAbsolute:(Lcom/kuka/core/geometry/v1/Velocity2D;)Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionVelocityProperty$Builder;
+      32: invokevirtual #83                 // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionVelocityProperty$Builder.build:()Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionVelocityProperty;
+      35: astore_3
+      36: aload_1
+      37: invokestatic  #72                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;
+      40: aload_3
+      41: invokestatic  #73                 // Method com/google/protobuf/Any.pack:(Lcom/google/protobuf/Message;)Lcom/google/protobuf/Any;
+      44: invokevirtual #74                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder.setProperty:(Lcom/google/protobuf/Any;)Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;
+      47: invokevirtual #75                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder.addProperties:(Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder;
+      50: pop
+      51: return
+
+  private void setMotionOrientation(com.kuka.mobilerobotics.graph.v1alpha1.TopologyEdge$Builder, com.kuka.rcs.bd.map.model.EdgeDto);
+    Code:
+       0: invokestatic  #84                 // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionOrientation.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionOrientation$Builder;
+       3: astore_3
+       4: aload_2
+       5: invokevirtual #85                 // Method com/kuka/rcs/bd/map/model/EdgeDto.getOrientation:()Ljava/lang/String;
+       8: invokestatic  #86                 // Method java/util/Optional.ofNullable:(Ljava/lang/Object;)Ljava/util/Optional;
+      11: invokedynamic #87,  0             // InvokeDynamic #0:apply:()Ljava/util/function/Function;
+      16: invokevirtual #88                 // Method java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+      19: aload_3
+      20: invokedynamic #89,  0             // InvokeDynamic #1:accept:(Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionOrientation$Builder;)Ljava/util/function/Consumer;
+      25: invokevirtual #90                 // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+      28: aload_1
+      29: invokestatic  #72                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;
+      32: aload_3
+      33: invokevirtual #91                 // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionOrientation$Builder.build:()Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionOrientation;
+      36: invokestatic  #73                 // Method com/google/protobuf/Any.pack:(Lcom/google/protobuf/Message;)Lcom/google/protobuf/Any;
+      39: invokevirtual #74                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder.setProperty:(Lcom/google/protobuf/Any;)Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;
+      42: invokevirtual #75                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder.addProperties:(Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder;
+      45: pop
+      46: return
+
+  private void setMotionRecoveryProperty(com.kuka.mobilerobotics.graph.v1alpha1.TopologyEdge$Builder, com.kuka.rcs.bd.map.model.EdgeDto);
+    Code:
+       0: invokestatic  #92                 // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionRecoveryProperty.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionRecoveryProperty$Builder;
+       3: astore_3
+       4: aload_3
+       5: invokestatic  #93                 // Method com/kuka/mobilerobotics/motion/v1alpha1/MotionRecovery.newBuilder:()Lcom/kuka/mobilerobotics/motion/v1alpha1/MotionRecovery$Builder;
+       8: invokestatic  #94                 // Method com/kuka/mobilerobotics/motion/v1alpha1/PathRecovery.newBuilder:()Lcom/kuka/mobilerobotics/motion/v1alpha1/PathRecovery$Builder;
+      11: aload_2
+      12: invokevirtual #95                 // Method com/kuka/rcs/bd/map/model/EdgeDto.getMaxRecoverDistance:()Ljava/lang/Double;
+      15: invokevirtual #35                 // Method java/lang/Double.doubleValue:()D
+      18: invokevirtual #96                 // Method com/kuka/mobilerobotics/motion/v1alpha1/PathRecovery$Builder.setMaxTranslationalDistance:(D)Lcom/kuka/mobilerobotics/motion/v1alpha1/PathRecovery$Builder;
+      21: aload_2
+      22: invokevirtual #97                 // Method com/kuka/rcs/bd/map/model/EdgeDto.getMaxRecoverAngle:()Ljava/lang/Double;
+      25: invokevirtual #35                 // Method java/lang/Double.doubleValue:()D
+      28: invokevirtual #98                 // Method com/kuka/mobilerobotics/motion/v1alpha1/PathRecovery$Builder.setMaxRotationalDistance:(D)Lcom/kuka/mobilerobotics/motion/v1alpha1/PathRecovery$Builder;
+      31: invokevirtual #99                 // Method com/kuka/mobilerobotics/motion/v1alpha1/PathRecovery$Builder.build:()Lcom/kuka/mobilerobotics/motion/v1alpha1/PathRecovery;
+      34: invokevirtual #100                // Method com/kuka/mobilerobotics/motion/v1alpha1/MotionRecovery$Builder.setPathRecovery:(Lcom/kuka/mobilerobotics/motion/v1alpha1/PathRecovery;)Lcom/kuka/mobilerobotics/motion/v1alpha1/MotionRecovery$Builder;
+      37: invokevirtual #101                // Method com/kuka/mobilerobotics/motion/v1alpha1/MotionRecovery$Builder.build:()Lcom/kuka/mobilerobotics/motion/v1alpha1/MotionRecovery;
+      40: invokevirtual #102                // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionRecoveryProperty$Builder.setRecovery:(Lcom/kuka/mobilerobotics/motion/v1alpha1/MotionRecovery;)Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionRecoveryProperty$Builder;
+      43: pop
+      44: aload_1
+      45: invokestatic  #72                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;
+      48: aload_3
+      49: invokevirtual #103                // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionRecoveryProperty$Builder.build:()Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionRecoveryProperty;
+      52: invokestatic  #73                 // Method com/google/protobuf/Any.pack:(Lcom/google/protobuf/Message;)Lcom/google/protobuf/Any;
+      55: invokevirtual #74                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder.setProperty:(Lcom/google/protobuf/Any;)Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;
+      58: invokevirtual #75                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder.addProperties:(Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge$Builder;
+      61: pop
+      62: return
+
+  private void setMotionRecoveryProperty(com.kuka.mobilerobotics.graph.v1alpha1.TopologyNode$Builder, com.kuka.rcs.bd.map.model.NodeDto);
+    Code:
+       0: invokestatic  #92                 // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionRecoveryProperty.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionRecoveryProperty$Builder;
+       3: astore_3
+       4: aload_3
+       5: invokestatic  #93                 // Method com/kuka/mobilerobotics/motion/v1alpha1/MotionRecovery.newBuilder:()Lcom/kuka/mobilerobotics/motion/v1alpha1/MotionRecovery$Builder;
+       8: invokestatic  #94                 // Method com/kuka/mobilerobotics/motion/v1alpha1/PathRecovery.newBuilder:()Lcom/kuka/mobilerobotics/motion/v1alpha1/PathRecovery$Builder;
+      11: aload_2
+      12: invokevirtual #104                // Method com/kuka/rcs/bd/map/model/NodeDto.getMaxRecoverDistance:()Ljava/lang/Double;
+      15: invokevirtual #35                 // Method java/lang/Double.doubleValue:()D
+      18: invokevirtual #96                 // Method com/kuka/mobilerobotics/motion/v1alpha1/PathRecovery$Builder.setMaxTranslationalDistance:(D)Lcom/kuka/mobilerobotics/motion/v1alpha1/PathRecovery$Builder;
+      21: aload_2
+      22: invokevirtual #105                // Method com/kuka/rcs/bd/map/model/NodeDto.getMaxRecoverAngle:()Ljava/lang/Double;
+      25: invokevirtual #35                 // Method java/lang/Double.doubleValue:()D
+      28: invokevirtual #98                 // Method com/kuka/mobilerobotics/motion/v1alpha1/PathRecovery$Builder.setMaxRotationalDistance:(D)Lcom/kuka/mobilerobotics/motion/v1alpha1/PathRecovery$Builder;
+      31: invokevirtual #99                 // Method com/kuka/mobilerobotics/motion/v1alpha1/PathRecovery$Builder.build:()Lcom/kuka/mobilerobotics/motion/v1alpha1/PathRecovery;
+      34: invokevirtual #100                // Method com/kuka/mobilerobotics/motion/v1alpha1/MotionRecovery$Builder.setPathRecovery:(Lcom/kuka/mobilerobotics/motion/v1alpha1/PathRecovery;)Lcom/kuka/mobilerobotics/motion/v1alpha1/MotionRecovery$Builder;
+      37: invokevirtual #101                // Method com/kuka/mobilerobotics/motion/v1alpha1/MotionRecovery$Builder.build:()Lcom/kuka/mobilerobotics/motion/v1alpha1/MotionRecovery;
+      40: invokevirtual #102                // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionRecoveryProperty$Builder.setRecovery:(Lcom/kuka/mobilerobotics/motion/v1alpha1/MotionRecovery;)Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionRecoveryProperty$Builder;
+      43: pop
+      44: aload_1
+      45: invokestatic  #72                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;
+      48: aload_3
+      49: invokevirtual #103                // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionRecoveryProperty$Builder.build:()Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionRecoveryProperty;
+      52: invokestatic  #73                 // Method com/google/protobuf/Any.pack:(Lcom/google/protobuf/Message;)Lcom/google/protobuf/Any;
+      55: invokevirtual #74                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder.setProperty:(Lcom/google/protobuf/Any;)Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;
+      58: invokevirtual #106                // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder.addProperties:(Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder;
+      61: pop
+      62: return
+
+  private void setMotionVelocityProperty(com.kuka.mobilerobotics.graph.v1alpha1.TopologyNode$Builder, com.kuka.rcs.bd.map.model.NodeDto);
+    Code:
+       0: invokestatic  #76                 // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionVelocityProperty.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionVelocityProperty$Builder;
+       3: invokestatic  #77                 // Method com/kuka/core/geometry/v1/Velocity2D.newBuilder:()Lcom/kuka/core/geometry/v1/Velocity2D$Builder;
+       6: aload_2
+       7: invokevirtual #107                // Method com/kuka/rcs/bd/map/model/NodeDto.getMaxAngularVelocity:()Ljava/lang/Double;
+      10: invokevirtual #35                 // Method java/lang/Double.doubleValue:()D
+      13: invokevirtual #79                 // Method com/kuka/core/geometry/v1/Velocity2D$Builder.setX:(D)Lcom/kuka/core/geometry/v1/Velocity2D$Builder;
+      16: aload_2
+      17: invokevirtual #107                // Method com/kuka/rcs/bd/map/model/NodeDto.getMaxAngularVelocity:()Ljava/lang/Double;
+      20: invokevirtual #35                 // Method java/lang/Double.doubleValue:()D
+      23: invokevirtual #80                 // Method com/kuka/core/geometry/v1/Velocity2D$Builder.setY:(D)Lcom/kuka/core/geometry/v1/Velocity2D$Builder;
+      26: invokevirtual #81                 // Method com/kuka/core/geometry/v1/Velocity2D$Builder.build:()Lcom/kuka/core/geometry/v1/Velocity2D;
+      29: invokevirtual #82                 // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionVelocityProperty$Builder.setMaxVelocityAbsolute:(Lcom/kuka/core/geometry/v1/Velocity2D;)Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionVelocityProperty$Builder;
+      32: invokevirtual #83                 // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionVelocityProperty$Builder.build:()Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionVelocityProperty;
+      35: astore_3
+      36: aload_1
+      37: invokestatic  #72                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;
+      40: aload_3
+      41: invokestatic  #73                 // Method com/google/protobuf/Any.pack:(Lcom/google/protobuf/Message;)Lcom/google/protobuf/Any;
+      44: invokevirtual #74                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder.setProperty:(Lcom/google/protobuf/Any;)Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;
+      47: invokevirtual #106                // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder.addProperties:(Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder;
+      50: pop
+      51: return
+
+  private void setVirtualLineMotionProperty(com.kuka.mobilerobotics.graph.v1alpha1.TopologyNode$Builder, com.kuka.rcs.bd.map.model.NodeDto);
+    Code:
+       0: invokestatic  #108                // Method com/kuka/mobilerobotics/graph/v1alpha1/VirtualLineMotionProperty.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/VirtualLineMotionProperty$Builder;
+       3: astore_3
+       4: aload_2
+       5: invokevirtual #109                // Method com/kuka/rcs/bd/map/model/NodeDto.getTransitOrientations:()Ljava/lang/String;
+       8: invokestatic  #86                 // Method java/util/Optional.ofNullable:(Ljava/lang/Object;)Ljava/util/Optional;
+      11: invokedynamic #110,  0            // InvokeDynamic #2:apply:()Ljava/util/function/Function;
+      16: invokevirtual #88                 // Method java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+      19: aconst_null
+      20: invokevirtual #111                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      23: checkcast     #112                // class "[Ljava/lang/String;"
+      26: astore        4
+      28: aload         4
+      30: invokestatic  #113                // Method java/util/Objects.nonNull:(Ljava/lang/Object;)Z
+      33: ifeq          110
+      36: aload         4
+      38: arraylength
+      39: ifle          110
+      42: invokestatic  #84                 // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionOrientation.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionOrientation$Builder;
+      45: astore        5
+      47: aload         4
+      49: astore        6
+      51: aload         6
+      53: arraylength
+      54: istore        7
+      56: iconst_0
+      57: istore        8
+      59: iload         8
+      61: iload         7
+      63: if_icmpge     100
+      66: aload         6
+      68: iload         8
+      70: aaload
+      71: astore        9
+      73: aload         5
+      75: new           #114                // class java/math/BigDecimal
+      78: dup
+      79: aload         9
+      81: invokespecial #115                // Method java/math/BigDecimal."<init>":(Ljava/lang/String;)V
+      84: invokevirtual #116                // Method java/math/BigDecimal.doubleValue:()D
+      87: invokestatic  #117                // Method java/lang/Math.toRadians:(D)D
+      90: invokevirtual #118                // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionOrientation$Builder.addPathOrientationsRadians:(D)Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionOrientation$Builder;
+      93: pop
+      94: iinc          8, 1
+      97: goto          59
+     100: aload_3
+     101: aload         5
+     103: invokevirtual #91                 // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionOrientation$Builder.build:()Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionOrientation;
+     106: invokevirtual #119                // Method com/kuka/mobilerobotics/graph/v1alpha1/VirtualLineMotionProperty$Builder.setMotionOrientation:(Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionOrientation;)Lcom/kuka/mobilerobotics/graph/v1alpha1/VirtualLineMotionProperty$Builder;
+     109: pop
+     110: aload_3
+     111: invokestatic  #120                // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionOrientationModeProperty.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionOrientationModeProperty$Builder;
+     114: invokestatic  #121                // Method com/google/protobuf/BoolValue.newBuilder:()Lcom/google/protobuf/BoolValue$Builder;
+     117: getstatic     #122                // Field com/kuka/rcs/bd/map/model/enums/NodeRotationType.NO_ROTATION_ALLOWED:Lcom/kuka/rcs/bd/map/model/enums/NodeRotationType;
+     120: invokevirtual #123                // Method com/kuka/rcs/bd/map/model/enums/NodeRotationType.getValue:()Ljava/lang/Integer;
+     123: aload_2
+     124: invokevirtual #124                // Method com/kuka/rcs/bd/map/model/NodeDto.getRotationType:()Ljava/lang/Integer;
+     127: invokestatic  #125                // Method com/kuka/rcs/bd/common/core/util/BasicNumberUtils.same:(Ljava/lang/Integer;Ljava/lang/Integer;)Z
+     130: ifne          137
+     133: iconst_1
+     134: goto          138
+     137: iconst_0
+     138: invokevirtual #126                // Method com/google/protobuf/BoolValue$Builder.setValue:(Z)Lcom/google/protobuf/BoolValue$Builder;
+     141: invokevirtual #127                // Method com/google/protobuf/BoolValue$Builder.build:()Lcom/google/protobuf/BoolValue;
+     144: invokevirtual #128                // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionOrientationModeProperty$Builder.setAllowRotation:(Lcom/google/protobuf/BoolValue;)Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionOrientationModeProperty$Builder;
+     147: invokevirtual #129                // Method com/kuka/mobilerobotics/graph/v1alpha1/VirtualLineMotionProperty$Builder.setMotionOrientationMode:(Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionOrientationModeProperty$Builder;)Lcom/kuka/mobilerobotics/graph/v1alpha1/VirtualLineMotionProperty$Builder;
+     150: pop
+     151: aload_3
+     152: invokestatic  #130                // Method com/kuka/mobilerobotics/motion/v1alpha1/TrackingAccuracy.newBuilder:()Lcom/kuka/mobilerobotics/motion/v1alpha1/TrackingAccuracy$Builder;
+     155: invokestatic  #131                // Method com/google/protobuf/DoubleValue.newBuilder:()Lcom/google/protobuf/DoubleValue$Builder;
+     158: aload_2
+     159: invokevirtual #132                // Method com/kuka/rcs/bd/map/model/NodeDto.getAngularAccuracy:()Ljava/lang/Double;
+     162: invokevirtual #35                 // Method java/lang/Double.doubleValue:()D
+     165: invokevirtual #133                // Method com/google/protobuf/DoubleValue$Builder.setValue:(D)Lcom/google/protobuf/DoubleValue$Builder;
+     168: invokevirtual #134                // Method com/google/protobuf/DoubleValue$Builder.build:()Lcom/google/protobuf/DoubleValue;
+     171: invokevirtual #135                // Method com/kuka/mobilerobotics/motion/v1alpha1/TrackingAccuracy$Builder.setRotationalTrackingAccuracy:(Lcom/google/protobuf/DoubleValue;)Lcom/kuka/mobilerobotics/motion/v1alpha1/TrackingAccuracy$Builder;
+     174: invokestatic  #131                // Method com/google/protobuf/DoubleValue.newBuilder:()Lcom/google/protobuf/DoubleValue$Builder;
+     177: aload_2
+     178: invokevirtual #136                // Method com/kuka/rcs/bd/map/model/NodeDto.getDistanceAccuracy:()Ljava/lang/Double;
+     181: invokevirtual #35                 // Method java/lang/Double.doubleValue:()D
+     184: invokevirtual #133                // Method com/google/protobuf/DoubleValue$Builder.setValue:(D)Lcom/google/protobuf/DoubleValue$Builder;
+     187: invokevirtual #134                // Method com/google/protobuf/DoubleValue$Builder.build:()Lcom/google/protobuf/DoubleValue;
+     190: invokevirtual #137                // Method com/kuka/mobilerobotics/motion/v1alpha1/TrackingAccuracy$Builder.setTranslationalTrackingAccuracy:(Lcom/google/protobuf/DoubleValue;)Lcom/kuka/mobilerobotics/motion/v1alpha1/TrackingAccuracy$Builder;
+     193: invokevirtual #138                // Method com/kuka/mobilerobotics/motion/v1alpha1/TrackingAccuracy$Builder.build:()Lcom/kuka/mobilerobotics/motion/v1alpha1/TrackingAccuracy;
+     196: invokevirtual #139                // Method com/kuka/mobilerobotics/graph/v1alpha1/VirtualLineMotionProperty$Builder.setTrackingAccuracy:(Lcom/kuka/mobilerobotics/motion/v1alpha1/TrackingAccuracy;)Lcom/kuka/mobilerobotics/graph/v1alpha1/VirtualLineMotionProperty$Builder;
+     199: invokevirtual #140                // Method com/kuka/mobilerobotics/graph/v1alpha1/VirtualLineMotionProperty$Builder.build:()Lcom/kuka/mobilerobotics/graph/v1alpha1/VirtualLineMotionProperty;
+     202: pop
+     203: aload_3
+     204: invokestatic  #141                // Method com/kuka/mobilerobotics/motion/v1alpha1/GoalAccuracy.newBuilder:()Lcom/kuka/mobilerobotics/motion/v1alpha1/GoalAccuracy$Builder;
+     207: invokestatic  #131                // Method com/google/protobuf/DoubleValue.newBuilder:()Lcom/google/protobuf/DoubleValue$Builder;
+     210: aload_2
+     211: invokevirtual #142                // Method com/kuka/rcs/bd/map/model/NodeDto.getGoalAngularAccuracy:()Ljava/lang/Double;
+     214: invokevirtual #35                 // Method java/lang/Double.doubleValue:()D
+     217: invokevirtual #133                // Method com/google/protobuf/DoubleValue$Builder.setValue:(D)Lcom/google/protobuf/DoubleValue$Builder;
+     220: invokevirtual #134                // Method com/google/protobuf/DoubleValue$Builder.build:()Lcom/google/protobuf/DoubleValue;
+     223: invokevirtual #143                // Method com/kuka/mobilerobotics/motion/v1alpha1/GoalAccuracy$Builder.setRotationalGoalAccuracy:(Lcom/google/protobuf/DoubleValue;)Lcom/kuka/mobilerobotics/motion/v1alpha1/GoalAccuracy$Builder;
+     226: invokestatic  #131                // Method com/google/protobuf/DoubleValue.newBuilder:()Lcom/google/protobuf/DoubleValue$Builder;
+     229: aload_2
+     230: invokevirtual #144                // Method com/kuka/rcs/bd/map/model/NodeDto.getGoalDistanceAccuracy:()Ljava/lang/Double;
+     233: invokevirtual #35                 // Method java/lang/Double.doubleValue:()D
+     236: invokevirtual #133                // Method com/google/protobuf/DoubleValue$Builder.setValue:(D)Lcom/google/protobuf/DoubleValue$Builder;
+     239: invokevirtual #134                // Method com/google/protobuf/DoubleValue$Builder.build:()Lcom/google/protobuf/DoubleValue;
+     242: invokevirtual #145                // Method com/kuka/mobilerobotics/motion/v1alpha1/GoalAccuracy$Builder.setTranslationalGoalAccuracy:(Lcom/google/protobuf/DoubleValue;)Lcom/kuka/mobilerobotics/motion/v1alpha1/GoalAccuracy$Builder;
+     245: invokevirtual #146                // Method com/kuka/mobilerobotics/graph/v1alpha1/VirtualLineMotionProperty$Builder.setGoalAccuracy:(Lcom/kuka/mobilerobotics/motion/v1alpha1/GoalAccuracy$Builder;)Lcom/kuka/mobilerobotics/graph/v1alpha1/VirtualLineMotionProperty$Builder;
+     248: pop
+     249: aload_1
+     250: invokestatic  #72                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;
+     253: aload_3
+     254: invokevirtual #140                // Method com/kuka/mobilerobotics/graph/v1alpha1/VirtualLineMotionProperty$Builder.build:()Lcom/kuka/mobilerobotics/graph/v1alpha1/VirtualLineMotionProperty;
+     257: invokestatic  #73                 // Method com/google/protobuf/Any.pack:(Lcom/google/protobuf/Message;)Lcom/google/protobuf/Any;
+     260: invokevirtual #74                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder.setProperty:(Lcom/google/protobuf/Any;)Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;
+     263: invokevirtual #106                // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder.addProperties:(Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder;
+     266: pop
+     267: return
+
+  private void setStationProperty(com.kuka.mobilerobotics.graph.v1alpha1.TopologyNode$Builder, com.kuka.rcs.bd.map.model.NodeDto);
+    Code:
+       0: aload_2
+       1: invokevirtual #147                // Method com/kuka/rcs/bd/map/model/NodeDto.getForeignCode:()Ljava/lang/String;
+       4: astore_3
+       5: aload_3
+       6: ifnull        44
+       9: aload_3
+      10: invokevirtual #148                // Method java/lang/String.isEmpty:()Z
+      13: ifne          44
+      16: invokestatic  #149                // Method com/kuka/mobilerobotics/graph/v1alpha1/StationProperty.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/StationProperty$Builder;
+      19: aload_3
+      20: invokevirtual #150                // Method com/kuka/mobilerobotics/graph/v1alpha1/StationProperty$Builder.setStationUuid:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/graph/v1alpha1/StationProperty$Builder;
+      23: invokevirtual #151                // Method com/kuka/mobilerobotics/graph/v1alpha1/StationProperty$Builder.build:()Lcom/kuka/mobilerobotics/graph/v1alpha1/StationProperty;
+      26: astore        4
+      28: aload_1
+      29: invokestatic  #72                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty.newBuilder:()Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;
+      32: aload         4
+      34: invokestatic  #73                 // Method com/google/protobuf/Any.pack:(Lcom/google/protobuf/Message;)Lcom/google/protobuf/Any;
+      37: invokevirtual #74                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder.setProperty:(Lcom/google/protobuf/Any;)Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;
+      40: invokevirtual #106                // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder.addProperties:(Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty$Builder;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode$Builder;
+      43: pop
+      44: return
+
+  private static java.lang.String[] lambda$setVirtualLineMotionProperty$2(java.lang.String);
+    Code:
+       0: aload_0
+       1: ldc           #153                // String ,
+       3: invokevirtual #154                // Method java/lang/String.split:(Ljava/lang/String;)[Ljava/lang/String;
+       6: areturn
+
+  private static void lambda$setMotionOrientation$1(com.kuka.mobilerobotics.graph.v1alpha1.MotionOrientation$Builder, java.lang.String[]);
+    Code:
+       0: aload_1
+       1: astore_2
+       2: aload_2
+       3: arraylength
+       4: istore_3
+       5: iconst_0
+       6: istore        4
+       8: iload         4
+      10: iload_3
+      11: if_icmpge     46
+      14: aload_2
+      15: iload         4
+      17: aaload
+      18: astore        5
+      20: aload_0
+      21: new           #114                // class java/math/BigDecimal
+      24: dup
+      25: aload         5
+      27: invokespecial #115                // Method java/math/BigDecimal."<init>":(Ljava/lang/String;)V
+      30: invokevirtual #116                // Method java/math/BigDecimal.doubleValue:()D
+      33: invokestatic  #117                // Method java/lang/Math.toRadians:(D)D
+      36: invokevirtual #118                // Method com/kuka/mobilerobotics/graph/v1alpha1/MotionOrientation$Builder.addPathOrientationsRadians:(D)Lcom/kuka/mobilerobotics/graph/v1alpha1/MotionOrientation$Builder;
+      39: pop
+      40: iinc          4, 1
+      43: goto          8
+      46: return
+
+  private static java.lang.String[] lambda$setMotionOrientation$0(java.lang.String);
+    Code:
+       0: aload_0
+       1: ldc           #153                // String ,
+       3: invokevirtual #154                // Method java/lang/String.split:(Ljava/lang/String;)[Ljava/lang/String;
+       6: areturn
+
+  static {};
+    Code:
+       0: ldc           #155                // class com/kuka/rcs/bd/iisy/data/mapper/MapGraphMapper
+       2: invokestatic  #156                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #16                 // Field log:Lorg/slf4j/Logger;
+       8: return
+}

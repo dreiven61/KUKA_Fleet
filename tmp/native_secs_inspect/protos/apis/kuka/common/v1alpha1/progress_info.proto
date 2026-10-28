@@ -1,0 +1,38 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.common.v1alpha1;
+
+option java_package = "com.kuka.common.v1alpha1";
+option java_outer_classname = "ProgressInfoProto";
+option java_multiple_files = true;
+
+// The ProgressInfo runtime information.
+message ProgressInfo
+{
+  // a human readable progress information text.
+  string progress_information = 1;
+
+  // number of total actions in the service.
+  int32 total_actions_count = 3;
+
+  // number of finished actions by the service.
+  int32 finished_actions_count = 4;
+
+  // name of the currently executing action.
+  string current_action_name = 5;
+
+  // number of substeps of current action.
+  int64 current_action_total_substeps = 6;
+
+  // current progress of the currently executing action.
+  int64 current_action_finished_substeps = 7;
+}
+
+

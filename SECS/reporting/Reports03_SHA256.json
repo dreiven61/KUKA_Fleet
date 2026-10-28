@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "C:\\work\\KUKA\\SECS\\fleet_transfer_plugin\\build\\servostar-mes-transfer-0.3.0.jar",
+    "Hash": "C8D3E2E5B261931C58C1423405ADDA1B1867341E7B09B25E48EDBE267F350E9D"
+  },
+  {
+    "Path": "C:\\work\\KUKA\\VirtualMCS\\KukaVirtualMCS-1.1.0-win-x64.zip",
+    "Hash": "83E22C669409316D490696A2D2A97412EEFFB662F45795E01D67A14D2DF3C961"
+  },
+  {
+    "Path": "C:\\work\\KUKA\\SECS\\reporting\\ecs_candidate\\SecsTransferReports03_IMPORT_CANDIDATE.json",
+    "Hash": "C6265D31550B6D0CEADA120ABCEE0ACF9D753E9AAD1530C20006719B5F9F65B0"
+  }
+]

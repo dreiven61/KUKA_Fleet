@@ -1,0 +1,43 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motion.v1alpha1;
+
+import "kuka/mobilerobotics/motion/v1alpha1/annotated_spline_segment.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/common_motion_parameters.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/motion_recovery.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/motion_reference_frame.proto";
+
+option java_package = "com.kuka.mobilerobotics.motion.v1alpha1";
+option java_outer_classname = "SplineMotionCommandProto";
+option java_multiple_files = true;
+
+/////////////////
+// >> NOTE <<  //  This is currently just a proposal. Do not use this message.
+/////////////////
+message SplineMotionCommand
+{
+  // The common motion parameters (max velocity, tracking accuracy, etc.)
+  // If this value is not provided, then a platform-specific default parameters
+  // will be used.
+  // Optional.
+  CommonMotionParameters common_motion_parameters = 1;
+
+  // The reference frame in which this motion is defined. Currently, only 
+  // 'map' is supported. If this parameters is null, then 'map' will be used.
+  // Optional.
+  MotionReferenceFrame motion_reference_frame = 2;
+
+  // The spline (path) definition as a sequence of spline segments.
+  repeated AnnotatedSplineSegment annotated_spline_segments = 3;
+
+  // The allowed recoveries. If several recoveries are applicable during a recovery attempt,
+  // then the recovery with lowest index will be chosen.
+  repeated MotionRecovery recoveries = 4;
+}

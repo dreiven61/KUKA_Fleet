@@ -1,0 +1,46 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.core.geometry.v1;
+
+import "kuka/core/geometry/v1/matrix_nxm.proto";
+import "kuka/core/v1/reliability.proto";
+
+option csharp_namespace = "Kuka.Core.Geometry.V1";
+option java_package = "com.kuka.core.geometry.v1";
+option java_outer_classname = "Transform2DProto";
+option java_multiple_files = true;
+
+
+// Represents a transform between two coordinate frames in 2D space.
+// <br>
+// When performing the transformation first the rotational (theta)
+// component and then the translational (x, y) component is to be applied.
+message Transform2D
+{
+  double x = 1;
+  double y = 2;
+  double theta = 3;
+}
+
+// Contains a transform and reliability information
+// (uncertainty or information matrix).
+message Transform2DWithReliability
+{
+  Transform2D transform = 1;
+
+  // The type of the reliability matrix.
+  // Can only be COV3 or INF3.
+  kuka.core.v1.ReliabilityMatrixType reliability_type = 2;
+
+  // Covariance or information matrix for the transformation.
+  // Only upper half of matrix is stored. The matrix is row based.
+  // The type of this matrix is encoded in the field <tt>reliability_type</tt>.
+  kuka.core.geometry.v1.MatrixNxM reliability_matrix = 3;
+}

@@ -1,0 +1,632 @@
+[
+  {
+    "name": "WaitPickupStarted",
+    "configuration": {
+      "maxRetryTimes": 120,
+      "retryPeriod": 5,
+      "grpcClientName": "externalSystem",
+      "useRedisQueueForMsgPersistence": false,
+      "externalSystemApi": {
+        "apiName": "Fleet_Transfer_progress",
+        "apiUrl": "http://192.168.0.45:10870/interfaces/api/mes-transfer/progress",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "PASTE_EXISTING_FLEET_TOKEN"
+          }
+        ],
+        "params": []
+      },
+      "requestBody": {
+        "name": "root",
+        "externalName": "",
+        "type": "OBJECT",
+        "valueType": null,
+        "desc": "",
+        "value": "",
+        "children": [
+          {
+            "name": "COMMANDID",
+            "externalName": "COMMANDID",
+            "type": "STRING",
+            "valueType": "DYNAMIC",
+            "desc": "Command ID",
+            "children": [],
+            "value": "${COMMANDID}",
+            "id": "41792335481793063270079"
+          },
+          {
+            "name": "PRIORITY",
+            "externalName": "PRIORITY",
+            "type": "STRING",
+            "valueType": "DYNAMIC",
+            "desc": "Priority",
+            "children": [],
+            "value": "${PRIORITY}",
+            "id": "93045457051793063270679"
+          },
+          {
+            "name": "REPLACE",
+            "externalName": "REPLACE",
+            "type": "STRING",
+            "valueType": "DYNAMIC",
+            "desc": "Replace",
+            "children": [],
+            "value": "${REPLACE}",
+            "id": "70917775981793063271116"
+          },
+          {
+            "name": "CARRIERID",
+            "externalName": "CARRIERID",
+            "type": "STRING",
+            "valueType": "DYNAMIC",
+            "desc": "Carrier ID",
+            "children": [],
+            "value": "${CARRIERID}",
+            "id": "39204555301793063271616"
+          },
+          {
+            "name": "SOURCEPORT",
+            "externalName": "SOURCEPORT",
+            "type": "STRING",
+            "valueType": "DYNAMIC",
+            "desc": "Source port",
+            "children": [],
+            "value": "${SOURCEPORT}",
+            "id": "97023694501793063272191"
+          },
+          {
+            "name": "DESTPORT",
+            "externalName": "DESTPORT",
+            "type": "STRING",
+            "valueType": "DYNAMIC",
+            "desc": "Destination port",
+            "children": [],
+            "value": "${DESTPORT}",
+            "id": "32548675771793063272752"
+          }
+        ],
+        "id": "27493657011792997037614"
+      },
+      "responseBody": {
+        "name": "root",
+        "externalName": "",
+        "type": "OBJECT",
+        "valueType": null,
+        "desc": "",
+        "value": "",
+        "children": [
+          {
+            "name": "API_SUCCESS",
+            "externalName": "success",
+            "type": "BOOLEAN",
+            "valueType": "DYNAMIC",
+            "desc": "API 성공 여부",
+            "children": [],
+            "value": "true",
+            "id": "72780090791793000702789"
+          },
+          {
+            "name": "API_CODE",
+            "externalName": "code",
+            "type": "STRING",
+            "valueType": "DYNAMIC",
+            "desc": "API 결과 코드",
+            "children": [],
+            "value": "0",
+            "id": "98020527381793000703474"
+          }
+        ],
+        "id": "66976581371793000691709"
+      },
+      "parameters_": [],
+      "responseParameters_": []
+    }
+  },
+  {
+    "name": "ReportTransferring211",
+    "configuration": {
+      "maxRetryTimes": 1,
+      "retryPeriod": 5,
+      "eventName": "TransferInitiated",
+      "requestBody": {
+        "type": "L",
+        "value": "",
+        "paramName": "",
+        "paramType": null,
+        "paramLabel": "",
+        "children": [
+          {
+            "type": "U4",
+            "value": "1",
+            "children": [],
+            "paramName": "DATAID",
+            "paramType": "DYNAMIC",
+            "paramLabel": "Data ID",
+            "typeValid": true,
+            "valueValid": true
+          },
+          {
+            "type": "U2",
+            "value": "211",
+            "children": [],
+            "paramName": "CEID",
+            "paramType": "DYNAMIC",
+            "paramLabel": "CEID",
+            "typeValid": true,
+            "valueValid": true
+          },
+          {
+            "type": "L",
+            "value": "",
+            "children": [
+              {
+                "type": "L",
+                "value": "",
+                "children": [
+                  {
+                    "type": "U2",
+                    "value": "2",
+                    "children": [],
+                    "paramName": "RPTID",
+                    "paramType": "DYNAMIC",
+                    "paramLabel": "RPTID",
+                    "typeValid": true,
+                    "valueValid": true
+                  },
+                  {
+                    "type": "L",
+                    "value": "",
+                    "children": [
+                      {
+                        "type": "A",
+                        "value": "${COMMANDID}",
+                        "children": [],
+                        "paramName": "COMMANDID",
+                        "paramType": "DYNAMIC",
+                        "paramLabel": "Command ID",
+                        "typeValid": true,
+                        "valueValid": true
+                      },
+                      {
+                        "type": "L",
+                        "value": "",
+                        "children": [
+                          {
+                            "type": "L",
+                            "value": "",
+                            "children": [
+                              {
+                                "type": "L",
+                                "value": "",
+                                "children": [
+                                  {
+                                    "type": "A",
+                                    "value": "${CARRIERID}",
+                                    "children": [],
+                                    "paramName": "CARRIERID",
+                                    "paramType": "DYNAMIC",
+                                    "paramLabel": "Carrier ID",
+                                    "typeValid": true,
+                                    "valueValid": true
+                                  },
+                                  {
+                                    "type": "A",
+                                    "value": "${SOURCEPORT}",
+                                    "children": [],
+                                    "paramName": "SOURCEPORT",
+                                    "paramType": "DYNAMIC",
+                                    "paramLabel": "Source port",
+                                    "typeValid": true,
+                                    "valueValid": true
+                                  },
+                                  {
+                                    "type": "A",
+                                    "value": "${DESTPORT}",
+                                    "children": [],
+                                    "paramName": "DESTPORT",
+                                    "paramType": "DYNAMIC",
+                                    "paramLabel": "Destination port",
+                                    "typeValid": true,
+                                    "valueValid": true
+                                  }
+                                ],
+                                "paramName": "",
+                                "paramType": null,
+                                "paramLabel": "",
+                                "typeValid": true,
+                                "valueValid": true
+                              },
+                              {
+                                "type": "A",
+                                "value": "${SOURCEPORT}",
+                                "children": [],
+                                "paramName": "SOURCEPORT",
+                                "paramType": "DYNAMIC",
+                                "paramLabel": "SOURCEPORT",
+                                "typeValid": true,
+                                "valueValid": true
+                              }
+                            ],
+                            "paramName": "",
+                            "paramType": null,
+                            "paramLabel": "",
+                            "typeValid": true,
+                            "valueValid": true
+                          }
+                        ],
+                        "paramName": "",
+                        "paramType": null,
+                        "paramLabel": "",
+                        "typeValid": true,
+                        "valueValid": true
+                      },
+                      {
+                        "type": "U2",
+                        "value": "0",
+                        "children": [],
+                        "paramName": "RESULTCODE",
+                        "paramType": "DYNAMIC",
+                        "paramLabel": "RESULTCODE",
+                        "typeValid": true,
+                        "valueValid": true
+                      }
+                    ],
+                    "paramName": "",
+                    "paramType": null,
+                    "paramLabel": "",
+                    "typeValid": true,
+                    "valueValid": true
+                  }
+                ],
+                "paramName": "",
+                "paramType": null,
+                "paramLabel": "",
+                "typeValid": true,
+                "valueValid": true
+              }
+            ],
+            "paramName": "",
+            "paramType": null,
+            "paramLabel": "",
+            "typeValid": true,
+            "valueValid": true
+          }
+        ],
+        "typeValid": true,
+        "valueValid": true
+      },
+      "responseBody": {
+        "type": "BINARY",
+        "value": "0",
+        "children": [],
+        "paramName": "ACKC6",
+        "paramType": "DYNAMIC",
+        "paramLabel": "ACKC6",
+        "typeValid": true,
+        "valueValid": true
+      },
+      "timeout": 600
+    }
+  },
+  {
+    "name": "WaitTransferCompleted",
+    "configuration": {
+      "maxRetryTimes": 120,
+      "retryPeriod": 5,
+      "grpcClientName": "externalSystem",
+      "useRedisQueueForMsgPersistence": false,
+      "externalSystemApi": {
+        "apiName": "Fleet_Transfer_completed",
+        "apiUrl": "http://192.168.0.45:10870/interfaces/api/mes-transfer/completed",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "PASTE_EXISTING_FLEET_TOKEN"
+          }
+        ],
+        "params": []
+      },
+      "requestBody": {
+        "name": "root",
+        "externalName": "",
+        "type": "OBJECT",
+        "valueType": null,
+        "desc": "",
+        "value": "",
+        "children": [
+          {
+            "name": "COMMANDID",
+            "externalName": "COMMANDID",
+            "type": "STRING",
+            "valueType": "DYNAMIC",
+            "desc": "Command ID",
+            "children": [],
+            "value": "${COMMANDID}",
+            "id": "41792335481793063270079"
+          },
+          {
+            "name": "PRIORITY",
+            "externalName": "PRIORITY",
+            "type": "STRING",
+            "valueType": "DYNAMIC",
+            "desc": "Priority",
+            "children": [],
+            "value": "${PRIORITY}",
+            "id": "93045457051793063270679"
+          },
+          {
+            "name": "REPLACE",
+            "externalName": "REPLACE",
+            "type": "STRING",
+            "valueType": "DYNAMIC",
+            "desc": "Replace",
+            "children": [],
+            "value": "${REPLACE}",
+            "id": "70917775981793063271116"
+          },
+          {
+            "name": "CARRIERID",
+            "externalName": "CARRIERID",
+            "type": "STRING",
+            "valueType": "DYNAMIC",
+            "desc": "Carrier ID",
+            "children": [],
+            "value": "${CARRIERID}",
+            "id": "39204555301793063271616"
+          },
+          {
+            "name": "SOURCEPORT",
+            "externalName": "SOURCEPORT",
+            "type": "STRING",
+            "valueType": "DYNAMIC",
+            "desc": "Source port",
+            "children": [],
+            "value": "${SOURCEPORT}",
+            "id": "97023694501793063272191"
+          },
+          {
+            "name": "DESTPORT",
+            "externalName": "DESTPORT",
+            "type": "STRING",
+            "valueType": "DYNAMIC",
+            "desc": "Destination port",
+            "children": [],
+            "value": "${DESTPORT}",
+            "id": "32548675771793063272752"
+          }
+        ],
+        "id": "27493657011792997037614"
+      },
+      "responseBody": {
+        "name": "root",
+        "externalName": "",
+        "type": "OBJECT",
+        "valueType": null,
+        "desc": "",
+        "value": "",
+        "children": [
+          {
+            "name": "API_SUCCESS",
+            "externalName": "success",
+            "type": "BOOLEAN",
+            "valueType": "DYNAMIC",
+            "desc": "API 성공 여부",
+            "children": [],
+            "value": "true",
+            "id": "72780090791793000702789"
+          },
+          {
+            "name": "API_CODE",
+            "externalName": "code",
+            "type": "STRING",
+            "valueType": "DYNAMIC",
+            "desc": "API 결과 코드",
+            "children": [],
+            "value": "0",
+            "id": "98020527381793000703474"
+          }
+        ],
+        "id": "66976581371793000691709"
+      },
+      "parameters_": [],
+      "responseParameters_": []
+    }
+  },
+  {
+    "name": "ReportTransferCompleted207",
+    "configuration": {
+      "maxRetryTimes": 1,
+      "retryPeriod": 5,
+      "eventName": "TransferInitiated",
+      "requestBody": {
+        "type": "L",
+        "value": "",
+        "paramName": "",
+        "paramType": null,
+        "paramLabel": "",
+        "children": [
+          {
+            "type": "U4",
+            "value": "1",
+            "children": [],
+            "paramName": "DATAID",
+            "paramType": "DYNAMIC",
+            "paramLabel": "Data ID",
+            "typeValid": true,
+            "valueValid": true
+          },
+          {
+            "type": "U2",
+            "value": "207",
+            "children": [],
+            "paramName": "CEID",
+            "paramType": "DYNAMIC",
+            "paramLabel": "CEID",
+            "typeValid": true,
+            "valueValid": true
+          },
+          {
+            "type": "L",
+            "value": "",
+            "children": [
+              {
+                "type": "L",
+                "value": "",
+                "children": [
+                  {
+                    "type": "U2",
+                    "value": "2",
+                    "children": [],
+                    "paramName": "RPTID",
+                    "paramType": "DYNAMIC",
+                    "paramLabel": "RPTID",
+                    "typeValid": true,
+                    "valueValid": true
+                  },
+                  {
+                    "type": "L",
+                    "value": "",
+                    "children": [
+                      {
+                        "type": "A",
+                        "value": "${COMMANDID}",
+                        "children": [],
+                        "paramName": "COMMANDID",
+                        "paramType": "DYNAMIC",
+                        "paramLabel": "Command ID",
+                        "typeValid": true,
+                        "valueValid": true
+                      },
+                      {
+                        "type": "L",
+                        "value": "",
+                        "children": [
+                          {
+                            "type": "L",
+                            "value": "",
+                            "children": [
+                              {
+                                "type": "L",
+                                "value": "",
+                                "children": [
+                                  {
+                                    "type": "A",
+                                    "value": "${CARRIERID}",
+                                    "children": [],
+                                    "paramName": "CARRIERID",
+                                    "paramType": "DYNAMIC",
+                                    "paramLabel": "Carrier ID",
+                                    "typeValid": true,
+                                    "valueValid": true
+                                  },
+                                  {
+                                    "type": "A",
+                                    "value": "${SOURCEPORT}",
+                                    "children": [],
+                                    "paramName": "SOURCEPORT",
+                                    "paramType": "DYNAMIC",
+                                    "paramLabel": "Source port",
+                                    "typeValid": true,
+                                    "valueValid": true
+                                  },
+                                  {
+                                    "type": "A",
+                                    "value": "${DESTPORT}",
+                                    "children": [],
+                                    "paramName": "DESTPORT",
+                                    "paramType": "DYNAMIC",
+                                    "paramLabel": "Destination port",
+                                    "typeValid": true,
+                                    "valueValid": true
+                                  }
+                                ],
+                                "paramName": "",
+                                "paramType": null,
+                                "paramLabel": "",
+                                "typeValid": true,
+                                "valueValid": true
+                              },
+                              {
+                                "type": "A",
+                                "value": "${DESTPORT}",
+                                "children": [],
+                                "paramName": "DESTPORT",
+                                "paramType": "DYNAMIC",
+                                "paramLabel": "DESTPORT",
+                                "typeValid": true,
+                                "valueValid": true
+                              }
+                            ],
+                            "paramName": "",
+                            "paramType": null,
+                            "paramLabel": "",
+                            "typeValid": true,
+                            "valueValid": true
+                          }
+                        ],
+                        "paramName": "",
+                        "paramType": null,
+                        "paramLabel": "",
+                        "typeValid": true,
+                        "valueValid": true
+                      },
+                      {
+                        "type": "U2",
+                        "value": "0",
+                        "children": [],
+                        "paramName": "RESULTCODE",
+                        "paramType": "DYNAMIC",
+                        "paramLabel": "RESULTCODE",
+                        "typeValid": true,
+                        "valueValid": true
+                      }
+                    ],
+                    "paramName": "",
+                    "paramType": null,
+                    "paramLabel": "",
+                    "typeValid": true,
+                    "valueValid": true
+                  }
+                ],
+                "paramName": "",
+                "paramType": null,
+                "paramLabel": "",
+                "typeValid": true,
+                "valueValid": true
+              }
+            ],
+            "paramName": "",
+            "paramType": null,
+            "paramLabel": "",
+            "typeValid": true,
+            "valueValid": true
+          }
+        ],
+        "typeValid": true,
+        "valueValid": true
+      },
+      "responseBody": {
+        "type": "BINARY",
+        "value": "0",
+        "children": [],
+        "paramName": "ACKC6",
+        "paramType": "DYNAMIC",
+        "paramLabel": "ACKC6",
+        "typeValid": true,
+        "valueValid": true
+      },
+      "timeout": 600
+    }
+  }
+]

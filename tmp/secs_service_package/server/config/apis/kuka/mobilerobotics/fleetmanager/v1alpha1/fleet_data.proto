@@ -1,0 +1,46 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.fleetmanager.v1alpha1;
+
+import "kuka/mobilerobotics/fleetmanager/v1alpha1/plan_step.proto";
+import "kuka/mobilerobotics/graph/v1alpha1/topology_node_reference.proto";
+
+option java_package = "com.kuka.mobilerobotics.fleetmanager.v1alpha1";
+option java_outer_classname = "FleetDataProto";
+option java_multiple_files = true;
+
+// Contains Fleet Management related information on all robots in the system. Any robot in the system is either 
+// assigned to a graph or not. While driving on an edge of that graph, the last node defines the node the robot 
+// was on and the next node defines the node the robot is moving to.
+message FleetData
+{
+  // All robots with their corresponding fleet data.
+  repeated FleetRobotData robots = 1;
+}
+
+// Information on one robot.
+message FleetRobotData 
+{
+  // The robot uuid.
+  string robot_uuid = 1;
+
+  // The previous node reference. The value is not set (e.g. null in java), if the robot is not assigned to a graph.
+  // If the robot is directly located on a node, both last and next node reference hold the same value.
+  kuka.mobilerobotics.graph.v1alpha1.TopologyNodeReference last_node = 4;
+	
+  // The next node reference. The value is not set (e.g. null in java), if the robot is not assigned to a graph.
+  // If the robot is directly located on a node, both last and next node reference hold the same value.
+  kuka.mobilerobotics.graph.v1alpha1.TopologyNodeReference next_node = 5;
+	
+  // The current plan as list of plan steps.
+  // The plan is not set if the robot is not executing any graph motion.
+  repeated PlanStep plan = 2;
+}
+

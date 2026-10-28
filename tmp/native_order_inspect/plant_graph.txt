@@ -1,0 +1,335 @@
+Compiled from "PlantGraph.java"
+public final class com.kuka.mobilerobotics.orderengine.model.schedule.PlantGraph extends org.jgrapht.graph.DirectedWeightedMultigraph<com.kuka.mobilerobotics.graph.v1alpha1.TopologyNode, com.kuka.mobilerobotics.orderengine.model.schedule.PlantGraph$Edge> {
+  private static final long serialVersionUID;
+
+  private final java.util.Map<java.lang.String, com.kuka.mobilerobotics.graph.v1alpha1.TopologyNode> _byNodeUuidLookup;
+
+  private com.kuka.mobilerobotics.orderengine.model.schedule.PlantGraph();
+    Code:
+       0: aload_0
+       1: ldc           #1                  // class com/kuka/mobilerobotics/orderengine/model/schedule/PlantGraph$Edge
+       3: invokespecial #3                  // Method org/jgrapht/graph/DirectedWeightedMultigraph."<init>":(Ljava/lang/Class;)V
+       6: aload_0
+       7: new           #9                  // class java/util/concurrent/ConcurrentHashMap
+      10: dup
+      11: invokespecial #11                 // Method java/util/concurrent/ConcurrentHashMap."<init>":()V
+      14: putfield      #14                 // Field _byNodeUuidLookup:Ljava/util/Map;
+      17: return
+
+  public static com.kuka.mobilerobotics.orderengine.model.schedule.PlantGraph from(com.kuka.mobilerobotics.graph.v1alpha1.GraphData);
+    Code:
+       0: aload_0
+       1: invokevirtual #20                 // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphData.getTopologyGraphsList:()Ljava/util/List;
+       4: invokedynamic #26,  0             // InvokeDynamic #0:apply:()Ljava/util/function/IntFunction;
+       9: invokeinterface #30,  2           // InterfaceMethod java/util/List.toArray:(Ljava/util/function/IntFunction;)[Ljava/lang/Object;
+      14: checkcast     #36                 // class "[Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph;"
+      17: invokestatic  #38                 // Method from:([Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph;)Lcom/kuka/mobilerobotics/orderengine/model/schedule/PlantGraph;
+      20: areturn
+
+  public static com.kuka.mobilerobotics.orderengine.model.schedule.PlantGraph from(com.kuka.mobilerobotics.graph.v1alpha1.TopologyGraph...);
+    Code:
+       0: new           #15                 // class com/kuka/mobilerobotics/orderengine/model/schedule/PlantGraph
+       3: dup
+       4: invokespecial #42                 // Method "<init>":()V
+       7: astore_1
+       8: aload_0
+       9: astore_2
+      10: aload_2
+      11: arraylength
+      12: istore_3
+      13: iconst_0
+      14: istore        4
+      16: iload         4
+      18: iload_3
+      19: if_icmpge     44
+      22: aload_2
+      23: iload         4
+      25: aaload
+      26: astore        5
+      28: aload_1
+      29: aload         5
+      31: invokevirtual #43                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph.getNodesList:()Ljava/util/List;
+      34: invokestatic  #48                 // Method org/jgrapht/Graphs.addAllVertices:(Lorg/jgrapht/Graph;Ljava/util/Collection;)Z
+      37: pop
+      38: iinc          4, 1
+      41: goto          16
+      44: aload_0
+      45: astore_2
+      46: aload_2
+      47: arraylength
+      48: istore_3
+      49: iconst_0
+      50: istore        4
+      52: iload         4
+      54: iload_3
+      55: if_icmpge     76
+      58: aload_2
+      59: iload         4
+      61: aaload
+      62: astore        5
+      64: aload_1
+      65: aload         5
+      67: invokestatic  #54                 // Method addAllEdges:(Lcom/kuka/mobilerobotics/orderengine/model/schedule/PlantGraph;Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph;)V
+      70: iinc          4, 1
+      73: goto          52
+      76: aload_1
+      77: areturn
+
+  private static void addAllEdges(com.kuka.mobilerobotics.orderengine.model.schedule.PlantGraph, com.kuka.mobilerobotics.graph.v1alpha1.TopologyGraph);
+    Code:
+       0: aload_1
+       1: invokevirtual #58                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph.getEdgesList:()Ljava/util/List;
+       4: invokeinterface #61,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       9: astore_2
+      10: aload_2
+      11: invokeinterface #65,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      16: ifeq          72
+      19: aload_2
+      20: invokeinterface #71,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      25: checkcast     #75                 // class com/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge
+      28: astore_3
+      29: aload_0
+      30: aload_3
+      31: invokevirtual #77                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge.getStartNodeUuid:()Ljava/lang/String;
+      34: invokevirtual #81                 // Method getNode:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode;
+      37: astore        4
+      39: aload_0
+      40: aload_3
+      41: invokevirtual #85                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyEdge.getTargetNodeUuid:()Ljava/lang/String;
+      44: invokevirtual #81                 // Method getNode:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode;
+      47: astore        5
+      49: aload         4
+      51: aload         5
+      53: invokestatic  #88                 // Method com/kuka/mobilerobotics/orderengine/common/util/Util.euclideanDistance:(Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode;Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode;)D
+      56: dstore        6
+      58: aload_0
+      59: aload         4
+      61: aload         5
+      63: dload         6
+      65: invokestatic  #94                 // Method org/jgrapht/Graphs.addEdge:(Lorg/jgrapht/Graph;Ljava/lang/Object;Ljava/lang/Object;D)Ljava/lang/Object;
+      68: pop
+      69: goto          10
+      72: aload_1
+      73: invokevirtual #43                 // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph.getNodesList:()Ljava/util/List;
+      76: invokeinterface #61,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      81: astore_2
+      82: aload_2
+      83: invokeinterface #65,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      88: ifeq          160
+      91: aload_2
+      92: invokeinterface #71,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      97: checkcast     #98                 // class com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode
+     100: astore_3
+     101: aload_3
+     102: invokestatic  #100                // Method getGraphTransitions:(Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode;)Ljava/util/List;
+     105: invokeinterface #61,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     110: astore        4
+     112: aload         4
+     114: invokeinterface #65,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+     119: ifeq          157
+     122: aload         4
+     124: invokeinterface #71,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     129: checkcast     #104                // class com/kuka/mobilerobotics/graph/v1alpha1/GraphTransitionProperty
+     132: astore        5
+     134: aload_0
+     135: aload         5
+     137: invokevirtual #106                // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphTransitionProperty.getNodeUuid:()Ljava/lang/String;
+     140: invokevirtual #81                 // Method getNode:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode;
+     143: astore        6
+     145: aload_0
+     146: aload_3
+     147: aload         6
+     149: dconst_1
+     150: invokestatic  #94                 // Method org/jgrapht/Graphs.addEdge:(Lorg/jgrapht/Graph;Ljava/lang/Object;Ljava/lang/Object;D)Ljava/lang/Object;
+     153: pop
+     154: goto          112
+     157: goto          82
+     160: return
+
+  private static java.util.List<com.kuka.mobilerobotics.graph.v1alpha1.GraphTransitionProperty> getGraphTransitions(com.kuka.mobilerobotics.graph.v1alpha1.TopologyNode);
+    Code:
+       0: aload_0
+       1: invokevirtual #109                // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode.getPropertiesList:()Ljava/util/List;
+       4: invokeinterface #112,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+       9: invokedynamic #116,  0            // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+      14: invokeinterface #119,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      19: invokedynamic #125,  0            // InvokeDynamic #2:test:()Ljava/util/function/Predicate;
+      24: invokeinterface #129,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+      29: invokedynamic #133,  0            // InvokeDynamic #3:apply:()Ljava/util/function/Function;
+      34: invokeinterface #119,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      39: invokestatic  #134                // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+      42: invokeinterface #140,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+      47: checkcast     #31                 // class java/util/List
+      50: areturn
+
+  private static com.kuka.mobilerobotics.graph.v1alpha1.GraphTransitionProperty unpackGraphTransition(com.google.protobuf.Any);
+    Code:
+       0: aload_0
+       1: ldc           #104                // class com/kuka/mobilerobotics/graph/v1alpha1/GraphTransitionProperty
+       3: invokevirtual #144                // Method com/google/protobuf/Any.unpack:(Ljava/lang/Class;)Lcom/google/protobuf/Message;
+       6: checkcast     #104                // class com/kuka/mobilerobotics/graph/v1alpha1/GraphTransitionProperty
+       9: areturn
+      10: astore_1
+      11: new           #152                // class java/io/UncheckedIOException
+      14: dup
+      15: aload_1
+      16: invokespecial #154                // Method java/io/UncheckedIOException."<init>":(Ljava/io/IOException;)V
+      19: athrow
+    Exception table:
+       from    to  target type
+           0     9    10   Class com/google/protobuf/InvalidProtocolBufferException
+
+  public com.kuka.mobilerobotics.graph.v1alpha1.TopologyNode getNode(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #157                // Method findNode:(Ljava/lang/String;)Ljava/util/Optional;
+       5: aload_1
+       6: invokedynamic #161,  0            // InvokeDynamic #4:get:(Ljava/lang/String;)Ljava/util/function/Supplier;
+      11: invokevirtual #165                // Method java/util/Optional.orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+      14: checkcast     #98                 // class com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode
+      17: areturn
+
+  public java.util.Optional<com.kuka.mobilerobotics.graph.v1alpha1.TopologyNode> findNode(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #14                 // Field _byNodeUuidLookup:Ljava/util/Map;
+       4: aload_1
+       5: invokeinterface #171,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      10: checkcast     #98                 // class com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode
+      13: invokestatic  #176                // Method java/util/Optional.ofNullable:(Ljava/lang/Object;)Ljava/util/Optional;
+      16: areturn
+
+  public com.kuka.mobilerobotics.graph.v1alpha1.TopologyNode getOrReturnNull(com.kuka.mobilerobotics.graph.v1alpha1.TopologyNodeReference);
+    Code:
+       0: aload_1
+       1: ifnonnull     6
+       4: aconst_null
+       5: areturn
+       6: aload_0
+       7: getfield      #14                 // Field _byNodeUuidLookup:Ljava/util/Map;
+      10: aload_1
+      11: invokevirtual #180                // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNodeReference.getNodeUuid:()Ljava/lang/String;
+      14: invokeinterface #171,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      19: checkcast     #98                 // class com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode
+      22: astore_2
+      23: aload_2
+      24: ifnull        41
+      27: aload_2
+      28: invokevirtual #183                // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode.getGraphUuid:()Ljava/lang/String;
+      31: aload_1
+      32: invokevirtual #186                // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNodeReference.getGraphUuid:()Ljava/lang/String;
+      35: invokevirtual #187                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      38: ifne          43
+      41: aconst_null
+      42: areturn
+      43: aload_2
+      44: areturn
+
+  public boolean removeVertex(com.kuka.mobilerobotics.graph.v1alpha1.TopologyNode);
+    Code:
+       0: aload_1
+       1: ifnonnull     6
+       4: iconst_0
+       5: ireturn
+       6: aload_0
+       7: aload_1
+       8: invokespecial #193                // Method org/jgrapht/graph/DirectedWeightedMultigraph.removeVertex:(Ljava/lang/Object;)Z
+      11: istore_2
+      12: iload_2
+      13: ifeq          30
+      16: aload_0
+      17: getfield      #14                 // Field _byNodeUuidLookup:Ljava/util/Map;
+      20: aload_1
+      21: invokevirtual #196                // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode.getUuid:()Ljava/lang/String;
+      24: invokeinterface #199,  2          // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+      29: pop
+      30: iload_2
+      31: ireturn
+
+  public boolean addVertex(com.kuka.mobilerobotics.graph.v1alpha1.TopologyNode);
+    Code:
+       0: aload_1
+       1: ifnonnull     14
+       4: new           #202                // class java/lang/IllegalArgumentException
+       7: dup
+       8: ldc           #204                // String Vertices can\'t be null.
+      10: invokespecial #206                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      13: athrow
+      14: aload_0
+      15: aload_1
+      16: invokevirtual #196                // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode.getUuid:()Ljava/lang/String;
+      19: invokevirtual #157                // Method findNode:(Ljava/lang/String;)Ljava/util/Optional;
+      22: aconst_null
+      23: invokevirtual #209                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      26: checkcast     #98                 // class com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode
+      29: astore_2
+      30: aload_2
+      31: ifnull        63
+      34: aload_2
+      35: aload_1
+      36: invokevirtual #212                // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode.equals:(Ljava/lang/Object;)Z
+      39: ifne          63
+      42: new           #202                // class java/lang/IllegalArgumentException
+      45: dup
+      46: aload_2
+      47: invokestatic  #213                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      50: aload_1
+      51: invokestatic  #213                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      54: invokedynamic #217,  0            // InvokeDynamic #5:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      59: invokespecial #206                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      62: athrow
+      63: aload_0
+      64: aload_1
+      65: invokespecial #221                // Method org/jgrapht/graph/DirectedWeightedMultigraph.addVertex:(Ljava/lang/Object;)Z
+      68: istore_3
+      69: iload_3
+      70: ifeq          88
+      73: aload_0
+      74: getfield      #14                 // Field _byNodeUuidLookup:Ljava/util/Map;
+      77: aload_1
+      78: invokevirtual #196                // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode.getUuid:()Ljava/lang/String;
+      81: aload_1
+      82: invokeinterface #224,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      87: pop
+      88: iload_3
+      89: ireturn
+
+  public boolean removeVertex(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #98                 // class com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode
+       5: invokevirtual #228                // Method removeVertex:(Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode;)Z
+       8: ireturn
+
+  public boolean addVertex(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #98                 // class com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode
+       5: invokevirtual #231                // Method addVertex:(Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode;)Z
+       8: ireturn
+
+  private static java.util.NoSuchElementException lambda$getNode$2(java.lang.String);
+    Code:
+       0: new           #233                // class java/util/NoSuchElementException
+       3: dup
+       4: aload_0
+       5: invokedynamic #235,  0            // InvokeDynamic #6:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      10: invokespecial #238                // Method java/util/NoSuchElementException."<init>":(Ljava/lang/String;)V
+      13: areturn
+
+  private static boolean lambda$getGraphTransitions$1(com.google.protobuf.Any);
+    Code:
+       0: aload_0
+       1: invokestatic  #239                // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphTransitionProperty.getDefaultInstance:()Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphTransitionProperty;
+       4: invokevirtual #243                // Method com/google/protobuf/Any.isSameTypeAs:(Lcom/google/protobuf/Message;)Z
+       7: ireturn
+
+  private static com.kuka.mobilerobotics.graph.v1alpha1.TopologyGraph[] lambda$from$0(int);
+    Code:
+       0: iload_0
+       1: anewarray     #44                 // class com/kuka/mobilerobotics/graph/v1alpha1/TopologyGraph
+       4: areturn
+}

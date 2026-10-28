@@ -1,0 +1,34 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.fleetmanager.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+import "kuka/mobilerobotics/graph/v1alpha1/topology_node_reference.proto";
+import "kuka/mobilerobotics/fleetmanager/v1alpha1/graph_motion_action_description.proto";
+
+option java_package = "com.kuka.mobilerobotics.fleetmanager.v1alpha1";
+option java_outer_classname = "GoalNodeProto";
+option java_multiple_files = true;
+
+// Represents a goal node that has to be visited during execution of a graph motion command. Each goal node consists of a reference to a topology node, an orientation, and a list of actions.
+message GoalNode
+{
+  // The node which has to be visited.
+  kuka.mobilerobotics.graph.v1alpha1.TopologyNodeReference node = 1;
+
+  // The orientation which the robot must have at this goal in radians. 
+  // optional
+  google.protobuf.DoubleValue orientation = 2;
+
+  // A list of ations that will be executed in parallel at this node and with the given orientation.
+  // optional
+  repeated kuka.mobilerobotics.fleetmanager.v1alpha1.GraphMotionActionDescription goal_action_description = 3;
+
+}

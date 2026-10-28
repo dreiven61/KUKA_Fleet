@@ -1,0 +1,36 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.localizer.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+import "kuka/core/geometry/v1/transform_2d.proto";
+
+option java_package = "com.kuka.mobilerobotics.localizer.v1alpha1";
+option java_outer_classname = "InitializeLocalizerCommandProto";
+option java_multiple_files = true;
+
+// Contains information for the initialize localizer command.
+message InitializeLocalizerCommand
+{	
+  // The new localizer robot pose with covariance.
+  // The default reliability matrix is the following 3x3 covariance matrix:
+  // | st^2 0 0 |
+  // | 0 st^2 0 |
+  // | 0 0 sr^2 |
+  // with st = 0.1 and sr = 0.0872665,
+  // which indicates 0.1m translational and 5° rotational standard deviation.
+  kuka.core.geometry.v1.Transform2DWithReliability pose = 1;
+
+  // Optional field, the map on which the robot is located.
+  // If the map differs from the map on which the robot is currently localized,
+  // then the new map is loaded.
+  // Note: In this case this call may last for a while, depending on the size of the new map. 
+  google.protobuf.StringValue map_uuid = 2;
+}

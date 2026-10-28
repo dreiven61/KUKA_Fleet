@@ -1,0 +1,78 @@
+Compiled from "GraphDataProviderGrpc.java"
+final class com.kuka.mobilerobotics.orderengine.data.provider.GraphDataProviderGrpc extends com.kuka.mobilerobotics.orderengine.data.provider.SingleDataProviderGrpc<com.kuka.mobilerobotics.graph.v1alpha1.GraphData> implements com.kuka.mobilerobotics.orderengine.data.provider.GraphDataProvider {
+  private static final org.slf4j.Logger LOG;
+
+  com.kuka.mobilerobotics.orderengine.data.provider.GraphDataProviderGrpc(io.grpc.Channel);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #1                  // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphData.getDefaultInstance:()Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphData;
+       5: invokespecial #7                  // Method com/kuka/mobilerobotics/orderengine/data/provider/SingleDataProviderGrpc."<init>":(Lio/grpc/Channel;Lcom/google/protobuf/Message;)V
+       8: return
+
+  void activate();
+    Code:
+       0: aload_0
+       1: invokevirtual #13                 // Method initialize:()V
+       4: return
+
+  void initialize();
+    Code:
+       0: aload_0
+       1: invokevirtual #19                 // Method requestData:()V
+       4: aload_0
+       5: invokevirtual #22                 // Method subscribeData:()V
+       8: return
+
+  void onDataChange(com.kuka.core.v1.MessageHeader, com.kuka.mobilerobotics.graph.v1alpha1.GraphData, com.kuka.mobilerobotics.graph.v1alpha1.GraphData);
+    Code:
+       0: getstatic     #25                 // Field LOG:Lorg/slf4j/Logger;
+       3: invokeinterface #29,  1           // InterfaceMethod org/slf4j/Logger.isDebugEnabled:()Z
+       8: ifeq          49
+      11: getstatic     #25                 // Field LOG:Lorg/slf4j/Logger;
+      14: ldc           #35                 // String Received {} from {}: {}
+      16: iconst_3
+      17: anewarray     #37                 // class java/lang/Object
+      20: dup
+      21: iconst_0
+      22: aload_0
+      23: invokevirtual #39                 // Method dataName:()Ljava/lang/String;
+      26: aastore
+      27: dup
+      28: iconst_1
+      29: aload_1
+      30: invokevirtual #43                 // Method com/kuka/core/v1/MessageHeader.getPublisher:()Lcom/kuka/core/v1/Owner;
+      33: invokevirtual #49                 // Method com/kuka/core/v1/Owner.getId:()Ljava/lang/String;
+      36: aastore
+      37: dup
+      38: iconst_2
+      39: aload_3
+      40: invokestatic  #54                 // Method com/google/protobuf/TextFormat.shortDebugString:(Lcom/google/protobuf/MessageOrBuilder;)Ljava/lang/String;
+      43: aastore
+      44: invokeinterface #60,  3           // InterfaceMethod org/slf4j/Logger.debug:(Ljava/lang/String;[Ljava/lang/Object;)V
+      49: return
+
+  void deactivate() throws java.lang.InterruptedException;
+    Code:
+       0: aload_0
+       1: invokespecial #64                 // Method com/kuka/mobilerobotics/orderengine/data/provider/SingleDataProviderGrpc.shutdown:()V
+       4: return
+
+  void onDataChange(com.kuka.core.v1.MessageHeader, com.google.protobuf.Message, com.google.protobuf.Message);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: checkcast     #2                  // class com/kuka/mobilerobotics/graph/v1alpha1/GraphData
+       6: aload_3
+       7: checkcast     #2                  // class com/kuka/mobilerobotics/graph/v1alpha1/GraphData
+      10: invokevirtual #67                 // Method onDataChange:(Lcom/kuka/core/v1/MessageHeader;Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphData;Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphData;)V
+      13: return
+
+  static {};
+    Code:
+       0: ldc           #14                 // class com/kuka/mobilerobotics/orderengine/data/provider/GraphDataProviderGrpc
+       2: invokestatic  #71                 // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #25                 // Field LOG:Lorg/slf4j/Logger;
+       8: return
+}

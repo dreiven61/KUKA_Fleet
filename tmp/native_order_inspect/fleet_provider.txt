@@ -1,0 +1,57 @@
+Compiled from "FleetDataProviderGrpc.java"
+final class com.kuka.mobilerobotics.orderengine.data.provider.FleetDataProviderGrpc extends com.kuka.mobilerobotics.orderengine.data.provider.SingleDataProviderGrpc<com.kuka.mobilerobotics.fleetmanager.v1alpha1.FleetData> implements com.kuka.mobilerobotics.orderengine.data.provider.FleetDataProvider {
+  private static final org.slf4j.Logger LOG;
+
+  com.kuka.mobilerobotics.orderengine.data.provider.FleetDataProviderGrpc(io.grpc.Channel);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #1                  // Method com/kuka/mobilerobotics/fleetmanager/v1alpha1/FleetData.getDefaultInstance:()Lcom/kuka/mobilerobotics/fleetmanager/v1alpha1/FleetData;
+       5: invokespecial #7                  // Method com/kuka/mobilerobotics/orderengine/data/provider/SingleDataProviderGrpc."<init>":(Lio/grpc/Channel;Lcom/google/protobuf/Message;)V
+       8: return
+
+  void activate(com.kuka.mobilerobotics.orderengine.data.provider.RobotDataProvider);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: invokestatic  #13                 // Method com/kuka/mobilerobotics/orderengine/data/provider/PatientClientSubscriber.initializeWhenAvailable:(Lcom/kuka/mobilerobotics/orderengine/data/provider/RobotDataProvider;Lcom/kuka/mobilerobotics/orderengine/data/provider/AbstractDataProviderClientGrpc;)V
+       5: return
+
+  void onDataChange(com.kuka.core.v1.MessageHeader, com.kuka.mobilerobotics.fleetmanager.v1alpha1.FleetData, com.kuka.mobilerobotics.fleetmanager.v1alpha1.FleetData);
+    Code:
+       0: getstatic     #19                 // Field LOG:Lorg/slf4j/Logger;
+       3: invokeinterface #25,  1           // InterfaceMethod org/slf4j/Logger.isTraceEnabled:()Z
+       8: ifeq          29
+      11: getstatic     #19                 // Field LOG:Lorg/slf4j/Logger;
+      14: ldc           #31                 // String Received {}: {}
+      16: aload_0
+      17: invokevirtual #33                 // Method dataName:()Ljava/lang/String;
+      20: aload_3
+      21: invokestatic  #37                 // Method com/google/protobuf/TextFormat.shortDebugString:(Lcom/google/protobuf/MessageOrBuilder;)Ljava/lang/String;
+      24: invokeinterface #43,  4           // InterfaceMethod org/slf4j/Logger.trace:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      29: return
+
+  void deactivate() throws java.lang.InterruptedException;
+    Code:
+       0: aload_0
+       1: invokespecial #47                 // Method com/kuka/mobilerobotics/orderengine/data/provider/SingleDataProviderGrpc.shutdown:()V
+       4: return
+
+  void onDataChange(com.kuka.core.v1.MessageHeader, com.google.protobuf.Message, com.google.protobuf.Message);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: checkcast     #2                  // class com/kuka/mobilerobotics/fleetmanager/v1alpha1/FleetData
+       6: aload_3
+       7: checkcast     #2                  // class com/kuka/mobilerobotics/fleetmanager/v1alpha1/FleetData
+      10: invokevirtual #51                 // Method onDataChange:(Lcom/kuka/core/v1/MessageHeader;Lcom/kuka/mobilerobotics/fleetmanager/v1alpha1/FleetData;Lcom/kuka/mobilerobotics/fleetmanager/v1alpha1/FleetData;)V
+      13: return
+
+  static {};
+    Code:
+       0: ldc           #20                 // class com/kuka/mobilerobotics/orderengine/data/provider/FleetDataProviderGrpc
+       2: invokestatic  #55                 // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #19                 // Field LOG:Lorg/slf4j/Logger;
+       8: return
+}

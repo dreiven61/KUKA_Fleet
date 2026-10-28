@@ -1,0 +1,65 @@
+#############################################################################################
+# For custom configuration, please copy the configuration from application*.yml and change the value
+# DO NOT change the configuration in application*.yml except this file.
+#############################################################################################
+
+# Configuration of other services
+BASIC_DATA_HOST: 127.0.0.1
+BASIC_DATA_PORT: 7999
+# Maximum number of robots 机器人最大数量
+robot.params.maxRobotNumbers: 50
+# Switch of light and music 声光配置开关
+robot.params.lightMusic.isOpen: "true"
+robot.params.lightMusic.pointOpenLightMusicMonitor: "false"
+# Configuration of map 地图相关配置
+# 机器人偏差距离(在这个偏差之内仍认为车在点上或边上)
+robot.map.distance-threshold: 0.1
+##### Kukai #####
+# Invalid area expanding configuration (mm) 举升状态下无效区的膨胀参数 单位mm
+kukai.agv.params.avoid.expandExcludeAreaOnload: 100
+# Switch of verifying rack code 是否需要校验货码
+kukai.agv.params.rack.verifyRackCode: "true"
+# Offset of rotate safe area (mm) 旋转时安全区的膨胀参数（空车/举升） 单位mm
+kukai.agv.params.avoid.rotateSafeAreaOffset: 100
+# Re-apply obstacle avoidance time interval (ms)  绕障不允许之后，重新申请的时间间隔 (ms)
+kukai.agv.params.obstacleAvoidance.waitTimeMs: 3000
+# remote control kukai robot start-up 远程控制kukai小车开机功能
+kukai.remote.openRemoteStartup: false
+kukai.remote.wifi.port: 8143
+##### Kukas #####
+# Minimum score of detecting charger  600s精定位检测最小得分
+kukas.agv.params.charge.chargerDetectTrustMinScore: 0.65
+##### HAI #####
+# configuration of HAI robot with 8 packs 海柔8背篓料箱车
+HAI_SERVER_SWITCH: "false"
+KUBO_SERVER_SWITCH: "false"
+HAI_REDIS_HOST: 127.0.0.1
+HAI_REDIS_PASSWORD: ""
+HAI_REDIS_TIMEOUT: 2000
+HAI_REDIS_DATABASE: 0
+HAI_KAFKA_HOST: 127.0.0.1
+HAI_KAFKA_PORT: 9092
+# SASL_PLAINTEXT/SASL_SSL/PLAINTEXT/SSL
+HAI_KAFKA_SECURITY_PROTOCOL: SASL_PLAINTEXT
+# PLAIN/SCRAM-SHA-256/SCRAM-SHA-512
+HAI_KAFKA_SASL_MECHANISM: PLAIN
+HAI_KAFKA_USERNAME: ""
+HAI_KAFKA_PASSWORD: ""
+HAI_KAFKA_PRODUCER_TOPIC: ll
+HAI_KAFKA_CONSUMER_TOPIC: ss
+HAI_KAFKA_GROUP: "group-1"
+##### VDA5050 #####
+# Switch of VDA 5050 robots VDA车是否上线开关
+VDA_SERVER_SWITCH: "true"
+# vda5050 broker ip配置
+VDA_MQTT_HOST: 127.0.0.1
+vda.agv.params.topicPrefix: "uagv/v2/kuka/,uagv/v1/Kollmorgen/,APR/v2/Tuskrobots/,udp/v2/KC/,vda/v2.0.0/mr/,vda5050/frldAGV/,agv/v1/hangfa/,lcs/v1/lgimagv/"
+##### SEER #####
+# Switch of Seer Forklift 仙工叉车是否上线开关
+SEER_SERVER_SWITCH: "false"
+
+
+
+
+
+

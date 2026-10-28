@@ -1,0 +1,5111 @@
+{
+ "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.GraphData",
+ "topologyGraphs": [
+  {
+   "uuid": "lay01-dist1",
+   "name": "lay01-dist1",
+   "mapUuid": "251216hhj_kuka_floor_2",
+   "nodes": [
+    {
+     "uuid": "lay01-dist1-56",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "56",
+     "position": {
+      "x": 12,
+      "y": 13
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-57",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "57",
+     "position": {
+      "x": 14,
+      "y": 13
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-58",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "58",
+     "position": {
+      "x": 16,
+      "y": 13
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-59",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "59",
+     "position": {
+      "x": 12,
+      "y": 15
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-60",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "60",
+     "position": {
+      "x": 14,
+      "y": 15
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-61",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "61",
+     "position": {
+      "x": 16,
+      "y": 15
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-62",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "62",
+     "position": {
+      "x": 12,
+      "y": 17
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-63",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "63",
+     "position": {
+      "x": 14,
+      "y": 17
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-64",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "64",
+     "position": {
+      "x": 16,
+      "y": 17
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-65",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "65",
+     "position": {
+      "x": 12,
+      "y": 19
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-66",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "66",
+     "position": {
+      "x": 14,
+      "y": 19
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-67",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "67",
+     "position": {
+      "x": 16,
+      "y": 19
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-68",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "68",
+     "position": {
+      "x": 12,
+      "y": 21
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-69",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "69",
+     "position": {
+      "x": 14,
+      "y": 21
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-70",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "70",
+     "position": {
+      "x": 16,
+      "y": 21
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-84",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "84",
+     "position": {
+      "x": 14,
+      "y": 23
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-86",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "86",
+     "position": {
+      "x": 14,
+      "y": 11
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-87",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "87",
+     "position": {
+      "x": 18,
+      "y": 17
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-88",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "88",
+     "position": {
+      "x": 10,
+      "y": 17
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-89",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "89",
+     "position": {
+      "x": 12,
+      "y": 23
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-90",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "90",
+     "position": {
+      "x": 16,
+      "y": 23
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-93",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "93",
+     "position": {
+      "x": 10,
+      "y": 19
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-94",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "94",
+     "position": {
+      "x": 18,
+      "y": 19
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-95",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "95",
+     "position": {
+      "x": 10,
+      "y": 15
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-96",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "96",
+     "position": {
+      "x": 18,
+      "y": 15
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-97",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "97",
+     "position": {
+      "x": 12,
+      "y": 11
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-98",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "98",
+     "position": {
+      "x": 16,
+      "y": 11
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-99",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "99",
+     "position": {
+      "x": 11,
+      "y": 17
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-100",
+     "graphUuid": "lay01-dist1",
+     "id": 0,
+     "name": "100",
+     "position": {
+      "x": 17,
+      "y": 17
+     },
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.5,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 60,
+         "y": 60,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.VirtualLineMotionProperty",
+        "motionOrientation": {
+         "orientationsRadians": [],
+         "pathOrientationsRadians": [
+          0,
+          3.1415926535897931
+         ]
+        },
+        "motionOrientationMode": {
+         "allowRotation": true
+        },
+        "goalAccuracy": {
+         "translationalGoalAccuracy": 0.03,
+         "rotationalGoalAccuracy": 3
+        },
+        "trackingAccuracy": {
+         "translationalTrackingAccuracy": 0.1,
+         "rotationalTrackingAccuracy": 4
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    }
+   ],
+   "edges": [
+    {
+     "uuid": "lay01-dist1-57_lay01-dist1-56",
+     "startNodeUuid": "lay01-dist1-57",
+     "targetNodeUuid": "lay01-dist1-56",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-56_lay01-dist1-57",
+     "startNodeUuid": "lay01-dist1-56",
+     "targetNodeUuid": "lay01-dist1-57",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-58_lay01-dist1-57",
+     "startNodeUuid": "lay01-dist1-58",
+     "targetNodeUuid": "lay01-dist1-57",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-57_lay01-dist1-58",
+     "startNodeUuid": "lay01-dist1-57",
+     "targetNodeUuid": "lay01-dist1-58",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-59_lay01-dist1-56",
+     "startNodeUuid": "lay01-dist1-59",
+     "targetNodeUuid": "lay01-dist1-56",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-56_lay01-dist1-59",
+     "startNodeUuid": "lay01-dist1-56",
+     "targetNodeUuid": "lay01-dist1-59",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-60_lay01-dist1-59",
+     "startNodeUuid": "lay01-dist1-60",
+     "targetNodeUuid": "lay01-dist1-59",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-59_lay01-dist1-60",
+     "startNodeUuid": "lay01-dist1-59",
+     "targetNodeUuid": "lay01-dist1-60",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-60_lay01-dist1-57",
+     "startNodeUuid": "lay01-dist1-60",
+     "targetNodeUuid": "lay01-dist1-57",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-57_lay01-dist1-60",
+     "startNodeUuid": "lay01-dist1-57",
+     "targetNodeUuid": "lay01-dist1-60",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-61_lay01-dist1-60",
+     "startNodeUuid": "lay01-dist1-61",
+     "targetNodeUuid": "lay01-dist1-60",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-60_lay01-dist1-61",
+     "startNodeUuid": "lay01-dist1-60",
+     "targetNodeUuid": "lay01-dist1-61",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-61_lay01-dist1-58",
+     "startNodeUuid": "lay01-dist1-61",
+     "targetNodeUuid": "lay01-dist1-58",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-58_lay01-dist1-61",
+     "startNodeUuid": "lay01-dist1-58",
+     "targetNodeUuid": "lay01-dist1-61",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-62_lay01-dist1-59",
+     "startNodeUuid": "lay01-dist1-62",
+     "targetNodeUuid": "lay01-dist1-59",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-59_lay01-dist1-62",
+     "startNodeUuid": "lay01-dist1-59",
+     "targetNodeUuid": "lay01-dist1-62",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-63_lay01-dist1-62",
+     "startNodeUuid": "lay01-dist1-63",
+     "targetNodeUuid": "lay01-dist1-62",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-62_lay01-dist1-63",
+     "startNodeUuid": "lay01-dist1-62",
+     "targetNodeUuid": "lay01-dist1-63",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-63_lay01-dist1-60",
+     "startNodeUuid": "lay01-dist1-63",
+     "targetNodeUuid": "lay01-dist1-60",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-60_lay01-dist1-63",
+     "startNodeUuid": "lay01-dist1-60",
+     "targetNodeUuid": "lay01-dist1-63",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-64_lay01-dist1-63",
+     "startNodeUuid": "lay01-dist1-64",
+     "targetNodeUuid": "lay01-dist1-63",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-63_lay01-dist1-64",
+     "startNodeUuid": "lay01-dist1-63",
+     "targetNodeUuid": "lay01-dist1-64",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-64_lay01-dist1-61",
+     "startNodeUuid": "lay01-dist1-64",
+     "targetNodeUuid": "lay01-dist1-61",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-61_lay01-dist1-64",
+     "startNodeUuid": "lay01-dist1-61",
+     "targetNodeUuid": "lay01-dist1-64",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-65_lay01-dist1-62",
+     "startNodeUuid": "lay01-dist1-65",
+     "targetNodeUuid": "lay01-dist1-62",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-62_lay01-dist1-65",
+     "startNodeUuid": "lay01-dist1-62",
+     "targetNodeUuid": "lay01-dist1-65",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-66_lay01-dist1-65",
+     "startNodeUuid": "lay01-dist1-66",
+     "targetNodeUuid": "lay01-dist1-65",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-65_lay01-dist1-66",
+     "startNodeUuid": "lay01-dist1-65",
+     "targetNodeUuid": "lay01-dist1-66",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-66_lay01-dist1-63",
+     "startNodeUuid": "lay01-dist1-66",
+     "targetNodeUuid": "lay01-dist1-63",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-63_lay01-dist1-66",
+     "startNodeUuid": "lay01-dist1-63",
+     "targetNodeUuid": "lay01-dist1-66",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-67_lay01-dist1-66",
+     "startNodeUuid": "lay01-dist1-67",
+     "targetNodeUuid": "lay01-dist1-66",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-66_lay01-dist1-67",
+     "startNodeUuid": "lay01-dist1-66",
+     "targetNodeUuid": "lay01-dist1-67",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-67_lay01-dist1-64",
+     "startNodeUuid": "lay01-dist1-67",
+     "targetNodeUuid": "lay01-dist1-64",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-64_lay01-dist1-67",
+     "startNodeUuid": "lay01-dist1-64",
+     "targetNodeUuid": "lay01-dist1-67",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-68_lay01-dist1-65",
+     "startNodeUuid": "lay01-dist1-68",
+     "targetNodeUuid": "lay01-dist1-65",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-65_lay01-dist1-68",
+     "startNodeUuid": "lay01-dist1-65",
+     "targetNodeUuid": "lay01-dist1-68",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-69_lay01-dist1-68",
+     "startNodeUuid": "lay01-dist1-69",
+     "targetNodeUuid": "lay01-dist1-68",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-68_lay01-dist1-69",
+     "startNodeUuid": "lay01-dist1-68",
+     "targetNodeUuid": "lay01-dist1-69",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-69_lay01-dist1-66",
+     "startNodeUuid": "lay01-dist1-69",
+     "targetNodeUuid": "lay01-dist1-66",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-66_lay01-dist1-69",
+     "startNodeUuid": "lay01-dist1-66",
+     "targetNodeUuid": "lay01-dist1-69",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-70_lay01-dist1-69",
+     "startNodeUuid": "lay01-dist1-70",
+     "targetNodeUuid": "lay01-dist1-69",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-69_lay01-dist1-70",
+     "startNodeUuid": "lay01-dist1-69",
+     "targetNodeUuid": "lay01-dist1-70",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-70_lay01-dist1-67",
+     "startNodeUuid": "lay01-dist1-70",
+     "targetNodeUuid": "lay01-dist1-67",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-67_lay01-dist1-70",
+     "startNodeUuid": "lay01-dist1-67",
+     "targetNodeUuid": "lay01-dist1-70",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-84_lay01-dist1-69",
+     "startNodeUuid": "lay01-dist1-84",
+     "targetNodeUuid": "lay01-dist1-69",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-69_lay01-dist1-84",
+     "startNodeUuid": "lay01-dist1-69",
+     "targetNodeUuid": "lay01-dist1-84",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-86_lay01-dist1-57",
+     "startNodeUuid": "lay01-dist1-86",
+     "targetNodeUuid": "lay01-dist1-57",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-57_lay01-dist1-86",
+     "startNodeUuid": "lay01-dist1-57",
+     "targetNodeUuid": "lay01-dist1-86",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-97_lay01-dist1-56",
+     "startNodeUuid": "lay01-dist1-97",
+     "targetNodeUuid": "lay01-dist1-56",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-56_lay01-dist1-97",
+     "startNodeUuid": "lay01-dist1-56",
+     "targetNodeUuid": "lay01-dist1-97",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-98_lay01-dist1-58",
+     "startNodeUuid": "lay01-dist1-98",
+     "targetNodeUuid": "lay01-dist1-58",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-58_lay01-dist1-98",
+     "startNodeUuid": "lay01-dist1-58",
+     "targetNodeUuid": "lay01-dist1-98",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-96_lay01-dist1-61",
+     "startNodeUuid": "lay01-dist1-96",
+     "targetNodeUuid": "lay01-dist1-61",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-61_lay01-dist1-96",
+     "startNodeUuid": "lay01-dist1-61",
+     "targetNodeUuid": "lay01-dist1-96",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-95_lay01-dist1-59",
+     "startNodeUuid": "lay01-dist1-95",
+     "targetNodeUuid": "lay01-dist1-59",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-59_lay01-dist1-95",
+     "startNodeUuid": "lay01-dist1-59",
+     "targetNodeUuid": "lay01-dist1-95",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-93_lay01-dist1-65",
+     "startNodeUuid": "lay01-dist1-93",
+     "targetNodeUuid": "lay01-dist1-65",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-65_lay01-dist1-93",
+     "startNodeUuid": "lay01-dist1-65",
+     "targetNodeUuid": "lay01-dist1-93",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-94_lay01-dist1-67",
+     "startNodeUuid": "lay01-dist1-94",
+     "targetNodeUuid": "lay01-dist1-67",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-67_lay01-dist1-94",
+     "startNodeUuid": "lay01-dist1-67",
+     "targetNodeUuid": "lay01-dist1-94",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-89_lay01-dist1-68",
+     "startNodeUuid": "lay01-dist1-89",
+     "targetNodeUuid": "lay01-dist1-68",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-68_lay01-dist1-89",
+     "startNodeUuid": "lay01-dist1-68",
+     "targetNodeUuid": "lay01-dist1-89",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-90_lay01-dist1-70",
+     "startNodeUuid": "lay01-dist1-90",
+     "targetNodeUuid": "lay01-dist1-70",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-70_lay01-dist1-90",
+     "startNodeUuid": "lay01-dist1-70",
+     "targetNodeUuid": "lay01-dist1-90",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-62_lay01-dist1-99",
+     "startNodeUuid": "lay01-dist1-62",
+     "targetNodeUuid": "lay01-dist1-99",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-99_lay01-dist1-88",
+     "startNodeUuid": "lay01-dist1-99",
+     "targetNodeUuid": "lay01-dist1-88",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-88_lay01-dist1-99",
+     "startNodeUuid": "lay01-dist1-88",
+     "targetNodeUuid": "lay01-dist1-99",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-99_lay01-dist1-62",
+     "startNodeUuid": "lay01-dist1-99",
+     "targetNodeUuid": "lay01-dist1-62",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-64_lay01-dist1-100",
+     "startNodeUuid": "lay01-dist1-64",
+     "targetNodeUuid": "lay01-dist1-100",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-100_lay01-dist1-87",
+     "startNodeUuid": "lay01-dist1-100",
+     "targetNodeUuid": "lay01-dist1-87",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-87_lay01-dist1-100",
+     "startNodeUuid": "lay01-dist1-87",
+     "targetNodeUuid": "lay01-dist1-100",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    },
+    {
+     "uuid": "lay01-dist1-100_lay01-dist1-64",
+     "startNodeUuid": "lay01-dist1-100",
+     "targetNodeUuid": "lay01-dist1-64",
+     "properties": [
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionVelocityProperty",
+        "maxVelocityAbsolute": {
+         "x": 1.5,
+         "y": 1.5,
+         "theta": 0
+        }
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionBlendingProperty"
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionOrientation",
+        "orientationsRadians": [],
+        "pathOrientationsRadians": [
+         0,
+         3.1415926535897931
+        ]
+       },
+       "resourceGroup": []
+      },
+      {
+       "property": {
+        "@type": "type.googleapis.com/kuka.mobilerobotics.graph.v1alpha1.MotionRecoveryProperty",
+        "recovery": {
+         "pathRecovery": {
+          "maxTranslationalDistance": 0.2,
+          "maxRotationalDistance": 10
+         }
+        }
+       },
+       "resourceGroup": []
+      }
+     ]
+    }
+   ],
+   "nodeProperties": [],
+   "edgeProperties": []
+  }
+ ]
+}

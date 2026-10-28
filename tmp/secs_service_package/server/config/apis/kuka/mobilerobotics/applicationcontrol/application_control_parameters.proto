@@ -1,0 +1,31 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.applicationcontrol;
+
+option csharp_namespace = "Kuka.MobileRobotics.ApplicationControlParameters";
+option java_multiple_files = true;
+option java_outer_classname = "ApplicationControlParametersProto";
+option java_package = "com.kuka.mobilerobotics.applicationcontrol";
+
+// Message representing data that can be exchanged through the application control
+message ApplicationControlParameters
+{
+  // The integer parameter
+  int32 int_parameter = 1;
+
+  // The double precision floating point parameter
+  double double_parameter = 2;
+
+  // The boolean parameter
+  bool bool_parameter = 3;
+
+  // The string parameter
+  string string_parameter = 4;
+}

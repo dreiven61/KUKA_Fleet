@@ -1,0 +1,91 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.wirelessadapter;
+
+import "kuka/core/v1/message_header.proto";
+import "kuka/mobilerobotics/wirelessadapter/network_configuration.proto";
+import "kuka/mobilerobotics/wirelessadapter/network_connection_data.proto";
+import "kuka/mobilerobotics/wirelessadapter/network_connection_status.proto";
+
+option csharp_namespace = "Kuka.Mobilerobotics.Wirelessadapter";
+option java_multiple_files = true;
+option java_outer_classname = "WirelessAdapterControlServiceProto";
+option java_package = "com.kuka.mobilerobotics.wirelessadapter";
+
+// Provides service functions for managing wireless adapter.
+service WirelessAdapterControlService
+{
+  // Provides a stream of the status of the wireless network.
+  rpc SubscribeConnectionStatus(SubscribeConnectionStatusRequest) returns (stream SubscribeConnectionStatusResponse);
+  
+  // Getting the network status details.
+  //
+  //   FAILED_PRECONDITION -> if netwok device is not avaliable.
+  rpc GetNetworkConfiguration(GetNetworkConfigurationRequest)  returns (GetNetworkConfigurationResponse);
+  
+  // Send connection request to network device.
+  //
+  // Error codes:
+  //   INVALID_ARGUMENT    -> if the provided network_connection_data contains invalid field.
+  //                          eg.: invalid SSID, password. 
+  //   FAILED_PRECONDITION -> if netwok device is not avaliable.
+  rpc Connect(ConnectRequest) returns (ConnectResponse);
+}
+
+// Request message for stream of the status of the wireless network.
+message SubscribeConnectionStatusRequest
+{
+  // header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader message_header = 1;
+}
+
+// Response message containing network connection status data.
+message SubscribeConnectionStatusResponse
+{
+  // header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader message_header = 1;
+  
+  // The actual connection state of the wireless network.
+  NetworkConnectionStatus network_connection_status = 2;
+}
+
+// Request message for GetNetworkConfiguration.
+message GetNetworkConfigurationRequest
+{
+  // header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader message_header = 1;
+}
+
+// Response message containing network configuration data.
+message GetNetworkConfigurationResponse
+{
+  // header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader message_header = 1;
+  
+  // The connected wireless network details.
+  kuka.mobilerobotics.wirelessadapter.NetworkConfiguration network_configuration = 2;
+}
+
+// Request message contains data of the wireless network to connect.
+message ConnectRequest
+{
+  // header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader message_header = 1;
+  
+  // Connection data of the wireless network to connect.
+  kuka.mobilerobotics.wirelessadapter.NetworkConnectionData network_connection_data = 2;
+}
+
+// Response message for ConnectToNetwork.
+message ConnectResponse
+{
+  // header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader message_header = 1;
+}

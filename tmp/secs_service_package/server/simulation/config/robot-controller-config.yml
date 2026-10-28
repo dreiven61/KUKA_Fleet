@@ -1,0 +1,75 @@
+uuid: ###ROBOT_UUID###
+name: ###ROBOT_NAME###
+compress: false
+server:
+  host: "mqtt-broker"
+  port: 8883
+# The data of the following data providers is made available through the robot controller's data provider.
+# This list may be extended with custom data provider services.
+dataProviders:
+  - host: simlocalizer
+    port: 50020
+    dataTypes:
+      - kuka.diagnostics.v1alpha1.ModuleData
+      - kuka.mobilerobotics.localizer.v1alpha1.LocalizerData
+  - host: configuration
+    port: 50190
+    dataTypes:
+      - kuka.mobilerobotics.configuration.v1alpha1.PlatformConfiguration
+      - kuka.mobilerobotics.lifetimedata.dataprovider.v1alpha1.SerialNumber
+      - kuka.mobilerobotics.safety.dataprovider.v1.SafetyStatus
+      - kuka.mobilerobotics.capacity.v1alpha1.TransportCapacity
+  - host: simrobot
+    port: 50121
+    dataTypes:
+      - kuka.mobilerobotics.simulation.v1alpha1.RobotSimulationData
+      - kuka.mobilerobotics.safety.dataprovider.v1.SafetyState
+      - kuka.mobilerobotics.motioncontrol.dataprovider.v1.Odometry
+      - kuka.mobilerobotics.battery.v1.BatteryState
+# Any action executable by one of the following action exeutors is commandable from the robot controller's action executor.
+# This list may be extended with custom action executor services.
+actionExecutors:
+  - host: simlocalizer
+    port: 50020
+    actionTypes:
+      - kuka.mobilerobotics.localizer.v1alpha1.InitializeLocalizerCommand
+  - host: motions
+    port: 50040
+    actionTypes:
+      - kuka.mobilerobotics.motion.v1alpha1.VirtualLineMotionCommand
+      - kuka.mobilerobotics.motion.v1alpha1.RelativeMotionCommand
+  - host: diagnostics
+    port: 50140
+    actionTypes:
+        - kuka.diagnostics.v1alpha1.CreateDiagnosticsPackageCommand
+  - host: simrobot
+    port: 50121
+    actionTypes:
+        - kuka.mobilerobotics.simulation.v1alpha1.UpdateRobotSimulationDataCommand
+  - host: simulateactionexecutor
+    port: 50230
+    actionTypes:
+        - kuka.mobilerobotics.applicationcontrol.ExecuteKrlApplicationAction
+        - kuka.mobilerobotics.transfer.v1alpha1.PickCommand
+        - kuka.mobilerobotics.transfer.v1alpha1.DropCommand
+healthCheck:
+  interval: 1   # in seconds
+  timeout: 250  # in milliseconds
+# apply rate limits to the gRPC server
+# see https://resilience4j.readme.io/docs/ratelimiter
+rateLimits:
+  # target "*" applies a global rate limit
+  # targets without "/" apply a rate limit to whole services (e.g. "kuka.actionexecutor.v1alpha1.ActionExecutorService")
+  # targets with "/" apply a rate limit to individual methods (e.g. "kuka.dataprovider.v1alpha1.DataProviderService/SubscribeData")
+  - target: "*"
+    timeoutDurationInSeconds: 5
+    limitRefreshPeriodInSeconds: 5
+    limitForPeriod: 100
+grpc:
+  # Deadlines that shall be used when calling gRPC service methods.
+  # If a RPC does not produce a response within this timeframe, the client will stop waiting and return an error.
+  # These deadline configurations are only used for RPCs, that will actually stop after some time.
+  # Subscribe-style RPCs do not finish by definition. For those, the deadlines are irrelevant.
+  deadlines:
+    # global deadline of 5s
+    deadlineInMilliSeconds: 5000

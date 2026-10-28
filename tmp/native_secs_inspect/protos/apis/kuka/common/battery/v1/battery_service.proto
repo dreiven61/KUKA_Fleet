@@ -1,0 +1,70 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.common.battery.v1;
+
+import "kuka/common/battery/v1/battery_state.proto";
+import "kuka/core/v1/message_header.proto";
+
+option csharp_namespace = "Kuka.Common.Battery.V1";
+option java_multiple_files = true;
+option java_outer_classname = "BatteryStateServiceProto";
+option java_package = "com.kuka.common.battery.v1";
+
+// Provides the minimal set of battery state data.
+service BatteryStateService
+{
+  // Provides the current state of the battery.
+  rpc GetBatteryState(GetBatteryStateRequest) returns (GetBatteryStateResponse);
+
+  // Provides the state of the battery continuously.
+  rpc SubscribeBatteryState(SubscribeBatteryStateRequest) returns (stream SubscribeBatteryStateResponse);
+}
+
+// Request for obtaining battery state.
+message GetBatteryStateRequest
+{
+  // header containing information about the origin of this message
+  kuka.core.v1.MessageHeader message_header = 1;
+
+  reserved 2;
+}
+
+// Response containing battery state data.
+message GetBatteryStateResponse
+{
+  // header containing information about the origin of this message
+  kuka.core.v1.MessageHeader message_header = 1;
+
+  reserved 2;
+
+  // The actual battery state
+  BatteryState data = 3;
+}
+
+// Request for obtaining battery states.
+message SubscribeBatteryStateRequest
+{
+  // header containing information about the origin of this message
+  kuka.core.v1.MessageHeader message_header = 1;
+
+  reserved 2;
+}
+
+// Response containing battery state data.
+message SubscribeBatteryStateResponse
+{
+  // header containing information about the origin of this message
+  kuka.core.v1.MessageHeader message_header = 1;
+
+  reserved 2;
+
+  // The actual battery state
+  BatteryState data = 3;
+}

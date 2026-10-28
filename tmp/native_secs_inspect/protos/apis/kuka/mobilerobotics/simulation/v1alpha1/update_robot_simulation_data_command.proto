@@ -1,0 +1,23 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.simulation.v1alpha1;
+
+import "kuka/mobilerobotics/simulation/v1alpha1/robot_simulation_data.proto";
+
+option java_package = "com.kuka.mobilerobotics.simulation.v1alpha1";
+option java_outer_classname = "UpdateRobotSimulationDataCommandProto";
+option java_multiple_files = true;
+
+// Contains information for the update of the simulated robot.
+message UpdateRobotSimulationDataCommand
+{
+	// The new simulated robot simulation state to be set. Only the fields to update must be set.
+	kuka.mobilerobotics.simulation.v1alpha1.RobotSimulationData data = 1;
+}

@@ -1,0 +1,28 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.laser.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.laser.v1alpha1";
+option java_outer_classname = "LaserMonitoringCaseProto";
+option java_multiple_files = true;
+
+// represents a single monitoring case
+// at any time, only one case can be active, but it can contain multiple laser fields
+message LaserMonitoringCase
+{
+    // ID of the laser this field is associated with
+    int32 laser_id = 1;
+
+    // number of this case, is referenced by SickMicroscan3DiagnosticData.active_monitoring_case
+    int32 case_number = 2;
+
+    // list of fields associated with this case
+    repeated int32 field_indices = 3;
+}

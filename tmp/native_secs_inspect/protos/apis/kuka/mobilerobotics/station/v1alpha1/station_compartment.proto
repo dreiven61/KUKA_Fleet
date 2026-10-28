@@ -1,0 +1,49 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.station.v1alpha1;
+
+import "google/protobuf/any.proto";
+import "google/protobuf/wrappers.proto";
+import "kuka/mobilerobotics/capacity/v1alpha1/payload_filter.proto";
+
+option java_package = "com.kuka.mobilerobotics.station.v1alpha1";
+option java_outer_classname = "StationCompartmentProto";
+option java_multiple_files = true;
+
+// Describes a compartment of a station. A compartment is a place that can
+// hold a single payload.
+message StationCompartment {
+
+  // An identifier for the compartment.
+  // The identifier must be unique per robot. It does not have to be globally unique.
+  string uuid = 1;
+
+  // [optional] If not specified, all payloads can be put in this compartment
+  kuka.mobilerobotics.capacity.v1alpha1.PayloadFilter filter = 2;
+
+  // The priority determines the ordering in which compartments are used.
+  // Priorities follow the natural ordering of integers: lower values have a higher priority.
+  // [optional] If not specified, the compartment has priority of zero.
+  google.protobuf.Int32Value priority = 3;
+
+  // Customer specific extensions.
+  repeated google.protobuf.Any custom = 4;
+
+  // Whether this compartment can be used to dispose payloads.
+  // When true, dispose orders can have this compartment as target.
+  // [optional] Defaults to false.
+  google.protobuf.BoolValue is_dispose = 5;
+  
+  // Whether this compartment can be used to buffer payloads.
+  // When true, buffer orders can have this compartment as target.
+  // [optional] Defaults to false.
+  google.protobuf.BoolValue is_buffer = 6;
+
+}

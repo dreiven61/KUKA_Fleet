@@ -1,0 +1,36 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.wirelessadapter;
+
+option csharp_namespace = "Kuka.Mobilerobotics.Wirelessadapter";
+option java_multiple_files = true;
+option java_outer_classname = "NetworkConnectionStatusProto";
+option java_package = "com.kuka.mobilerobotics.wirelessadapter";
+
+// The actual connection status of the wireless network device. 
+message NetworkConnectionStatus 
+{
+  // The different types of connection status.
+  enum ConnectionStatus 
+  {
+    // Connection state not specified.
+    CONNECTION_STATUS_UNSPECIFIED = 0;
+    // Not connected.
+    NOT_CONNECTED = 1;
+    // Connected to a wireless network.
+    CONNECTED = 2;
+  }
+
+  // Connection Status of the network device.
+  ConnectionStatus connection_status = 1;
+
+  // Connection quality of the WiFi/5G connection [dbm].
+  int32 connection_quality = 2;
+}

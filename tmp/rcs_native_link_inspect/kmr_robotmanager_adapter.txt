@@ -1,0 +1,1235 @@
+Compiled from "KmrRobotManagerAdapterImpl.java"
+public class com.kuka.rcs.rob.robot.kmr.adapter.KmrRobotManagerAdapterImpl implements com.kuka.rcs.rob.robot.kmr.adapter.IKmrRobotManagerAdapter {
+  private static final org.slf4j.Logger log;
+
+  private static final java.lang.String ROBOT_SERVER_UUID;
+
+  private final java.util.concurrent.ScheduledExecutorService scheduledExecutor;
+
+  private static int threadNumber;
+
+  private com.kuka.dataprovider.v1alpha1.DataProviderServiceGrpc$DataProviderServiceBlockingStub dataProviderServiceBlockingStub;
+
+  private com.kuka.dataprovider.v1alpha1.DataProviderServiceGrpc$DataProviderServiceStub dataProviderServiceStub;
+
+  private com.kuka.actionexecutor.v1alpha1.ActionExecutorServiceGrpc$ActionExecutorServiceBlockingStub actionExecutorServiceBlockingStub;
+
+  private com.kuka.actionexecutor.v1alpha1.ActionExecutorServiceGrpc$ActionExecutorServiceStub actionExecutorServiceStub;
+
+  private java.lang.Long resubscribeInterval;
+
+  private org.springframework.context.ApplicationEventPublisher publisher;
+
+  private final java.util.Map<java.lang.String, com.kuka.rcs.rob.robot.kmr.adapter.rb.KmrRobot> robotCache;
+
+  private final java.util.Map<java.lang.String, com.kuka.rcs.rob.robot.kmr.adapter.rb.KmrMap> mapCache;
+
+  protected final java.util.Collection<com.kuka.rcs.rob.robot.kmr.adapter.listener.IKmrRobotManagerListener> listeners;
+
+  private final java.util.concurrent.atomic.AtomicBoolean actionSubscriberActive;
+
+  private final java.util.concurrent.atomic.AtomicBoolean actionSubscriberRecreateScheduled;
+
+  private volatile long actionRecreateNotBeforeMs;
+
+  public com.kuka.rcs.rob.robot.kmr.adapter.KmrRobotManagerAdapterImpl();
+    Code:
+       0: aload_0
+       1: invokespecial #15                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: new           #16                 // class java/util/concurrent/ScheduledThreadPoolExecutor
+       8: dup
+       9: bipush        10
+      11: aload_0
+      12: invokedynamic #17,  0             // InvokeDynamic #0:newThread:(Lcom/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl;)Ljava/util/concurrent/ThreadFactory;
+      17: invokespecial #18                 // Method java/util/concurrent/ScheduledThreadPoolExecutor."<init>":(ILjava/util/concurrent/ThreadFactory;)V
+      20: putfield      #9                  // Field scheduledExecutor:Ljava/util/concurrent/ScheduledExecutorService;
+      23: aload_0
+      24: new           #19                 // class java/util/concurrent/ConcurrentHashMap
+      27: dup
+      28: invokespecial #20                 // Method java/util/concurrent/ConcurrentHashMap."<init>":()V
+      31: putfield      #7                  // Field robotCache:Ljava/util/Map;
+      34: aload_0
+      35: new           #19                 // class java/util/concurrent/ConcurrentHashMap
+      38: dup
+      39: invokespecial #20                 // Method java/util/concurrent/ConcurrentHashMap."<init>":()V
+      42: putfield      #13                 // Field mapCache:Ljava/util/Map;
+      45: aload_0
+      46: new           #21                 // class java/util/concurrent/CopyOnWriteArraySet
+      49: dup
+      50: invokespecial #22                 // Method java/util/concurrent/CopyOnWriteArraySet."<init>":()V
+      53: putfield      #23                 // Field listeners:Ljava/util/Collection;
+      56: aload_0
+      57: new           #24                 // class java/util/concurrent/atomic/AtomicBoolean
+      60: dup
+      61: iconst_0
+      62: invokespecial #25                 // Method java/util/concurrent/atomic/AtomicBoolean."<init>":(Z)V
+      65: putfield      #26                 // Field actionSubscriberActive:Ljava/util/concurrent/atomic/AtomicBoolean;
+      68: aload_0
+      69: new           #24                 // class java/util/concurrent/atomic/AtomicBoolean
+      72: dup
+      73: iconst_0
+      74: invokespecial #25                 // Method java/util/concurrent/atomic/AtomicBoolean."<init>":(Z)V
+      77: putfield      #27                 // Field actionSubscriberRecreateScheduled:Ljava/util/concurrent/atomic/AtomicBoolean;
+      80: aload_0
+      81: lconst_0
+      82: putfield      #28                 // Field actionRecreateNotBeforeMs:J
+      85: return
+
+  private static synchronized int nextThreadNum();
+    Code:
+       0: getstatic     #29                 // Field threadNumber:I
+       3: iconst_1
+       4: iadd
+       5: dup
+       6: putstatic     #29                 // Field threadNumber:I
+       9: ireturn
+
+  public void init();
+    Code:
+       0: aload_0
+       1: aload_0
+       2: invokevirtual #30                 // Method getAllMaps:()Ljava/util/List;
+       5: invokespecial #31                 // Method cacheMaps:(Ljava/util/List;)V
+       8: aload_0
+       9: getfield      #9                  // Field scheduledExecutor:Ljava/util/concurrent/ScheduledExecutorService;
+      12: aload_0
+      13: invokedynamic #32,  0             // InvokeDynamic #1:run:(Lcom/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl;)Ljava/lang/Runnable;
+      18: invokeinterface #33,  2           // InterfaceMethod java/util/concurrent/ScheduledExecutorService.execute:(Ljava/lang/Runnable;)V
+      23: aload_0
+      24: aload_0
+      25: invokevirtual #34                 // Method getAllRobots:()Ljava/util/List;
+      28: invokespecial #35                 // Method cacheRobots:(Ljava/util/List;)V
+      31: aload_0
+      32: getfield      #9                  // Field scheduledExecutor:Ljava/util/concurrent/ScheduledExecutorService;
+      35: aload_0
+      36: invokedynamic #36,  0             // InvokeDynamic #2:run:(Lcom/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl;)Ljava/lang/Runnable;
+      41: invokeinterface #33,  2           // InterfaceMethod java/util/concurrent/ScheduledExecutorService.execute:(Ljava/lang/Runnable;)V
+      46: aload_0
+      47: invokevirtual #37                 // Method startActionSubscriber:()V
+      50: return
+
+  private void cacheMaps(java.util.List<com.kuka.rcs.rob.robot.kmr.adapter.rb.SimpleMapData>);
+    Code:
+       0: aload_1
+       1: invokeinterface #38,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       6: astore_2
+       7: aload_2
+       8: invokeinterface #39,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      13: ifeq          63
+      16: aload_2
+      17: invokeinterface #40,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      22: checkcast     #41                 // class com/kuka/rcs/rob/robot/kmr/adapter/rb/SimpleMapData
+      25: astore_3
+      26: aload_3
+      27: invokevirtual #42                 // Method com/kuka/rcs/rob/robot/kmr/adapter/rb/SimpleMapData.getUuid:()Ljava/lang/String;
+      30: astore        4
+      32: aload_0
+      33: getfield      #13                 // Field mapCache:Ljava/util/Map;
+      36: aload         4
+      38: invokeinterface #43,  2           // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+      43: ifne          60
+      46: aload_0
+      47: aload         4
+      49: new           #44                 // class com/kuka/rcs/rob/robot/kmr/adapter/rb/KmrMap
+      52: dup
+      53: aload_3
+      54: invokespecial #45                 // Method com/kuka/rcs/rob/robot/kmr/adapter/rb/KmrMap."<init>":(Lcom/kuka/rcs/rob/robot/kmr/adapter/rb/SimpleMapData;)V
+      57: invokespecial #12                 // Method addKmrMap:(Ljava/lang/String;Lcom/kuka/rcs/rob/robot/kmr/adapter/rb/KmrMap;)V
+      60: goto          7
+      63: return
+
+  private void subscribeMaps();
+    Code:
+       0: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+       3: ldc           #46                 // String Subscribing KMR Map every {}ms until success...
+       5: aload_0
+       6: getfield      #10                 // Field resubscribeInterval:Ljava/lang/Long;
+       9: invokeinterface #47,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      14: invokestatic  #48                 // Method com/kuka/dataprovider/v1alpha1/SubscribeDataRequest.newBuilder:()Lcom/kuka/dataprovider/v1alpha1/SubscribeDataRequest$Builder;
+      17: invokestatic  #49                 // Method com/kuka/mobilerobotics/localizer/v1alpha1/MapData.getDescriptor:()Lcom/google/protobuf/Descriptors$Descriptor;
+      20: invokevirtual #50                 // Method com/google/protobuf/Descriptors$Descriptor.getFullName:()Ljava/lang/String;
+      23: invokevirtual #51                 // Method com/kuka/dataprovider/v1alpha1/SubscribeDataRequest$Builder.setDataType:(Ljava/lang/String;)Lcom/kuka/dataprovider/v1alpha1/SubscribeDataRequest$Builder;
+      26: dconst_1
+      27: invokevirtual #52                 // Method com/kuka/dataprovider/v1alpha1/SubscribeDataRequest$Builder.setFrequency:(D)Lcom/kuka/dataprovider/v1alpha1/SubscribeDataRequest$Builder;
+      30: invokevirtual #53                 // Method com/kuka/dataprovider/v1alpha1/SubscribeDataRequest$Builder.build:()Lcom/kuka/dataprovider/v1alpha1/SubscribeDataRequest;
+      33: astore_1
+      34: aload_0
+      35: getfield      #54                 // Field dataProviderServiceStub:Lcom/kuka/dataprovider/v1alpha1/DataProviderServiceGrpc$DataProviderServiceStub;
+      38: aload_1
+      39: new           #55                 // class com/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl$1
+      42: dup
+      43: aload_0
+      44: invokespecial #56                 // Method com/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl$1."<init>":(Lcom/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl;)V
+      47: invokevirtual #57                 // Method com/kuka/dataprovider/v1alpha1/DataProviderServiceGrpc$DataProviderServiceStub.subscribeData:(Lcom/kuka/dataprovider/v1alpha1/SubscribeDataRequest;Lio/grpc/stub/StreamObserver;)V
+      50: goto          113
+      53: astore_1
+      54: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+      57: ldc           #59                 // String KMR Robot Grpc Server is unavailable, try to select all KMR maps for caching after {}ms.
+      59: aload_0
+      60: getfield      #10                 // Field resubscribeInterval:Ljava/lang/Long;
+      63: invokeinterface #60,  3           // InterfaceMethod org/slf4j/Logger.debug:(Ljava/lang/String;Ljava/lang/Object;)V
+      68: aload_0
+      69: getfield      #9                  // Field scheduledExecutor:Ljava/util/concurrent/ScheduledExecutorService;
+      72: aload_0
+      73: invokedynamic #32,  0             // InvokeDynamic #1:run:(Lcom/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl;)Ljava/lang/Runnable;
+      78: aload_0
+      79: getfield      #10                 // Field resubscribeInterval:Ljava/lang/Long;
+      82: invokevirtual #61                 // Method java/lang/Long.longValue:()J
+      85: getstatic     #62                 // Field java/util/concurrent/TimeUnit.MILLISECONDS:Ljava/util/concurrent/TimeUnit;
+      88: invokeinterface #63,  5           // InterfaceMethod java/util/concurrent/ScheduledExecutorService.schedule:(Ljava/lang/Runnable;JLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture;
+      93: pop
+      94: goto          113
+      97: astore_1
+      98: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+     101: aload_1
+     102: invokevirtual #65                 // Method java/lang/Exception.getMessage:()Ljava/lang/String;
+     105: aload_1
+     106: invokeinterface #66,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     111: aload_1
+     112: athrow
+     113: return
+    Exception table:
+       from    to  target type
+          14    50    53   Class io/grpc/StatusRuntimeException
+          14    50    97   Class java/lang/Exception
+
+  private void cacheRobots(java.util.List<com.kuka.mobilerobotics.robotmanager.v1alpha1.Robot>);
+    Code:
+       0: aload_1
+       1: invokeinterface #38,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       6: astore_2
+       7: aload_2
+       8: invokeinterface #39,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      13: ifeq          66
+      16: aload_2
+      17: invokeinterface #40,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      22: checkcast     #67                 // class com/kuka/mobilerobotics/robotmanager/v1alpha1/Robot
+      25: astore_3
+      26: aload_3
+      27: invokevirtual #68                 // Method com/kuka/mobilerobotics/robotmanager/v1alpha1/Robot.getUuid:()Ljava/lang/String;
+      30: astore        4
+      32: aload_0
+      33: getfield      #7                  // Field robotCache:Ljava/util/Map;
+      36: aload         4
+      38: invokeinterface #43,  2           // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+      43: ifne          63
+      46: aload_0
+      47: aload_3
+      48: invokevirtual #68                 // Method com/kuka/mobilerobotics/robotmanager/v1alpha1/Robot.getUuid:()Ljava/lang/String;
+      51: new           #69                 // class com/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot
+      54: dup
+      55: aload_3
+      56: aload_0
+      57: invokespecial #70                 // Method com/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot."<init>":(Lcom/kuka/mobilerobotics/robotmanager/v1alpha1/Robot;Lcom/kuka/rcs/rob/robot/kmr/adapter/IKmrRobotManagerAdapter;)V
+      60: invokespecial #6                  // Method addKmrRobot:(Ljava/lang/String;Lcom/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot;)V
+      63: goto          7
+      66: return
+
+  private void subscribeRobots();
+    Code:
+       0: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+       3: ldc           #71                 // String Subscribing KMR Robot every {}ms until success...
+       5: aload_0
+       6: getfield      #10                 // Field resubscribeInterval:Ljava/lang/Long;
+       9: invokeinterface #47,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      14: invokestatic  #48                 // Method com/kuka/dataprovider/v1alpha1/SubscribeDataRequest.newBuilder:()Lcom/kuka/dataprovider/v1alpha1/SubscribeDataRequest$Builder;
+      17: invokestatic  #72                 // Method com/kuka/mobilerobotics/robotmanager/v1alpha1/RobotData.getDescriptor:()Lcom/google/protobuf/Descriptors$Descriptor;
+      20: invokevirtual #50                 // Method com/google/protobuf/Descriptors$Descriptor.getFullName:()Ljava/lang/String;
+      23: invokevirtual #51                 // Method com/kuka/dataprovider/v1alpha1/SubscribeDataRequest$Builder.setDataType:(Ljava/lang/String;)Lcom/kuka/dataprovider/v1alpha1/SubscribeDataRequest$Builder;
+      26: dconst_1
+      27: invokevirtual #52                 // Method com/kuka/dataprovider/v1alpha1/SubscribeDataRequest$Builder.setFrequency:(D)Lcom/kuka/dataprovider/v1alpha1/SubscribeDataRequest$Builder;
+      30: invokevirtual #53                 // Method com/kuka/dataprovider/v1alpha1/SubscribeDataRequest$Builder.build:()Lcom/kuka/dataprovider/v1alpha1/SubscribeDataRequest;
+      33: astore_1
+      34: aload_0
+      35: getfield      #54                 // Field dataProviderServiceStub:Lcom/kuka/dataprovider/v1alpha1/DataProviderServiceGrpc$DataProviderServiceStub;
+      38: aload_1
+      39: new           #73                 // class com/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl$2
+      42: dup
+      43: aload_0
+      44: invokespecial #74                 // Method com/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl$2."<init>":(Lcom/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl;)V
+      47: invokevirtual #57                 // Method com/kuka/dataprovider/v1alpha1/DataProviderServiceGrpc$DataProviderServiceStub.subscribeData:(Lcom/kuka/dataprovider/v1alpha1/SubscribeDataRequest;Lio/grpc/stub/StreamObserver;)V
+      50: goto          113
+      53: astore_1
+      54: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+      57: ldc           #75                 // String KMR Robot Grpc Server is unavailable, try to select all KMR robots for caching after {}ms.
+      59: aload_0
+      60: getfield      #10                 // Field resubscribeInterval:Ljava/lang/Long;
+      63: invokeinterface #60,  3           // InterfaceMethod org/slf4j/Logger.debug:(Ljava/lang/String;Ljava/lang/Object;)V
+      68: aload_0
+      69: getfield      #9                  // Field scheduledExecutor:Ljava/util/concurrent/ScheduledExecutorService;
+      72: aload_0
+      73: invokedynamic #36,  0             // InvokeDynamic #2:run:(Lcom/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl;)Ljava/lang/Runnable;
+      78: aload_0
+      79: getfield      #10                 // Field resubscribeInterval:Ljava/lang/Long;
+      82: invokevirtual #61                 // Method java/lang/Long.longValue:()J
+      85: getstatic     #62                 // Field java/util/concurrent/TimeUnit.MILLISECONDS:Ljava/util/concurrent/TimeUnit;
+      88: invokeinterface #63,  5           // InterfaceMethod java/util/concurrent/ScheduledExecutorService.schedule:(Ljava/lang/Runnable;JLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture;
+      93: pop
+      94: goto          113
+      97: astore_1
+      98: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+     101: aload_1
+     102: invokevirtual #65                 // Method java/lang/Exception.getMessage:()Ljava/lang/String;
+     105: aload_1
+     106: invokeinterface #66,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     111: aload_1
+     112: athrow
+     113: return
+    Exception table:
+       from    to  target type
+          14    50    53   Class io/grpc/StatusRuntimeException
+          14    50    97   Class java/lang/Exception
+
+  private void subscribeActions();
+    Code:
+       0: invokestatic  #76                 // Method java/util/UUID.randomUUID:()Ljava/util/UUID;
+       3: astore_1
+       4: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+       7: getstatic     #77                 // Field com/kuka/rcs/rob/common/constant/LogPattern.SUBSCRIBER:Lcom/kuka/rcs/rob/common/constant/LogPattern;
+      10: ldc           #78                 // String Start Action Subscriber
+      12: invokevirtual #79                 // Method com/kuka/rcs/rob/common/constant/LogPattern.concat:(Ljava/lang/String;)Ljava/lang/String;
+      15: aload_1
+      16: invokeinterface #47,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      21: invokestatic  #80                 // Method com/kuka/actionexecutor/v1alpha1/SubscribeActionsRequest.newBuilder:()Lcom/kuka/actionexecutor/v1alpha1/SubscribeActionsRequest$Builder;
+      24: invokevirtual #81                 // Method com/kuka/actionexecutor/v1alpha1/SubscribeActionsRequest$Builder.build:()Lcom/kuka/actionexecutor/v1alpha1/SubscribeActionsRequest;
+      27: astore_2
+      28: aload_0
+      29: getfield      #82                 // Field actionExecutorServiceStub:Lcom/kuka/actionexecutor/v1alpha1/ActionExecutorServiceGrpc$ActionExecutorServiceStub;
+      32: aload_2
+      33: new           #83                 // class com/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl$3
+      36: dup
+      37: aload_0
+      38: aload_1
+      39: invokespecial #84                 // Method com/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl$3."<init>":(Lcom/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl;Ljava/util/UUID;)V
+      42: invokevirtual #85                 // Method com/kuka/actionexecutor/v1alpha1/ActionExecutorServiceGrpc$ActionExecutorServiceStub.subscribeActions:(Lcom/kuka/actionexecutor/v1alpha1/SubscribeActionsRequest;Lio/grpc/stub/StreamObserver;)V
+      45: return
+
+  private void closeActionSubscriberOnce(java.util.UUID, java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #26                 // Field actionSubscriberActive:Ljava/util/concurrent/atomic/AtomicBoolean;
+       4: iconst_0
+       5: invokevirtual #86                 // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+       8: aload_0
+       9: getfield      #27                 // Field actionSubscriberRecreateScheduled:Ljava/util/concurrent/atomic/AtomicBoolean;
+      12: iconst_0
+      13: iconst_1
+      14: invokevirtual #87                 // Method java/util/concurrent/atomic/AtomicBoolean.compareAndSet:(ZZ)Z
+      17: ifne          39
+      20: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+      23: getstatic     #77                 // Field com/kuka/rcs/rob/common/constant/LogPattern.SUBSCRIBER:Lcom/kuka/rcs/rob/common/constant/LogPattern;
+      26: ldc           #88                 // String Action recreate already scheduled, skip duplicate, reason={}
+      28: invokevirtual #79                 // Method com/kuka/rcs/rob/common/constant/LogPattern.concat:(Ljava/lang/String;)Ljava/lang/String;
+      31: aload_1
+      32: aload_2
+      33: invokeinterface #89,  4           // InterfaceMethod org/slf4j/Logger.debug:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      38: return
+      39: aload_0
+      40: getfield      #10                 // Field resubscribeInterval:Ljava/lang/Long;
+      43: ifnonnull     52
+      46: ldc2_w        #90                 // long 5000l
+      49: goto          59
+      52: aload_0
+      53: getfield      #10                 // Field resubscribeInterval:Ljava/lang/Long;
+      56: invokevirtual #61                 // Method java/lang/Long.longValue:()J
+      59: lstore_3
+      60: invokestatic  #92                 // Method java/lang/System.currentTimeMillis:()J
+      63: lstore        5
+      65: aload_0
+      66: getfield      #28                 // Field actionRecreateNotBeforeMs:J
+      69: lstore        7
+      71: lload_3
+      72: lconst_0
+      73: lload         7
+      75: lload         5
+      77: lsub
+      78: invokestatic  #93                 // Method java/lang/Math.max:(JJ)J
+      81: invokestatic  #93                 // Method java/lang/Math.max:(JJ)J
+      84: lstore        9
+      86: aload_0
+      87: lload         5
+      89: lload         9
+      91: ladd
+      92: putfield      #28                 // Field actionRecreateNotBeforeMs:J
+      95: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+      98: getstatic     #77                 // Field com/kuka/rcs/rob/common/constant/LogPattern.SUBSCRIBER:Lcom/kuka/rcs/rob/common/constant/LogPattern;
+     101: ldc           #94                 // String Schedule ActionSubscriberRecreateEvent after {}ms, reason={}
+     103: invokevirtual #79                 // Method com/kuka/rcs/rob/common/constant/LogPattern.concat:(Ljava/lang/String;)Ljava/lang/String;
+     106: iconst_3
+     107: anewarray     #95                 // class java/lang/Object
+     110: dup
+     111: iconst_0
+     112: aload_1
+     113: aastore
+     114: dup
+     115: iconst_1
+     116: lload         9
+     118: invokestatic  #96                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     121: aastore
+     122: dup
+     123: iconst_2
+     124: aload_2
+     125: aastore
+     126: invokeinterface #97,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+     131: aload_0
+     132: getfield      #9                  // Field scheduledExecutor:Ljava/util/concurrent/ScheduledExecutorService;
+     135: aload_0
+     136: invokedynamic #98,  0             // InvokeDynamic #3:run:(Lcom/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl;)Ljava/lang/Runnable;
+     141: lload         9
+     143: getstatic     #62                 // Field java/util/concurrent/TimeUnit.MILLISECONDS:Ljava/util/concurrent/TimeUnit;
+     146: invokeinterface #63,  5           // InterfaceMethod java/util/concurrent/ScheduledExecutorService.schedule:(Ljava/lang/Runnable;JLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture;
+     151: pop
+     152: return
+
+  public java.util.List<java.lang.String> getDataTypes();
+    Code:
+       0: aload_0
+       1: getfield      #99                 // Field dataProviderServiceBlockingStub:Lcom/kuka/dataprovider/v1alpha1/DataProviderServiceGrpc$DataProviderServiceBlockingStub;
+       4: invokestatic  #100                // Method com/kuka/dataprovider/v1alpha1/GetDataTypesRequest.newBuilder:()Lcom/kuka/dataprovider/v1alpha1/GetDataTypesRequest$Builder;
+       7: invokevirtual #101                // Method com/kuka/dataprovider/v1alpha1/GetDataTypesRequest$Builder.build:()Lcom/kuka/dataprovider/v1alpha1/GetDataTypesRequest;
+      10: invokevirtual #102                // Method com/kuka/dataprovider/v1alpha1/DataProviderServiceGrpc$DataProviderServiceBlockingStub.getDataTypes:(Lcom/kuka/dataprovider/v1alpha1/GetDataTypesRequest;)Lcom/kuka/dataprovider/v1alpha1/GetDataTypesResponse;
+      13: invokevirtual #103                // Method com/kuka/dataprovider/v1alpha1/GetDataTypesResponse.getDataTypesList:()Lcom/google/protobuf/ProtocolStringList;
+      16: areturn
+
+  public java.util.List<java.lang.String> getActionTypes();
+    Code:
+       0: aload_0
+       1: getfield      #104                // Field actionExecutorServiceBlockingStub:Lcom/kuka/actionexecutor/v1alpha1/ActionExecutorServiceGrpc$ActionExecutorServiceBlockingStub;
+       4: invokestatic  #105                // Method com/kuka/actionexecutor/v1alpha1/GetActionTypesRequest.newBuilder:()Lcom/kuka/actionexecutor/v1alpha1/GetActionTypesRequest$Builder;
+       7: invokevirtual #106                // Method com/kuka/actionexecutor/v1alpha1/GetActionTypesRequest$Builder.build:()Lcom/kuka/actionexecutor/v1alpha1/GetActionTypesRequest;
+      10: invokevirtual #107                // Method com/kuka/actionexecutor/v1alpha1/ActionExecutorServiceGrpc$ActionExecutorServiceBlockingStub.getActionTypes:(Lcom/kuka/actionexecutor/v1alpha1/GetActionTypesRequest;)Lcom/kuka/actionexecutor/v1alpha1/GetActionTypesResponse;
+      13: invokevirtual #108                // Method com/kuka/actionexecutor/v1alpha1/GetActionTypesResponse.getActionTypesList:()Lcom/google/protobuf/ProtocolStringList;
+      16: areturn
+
+  public java.util.List<com.kuka.rcs.rob.robot.kmr.adapter.rb.SimpleMapData> getAllMaps();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field mapCache:Ljava/util/Map;
+       4: invokeinterface #109,  1          // InterfaceMethod java/util/Map.isEmpty:()Z
+       9: ifne          48
+      12: aload_0
+      13: getfield      #13                 // Field mapCache:Ljava/util/Map;
+      16: invokeinterface #110,  1          // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+      21: invokeinterface #111,  1          // InterfaceMethod java/util/Collection.stream:()Ljava/util/stream/Stream;
+      26: invokedynamic #112,  0            // InvokeDynamic #4:apply:()Ljava/util/function/Function;
+      31: invokeinterface #113,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      36: invokestatic  #114                // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+      39: invokeinterface #115,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+      44: checkcast     #116                // class java/util/List
+      47: areturn
+      48: aload_0
+      49: getfield      #99                 // Field dataProviderServiceBlockingStub:Lcom/kuka/dataprovider/v1alpha1/DataProviderServiceGrpc$DataProviderServiceBlockingStub;
+      52: invokestatic  #117                // Method com/kuka/dataprovider/v1alpha1/GetDataRequest.newBuilder:()Lcom/kuka/dataprovider/v1alpha1/GetDataRequest$Builder;
+      55: invokestatic  #49                 // Method com/kuka/mobilerobotics/localizer/v1alpha1/MapData.getDescriptor:()Lcom/google/protobuf/Descriptors$Descriptor;
+      58: invokevirtual #50                 // Method com/google/protobuf/Descriptors$Descriptor.getFullName:()Ljava/lang/String;
+      61: invokevirtual #118                // Method com/kuka/dataprovider/v1alpha1/GetDataRequest$Builder.setDataType:(Ljava/lang/String;)Lcom/kuka/dataprovider/v1alpha1/GetDataRequest$Builder;
+      64: invokevirtual #119                // Method com/kuka/dataprovider/v1alpha1/GetDataRequest$Builder.build:()Lcom/kuka/dataprovider/v1alpha1/GetDataRequest;
+      67: invokevirtual #120                // Method com/kuka/dataprovider/v1alpha1/DataProviderServiceGrpc$DataProviderServiceBlockingStub.getData:(Lcom/kuka/dataprovider/v1alpha1/GetDataRequest;)Lcom/kuka/dataprovider/v1alpha1/GetDataResponse;
+      70: invokevirtual #121                // Method com/kuka/dataprovider/v1alpha1/GetDataResponse.getData:()Lcom/google/protobuf/Any;
+      73: ldc           #122                // class com/kuka/mobilerobotics/localizer/v1alpha1/MapData
+      75: invokevirtual #123                // Method com/google/protobuf/Any.unpack:(Ljava/lang/Class;)Lcom/google/protobuf/Message;
+      78: checkcast     #122                // class com/kuka/mobilerobotics/localizer/v1alpha1/MapData
+      81: invokevirtual #124                // Method com/kuka/mobilerobotics/localizer/v1alpha1/MapData.getMapsList:()Ljava/util/List;
+      84: astore_1
+      85: aload_1
+      86: invokeinterface #125,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      91: invokedynamic #126,  0            // InvokeDynamic #5:apply:()Ljava/util/function/Function;
+      96: invokeinterface #113,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+     101: invokestatic  #114                // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+     104: invokeinterface #115,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     109: checkcast     #116                // class java/util/List
+     112: areturn
+     113: astore_1
+     114: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+     117: aload_1
+     118: invokevirtual #65                 // Method java/lang/Exception.getMessage:()Ljava/lang/String;
+     121: aload_1
+     122: invokeinterface #66,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     127: new           #127                // class java/util/ArrayList
+     130: dup
+     131: invokespecial #128                // Method java/util/ArrayList."<init>":()V
+     134: areturn
+    Exception table:
+       from    to  target type
+          48   112   113   Class java/lang/Exception
+
+  public java.util.List<com.kuka.mobilerobotics.robotmanager.v1alpha1.Robot> getAllRobots();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field robotCache:Ljava/util/Map;
+       4: invokeinterface #109,  1          // InterfaceMethod java/util/Map.isEmpty:()Z
+       9: ifne          48
+      12: aload_0
+      13: getfield      #7                  // Field robotCache:Ljava/util/Map;
+      16: invokeinterface #110,  1          // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+      21: invokeinterface #111,  1          // InterfaceMethod java/util/Collection.stream:()Ljava/util/stream/Stream;
+      26: invokedynamic #129,  0            // InvokeDynamic #6:apply:()Ljava/util/function/Function;
+      31: invokeinterface #113,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      36: invokestatic  #114                // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+      39: invokeinterface #115,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+      44: checkcast     #116                // class java/util/List
+      47: areturn
+      48: aload_0
+      49: getfield      #99                 // Field dataProviderServiceBlockingStub:Lcom/kuka/dataprovider/v1alpha1/DataProviderServiceGrpc$DataProviderServiceBlockingStub;
+      52: invokestatic  #117                // Method com/kuka/dataprovider/v1alpha1/GetDataRequest.newBuilder:()Lcom/kuka/dataprovider/v1alpha1/GetDataRequest$Builder;
+      55: invokestatic  #72                 // Method com/kuka/mobilerobotics/robotmanager/v1alpha1/RobotData.getDescriptor:()Lcom/google/protobuf/Descriptors$Descriptor;
+      58: invokevirtual #50                 // Method com/google/protobuf/Descriptors$Descriptor.getFullName:()Ljava/lang/String;
+      61: invokevirtual #118                // Method com/kuka/dataprovider/v1alpha1/GetDataRequest$Builder.setDataType:(Ljava/lang/String;)Lcom/kuka/dataprovider/v1alpha1/GetDataRequest$Builder;
+      64: invokevirtual #119                // Method com/kuka/dataprovider/v1alpha1/GetDataRequest$Builder.build:()Lcom/kuka/dataprovider/v1alpha1/GetDataRequest;
+      67: invokevirtual #120                // Method com/kuka/dataprovider/v1alpha1/DataProviderServiceGrpc$DataProviderServiceBlockingStub.getData:(Lcom/kuka/dataprovider/v1alpha1/GetDataRequest;)Lcom/kuka/dataprovider/v1alpha1/GetDataResponse;
+      70: invokevirtual #121                // Method com/kuka/dataprovider/v1alpha1/GetDataResponse.getData:()Lcom/google/protobuf/Any;
+      73: ldc           #130                // class com/kuka/mobilerobotics/robotmanager/v1alpha1/RobotData
+      75: invokevirtual #123                // Method com/google/protobuf/Any.unpack:(Ljava/lang/Class;)Lcom/google/protobuf/Message;
+      78: checkcast     #130                // class com/kuka/mobilerobotics/robotmanager/v1alpha1/RobotData
+      81: invokevirtual #131                // Method com/kuka/mobilerobotics/robotmanager/v1alpha1/RobotData.getRobotsList:()Ljava/util/List;
+      84: invokeinterface #125,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      89: invokedynamic #132,  0            // InvokeDynamic #7:test:()Ljava/util/function/Predicate;
+      94: invokeinterface #133,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+      99: invokestatic  #114                // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+     102: invokeinterface #115,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     107: checkcast     #116                // class java/util/List
+     110: areturn
+     111: astore_1
+     112: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+     115: aload_1
+     116: invokevirtual #65                 // Method java/lang/Exception.getMessage:()Ljava/lang/String;
+     119: aload_1
+     120: invokeinterface #66,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     125: new           #127                // class java/util/ArrayList
+     128: dup
+     129: invokespecial #128                // Method java/util/ArrayList."<init>":()V
+     132: areturn
+    Exception table:
+       from    to  target type
+          48   110   111   Class java/lang/Exception
+
+  public com.kuka.rcs.rob.robot.kmr.adapter.rb.KmrRobot getRobot(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field robotCache:Ljava/util/Map;
+       4: aload_1
+       5: invokeinterface #134,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      10: checkcast     #69                 // class com/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot
+      13: areturn
+
+  public com.kuka.mobilerobotics.localizer.v1alpha1.LocalizerData getLocalizerData(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #99                 // Field dataProviderServiceBlockingStub:Lcom/kuka/dataprovider/v1alpha1/DataProviderServiceGrpc$DataProviderServiceBlockingStub;
+       4: invokestatic  #117                // Method com/kuka/dataprovider/v1alpha1/GetDataRequest.newBuilder:()Lcom/kuka/dataprovider/v1alpha1/GetDataRequest$Builder;
+       7: invokestatic  #135                // Method com/kuka/mobilerobotics/localizer/v1alpha1/LocalizerData.getDescriptor:()Lcom/google/protobuf/Descriptors$Descriptor;
+      10: invokevirtual #50                 // Method com/google/protobuf/Descriptors$Descriptor.getFullName:()Ljava/lang/String;
+      13: invokevirtual #118                // Method com/kuka/dataprovider/v1alpha1/GetDataRequest$Builder.setDataType:(Ljava/lang/String;)Lcom/kuka/dataprovider/v1alpha1/GetDataRequest$Builder;
+      16: invokestatic  #136                // Method com/kuka/mobilerobotics/robotmanager/v1alpha1/RobotUuidFilter.newBuilder:()Lcom/kuka/mobilerobotics/robotmanager/v1alpha1/RobotUuidFilter$Builder;
+      19: aload_1
+      20: invokevirtual #137                // Method com/kuka/mobilerobotics/robotmanager/v1alpha1/RobotUuidFilter$Builder.setUuid:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/robotmanager/v1alpha1/RobotUuidFilter$Builder;
+      23: invokevirtual #138                // Method com/kuka/mobilerobotics/robotmanager/v1alpha1/RobotUuidFilter$Builder.build:()Lcom/kuka/mobilerobotics/robotmanager/v1alpha1/RobotUuidFilter;
+      26: invokestatic  #139                // Method com/google/protobuf/Any.pack:(Lcom/google/protobuf/Message;)Lcom/google/protobuf/Any;
+      29: invokevirtual #140                // Method com/kuka/dataprovider/v1alpha1/GetDataRequest$Builder.addFilters:(Lcom/google/protobuf/Any;)Lcom/kuka/dataprovider/v1alpha1/GetDataRequest$Builder;
+      32: invokevirtual #119                // Method com/kuka/dataprovider/v1alpha1/GetDataRequest$Builder.build:()Lcom/kuka/dataprovider/v1alpha1/GetDataRequest;
+      35: invokevirtual #120                // Method com/kuka/dataprovider/v1alpha1/DataProviderServiceGrpc$DataProviderServiceBlockingStub.getData:(Lcom/kuka/dataprovider/v1alpha1/GetDataRequest;)Lcom/kuka/dataprovider/v1alpha1/GetDataResponse;
+      38: invokevirtual #121                // Method com/kuka/dataprovider/v1alpha1/GetDataResponse.getData:()Lcom/google/protobuf/Any;
+      41: ldc           #141                // class com/kuka/mobilerobotics/localizer/v1alpha1/LocalizerData
+      43: invokevirtual #123                // Method com/google/protobuf/Any.unpack:(Ljava/lang/Class;)Lcom/google/protobuf/Message;
+      46: checkcast     #141                // class com/kuka/mobilerobotics/localizer/v1alpha1/LocalizerData
+      49: areturn
+      50: astore_2
+      51: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+      54: ldc           #142                // String Robot %s %s
+      56: iconst_2
+      57: anewarray     #95                 // class java/lang/Object
+      60: dup
+      61: iconst_0
+      62: aload_1
+      63: aastore
+      64: dup
+      65: iconst_1
+      66: aload_2
+      67: invokevirtual #65                 // Method java/lang/Exception.getMessage:()Ljava/lang/String;
+      70: aastore
+      71: invokestatic  #143                // Method java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+      74: aload_2
+      75: invokeinterface #66,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+      80: invokestatic  #144                // Method com/kuka/mobilerobotics/localizer/v1alpha1/LocalizerData.newBuilder:()Lcom/kuka/mobilerobotics/localizer/v1alpha1/LocalizerData$Builder;
+      83: invokevirtual #145                // Method com/kuka/mobilerobotics/localizer/v1alpha1/LocalizerData$Builder.build:()Lcom/kuka/mobilerobotics/localizer/v1alpha1/LocalizerData;
+      86: areturn
+    Exception table:
+       from    to  target type
+           0    49    50   Class java/lang/Exception
+
+  public java.util.List<java.lang.String> getActionTypes(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field robotCache:Ljava/util/Map;
+       4: aload_1
+       5: invokeinterface #43,  2           // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+      10: ifne          17
+      13: invokestatic  #146                // Method java/util/Collections.emptyList:()Ljava/util/List;
+      16: areturn
+      17: aload_0
+      18: getfield      #7                  // Field robotCache:Ljava/util/Map;
+      21: aload_1
+      22: invokeinterface #134,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      27: checkcast     #69                 // class com/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot
+      30: invokevirtual #147                // Method com/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot.getRobot:()Lcom/kuka/mobilerobotics/robotmanager/v1alpha1/Robot;
+      33: invokevirtual #148                // Method com/kuka/mobilerobotics/robotmanager/v1alpha1/Robot.getActionTypesList:()Lcom/google/protobuf/ProtocolStringList;
+      36: areturn
+
+  public java.util.List<java.lang.String> getDataTypes(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field robotCache:Ljava/util/Map;
+       4: aload_1
+       5: invokeinterface #43,  2           // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+      10: ifne          17
+      13: invokestatic  #146                // Method java/util/Collections.emptyList:()Ljava/util/List;
+      16: areturn
+      17: aload_0
+      18: getfield      #7                  // Field robotCache:Ljava/util/Map;
+      21: aload_1
+      22: invokeinterface #134,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      27: checkcast     #69                 // class com/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot
+      30: invokevirtual #147                // Method com/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot.getRobot:()Lcom/kuka/mobilerobotics/robotmanager/v1alpha1/Robot;
+      33: invokevirtual #149                // Method com/kuka/mobilerobotics/robotmanager/v1alpha1/Robot.getDataTypesList:()Lcom/google/protobuf/ProtocolStringList;
+      36: areturn
+
+  public void submitAction(java.lang.String, java.lang.String, com.google.protobuf.Message);
+    Code:
+       0: aload_3
+       1: invokeinterface #150,  1          // InterfaceMethod com/google/protobuf/Message.getDescriptorForType:()Lcom/google/protobuf/Descriptors$Descriptor;
+       6: invokevirtual #50                 // Method com/google/protobuf/Descriptors$Descriptor.getFullName:()Ljava/lang/String;
+       9: invokestatic  #151                // Method com/google/protobuf/Any.getDescriptor:()Lcom/google/protobuf/Descriptors$Descriptor;
+      12: invokevirtual #50                 // Method com/google/protobuf/Descriptors$Descriptor.getFullName:()Ljava/lang/String;
+      15: invokevirtual #152                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      18: ifeq          30
+      21: aload_3
+      22: checkcast     #153                // class com/google/protobuf/Any
+      25: astore        4
+      27: goto          36
+      30: aload_3
+      31: invokestatic  #139                // Method com/google/protobuf/Any.pack:(Lcom/google/protobuf/Message;)Lcom/google/protobuf/Any;
+      34: astore        4
+      36: invokestatic  #154                // Method com/kuka/actionexecutor/v1alpha1/SubmitActionRequest.newBuilder:()Lcom/kuka/actionexecutor/v1alpha1/SubmitActionRequest$Builder;
+      39: invokestatic  #155                // Method com/kuka/actionexecutor/v1alpha1/ActionDescription.newBuilder:()Lcom/kuka/actionexecutor/v1alpha1/ActionDescription$Builder;
+      42: aload_1
+      43: invokevirtual #156                // Method com/kuka/actionexecutor/v1alpha1/ActionDescription$Builder.setResourceUuid:(Ljava/lang/String;)Lcom/kuka/actionexecutor/v1alpha1/ActionDescription$Builder;
+      46: aload_2
+      47: invokevirtual #157                // Method com/kuka/actionexecutor/v1alpha1/ActionDescription$Builder.setUuid:(Ljava/lang/String;)Lcom/kuka/actionexecutor/v1alpha1/ActionDescription$Builder;
+      50: aload         4
+      52: invokevirtual #158                // Method com/kuka/actionexecutor/v1alpha1/ActionDescription$Builder.setCommand:(Lcom/google/protobuf/Any;)Lcom/kuka/actionexecutor/v1alpha1/ActionDescription$Builder;
+      55: invokevirtual #159                // Method com/kuka/actionexecutor/v1alpha1/ActionDescription$Builder.build:()Lcom/kuka/actionexecutor/v1alpha1/ActionDescription;
+      58: invokevirtual #160                // Method com/kuka/actionexecutor/v1alpha1/SubmitActionRequest$Builder.setAction:(Lcom/kuka/actionexecutor/v1alpha1/ActionDescription;)Lcom/kuka/actionexecutor/v1alpha1/SubmitActionRequest$Builder;
+      61: invokevirtual #161                // Method com/kuka/actionexecutor/v1alpha1/SubmitActionRequest$Builder.build:()Lcom/kuka/actionexecutor/v1alpha1/SubmitActionRequest;
+      64: astore        5
+      66: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+      69: ldc           #162                // String ### Action ### Submit Action - Action[{}] - SubmitActionRequest[{}]
+      71: aload_2
+      72: aload         5
+      74: invokestatic  #163                // Method com/kuka/rcs/rob/robot/kmr/ProtoPrinterUtils.printMessageInString:(Lcom/google/protobuf/Message;)Ljava/lang/String;
+      77: invokeinterface #164,  4          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      82: aload_0
+      83: getfield      #104                // Field actionExecutorServiceBlockingStub:Lcom/kuka/actionexecutor/v1alpha1/ActionExecutorServiceGrpc$ActionExecutorServiceBlockingStub;
+      86: aload         5
+      88: invokevirtual #165                // Method com/kuka/actionexecutor/v1alpha1/ActionExecutorServiceGrpc$ActionExecutorServiceBlockingStub.submitAction:(Lcom/kuka/actionexecutor/v1alpha1/SubmitActionRequest;)Lcom/kuka/actionexecutor/v1alpha1/SubmitActionResponse;
+      91: astore        6
+      93: aload         6
+      95: invokevirtual #166                // Method com/kuka/actionexecutor/v1alpha1/SubmitActionResponse.getError:()Lcom/google/rpc/Status;
+      98: astore        7
+     100: aload         7
+     102: invokevirtual #167                // Method com/google/rpc/Status.getCode:()I
+     105: ifeq          129
+     108: new           #168                // class com/kuka/rcs/rob/core/execution/ExecutionException
+     111: dup
+     112: aload         7
+     114: invokevirtual #169                // Method com/google/rpc/Status.getMessage:()Ljava/lang/String;
+     117: aload         7
+     119: invokevirtual #167                // Method com/google/rpc/Status.getCode:()I
+     122: invokestatic  #170                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     125: invokespecial #171                // Method com/kuka/rcs/rob/core/execution/ExecutionException."<init>":(Ljava/lang/String;Ljava/lang/Object;)V
+     128: athrow
+     129: return
+
+  public void cancelActions(java.util.List<java.lang.String>) throws com.kuka.rcs.rob.core.execution.ExecutionException;
+    Code:
+       0: aload_0
+       1: getfield      #104                // Field actionExecutorServiceBlockingStub:Lcom/kuka/actionexecutor/v1alpha1/ActionExecutorServiceGrpc$ActionExecutorServiceBlockingStub;
+       4: invokestatic  #172                // Method com/kuka/actionexecutor/v1alpha1/CancelActionsRequest.newBuilder:()Lcom/kuka/actionexecutor/v1alpha1/CancelActionsRequest$Builder;
+       7: aload_1
+       8: invokevirtual #173                // Method com/kuka/actionexecutor/v1alpha1/CancelActionsRequest$Builder.addAllActionUuids:(Ljava/lang/Iterable;)Lcom/kuka/actionexecutor/v1alpha1/CancelActionsRequest$Builder;
+      11: invokevirtual #174                // Method com/kuka/actionexecutor/v1alpha1/CancelActionsRequest$Builder.build:()Lcom/kuka/actionexecutor/v1alpha1/CancelActionsRequest;
+      14: invokevirtual #175                // Method com/kuka/actionexecutor/v1alpha1/ActionExecutorServiceGrpc$ActionExecutorServiceBlockingStub.cancelActions:(Lcom/kuka/actionexecutor/v1alpha1/CancelActionsRequest;)Lcom/kuka/actionexecutor/v1alpha1/CancelActionsResponse;
+      17: astore_2
+      18: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+      21: ldc           #176                // String ### Action ### Cancel Actions - CancelActionsRequest[{}]
+      23: aload_1
+      24: invokeinterface #47,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      29: aload_2
+      30: invokevirtual #177                // Method com/kuka/actionexecutor/v1alpha1/CancelActionsResponse.getErrorsMap:()Ljava/util/Map;
+      33: invokeinterface #178,  1          // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+      38: invokeinterface #179,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      43: astore_3
+      44: aload_3
+      45: invokeinterface #39,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      50: ifeq          108
+      53: aload_3
+      54: invokeinterface #40,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      59: checkcast     #180                // class java/util/Map$Entry
+      62: astore        4
+      64: aload         4
+      66: invokeinterface #181,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      71: checkcast     #182                // class com/google/rpc/Status
+      74: astore        5
+      76: aload         5
+      78: invokevirtual #167                // Method com/google/rpc/Status.getCode:()I
+      81: ifeq          105
+      84: new           #168                // class com/kuka/rcs/rob/core/execution/ExecutionException
+      87: dup
+      88: aload         5
+      90: invokevirtual #169                // Method com/google/rpc/Status.getMessage:()Ljava/lang/String;
+      93: aload         5
+      95: invokevirtual #167                // Method com/google/rpc/Status.getCode:()I
+      98: invokestatic  #170                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     101: invokespecial #171                // Method com/kuka/rcs/rob/core/execution/ExecutionException."<init>":(Ljava/lang/String;Ljava/lang/Object;)V
+     104: athrow
+     105: goto          44
+     108: return
+
+  public void pauseExecutor() throws com.kuka.rcs.rob.core.execution.ExecutionException;
+    Code:
+       0: aload_0
+       1: getfield      #104                // Field actionExecutorServiceBlockingStub:Lcom/kuka/actionexecutor/v1alpha1/ActionExecutorServiceGrpc$ActionExecutorServiceBlockingStub;
+       4: invokestatic  #183                // Method com/kuka/actionexecutor/v1alpha1/PauseExecutorRequest.newBuilder:()Lcom/kuka/actionexecutor/v1alpha1/PauseExecutorRequest$Builder;
+       7: invokevirtual #184                // Method com/kuka/actionexecutor/v1alpha1/PauseExecutorRequest$Builder.build:()Lcom/kuka/actionexecutor/v1alpha1/PauseExecutorRequest;
+      10: invokevirtual #185                // Method com/kuka/actionexecutor/v1alpha1/ActionExecutorServiceGrpc$ActionExecutorServiceBlockingStub.pauseExecutor:(Lcom/kuka/actionexecutor/v1alpha1/PauseExecutorRequest;)Lcom/kuka/actionexecutor/v1alpha1/PauseExecutorResponse;
+      13: pop
+      14: return
+
+  public void resumeExecutor() throws com.kuka.rcs.rob.core.execution.ExecutionException;
+    Code:
+       0: aload_0
+       1: getfield      #104                // Field actionExecutorServiceBlockingStub:Lcom/kuka/actionexecutor/v1alpha1/ActionExecutorServiceGrpc$ActionExecutorServiceBlockingStub;
+       4: invokestatic  #186                // Method com/kuka/actionexecutor/v1alpha1/ResumeExecutorRequest.newBuilder:()Lcom/kuka/actionexecutor/v1alpha1/ResumeExecutorRequest$Builder;
+       7: invokevirtual #187                // Method com/kuka/actionexecutor/v1alpha1/ResumeExecutorRequest$Builder.build:()Lcom/kuka/actionexecutor/v1alpha1/ResumeExecutorRequest;
+      10: invokevirtual #188                // Method com/kuka/actionexecutor/v1alpha1/ActionExecutorServiceGrpc$ActionExecutorServiceBlockingStub.resumeExecutor:(Lcom/kuka/actionexecutor/v1alpha1/ResumeExecutorRequest;)Lcom/kuka/actionexecutor/v1alpha1/ResumeExecutorResponse;
+      13: pop
+      14: return
+
+  public com.kuka.dataprovider.v1alpha1.DataProviderServiceGrpc$DataProviderServiceBlockingStub getDataProviderServiceBlockingStub();
+    Code:
+       0: aload_0
+       1: getfield      #99                 // Field dataProviderServiceBlockingStub:Lcom/kuka/dataprovider/v1alpha1/DataProviderServiceGrpc$DataProviderServiceBlockingStub;
+       4: areturn
+
+  public com.kuka.dataprovider.v1alpha1.DataProviderServiceGrpc$DataProviderServiceStub getDataProviderServiceStub();
+    Code:
+       0: aload_0
+       1: getfield      #54                 // Field dataProviderServiceStub:Lcom/kuka/dataprovider/v1alpha1/DataProviderServiceGrpc$DataProviderServiceStub;
+       4: areturn
+
+  public com.kuka.actionexecutor.v1alpha1.ActionExecutorServiceGrpc$ActionExecutorServiceBlockingStub getActionExecutorServiceBlockingStub();
+    Code:
+       0: aload_0
+       1: getfield      #104                // Field actionExecutorServiceBlockingStub:Lcom/kuka/actionexecutor/v1alpha1/ActionExecutorServiceGrpc$ActionExecutorServiceBlockingStub;
+       4: areturn
+
+  public com.kuka.actionexecutor.v1alpha1.ActionExecutorServiceGrpc$ActionExecutorServiceStub getActionExecutorServiceStub();
+    Code:
+       0: aload_0
+       1: getfield      #82                 // Field actionExecutorServiceStub:Lcom/kuka/actionexecutor/v1alpha1/ActionExecutorServiceGrpc$ActionExecutorServiceStub;
+       4: areturn
+
+  public java.util.concurrent.ScheduledExecutorService getScheduledExecutor();
+    Code:
+       0: aload_0
+       1: getfield      #9                  // Field scheduledExecutor:Ljava/util/concurrent/ScheduledExecutorService;
+       4: areturn
+
+  public java.lang.Long getResubscribeInterval();
+    Code:
+       0: aload_0
+       1: getfield      #10                 // Field resubscribeInterval:Ljava/lang/Long;
+       4: areturn
+
+  public java.net.InetSocketAddress getLocalAddress();
+    Code:
+       0: ldc           #189                // String 127.0.0.1
+       2: iconst_0
+       3: invokestatic  #190                // Method java/net/InetSocketAddress.createUnresolved:(Ljava/lang/String;I)Ljava/net/InetSocketAddress;
+       6: areturn
+
+  public java.net.InetSocketAddress getRemoteAddress();
+    Code:
+       0: ldc           #189                // String 127.0.0.1
+       2: ldc           #191                // int 50090
+       4: invokestatic  #190                // Method java/net/InetSocketAddress.createUnresolved:(Ljava/lang/String;I)Ljava/net/InetSocketAddress;
+       7: areturn
+
+  public void addKmrRobotManagerListener(com.kuka.rcs.rob.robot.kmr.adapter.listener.IKmrRobotManagerListener);
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field listeners:Ljava/util/Collection;
+       4: aload_1
+       5: invokeinterface #192,  2          // InterfaceMethod java/util/Collection.add:(Ljava/lang/Object;)Z
+      10: pop
+      11: return
+
+  public void removeKmrRobotManagerListener(com.kuka.rcs.rob.robot.kmr.adapter.listener.IKmrRobotManagerListener);
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field listeners:Ljava/util/Collection;
+       4: aload_1
+       5: invokeinterface #193,  2          // InterfaceMethod java/util/Collection.remove:(Ljava/lang/Object;)Z
+      10: pop
+      11: return
+
+  public void removeCacheRobot(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field robotCache:Ljava/util/Map;
+       4: aload_1
+       5: invokeinterface #43,  2           // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+      10: ifeq          18
+      13: aload_0
+      14: aload_1
+      15: invokespecial #4                  // Method removeKmrRobot:(Ljava/lang/String;)V
+      18: return
+
+  public void startActionSubscriber();
+    Code:
+       0: aload_0
+       1: getfield      #26                 // Field actionSubscriberActive:Ljava/util/concurrent/atomic/AtomicBoolean;
+       4: iconst_0
+       5: iconst_1
+       6: invokevirtual #87                 // Method java/util/concurrent/atomic/AtomicBoolean.compareAndSet:(ZZ)Z
+       9: ifne          23
+      12: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+      15: ldc           #194                // String Action subscriber already active, skip start.
+      17: invokeinterface #195,  2          // InterfaceMethod org/slf4j/Logger.debug:(Ljava/lang/String;)V
+      22: return
+      23: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+      26: ldc           #196                // String Try to start action subscriber.
+      28: invokeinterface #195,  2          // InterfaceMethod org/slf4j/Logger.debug:(Ljava/lang/String;)V
+      33: aload_0
+      34: getfield      #9                  // Field scheduledExecutor:Ljava/util/concurrent/ScheduledExecutorService;
+      37: aload_0
+      38: invokedynamic #197,  0            // InvokeDynamic #8:run:(Lcom/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl;)Ljava/lang/Runnable;
+      43: invokeinterface #33,  2           // InterfaceMethod java/util/concurrent/ScheduledExecutorService.execute:(Ljava/lang/Runnable;)V
+      48: return
+
+  private void addKmrMap(java.lang.String, com.kuka.rcs.rob.robot.kmr.adapter.rb.KmrMap);
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field mapCache:Ljava/util/Map;
+       4: aload_1
+       5: aload_2
+       6: invokeinterface #198,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      11: pop
+      12: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+      15: ldc           #199                // String Map [{}] successfully added, current map cache: {}
+      17: aload_1
+      18: aload_0
+      19: getfield      #13                 // Field mapCache:Ljava/util/Map;
+      22: invokeinterface #164,  4          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      27: aload_0
+      28: aload_2
+      29: invokespecial #200                // Method notifyKmrMapAdded:(Lcom/kuka/rcs/rob/robot/kmr/adapter/rb/KmrMap;)V
+      32: return
+
+  private void removeKmrMap(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field mapCache:Ljava/util/Map;
+       4: aload_1
+       5: invokeinterface #201,  2          // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+      10: checkcast     #44                 // class com/kuka/rcs/rob/robot/kmr/adapter/rb/KmrMap
+      13: astore_2
+      14: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+      17: ldc           #202                // String Map [{}] successfully removed, current map cache: {}
+      19: aload_1
+      20: aload_0
+      21: getfield      #13                 // Field mapCache:Ljava/util/Map;
+      24: invokeinterface #164,  4          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      29: aload_0
+      30: aload_2
+      31: invokespecial #203                // Method notifyKmrMapRemoved:(Lcom/kuka/rcs/rob/robot/kmr/adapter/rb/KmrMap;)V
+      34: return
+
+  private void addKmrRobot(java.lang.String, com.kuka.rcs.rob.robot.kmr.adapter.rb.KmrRobot);
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field robotCache:Ljava/util/Map;
+       4: aload_1
+       5: aload_2
+       6: invokeinterface #198,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      11: pop
+      12: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+      15: ldc           #204                // String Robot [{}] successfully added, cache size: {}, current robot cache: {}
+      17: iconst_3
+      18: anewarray     #95                 // class java/lang/Object
+      21: dup
+      22: iconst_0
+      23: aload_1
+      24: aastore
+      25: dup
+      26: iconst_1
+      27: aload_0
+      28: getfield      #7                  // Field robotCache:Ljava/util/Map;
+      31: invokeinterface #205,  1          // InterfaceMethod java/util/Map.size:()I
+      36: invokestatic  #170                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      39: aastore
+      40: dup
+      41: iconst_2
+      42: aload_0
+      43: getfield      #7                  // Field robotCache:Ljava/util/Map;
+      46: aastore
+      47: invokeinterface #97,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+      52: aload_0
+      53: aload_2
+      54: invokespecial #206                // Method notifyKmrRobotAdded:(Lcom/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot;)V
+      57: return
+
+  private void updateKmrRobot(java.lang.String, com.kuka.mobilerobotics.robotmanager.v1alpha1.Robot);
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field robotCache:Ljava/util/Map;
+       4: aload_1
+       5: invokeinterface #134,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      10: checkcast     #69                 // class com/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot
+      13: astore_3
+      14: aload_3
+      15: aload_2
+      16: invokevirtual #207                // Method com/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot.setRobot:(Lcom/kuka/mobilerobotics/robotmanager/v1alpha1/Robot;)V
+      19: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+      22: ldc           #208                // String Robot [{}] successfully updated, cache size: {}, current robot cache: {}
+      24: iconst_3
+      25: anewarray     #95                 // class java/lang/Object
+      28: dup
+      29: iconst_0
+      30: aload_1
+      31: aastore
+      32: dup
+      33: iconst_1
+      34: aload_0
+      35: getfield      #7                  // Field robotCache:Ljava/util/Map;
+      38: invokeinterface #205,  1          // InterfaceMethod java/util/Map.size:()I
+      43: invokestatic  #170                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      46: aastore
+      47: dup
+      48: iconst_2
+      49: aload_0
+      50: getfield      #7                  // Field robotCache:Ljava/util/Map;
+      53: aastore
+      54: invokeinterface #97,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+      59: aload_0
+      60: aload_3
+      61: invokespecial #209                // Method notifyKmrRobotUpdated:(Lcom/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot;)V
+      64: return
+
+  private void removeKmrRobot(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field robotCache:Ljava/util/Map;
+       4: aload_1
+       5: invokeinterface #201,  2          // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+      10: checkcast     #69                 // class com/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot
+      13: astore_2
+      14: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+      17: ldc           #210                // String Robot [{}] successfully removed, cache size: {}, current robot cache: {}
+      19: iconst_3
+      20: anewarray     #95                 // class java/lang/Object
+      23: dup
+      24: iconst_0
+      25: aload_1
+      26: aastore
+      27: dup
+      28: iconst_1
+      29: aload_0
+      30: getfield      #7                  // Field robotCache:Ljava/util/Map;
+      33: invokeinterface #205,  1          // InterfaceMethod java/util/Map.size:()I
+      38: invokestatic  #170                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      41: aastore
+      42: dup
+      43: iconst_2
+      44: aload_0
+      45: getfield      #7                  // Field robotCache:Ljava/util/Map;
+      48: aastore
+      49: invokeinterface #97,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+      54: aload_0
+      55: aload_2
+      56: invokespecial #211                // Method notifyKmrRobotRemoved:(Lcom/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot;)V
+      59: return
+
+  private void notifyKmrMapAdded(com.kuka.rcs.rob.robot.kmr.adapter.rb.KmrMap);
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field listeners:Ljava/util/Collection;
+       4: invokeinterface #212,  1          // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+       9: astore_2
+      10: aload_2
+      11: invokeinterface #39,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      16: ifeq          39
+      19: aload_2
+      20: invokeinterface #40,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      25: checkcast     #213                // class com/kuka/rcs/rob/robot/kmr/adapter/listener/IKmrRobotManagerListener
+      28: astore_3
+      29: aload_3
+      30: aload_1
+      31: invokeinterface #214,  2          // InterfaceMethod com/kuka/rcs/rob/robot/kmr/adapter/listener/IKmrRobotManagerListener.onKmrMapAdded:(Lcom/kuka/rcs/rob/robot/kmr/adapter/rb/KmrMap;)V
+      36: goto          10
+      39: return
+
+  private void notifyKmrMapRemoved(com.kuka.rcs.rob.robot.kmr.adapter.rb.KmrMap);
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field listeners:Ljava/util/Collection;
+       4: invokeinterface #212,  1          // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+       9: astore_2
+      10: aload_2
+      11: invokeinterface #39,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      16: ifeq          39
+      19: aload_2
+      20: invokeinterface #40,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      25: checkcast     #213                // class com/kuka/rcs/rob/robot/kmr/adapter/listener/IKmrRobotManagerListener
+      28: astore_3
+      29: aload_3
+      30: aload_1
+      31: invokeinterface #215,  2          // InterfaceMethod com/kuka/rcs/rob/robot/kmr/adapter/listener/IKmrRobotManagerListener.onKmrMapRemoved:(Lcom/kuka/rcs/rob/robot/kmr/adapter/rb/KmrMap;)V
+      36: goto          10
+      39: return
+
+  private void notifyKmrRobotAdded(com.kuka.rcs.rob.robot.kmr.adapter.rb.KmrRobot);
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field listeners:Ljava/util/Collection;
+       4: invokeinterface #212,  1          // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+       9: astore_2
+      10: aload_2
+      11: invokeinterface #39,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      16: ifeq          39
+      19: aload_2
+      20: invokeinterface #40,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      25: checkcast     #213                // class com/kuka/rcs/rob/robot/kmr/adapter/listener/IKmrRobotManagerListener
+      28: astore_3
+      29: aload_3
+      30: aload_1
+      31: invokeinterface #216,  2          // InterfaceMethod com/kuka/rcs/rob/robot/kmr/adapter/listener/IKmrRobotManagerListener.onKmrRobotAdded:(Lcom/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot;)V
+      36: goto          10
+      39: return
+
+  private void notifyKmrRobotUpdated(com.kuka.rcs.rob.robot.kmr.adapter.rb.KmrRobot);
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field listeners:Ljava/util/Collection;
+       4: invokeinterface #212,  1          // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+       9: astore_2
+      10: aload_2
+      11: invokeinterface #39,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      16: ifeq          39
+      19: aload_2
+      20: invokeinterface #40,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      25: checkcast     #213                // class com/kuka/rcs/rob/robot/kmr/adapter/listener/IKmrRobotManagerListener
+      28: astore_3
+      29: aload_3
+      30: aload_1
+      31: invokeinterface #217,  2          // InterfaceMethod com/kuka/rcs/rob/robot/kmr/adapter/listener/IKmrRobotManagerListener.onKmrRobotUpdated:(Lcom/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot;)V
+      36: goto          10
+      39: return
+
+  private void notifyKmrRobotRemoved(com.kuka.rcs.rob.robot.kmr.adapter.rb.KmrRobot);
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field listeners:Ljava/util/Collection;
+       4: invokeinterface #212,  1          // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+       9: astore_2
+      10: aload_2
+      11: invokeinterface #39,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      16: ifeq          39
+      19: aload_2
+      20: invokeinterface #40,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      25: checkcast     #213                // class com/kuka/rcs/rob/robot/kmr/adapter/listener/IKmrRobotManagerListener
+      28: astore_3
+      29: aload_3
+      30: aload_1
+      31: invokeinterface #218,  2          // InterfaceMethod com/kuka/rcs/rob/robot/kmr/adapter/listener/IKmrRobotManagerListener.onKmrRobotRemoved:(Lcom/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot;)V
+      36: goto          10
+      39: return
+
+  private void notifyKmrRobotManagerLost();
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field listeners:Ljava/util/Collection;
+       4: invokeinterface #212,  1          // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+       9: astore_1
+      10: aload_1
+      11: invokeinterface #39,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      16: ifeq          38
+      19: aload_1
+      20: invokeinterface #40,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      25: checkcast     #213                // class com/kuka/rcs/rob/robot/kmr/adapter/listener/IKmrRobotManagerListener
+      28: astore_2
+      29: aload_2
+      30: invokeinterface #219,  1          // InterfaceMethod com/kuka/rcs/rob/robot/kmr/adapter/listener/IKmrRobotManagerListener.onKmrRobotManagerLost:()V
+      35: goto          10
+      38: return
+
+  private static boolean lambda$getAllRobots$2(com.kuka.mobilerobotics.robotmanager.v1alpha1.Robot);
+    Code:
+       0: aload_0
+       1: invokevirtual #68                 // Method com/kuka/mobilerobotics/robotmanager/v1alpha1/Robot.getUuid:()Ljava/lang/String;
+       4: ldc           #221                // String 00000000-0000-0000-0000-000000000000
+       6: invokevirtual #152                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       9: ifne          16
+      12: iconst_1
+      13: goto          17
+      16: iconst_0
+      17: ireturn
+
+  private void lambda$closeActionSubscriberOnce$1();
+    Code:
+       0: aload_0
+       1: getfield      #222                // Field publisher:Lorg/springframework/context/ApplicationEventPublisher;
+       4: new           #223                // class com/kuka/rcs/rob/robot/kmr/event/ActionSubscriberRecreateEvent
+       7: dup
+       8: invokespecial #224                // Method com/kuka/rcs/rob/robot/kmr/event/ActionSubscriberRecreateEvent."<init>":()V
+      11: invokeinterface #225,  2          // InterfaceMethod org/springframework/context/ApplicationEventPublisher.publishEvent:(Ljava/lang/Object;)V
+      16: aload_0
+      17: getfield      #27                 // Field actionSubscriberRecreateScheduled:Ljava/util/concurrent/atomic/AtomicBoolean;
+      20: iconst_0
+      21: invokevirtual #86                 // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+      24: goto          38
+      27: astore_1
+      28: aload_0
+      29: getfield      #27                 // Field actionSubscriberRecreateScheduled:Ljava/util/concurrent/atomic/AtomicBoolean;
+      32: iconst_0
+      33: invokevirtual #86                 // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+      36: aload_1
+      37: athrow
+      38: return
+    Exception table:
+       from    to  target type
+           0    16    27   any
+
+  private java.lang.Thread lambda$new$0(java.lang.Runnable);
+    Code:
+       0: new           #226                // class java/lang/Thread
+       3: dup
+       4: aload_1
+       5: ldc           #227                // String %s-%d
+       7: iconst_2
+       8: anewarray     #95                 // class java/lang/Object
+      11: dup
+      12: iconst_0
+      13: aload_0
+      14: invokevirtual #228                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      17: invokevirtual #229                // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+      20: aastore
+      21: dup
+      22: iconst_1
+      23: invokestatic  #230                // Method nextThreadNum:()I
+      26: invokestatic  #170                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      29: aastore
+      30: invokestatic  #143                // Method java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+      33: invokespecial #231                // Method java/lang/Thread."<init>":(Ljava/lang/Runnable;Ljava/lang/String;)V
+      36: areturn
+
+  static org.slf4j.Logger access$000();
+    Code:
+       0: getstatic     #14                 // Field log:Lorg/slf4j/Logger;
+       3: areturn
+
+  static java.util.Map access$100(com.kuka.rcs.rob.robot.kmr.adapter.KmrRobotManagerAdapterImpl);
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field mapCache:Ljava/util/Map;
+       4: areturn
+
+  static void access$200(com.kuka.rcs.rob.robot.kmr.adapter.KmrRobotManagerAdapterImpl, java.lang.String, com.kuka.rcs.rob.robot.kmr.adapter.rb.KmrMap);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #12                 // Method addKmrMap:(Ljava/lang/String;Lcom/kuka/rcs/rob/robot/kmr/adapter/rb/KmrMap;)V
+       6: return
+
+  static void access$300(com.kuka.rcs.rob.robot.kmr.adapter.KmrRobotManagerAdapterImpl, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #11                 // Method removeKmrMap:(Ljava/lang/String;)V
+       5: return
+
+  static java.lang.Long access$400(com.kuka.rcs.rob.robot.kmr.adapter.KmrRobotManagerAdapterImpl);
+    Code:
+       0: aload_0
+       1: getfield      #10                 // Field resubscribeInterval:Ljava/lang/Long;
+       4: areturn
+
+  static java.util.concurrent.ScheduledExecutorService access$500(com.kuka.rcs.rob.robot.kmr.adapter.KmrRobotManagerAdapterImpl);
+    Code:
+       0: aload_0
+       1: getfield      #9                  // Field scheduledExecutor:Ljava/util/concurrent/ScheduledExecutorService;
+       4: areturn
+
+  static void access$600(com.kuka.rcs.rob.robot.kmr.adapter.KmrRobotManagerAdapterImpl);
+    Code:
+       0: aload_0
+       1: invokespecial #8                  // Method subscribeMaps:()V
+       4: return
+
+  static java.util.Map access$700(com.kuka.rcs.rob.robot.kmr.adapter.KmrRobotManagerAdapterImpl);
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field robotCache:Ljava/util/Map;
+       4: areturn
+
+  static void access$800(com.kuka.rcs.rob.robot.kmr.adapter.KmrRobotManagerAdapterImpl, java.lang.String, com.kuka.rcs.rob.robot.kmr.adapter.rb.KmrRobot);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #6                  // Method addKmrRobot:(Ljava/lang/String;Lcom/kuka/rcs/rob/robot/kmr/adapter/rb/KmrRobot;)V
+       6: return
+
+  static void access$900(com.kuka.rcs.rob.robot.kmr.adapter.KmrRobotManagerAdapterImpl, java.lang.String, com.kuka.mobilerobotics.robotmanager.v1alpha1.Robot);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #5                  // Method updateKmrRobot:(Ljava/lang/String;Lcom/kuka/mobilerobotics/robotmanager/v1alpha1/Robot;)V
+       6: return
+
+  static void access$1000(com.kuka.rcs.rob.robot.kmr.adapter.KmrRobotManagerAdapterImpl, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #4                  // Method removeKmrRobot:(Ljava/lang/String;)V
+       5: return
+
+  static void access$1100(com.kuka.rcs.rob.robot.kmr.adapter.KmrRobotManagerAdapterImpl);
+    Code:
+       0: aload_0
+       1: invokespecial #3                  // Method notifyKmrRobotManagerLost:()V
+       4: return
+
+  static void access$1200(com.kuka.rcs.rob.robot.kmr.adapter.KmrRobotManagerAdapterImpl);
+    Code:
+       0: aload_0
+       1: invokespecial #2                  // Method subscribeRobots:()V
+       4: return
+
+  static void access$1300(com.kuka.rcs.rob.robot.kmr.adapter.KmrRobotManagerAdapterImpl, java.util.UUID, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #1                  // Method closeActionSubscriberOnce:(Ljava/util/UUID;Ljava/lang/String;)V
+       6: return
+
+  static {};
+    Code:
+       0: ldc           #220                // class com/kuka/rcs/rob/robot/kmr/adapter/KmrRobotManagerAdapterImpl
+       2: invokestatic  #232                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #14                 // Field log:Lorg/slf4j/Logger;
+       8: return
+}

@@ -1,0 +1,211 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.actionexecutor.v1alpha1;
+
+import "google/rpc/status.proto";
+import "kuka/actionexecutor/v1alpha1/action.proto";
+import "kuka/actionexecutor/v1alpha1/action_description.proto";
+import "kuka/core/v1/message_header.proto";
+
+option java_package = "com.kuka.actionexecutor.v1alpha1";
+option java_outer_classname = "ActionExecutorServiceProto";
+option java_multiple_files = true;
+
+// The action executor is responsible for executing actions
+// based on action descriptions.
+service ActionExecutorService {
+
+  // Subscribe to state changes of actions.
+  // When calling this method all state changes of all actions are received via the subscribe action response.
+  rpc SubscribeActions (SubscribeActionsRequest) returns (stream SubscribeActionsResponse);
+
+  // Submits the provided action request for execution to an action executor.
+  // The response of this RPC call returns the information whether the action executor has received
+  // the command and will execute it.
+  // Note that the response does not represent the result of the execution itself as the action executor
+  // processes the action asynchronously. The execution state of an action (e.g. if the action has been
+  // executed successfully) can be checked using the RPC call SubscribeActions.
+  // If the call fails (i.e., the returned response contains a status code), then it is
+  // ensured that this action won't be executed.
+  rpc SubmitAction (SubmitActionRequest) returns (SubmitActionResponse);
+
+  // Updates an action.
+  // Note that the response does not represent the result of the update itself as the action executor
+  // processes the request asynchronously. The state of an action (e.g. if the action has been
+  // updated successfully) can be checked using the RPC call SubscribeActions.
+  // If the call fails (i.e., the returned response contains a status code), then it is
+  // ensured that this action won't be updated.
+  rpc UpdateAction (UpdateActionRequest) returns (UpdateActionResponse);
+
+  // Cancels the specified actions.
+  // This operation stops the execution of the given actions.
+  // All actions depending on the canceled actions are automatically canceled.
+  // The cancellation of referenced actions that do not exist is ignored.
+  // Note that the response does not represent the result of the cancellation itself as the action executor
+  // processes the request asynchronously. The state of an action (e.g. if the action has been
+  // cancelled successfully) can be checked using the RPC call SubscribeActions.
+  rpc CancelActions (CancelActionsRequest) returns (CancelActionsResponse);
+
+  // Returns the Protobuf full names corresponding to the types of actions provided by this service.
+  rpc GetActionTypes(GetActionTypesRequest) returns (GetActionTypesResponse);
+
+  // Pauses all actions.
+  // If the action executor has already been paused, the pause request hasn't an effect.
+  rpc PauseExecutor (PauseExecutorRequest) returns (PauseExecutorResponse);
+
+  // Resumes all actions (after a pause request).
+  rpc ResumeExecutor (ResumeExecutorRequest) returns (ResumeExecutorResponse);
+}
+
+// Request for subscribing to changes of a set of actions.
+message SubscribeActionsRequest {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+}
+
+// Response containing a set of actions with state changes.
+message SubscribeActionsResponse {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // The set of actions.
+  repeated Action actions = 2;
+}
+
+// Request for submitting of an action for execution.
+message SubmitActionRequest {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // The action to be executed.
+  ActionDescription action = 2;
+}
+
+// The response to a submit action for execution request.
+message SubmitActionResponse {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // If no error occurs this field is empty.
+  // The following errors can occur with error code Code.INVALID_ARGUMENT:
+  // 1. No uuid is set in the action description.
+  // 2. A uuid is set which is not unique.
+  // 3. For the given parameters in the action description no executable action could be found.
+  //
+  // The following errors can occur with error code Code.NOT_FOUND:
+  // 1. No resource is found for the given resource uuid.
+  //
+  // The following errors can occur with error code Code.INTERNAL:
+  // 1. A corrupt set of action parameters is set in the action description.
+  //
+  // It is not guaranteed that any of the listed errors result in an error in the response but may also
+  // result in changes of the action state to error. 
+  google.rpc.Status error = 2;
+}
+
+// Request for update of actions.
+message UpdateActionRequest {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // The actions that should be updated.
+  ActionDescription action = 2;
+}
+
+// The response to an update actions request.
+message UpdateActionResponse {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // If no error occurs this field is empty.
+
+  // The following errors can occur with error code Code.INVALID_ARGUMENT:
+  // 1. No action with the given uuid is managed by the action executor
+  // 2. A field is changed that cannot be updated (e.g. resource_uuid for an action that is already EXECUTING)
+  // 3. The requested action update introduces a cycle
+  google.rpc.Status error = 2;
+}
+
+// Request for canceling a set of actions.
+// Note that action executors may automatically cancel all subsequent actions. This can happen if an action executor
+// handles queues of actions, where actions depend on preceding actions (e.g. the motion module).
+message CancelActionsRequest {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  repeated string action_uuids = 2;
+}
+
+// The response to a cancel actions request.
+message CancelActionsResponse {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // If no error occurs this map is empty.
+  // The map's key is the action uuid.
+  // The following error can occur with error code Code.FAILED_PRECONDITION:
+  // 1. The action to cancel cannot be canceled or cannot be canceled anymore.
+  map<string, google.rpc.Status> errors = 2;
+}
+
+// Request for getting all supported action types.
+message GetActionTypesRequest {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+}
+
+// Response to send all supported action types.
+message GetActionTypesResponse
+{
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // Protobuf message full names corresponding to the types of the actions.
+  // This is the action type name that must be provided with an ActionDescription command.
+  repeated string action_types = 2;
+}
+
+// Request for pausing an executor.
+message PauseExecutorRequest {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+}
+
+// The response to a pause executor request.
+message PauseExecutorResponse {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+  
+  // If no error occurs this map is empty.
+  // The map's key is the action type.
+  // If an action executor supports multiple action types its error might be present multiple times.
+  // The following error can occur with error code Code.INTERNAL
+  // 1. The executor of the action type could not be paused.
+  map<string, google.rpc.Status> error = 2;
+}
+
+// Request for resuming an executor.
+message ResumeExecutorRequest {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+}
+
+// The response to a resume executor request.
+message ResumeExecutorResponse {
+  // Header containing the metadata of this message.
+  kuka.core.v1.MessageHeader header = 1;
+  
+  // If no error occurs this map is empty.
+  // The map's key is the action type.
+  // If an action executor supports multiple action types its error might be present multiple times.
+  // The following error can occur with error code Code.INTERNAL
+  // 1. The executor of the action type could not be resumed.
+  map<string, google.rpc.Status> error = 2;
+}

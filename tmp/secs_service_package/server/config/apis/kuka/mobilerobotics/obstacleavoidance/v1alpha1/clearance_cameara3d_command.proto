@@ -1,0 +1,26 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.obstacleavoidance.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.obstacleavoidance.v1alpha1";
+option java_outer_classname = "ClearanceCamera3dCommandProto";
+option java_multiple_files = true;
+
+// this command is used to set the clearance the 3d camera system observes
+// the clearance is the distance from the floor where objects are recognized as obstacles
+message ClearanceCamera3dCommand 
+{
+  // controls the overhead clearance of the camera (in meters)
+  // objects above this height will be ignored for obstacle detection
+  double clearance = 1;
+  // if true, we limit the clearence to the height given in clearance_m, 
+  // if false, no specific clearance is set
+  bool enabled = 2;
+}

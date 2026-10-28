@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "bind": "0.0.0.0",
+  "port": 5556,
+  "sessionId": 3000,
+  "t3Seconds": 120,
+  "authorization": "0794156dfffc059658797c3ed52af2e5ab4f646ebbf951846fb36729ee08586b",
+  "journal": "/var/log/kuka/interface/servostar-native-state.json",
+  "alarmMappings": {
+    "PP_NoPath": {
+      "alid": 900001,
+      "category": 6,
+      "text": "FLEET_PATH_NOT_FOUND"
+    }
+  },
+  "terminalResultMappings": {},
+  "genericTerminalResult": 9000
+}

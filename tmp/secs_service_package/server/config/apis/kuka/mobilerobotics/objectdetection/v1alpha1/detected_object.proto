@@ -1,0 +1,27 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.objectdetection.v1alpha1;
+
+import "kuka/core/geometry/v1/transform_2d.proto";
+
+option java_package = "com.kuka.mobilerobotics.objectdetection.v1alpha1";
+option java_outer_classname = "DetectedObjectProto";
+option java_multiple_files = true;
+
+
+// Contains information about a detected object.
+message DetectedObject {
+
+  // The object pose hypothesis in the robot coordinate system.
+  kuka.core.geometry.v1.Transform2D pose = 1;
+	
+  // The pose score in [0,1], the higher the better.
+  double score = 2;
+}

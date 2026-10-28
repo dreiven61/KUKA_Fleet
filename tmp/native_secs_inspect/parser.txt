@@ -1,0 +1,643 @@
+Compiled from "CommandParser.java"
+public final class com.kuka.secs4kuka.app.msgs.CommandParser {
+  private com.kuka.secs4kuka.app.msgs.CommandParser();
+    Code:
+       0: aload_0
+       1: invokespecial #3                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  private static java.lang.String getCommand(org.ozsoft.secs4j.format.Data<?>, boolean);
+    Code:
+       0: iload_1
+       1: ifeq          8
+       4: iconst_2
+       5: goto          9
+       8: iconst_0
+       9: istore_2
+      10: aload_0
+      11: checkcast     #9                  // class org/ozsoft/secs4j/format/L
+      14: iload_2
+      15: invokevirtual #11                 // Method org/ozsoft/secs4j/format/L.getItem:(I)Lorg/ozsoft/secs4j/format/Data;
+      18: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+      21: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+      24: areturn
+
+  private static org.ozsoft.secs4j.format.Data<?> getParams(org.ozsoft.secs4j.format.Data<?>, boolean);
+    Code:
+       0: iload_1
+       1: ifeq          8
+       4: iconst_3
+       5: goto          9
+       8: iconst_1
+       9: istore_2
+      10: aload_0
+      11: checkcast     #9                  // class org/ozsoft/secs4j/format/L
+      14: iload_2
+      15: invokevirtual #11                 // Method org/ozsoft/secs4j/format/L.getItem:(I)Lorg/ozsoft/secs4j/format/Data;
+      18: areturn
+
+  public static com.kuka.secs4kuka.app.msgs.SecsCommand parseSecsCommand(org.ozsoft.secs4j.format.Data<?>, long, boolean) throws org.ozsoft.secs4j.SecsParseException;
+    Code:
+       0: new           #21                 // class com/kuka/secs4kuka/app/msgs/ReplyInfo
+       3: dup
+       4: lload_1
+       5: iload_3
+       6: invokespecial #23                 // Method com/kuka/secs4kuka/app/msgs/ReplyInfo."<init>":(JZ)V
+       9: astore        4
+      11: aload_0
+      12: iload_3
+      13: invokestatic  #26                 // Method getCommand:(Lorg/ozsoft/secs4j/format/Data;Z)Ljava/lang/String;
+      16: astore        5
+      18: aload_0
+      19: iload_3
+      20: invokestatic  #32                 // Method getParams:(Lorg/ozsoft/secs4j/format/Data;Z)Lorg/ozsoft/secs4j/format/Data;
+      23: astore        6
+      25: aload         5
+      27: aload         6
+      29: aload         4
+      31: invokestatic  #36                 // Method parseCommand:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)Lcom/kuka/secs4kuka/app/msgs/SecsCommand;
+      34: areturn
+      35: astore        5
+      37: new           #42                 // class org/ozsoft/secs4j/SecsParseException
+      40: dup
+      41: ldc           #44                 // String unexpected data type in command message
+      43: aload         5
+      45: invokespecial #46                 // Method org/ozsoft/secs4j/SecsParseException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      48: athrow
+      49: astore        5
+      51: new           #42                 // class org/ozsoft/secs4j/SecsParseException
+      54: dup
+      55: ldc           #51                 // String unexpected data format in command message
+      57: aload         5
+      59: invokespecial #46                 // Method org/ozsoft/secs4j/SecsParseException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      62: athrow
+      63: astore        5
+      65: new           #42                 // class org/ozsoft/secs4j/SecsParseException
+      68: dup
+      69: ldc           #55                 // String unexpected exception
+      71: aload         5
+      73: invokespecial #46                 // Method org/ozsoft/secs4j/SecsParseException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      76: athrow
+    Exception table:
+       from    to  target type
+          11    34    35   Class java/lang/ClassCastException
+          11    34    49   Class java/lang/IndexOutOfBoundsException
+          11    34    63   Class java/lang/Exception
+
+  private static com.kuka.secs4kuka.app.msgs.SecsCommand parseCommand(java.lang.String, org.ozsoft.secs4j.format.Data<?>, com.kuka.secs4kuka.app.msgs.ReplyInfo) throws org.ozsoft.secs4j.SecsParseException;
+    Code:
+       0: ldc           #57                 // String ABORT
+       2: aload_0
+       3: invokevirtual #59                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       6: ifeq          15
+       9: aload_1
+      10: aload_2
+      11: invokestatic  #65                 // Method parseAbortCommand:(Lorg/ozsoft/secs4j/format/Data;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)Lcom/kuka/secs4kuka/app/msgs/SecsAbortCommand;
+      14: areturn
+      15: ldc           #69                 // String CANCEL
+      17: aload_0
+      18: invokevirtual #59                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      21: ifeq          30
+      24: aload_1
+      25: aload_2
+      26: invokestatic  #71                 // Method parseCancelCommand:(Lorg/ozsoft/secs4j/format/Data;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)Lcom/kuka/secs4kuka/app/msgs/SecsCancelCommand;
+      29: areturn
+      30: ldc           #75                 // String PAUSE
+      32: aload_0
+      33: invokevirtual #59                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      36: ifeq          48
+      39: new           #77                 // class com/kuka/secs4kuka/app/msgs/SecsPauseCommand
+      42: dup
+      43: aload_2
+      44: invokespecial #79                 // Method com/kuka/secs4kuka/app/msgs/SecsPauseCommand."<init>":(Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)V
+      47: areturn
+      48: ldc           #82                 // String RESUME
+      50: aload_0
+      51: invokevirtual #59                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      54: ifeq          66
+      57: new           #84                 // class com/kuka/secs4kuka/app/msgs/SecsResumeCommand
+      60: dup
+      61: aload_2
+      62: invokespecial #86                 // Method com/kuka/secs4kuka/app/msgs/SecsResumeCommand."<init>":(Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)V
+      65: areturn
+      66: ldc           #87                 // String TRANSFER
+      68: aload_0
+      69: invokevirtual #59                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      72: ifeq          81
+      75: aload_1
+      76: aload_2
+      77: invokestatic  #89                 // Method parseTransferCommand:(Lorg/ozsoft/secs4j/format/Data;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)Lcom/kuka/secs4kuka/app/msgs/SecsTransferCommand;
+      80: areturn
+      81: ldc           #93                 // String STAGE
+      83: aload_0
+      84: invokevirtual #59                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      87: ifeq          96
+      90: aload_1
+      91: aload_2
+      92: invokestatic  #95                 // Method parseStageCommand:(Lorg/ozsoft/secs4j/format/Data;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)Lcom/kuka/secs4kuka/app/msgs/SecsStageCommand;
+      95: areturn
+      96: ldc           #99                 // String PRIORITYUPDATE
+      98: aload_0
+      99: invokevirtual #59                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     102: ifeq          111
+     105: aload_1
+     106: aload_2
+     107: invokestatic  #101                // Method parsePriorityUpdateCommand:(Lorg/ozsoft/secs4j/format/Data;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)Lcom/kuka/secs4kuka/app/msgs/SecsCommand;
+     110: areturn
+     111: ldc           #105                // String FORCE_CHARGE
+     113: aload_0
+     114: invokevirtual #107                // Method java/lang/String.toUpperCase:()Ljava/lang/String;
+     117: invokevirtual #59                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     120: ifeq          129
+     123: aload_1
+     124: aload_2
+     125: invokestatic  #110                // Method parseForceChargeCommand:(Lorg/ozsoft/secs4j/format/Data;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)Lcom/kuka/secs4kuka/app/msgs/SecsCommand;
+     128: areturn
+     129: ldc           #113                // String FORCE_CHARGE_CANCEL
+     131: aload_0
+     132: invokevirtual #107                // Method java/lang/String.toUpperCase:()Ljava/lang/String;
+     135: invokevirtual #59                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     138: ifeq          147
+     141: aload_1
+     142: aload_2
+     143: invokestatic  #115                // Method parseForceChargeCancelCommand:(Lorg/ozsoft/secs4j/format/Data;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)Lcom/kuka/secs4kuka/app/msgs/SecsCommand;
+     146: areturn
+     147: ldc           #118                // String FREEZE
+     149: aload_0
+     150: invokevirtual #107                // Method java/lang/String.toUpperCase:()Ljava/lang/String;
+     153: invokevirtual #59                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     156: ifeq          168
+     159: getstatic     #120                // Field com/kuka/secs4kuka/app/msgs/SecsFreezeCommand$FreezeCommandType.FREEZE:Lcom/kuka/secs4kuka/app/msgs/SecsFreezeCommand$FreezeCommandType;
+     162: aload_1
+     163: aload_2
+     164: invokestatic  #125                // Method parseFreezeCommand:(Lcom/kuka/secs4kuka/app/msgs/SecsFreezeCommand$FreezeCommandType;Lorg/ozsoft/secs4j/format/Data;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)Lcom/kuka/secs4kuka/app/msgs/SecsFreezeCommand;
+     167: areturn
+     168: ldc           #129                // String UNFREEZE
+     170: aload_0
+     171: invokevirtual #107                // Method java/lang/String.toUpperCase:()Ljava/lang/String;
+     174: invokevirtual #59                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     177: ifeq          189
+     180: getstatic     #131                // Field com/kuka/secs4kuka/app/msgs/SecsFreezeCommand$FreezeCommandType.UNFREEZE:Lcom/kuka/secs4kuka/app/msgs/SecsFreezeCommand$FreezeCommandType;
+     183: aload_1
+     184: aload_2
+     185: invokestatic  #125                // Method parseFreezeCommand:(Lcom/kuka/secs4kuka/app/msgs/SecsFreezeCommand$FreezeCommandType;Lorg/ozsoft/secs4j/format/Data;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)Lcom/kuka/secs4kuka/app/msgs/SecsFreezeCommand;
+     188: areturn
+     189: new           #133                // class com/kuka/secs4kuka/app/msgs/SecsRawCommand
+     192: dup
+     193: aload_0
+     194: aload_1
+     195: aload_2
+     196: invokespecial #135                // Method com/kuka/secs4kuka/app/msgs/SecsRawCommand."<init>":(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)V
+     199: areturn
+
+  public static com.kuka.secs4kuka.app.msgs.SecsFreezeCommand parseFreezeCommand(com.kuka.secs4kuka.app.msgs.SecsFreezeCommand$FreezeCommandType, org.ozsoft.secs4j.format.Data<?>, com.kuka.secs4kuka.app.msgs.ReplyInfo) throws org.ozsoft.secs4j.SecsParseException;
+    Code:
+       0: new           #138                // class java/util/ArrayList
+       3: dup
+       4: invokespecial #140                // Method java/util/ArrayList."<init>":()V
+       7: astore_3
+       8: ldc           #141                // String VEHICLEID
+      10: aload_1
+      11: invokestatic  #143                // Method org/ozsoft/secs4j/util/ParseUtils.getParamOpt:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+      14: checkcast     #9                  // class org/ozsoft/secs4j/format/L
+      17: astore        4
+      19: aload         4
+      21: ifnonnull     34
+      24: new           #149                // class com/kuka/secs4kuka/app/msgs/SecsFreezeCommand
+      27: dup
+      28: aload_0
+      29: aload_2
+      30: invokespecial #151                // Method com/kuka/secs4kuka/app/msgs/SecsFreezeCommand."<init>":(Lcom/kuka/secs4kuka/app/msgs/SecsFreezeCommand$FreezeCommandType;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)V
+      33: areturn
+      34: aload         4
+      36: invokevirtual #154                // Method org/ozsoft/secs4j/format/L.getValue:()Ljava/util/List;
+      39: invokeinterface #157,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      44: astore        5
+      46: aload         5
+      48: invokeinterface #163,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      53: ifeq          90
+      56: aload         5
+      58: invokeinterface #169,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      63: checkcast     #173                // class org/ozsoft/secs4j/format/Data
+      66: astore        6
+      68: aload         6
+      70: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+      73: astore        7
+      75: aload_3
+      76: aload         7
+      78: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+      81: invokeinterface #175,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      86: pop
+      87: goto          46
+      90: new           #149                // class com/kuka/secs4kuka/app/msgs/SecsFreezeCommand
+      93: dup
+      94: aload_0
+      95: aload_3
+      96: aload_2
+      97: invokespecial #178                // Method com/kuka/secs4kuka/app/msgs/SecsFreezeCommand."<init>":(Lcom/kuka/secs4kuka/app/msgs/SecsFreezeCommand$FreezeCommandType;Ljava/util/List;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)V
+     100: areturn
+
+  public static com.kuka.secs4kuka.app.msgs.SecsTransferCommand parseTransferCommand(org.ozsoft.secs4j.format.Data<?>, com.kuka.secs4kuka.app.msgs.ReplyInfo) throws org.ozsoft.secs4j.SecsParseException;
+    Code:
+       0: ldc           #181                // String COMMANDINFO
+       2: aload_0
+       3: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+       6: checkcast     #9                  // class org/ozsoft/secs4j/format/L
+       9: astore_2
+      10: ldc           #186                // String COMMANDID
+      12: aload_2
+      13: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+      16: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+      19: astore_3
+      20: ldc           #188                // String PRIORITY
+      22: aload_2
+      23: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+      26: checkcast     #190                // class org/ozsoft/secs4j/format/U2
+      29: astore        4
+      31: ldc           #192                // String REPLACE
+      33: aload_2
+      34: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+      37: checkcast     #190                // class org/ozsoft/secs4j/format/U2
+      40: astore        5
+      42: new           #194                // class com/kuka/secs4kuka/app/msgs/SecsTransferCommand$SecsTransferCommandBuilder
+      45: dup
+      46: aload_3
+      47: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+      50: invokespecial #196                // Method com/kuka/secs4kuka/app/msgs/SecsTransferCommand$SecsTransferCommandBuilder."<init>":(Ljava/lang/String;)V
+      53: aload         4
+      55: iconst_0
+      56: invokevirtual #199                // Method org/ozsoft/secs4j/format/U2.getValue:(I)J
+      59: l2i
+      60: invokevirtual #202                // Method com/kuka/secs4kuka/app/msgs/SecsTransferCommand$SecsTransferCommandBuilder.setPriority:(I)Lcom/kuka/secs4kuka/app/msgs/SecsTransferCommand$SecsTransferCommandBuilder;
+      63: aload         5
+      65: iconst_0
+      66: invokevirtual #199                // Method org/ozsoft/secs4j/format/U2.getValue:(I)J
+      69: l2i
+      70: invokevirtual #206                // Method com/kuka/secs4kuka/app/msgs/SecsTransferCommand$SecsTransferCommandBuilder.setReplace:(I)Lcom/kuka/secs4kuka/app/msgs/SecsTransferCommand$SecsTransferCommandBuilder;
+      73: aload_1
+      74: invokevirtual #209                // Method com/kuka/secs4kuka/app/msgs/SecsTransferCommand$SecsTransferCommandBuilder.setReplyInfo:(Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)Lcom/kuka/secs4kuka/app/msgs/SecsTransferCommand$SecsTransferCommandBuilder;
+      77: astore        6
+      79: ldc           #213                // String TRANSFERINFO
+      81: aload_0
+      82: invokestatic  #215                // Method org/ozsoft/secs4j/util/ParseUtils.getAllParams:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Ljava/util/List;
+      85: astore        7
+      87: aload         7
+      89: invokeinterface #157,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      94: astore        8
+      96: aload         8
+      98: invokeinterface #163,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     103: ifeq          178
+     106: aload         8
+     108: invokeinterface #169,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     113: checkcast     #173                // class org/ozsoft/secs4j/format/Data
+     116: astore        9
+     118: ldc           #219                // String CARRIERID
+     120: aload         9
+     122: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+     125: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+     128: astore        10
+     130: ldc           #221                // String SOURCEPORT
+     132: aload         9
+     134: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+     137: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+     140: astore        11
+     142: ldc           #223                // String DESTPORT
+     144: aload         9
+     146: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+     149: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+     152: astore        12
+     154: aload         6
+     156: aload         10
+     158: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+     161: aload         11
+     163: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+     166: aload         12
+     168: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+     171: invokevirtual #225                // Method com/kuka/secs4kuka/app/msgs/SecsTransferCommand$SecsTransferCommandBuilder.addTransferInfo:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/kuka/secs4kuka/app/msgs/SecsTransferCommand$SecsTransferCommandBuilder;
+     174: pop
+     175: goto          96
+     178: ldc           #229                // String STAGEIDLIST
+     180: aload_0
+     181: invokestatic  #143                // Method org/ozsoft/secs4j/util/ParseUtils.getParamOpt:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+     184: checkcast     #9                  // class org/ozsoft/secs4j/format/L
+     187: astore        8
+     189: aload         8
+     191: ifnull        245
+     194: aload         8
+     196: invokevirtual #154                // Method org/ozsoft/secs4j/format/L.getValue:()Ljava/util/List;
+     199: invokeinterface #157,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     204: astore        9
+     206: aload         9
+     208: invokeinterface #163,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     213: ifeq          245
+     216: aload         9
+     218: invokeinterface #169,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     223: checkcast     #173                // class org/ozsoft/secs4j/format/Data
+     226: astore        10
+     228: aload         6
+     230: aload         10
+     232: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+     235: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+     238: invokevirtual #231                // Method com/kuka/secs4kuka/app/msgs/SecsTransferCommand$SecsTransferCommandBuilder.addStageId:(Ljava/lang/String;)Lcom/kuka/secs4kuka/app/msgs/SecsTransferCommand$SecsTransferCommandBuilder;
+     241: pop
+     242: goto          206
+     245: aload         6
+     247: invokevirtual #235                // Method com/kuka/secs4kuka/app/msgs/SecsTransferCommand$SecsTransferCommandBuilder.build:()Lcom/kuka/secs4kuka/app/msgs/SecsTransferCommand;
+     250: areturn
+
+  public static com.kuka.secs4kuka.app.msgs.SecsAbortCommand parseAbortCommand(org.ozsoft.secs4j.format.Data<?>, com.kuka.secs4kuka.app.msgs.ReplyInfo) throws org.ozsoft.secs4j.SecsParseException;
+    Code:
+       0: ldc           #186                // String COMMANDID
+       2: aload_0
+       3: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+       6: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+       9: astore_2
+      10: new           #239                // class com/kuka/secs4kuka/app/msgs/SecsAbortCommand
+      13: dup
+      14: aload_2
+      15: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+      18: aload_1
+      19: invokespecial #241                // Method com/kuka/secs4kuka/app/msgs/SecsAbortCommand."<init>":(Ljava/lang/String;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)V
+      22: areturn
+
+  public static com.kuka.secs4kuka.app.msgs.SecsCancelCommand parseCancelCommand(org.ozsoft.secs4j.format.Data<?>, com.kuka.secs4kuka.app.msgs.ReplyInfo) throws org.ozsoft.secs4j.SecsParseException;
+    Code:
+       0: ldc           #186                // String COMMANDID
+       2: aload_0
+       3: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+       6: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+       9: astore_2
+      10: new           #244                // class com/kuka/secs4kuka/app/msgs/SecsCancelCommand
+      13: dup
+      14: aload_2
+      15: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+      18: aload_1
+      19: invokespecial #246                // Method com/kuka/secs4kuka/app/msgs/SecsCancelCommand."<init>":(Ljava/lang/String;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)V
+      22: areturn
+
+  public static com.kuka.secs4kuka.app.msgs.SecsStageCommand parseStageCommand(org.ozsoft.secs4j.format.Data<?>, com.kuka.secs4kuka.app.msgs.ReplyInfo) throws org.ozsoft.secs4j.SecsParseException;
+    Code:
+       0: ldc           #247                // String STAGEINFO
+       2: aload_0
+       3: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+       6: checkcast     #9                  // class org/ozsoft/secs4j/format/L
+       9: astore_2
+      10: ldc           #213                // String TRANSFERINFO
+      12: aload_0
+      13: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+      16: checkcast     #9                  // class org/ozsoft/secs4j/format/L
+      19: astore_3
+      20: ldc           #249                // String STAGEID
+      22: aload_2
+      23: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+      26: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+      29: astore        4
+      31: ldc           #188                // String PRIORITY
+      33: aload_2
+      34: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+      37: checkcast     #190                // class org/ozsoft/secs4j/format/U2
+      40: astore        5
+      42: ldc           #192                // String REPLACE
+      44: aload_2
+      45: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+      48: checkcast     #190                // class org/ozsoft/secs4j/format/U2
+      51: astore        6
+      53: ldc           #251                // String EXPECTEDDURATION
+      55: aload_2
+      56: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+      59: checkcast     #190                // class org/ozsoft/secs4j/format/U2
+      62: astore        7
+      64: ldc           #253                // String NOBLOCKINGTIME
+      66: aload_2
+      67: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+      70: checkcast     #190                // class org/ozsoft/secs4j/format/U2
+      73: astore        8
+      75: ldc           #255                // String WAITTIMEOUT
+      77: aload_2
+      78: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+      81: checkcast     #190                // class org/ozsoft/secs4j/format/U2
+      84: astore        9
+      86: ldc           #219                // String CARRIERID
+      88: aload_3
+      89: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+      92: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+      95: astore        10
+      97: ldc           #221                // String SOURCEPORT
+      99: aload_3
+     100: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+     103: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+     106: astore        11
+     108: ldc           #223                // String DESTPORT
+     110: aload_3
+     111: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+     114: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+     117: astore        12
+     119: new           #257                // class com/kuka/secs4kuka/app/msgs/SecsStageCommand
+     122: dup
+     123: aload         4
+     125: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+     128: aload         5
+     130: iconst_0
+     131: invokevirtual #199                // Method org/ozsoft/secs4j/format/U2.getValue:(I)J
+     134: l2i
+     135: aload         6
+     137: iconst_0
+     138: invokevirtual #199                // Method org/ozsoft/secs4j/format/U2.getValue:(I)J
+     141: l2i
+     142: aload         7
+     144: iconst_0
+     145: invokevirtual #199                // Method org/ozsoft/secs4j/format/U2.getValue:(I)J
+     148: l2i
+     149: aload         8
+     151: iconst_0
+     152: invokevirtual #199                // Method org/ozsoft/secs4j/format/U2.getValue:(I)J
+     155: l2i
+     156: aload         9
+     158: iconst_0
+     159: invokevirtual #199                // Method org/ozsoft/secs4j/format/U2.getValue:(I)J
+     162: l2i
+     163: aload         10
+     165: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+     168: aload         11
+     170: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+     173: aload         12
+     175: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+     178: aload_1
+     179: invokespecial #259                // Method com/kuka/secs4kuka/app/msgs/SecsStageCommand."<init>":(Ljava/lang/String;IIIIILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)V
+     182: areturn
+
+  public static com.kuka.secs4kuka.app.msgs.SecsCommand parseForceChargeCommand(org.ozsoft.secs4j.format.Data<?>, com.kuka.secs4kuka.app.msgs.ReplyInfo) throws org.ozsoft.secs4j.SecsParseException;
+    Code:
+       0: ldc           #141                // String VEHICLEID
+       2: aload_0
+       3: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+       6: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+       9: astore_2
+      10: new           #262                // class com/kuka/secs4kuka/app/msgs/SecsForceChargeCommand
+      13: dup
+      14: aload_2
+      15: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+      18: aload_1
+      19: invokespecial #264                // Method com/kuka/secs4kuka/app/msgs/SecsForceChargeCommand."<init>":(Ljava/lang/String;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)V
+      22: areturn
+
+  public static com.kuka.secs4kuka.app.msgs.SecsCommand parseForceChargeCancelCommand(org.ozsoft.secs4j.format.Data<?>, com.kuka.secs4kuka.app.msgs.ReplyInfo) throws org.ozsoft.secs4j.SecsParseException;
+    Code:
+       0: ldc           #141                // String VEHICLEID
+       2: aload_0
+       3: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+       6: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+       9: astore_2
+      10: new           #265                // class com/kuka/secs4kuka/app/msgs/SecsForceChargeCancelCommand
+      13: dup
+      14: aload_2
+      15: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+      18: aload_1
+      19: invokespecial #267                // Method com/kuka/secs4kuka/app/msgs/SecsForceChargeCancelCommand."<init>":(Ljava/lang/String;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)V
+      22: areturn
+
+  public static com.kuka.secs4kuka.app.msgs.SecsCommand parsePriorityUpdateCommand(org.ozsoft.secs4j.format.Data<?>, com.kuka.secs4kuka.app.msgs.ReplyInfo) throws org.ozsoft.secs4j.SecsParseException;
+    Code:
+       0: ldc           #186                // String COMMANDID
+       2: aload_0
+       3: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+       6: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+       9: astore_2
+      10: ldc           #188                // String PRIORITY
+      12: aload_0
+      13: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+      16: checkcast     #190                // class org/ozsoft/secs4j/format/U2
+      19: astore_3
+      20: aload_2
+      21: ifnull        64
+      24: aload_3
+      25: ifnull        64
+      28: new           #268                // class com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder
+      31: dup
+      32: aload_2
+      33: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+      36: invokespecial #270                // Method com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder."<init>":(Ljava/lang/String;)V
+      39: aload_3
+      40: iconst_0
+      41: invokevirtual #199                // Method org/ozsoft/secs4j/format/U2.getValue:(I)J
+      44: l2i
+      45: invokevirtual #271                // Method com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder.setPriority:(I)Lcom/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder;
+      48: iconst_1
+      49: invokevirtual #274                // Method com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder.setReplace:(I)Lcom/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder;
+      52: aload_1
+      53: invokevirtual #276                // Method com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder.setReplyInfo:(Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)Lcom/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder;
+      56: astore        4
+      58: aload         4
+      60: invokevirtual #279                // Method com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder.build:()Lcom/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand;
+      63: areturn
+      64: goto          68
+      67: astore_2
+      68: ldc           #181                // String COMMANDINFO
+      70: aload_0
+      71: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+      74: checkcast     #9                  // class org/ozsoft/secs4j/format/L
+      77: astore_2
+      78: ldc           #186                // String COMMANDID
+      80: aload_2
+      81: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+      84: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+      87: astore_3
+      88: ldc           #188                // String PRIORITY
+      90: aload_2
+      91: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+      94: checkcast     #190                // class org/ozsoft/secs4j/format/U2
+      97: astore        4
+      99: ldc           #192                // String REPLACE
+     101: aload_2
+     102: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+     105: checkcast     #190                // class org/ozsoft/secs4j/format/U2
+     108: astore        5
+     110: new           #268                // class com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder
+     113: dup
+     114: aload_3
+     115: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+     118: invokespecial #270                // Method com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder."<init>":(Ljava/lang/String;)V
+     121: aload         4
+     123: iconst_0
+     124: invokevirtual #199                // Method org/ozsoft/secs4j/format/U2.getValue:(I)J
+     127: l2i
+     128: invokevirtual #271                // Method com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder.setPriority:(I)Lcom/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder;
+     131: aload         5
+     133: iconst_0
+     134: invokevirtual #199                // Method org/ozsoft/secs4j/format/U2.getValue:(I)J
+     137: l2i
+     138: invokevirtual #274                // Method com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder.setReplace:(I)Lcom/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder;
+     141: aload_1
+     142: invokevirtual #276                // Method com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder.setReplyInfo:(Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)Lcom/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder;
+     145: astore        6
+     147: ldc           #213                // String TRANSFERINFO
+     149: aload_0
+     150: invokestatic  #215                // Method org/ozsoft/secs4j/util/ParseUtils.getAllParams:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Ljava/util/List;
+     153: astore        7
+     155: aload         7
+     157: invokeinterface #157,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     162: astore        8
+     164: aload         8
+     166: invokeinterface #163,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     171: ifeq          246
+     174: aload         8
+     176: invokeinterface #169,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     181: checkcast     #173                // class org/ozsoft/secs4j/format/Data
+     184: astore        9
+     186: ldc           #219                // String CARRIERID
+     188: aload         9
+     190: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+     193: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+     196: astore        10
+     198: ldc           #221                // String SOURCEPORT
+     200: aload         9
+     202: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+     205: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+     208: astore        11
+     210: ldc           #223                // String DESTPORT
+     212: aload         9
+     214: invokestatic  #183                // Method org/ozsoft/secs4j/util/ParseUtils.getParam:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+     217: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+     220: astore        12
+     222: aload         6
+     224: aload         10
+     226: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+     229: aload         11
+     231: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+     234: aload         12
+     236: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+     239: invokevirtual #282                // Method com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder.addTransferInfo:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder;
+     242: pop
+     243: goto          164
+     246: ldc           #229                // String STAGEIDLIST
+     248: aload_0
+     249: invokestatic  #143                // Method org/ozsoft/secs4j/util/ParseUtils.getParamOpt:(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;)Lorg/ozsoft/secs4j/format/Data;
+     252: checkcast     #9                  // class org/ozsoft/secs4j/format/L
+     255: astore        8
+     257: aload         8
+     259: ifnull        313
+     262: aload         8
+     264: invokevirtual #154                // Method org/ozsoft/secs4j/format/L.getValue:()Ljava/util/List;
+     267: invokeinterface #157,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     272: astore        9
+     274: aload         9
+     276: invokeinterface #163,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     281: ifeq          313
+     284: aload         9
+     286: invokeinterface #169,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     291: checkcast     #173                // class org/ozsoft/secs4j/format/Data
+     294: astore        10
+     296: aload         6
+     298: aload         10
+     300: checkcast     #15                 // class org/ozsoft/secs4j/format/A
+     303: invokevirtual #17                 // Method org/ozsoft/secs4j/format/A.getValue:()Ljava/lang/String;
+     306: invokevirtual #285                // Method com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder.addStageId:(Ljava/lang/String;)Lcom/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder;
+     309: pop
+     310: goto          274
+     313: aload         6
+     315: invokevirtual #279                // Method com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand$SecsPriorityUpdateCommandBuilder.build:()Lcom/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand;
+     318: areturn
+    Exception table:
+       from    to  target type
+           0    63    67   Class org/ozsoft/secs4j/SecsParseException
+}

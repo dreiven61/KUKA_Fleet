@@ -1,0 +1,5 @@
+compartments:
+  - uuid: c0
+#   priority: 0
+#   filter:
+#     type_uuids: {}

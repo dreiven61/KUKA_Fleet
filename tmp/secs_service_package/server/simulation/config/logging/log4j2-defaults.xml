@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration xmlns="https://logging.apache.org/xml/ns"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="https://logging.apache.org/xml/ns https://logging.apache.org/xml/ns/log4j-config-2.xsd"
+               monitorInterval="30">
+
+    <Appenders>
+        <Console name="console">
+            <Filters>
+                <NoMarkerFilter/>
+            </Filters>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSSXXX} [%8.8t] %-5p %-26.26c{1.} %m%n"/>
+        </Console>
+        <RollingFile name="file" fileName="${logging.file.name}" filePattern="${logging.file.pattern}">
+            <Filters>
+                <NoMarkerFilter/>
+            </Filters>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSSXXX} [%8.8t] %-5p %-26.26c{1.} %m%n"/>
+            <DefaultRolloverStrategy max="7" fileIndex="min"/>
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- only perform WARN level logging on third party libs -->
+        <Logger name="com" level="WARN" />
+        <Logger name="io" level="WARN" />
+        <Logger name="org" level="WARN" />
+
+        <!-- perform DEBUG level logging on KUKA libs -->
+        <Logger name="com.kuka" level="DEBUG"/>
+
+        <Root level="DEBUG">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="file" />
+        </Root>
+    </Loggers>
+
+</Configuration>

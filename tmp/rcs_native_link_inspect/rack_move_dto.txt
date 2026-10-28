@@ -1,0 +1,1361 @@
+Classfile jar:file:///C:/work/KUKA/SW/KUKA.AMR_Fleet_2.15.1/STANDARD-API-2.15.5-jar-with-dependencies.jar!/com/kuka/interfaces/plugin/entity/RackMoveDto.class
+  Last modified 2026. 7. 8.; size 7633 bytes
+  SHA-256 checksum fecb47cb6d17a7c36dba5a31518d62b7fae8ada29c493d000f99ae497de77462
+  Compiled from "RackMoveDto.java"
+public class com.kuka.interfaces.plugin.entity.RackMoveDto
+  minor version: 0
+  major version: 52
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #15                         // com/kuka/interfaces/plugin/entity/RackMoveDto
+  super_class: #45                        // java/lang/Object
+  interfaces: 0, fields: 10, methods: 25, attributes: 2
+Constant pool:
+    #1 = Methodref          #45.#175      // java/lang/Object."<init>":()V
+    #2 = Methodref          #176.#177     // java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+    #3 = Fieldref           #15.#178      // com/kuka/interfaces/plugin/entity/RackMoveDto.putDown:Ljava/lang/Boolean;
+    #4 = Methodref          #179.#180     // java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+    #5 = Fieldref           #15.#181      // com/kuka/interfaces/plugin/entity/RackMoveDto.waitingMillis:Ljava/lang/Integer;
+    #6 = String             #182          //
+    #7 = Fieldref           #15.#183      // com/kuka/interfaces/plugin/entity/RackMoveDto.containerStopAngle:Ljava/lang/String;
+    #8 = Fieldref           #15.#184      // com/kuka/interfaces/plugin/entity/RackMoveDto.sequence:Ljava/lang/Integer;
+    #9 = Fieldref           #15.#185      // com/kuka/interfaces/plugin/entity/RackMoveDto.position:Ljava/lang/String;
+   #10 = Fieldref           #15.#186      // com/kuka/interfaces/plugin/entity/RackMoveDto.type:Ljava/lang/String;
+   #11 = Fieldref           #15.#187      // com/kuka/interfaces/plugin/entity/RackMoveDto.passStrategy:Ljava/lang/String;
+   #12 = Fieldref           #15.#188      // com/kuka/interfaces/plugin/entity/RackMoveDto.actionType:Ljava/lang/String;
+   #13 = Fieldref           #15.#189      // com/kuka/interfaces/plugin/entity/RackMoveDto.actionConfirm:Ljava/lang/Boolean;
+   #14 = Fieldref           #15.#190      // com/kuka/interfaces/plugin/entity/RackMoveDto.actionInform:Ljava/lang/Boolean;
+   #15 = Class              #191          // com/kuka/interfaces/plugin/entity/RackMoveDto
+   #16 = Methodref          #15.#192      // com/kuka/interfaces/plugin/entity/RackMoveDto.canEqual:(Ljava/lang/Object;)Z
+   #17 = Methodref          #15.#193      // com/kuka/interfaces/plugin/entity/RackMoveDto.getSequence:()Ljava/lang/Integer;
+   #18 = Methodref          #45.#194      // java/lang/Object.equals:(Ljava/lang/Object;)Z
+   #19 = Methodref          #15.#195      // com/kuka/interfaces/plugin/entity/RackMoveDto.getPosition:()Ljava/lang/String;
+   #20 = Methodref          #15.#196      // com/kuka/interfaces/plugin/entity/RackMoveDto.getType:()Ljava/lang/String;
+   #21 = Methodref          #15.#197      // com/kuka/interfaces/plugin/entity/RackMoveDto.getPassStrategy:()Ljava/lang/String;
+   #22 = Methodref          #15.#198      // com/kuka/interfaces/plugin/entity/RackMoveDto.getPutDown:()Ljava/lang/Boolean;
+   #23 = Methodref          #15.#199      // com/kuka/interfaces/plugin/entity/RackMoveDto.getActionType:()Ljava/lang/String;
+   #24 = Methodref          #15.#200      // com/kuka/interfaces/plugin/entity/RackMoveDto.getWaitingMillis:()Ljava/lang/Integer;
+   #25 = Methodref          #15.#201      // com/kuka/interfaces/plugin/entity/RackMoveDto.getContainerStopAngle:()Ljava/lang/String;
+   #26 = Methodref          #15.#202      // com/kuka/interfaces/plugin/entity/RackMoveDto.getActionConfirm:()Ljava/lang/Boolean;
+   #27 = Methodref          #15.#203      // com/kuka/interfaces/plugin/entity/RackMoveDto.getActionInform:()Ljava/lang/Boolean;
+   #28 = Methodref          #45.#204      // java/lang/Object.hashCode:()I
+   #29 = Class              #205          // java/lang/StringBuilder
+   #30 = Methodref          #29.#175      // java/lang/StringBuilder."<init>":()V
+   #31 = String             #206          // RackMoveDto(sequence=
+   #32 = Methodref          #29.#207      // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+   #33 = Methodref          #29.#208      // java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+   #34 = String             #209          // , position=
+   #35 = String             #210          // , type=
+   #36 = String             #211          // , passStrategy=
+   #37 = String             #212          // , putDown=
+   #38 = String             #213          // , actionType=
+   #39 = String             #214          // , waitingMillis=
+   #40 = String             #215          // , containerStopAngle=
+   #41 = String             #216          // , actionConfirm=
+   #42 = String             #217          // , actionInform=
+   #43 = String             #218          // )
+   #44 = Methodref          #29.#219      // java/lang/StringBuilder.toString:()Ljava/lang/String;
+   #45 = Class              #220          // java/lang/Object
+   #46 = Utf8               sequence
+   #47 = Utf8               Ljava/lang/Integer;
+   #48 = Utf8               RuntimeVisibleAnnotations
+   #49 = Utf8               Lio/swagger/annotations/ApiModelProperty;
+   #50 = Utf8               value
+   #51 = Utf8               íÂ?ïÃßí?
+   #52 = Utf8               notes
+   #53 = Utf8               ö¢?1?ÑÃã·?Ê­îÜÑÃïÃ ý¨?âÍé©ïÎ×ºïÃîÜßí?ëîó­?ñò£¬?ïÃ?õÌÓÞ
+   #54 = Utf8               Lorg/hibernate/validator/constraints/Range;
+   #55 = Utf8               min
+   #56 = Long               1l
+   #58 = Utf8               message
+   #59 = Utf8               sequence can not be lower than one
+   #60 = Utf8               RuntimeVisibleTypeAnnotations
+   #61 = Utf8               position
+   #62 = Utf8               Ljava/lang/String;
+   #63 = Utf8               íÂ?ïÃ??
+   #64 = Utf8               Ljavax/validation/constraints/NotBlank;
+   #65 = Utf8               position can not be blank
+   #66 = Utf8               type
+   #67 = Utf8               íÂ?ïÃ?úþ,NODE_POINT|NODE_AREA
+   #68 = Utf8               Ljavax/validation/constraints/Pattern;
+   #69 = Utf8               regexp
+   #70 = Utf8               NODE_POINT|NODE_AREA
+   #71 = Utf8               missionData type  only NODE_POINT|NODE_AREA can be accept
+   #72 = Utf8               passStrategy
+   #73 = Utf8               ?îñìò?ïÃ?áÖý¨Û¯ú¼óþÕÔ,AUTO|MANUAL
+   #74 = Utf8               AUTO|MANUAL
+   #75 = Utf8               passStrategy only AUTO|MANUAL can not be accept
+   #76 = Utf8               putDown
+   #77 = Utf8               Ljava/lang/Boolean;
+   #78 = Utf8               íÂ?ïÃãÀÜúÛ¯ù»?Ê­(FLEET 2.15.0÷úÜâÐàñýý¨ö¢á¼?í®Ó«£¬ËÇéÄactionType)
+   #79 = Utf8               Ùù? false
+   #80 = Utf8               actionType
+   #81 = Utf8               Óð??ïÃ?âÍé©?ú¼îÜ?íÂ,UP_CONTAINER|DOWN_CONTAINER
+   #82 = Utf8               waitingMillis
+   #83 = Utf8               í»??????îñìò??ïÃîÜ??
+   #84 = Utf8               Ùù??êÈ:ûÆõ©
+   #85 = Utf8               containerStopAngle
+   #86 = Utf8               é»ÐïïÎ?ÊÇÓø
+   #87 = Utf8               Ùù??êÈ 0
+   #88 = Utf8               actionConfirm
+   #89 = Utf8               ?ú¼?íÂîñãÀÜúâÍé©??
+   #90 = Utf8               actionInform
+   #91 = Utf8               ?ú¼?íÂý¨ãÀÜúâÍé©÷×ò±
+   #92 = Utf8               <init>
+   #93 = Utf8               ()V
+   #94 = Utf8               Code
+   #95 = Utf8               LineNumberTable
+   #96 = Utf8               LocalVariableTable
+   #97 = Utf8               this
+   #98 = Utf8               Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+   #99 = Utf8               getSequence
+  #100 = Utf8               ()Ljava/lang/Integer;
+  #101 = Utf8               getPosition
+  #102 = Utf8               ()Ljava/lang/String;
+  #103 = Utf8               getType
+  #104 = Utf8               getPassStrategy
+  #105 = Utf8               getPutDown
+  #106 = Utf8               ()Ljava/lang/Boolean;
+  #107 = Utf8               getActionType
+  #108 = Utf8               getWaitingMillis
+  #109 = Utf8               getContainerStopAngle
+  #110 = Utf8               getActionConfirm
+  #111 = Utf8               getActionInform
+  #112 = Utf8               setSequence
+  #113 = Utf8               (Ljava/lang/Integer;)V
+  #114 = Utf8               MethodParameters
+  #115 = Utf8               setPosition
+  #116 = Utf8               (Ljava/lang/String;)V
+  #117 = Utf8               setType
+  #118 = Utf8               setPassStrategy
+  #119 = Utf8               setPutDown
+  #120 = Utf8               (Ljava/lang/Boolean;)V
+  #121 = Utf8               setActionType
+  #122 = Utf8               setWaitingMillis
+  #123 = Utf8               setContainerStopAngle
+  #124 = Utf8               setActionConfirm
+  #125 = Utf8               setActionInform
+  #126 = Utf8               equals
+  #127 = Utf8               (Ljava/lang/Object;)Z
+  #128 = Utf8               o
+  #129 = Utf8               Ljava/lang/Object;
+  #130 = Utf8               other
+  #131 = Utf8               this$sequence
+  #132 = Utf8               other$sequence
+  #133 = Utf8               this$position
+  #134 = Utf8               other$position
+  #135 = Utf8               this$type
+  #136 = Utf8               other$type
+  #137 = Utf8               this$passStrategy
+  #138 = Utf8               other$passStrategy
+  #139 = Utf8               this$putDown
+  #140 = Utf8               other$putDown
+  #141 = Utf8               this$actionType
+  #142 = Utf8               other$actionType
+  #143 = Utf8               this$waitingMillis
+  #144 = Utf8               other$waitingMillis
+  #145 = Utf8               this$containerStopAngle
+  #146 = Utf8               other$containerStopAngle
+  #147 = Utf8               this$actionConfirm
+  #148 = Utf8               other$actionConfirm
+  #149 = Utf8               this$actionInform
+  #150 = Utf8               other$actionInform
+  #151 = Utf8               StackMapTable
+  #152 = Class              #191          // com/kuka/interfaces/plugin/entity/RackMoveDto
+  #153 = Class              #220          // java/lang/Object
+  #154 = Utf8               canEqual
+  #155 = Utf8               hashCode
+  #156 = Utf8               ()I
+  #157 = Utf8               PRIME
+  #158 = Utf8               I
+  #159 = Utf8               result
+  #160 = Utf8               $sequence
+  #161 = Utf8               $position
+  #162 = Utf8               $type
+  #163 = Utf8               $passStrategy
+  #164 = Utf8               $putDown
+  #165 = Utf8               $actionType
+  #166 = Utf8               $waitingMillis
+  #167 = Utf8               $containerStopAngle
+  #168 = Utf8               $actionConfirm
+  #169 = Utf8               $actionInform
+  #170 = Utf8               toString
+  #171 = Utf8               SourceFile
+  #172 = Utf8               RackMoveDto.java
+  #173 = Utf8               Lio/swagger/annotations/ApiModel;
+  #174 = Utf8               ?Ê­/öõ?Úæ?ìò???
+  #175 = NameAndType        #92:#93       // "<init>":()V
+  #176 = Class              #221          // java/lang/Boolean
+  #177 = NameAndType        #222:#223     // valueOf:(Z)Ljava/lang/Boolean;
+  #178 = NameAndType        #76:#77       // putDown:Ljava/lang/Boolean;
+  #179 = Class              #224          // java/lang/Integer
+  #180 = NameAndType        #222:#225     // valueOf:(I)Ljava/lang/Integer;
+  #181 = NameAndType        #82:#47       // waitingMillis:Ljava/lang/Integer;
+  #182 = Utf8
+  #183 = NameAndType        #85:#62       // containerStopAngle:Ljava/lang/String;
+  #184 = NameAndType        #46:#47       // sequence:Ljava/lang/Integer;
+  #185 = NameAndType        #61:#62       // position:Ljava/lang/String;
+  #186 = NameAndType        #66:#62       // type:Ljava/lang/String;
+  #187 = NameAndType        #72:#62       // passStrategy:Ljava/lang/String;
+  #188 = NameAndType        #80:#62       // actionType:Ljava/lang/String;
+  #189 = NameAndType        #88:#77       // actionConfirm:Ljava/lang/Boolean;
+  #190 = NameAndType        #90:#77       // actionInform:Ljava/lang/Boolean;
+  #191 = Utf8               com/kuka/interfaces/plugin/entity/RackMoveDto
+  #192 = NameAndType        #154:#127     // canEqual:(Ljava/lang/Object;)Z
+  #193 = NameAndType        #99:#100      // getSequence:()Ljava/lang/Integer;
+  #194 = NameAndType        #126:#127     // equals:(Ljava/lang/Object;)Z
+  #195 = NameAndType        #101:#102     // getPosition:()Ljava/lang/String;
+  #196 = NameAndType        #103:#102     // getType:()Ljava/lang/String;
+  #197 = NameAndType        #104:#102     // getPassStrategy:()Ljava/lang/String;
+  #198 = NameAndType        #105:#106     // getPutDown:()Ljava/lang/Boolean;
+  #199 = NameAndType        #107:#102     // getActionType:()Ljava/lang/String;
+  #200 = NameAndType        #108:#100     // getWaitingMillis:()Ljava/lang/Integer;
+  #201 = NameAndType        #109:#102     // getContainerStopAngle:()Ljava/lang/String;
+  #202 = NameAndType        #110:#106     // getActionConfirm:()Ljava/lang/Boolean;
+  #203 = NameAndType        #111:#106     // getActionInform:()Ljava/lang/Boolean;
+  #204 = NameAndType        #155:#156     // hashCode:()I
+  #205 = Utf8               java/lang/StringBuilder
+  #206 = Utf8               RackMoveDto(sequence=
+  #207 = NameAndType        #226:#227     // append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #208 = NameAndType        #226:#228     // append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+  #209 = Utf8               , position=
+  #210 = Utf8               , type=
+  #211 = Utf8               , passStrategy=
+  #212 = Utf8               , putDown=
+  #213 = Utf8               , actionType=
+  #214 = Utf8               , waitingMillis=
+  #215 = Utf8               , containerStopAngle=
+  #216 = Utf8               , actionConfirm=
+  #217 = Utf8               , actionInform=
+  #218 = Utf8               )
+  #219 = NameAndType        #170:#102     // toString:()Ljava/lang/String;
+  #220 = Utf8               java/lang/Object
+  #221 = Utf8               java/lang/Boolean
+  #222 = Utf8               valueOf
+  #223 = Utf8               (Z)Ljava/lang/Boolean;
+  #224 = Utf8               java/lang/Integer
+  #225 = Utf8               (I)Ljava/lang/Integer;
+  #226 = Utf8               append
+  #227 = Utf8               (Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #228 = Utf8               (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+{
+  private java.lang.Integer sequence;
+    descriptor: Ljava/lang/Integer;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #49(#50=s#51,#52=s#53)
+        io.swagger.annotations.ApiModelProperty(
+          value="íÂ?ïÃßí?"
+          notes="ö¢?1?ÑÃã·?Ê­îÜÑÃïÃ ý¨?âÍé©ïÎ×ºïÃîÜßí?ëîó­?ñò£¬?ïÃ?õÌÓÞ"
+        )
+      1: #54(#55=J#56,#58=s#59)
+        org.hibernate.validator.constraints.Range(
+          min=1l
+          message="sequence can not be lower than one"
+        )
+    RuntimeVisibleTypeAnnotations:
+      0: #54(#55=J#56,#58=s#59): FIELD
+        org.hibernate.validator.constraints.Range(
+          min=1l
+          message="sequence can not be lower than one"
+        )
+
+  private java.lang.String position;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #49(#50=s#63)
+        io.swagger.annotations.ApiModelProperty(
+          value="íÂ?ïÃ??"
+        )
+      1: #64(#58=s#65)
+        javax.validation.constraints.NotBlank(
+          message="position can not be blank"
+        )
+    RuntimeVisibleTypeAnnotations:
+      0: #64(#58=s#65): FIELD
+        javax.validation.constraints.NotBlank(
+          message="position can not be blank"
+        )
+
+  private java.lang.String type;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #49(#50=s#67)
+        io.swagger.annotations.ApiModelProperty(
+          value="íÂ?ïÃ?úþ,NODE_POINT|NODE_AREA"
+        )
+      1: #68(#69=s#70,#58=s#71)
+        javax.validation.constraints.Pattern(
+          regexp="NODE_POINT|NODE_AREA"
+          message="missionData type  only NODE_POINT|NODE_AREA can be accept"
+        )
+    RuntimeVisibleTypeAnnotations:
+      0: #68(#69=s#70,#58=s#71): FIELD
+        javax.validation.constraints.Pattern(
+          regexp="NODE_POINT|NODE_AREA"
+          message="missionData type  only NODE_POINT|NODE_AREA can be accept"
+        )
+
+  private java.lang.String passStrategy;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #49(#50=s#73)
+        io.swagger.annotations.ApiModelProperty(
+          value="?îñìò?ïÃ?áÖý¨Û¯ú¼óþÕÔ,AUTO|MANUAL"
+        )
+      1: #68(#69=s#74,#58=s#75)
+        javax.validation.constraints.Pattern(
+          regexp="AUTO|MANUAL"
+          message="passStrategy only AUTO|MANUAL can not be accept"
+        )
+    RuntimeVisibleTypeAnnotations:
+      0: #68(#69=s#74,#58=s#75): FIELD
+        javax.validation.constraints.Pattern(
+          regexp="AUTO|MANUAL"
+          message="passStrategy only AUTO|MANUAL can not be accept"
+        )
+
+  private java.lang.Boolean putDown;
+    descriptor: Ljava/lang/Boolean;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #49(#50=s#78,#52=s#79)
+        io.swagger.annotations.ApiModelProperty(
+          value="íÂ?ïÃãÀÜúÛ¯ù»?Ê­(FLEET 2.15.0÷úÜâÐàñýý¨ö¢á¼?í®Ó«£¬ËÇéÄactionType)"
+          notes="Ùù? false"
+        )
+
+  private java.lang.String actionType;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #49(#50=s#81)
+        io.swagger.annotations.ApiModelProperty(
+          value="Óð??ïÃ?âÍé©?ú¼îÜ?íÂ,UP_CONTAINER|DOWN_CONTAINER"
+        )
+
+  private java.lang.Integer waitingMillis;
+    descriptor: Ljava/lang/Integer;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #49(#50=s#83,#52=s#84)
+        io.swagger.annotations.ApiModelProperty(
+          value="í»??????îñìò??ïÃîÜ??"
+          notes="Ùù??êÈ:ûÆõ©"
+        )
+
+  private java.lang.String containerStopAngle;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #49(#50=s#86,#52=s#87)
+        io.swagger.annotations.ApiModelProperty(
+          value="é»ÐïïÎ?ÊÇÓø"
+          notes="Ùù??êÈ 0"
+        )
+
+  private java.lang.Boolean actionConfirm;
+    descriptor: Ljava/lang/Boolean;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #49(#50=s#89)
+        io.swagger.annotations.ApiModelProperty(
+          value="?ú¼?íÂîñãÀÜúâÍé©??"
+        )
+
+  private java.lang.Boolean actionInform;
+    descriptor: Ljava/lang/Boolean;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #49(#50=s#91)
+        io.swagger.annotations.ApiModelProperty(
+          value="?ú¼?íÂý¨ãÀÜúâÍé©÷×ò±"
+        )
+
+  public com.kuka.interfaces.plugin.entity.RackMoveDto();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: iconst_0
+         6: invokestatic  #2                  // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+         9: putfield      #3                  // Field putDown:Ljava/lang/Boolean;
+        12: aload_0
+        13: iconst_0
+        14: invokestatic  #4                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        17: putfield      #5                  // Field waitingMillis:Ljava/lang/Integer;
+        20: aload_0
+        21: ldc           #6                  // String
+        23: putfield      #7                  // Field containerStopAngle:Ljava/lang/String;
+        26: return
+      LineNumberTable:
+        line 17: 0
+        line 35: 4
+        line 36: 6
+        line 41: 12
+        line 42: 14
+        line 44: 20
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      27     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+
+  public java.lang.Integer getSequence();
+    descriptor: ()Ljava/lang/Integer;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #8                  // Field sequence:Ljava/lang/Integer;
+         4: areturn
+      LineNumberTable:
+        line 22: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+
+  public java.lang.String getPosition();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #9                  // Field position:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 25: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+
+  public java.lang.String getType();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #10                 // Field type:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 29: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+
+  public java.lang.String getPassStrategy();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #11                 // Field passStrategy:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 33: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+
+  public java.lang.Boolean getPutDown();
+    descriptor: ()Ljava/lang/Boolean;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #3                  // Field putDown:Ljava/lang/Boolean;
+         4: areturn
+      LineNumberTable:
+        line 36: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+
+  public java.lang.String getActionType();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #12                 // Field actionType:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 39: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+
+  public java.lang.Integer getWaitingMillis();
+    descriptor: ()Ljava/lang/Integer;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #5                  // Field waitingMillis:Ljava/lang/Integer;
+         4: areturn
+      LineNumberTable:
+        line 42: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+
+  public java.lang.String getContainerStopAngle();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #7                  // Field containerStopAngle:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 45: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+
+  public java.lang.Boolean getActionConfirm();
+    descriptor: ()Ljava/lang/Boolean;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #13                 // Field actionConfirm:Ljava/lang/Boolean;
+         4: areturn
+      LineNumberTable:
+        line 48: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+
+  public java.lang.Boolean getActionInform();
+    descriptor: ()Ljava/lang/Boolean;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #14                 // Field actionInform:Ljava/lang/Boolean;
+         4: areturn
+      LineNumberTable:
+        line 51: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+
+  public void setSequence(java.lang.Integer);
+    descriptor: (Ljava/lang/Integer;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #8                  // Field sequence:Ljava/lang/Integer;
+         5: return
+      LineNumberTable:
+        line 17: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+            0       6     1 sequence   Ljava/lang/Integer;
+    MethodParameters:
+      Name                           Flags
+      sequence                       final
+
+  public void setPosition(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #9                  // Field position:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 17: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+            0       6     1 position   Ljava/lang/String;
+    MethodParameters:
+      Name                           Flags
+      position                       final
+
+  public void setType(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #10                 // Field type:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 17: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+            0       6     1  type   Ljava/lang/String;
+    MethodParameters:
+      Name                           Flags
+      type                           final
+
+  public void setPassStrategy(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #11                 // Field passStrategy:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 17: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+            0       6     1 passStrategy   Ljava/lang/String;
+    MethodParameters:
+      Name                           Flags
+      passStrategy                   final
+
+  public void setPutDown(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #3                  // Field putDown:Ljava/lang/Boolean;
+         5: return
+      LineNumberTable:
+        line 17: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+            0       6     1 putDown   Ljava/lang/Boolean;
+    MethodParameters:
+      Name                           Flags
+      putDown                        final
+
+  public void setActionType(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #12                 // Field actionType:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 17: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+            0       6     1 actionType   Ljava/lang/String;
+    MethodParameters:
+      Name                           Flags
+      actionType                     final
+
+  public void setWaitingMillis(java.lang.Integer);
+    descriptor: (Ljava/lang/Integer;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #5                  // Field waitingMillis:Ljava/lang/Integer;
+         5: return
+      LineNumberTable:
+        line 17: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+            0       6     1 waitingMillis   Ljava/lang/Integer;
+    MethodParameters:
+      Name                           Flags
+      waitingMillis                  final
+
+  public void setContainerStopAngle(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #7                  // Field containerStopAngle:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 17: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+            0       6     1 containerStopAngle   Ljava/lang/String;
+    MethodParameters:
+      Name                           Flags
+      containerStopAngle             final
+
+  public void setActionConfirm(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #13                 // Field actionConfirm:Ljava/lang/Boolean;
+         5: return
+      LineNumberTable:
+        line 17: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+            0       6     1 actionConfirm   Ljava/lang/Boolean;
+    MethodParameters:
+      Name                           Flags
+      actionConfirm                  final
+
+  public void setActionInform(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #14                 // Field actionInform:Ljava/lang/Boolean;
+         5: return
+      LineNumberTable:
+        line 17: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+            0       6     1 actionInform   Ljava/lang/Boolean;
+    MethodParameters:
+      Name                           Flags
+      actionInform                   final
+
+  public boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=23, args_size=2
+         0: aload_1
+         1: aload_0
+         2: if_acmpne     7
+         5: iconst_1
+         6: ireturn
+         7: aload_1
+         8: instanceof    #15                 // class com/kuka/interfaces/plugin/entity/RackMoveDto
+        11: ifne          16
+        14: iconst_0
+        15: ireturn
+        16: aload_1
+        17: checkcast     #15                 // class com/kuka/interfaces/plugin/entity/RackMoveDto
+        20: astore_2
+        21: aload_2
+        22: aload_0
+        23: invokevirtual #16                 // Method canEqual:(Ljava/lang/Object;)Z
+        26: ifne          31
+        29: iconst_0
+        30: ireturn
+        31: aload_0
+        32: invokevirtual #17                 // Method getSequence:()Ljava/lang/Integer;
+        35: astore_3
+        36: aload_2
+        37: invokevirtual #17                 // Method getSequence:()Ljava/lang/Integer;
+        40: astore        4
+        42: aload_3
+        43: ifnonnull     54
+        46: aload         4
+        48: ifnull        65
+        51: goto          63
+        54: aload_3
+        55: aload         4
+        57: invokevirtual #18                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+        60: ifne          65
+        63: iconst_0
+        64: ireturn
+        65: aload_0
+        66: invokevirtual #19                 // Method getPosition:()Ljava/lang/String;
+        69: astore        5
+        71: aload_2
+        72: invokevirtual #19                 // Method getPosition:()Ljava/lang/String;
+        75: astore        6
+        77: aload         5
+        79: ifnonnull     90
+        82: aload         6
+        84: ifnull        102
+        87: goto          100
+        90: aload         5
+        92: aload         6
+        94: invokevirtual #18                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+        97: ifne          102
+       100: iconst_0
+       101: ireturn
+       102: aload_0
+       103: invokevirtual #20                 // Method getType:()Ljava/lang/String;
+       106: astore        7
+       108: aload_2
+       109: invokevirtual #20                 // Method getType:()Ljava/lang/String;
+       112: astore        8
+       114: aload         7
+       116: ifnonnull     127
+       119: aload         8
+       121: ifnull        139
+       124: goto          137
+       127: aload         7
+       129: aload         8
+       131: invokevirtual #18                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       134: ifne          139
+       137: iconst_0
+       138: ireturn
+       139: aload_0
+       140: invokevirtual #21                 // Method getPassStrategy:()Ljava/lang/String;
+       143: astore        9
+       145: aload_2
+       146: invokevirtual #21                 // Method getPassStrategy:()Ljava/lang/String;
+       149: astore        10
+       151: aload         9
+       153: ifnonnull     164
+       156: aload         10
+       158: ifnull        176
+       161: goto          174
+       164: aload         9
+       166: aload         10
+       168: invokevirtual #18                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       171: ifne          176
+       174: iconst_0
+       175: ireturn
+       176: aload_0
+       177: invokevirtual #22                 // Method getPutDown:()Ljava/lang/Boolean;
+       180: astore        11
+       182: aload_2
+       183: invokevirtual #22                 // Method getPutDown:()Ljava/lang/Boolean;
+       186: astore        12
+       188: aload         11
+       190: ifnonnull     201
+       193: aload         12
+       195: ifnull        213
+       198: goto          211
+       201: aload         11
+       203: aload         12
+       205: invokevirtual #18                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       208: ifne          213
+       211: iconst_0
+       212: ireturn
+       213: aload_0
+       214: invokevirtual #23                 // Method getActionType:()Ljava/lang/String;
+       217: astore        13
+       219: aload_2
+       220: invokevirtual #23                 // Method getActionType:()Ljava/lang/String;
+       223: astore        14
+       225: aload         13
+       227: ifnonnull     238
+       230: aload         14
+       232: ifnull        250
+       235: goto          248
+       238: aload         13
+       240: aload         14
+       242: invokevirtual #18                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       245: ifne          250
+       248: iconst_0
+       249: ireturn
+       250: aload_0
+       251: invokevirtual #24                 // Method getWaitingMillis:()Ljava/lang/Integer;
+       254: astore        15
+       256: aload_2
+       257: invokevirtual #24                 // Method getWaitingMillis:()Ljava/lang/Integer;
+       260: astore        16
+       262: aload         15
+       264: ifnonnull     275
+       267: aload         16
+       269: ifnull        287
+       272: goto          285
+       275: aload         15
+       277: aload         16
+       279: invokevirtual #18                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       282: ifne          287
+       285: iconst_0
+       286: ireturn
+       287: aload_0
+       288: invokevirtual #25                 // Method getContainerStopAngle:()Ljava/lang/String;
+       291: astore        17
+       293: aload_2
+       294: invokevirtual #25                 // Method getContainerStopAngle:()Ljava/lang/String;
+       297: astore        18
+       299: aload         17
+       301: ifnonnull     312
+       304: aload         18
+       306: ifnull        324
+       309: goto          322
+       312: aload         17
+       314: aload         18
+       316: invokevirtual #18                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       319: ifne          324
+       322: iconst_0
+       323: ireturn
+       324: aload_0
+       325: invokevirtual #26                 // Method getActionConfirm:()Ljava/lang/Boolean;
+       328: astore        19
+       330: aload_2
+       331: invokevirtual #26                 // Method getActionConfirm:()Ljava/lang/Boolean;
+       334: astore        20
+       336: aload         19
+       338: ifnonnull     349
+       341: aload         20
+       343: ifnull        361
+       346: goto          359
+       349: aload         19
+       351: aload         20
+       353: invokevirtual #18                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       356: ifne          361
+       359: iconst_0
+       360: ireturn
+       361: aload_0
+       362: invokevirtual #27                 // Method getActionInform:()Ljava/lang/Boolean;
+       365: astore        21
+       367: aload_2
+       368: invokevirtual #27                 // Method getActionInform:()Ljava/lang/Boolean;
+       371: astore        22
+       373: aload         21
+       375: ifnonnull     386
+       378: aload         22
+       380: ifnull        398
+       383: goto          396
+       386: aload         21
+       388: aload         22
+       390: invokevirtual #18                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       393: ifne          398
+       396: iconst_0
+       397: ireturn
+       398: iconst_1
+       399: ireturn
+      LineNumberTable:
+        line 17: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0     400     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+            0     400     1     o   Ljava/lang/Object;
+           21     379     2 other   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+           36     364     3 this$sequence   Ljava/lang/Object;
+           42     358     4 other$sequence   Ljava/lang/Object;
+           71     329     5 this$position   Ljava/lang/Object;
+           77     323     6 other$position   Ljava/lang/Object;
+          108     292     7 this$type   Ljava/lang/Object;
+          114     286     8 other$type   Ljava/lang/Object;
+          145     255     9 this$passStrategy   Ljava/lang/Object;
+          151     249    10 other$passStrategy   Ljava/lang/Object;
+          182     218    11 this$putDown   Ljava/lang/Object;
+          188     212    12 other$putDown   Ljava/lang/Object;
+          219     181    13 this$actionType   Ljava/lang/Object;
+          225     175    14 other$actionType   Ljava/lang/Object;
+          256     144    15 this$waitingMillis   Ljava/lang/Object;
+          262     138    16 other$waitingMillis   Ljava/lang/Object;
+          293     107    17 this$containerStopAngle   Ljava/lang/Object;
+          299     101    18 other$containerStopAngle   Ljava/lang/Object;
+          330      70    19 this$actionConfirm   Ljava/lang/Object;
+          336      64    20 other$actionConfirm   Ljava/lang/Object;
+          367      33    21 this$actionInform   Ljava/lang/Object;
+          373      27    22 other$actionInform   Ljava/lang/Object;
+      StackMapTable: number_of_entries = 33
+        frame_type = 7 /* same */
+        frame_type = 8 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 14
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto ]
+        frame_type = 253 /* append */
+          offset_delta = 22
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 8 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+    MethodParameters:
+      Name                           Flags
+      o                              final
+
+  protected boolean canEqual(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    flags: (0x0004) ACC_PROTECTED
+    Code:
+      stack=1, locals=2, args_size=2
+         0: aload_1
+         1: instanceof    #15                 // class com/kuka/interfaces/plugin/entity/RackMoveDto
+         4: ireturn
+      LineNumberTable:
+        line 17: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+            0       5     1 other   Ljava/lang/Object;
+    MethodParameters:
+      Name                           Flags
+      other                          final
+
+  public int hashCode();
+    descriptor: ()I
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=13, args_size=1
+         0: bipush        59
+         2: istore_1
+         3: iconst_1
+         4: istore_2
+         5: aload_0
+         6: invokevirtual #17                 // Method getSequence:()Ljava/lang/Integer;
+         9: astore_3
+        10: iload_2
+        11: bipush        59
+        13: imul
+        14: aload_3
+        15: ifnonnull     23
+        18: bipush        43
+        20: goto          27
+        23: aload_3
+        24: invokevirtual #28                 // Method java/lang/Object.hashCode:()I
+        27: iadd
+        28: istore_2
+        29: aload_0
+        30: invokevirtual #19                 // Method getPosition:()Ljava/lang/String;
+        33: astore        4
+        35: iload_2
+        36: bipush        59
+        38: imul
+        39: aload         4
+        41: ifnonnull     49
+        44: bipush        43
+        46: goto          54
+        49: aload         4
+        51: invokevirtual #28                 // Method java/lang/Object.hashCode:()I
+        54: iadd
+        55: istore_2
+        56: aload_0
+        57: invokevirtual #20                 // Method getType:()Ljava/lang/String;
+        60: astore        5
+        62: iload_2
+        63: bipush        59
+        65: imul
+        66: aload         5
+        68: ifnonnull     76
+        71: bipush        43
+        73: goto          81
+        76: aload         5
+        78: invokevirtual #28                 // Method java/lang/Object.hashCode:()I
+        81: iadd
+        82: istore_2
+        83: aload_0
+        84: invokevirtual #21                 // Method getPassStrategy:()Ljava/lang/String;
+        87: astore        6
+        89: iload_2
+        90: bipush        59
+        92: imul
+        93: aload         6
+        95: ifnonnull     103
+        98: bipush        43
+       100: goto          108
+       103: aload         6
+       105: invokevirtual #28                 // Method java/lang/Object.hashCode:()I
+       108: iadd
+       109: istore_2
+       110: aload_0
+       111: invokevirtual #22                 // Method getPutDown:()Ljava/lang/Boolean;
+       114: astore        7
+       116: iload_2
+       117: bipush        59
+       119: imul
+       120: aload         7
+       122: ifnonnull     130
+       125: bipush        43
+       127: goto          135
+       130: aload         7
+       132: invokevirtual #28                 // Method java/lang/Object.hashCode:()I
+       135: iadd
+       136: istore_2
+       137: aload_0
+       138: invokevirtual #23                 // Method getActionType:()Ljava/lang/String;
+       141: astore        8
+       143: iload_2
+       144: bipush        59
+       146: imul
+       147: aload         8
+       149: ifnonnull     157
+       152: bipush        43
+       154: goto          162
+       157: aload         8
+       159: invokevirtual #28                 // Method java/lang/Object.hashCode:()I
+       162: iadd
+       163: istore_2
+       164: aload_0
+       165: invokevirtual #24                 // Method getWaitingMillis:()Ljava/lang/Integer;
+       168: astore        9
+       170: iload_2
+       171: bipush        59
+       173: imul
+       174: aload         9
+       176: ifnonnull     184
+       179: bipush        43
+       181: goto          189
+       184: aload         9
+       186: invokevirtual #28                 // Method java/lang/Object.hashCode:()I
+       189: iadd
+       190: istore_2
+       191: aload_0
+       192: invokevirtual #25                 // Method getContainerStopAngle:()Ljava/lang/String;
+       195: astore        10
+       197: iload_2
+       198: bipush        59
+       200: imul
+       201: aload         10
+       203: ifnonnull     211
+       206: bipush        43
+       208: goto          216
+       211: aload         10
+       213: invokevirtual #28                 // Method java/lang/Object.hashCode:()I
+       216: iadd
+       217: istore_2
+       218: aload_0
+       219: invokevirtual #26                 // Method getActionConfirm:()Ljava/lang/Boolean;
+       222: astore        11
+       224: iload_2
+       225: bipush        59
+       227: imul
+       228: aload         11
+       230: ifnonnull     238
+       233: bipush        43
+       235: goto          243
+       238: aload         11
+       240: invokevirtual #28                 // Method java/lang/Object.hashCode:()I
+       243: iadd
+       244: istore_2
+       245: aload_0
+       246: invokevirtual #27                 // Method getActionInform:()Ljava/lang/Boolean;
+       249: astore        12
+       251: iload_2
+       252: bipush        59
+       254: imul
+       255: aload         12
+       257: ifnonnull     265
+       260: bipush        43
+       262: goto          270
+       265: aload         12
+       267: invokevirtual #28                 // Method java/lang/Object.hashCode:()I
+       270: iadd
+       271: istore_2
+       272: iload_2
+       273: ireturn
+      LineNumberTable:
+        line 17: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0     274     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+            3     271     1 PRIME   I
+            5     269     2 result   I
+           10     264     3 $sequence   Ljava/lang/Object;
+           35     239     4 $position   Ljava/lang/Object;
+           62     212     5 $type   Ljava/lang/Object;
+           89     185     6 $passStrategy   Ljava/lang/Object;
+          116     158     7 $putDown   Ljava/lang/Object;
+          143     131     8 $actionType   Ljava/lang/Object;
+          170     104     9 $waitingMillis   Ljava/lang/Object;
+          197      77    10 $containerStopAngle   Ljava/lang/Object;
+          224      50    11 $actionConfirm   Ljava/lang/Object;
+          251      23    12 $actionInform   Ljava/lang/Object;
+      StackMapTable: number_of_entries = 20
+        frame_type = 255 /* full_frame */
+          offset_delta = 23
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 3
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/RackMoveDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: new           #29                 // class java/lang/StringBuilder
+         3: dup
+         4: invokespecial #30                 // Method java/lang/StringBuilder."<init>":()V
+         7: ldc           #31                 // String RackMoveDto(sequence=
+         9: invokevirtual #32                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        12: aload_0
+        13: invokevirtual #17                 // Method getSequence:()Ljava/lang/Integer;
+        16: invokevirtual #33                 // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+        19: ldc           #34                 // String , position=
+        21: invokevirtual #32                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        24: aload_0
+        25: invokevirtual #19                 // Method getPosition:()Ljava/lang/String;
+        28: invokevirtual #32                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        31: ldc           #35                 // String , type=
+        33: invokevirtual #32                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        36: aload_0
+        37: invokevirtual #20                 // Method getType:()Ljava/lang/String;
+        40: invokevirtual #32                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        43: ldc           #36                 // String , passStrategy=
+        45: invokevirtual #32                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        48: aload_0
+        49: invokevirtual #21                 // Method getPassStrategy:()Ljava/lang/String;
+        52: invokevirtual #32                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        55: ldc           #37                 // String , putDown=
+        57: invokevirtual #32                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        60: aload_0
+        61: invokevirtual #22                 // Method getPutDown:()Ljava/lang/Boolean;
+        64: invokevirtual #33                 // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+        67: ldc           #38                 // String , actionType=
+        69: invokevirtual #32                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        72: aload_0
+        73: invokevirtual #23                 // Method getActionType:()Ljava/lang/String;
+        76: invokevirtual #32                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        79: ldc           #39                 // String , waitingMillis=
+        81: invokevirtual #32                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        84: aload_0
+        85: invokevirtual #24                 // Method getWaitingMillis:()Ljava/lang/Integer;
+        88: invokevirtual #33                 // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+        91: ldc           #40                 // String , containerStopAngle=
+        93: invokevirtual #32                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        96: aload_0
+        97: invokevirtual #25                 // Method getContainerStopAngle:()Ljava/lang/String;
+       100: invokevirtual #32                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       103: ldc           #41                 // String , actionConfirm=
+       105: invokevirtual #32                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       108: aload_0
+       109: invokevirtual #26                 // Method getActionConfirm:()Ljava/lang/Boolean;
+       112: invokevirtual #33                 // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+       115: ldc           #42                 // String , actionInform=
+       117: invokevirtual #32                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       120: aload_0
+       121: invokevirtual #27                 // Method getActionInform:()Ljava/lang/Boolean;
+       124: invokevirtual #33                 // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+       127: ldc           #43                 // String )
+       129: invokevirtual #32                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       132: invokevirtual #44                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       135: areturn
+      LineNumberTable:
+        line 17: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0     136     0  this   Lcom/kuka/interfaces/plugin/entity/RackMoveDto;
+}
+SourceFile: "RackMoveDto.java"
+RuntimeVisibleAnnotations:
+  0: #173(#50=s#174)
+    io.swagger.annotations.ApiModel(
+      value="?Ê­/öõ?Úæ?ìò???"
+    )

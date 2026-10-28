@@ -1,0 +1,49 @@
+{
+  "endpoint": "192.168.0.45:50090",
+  "dataTypes": [
+    "kuka.mobilerobotics.payload.v1alpha1.PayloadTypesData",
+    "kuka.mobilerobotics.robotmanager.v1alpha1.LocalRobotData",
+    "kuka.mobilerobotics.payload.v1alpha1.PayloadData",
+    "kuka.mobilerobotics.localizer.v1alpha1.MapData",
+    "kuka.mobilerobotics.finelocalization.v1alpha1.LocationData",
+    "kuka.diagnostics.v1alpha1.ModuleData",
+    "kuka.mobilerobotics.station.v1alpha1.StationData",
+    "kuka.mobilerobotics.robotmanager.v1alpha1.RobotData",
+    "kuka.mobilerobotics.objects.v1alpha1.ObjectModelData"
+  ],
+  "robotData": {
+    "robots": [
+      {
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "action_types": [
+          "kuka.diagnostics.v1alpha1.CreateDiagnosticsPackageCommand",
+          "kuka.mobilerobotics.finelocalization.v1alpha1.ManageLocationDataCommand",
+          "kuka.mobilerobotics.localizer.v1alpha1.ManageMapDataCommand",
+          "kuka.mobilerobotics.objects.v1alpha1.ManageObjectModelDataCommand",
+          "kuka.mobilerobotics.order.v1alpha1.OrderCommand",
+          "kuka.mobilerobotics.payload.v1alpha1.ManagePayloadDataCommand",
+          "kuka.mobilerobotics.payload.v1alpha1.ManagePayloadTypeDataCommand",
+          "kuka.mobilerobotics.robotmanager.v1alpha1.SetServerCommand",
+          "kuka.mobilerobotics.secs.v1alpha1.SecsEventCommand",
+          "kuka.mobilerobotics.station.v1alpha1.ManageStationDataCommand",
+          "kuka.mobilerobotics.wakeup.v1alpha1.WakeUpCommand"
+        ],
+        "data_types": [
+          "kuka.diagnostics.v1alpha1.ModuleData",
+          "kuka.mobilerobotics.finelocalization.v1alpha1.LocationData",
+          "kuka.mobilerobotics.localizer.v1alpha1.MapData",
+          "kuka.mobilerobotics.objects.v1alpha1.ObjectModelData",
+          "kuka.mobilerobotics.payload.v1alpha1.PayloadData",
+          "kuka.mobilerobotics.payload.v1alpha1.PayloadTypesData",
+          "kuka.mobilerobotics.robotmanager.v1alpha1.LocalRobotData",
+          "kuka.mobilerobotics.robotmanager.v1alpha1.RobotData",
+          "kuka.mobilerobotics.station.v1alpha1.StationData"
+        ],
+        "timestamp": "2026-10-23T08:13:57.759315298Z"
+      }
+    ]
+  },
+  "robotCount": 1,
+  "stationData": {},
+  "payloadData": {}
+}

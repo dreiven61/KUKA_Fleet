@@ -1,0 +1,22 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.obstacleavoidance.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.obstacleavoidance.v1alpha1";
+option java_outer_classname = "ActivateCamera3dCommandProto";
+option java_multiple_files = true;
+
+// controls whether the cameras obstacle detection is enabled or disabled
+// while disabled, the current clearence and all other settings are ignored and the camera behaves as there are no obstacles is sight
+// if enabled, all other settings take effect as they were configured with other commands (i.e. ClearanceCamera3dCommand)
+message ActivateCamera3dCommand 
+{
+  bool enabled = 1;
+}

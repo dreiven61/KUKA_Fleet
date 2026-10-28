@@ -1,0 +1,37 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.core.geometry.v1;
+
+import "kuka/core/geometry/v1/circle.proto";
+import "kuka/core/geometry/v1/polygon.proto";
+import "kuka/core/geometry/v1/rectangle.proto";
+import "kuka/core/geometry/v1/transform_2d.proto";
+
+option csharp_namespace = "Kuka.Core.Geometry.V1";
+option java_package = "com.kuka.core.geometry.v1";
+option java_outer_classname = "Shape2DProto";
+option java_multiple_files = true;
+
+message Shape2D {
+  oneof shape {
+    // Defines a circle in x-y plane
+    kuka.core.geometry.v1.Circle circle = 1;
+    
+    // Defines a rectangle in x-y plane.
+    // Length is relative to offset
+    kuka.core.geometry.v1.Rectangle rectangle = 2;
+
+    // Defines a polygon in x-y plane.
+    kuka.core.geometry.v1.Polygon polygon = 3;
+  }
+
+  // Offset of the shape relative to its origin.
+  kuka.core.geometry.v1.Transform2D offset = 4;
+}

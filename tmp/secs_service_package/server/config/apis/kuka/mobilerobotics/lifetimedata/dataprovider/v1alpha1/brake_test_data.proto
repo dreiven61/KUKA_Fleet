@@ -1,0 +1,30 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.lifetimedata.dataprovider.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.LifetimeData.DataProvider.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "BrakeTestDataProto";
+option java_package = "com.kuka.mobilerobotics.lifetimedata.dataprovider.v1alpha1";
+
+// The data related to the last brake test execution.
+message BrakeTestData
+{
+  // The date of the last brake test execution for the left axis.
+  google.protobuf.Timestamp left_axis_date = 1;
+  // The result of the last brake test execution for the left axis.
+  bool left_axis_result = 2;
+  // The date of the last brake test execution for the right axis.
+  google.protobuf.Timestamp right_axis_date = 3;
+  // The result of the last brake test execution for the right axis.
+  bool right_axis_result = 4;
+}

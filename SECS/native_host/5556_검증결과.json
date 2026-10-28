@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-28",
+  "externalPort": 5556,
+  "sessionId": 3000,
+  "pcMode": "Active",
+  "pluginMode": "Passive",
+  "pluginVersion": "1.1.1",
+  "pcVersion": "2.1.1",
+  "sourceBuildVerified": true,
+  "pcTests": 317,
+  "javaBusinessTests": 1577,
+  "liveServerModified": false,
+  "serverReadOnlyEvidence": {
+    "oldPortOwner": "kecs-engine",
+    "oldMapping": "5556:5556",
+    "interfacePublishedPorts": [
+      "10870:10870"
+    ],
+    "nativeConfigExists": false
+  },
+  "sha256": {
+    "SECS/fleet_transfer_plugin/build/servostar-mes-transfer-1.1.1.jar": "dbbc2b9f74c9583c79434b4648be1c95547af1730c0f64d5bcd512a5f7e1854b",
+    "VirtualMCS/dist-2.1.1/KukaVirtualMCS.dll": "df867ca9912672529df8606f30f96918e035e9c7919e8bcab5d37703d068b37c",
+    "VirtualMCS/KukaVirtualMCS-2.1.1-win-x64.zip": "f0c7233198dfb3b3298622b09ebbcfcd1090546aac8162f6a9c33d38b5db9833"
+  }
+}

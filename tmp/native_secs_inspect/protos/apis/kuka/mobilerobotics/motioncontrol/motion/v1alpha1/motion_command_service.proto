@@ -1,0 +1,140 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motioncontrol.motion.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+
+import "kuka/core/v1/message_header.proto";
+import "kuka/mobilerobotics/motioncontrol/motion/v1alpha1/motion_command.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.MotionControl.Motion.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "MotionControlServiceProto";
+option java_package = "com.kuka.mobilerobotics.motioncontrol.motion.v1alpha1";
+
+// Service for executing commands on a motion device.
+service MotionControlService
+{
+  // Start the motion system in order to make it ready to drive (transitions to "INITIALIZING" and to "RUNNING")
+  rpc StartMotionControl(StartMotionControlRequest) returns (StartMotionControlResponse);
+
+  // Stops the vehicle (transitions to STOPPING)
+  rpc StopMotionControl(StopMotionControlRequest) returns (StopMotionControlResponse);
+
+  // Sends a stream of motion commands to be executed - transitions to RUNNING
+  rpc UpdateMotionCommand(stream UpdateMotionCommandRequest) returns (stream UpdateMotionCommandResponse);
+
+  // Returns the currently executed motion command
+  rpc GetMotionCommand(GetMotionCommandRequest) returns (GetMotionCommandResponse);
+
+  // Starts a stream which provides the motion commands currently executed
+  rpc SubscribeMotionCommand(SubscribeMotionCommandRequest) returns (stream SubscribeMotionCommandResponse);
+}
+
+// Request and response for StartMotionControl
+message StartMotionControlRequest
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // A unique identifier designating the owner of the control instance.
+  // This id must be provided with the command to ensure the single point of control.
+  google.protobuf.StringValue control_uuid = 2;
+}
+
+// StartMotionControlResponse
+message StartMotionControlResponse
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // The timeout until the client has to sent the first command.
+  double timeout = 2;
+}
+
+// Request and response for FinalizeMotion
+message StopMotionControlRequest
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // A unique identifier designating the owner of the control instance.
+  // This id must be provided with the command to ensure the single point of control.
+  string control_uuid = 2;
+}
+
+// StopMotionControlResponse
+message StopMotionControlResponse
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+}
+
+// Request and response for UpdateMotionCommand
+message UpdateMotionCommandRequest
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // A unique identifier designating the owner of the control instance.
+  // This id must be obtained from a previous call to "StartMotionControl" to ensure the single point of control.
+  string control_uuid = 2;
+
+  // Actual command request, containing the command information and the timestamp at its generation.
+  MotionCommand command = 3;
+}
+
+// This contains the motion command (velocity or trajectory) adjusted to match the platform's constraints.
+message UpdateMotionCommandResponse
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // Contains the corrected command information.
+  oneof corrected
+  {
+    // velocity control
+    VelocityCommand velocity_command = 2;
+  }
+}
+
+// Requests and responses for GetMotionCommand and SubscribeMotionCommand
+message GetMotionCommandRequest
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+}
+
+// GetMotionCommandResponse
+message GetMotionCommandResponse
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // Contains the command currently executed
+  MotionCommand command = 2;
+}
+
+// SubscribeMotionCommandRequest
+message SubscribeMotionCommandRequest
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+}
+
+// SubscribeMotionCommandResponse
+message SubscribeMotionCommandResponse
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+
+  // Contains the command currently executed
+  MotionCommand command = 2;
+}

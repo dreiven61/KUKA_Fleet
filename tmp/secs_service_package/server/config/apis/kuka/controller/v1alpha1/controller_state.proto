@@ -1,0 +1,48 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.controller.v1alpha1;
+
+import "kuka/core/state/v1/error_state.proto";
+
+option csharp_namespace = "Kuka.Controller.V1alpha1";
+option java_package = "com.kuka.controller.v1alpha1";
+option java_outer_classname = "ControllerStateProto";
+option java_multiple_files = true;
+
+// Represents the state of a controller service.
+message ControllerState {
+
+  enum State {
+    // The controller state is unknown.
+    UNKNOWN = 0;
+
+    // The controller cannot execute its function (e.g. blocked by something).
+    NOT_AVAILABLE = 1;
+
+    // The controller is available and there is no active comand session. It is ready to accept StartControl() commands.
+    AVAILABLE = 2;
+
+    // The controller session is starting. StartControl() method was called on the controller and it's execution is in progress.
+    INITIALIZING = 3;
+
+    // The controller session started and it's able to process command updates.
+    RUNNING = 4;
+
+    // The controller session is stopping. StopControl() method was called on the controller and it's execution is in progress.
+    STOPPING = 5;
+  }
+
+  // The current state of the controller.
+  State state = 1;
+
+  // The current state of the error state machine.
+  // The field is optional. If not set, defaults to OK.
+  kuka.core.state.v1.ErrorState error_state = 2;
+}

@@ -1,0 +1,34 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.safety.dataprovider.v1;
+
+option csharp_namespace = "Kuka.Mobilerobotics.Safety.DataProvider.V1";
+option java_multiple_files = true;
+option java_outer_classname = "SafetyStatusProto";
+option java_package = "com.kuka.mobilerobotics.safety.dataprovider.v1";
+
+// message to send Safety Status 
+message SafetyStatus
+{
+  // Automatic operation mode.
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  bool automaticOperation = 1;
+  // Platform is in locked state (motions denied).
+  bool locked = 2;
+  // The wheel brakes are open.
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  bool platformBrakeOpen = 3;
+  // Motion execution is allowed. False means Stop request (SS1).
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  bool motionEnabled = 4;
+  // Automatic restart active, false automatic restart prevented for personnel detection function.
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  bool motionAutoRestart = 5;
+}

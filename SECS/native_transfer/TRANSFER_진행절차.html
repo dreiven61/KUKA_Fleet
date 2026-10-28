@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>TRANSFER_진행절차</title>
+  <style>
+
+html {
+color: #1a1a1a;
+background-color: #fdfdfd;
+}
+body {
+margin: 0 auto;
+max-width: 36em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 12px;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+html {
+background-color: white;
+}
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+a {
+color: #1a1a1a;
+}
+a:visited {
+color: #1a1a1a;
+}
+img {
+max-width: 100%;
+}
+svg {
+height: auto;
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+white-space: pre-wrap;
+font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+font-size: 85%;
+margin: 0;
+hyphens: manual;
+}
+pre {
+margin: 1em 0;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+.sourceCode {
+background-color: transparent;
+overflow: visible;
+}
+hr {
+border: none;
+border-top: 1px solid #1a1a1a;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid #1a1a1a;
+border-bottom: 1px solid #1a1a1a;
+}
+th {
+border-top: 1px solid #1a1a1a;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+
+<style id="md-pandoc-exporter-clean-print-style">
+@page { size: Letter; margin: 0.60in 0.45in 0.55in 0.45in; }
+html {
+  background: #fff !important;
+  color: #222;
+  font-family: Arial, "Malgun Gothic", "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+}
+body {
+  margin: 0 !important;
+  max-width: none !important;
+  width: auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+  color: #222;
+  overflow-wrap: break-word;
+}
+h1 {
+  font-size: 30px;
+  line-height: 1.2;
+  margin: 0 0 28px;
+  font-weight: 700;
+}
+h2 {
+  font-size: 24px;
+  line-height: 1.25;
+  margin: 28px 0 18px;
+  font-weight: 700;
+}
+h3 {
+  font-size: 20px;
+  line-height: 1.3;
+  margin: 26px 0 14px;
+  font-weight: 700;
+}
+p { margin: 0 0 14px; }
+table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 16px 0 18px;
+  font-size: 14px;
+  line-height: 1.45;
+  page-break-inside: auto;
+  table-layout: auto !important;
+}
+thead { display: table-header-group; }
+tr {
+  page-break-inside: avoid;
+  page-break-after: auto;
+}
+th,
+td {
+  border: 1px solid #d9d9d9 !important;
+  padding: 8px 10px !important;
+  vertical-align: middle;
+}
+th {
+  font-weight: 700;
+  background: #fff;
+}
+tbody { border: 0 !important; }
+code {
+  font-family: Consolas, "Cascadia Mono", "Courier New", monospace;
+  font-size: 0.84em;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+ul,
+ol {
+  margin: 0 0 14px 24px;
+  padding: 0;
+}
+li { margin: 3px 0; }
+@media print {
+  body { font-size: 14px !important; }
+  h2,
+  h3,
+  h4 { break-after: avoid; }
+}
+</style>
+</head>
+<body>
+<h1 id="secs-transfer-메시지와-fleet-사전-설정">SECS TRANSFER 메시지와
+Fleet 사전 설정</h1>
+<p>대상은 기존 KMP1500i 가상 로봇과 lay01/dist1이다. 왕복 Workflow와
+Windows REST 브릿지를 사용하지 않고 단방향 운송 명령을 시험한다.</p>
+<p><strong>현재 상태:</strong> 메시지 파일은 작성했고 설치본 파서로
+구조를 검증했다. 현재 KMP1500i 가상 로봇을 기본 SECS/Order Engine 경로에
+연결하는 설정과 GraphData에 Station을 저장하는 방법은 확인되지 않았다.
+아래 1~2는 메시지 준비 및 SECS 설정 확인 절차다. 3~4가 완료되기 전 실제
+운송 준비 완료로 보지 않는다. 이 문서는 서버 설정 적용 완료 기록이
+아니다.</p>
+<h2 id="secomsimulator-메시지-준비">1. SEComSimulator 메시지 준비</h2>
+<p>File → Open에서 다음 파일을 연다.</p>
+<p><code>C:\work\KUKA\SECS\native_transfer\FLEET_TRANSFER_TEST.SMD</code></p>
+<p>라이브러리에는 다음 요청을 준비했다. 응답(Ack) 항목은 수동으로
+전송하지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>요청</th>
+<th>의미</th>
+<th>최초 예시 COMMANDID</th>
+<th>SOURCEPORT</th>
+<th>DESTPORT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Transfer89To97 — S2F49 W H→E</td>
+<td>89→97 단방향 운송</td>
+<td>TR_TEST_001</td>
+<td>PORT_89</td>
+<td>PORT_97</td>
+</tr>
+<tr>
+<td>Transfer97To89 — S2F49 W H→E</td>
+<td>97→89 단방향 운송</td>
+<td>TR_TEST_002</td>
+<td>PORT_97</td>
+<td>PORT_89</td>
+</tr>
+<tr>
+<td>ResumeNativeTransfers — S2F41 W H→E</td>
+<td>기본 운송 시스템 RESUME</td>
+<td>해당 없음</td>
+<td>해당 없음</td>
+<td>해당 없음</td>
+</tr>
+</tbody>
+</table>
+<p>PORT_89와 PORT_97은 이번 시험을 위해 정한 <strong>등록 예정
+값</strong>이다. 현재 Fleet에 이미 등록된 값이라고 가정하지 않는다.</p>
+<p>각 S2F49의 데이터 구조:</p>
+<pre class="text"><code>L 4
+  U4 DATAID = 0
+  A  OBJSPEC = &quot;&quot;
+  A  RCMD = &quot;TRANSFER&quot;
+  L 2
+    L 2
+      A &quot;COMMANDINFO&quot;
+      L 3
+        L 2 → A &quot;COMMANDID&quot;, A &quot;TR_TEST_001&quot;
+        L 2 → A &quot;PRIORITY&quot;, U2 1
+        L 2 → A &quot;REPLACE&quot;, U2 0
+    L 2
+      A &quot;TRANSFERINFO&quot;
+      L 3
+        L 2 → A &quot;CARRIERID&quot;, A &quot;SIM_CARGO_001&quot;
+        L 2 → A &quot;SOURCEPORT&quot;, A &quot;PORT_89&quot;
+        L 2 → A &quot;DESTPORT&quot;, A &quot;PORT_97&quot;</code></pre>
+<p>Fleet 설치본 파서에서는 REPLACE도 필요하다. 값을 바꿀 때 ASCII
+Count는 문자열의 실제 바이트 길이와 맞아야 한다. 예: PORT_89=7,
+PORT_97=7, SIM_CARGO_001=13, TR_TEST_001=11. 새 운송 요청에는 새
+COMMANDID를 사용한다. 접수 여부가 불명확한 요청은 새 ID로 즉시
+재전송하지 않는다.</p>
+<h2 id="fleet-secs-설정-확인">2. Fleet SECS 설정 확인</h2>
+<p>서버에서 <code>/opt/server/config/secs/secs-config.yml</code>을
+확인한다. 기본 TRANSFER를 Order Engine에 전달하는 설정은 다음과
+같다.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">convertTransfersToOrderCommands</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">createPayloadsForOrders</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">payloadTypeId</span><span class="kw">:</span><span class="at"> SECS</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">commandActionExecutors</span><span class="kw">:</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">TRANSFER</span><span class="kw">:</span><span class="at"> orderengine:50200</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">CANCEL</span><span class="kw">:</span><span class="at"> orderengine:50200</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ABORT</span><span class="kw">:</span><span class="at"> orderengine:50200</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">PAUSE</span><span class="kw">:</span><span class="at"> orderengine:50200</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">RESUME</span><span class="kw">:</span><span class="at"> orderengine:50200</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">default</span><span class="kw">:</span><span class="at"> orderengine:50200</span></span></code></pre></div>
+<p>같은 YAML 블록을 중복 추가하지 않는다.
+<code>convertTransfersToOrderCommands</code>,
+<code>createPayloadsForOrders</code>, <code>payloadTypeId</code>는 현재
+설치본의 기본값도 각각 true/true/SECS다. 2026-10-26에 읽은 실제
+파일에서도 TRANSFER는 orderengine:50200으로 매핑돼 있었다. 따라서 위
+항목을 명시하는 것만으로 현재 문제를 해결한다고 볼 수 없다.</p>
+<p>현재 방식은 stationCompartmentDelimiter를 지정하지 않는 구성을 전제로
+한다. 이 경우 SOURCEPORT/DESTPORT는 전역적으로 고유한 Station
+compartment UUID다. 지도 화면의 노드 번호와 별개다.</p>
+<p>설정을 실제로 변경할 경우 먼저 백업한다.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp <span class="at">-a</span> /opt/server/config/secs/secs-config.yml /opt/server/config/secs/secs-config.yml.before-native-transfer</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano /opt/server/config/secs/secs-config.yml</span></code></pre></div>
+<p>변경 후 SECS 서비스에만 적용한다.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker restart secs</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker logs <span class="at">--tail</span> 50 secs</span></code></pre></div>
+<p>이 설정 확인/변경은 SECS 접수 경로의 준비이며 로봇·Station 등록을
+대신하지 않는다.</p>
+<h2 id="fromto에-필요한-fleet-데이터">3. From/To에 필요한 Fleet
+데이터</h2>
+<p>실제 GraphData를 조회한 결과:</p>
+<table style="width:100%;">
+<thead>
+<tr>
+<th>역할</th>
+<th>Graph UUID</th>
+<th>실제 Node UUID</th>
+<th>위치(m)</th>
+<th>등록할 Station UUID 예시</th>
+<th>등록할 compartment UUID 예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>From</td>
+<td>lay01-dist1</td>
+<td>lay01-dist1-89</td>
+<td>X=12, Y=23</td>
+<td>SECS_ST_89</td>
+<td>PORT_89</td>
+</tr>
+<tr>
+<td>To</td>
+<td>lay01-dist1</td>
+<td>lay01-dist1-97</td>
+<td>X=12, Y=11</td>
+<td>SECS_ST_97</td>
+<td>PORT_97</td>
+</tr>
+</tbody>
+</table>
+<p>각 Station은 capacity.compartments에 해당 PORT를 가진 StationData로
+등록돼야 한다. 데이터 형식 예시는
+<code>station_setup_requests.json</code>에 있다. 이 파일은 RPC 요청
+데이터 참조용이며 Fleet GUI의 Import 파일이라고 가정하지 않는다.
+적용하지 않았다.</p>
+<p>등록에 쓰이는 공식 메시지는
+<code>kuka.mobilerobotics.station.v1alpha1.ManageStationDataCommand</code>이고
+INSERT는 type=1이다. Station 서비스는 station:50110이다. 별도의
+PayloadType <code>SECS</code>도 Payload 서비스에 있어야 한다. 웹
+Container 목록의 SIM_CARGO_001과 기본 SECS의 PayloadData는 현재 조회상
+자동으로 연계돼 있지 않다.</p>
+<p>Station을 등록한 뒤에는 GraphData의 89/97 노드에 각 Station UUID를
+연결해야 한다. 설치본 Order Engine은 노드 GraphProperty의
+StationProperty를 읽어 Station 위치를 찾는다. 현재 조회한 그래프에는 이
+StationProperty가 없다. 등록할 속성의 예시는
+<code>station_setup_requests.json</code>에 함께 적었다.</p>
+<p><strong>중단 지점:</strong> 현재 basic-data 서버에서 공식
+<code>GraphEditorService/UpsertNodes</code>에 빈 목록을 보낸 결과
+<code>UNIMPLEMENTED / Method not found</code>가 반환됐다. 실제 노드는
+변경하지 않았다. 따라서 이 서버에서 StationProperty를 저장하는 검증된
+명령이나 GUI 절차를 아직 제시할 수 없다. 여기서 지도 데이터를 임의로
+덮어쓰거나 Station UUID가 노드 번호와 자동 연계된다고 가정하지
+않는다.</p>
+<h2 id="로봇과-pickdrop-연결">4. 로봇과 Pick/Drop 연결</h2>
+<p>Order Engine이 사용할 로봇은 RobotData에 등록돼 있어야 하고, 화물을
+실을 TransportCapacity, 배터리 상태, 해당 로봇의 Pick/Drop 실행 경로가
+필요하다. 현재 RobotManager:50090에는 서버 항목만 있고 기존 KMP1500i
+가상 로봇 1/2/3은 없다.</p>
+<p>이 로봇 연결 절차도 현재 설치본/공개 문서/조회한 표준 API에서
+확인하지 못했다. 로봇 이름만 정적 RobotData에 넣는 방식으로 실제 운송
+연계가 완료됐다고 처리하지 않는다. 기존 KMP1500i New Sims에 대한 공식
+연계 모듈·설정 확인이 필요하다.</p>
+<h2 id="준비가-완료된-뒤의-전송-순서">5. 준비가 완료된 뒤의 전송
+순서</h2>
+<ol type="1">
+<li>준비된 포트와 실제 화물 위치가 맞는지 확인한다. 다른 반복 시험이
+같은 로봇·화물을 사용하지 않도록 한다.</li>
+<li>SEComSimulator: Host, HSMS Active, 192.168.0.45:5555, Device ID
+3000.</li>
+<li>Open Connection 후 S1F13 ConnectEquip(L0, H→E)을 보내 S1F14
+COMMACK=0을 확인한다.</li>
+<li>S1F17 Request ON-LINE을 보내 S1F18 응답을 확인한다.</li>
+<li>기본 운송 제어가 PAUSED 상태라면 ResumeNativeTransfers(S2F41
+RESUME)를 보내고 S2F42 응답을 확인한다. RESUME는 접수된 기존 운송 명령의
+진행에 영향을 줄 수 있으므로 대기 작업도 확인한다.</li>
+<li>Transfer89To97의 <strong>S2F49 요청</strong>을 보낸다. S2F50은 접수
+결과이므로 이것만으로 운송 완료로 판정하지 않는다. 거부 시 추가 명령을
+보내기 전에 원인을 확인한다.</li>
+<li>실제 Pick→이동→Drop 및 해당 COMMANDID의 완료 보고를 확인한다. 그 뒤
+필요하면 Transfer97To89를 새 COMMANDID로 별도 전송한다. 자동 왕복으로
+처리하지 않는다.</li>
+</ol>
+<p>이번 확인에서는 HSMS 명령이나 운송 주문을 전송하지 않았다. 현재
+제공한 것은 검증된 메시지 구조, 실제 지도 식별자, 필요한 설정 데이터와
+적용이 막힌 지점이다. 전체 운송이 작동하는 Fleet 사전 설정 완료 절차로
+오인하지 않아야 한다.</p>
+</body>
+</html>

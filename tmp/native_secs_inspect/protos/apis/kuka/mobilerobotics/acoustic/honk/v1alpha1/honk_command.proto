@@ -1,0 +1,47 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.acoustic.v1alpha1;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.Acoustic.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "HonkCommandProto";
+option java_package = "com.kuka.mobilerobotics.acoustic.v1alpha1";
+
+// Definition of a honking command which consists of a honking sequence that is emitted
+// by the robot and optionally repeated.
+// If none of the optional parameters is provided, the honking sequence is executed once.
+// If multiple optional parameters are provided, the longest lasting parameter shall be satisfied
+// New honk commands overwrite the already executed honk commands.
+message HonkCommand
+{
+  // The timestamp corresponding to the time of the creation of this honk command.
+  google.protobuf.Timestamp timestamp = 1;
+  // An individual honk consists of a honking sound and a following silent period.
+  message Honk
+  {
+    // Duration of honking
+    google.protobuf.Duration on_duration = 1;
+    // Duration of silence after honking
+    google.protobuf.Duration off_duration = 2;
+  }
+  // List of individual honks to be emitted.
+  repeated Honk honk_sequence = 2;
+  // OPTIONAL
+  // Duration until the sequence are repeated in seconds.
+  google.protobuf.Duration duration = 3;
+  // OPTIONAL
+  // Number of repetitions of all honks.
+  // Repetition starts after the last honk action is executed.
+  // protolint:disable:next FIELD_NAMES_EXCLUDE_PREPOSITIONS
+  uint32 repetition_of_honk_sequence = 4;
+}

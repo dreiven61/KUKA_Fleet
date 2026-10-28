@@ -1,0 +1,217 @@
+Compiled from "AmrContainerManagerController.java"
+public class com.kuka.interfaces.plugin.controller.AmrContainerManagerController {
+  private static final org.slf4j.Logger log;
+
+  private com.kuka.interfaces.plugin.services.WcsGrpcAdapterService wcsGrpcAdapterService;
+
+  public com.kuka.interfaces.plugin.controller.AmrContainerManagerController();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public com.kuka.interfaces.plugin.common.ResponseResult<java.util.List<com.kuka.interfaces.plugin.entity.ContainerDto>> containerQuery(com.kuka.interfaces.plugin.entity.ContainerQueryDto);
+    Code:
+       0: getstatic     #2                  // Field log:Lorg/slf4j/Logger;
+       3: ldc           #3                  // String containerQuery:[{}]
+       5: aload_1
+       6: invokeinterface #4,  3            // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      11: aload_1
+      12: invokevirtual #5                  // Method com/kuka/interfaces/plugin/entity/ContainerQueryDto.getEmptyFullStatus:()Ljava/lang/Integer;
+      15: invokestatic  #6                  // Method com/kuka/interfaces/plugin/common/MisUtils.null2Default:(Ljava/lang/Object;)Lcom/kuka/interfaces/plugin/function/NullToDefaultHandler;
+      18: aload_1
+      19: invokedynamic #7,  0              // InvokeDynamic #0:run:(Lcom/kuka/interfaces/plugin/entity/ContainerQueryDto;)Ljava/lang/Runnable;
+      24: invokeinterface #8,  2            // InterfaceMethod com/kuka/interfaces/plugin/function/NullToDefaultHandler.nullToDefaultHandle:(Ljava/lang/Runnable;)V
+      29: aload_0
+      30: getfield      #9                  // Field wcsGrpcAdapterService:Lcom/kuka/interfaces/plugin/services/WcsGrpcAdapterService;
+      33: aload_1
+      34: invokevirtual #10                 // Method com/kuka/interfaces/plugin/services/WcsGrpcAdapterService.queryContainer:(Lcom/kuka/interfaces/plugin/entity/ContainerQueryDto;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+      37: areturn
+
+  public com.kuka.interfaces.plugin.common.ResponseResult<java.util.List<com.kuka.interfaces.plugin.entity.ContainerDto>> containerQueryAll(com.kuka.interfaces.plugin.entity.ContainerQueryAllDto);
+    Code:
+       0: getstatic     #2                  // Field log:Lorg/slf4j/Logger;
+       3: ldc           #11                 // String containerQueryAll:[{}]
+       5: aload_1
+       6: invokeinterface #4,  3            // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      11: aload_0
+      12: getfield      #9                  // Field wcsGrpcAdapterService:Lcom/kuka/interfaces/plugin/services/WcsGrpcAdapterService;
+      15: aload_1
+      16: invokevirtual #12                 // Method com/kuka/interfaces/plugin/services/WcsGrpcAdapterService.queryContainerAll:(Lcom/kuka/interfaces/plugin/entity/ContainerQueryAllDto;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+      19: areturn
+
+  public com.kuka.interfaces.plugin.common.ResponseResult containerIn(com.kuka.interfaces.plugin.entity.ContainerMoveInDto);
+    Code:
+       0: getstatic     #2                  // Field log:Lorg/slf4j/Logger;
+       3: ldc           #13                 // String amr container in:[{}]
+       5: aload_1
+       6: invokeinterface #4,  3            // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      11: aload_1
+      12: invokevirtual #14                 // Method com/kuka/interfaces/plugin/entity/ContainerMoveInDto.getIsNew:()Ljava/lang/Boolean;
+      15: invokestatic  #6                  // Method com/kuka/interfaces/plugin/common/MisUtils.null2Default:(Ljava/lang/Object;)Lcom/kuka/interfaces/plugin/function/NullToDefaultHandler;
+      18: aload_1
+      19: invokedynamic #15,  0             // InvokeDynamic #1:run:(Lcom/kuka/interfaces/plugin/entity/ContainerMoveInDto;)Ljava/lang/Runnable;
+      24: invokeinterface #8,  2            // InterfaceMethod com/kuka/interfaces/plugin/function/NullToDefaultHandler.nullToDefaultHandle:(Ljava/lang/Runnable;)V
+      29: aload_1
+      30: invokestatic  #16                 // Method com/kuka/interfaces/plugin/common/ValidatorUtil.validate:(Ljava/lang/Object;)Ljava/lang/String;
+      33: astore_2
+      34: aload_2
+      35: invokestatic  #17                 // Method org/springframework/util/StringUtils.hasText:(Ljava/lang/String;)Z
+      38: ifeq          46
+      41: aload_2
+      42: invokestatic  #18                 // Method com/kuka/interfaces/plugin/common/ResponseResult.error:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+      45: areturn
+      46: aload_0
+      47: getfield      #9                  // Field wcsGrpcAdapterService:Lcom/kuka/interfaces/plugin/services/WcsGrpcAdapterService;
+      50: aload_1
+      51: invokevirtual #19                 // Method com/kuka/interfaces/plugin/services/WcsGrpcAdapterService.containerIn:(Lcom/kuka/interfaces/plugin/entity/ContainerMoveInDto;)Ljava/lang/String;
+      54: astore_3
+      55: invokestatic  #20                 // Method com/kuka/interfaces/plugin/common/ResponseResult.ok:()Lcom/kuka/interfaces/plugin/common/ResponseResult;
+      58: new           #21                 // class java/lang/StringBuilder
+      61: dup
+      62: invokespecial #22                 // Method java/lang/StringBuilder."<init>":()V
+      65: ldc           #23                 // String containerCode:
+      67: invokevirtual #24                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      70: aload_3
+      71: invokevirtual #24                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      74: invokevirtual #25                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      77: invokevirtual #26                 // Method com/kuka/interfaces/plugin/common/ResponseResult.put:(Ljava/lang/Object;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+      80: areturn
+      81: astore_2
+      82: aload_2
+      83: invokevirtual #28                 // Method com/kuka/interfaces/plugin/common/InterfaceAPIException.getErrorCode:()Ljava/lang/String;
+      86: aload_2
+      87: invokevirtual #29                 // Method com/kuka/interfaces/plugin/common/InterfaceAPIException.getMessage:()Ljava/lang/String;
+      90: invokestatic  #30                 // Method com/kuka/interfaces/plugin/common/ResponseResult.error:(Ljava/lang/String;Ljava/lang/String;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+      93: areturn
+      94: astore_2
+      95: aload_2
+      96: invokevirtual #32                 // Method java/lang/Exception.getMessage:()Ljava/lang/String;
+      99: invokestatic  #18                 // Method com/kuka/interfaces/plugin/common/ResponseResult.error:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+     102: areturn
+    Exception table:
+       from    to  target type
+          11    45    81   Class com/kuka/interfaces/plugin/common/InterfaceAPIException
+          46    80    81   Class com/kuka/interfaces/plugin/common/InterfaceAPIException
+          11    45    94   Class java/lang/Exception
+          46    80    94   Class java/lang/Exception
+
+  public com.kuka.interfaces.plugin.common.ResponseResult containerOut(com.kuka.interfaces.plugin.entity.ContainerMoveOutDto);
+    Code:
+       0: getstatic     #2                  // Field log:Lorg/slf4j/Logger;
+       3: ldc           #33                 // String containerOut:[{}]
+       5: aload_1
+       6: invokeinterface #4,  3            // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      11: aload_1
+      12: invokevirtual #34                 // Method com/kuka/interfaces/plugin/entity/ContainerMoveOutDto.getIsDelete:()Ljava/lang/Boolean;
+      15: invokestatic  #6                  // Method com/kuka/interfaces/plugin/common/MisUtils.null2Default:(Ljava/lang/Object;)Lcom/kuka/interfaces/plugin/function/NullToDefaultHandler;
+      18: aload_1
+      19: invokedynamic #35,  0             // InvokeDynamic #2:run:(Lcom/kuka/interfaces/plugin/entity/ContainerMoveOutDto;)Ljava/lang/Runnable;
+      24: invokeinterface #8,  2            // InterfaceMethod com/kuka/interfaces/plugin/function/NullToDefaultHandler.nullToDefaultHandle:(Ljava/lang/Runnable;)V
+      29: aload_1
+      30: invokestatic  #16                 // Method com/kuka/interfaces/plugin/common/ValidatorUtil.validate:(Ljava/lang/Object;)Ljava/lang/String;
+      33: astore_2
+      34: aload_2
+      35: invokestatic  #17                 // Method org/springframework/util/StringUtils.hasText:(Ljava/lang/String;)Z
+      38: ifeq          46
+      41: aload_2
+      42: invokestatic  #18                 // Method com/kuka/interfaces/plugin/common/ResponseResult.error:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+      45: areturn
+      46: aload_0
+      47: getfield      #9                  // Field wcsGrpcAdapterService:Lcom/kuka/interfaces/plugin/services/WcsGrpcAdapterService;
+      50: aload_1
+      51: invokevirtual #36                 // Method com/kuka/interfaces/plugin/services/WcsGrpcAdapterService.containerOut:(Lcom/kuka/interfaces/plugin/entity/ContainerMoveOutDto;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+      54: areturn
+
+  public com.kuka.interfaces.plugin.common.ResponseResult updateContainer(com.kuka.interfaces.plugin.entity.ContainerUpdateDto);
+    Code:
+       0: getstatic     #2                  // Field log:Lorg/slf4j/Logger;
+       3: ldc           #37                 // String containerUpdateDto:[{}]
+       5: aload_1
+       6: invokeinterface #4,  3            // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      11: aload_1
+      12: invokestatic  #16                 // Method com/kuka/interfaces/plugin/common/ValidatorUtil.validate:(Ljava/lang/Object;)Ljava/lang/String;
+      15: astore_2
+      16: aload_2
+      17: invokestatic  #17                 // Method org/springframework/util/StringUtils.hasText:(Ljava/lang/String;)Z
+      20: ifeq          28
+      23: aload_2
+      24: invokestatic  #18                 // Method com/kuka/interfaces/plugin/common/ResponseResult.error:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+      27: areturn
+      28: aload_0
+      29: getfield      #9                  // Field wcsGrpcAdapterService:Lcom/kuka/interfaces/plugin/services/WcsGrpcAdapterService;
+      32: aload_1
+      33: invokevirtual #38                 // Method com/kuka/interfaces/plugin/services/WcsGrpcAdapterService.containerUpdate:(Lcom/kuka/interfaces/plugin/entity/ContainerUpdateDto;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+      36: areturn
+
+  public com.kuka.interfaces.plugin.common.ResponseResult<java.util.List<java.lang.String>> queryAreaCodeForContainerModel(java.lang.String, java.lang.Boolean);
+    Code:
+       0: getstatic     #2                  // Field log:Lorg/slf4j/Logger;
+       3: ldc           #39                 // String queryAllContainerModeCode exec
+       5: invokeinterface #40,  2           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;)V
+      10: aload_0
+      11: getfield      #9                  // Field wcsGrpcAdapterService:Lcom/kuka/interfaces/plugin/services/WcsGrpcAdapterService;
+      14: aload_1
+      15: aload_2
+      16: invokevirtual #41                 // Method java/lang/Boolean.booleanValue:()Z
+      19: invokevirtual #42                 // Method com/kuka/interfaces/plugin/services/WcsGrpcAdapterService.queryAreasForContainerMode:(Ljava/lang/String;Z)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+      22: areturn
+
+  public com.kuka.interfaces.plugin.common.ResponseResult<java.util.List<java.lang.String>> queryAllContainerModelCode();
+    Code:
+       0: getstatic     #2                  // Field log:Lorg/slf4j/Logger;
+       3: ldc           #43                 // String queryAllContainerModelCode exec
+       5: invokeinterface #40,  2           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;)V
+      10: aload_0
+      11: getfield      #9                  // Field wcsGrpcAdapterService:Lcom/kuka/interfaces/plugin/services/WcsGrpcAdapterService;
+      14: invokevirtual #44                 // Method com/kuka/interfaces/plugin/services/WcsGrpcAdapterService.getAllContainerModel:()Lcom/kuka/wcs/grpc/mission/WcsContainerModelListResponse;
+      17: astore_1
+      18: aload_1
+      19: invokevirtual #45                 // Method com/kuka/wcs/grpc/mission/WcsContainerModelListResponse.getSuccess:()Z
+      22: ifne          33
+      25: aload_1
+      26: invokevirtual #46                 // Method com/kuka/wcs/grpc/mission/WcsContainerModelListResponse.getMessage:()Ljava/lang/String;
+      29: invokestatic  #18                 // Method com/kuka/interfaces/plugin/common/ResponseResult.error:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+      32: areturn
+      33: invokestatic  #20                 // Method com/kuka/interfaces/plugin/common/ResponseResult.ok:()Lcom/kuka/interfaces/plugin/common/ResponseResult;
+      36: aload_1
+      37: invokevirtual #47                 // Method com/kuka/wcs/grpc/mission/WcsContainerModelListResponse.getContainerModelList:()Ljava/util/List;
+      40: invokeinterface #48,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      45: invokedynamic #49,  0             // InvokeDynamic #3:apply:()Ljava/util/function/Function;
+      50: invokeinterface #50,  2           // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      55: invokestatic  #51                 // Method java/util/stream/Collectors.toSet:()Ljava/util/stream/Collector;
+      58: invokeinterface #52,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+      63: invokevirtual #26                 // Method com/kuka/interfaces/plugin/common/ResponseResult.put:(Ljava/lang/Object;)Lcom/kuka/interfaces/plugin/common/ResponseResult;
+      66: areturn
+
+  private static void lambda$containerOut$2(com.kuka.interfaces.plugin.entity.ContainerMoveOutDto);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: invokestatic  #53                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+       5: invokevirtual #54                 // Method com/kuka/interfaces/plugin/entity/ContainerMoveOutDto.setIsDelete:(Ljava/lang/Boolean;)V
+       8: return
+
+  private static void lambda$containerIn$1(com.kuka.interfaces.plugin.entity.ContainerMoveInDto);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: invokestatic  #53                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+       5: invokevirtual #55                 // Method com/kuka/interfaces/plugin/entity/ContainerMoveInDto.setIsNew:(Ljava/lang/Boolean;)V
+       8: return
+
+  private static void lambda$containerQuery$0(com.kuka.interfaces.plugin.entity.ContainerQueryDto);
+    Code:
+       0: aload_0
+       1: iconst_2
+       2: invokestatic  #56                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       5: invokevirtual #57                 // Method com/kuka/interfaces/plugin/entity/ContainerQueryDto.setEmptyFullStatus:(Ljava/lang/Integer;)V
+       8: return
+
+  static {};
+    Code:
+       0: ldc           #58                 // class com/kuka/interfaces/plugin/controller/AmrContainerManagerController
+       2: invokestatic  #59                 // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #2                  // Field log:Lorg/slf4j/Logger;
+       8: return
+}

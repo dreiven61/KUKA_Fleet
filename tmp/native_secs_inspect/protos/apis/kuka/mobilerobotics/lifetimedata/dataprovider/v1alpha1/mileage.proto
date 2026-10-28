@@ -1,0 +1,22 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.lifetimedata.dataprovider.v1alpha1;
+
+option csharp_namespace = "Kuka.MobileRobotics.LifetimeData.DataProvider.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "MileageProto";
+option java_package = "com.kuka.mobilerobotics.lifetimedata.dataprovider.v1alpha1";
+
+// Total travelled distance of the vehicle in meter.
+message Mileage
+{
+  // The amount of distance the vehicle travelled [m].
+  double mileage_m = 1;
+}

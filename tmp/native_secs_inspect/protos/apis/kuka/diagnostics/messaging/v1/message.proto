@@ -1,0 +1,37 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.diagnostics.messaging.v1;
+
+import "kuka/diagnostics/messaging/v1/attribute.proto";
+import "kuka/diagnostics/messaging/v1/localizable_text.proto";
+import "kuka/diagnostics/messaging/v1/severity.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "MessageProto";
+option java_package = "com.kuka.diagnostics.messaging.v1";
+
+// Represents a message providing machine-readable and/or human-readable information.
+message Message {
+
+  // UUID of the message for tracking purposes.
+  string uuid = 1;
+
+  // The message (log) severity.
+  Severity severity = 2;
+  
+  // A localizable text with an English default text.
+  kuka.diagnostics.messaging.v1.LocalizableText text = 3;
+  
+  // Optional. The numeric message identifier of the standard message.
+  // Non standard messages like internal errors
+  // does not have assigned message identifier, this field default to 0.
+  uint32 standard_message_id = 4;
+}
+

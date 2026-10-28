@@ -1,0 +1,50 @@
+{
+  "headerId": 0,
+  "timestamp": "1970-01-01T00:00:00.000Z",
+  "version": "2.0.0",
+  "manufacturer": "KUKA",
+  "serialNumber": "",
+  "typeSpecification": {
+    "seriesName": "KMR iisy",
+    "seriesDescription": "The KMR iisy consists of the mobile platform and the LBR iisy robot. The KMR can independently pick up and set down the transported objects using the robot. The robot is in a defined parking position while the mobile platform is moving.\n\nThe KMR is used for transporting workpieces and devices to the place of use.\n\nThe KMR is designed for both autonomous and manual operation via the hand-held control unit. The mobile platform can be moved in the longitudinal direction and in curves. It can also rotate about its own center axis. The machine is driven electrically.\n\nThe differential drive and compact dimensions allow for precise navigation of the KMR – even in confined spaces.\n\nDuring the motion, the environment of the mobile platform is monitored by the integrated laser scanners.\n\nThe KMR functions without an external energy supply system. The mobile platform and the robot are independently supplied with power by the drive battery.\n\nThe mobile platform is designed for operation on firm, level floors that do not exceed the maximum permissible degree of inclination.",
+    "agvKinematic": "DIFF",
+    "agvClass": "CARRIER",
+    "maxLoadMass": 	200.0,
+    "localizationTypes": [
+      "NATURAL", "REFLECTOR"
+    ],
+    "navigationTypes": [
+      "VIRTUAL_LINE_GUIDED", "AUTONOMOUS"
+    ]
+  },
+  "physicalParameters": {
+    "speedMin": 0.0,
+    "speedMax": 1.5,
+    "accelerationMax": 0.3,
+    "decelerationMax": 1.89,
+    "heightMin": 0.0,
+    "heightMax": 0.0,
+    "width": 0.695,
+    "length": 1.12
+  },
+  "protocolLimits": {
+    "maxStringLens": {
+    },
+    "maxArrayLens": {
+    },
+    "timing": {
+      "minOrderInterval": 1.0,
+      "minStateInterval": 1.0
+    }
+  },
+  "protocolFeatures": {
+    "optionalParameters": [],
+    "agvActions": []
+  },
+  "agvGeometry": {
+  },
+  "loadSpecification": {
+  },
+  "localizationParameters": {
+  }
+}

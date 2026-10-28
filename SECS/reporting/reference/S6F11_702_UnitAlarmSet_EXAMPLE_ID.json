@@ -1,0 +1,50 @@
+{
+  "referenceOnly": true,
+  "stream": 6,
+  "function": 11,
+  "wait": true,
+  "body": {
+    "type": "L",
+    "value": [
+      {
+        "type": "U4",
+        "value": 1
+      },
+      {
+        "type": "U2",
+        "value": 702
+      },
+      {
+        "type": "L",
+        "value": [
+          {
+            "type": "L",
+            "value": [
+              {
+                "type": "U2",
+                "value": 6
+              },
+              {
+                "type": "L",
+                "value": [
+                  {
+                    "type": "A",
+                    "value": "1"
+                  },
+                  {
+                    "type": "U4",
+                    "value": 900001
+                  },
+                  {
+                    "type": "A",
+                    "value": "TEST_ONLY_VEHICLE_WARNING"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

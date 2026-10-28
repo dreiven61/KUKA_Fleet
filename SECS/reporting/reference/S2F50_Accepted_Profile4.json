@@ -1,0 +1,19 @@
+{
+  "referenceOnly": true,
+  "stream": 2,
+  "function": 50,
+  "wait": false,
+  "body": {
+    "type": "L",
+    "value": [
+      {
+        "type": "B",
+        "value": 4
+      },
+      {
+        "type": "L",
+        "value": []
+      }
+    ]
+  }
+}

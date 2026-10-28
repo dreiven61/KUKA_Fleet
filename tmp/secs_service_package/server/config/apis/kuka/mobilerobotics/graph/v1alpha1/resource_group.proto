@@ -1,0 +1,22 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.graph.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.graph.v1alpha1";
+option java_outer_classname = "ResourceGroupProto";
+option java_multiple_files = true;
+
+// A group of resources. The resource has specific capabilities, e.g. specific payload, battery state, lift. 
+// A resource can be assigned to different groups depending on capabilities.  
+message ResourceGroup 
+{	
+  // Defines a list of resources. 
+  repeated string resource_id = 1;
+}

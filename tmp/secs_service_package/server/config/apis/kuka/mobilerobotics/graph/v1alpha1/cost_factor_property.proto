@@ -1,0 +1,23 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package apis.kuka.mobilerobotics.graph.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.graph.v1alpha1";
+option java_outer_classname = "CostFactorPropertyProto";
+option java_multiple_files = true;
+
+
+// Definition of the cost factor value which can be set 
+// for a node or an edge. Factor must be greater or equal to 1.
+message CostFactorProperty
+{
+  // Defines the cost factor. Default value is 1. Less than 1 is not possible. 
+  double factor = 1;
+}

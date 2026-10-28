@@ -1,0 +1,56 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.localizer.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+import "kuka/core/geometry/v1/transform_2d.proto";
+
+option java_package = "com.kuka.mobilerobotics.localizer.v1alpha1";
+option java_outer_classname = "LocalizerDataProto";
+option java_multiple_files = true;
+
+// Contains the robot pose in the map coordinate system as evaluated by the localizer module.
+message LocalizerData
+{
+  // The timestamp at which the localizer pose was evaluated.
+  google.protobuf.Timestamp timestamp = 1;
+
+  // The robot pose in the map coordinate system along with reliabilty.
+  kuka.core.geometry.v1.Transform2DWithReliability pose = 2;
+
+  // Contains the UUID of the map on which the robot is currently localized.
+  string current_map_uuid = 3;
+
+  // An enum representing a simplified representation of the quality of the robot pose.
+  // The following situations can affect the pose quality:
+  // - laser scans detect obstacles that are recorded in the map
+  // - laser scans detect obstacles that are not recorded in the map (outliers)
+  // - laser scans do not detect obstacles that are in the map
+  enum PoseQuality
+    {
+    // The pose quality is not computed by the localizer module
+    UNSPECIFIED = 0;
+
+    // There is not enough data to determine the localizer's pose quality.
+    UNDECIDED = 1;
+
+    // The pose is healthy. Driving conditions are above the minimal requirements.
+    RELIABLE = 2;
+
+    // The map differs to much from the current environment as detected by the laser scanners.
+    // The robot may behave erroneous while driving.
+    UNRELIABLE = 3;
+  }
+
+  PoseQuality pose_quality = 4;
+
+  // The robot odometry that was used to evaluate the robot pose in map coordinate system.
+  kuka.core.geometry.v1.Transform2D odometry_pose = 5;
+}

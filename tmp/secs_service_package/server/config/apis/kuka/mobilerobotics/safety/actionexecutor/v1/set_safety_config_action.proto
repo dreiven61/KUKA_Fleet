@@ -1,0 +1,27 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.safety.actionexecutor.v1;
+
+option csharp_namespace = "Kuka.Mobilerobotics.Safety.ActionExecutor.V1";
+option java_multiple_files = true;
+option java_outer_classname = "SetSafetyConfigActionProto";
+option java_package = "com.kuka.mobilerobotics.safety.actionexecutor.v1";
+
+// Set safety config action (nApplicationSafetySetting in MrctoPsc struct).
+// Number of safety setting which has to be activated based on a specific location within the customer application.
+// Corresponds in the number one to one to the case on the scanner that is activated but can also activate additional
+// safety functions on the robot kinematics depending on the number range.
+// 0 = invalid config. Current driving field remains active.
+// 1-255 = Request to activate this safety setting.
+message SafetyConfig
+{
+  // The safety setting configuration.
+  int32 config = 1;
+}

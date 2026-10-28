@@ -1,0 +1,48 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motion.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+import "kuka/core/geometry/v1/transform_2d.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/common_motion_parameters.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/motion_reference_frame.proto";
+
+option java_package = "com.kuka.mobilerobotics.motion.v1alpha1";
+option java_outer_classname = "RelativeMotionCommandProto";
+option java_multiple_files = true;
+
+// A motion command that will move the AGV to a pose relative to its
+// current pose at the start of the motion (except in the case that
+// 'is_goal_pose_absolute' is set to true - see description there).
+message RelativeMotionCommand
+{
+  // The common motion parameters (max velocity, tracking accuracy, etc.)
+  // If this value is not provided, then a platform-specific default parameters
+  // will be used.
+  // Optional.
+  CommonMotionParameters common_motion_parameters = 1;
+
+  // The reference frame in which this motion is defined. Currently, only 
+  // 'map' and 'odometry' is supported. If this parameters is null, then
+  // 'odometry' will be used.
+  // Optional.
+  MotionReferenceFrame motion_reference_frame = 2;
+
+  // The goal pose.
+  kuka.core.geometry.v1.Transform2D goal_pose = 3;
+	
+  // If this parameter is set to true, then the goal pose will be interpreted
+  // to be in absolute coordinates with respect to the defined reference
+  // frame. Otherwise, the goal pose interpreted to be relative to the
+  // AGVs current pose at the time when the motion starts. The default
+  // (when the value is not set), is 'false'.
+  // Optional.
+  google.protobuf.BoolValue is_goal_pose_absolute = 4;
+}

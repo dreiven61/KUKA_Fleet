@@ -1,0 +1,54 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.graph.v1alpha1;
+
+import "kuka/core/geometry/v1/rectangle.proto";
+import "kuka/core/geometry/v1/vector_2d.proto";
+import "kuka/mobilerobotics/fleetmanager/v1alpha1/graph_motion_action_description.proto";
+
+option java_package = "com.kuka.mobilerobotics.graph.v1alpha1";
+option java_outer_classname = "NodeActionPropertyProto";
+option java_multiple_files = true;
+
+// definition of a node action which can be set for a node.
+message NodeActionProperty 
+{
+    // Represents the NodeActionExecutionType for this node action
+    enum ActionExecutionType
+    {
+        // No value has been specified.
+        // This should not be set, but it is the default for protobuf.
+        UNSPECIFIED = 0;
+
+        // The node actions are executed when the node is reached.
+        // If the node with this property is a start node, it is not executed.
+        REACH = 1;
+
+        // The node actions are executed when the node is left.
+        // If the node with this property is a goal node, it is not executed.
+        LEAVE = 2;
+
+        // The actions are executed when the node is reached and when it is left.
+        REACH_AND_LEAVE = 3;
+    }
+
+    // Rectangle specifying the restricted area.
+    kuka.core.geometry.v1.Rectangle restricted_area_shape = 1;
+
+    // Position defining the bottom left corner of the rectangle specifying the restricted area.
+    kuka.core.geometry.v1.Vector2D bottom_left_corner = 2;
+
+    // list of actions which should be executed on the node
+    repeated kuka.mobilerobotics.fleetmanager.v1alpha1.GraphMotionActionDescription actions = 3;
+
+    // The type defines when the actions shall be executed.
+    ActionExecutionType action_execution_type = 4;
+}
+

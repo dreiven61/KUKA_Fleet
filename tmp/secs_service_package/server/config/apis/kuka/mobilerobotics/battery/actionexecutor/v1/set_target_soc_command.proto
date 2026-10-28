@@ -1,0 +1,26 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.battery.actionexecutor.v1;
+
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.Battery.ActionExecutor.V1";
+option java_multiple_files = true;
+option java_outer_classname = "SetTargetSocCommandProto";
+option java_package = "com.kuka.mobilerobotics.battery.actionexecutor.v1";
+
+// Sets the charging target SoC on the battery.
+message SetTargetSocCommand
+{
+  // Target state of charge at which the battery shall request zero charging current. 
+  // Accepted range: [0.5, 1]. 
+  // 0 = empty, 1 = full. 
+  google.protobuf.DoubleValue target_soc = 1;
+}

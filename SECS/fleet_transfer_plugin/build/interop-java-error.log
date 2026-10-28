@@ -1,0 +1,5 @@
+10월 28, 2026 2:41:08 오후 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10월 28, 2026 2:41:09 오후 servostar.fleet.transfer.NativeHostService start
+INFO: Native SECS passive listener started on 9705, session 3000. No automatic transport submission.

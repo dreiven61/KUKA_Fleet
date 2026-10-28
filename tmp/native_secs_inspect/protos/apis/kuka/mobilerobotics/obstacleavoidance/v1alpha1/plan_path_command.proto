@@ -1,0 +1,31 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.obstacleavoidance.v1alpha1;
+
+import "kuka/mobilerobotics/motion/v1alpha1/annotated_spline_segment.proto";
+import "google/protobuf/wrappers.proto";
+
+option java_package = "com.kuka.mobilerobotics.obstacleavoidance.v1alpha1";
+option java_outer_classname = "PlanPathCommandProto";
+option java_multiple_files = true;
+
+
+// Defines a plan path command that will find a collision free path to a defined goal position 
+message PlanPathCommand 
+{
+  // The hint spline, which is used to find a collision free path
+  // If no collision free path can be found, an empty spline will be returned
+  repeated kuka.mobilerobotics.motion.v1alpha1.AnnotatedSplineSegment hint  = 1;
+
+  // The corridor spline
+  // The spline used to determine which area of ​​the map can be searched for finding an alternative spline 
+  // The annotaded spline contains the max. translational distance information as annotation with key "collisionAvoidanceTranslationalDistance", used to define the search corridor
+  repeated kuka.mobilerobotics.motion.v1alpha1.AnnotatedSplineSegment corridor  = 2;
+}

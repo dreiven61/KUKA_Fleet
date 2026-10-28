@@ -1,0 +1,2 @@
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+PASS: Java equipment -> Secs4Net: 14 acknowledged reports, one submit.

@@ -1,0 +1,31 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.safety.dataprovider.v1;
+
+option csharp_namespace = "Kuka.Mobilerobotics.Safety.DataProvider.V1";
+option java_multiple_files = true;
+option java_outer_classname = "MonitoredProtectionFieldDataProto";
+option java_package = "com.kuka.mobilerobotics.safety.dataprovider.v1";
+
+// message to send Monitore Protectionfield Data
+message MonitoredProtectionFieldData
+{
+  // Monitored protection fields for scenner 1.
+  // The first field will be the first element and the last will be the eighth.
+  // TRUE = This specific cut off path is monitored, FALSE = This specific cut off path is not monitored.
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  repeated bool Scanner1_CutOffPathIsMonitored = 1;
+
+  // Monitored protection fields for scenner 2.
+  // The first field will be the first element and the last will be the eighth.
+  // TRUE = This specific cut off path is monitored, FALSE = This specific cut off path is not monitored.
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  repeated bool Scanner2_CutOffPathIsMonitored = 2;
+}

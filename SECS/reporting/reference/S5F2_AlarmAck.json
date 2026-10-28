@@ -1,0 +1,10 @@
+{
+  "referenceOnly": true,
+  "stream": 5,
+  "function": 2,
+  "wait": false,
+  "body": {
+    "type": "B",
+    "value": 0
+  }
+}

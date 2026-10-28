@@ -1,0 +1,24 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.station.v1alpha1;
+
+import "kuka/mobilerobotics/station/v1alpha1/station.proto";
+
+option java_package = "com.kuka.mobilerobotics.station.v1alpha1";
+option java_outer_classname = "StationDataProto";
+option java_multiple_files = true;
+
+// Contains a list of Stations.
+// When this data is received from a subscribe call on the data provider, the station objects only contain a UUID.
+// When this data is received from a get call, the station objects contain the full data.
+message StationData
+{
+  repeated Station stations = 1;
+}

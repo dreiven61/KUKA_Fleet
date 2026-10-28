@@ -1,0 +1,44 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.order.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/any.proto";
+import "kuka/mobilerobotics/order/v1alpha1/buffer_order.proto";
+import "kuka/mobilerobotics/order/v1alpha1/dispose_order.proto";
+import "kuka/mobilerobotics/order/v1alpha1/pick_order.proto";
+import "kuka/mobilerobotics/order/v1alpha1/transfer_order.proto";
+
+option java_package = "com.kuka.mobilerobotics.order.v1alpha1";
+option java_outer_classname = "OrderCommandProto";
+option java_multiple_files = true;
+
+// A command that submits a new order.
+message OrderCommand
+{
+  // The order that shall be submitted. 
+  oneof order {
+    DisposeOrder dispose = 3;
+    BufferOrder buffer = 4;
+    PickOrder pick = 5;
+    TransferOrder transfer = 6;
+  }
+
+  // The order's priority. The priority determines with which importance an order is processed.
+  // Priorities follow the natural ordering of integers: lower values have a higher priority.
+  // [optional] If not specified, the priority defaults to 0.
+  google.protobuf.Int32Value priority = 1;
+
+  // The context of an order can be used for arbitrary, project-specific data. 
+  // Typical contexts contain a timetamp, an origin or an identifier from an external system. 
+  // [optional]
+  google.protobuf.Any context = 2;
+
+}

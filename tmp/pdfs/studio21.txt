@@ -1,0 +1,3843 @@
+
+=== PDF PAGE 1 ===
+Engineering Software
+KUKA.AMR Studio 2.1
+Operating and Programming Instructions
+Issued: 21.10.2024
+KUKA.AMR Studio 2.1 V1
+KUKA Robotics Guangdong
+
+=== PDF PAGE 2 ===
+KUKA.AMR Studio 2.1
+2/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+© Copyright 2024
+KUKA Robotics Guangdong Co., Ltd.
+No.3, Liaoxin Road
+Beijiao Town, Shunde District, Foshan City
+Guangdong Province
+China
+This documentation or excerpts therefrom may not be reproduced or disclosed to third parties
+without the express permission of KUKA Robotics Guangdong Co., Ltd.
+Other functions not described in this documentation may be operable in the controller. The user
+has no claims to these functions, however, in the case of a replacement or service work.
+We have checked the content of this documentation for conformity with the hardware and soft-
+ware described. Nevertheless, discrepancies cannot be precluded, for which reason we are not
+able to guarantee total conformity. The information in this documentation is checked on a regu-
+lar basis, however, and necessary corrections will be incorporated in the subsequent edition.
+Subject to technical alterations without an effect on the function.
+KIM-PS5-DOC
+Original documentation
+Publication: Pub KUKA.AMR Studio 2.1 (PDF) en
+PB25224
+Book structure: KUKA.AMR Studio 2.1 V1.2
+BS21783
+Version: KUKA.AMR Studio 2.1 V1
+
+=== PDF PAGE 3 ===
+Contents
+1 Introduction.............................................................................................. 7
+1.1 Target group.......................................................................................................... 7
+1.2 Representation of warnings and notes................................................................. 7
+1.3 Trademarks............................................................................................................ 7
+1.4 License terms........................................................................................................ 8
+1.5 Terms used............................................................................................................ 8
+2 Product description................................................................................. 9
+2.1 Product description................................................................................................ 9
+2.2 Intended use and misuse...................................................................................... 9
+3 Installation................................................................................................ 11
+3.1 System requirements............................................................................................. 11
+3.2 Installing KUKA.AMR Studio................................................................................. 11
+3.3 Running KUKA.AMR Studio.................................................................................. 11
+4 Graphical user interface......................................................................... 13
+4.1 Overview................................................................................................................ 13
+4.2 AMR list................................................................................................................. 14
+4.3 Switching between languages............................................................................... 15
+4.4 Software version.................................................................................................... 16
+4.5 Stop button............................................................................................................ 17
+4.6 Wizard.................................................................................................................... 17
+5 Configuration............................................................................................ 21
+5.1 Establishing a wired connection........................................................................... 21
+5.2 Wireless network configuration............................................................................. 22
+5.2.1 WIFI....................................................................................................................... 23
+5.2.2 5G.......................................................................................................................... 24
+5.3 Hardware check..................................................................................................... 25
+5.4 Fleet manager configuration................................................................................. 27
+5.4.1 KUKA.AMR Fleet configuration............................................................................. 27
+5.4.2 VDA5050 configuration.......................................................................................... 28
+5.4.3 CarryManager (CM) configuration......................................................................... 29
+5.5 Time synchronization............................................................................................. 30
+5.5.1 Synchronization with the local time...................................................................... 31
+5.5.2 Synchronization with a local NTP server............................................................. 31
+5.5.3 Synchronization with a public NTP server........................................................... 31
+5.6 Power management.............................................................................................. 31
+5.6.1 Battery power cut-off............................................................................................. 31
+5.6.2 Sleep mode........................................................................................................... 32
+5.7 Speaker language and volume............................................................................. 33
+5.8 Speed and tolerance............................................................................................. 34
+5.9 QR code type........................................................................................................ 34
+5.10 Checking the vehicle receiver FNC...................................................................... 36
+6 Basic controller commands................................................................... 39
+6.1 Jogging.................................................................................................................. 39
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 3/133
+
+=== PDF PAGE 4 ===
+6.2 Commonly used commands.................................................................................. 40
+6.3 Turn command....................................................................................................... 42
+7 Navigation commissioning..................................................................... 45
+7.1 Creating and managing maps............................................................................... 45
+7.1.1 Viewing current maps............................................................................................ 45
+7.1.2 Creating a SLAM map.......................................................................................... 46
+7.1.2.1 SLAM mapping best practices.............................................................................. 48
+7.1.3 Renaming a map in the AMR............................................................................... 50
+7.1.4 Downloading maps to the PC............................................................................... 51
+7.1.5 Opening a Map in KUKA.AMR Studio.................................................................. 52
+7.1.6 Cleaning and editing a map.................................................................................. 54
+7.1.7 Uploading a map to the AMR............................................................................... 56
+7.1.8 Activating a map on the AMR.............................................................................. 57
+7.1.9 Deploying a map to multiple AMRs...................................................................... 58
+7.1.10 Uploading a map to KUKA.AMR Fleet................................................................. 58
+7.1.11 Extending a SLAM map........................................................................................ 59
+7.1.11.1 Using raw map data vs. PGM image file............................................................. 61
+7.1.11.2 Extended map offset............................................................................................. 61
+7.2 Localizing the AMR on a SLAM map................................................................... 62
+7.3 Feature extension.................................................................................................. 65
+7.4 Fine localization models........................................................................................ 67
+7.4.1 Rack/holder/tray model.......................................................................................... 67
+7.4.1.1 Examples............................................................................................................... 77
+7.4.1.2 Use cases.............................................................................................................. 79
+7.4.2 Reflective sticker models...................................................................................... 81
+7.5 Navigation map...................................................................................................... 85
+8 Deploying and upgrading KUKA.AMR OS............................................ 87
+8.1 Upgrading a single AMR....................................................................................... 87
+8.2 Upgrading multiple AMRs..................................................................................... 88
+9 Business and navigation maps management...................................... 91
+9.1 Binding a business map to a navigation map...................................................... 91
+9.2 Loading linked maps to the AMR......................................................................... 93
+9.3 Downloading linked maps to the PC.................................................................... 94
+9.4 Setting the AMR on linked maps.......................................................................... 96
+10 Robot control system.............................................................................. 99
+10.1 Limitations/Preconditions....................................................................................... 99
+10.2 Activating/Deactivating scheduling from KUKA.AMR Studio................................ 99
+10.3 Entering a container.............................................................................................. 101
+10.4 Scheduling a single mission................................................................................. 102
+10.5 Executing command scripts.................................................................................. 105
+11 Troubleshooting....................................................................................... 111
+11.1 Online diagnosis.................................................................................................... 111
+11.1.1 Controller status.................................................................................................... 111
+11.1.2 KUKA.AMR OS control module message codes................................................. 113
+11.1.3 Viewing the LiDAR scan data............................................................................... 115
+11.1.4 Viewing LiDAR point cloud and location status................................................... 116
+KUKA.AMR Studio 2.1
+4/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+
+=== PDF PAGE 5 ===
+11.1.5 Viewing the obstacle map..................................................................................... 117
+11.1.6 Viewing QR code detection results...................................................................... 118
+11.1.7 Viewing the safety PLC Status............................................................................. 119
+11.2 Obtaining logs........................................................................................................ 125
+11.2.1 Obtaining KUKA.AMR OS logs............................................................................. 125
+11.2.2 Obtaining reflective sticker detection logs............................................................ 127
+11.2.3 Obtaining fine localization logs............................................................................. 128
+12 KUKA Service........................................................................................... 131
+12.1 Requesting support............................................................................................... 131
+12.2 KUKA Customer Support...................................................................................... 131
+Index 133
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 5/133
+
+=== PDF PAGE 6 ===
+KUKA.AMR Studio 2.1
+6/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+
+=== PDF PAGE 7 ===
+1 Introduction
+1.1 Target group
+This documentation is aimed at KUKA AMR integrators and/or operators
+with the following knowledge and skills:
+• Basic knowledge of the KMP (KUKA Mobile Platform)
+• Basic knowledge of KUKA.AMR OS
+• Basic knowledge of KUKA.AMR Fleet
+1.2 Representation of warnings and notes
+Safety
+These warnings are provided for safety purposes and must be observed.
+DANGER
+These warnings mean that it is certain or highly probable that death or
+severe injuries will occur if no precautions are taken.
+WARNING
+These warnings mean that death or severe injuries may occur if no pre-
+cautions are taken.
+CAUTION
+These warnings mean that minor injuries may occur if no precautions
+are taken.
+NOTICE
+These warnings mean that damage to property may occur, if no precau-
+tions are taken.
+These warnings contain references to safety-relevant information or gen-
+eral safety measures.
+These warnings do not refer to individual hazards or individual precau-
+tionary measures.
+This warning draws attention to procedures which serve to prevent or rem-
+edy emergencies or malfunctions:
+SAFETY INSTRUCTION
+The following procedure must be followed exactly!
+Procedures marked with this warning must be followed exactly.
+Notices
+These notices serve to make your work easier or contain references to
+further information.
+Tip to make your work easier or reference to further information.
+1.3 Trademarks
+Windows is a trademark of Microsoft Corporation.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 7/133
+Introduction
+
+=== PDF PAGE 8 ===
+GIMP is a registered trademark of the Free Software Foundation.
+1.4 License terms
+The KUKA license terms and the license terms of the open-source soft-
+ware used can be found under the LICENSE folder in the KUKA.AMR
+Studio installation directory.
+1.5 Terms used
+Term Description
+AMR Autonomous Mobile Robot
+Core panel The main control unit of an AMR
+IMU Inertial Measurement Unit
+IPC Industrial Personal Computer
+Computer type for use in industrial plants
+KMP KUKA Mobile Platform
+Odometer Sensor that measures the distance traveled
+Pose A position on a map that is defined by an orientation angle in addi-
+tion to its X and Y values.
+LiDAR Light Detection And Ranging
+Method for optical distance and speed measurement
+Landmark Orientation point for the mobile platform, which can consist of QR
+codes, reflective columns or reflective stickers
+SLAM Simultaneous Localization and Mapping
+Method in which the mobile platform creates a map of its environ-
+ment and simultaneously determines its position within that map
+KUKA.AMR Studio 2.1
+8/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Introduction
+
+=== PDF PAGE 9 ===
+2 Product description
+2.1 Product description
+KUKA.AMR Studio provides the required functions to commission, config-
+ure, and maintain the KMPs.
+Features
+Features provided by KUKA.AMR Studio include:
+• Open box check: KUKA.AMR Studio provides interfaces for KMP hard-
+ware condition check to ensure the hardware’s integrity.
+• KMP commissioning: KUKA.AMR Studio provides interfaces for KMP
+commissioning, including WIFI and 5G network setup.
+• Configuration: KUKA.AMR Studio provides interfaces for KMP configu-
+ration, including:
+‒ Setting speed limits
+‒ Sleep strategy
+‒ Speaker volume limitation
+‒ Sensor calibration
+‒ LiDAR configuration
+‒ Upper/lower cameras
+‒ 3D cameras
+‒ Jogging
+• Mapping and map extension (LiDAR SLAM, Reflectors and QR code)
+• Localization of KMPs in a SLAM map
+• Fine localization model management
+‒ Model creation (Racks, brackets, reflectors)
+‒ Model testing/validation
+• Deployment and upgrade of KUKA.AMR OS
+• Troubleshooting and diagnosis
+Compatibility
+KUKA.AMR Studio 2.x is compatible with the following:
+• KUKA.AMR OS 2.0 or later
+• KUKA.AMR Fleet 1.20 or later
+NOTICE
+For KUKA.AMR OS 2.0 or later, it is recommended to use the latest
+version of KUKA.AMR Studio.
+2.2 Intended use and misuse
+Intended use
+KUKA.AMR Studio is intended exclusively for the commissioning, configu-
+ration and control of KUKA KMPs.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 9/133
+Product description
+
+=== PDF PAGE 10 ===
+Misuse
+Any use or application deviating from the intended use is deemed to be
+misuse and is not allowed. It will result in the loss of warranty and liability
+claims. KUKA is not liable for any damage resulting from such misuse.
+KUKA.AMR Studio 2.1
+10/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Product description
+
+=== PDF PAGE 11 ===
+3 Installation
+3.1 System requirements
+Hardware
+• Memory: 8 GB or more
+• Storage: 4 GB or more
+• Wired Ethernet connection
+• Wireless Ethernet connection
+Software
+• PC with Intel Core i7 or Intel Core i9, or equivalent
+• Memory:
+‒ 10 platforms or fewer: 16 GB RAM
+‒ 11 … 50 platforms: 32 GB RAM
+‒ 51 platforms or more: 64 GB RAM
+• 200 GB free hard disk space
+• Network: no constraints
+3.2 Installing KUKA.AMR Studio
+KUKA.AMR Studio is a portable software package. It is delivered as a zip
+file. No installation wizard or script is required. Simply unzip the file into
+the desired folder. This allows for installing multiple versions of
+KUKA.AMR Studio on the same PC.
+The full path of the installation folder cannot contain any space.
+3.3 Running KUKA.AMR Studio
+To run KUKA.AMR Studio, browse to the installation folder and double-
+click the executable file K-Studio2.x.exe.
+User Data Location
+User-generated data, such as object models, downloaded maps from the
+AMR, are saved in the user-selected folder.
+Updating
+Since KUKA.AMR Studio is a portable software package, there is no up-
+dating process. Simply install the new version as described in
+(>>> 3.2 "Installing KUKA.AMR Studio" Page 11 ).
+Uninstallation
+To uninstall KUKA.AMR Studio, simply delete the installation folder.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 11/133
+Installation
+
+=== PDF PAGE 12 ===
+KUKA.AMR Studio 2.1
+12/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Installation
+
+=== PDF PAGE 13 ===
+4 Graphical user interface
+4.1 Overview
+Fig. 4-1: Overview
+Item Description
+1 Main Menu
+KUKA.AMR Studio software includes six major mod-
+ules:
+• Wizard: A quick start wizard to set up the AMR.
+• BaseInfo: Basic information of the AMR.
+• Controller: The status of the KUKA.AMR OS con-
+trol module. Also, some basic commands can be
+found here. Refer to ( >>> 6.2 "Commonly used
+commands" Page 40 ) and ( >>> 11.1.1 "Control-
+ler status" Page 111 ) for more information.
+• Navigation: Environment mapping, Fine Localiza-
+tion Model Creation, Location initialization.
+• App: Simple AMR control.
+• Log: Logging.
+2 AMR List
+3 Navigation Bar
+4 Jogging Panel
+Refer to ( >>> 6.1 "Jogging" Page 39 ) for more infor-
+mation.
+5 Page Area
+6 Status Bar
+7 Language Selection  and Software Version informa-
+tion
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 13/133
+Graphical user interface
+
+=== PDF PAGE 14 ===
+4.2 AMR list
+AMR connection
+Fig. 4-2: AMR list management
+Item Description
+AddIP Add an AMR to the AMR list. The AMR’s IP address must be entered
+in the IPAddr text field first.
+Delete Remove the selected AMR from the AMR list.
+Modify Modify the IP address of the selected AMR from the AMR list. Note
+that this change only affects the AMR list on KUKA.AMR Studio, not
+the actual IP address of the AMR.
+Refresh Update the connection states of the AMRs in the AMR list.
+AMR states
+Fig. 4-3: Different AMR States
+State Description Notes
+Disconnected The AMR is disconnected.
+Connected KUKA.AMR Studio can detect the heartbeat from the
+AMR but cannot determine its state.
+KUKA.AMR OS
+is in an error
+state.
+KUKA.AMR Studio 2.1
+14/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Graphical user interface
+
+=== PDF PAGE 15 ===
+State Description Notes
+AutoMode The AMR is under the control of KUKA.AMR Fleet or
+another fleet management system.
+DebugMode The AMR is under the control of KUKA.AMR Studio. Refer to
+(>>> 6 "Basic
+controller com-
+mands"
+Page 39) for
+details.
+ManualMode The AMR is under the control of the remote controller.
+BrakeRelease-
+Mode
+The drive motor brakes are released. The AMR can be
+pushed.
+Switching between operating modes
+Operating
+mode Procedure Notes
+AutoMode Set the hardware switch button on the
+AMR to AutoMode, and ensure that
+the AMR has not been forced into De-
+bugMode using KUKA.AMR Studio.
+1. Refer to the hardware documenta-
+tion for information about the hard-
+ware switch.
+2. While the hardware switch button
+on the AMR is in AutoMode,
+KUKA.AMR Studio can send
+“Force DebugMode” command to
+the AMR to force it into Debug-
+Mode. Refer to ( >>> 6 "Basic con-
+troller commands" Page 39 ) for
+details.
+3. While the hardware switch button
+on the AMR is in AutoMode, and
+the AMR has been forced into De-
+bugMode, it can be restored to Au-
+toMode by pressing “Restore Auto-
+Mode”.
+Debug-
+Mode
+1. Some models of KUKA AMR can
+be set to DebugMode using the
+hardware switch button. In this
+case, just set the hardware switch
+button on the AMR to DebugMode.
+2. Some models of KUKA AMR don’t
+have a DebugMode option on their
+switch buttons. In this case, set the
+hardware switch button to Auto-
+Mode, and then use KUKA.AMR
+Studio to send “Force DebugMode”
+command to the AMR to force it in-
+to DebugMode.
+Manual-
+Mode
+Set the hardware switch button on the
+AMR to ManualMode.
+BrakeRe-
+leaseMode
+Refer to the hardware documentation
+to learn how to set the AMR into
+BrakeReleaseMode.
+4.3 Switching between languages
+Procedure
+1. Click the three horizontal lines icon on the top-right corner and select
+Language.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 15/133
+Graphical user interface
+
+=== PDF PAGE 16 ===
+Fig. 4-4: Language and version menu item
+2. Select Chinese or English in the drop-down box and click OK.
+Fig. 4-5: Pop-up window of language switching
+KUKA.AMR Studio will automatically restart after the language
+switch.
+4.4 Software version
+To view the version of the KUKA.AMR Studio, click the three horizontal
+lines icon on the top-right corner and select SoftwareVersion.
+Fig. 4-6: Language and version menu item
+KUKA.AMR Studio 2.1
+16/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Graphical user interface
+
+
+=== PDF PAGE 17 ===
+Fig. 4-7: Software version information
+Item Description
+Version Main software version of KUKA.AMR Studio.
+Build data Compilation date and time of the current version.
+Commit id git commit ID of the current version compilation.
+Plugin version Plugin version.
+Path Path of the KUKA.AMR Studio executable file.
+4.5 Stop button
+The Stop button allows the user to stop the AMR’s motion.
+Fig. 4-8: Stop button
+4.6 Wizard
+The configuration wizard guides the user through the configuration proce-
+dures.
+“Quick Start” wizard
+1. Establish a wired connection to the AMR. Follow the guidance on the
+page to establish a wired connection to the AMR. Refer to
+(>>> 5.1 "Establishing a wired connection" Page 21 ) for more infor-
+mation.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 17/133
+Graphical user interface
+
+=== PDF PAGE 18 ===
+Fig. 4-9: Wired connection to the AMR
+2. Configure the wireless network. Refer to ( >>> 5.2 "Wireless network
+configuration" Page 22 ) for more information.
+Fig. 4-10: Wireless network configuration
+3. Establish a wireless connection to the AMR.
+• Unplug the Ethernet cable.
+• Enter the wireless IP address of the AMR.
+• Click Connect to establish a wireless connection to the AMR.
+KUKA.AMR Studio 2.1
+18/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Graphical user interface
+
+=== PDF PAGE 19 ===
+Fig. 4-11: Wireless connection to the AMR
+4. Check the hardware. Refer to ( >>> 5.3 "Hardware check" Page 25 )
+for more information.
+Fig. 4-12: Hardware Check
+5. Configure the communication between the AMR and the fleet manag-
+er. If a fleet manager is not set up yet, skip this step and finish this
+configuration later. Refer to ( >>> 5.4 "Fleet manager configuration"
+Page 27) for more information.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 19/133
+Graphical user interface
+
+=== PDF PAGE 20 ===
+Fig. 4-13: Fleet Manager communication configuration
+6. Configure parameters including time synchronization, power manage-
+ment, speaker, and QR Code type.
+Refer to
+• ( >>> 5.5 "Time synchronization" Page 30 )
+• ( >>> 5.6 "Power management" Page 31 )
+• ( >>> 5.7 "Speaker language and volume" Page 33 )
+• ( >>> 5.9 "QR code type" Page 34 )
+Fig. 4-14: Parameter configuration
+KUKA.AMR Studio 2.1
+20/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Graphical user interface
+
+=== PDF PAGE 21 ===
+5 Configuration
+5.1 Establishing a wired connection
+For the initial network configuration, the user must establish a wired con-
+nection to the AMR. The latter’s static wired IP address is 101.101.2.15.
+This enables a wired link to the PC with KUKA.AMR Studio. Refer to the
+KMP’s documentation to locate the Ethernet port on the AMR.
+Procedure
+1. Connect the PC to the AMR using an Ethernet cable.
+2. Set up the Ethernet connection on PC.
+• Go to the computer’s “Network & Internet” settings.
+• Click the Change adapter options  button.
+• Right-click the Ethernet button and select Properties.
+• Double-click Internet Protocol Version 4 (TCP/IPv4) .
+Fig. 5-1: Setting up the Ethernet connection on PC
+• Manually configure the IP address as 101.101.2.16 and the subnet
+mask as 255.255.255.0, and click OK.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 21/133
+Configuration
+
+=== PDF PAGE 22 ===
+Fig. 5-2: Configuring the PC IP address
+3. In KUKA.AMR Studio, type in the wired IP address of the AMR
+(101.101.2.15), and Click AddIP. The AMR is added to the AMR list,
+and its operating mode is displayed.
+Fig. 5-3: Adding the AMR to the list
+5.2 Wireless network configuration
+Before the AMR can be used in production, its wireless network connec-
+tion must be configured. All KUKA AMRs support WIFI. Some variants al-
+so support 5G connections. AMRs that support 5G connection have “5G”
+KUKA.AMR Studio 2.1
+22/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Configuration
+
+=== PDF PAGE 23 ===
+label in their AMR type name, e.g. KMP 1500P-EU-1.2-DIC-5G diffDrive
+(see the documentation of the specific AMR type for details).
+5.2.1 WIFI
+Precondition
+• A wired connection to the AMR is established.
+Procedure
+1. Navigate to BaseInfo > SiteConfiguration > WirelessNetwork and
+select WIFI.
+2. Connect the PC to the production WIFI network.
+3. Fill out the WIFI configuration settings in KUKA.AMR Studio.
+Fig. 5-4: WIFI settings
+4. Select Set. KUKA.AMR Studio will finish the WIFI configuration and try
+to Ping the AMR’s IP address.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 23/133
+Configuration
+
+=== PDF PAGE 24 ===
+Fig. 5-5: Completed WIFI configuration
+5.2.2 5G
+Precondition
+• The AMR supports 5G connection.
+• A SIM card is inserted in the AMR.
+• A wired connection is established with the AMR.
+Procedure
+1. Navigate to BaseInfo > SiteConfiguration > WirelessNetwork and
+select 5G.
+2. Fill out the 5G configuration settings in KUKA.AMR Studio.
+3. Select Set. KUKA.AMR Studio will finish the 5G configuration. If the
+configuration is successful, the IP address is displayed in the DeviceIP
+text field, and the mask is displayed in the IPMask text field.
+KUKA.AMR Studio 2.1
+24/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Configuration
+
+=== PDF PAGE 25 ===
+Fig. 5-6: 5G settings
+5.3 Hardware check
+Before configuring the AMR and mapping the environment, a hardware
+check should be conducted to ensure the AMR’s integrity.
+Precondition
+• A wired or wireless connection to the AMR is established.
+• The AMR is in DebugMode.
+Procedure
+• Browse to BaseInfo > Status > ProductionDiagnose.
+Fig. 5-7: Hardware check interface
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 25/133
+Configuration
+
+=== PDF PAGE 26 ===
+Item Description Notes
+AMR Type Click the get amr type  button 
+ . The AMR type is
+displayed 
+ .
+KUKA.AMR OS
+Version
+Click the Diagnose button 
+ .
+The version of each module of KUKA.AMR OS is dis-
+played 
+ .
+KUKA.AMR OS includes the following modules:
+‒ Rootfs: Root file system.
+‒ Navigation: AMR navigation system.
+‒ Controller Module: This program that controls the
+peripheral equipment.
+‒ IOBoard: This module communicates with the pe-
+ripheral equipment.
+Sensors Click the Diagnose button 
+ .
+The status of the AMR’s sensors is displayed 
+ .
+A green checkmark 
+  indicates that the sensor is in
+a good working condition.
+A red cross mark 
+ indicates that the sensor is in a
+faulty state.
+If a sensor is in
+a faulty state,
+contact KUKA
+support.
+Hardware Initiali-
+zation
+Click the Diagnose button
+ . The AMR will perform
+the hardware initialization procedure.
+A green checkmark 
+ indicates that the
+corresponding device is initialized successfully.
+A red cross mark 
+  indicates that the device fails to
+initialize. In this case, repeat the initialization process. If
+failure persists, contact KUKA support.
+i. The selected
+AMR must
+be in Debug-
+Mode.
+ii. Ensure there
+is no safety-
+related error.
+Refer to
+(>>> 11.1.1 "
+Controller
+status"
+Page 111)
+and
+(>>> 11.1.2 "
+KUKA.AMR
+OS control
+module mes-
+sage codes"
+Page 113).
+KUKA.AMR Studio 2.1
+26/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Configuration
+
+=== PDF PAGE 27 ===
+Item Description Notes
+Calibration Click the Query button 
+  of each item to check its
+last calibration time.
+A green checkmark 
+ and displayed calibration time
+indicate that the corresponding device is properly cali-
+brated.
+A red cross mark 
+  indicates that the device is not
+calibrated. In this case contact KUKA support.
+5.4 Fleet manager configuration
+KUKA AMRs can be managed by KUKA.AMR Fleet, the CarryManager
+(CM) fleet manager from Swisslog, or any other fleet manager that sup-
+ports the VDA50/50 protocol.
+5.4.1 KUKA.AMR Fleet configuration
+Procedure
+1. Navigate to BaseInfo > SiteConfiguration > Platform and select Pro-
+prietary Protocol.
+Fig. 5-8: KUKA.AMR Fleet configuration
+2. Press Query to load the current configuration.
+3. Add or modify the required data as specified in the following table.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 27/133
+Configuration
+
+=== PDF PAGE 28 ===
+Item Description Notes
+Device Number The AMR ID.
+Min: 1
+Max: 4294967295
+The AMR ID must be
+unique within the net-
+work.
+AMR Model The AMR type. The AMR model is
+displayed when the
+Query button is
+pressed. It needs on-
+ly to be changed in
+certain circumstan-
+ces. Contact KUKA
+service if the correct
+model is not dis-
+played.
+KUKA.AMR Fleet IP IP address of the
+KUKA.AMR Fleet
+server.
+4. Press the Set button. KUKA.AMR Studio applies the changes and re-
+starts KUKA.AMR OS.
+5.4.2 VDA5050 configuration
+VDA5050 is not supported in KUKA.AMR OS 2.2 or earlier versions.
+Procedure
+1. Navigate to BaseInfo > SiteConfiguration > Platform and select
+VDA5050.
+Fig. 5-9: VDA5050 configuration
+2. Press Query to load the current configuration.
+3. Add or modify the required data as specified in the following table.
+KUKA.AMR Studio 2.1
+28/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Configuration
+
+
+=== PDF PAGE 29 ===
+Item Description Notes
+Device Number The AMR ID.
+Min: 1
+Max: 4294967295
+The AMR ID must be
+unique within the net-
+work.
+AMR Model The AMR type The AMR model is
+displayed when the
+Query button is
+pressed. It needs on-
+ly be changed in cer-
+tain circumstances.
+Contact KUKA serv-
+ice if the correct
+model is not dis-
+played.
+URL URL of the VDA5050
+MQTT Broker
+Client ID MQTT Broker Client
+ID. Check Auto Gen-
+erate to have the
+system generate it
+automatically
+User Name User name for the
+MQTT broker con-
+nection
+Password Password for the
+MQTT broker con-
+nection
+4. Press the Set button. KUKA.AMR Studio applies the changes and re-
+starts KUKA.AMR OS.
+5.4.3 CarryManager (CM) configuration
+The CM protocol is available only for select KUKA AMRs, e.g. KMP
+600CU, KMP 600WCU. Refer the AMR’s hardware documentation for
+details.
+Procedure
+1. Navigate to BaseInfo > SiteConfiguration > Platform and select CM.
+Fig. 5-10: CarryManager configuration
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 29/133
+Configuration
+
+=== PDF PAGE 30 ===
+2. Press Query to load the current configuration.
+3. Add or modify the required data as specified in the following table.
+Item Description Notes
+Device Number The AMR ID.
+Min: 1
+Max: 4294967295
+The ID must be
+unique within the net-
+work.
+AMR Model The AMR type that
+the AMR log into the
+AMR Fleet Manager
+as.
+Click the Query but-
+ton, and the combo
+box will be populated
+with the current AMR
+Model. It needs only
+to be changed in cer-
+tain circumstances.
+Contact KUKA serv-
+ice if the correct
+model is not shown.
+4. Press the Set button. KUKA.AMR Studio applies the changes and re-
+starts KUKA.AMR OS.
+5.5 Time synchronization
+This interface allows for the synchronization of the AMR time with the lo-
+cal time or an NTP server time. This ensures the correct time in the logs.
+The interface can be found under BaseInfo > SiteConfiguration > Tim-
+ing.
+Fig. 5-11: Interface for time synchronization
+KUKA.AMR Studio 2.1
+30/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Configuration
+
+=== PDF PAGE 31 ===
+5.5.1 Synchronization with the local time
+Procedure
+1. Select the local time zone and click the SetZone button.
+2. Select Manual from the Clock Sync Method drop-down box.
+3. Click the Set button.
+4. After ten seconds, click the Query button to check whether the Device
+Time has been synchronized.
+This procedure only synchronizes the local time to the AMR once.
+5.5.2 Synchronization with a local NTP server
+Precondition
+• An NTP server is installed on a computer in the local network. NTP
+server installation is beyond the scope of this document.
+Procedure
+1. Select the local time zone and click the SetZone button.
+2. Select NTP from the Clock Sync Method drop-down box.
+3. Type in the IP address of NTP Server in the Server IP drop-down box.
+4. Click the Set button.
+5. After ten seconds, click the Query button to check whether the Device
+Time has been synchronized.
+5.5.3 Synchronization with a public NTP server
+Precondition
+• The AMR is connected to the Internet.
+Procedure
+1. Select the local time zone and click the SetZone button.
+2. Select NTP from the Clock Sync Method drop-down box.
+3. Select Public NTP Server  from the Server IP drop-down box.
+4. Click the Set button.
+5. After ten seconds, click the Query button to check whether the Device
+Time has been synchronized.
+5.6 Power management
+5.6.1 Battery power cut-off
+AMR battery strategy
+• Charging is managed by the fleet manager. Several types of battery
+charging strategies can be set in KUKA.AMR Fleet.
+• When the battery level is at 20% the AMR’s speed is limited to
+0.5m/s.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 31/133
+Configuration
+
+=== PDF PAGE 32 ===
+• When the battery level is at 10%, a fatal error is reported. The AMR
+cannot be commanded or jogged. However, the peripherals are still
+powered.
+• When the AMR battery is at the power cut-off level, the battery is
+switched off. This cut-off level is configurable by the user.
+Procedure
+1. Navigate to BaseInfo > SiteConfiguration > ShutDownPower.
+Fig. 5-12: Configuration of power cut-off level
+2. Use the slider to set the power cut-off level.
+3. Click the Set button.
+4. Restart the AMR.
+5.6.2 Sleep mode
+The AMR automatically enters the sleep mode if it remains idle for the
+user specified period. This is to consume less power. The AMR automati-
+cally exits the sleep mode when it receives a new task from the fleet
+manager or when the user interacts with it using the panel on the AMR.
+Procedure
+1. Navigate to BaseInfo > SiteConfiguration > SleepMode.
+KUKA.AMR Studio 2.1
+32/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Configuration
+
+=== PDF PAGE 33 ===
+Fig. 5-13: Sleep mode configuration
+2. Type the sleep mode time.
+3. Click the Set button.
+4. Restart the AMR.
+5.7 Speaker language and volume
+The user can set the AMR’s speaker language and default volume. Spe-
+cific volumes for graph edges can still be set through KUKA.AMR Fleet.
+Procedure
+1. Navigate to BaseInfo > SiteConfiguration > Speaker.
+Fig. 5-14: Speaker configuration
+2. Choose the speaker settings.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 33/133
+Configuration
+
+=== PDF PAGE 34 ===
+3. Click the Set button.
+4. Restart the AMR.
+5.8 Speed and tolerance
+The user can modify the maximum speeds and positioning tolerances of
+the AMR. However, this should only be performed when necessary and
+only by authorized personnel.
+NOTICE
+The parameters set here are the maximum that the AMR is allowed to
+reach. Hence, when receiving a mission from the fleet manager, the
+AMR speed, for example, is limited to the lower of the mission-set
+speed and the parameters set here.
+Procedure
+1. Navigate to BaseInfo > SiteConfiguration > SpeedAndTolerance.
+Fig. 5-15: Configuration of speed and tolerance
+2. Edit the settings.
+3. Click the Set button.
+4. Restart the AMR.
+5.9 QR code type
+KUKA.AMR OS supports several types of QR Code (see table below).
+This interface allows the user to specify the type of QR code used, if any.
+KUKA.AMR Studio 2.1
+34/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Configuration
+
+=== PDF PAGE 35 ===
+QR Code Type Sample picture
+KUKA Code V2
+KUKA Code V1
+Swisslog Code
+Hik Code
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 35/133
+Configuration
+
+=== PDF PAGE 36 ===
+QR Code Type Sample picture
+HAIROU Code
+Procedure
+1. Navigate to BaseInfo > SiteConfiguration > QRCodeType.
+Fig. 5-16: Configuration of QR code type
+2. Select the QR Code Type.
+3. Click the Set button.
+5.10 Checking the vehicle receiver FNC
+FNC configuration allows for the communication between KUKA.AMR OS
+and FNC, which is an integral part of the FNX system. The latter is only
+available on select models. Refer to the hardware document of the AMR
+for details.
+Users do not need to modify this configuration as it is pre-configured at
+the time of manufacturing. However, users need to check the relevant
+parameters of this configuration as they are required when using FNB
+(the Carry Control Unit).
+KUKA.AMR Studio 2.1
+36/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Configuration
+
+
+=== PDF PAGE 37 ===
+NOTICE
+FNC configuration only applies to the KMP 600W-C-U AMR.
+Procedure
+1. Navigate to BaseInfo > SiteConfiguration > FNC.
+Fig. 5-17: FNC configuration
+2. Click the Query button to display the FNC parameters.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 37/133
+Configuration
+
+=== PDF PAGE 38 ===
+KUKA.AMR Studio 2.1
+38/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Configuration
+
+=== PDF PAGE 39 ===
+6 Basic controller commands
+6.1 Jogging
+Description
+KUKA.AMR Studio can be used to jog the AMR, e.g. when mapping the
+environment.
+Fig. 6-1: Interface of jogging
+No. Name Description Notes
+1 Left
+Wheel
+Angle
+The angle of the left wheel relative
+to the AMR body’s coordinate sys-
+tem.
+Unit: degrees.
+This only
+applies to
+KMP
+3000P
+series.
+2 Right
+Wheel
+Angle
+The angle of the right wheel rela-
+tive to the AMR body’s coordinate
+system.
+Unit: degrees.
+3 Enable • Checked: The jogging feature
+is enabled.
+• Unchecked: The jogging fea-
+ture is disabled.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 39/133
+Basic controller commands
+
+=== PDF PAGE 40 ===
+No. Name Description Notes
+4 Mode • Diff: This mode is only applica-
+ble to AMRs with a differential
+drive chassis, such as the
+KMP 1500P series and KMP
+600P series.
+• OmniNormal: This mode ap-
+plies to AMRs with an omni-di-
+rectional chassis using two dif-
+ferential drive wheel sets, such
+as the KMP 3000P series. In
+this mode, the AMR can be
+controlled to move forward/
+backward/diagonally by press-
+ing Ctrl and
+Up/Down/Left/Right arrow keys.
+• OmniDiff: This mode applies
+to AMRs with an omni-direc-
+tional chassis using two differ-
+ential drive wheel sets, such
+as the KMP 3000P series. In
+this mode, the angles of the
+wheel sets need to be adjusted
+first by pressing Ctrl and Left/
+Right arrow keys. Then press
+Ctrl and Up/Down arrow keys
+to jog the AMR along the di-
+rection of the wheel sets.
+5 Arrow
+Keys Sta-
+tus
+Status of the arrow keys. A yellow
+color indicates that the correspond-
+ing arrow key is pressed.
+Precondition
+• The selected AMR is in DebugMode. Refer to ( >>> 4.2 "AMR list"
+Page 14).
+Procedure
+1. Check the Enable checkbox.
+2. Select the jogging mode according to the AMR.
+3. Press Ctrl and Up/Down/Left/Right arrow keys on the keyboard to
+jog the AMR.
+6.2 Commonly used commands
+Description
+KUKA.AMR Studio provides a list of commonly used commands, such as
+switching between modes and clearing errors. It can be found under Con-
+troller > CommonCmd tab page.
+KUKA.AMR Studio 2.1
+40/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Basic controller commands
+
+=== PDF PAGE 41 ===
+Fig. 6-2: Commonly used commands
+Button Description When to use Restriction
+Force DebugMode While the hardware
+switch on the AMR is
+in AutoMode, click
+this button to switch
+the AMR to Debug-
+Mode.
+The AMR is not
+equipped with a de-
+bug mode switch
+state.
+The hardware switch
+on the AMR must be
+in AutoMode.
+Restore AutoMode While the hardware
+switch on the AMR is
+set to AutoMode,
+click this button to
+switch the AMR back
+to AutoMode.
+To switch the AMR
+back to AutoMode if
+it has been forced to
+DebugMode.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 41/133
+Basic controller commands
+
+=== PDF PAGE 42 ===
+Button Description When to use Restriction
+Clear Errors Clear the errors re-
+ported by the
+KUKA.AMR OS con-
+trol module.
+To clear some non-fa-
+tal errors that the
+AMR cannot recover
+from automatically.
+The AMR must be in
+DebugMode.
+Init Hardware Perform the hardware
+initialization, i.e.:
+1. Clear errors.
+2. Enable motors.
+3. Configure param-
+eters of the
+KUKA.AMR OS
+control module.
+4. Calculate the gyro
+zero bias.
+5. Calibrate the lift.
+6. Perform hardware
+self-test.
+The AMR automati-
+cally performs the
+hardware initialization
+at startup. If this
+process fails,
+KUKA.AMR OS re-
+ports 0xB28 and
+0x8303 error codes.
+To recover from these
+errors, use this button
+to re-initialize.
+Stop Stop the AMR move-
+ment.
+Lift Up Raise the lift.
+Lift Down Lower the lift.
+Refer to ( >>> 4.2 "AMR list" Page 14 ) for “Different AMR States” and
+“Switching Between Operating Modes”.
+NOTICE
+Some fatal errors cannot be cleared by clicking the Clear Errors button.
+They can only be cleared by pressing the hardware reset button. Refer
+to (>>> 11.1.2 "KUKA.AMR OS control module message codes"
+Page 113) for more information.
+6.3 Turn command
+Description
+KUKA.AMR Studio provides an interface for the user to command the
+AMR to perform rotations. It can be found under Controller > TurnCmd.
+KUKA.AMR Studio 2.1
+42/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Basic controller commands
+
+
+=== PDF PAGE 43 ===
+Fig. 6-3: Turn command
+Item Description
+With Tray If checked, the tray rotates with the AMR.
+Otherwise, the tray’s orientation remains constant rel-
+ative to the map.
+This option applies only to AMRs with lifts that can
+rotate independently from the chassis, such as the
+KMP 600W-C-U diffDrive and only when the lift is up.
+Relative rotation If checked, the AMR rotates relative to its current ori-
+entation. Otherwise, the AMR rotates to the specified
+angle in the MAP coordinate system.
+Commanded an-
+gles
+A positive value indicates a counterclockwise rotation
+while a negative value indicates a clockwise rotation,
+unit: degrees.
+Relative rotation is not supported in KUKA.AMR OS V2.2.0 or earlier
+versions.
+NOTICE
+The actual angle of rotation depends on the selected angle value and
+whether relative or absolute rotation is selected. For example, if the
+user selects 0 degrees, the AMR does not move if relative rotation is
+selected. If absolute rotation is selected, the AMR rotates to align itself
+with the map’s coordinate system.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 43/133
+Basic controller commands
+
+=== PDF PAGE 44 ===
+Precondition
+• The AMR is in DebugMode.
+• The lift is up, if applicable.
+Procedure
+1. Select the rotation mode (with or without tray).
+2. Select whether relative rotation is desired.
+3. Select the rotation angle.
+4. Click the Turn button.
+KUKA.AMR Studio 2.1
+44/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Basic controller commands
+
+=== PDF PAGE 45 ===
+7 Navigation commissioning
+7.1 Creating and managing maps
+The interface for creating and managing maps can be found under Navi-
+gation > Mapping > MapMgrUnit > Map Manager.
+7.1.1 Viewing current maps
+Clicking the Query button displays the current maps available on the
+AMR. The “AMR SLAMMaps” tab shows the SLAM maps (pgm format).
+The “AMR NavMaps” tab shows all the navigation maps. Refer to
+(>>> 7.5 "Navigation map" Page 85 ).
+Fig. 7-1: Viewing current maps
+In the “AMR SLAMMaps” tab, the map currently used by the AMR is in-
+dicated with the orange color. The selected map (left mouse click) is
+highlighted with a gray color.
+Fig. 7-2: Currently used map and selected map
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 45/133
+Navigation commissioning
+
+=== PDF PAGE 46 ===
+Fig. 7-3: AMR SLAMMaps tab
+7.1.2 Creating a SLAM map
+KUKA.AMR Studio is used to map the environment as part of the commis-
+sioning. The AMR is jogged to cover all the areas where it will be operat-
+ing.
+KUKA.AMR Studio can be connected to the AMR wirelessly or through a
+wired connection. However, a wired connection is recommended to guar-
+antee stable and reliable data transmission.
+The AMR can be jogged through KUKA.AMR Studio using its jogging
+function (refer to ( >>> 6.1 "Jogging" Page 39 )), or through the remote
+controller.
+Precondition
+• The environment must be properly prepared before it is mapped using
+the AMR. Refer to ( >>> 7.1.2.1 "SLAM mapping best practices"
+Page 48) for details.
+Procedure
+1. Navigate to Navigation > Mapping > MapMgrUnit > Map Create.
+2. Click the Map Create  button.
+Fig. 7-4: Map Create
+KUKA.AMR Studio 2.1
+46/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+=== PDF PAGE 47 ===
+3. Enter the name of the map, the building name and floor number.
+These data are combined to create the final map name. The user can
+rename the map later. Refer to ( >>> 7.1.3 "Renaming a map in the
+AMR" Page 50 ).
+Fig. 7-5: Map information
+4. Click OK. The AMR is displayed as a blue rectangle. The current scan
+data is displayed in red.
+Fig. 7-6: Current scan data
+5. Jog the AMR to complete the mapping of the entire environment. Re-
+fer to ( >>> 7.1.2.1 "SLAM mapping best practices" Page 48 ) for de-
+tails. After moving about ten meters, the mapping interface will display
+the map that is being constructed in real time. If the AMR reads a QR
+Code or detects a reflective column or a reflective sticker, the land-
+mark information is recorded in the map. The recorded QR Code Fea-
+ture is displayed as a red solid square. The recorded reflective column
+sticker Feature is displayed as a red dot.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 47/133
+Navigation commissioning
+
+=== PDF PAGE 48 ===
+Fig. 7-7: Complete environment mapping
+6. After mapping all areas, click the Mapping stop  button. The map is
+constructed. Wait for the progress bar to reach 100%, then click OK.
+Fig. 7-8: Map creating status
+7. When the mapping is completed, the newly constructed map can be
+viewed in the Map Manager tab. Refer to ( >>> 7.1.1 "Viewing current
+maps" Page 45 ).
+7.1.2.1 SLAM mapping best practices
+Environment
+Before mapping the environment:
+1. Remove any non-permanent objects, e.g. pallets, forklifts, boxes, etc.
+2. Ensure that the surfaces at the LiDAR’s plane are not shiny.
+3. Ensure that the floor conditions conform to the specification in the
+AMR’s hardware documentation.
+4. If mapping long hallways with few features, add boxes along the path.
+They can be removed from the map later.
+KUKA.AMR Studio 2.1
+48/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+=== PDF PAGE 49 ===
+Mapping path
+When mapping with an AMR, it is recommended to:
+1. Return to the starting point at the end of the operation, then overshoot
+by ten meters, if possible.
+2. Avoid long lines. It is recommended to perform a loop every 100 me-
+ters.
+3. A circular or rectangular path is recommended. If the trajectory must
+be linear, it is recommended that the return path be at least two me-
+ters away from the initial path.
+4. Perform a full rotation at the corners.
+5. Perform a full rotation at the workstations.
+Example paths
+Fig. 7-9: Example path 1
+Fig. 7-10: Example path 2
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 49/133
+Navigation commissioning
+
+=== PDF PAGE 50 ===
+Fig. 7-11: Example path 3
+Fig. 7-12: Example path 4
+7.1.3 Renaming a map in the AMR
+Procedure
+1. Navigate to Navigation > Mapping > MapMgrUnit > Map Manager.
+2. Select the AMR.
+3. Click the Query button.
+4. Navigate to the AMR SLAMMaps tab, and select the map to be re-
+named.
+5. Click the Rename button. Enter the name of the map, the building
+name and floor number. Click OK.
+The activated map is not allowed to be renamed.
+The new name is not allowed to be the same as an existing map.
+KUKA.AMR Studio 2.1
+50/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+
+=== PDF PAGE 51 ===
+Fig. 7-13: Entering the new map information
+6. Click the Query button again to confirm.
+Fig. 7-14: Rename map confirmation
+7.1.4 Downloading maps to the PC
+Procedure
+1. Navigate to the AMR SLAMMaps  tab.
+2. Click Query to display the maps available in the AMR.
+3. Select the desired map and click Download to PC.
+4. Choose the local path.
+Fig. 7-15: Selecting the local path
+5. Wait for the download to complete.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 51/133
+Navigation commissioning
+
+=== PDF PAGE 52 ===
+Fig. 7-16: Map downloading status
+Map file contents
+The map information is in the form of a zip file containing five files: bin,
+xml, yaml, pgm, and png.
+Fig. 7-17: Map files
+File exten-
+sion File description Notes
+bin The original mapping raw data. When ex-
+tending the
+map, the
+AMR can
+use the bin
+file as the
+old map to
+guarantee a
+higher preci-
+sion.
+pgm The map that can be directly loaded and
+used by the AMR.
+yaml Map information.
+xml Feature information such as QR codes,
+reflective columns, and reflective stickers.
+png Picture file generated from the pgm file. It
+is used to display the map on KUKA.AMR
+Fleet.
+7.1.5 Opening a Map in KUKA.AMR Studio
+Precondition
+1. The xml, yaml and pgm files are required.
+2. The bin and png files are optional.
+KUKA.AMR Studio 2.1
+52/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+=== PDF PAGE 53 ===
+3. The files must be compressed in a zip file with the same name as the
+files themselves. For example, map files TestMap_B1_floor_1 must be
+compressed in a zip file named TestMap_B1_floor_1.zip.
+Fig. 7-18: Zip file name example
+Procedure
+1. Navigate to Navigation > Mapping > MapMgrUnit > Map Manager.
+2. Click the Open button.
+3. Browse to and select the desired map file.
+Fig. 7-19: Selecting the desired map file
+4. The map is loaded to KUKA.AMR Studio. QR codes, if any, are dis-
+played as solid red squares. Reflective stickers or columns are dis-
+played as red dots. Information about a landmark can be displayed by
+selecting it in the map (left mouse click). The information is displayed
+in the SelectedFeatures tab.
+Fig. 7-20: Loaded map with features
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 53/133
+Navigation commissioning
+
+=== PDF PAGE 54 ===
+7.1.6 Cleaning and editing a map
+Before using the map for navigation, it is recommended to remove noise
+and non-permanent features, e.g. user leg scans, pallets, etc.
+Map editing by GIMP
+1. Download and install the latest version of GIMP.
+Fig. 7-21: GIMP
+2. Open a local map (pgm) using GIMP.
+Fig. 7-22: Opening a local map
+3. Remove noise and repair walls and contours. Black pixels represent
+fixed objects such as walls, gray represents areas not scanned by la-
+sers, and white areas represent free areas without obstacles. When
+adjusting black pixels, e.g. walls, it is recommended to use a tool with
+a one-pixel size.
+4. Export the modified map as pgm file, preferably under the original
+name.
+5. Recompress the map files, bin, yaml, xml, png and the cleaned pgm,
+under the same name.
+6. Load the map to the AMR. Refer to ( >>> 7.1.7 "Uploading a map to
+the AMR" Page 56 ).
+When extending the map, it should be considered that there may be in-
+consistencies between the cleaned pgm and raw bin files.
+Map editing by KUKA.AMR Studio
+While it is recommended to use GIMP to edit a map, KUKA.AMR Studio
+can also be used to edit small-size maps (100 m 2 or smaller).
+KUKA.AMR Studio 2.1
+54/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+
+=== PDF PAGE 55 ===
+Fig. 7-23: Toolbox in Map Manager
+Tool Description Notes
+Pen tool, used for free drawing.
+• With a white contour color and an ap-
+propriate thickness, the Pen tool can
+be used to erase noises.
+• With a black contour color and a 1-pix-
+el thickness, the Pen tool can be used
+to repair walls.
+Select an object.
+Add text. Not suppor-
+ted by
+KUKA.AMR
+OS
+Draw a circle.
+• With a white contour color and a white
+fill color, it can be used to erase
+noises.
+Draw a rectangle.
+• With a white contour color and a white
+fill color, it can be used to erase
+noises.
+Draw an arrow. Not suppor-
+ted by
+KUKA.AMR
+OS
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 55/133
+Navigation commissioning
+
+=== PDF PAGE 56 ===
+Tool Description Notes
+Draw a line.
+• With a black contour color and a 1-pix-
+el thickness, it can be used to repair
+walls.
+Send to back.
+Bring to front.
+Set contour color and thickness.
+Set fill color.
+1. Open the desired map in KUKA.AMR Studio. Refer to
+(>>> 7.1.5 "Opening a Map in KUKA.AMR Studio" Page 52 ).
+2. Click the Enable Edit  button.
+3. Use the tool box on the left to edit the map.
+4. Click Save.
+5. Click the Disable Edit  button to exit the editing mode.
+7.1.7 Uploading a map to the AMR
+KUKA.AMR Studio can be used to upload a map to the AMR, e.g. after
+cleaning it and editing it by GIMP.
+Procedure
+1. Navigate to Navigation > Mapping > MapMgrUnit > Map Manager.
+2. Open the desired Map in KUKA.AMR Studio. Refer to
+(>>> 7.1.5 "Opening a Map in KUKA.AMR Studio" Page 52 ).
+3. Click the Upload to AMR  button.
+4. Wait for the uploading to complete.
+KUKA.AMR Studio 2.1
+56/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+=== PDF PAGE 57 ===
+Fig. 7-24: Upload confirmation
+7.1.8 Activating a map on the AMR
+KUKA.AMR Studio can be used to activate a map on the AMR. The acti-
+vated map can be used for the AMR navigation.
+Procedure
+1. Navigate to Navigation > Mapping > MapMgrUnit > Map Manager.
+2. Click the Query button.
+3. Select (left mouse click) the desired map.
+4. Click the Switch button. Wait for the process to be completed.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 57/133
+Navigation commissioning
+
+=== PDF PAGE 58 ===
+Fig. 7-25: Map activation status
+7.1.9 Deploying a map to multiple AMRs
+Since the LiDARs on the AMRs are calibrated, it is not necessary to map
+the same environment with each AMR in the application, even if they are
+of different types. Instead, the environment can be mapped with a single
+AMR and the resulted map is deployed to the remaining AMRs.
+Procedure
+1. Connect to the desired AMR.
+2. Load the desired map to the AMR. Refer to ( >>> 7.1.7 "Uploading a
+map to the AMR" Page 56 ).
+3. Repeat for the remaining AMRs.
+The map on the AMR should be activated if it is intended for navigation.
+7.1.10 Uploading a map to KUKA.AMR Fleet
+KUKA.AMR Fleet requires the map information for creating navigation
+graphs. KUKA.AMR Studio can be used to upload a map from the AMR
+directly to KUKA.AMR Fleet.
+Precondition
+• The IP address of KUKA.AMR Fleet is configured on the AMR.
+Procedure
+1. Navigate to Navigation > Mapping > MapMgrUnit > Map Manager.
+2. Select the map to be uploaded to KUKA.AMR Fleet.
+3. Click the Upload to Fleet  button.
+KUKA.AMR Studio 2.1
+58/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+
+=== PDF PAGE 59 ===
+Fig. 7-26: Uploading confirmation
+4. Enter KUKA.AMR Fleet user name and password.
+Fig. 7-27: Entering KUKA.AMR Fleet username and password
+7.1.11 Extending a SLAM map
+The map extension feature allows the user to extend a previously mapped
+area. This is useful when an application is implemented in stages where
+the area covered by the AMRs grows over time.
+Procedure
+1. Connect KUKA.AMR Studio and AMR using wired or wireless connec-
+tion. The former is preferred for a stable and reliable data transmis-
+sion.
+2. Jog the AMR to a location in the original map with rich and un-
+changed features. It should also be close to the new area.
+3. Navigate to Navigation > Mapping > MapMgrUnit > Map Extend.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 59/133
+Navigation commissioning
+
+=== PDF PAGE 60 ===
+Fig. 7-28: Map Create
+4. Click the Map Extend  button.
+5. Select the map to be extended.
+6. Select the data type for map extension ( Raw or pgm format). Refer to
+(>>> 7.1.4 "Downloading maps to the PC" Page 51 ) for differences.
+7. Type the name of the extended map.
+8. Select the initialization method ( Manual or QRCode).
+• If Manual mode  is selected, click Map Refresh. Manually drag the
+AMR and adjust its position to match the point cloud on the map.
+Then click Location Initialize. When the quality displays RELIA-
+BLE, click OK. Refer to ( >>> 7.2 "Localizing the AMR on a SLAM
+map" Page 62 ).
+• If QRCode is selected, jog the AMR to a QR code that has been
+mapped. When the code info is displayed, click OK.
+Fig. 7-29: Map Extend information
+9. Wait for the progress bar in the pop-up window to reach 100%. The
+AMR is then displayed in the extended map.
+KUKA.AMR Studio 2.1
+60/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+=== PDF PAGE 61 ===
+10. Jog the AMR around the area to be extended and then back to the
+starting point to form a loop. Refer to ( >>> 7.1.2.1 "SLAM mapping
+best practices" Page 48 ).
+11. Click Mapping Stop.
+12. The extended map information is displayed. Of particular interest is
+the offset. Refer to ( >>> 7.1.11.2 "Extended map offset" Page 61 ).
+7.1.11.1 Using raw map data vs. PGM image file
+If the map has not undergone any modifications, the Raw Map Data  is
+preferred as it can provide an extended map with higher quality. However,
+if the map has been edited, especially with operations such as rotation
+and stitching, then the PGM Image File  should be selected instead.
+7.1.11.2 Extended map offset
+The extended map offset refers to the change in the origin of the exten-
+ded map relative to the original map. If there is already a graph created in
+KUKA.AMR Fleet Manager based on the original map, the offset informa-
+tion can be used to adjust the graph in KUKA.AMR Fleet (refer to the
+KUKA.AMR Fleet document for more information).
+Fig. 7-30: Offset information
+If the pop-up window is closed without taking note of the offset, the infor-
+mation can be found in the yaml file.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 61/133
+Navigation commissioning
+
+=== PDF PAGE 62 ===
+Fig. 7-31: Offset information in the yaml file
+7.2 Localizing the AMR on a SLAM map
+The purpose of localizing the AMR on a map is to “teach” the AMR its in-
+itial location in the map. This is necessary when the AMR reports an "un-
+reliable positioning" error after booting up or switching maps.
+Procedure
+1. Switch the AMR the correct map, if applicable.
+2. Navigate to Navigation > Location > initLocation.
+Fig. 7-32: Interface of InitLocation
+3. Click Map Refresh. The cloud data, as seen by the AMR, is dis-
+played.
+Fig. 7-33: Displayed AMR information
+Below the Map Refresh  button, some information about the current
+AMR is displayed:
+• mapName: the name and path of the current map
+KUKA.AMR Studio 2.1
+62/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+=== PDF PAGE 63 ===
+• pose: the position of the AMR in the map
+• quality: whether the positioning is reliable
+• pointnumber: the number of valid points in the laser point cloud
+• error_info: error message
+4. Left-click in the map where the AMR is actually located. A small trian-
+gle, representing the AMR, and black point clouds are displayed.
+Fig. 7-34: Displayed AMR and point clouds
+5. Click and rotate the triangle to align the black cloud data with the map
+contour. For small adjustments, the fine-tuning buttons in the upper
+right corner can be used.
+Fig. 7-35: Aligning the black cloud data with the map contour
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 63/133
+Navigation commissioning
+
+=== PDF PAGE 64 ===
+Fig. 7-36: Fine-tuning buttons
+6. Click Location initial. The red point cloud data now also match the
+map contour, indicating that the localization initialization is complete.
+Fig. 7-37: Complete localization initialization
+7. Click Map Refresh.
+KUKA.AMR Studio 2.1
+64/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+=== PDF PAGE 65 ===
+Fig. 7-38: Refreshed map
+7.3 Feature extension
+The feature extension function of KUKA.AMR Studio can be used to add
+landmarks to the map  to assist with localization, especially in highly dy-
+namic environments.
+Procedure
+1. Navigate to Navigation > Mapping > MapMgrUnit > Feature Extend.
+2. Click the Feature Extend  button.
+3. Select the map.
+4. Select the map type ( Raw Map Data  or PGM)
+5. Select the feature type ( QR, REFLECTIVE POST  or REFLECTIVE).
+6. Select the initialization method, Manual or QRCode.
+• If Manual initialization is selected, click Map Refresh, manually
+drag the AMR icon and adjust its position to match the point cloud
+on the map. Then click Location Initialize. When the quality dis-
+plays RELIABLE, click OK.
+• If the QRCode initialization is selected, jog the AMR to a QR code
+that has been mapped. When the code information is displayed,
+click OK.
+7. Wait for the progress in the pop-up window to reach 100%. Then, the
+AMR is displayed in the extended map.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 65/133
+Navigation commissioning
+
+=== PDF PAGE 66 ===
+Fig. 7-39: Map Extend information
+8. Move the AMR around the landmarks to be recorded. Red squares for
+QR codes and red circles for reflective columns will be displayed in
+the map as they are discovered.
+9. After all the landmarks are recorded, jog the AMR back to the starting
+point to form a loop.
+10. Click Mapping Stop.
+Fig. 7-40: Map creating status
+KUKA.AMR Studio 2.1
+66/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+=== PDF PAGE 67 ===
+7.4 Fine localization models
+7.4.1 Rack/holder/tray model
+Description
+• Rack: moves with the AMR (also referred to as shelf).
+Fig. 7-41: Rack
+• Holder: fixed position (also referred to as bracket).
+Fig. 7-42: Holder
+• Tray: moves with the AMR. The AMR carries a tray and put it on a
+holder.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 67/133
+Navigation commissioning
+
+=== PDF PAGE 68 ===
+Fig. 7-43: Tray
+Model management
+The model management interface can be found under Navigation > Lo-
+cation > RackModel.
+Fig. 7-44: Model management
+Function Description
+Querying the
+existing models
+To list the available models in both the AMR and the
+host PC, click the Get Models  button in the Model
+List tab, select the local storage folder. The available
+models are displayed.
+The column “In AMR or Host Device” shows the loca-
+tion of the model: “Host Device” indicates that the
+model is in the local PC. Otherwise, the IP address
+of the AMR is shown.
+Uploading a
+model to the
+AMR
+A model stored in the local PC can be uploaded to
+AMR by clicking the Upload button in its row.
+Downloading a
+model to the lo-
+cal PC
+A model stored in the AMR can be downloaded to
+the local PC by clicking the Download button in its
+row.
+Deleting a mod-
+el
+A model, regardless of its location, can be deleted by
+clicking the Delete button in its row.
+KUKA.AMR Studio 2.1
+68/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+=== PDF PAGE 69 ===
+Function Description
+Displaying mod-
+el parameters
+Clicking the Select button in a row opens the Model
+Editor tab, displaying the selected model’s parame-
+ters. Clicking the Draw button in this tab shows a
+graphical representation of the model:
+• The green rectangles represent the Free Space
+area.
+• The black rectangles represent the legs of the
+rack/holder at the AMR’s LiDAR plane.
+• The red dotted circles represent the leg filters.
+This circle covers the model legs at the LiDAR
+plane when the lift is up.
+• A black square at the center of the model indi-
+cates the existence of a QR code beneath the
+rack.
+• The light gray X and Y axes represent the model
+coordinate system.
+• The red and blue axes represent the offset posi-
+tion of the AMR after entering the rack or holder.
+• The light gray rectangle represents the position of
+the AMR when approaching the rack/holders.
+Click the two triangle icons in the interface to enlarge the visualization.
+Fig. 7-45: Querying a rack model
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 69/133
+Navigation commissioning
+
+=== PDF PAGE 70 ===
+Fig. 7-46: Rack model parameters
+Fig. 7-47: Enlarged visualization
+Model Coordinate System (CS)
+The Model Coordinate System is defined as follows:
+• The center of the CS is at the center of the model.
+• The X axis is along the long side of the rack/holder.
+• The Y axis is along the short side of the rack/holder.
+KUKA.AMR Studio automatically adjusts the reference coordinate systems
+depending on which side the AMR is approaching the rack/holder.
+The shape of the model must be a rectangle (including a square).
+Fig. 7-48: Model coordinate system
+KUKA.AMR Studio 2.1
+70/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+
+=== PDF PAGE 71 ===
+Creating or editing a model
+The model edition page can be found under: Navigation > Location >
+RackModel > Model Editor.
+Fig. 7-49: Rack/holder/tray Model Editor
+Fig. 7-50: Coordinates of key points used for rack detection
+Fig. 7-51: Leg filter
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 71/133
+Navigation commissioning
+
+=== PDF PAGE 72 ===
+Parameter Description Notes
+Model type Physical type of the model:
+• storage rack
+• holder
+• tray
+Approach di-
+rection
+Side from which the AMR is to approach the
+rack/holder:
+• Both sides
+• Longer sides
+• Shorter sides
+Geometry
+type
+Geometric features:
+• Standard: Rectangular model with four
+legs
+• Irregular
+If “Standard” is selected, the
+coordinate parameters of the
+key points of the model can
+be automatically generated,
+determined by the length and
+width of the rack, and the
+length and width of each leg.
+Note that in this model, the
+legs are assumed to be in
+the corners of the rectangle.
+If “Irregular” is selected, the
+coordinate parameters of the
+key points of the rack need to
+be manually entered.
+File name Name of the model file (xml extension) This is the name that needs
+to be entered in Fleet.
+Example:
+If the model file name is
+rack_demo.xml, then the
+Model Name entered in Fleet
+should be rack_demo.
+Holder angle Orientation angle of the holder model coordi-
+nate system in the MAP coordinate system.
+Range: -π to π
+Unit: rad
+Only for holder types
+Model length From leg to leg, refer to ( >>> Fig. 7-54). Total length in KUKA.AMR
+FleetModel width
+Legs param “LEG_X_Size” refers to the side size of the
+legs along the long side of the rack (X-axis
+direction ). Leg_Y_size: refers to the side size
+of the legs along the short side of the rack
+(Y-axis direction).
+AMR Offset AMR goal position and orientation represen-
+ted in the model coordinate frame when the
+AMR moves under the rack, or inside a hold-
+er.
+KUKA.AMR Studio 2.1
+72/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+=== PDF PAGE 73 ===
+Parameter Description Notes
+Coordinates
+of Key Points
+Used for
+Rack Detec-
+tion
+Free Space:
+Description:
+• Free Space refers to the obstacle free
+space inside the legs. It is a polygon with
+no limit on the number of vertices. How-
+ever, its shape must be a convex.
+• The Free Space recorded in the model is
+used for model detection. The detection
+algorithm will report a detection failure if
+there are point clouds inside the Free
+Space area.
+• It is not related with the safety function.
+• The vertices should be filled in a clock-
+wise or counterclockwise order.
+• The Free Space must be located inside
+all legs (the distance from the nearest leg
+is recommended to be no less than
+50mm).
+Actions:
+• Click Add Point  to add new points.
+• Select a cell and double-click the left but-
+ton to edit it.
+Leg:
+Description:
+• A leg is a polygon with no limit on the
+number of vertices. For example, two
+points representing a line segment, three
+points representing a triangle, four points
+representing a quadrilateral, etc.
+• The vertices should be filled in a clock-
+wise or counterclockwise order.
+Actions:
+• Click Add Leg  to add a new leg.
+• Select a cell and double-click with the left
+button to edit it.
+• Select a cell and right-click to select
+whether to delete the entire leg.
+1. Measure the data on the
+laser scanning plane.
+2. If “Standard” is selected,
+the coordinate parameters
+of the key points of the
+model can be automati-
+cally generated, deter-
+mined by the length and
+width of the rack, the
+length and width of each
+leg. If “Irregular” is selec-
+ted, the coordinate pa-
+rameters of the key points
+of the rack need to be
+manually filled in.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 73/133
+Navigation commissioning
+
+=== PDF PAGE 74 ===
+Parameter Description Notes
+Leg filter • Leg filter represents the shape of the leg
+seen by the Lidar when the rack is raised.
+• X, Y represents the center of the Leg Fil-
+ter circle.
+• Diameter represents the diameter of the
+Leg Filter circle. It should be about
+50-100mm larger than the actual outer cir-
+cle diameter.
+Refer to ( >>> Fig. 7-52).
+1. If the leg filter is square, then X, Y, and Di-
+ameter should be filled in based on the coor-
+dinates and diameter of the envelope circle of
+the square.
+2. If a fixed wheel is scanned when the AMR
+lifts the rack, then X, Y, and Diameter should
+be filled in based on the coordinates and di-
+ameter of the envelope circle of the fixed
+wheel.
+3. If a caster wheel is scanned when the
+AMR lifts the rack, then X, Y, and Diameter
+should be selected so as to cover all points
+of the caster wheel when it rotates.
+Actions:
+• Click Add Leg  to add a new rack leg fil-
+ter.
+• Select a cell and double-click the left but-
+ton to edit it.
+• Select a cell and right-click to select
+whether to delete the entire shelf leg.
+• Applies to rack models.
+• No cell model is allowed
+to have blank data.
+Draw button Visualize the model.
+Save button Save the model file to the user-selected fold-
+er in the local PC.
+To upload to the AMR, select
+the AMR and click “Upload”
+from the “model list” page.
+Leg filter illustration
+Rack data:
+Length 1500 mm
+Width 1000 mm
+Leg X size 100 mm
+Leg Y size 80 mm
+Filter parameters for the leg 1:
+X - 700 mm
+Y 460 mm
+Diameter 180 mm
+The diameter should be 50 to 100 mm larger than the actual circumscri-
+bed circle diameter:
+√(100∗100+80∗80)+50 ≈180 (mm)
+KUKA.AMR Studio 2.1
+74/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+
+=== PDF PAGE 75 ===
+Fig. 7-52: The scanning plane of the laser scanners used for Rack
+Filter
+1 Leg 1
+2 Leg 2
+3 Leg 3
+4 Leg 4
+The following figure shows other cases about the scanning plane of the
+laser scanners when the AMR lifts up a rack.
+Diameter of the leg filter = actual diameter + 50 mm
+Fig. 7-53: Other cases about the scanning planes
+1 Rectangular leg
+2 Normal wheel
+3 Caster
+4 Actual diameter
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 75/133
+Navigation commissioning
+
+=== PDF PAGE 76 ===
+Rack top overhangs rack legs
+Fig. 7-54: Front view
+1 Model width (mm), entered in KUKA.AMR Studio
+Fig. 7-55: Side view
+1 Model length (mm), entered in KUKA.AMR Studio
+KUKA.AMR Studio 2.1
+76/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+=== PDF PAGE 77 ===
+Fig. 7-56: Top view
+1 Rack width, entered in KUKA.AMR Fleet
+2 Model width (mm), entered in KUKA.AMR Studio
+3 Rack length, entered in KUKA.AMR Fleet
+4 Model length (mm), entered in KUKA.AMR Studio
+7.4.1.1 Examples
+Creating a standard rack model
+Rack data:
+• The rack is 1500 mm long and 1000 mm wide, with each leg having a
+side length of 100 mm along the long side of the rack and a side
+length of 80 mm along the short side of the rack.
+• A QR code is affixed to the bottom of the rack. The X-axis direction of
+the QR code must be along the long side of the rack.
+• The AMR is required to be able to detect and enter the rack when fac-
+ing both the long and short sides of the rack.
+• The AMR is required to be in the center of the rack after entering.
+The information to be filled in on the interface is as follows:
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 77/133
+Navigation commissioning
+
+=== PDF PAGE 78 ===
+Fig. 7-57: Parameters of a standard rack
+NOTICE
+• Data in the tab page “Coordinates of Key Points Used for Rack De-
+tection” will be automatically generated. No need for manual input.
+• Data in the tab page “Leg Filter” will be automatically generated.
+However, manual confirmation is required if it is correct.
+Creating an irregular rack model
+Rack data:
+• A rack with a length of 1500 mm and a width of 1000 mm.
+• A QR code is affixed to the bottom of the rack. The X-axis direction of
+the QR code must be along the long side of the rack.
+• The AMR is required to be able to detect and enter the rack when fac-
+ing both the long and short sides of the rack.
+• The AMR is required to be in the center of the rack after entering.
+• The rack has five legs. Four of the legs are rectangular and the re-
+maining leg is triangular.
+Fig. 7-58: Irregular model
+The information to be entered is as follows:
+KUKA.AMR Studio 2.1
+78/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+=== PDF PAGE 79 ===
+Fig. 7-59: Parameters of an irregular rack
+Fig. 7-60: Coordinates of key points used for rack detection
+Fig. 7-61: Leg filter
+7.4.1.2 Use cases
+Case 1: Querying models on the AMR
+1. Select the desired AMR.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 79/133
+Navigation commissioning
+
+=== PDF PAGE 80 ===
+2. Navigate to Navigation > Location > RackModel > Model List  Tab
+Page, and click Get Model  to query the model files from the AMR and
+the local device. Refer to ( >>> 7.4.1 "Rack/holder/tray model"
+Page 67).
+3. Click Select to select the desired mode. The Model Editor page is
+opened.
+4. Click Draw. A diagram of the selected model is drawn.
+Case 2: Editing a model on the AMR
+1. Select the desired AMR.
+2. Navigate to Navigation > Location > RackModel > Model List  Tab
+Page, and click Get Model  to query the model files from the AMR and
+the local device. Refer to ( >>> 7.4.1 "Rack/holder/tray model"
+Page 67).
+3. Click Select to select the desired mode. The Model Editor page is
+opened.
+4. Click Draw. A diagram of the selected model is drawn.
+5. Edit the model as desired.
+6. Click Draw to update the model.
+7. Click Save. The model is saved to the local PC.
+8. Click Get Model  in the Model List page.
+9. Select the desired row and click Upload.
+Case 3: Creating a new model
+1. Navigate to Navigation > Location > RackModel > Model Editor.
+2. Open a model for editing.
+3. Edit File Name.
+4. Click Save to save the model to the local PC.
+Case 4: Querying models on local devices
+1. Navigate to Navigation > Location > RackModel > Model List Tab
+Page, and click Get Model  to query the model files from the AMR and
+the local device. Refer to ( >>> 7.4.1 "Rack/holder/tray model"
+Page 67).
+2. Click Select to select the desired mode. The Model Editor page is
+opened.
+3. Click Draw. A diagram of the selected model is drawn.
+Case 5: Synchronizing local models with the AMR
+1. Navigate to Navigation > Location > RackModel > Model List Tab
+Page, and click Get Model  to query the model files from the AMR and
+the local device. Refer to ( >>> 7.4.1 "Rack/holder/tray model"
+Page 67).
+2. Select the desired AMR.
+3. Select the desired local model.
+4. Click Upload.
+Case 6: Downloading models from the AMR to the local device
+1. Select the desired AMR.
+2. Navigate to Navigation > Location > RackModel > Model List Tab
+Page, and click Get Model  to query the model files from the AMR and
+KUKA.AMR Studio 2.1
+80/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+=== PDF PAGE 81 ===
+the local device. Refer to ( >>> 7.4.1 "Rack/holder/tray model"
+Page 67).
+3. Select the desired model on the AMR.
+4. Click Download.
+Storage path of local model files
+When KUKA.AMR Studio queries the models on local devices, it only
+queries the selected directory. It is recommended that users specify a sin-
+gle folder to store model data.
+7.4.2 Reflective sticker models
+Description
+Reflective stickers can be used to provide faster and more accurate fine
+localization. This is due to their high-intensity reflectivity. Information about
+deploying reflective stickers can be found in the deployment document.
+Fig. 7-62: Reflective sticker
+1 Reflective sticker
+Model management
+The reflective sticker model management interface can be found under
+Navigation > Location > ReflectiveSticker.
+Fig. 7-63: Reflective sticker model management page
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 81/133
+Navigation commissioning
+
+=== PDF PAGE 82 ===
+Function Description
+Querying the
+existing models
+To list the available models in both the AMR and the
+host PC, click the Get Models button in the Model
+List tab, and select the local storage folder. The avail-
+able models are displayed.
+The column “In AMR or Host Device” shows the loca-
+tion of the model: “Host Device” indicates that the
+model is in the local PC. Otherwise, the IP address
+of the AMR is shown.
+Uploading a
+model to the
+AMR
+A model stored in the local PC can be uploaded to
+AMR by clicking the Upload button in its row.
+Downloading a
+model to the lo-
+cal PC
+A model stored in the AMR can be downloaded to
+the local PC by clicking the Download button in its
+row.
+Deleting a mod-
+el
+A model, regardless of its location, can be deleted by
+clicking the Delete button in its row.
+Displaying mod-
+el parameters
+Clicking the Select button in a row opens the Model
+Editor tab, displaying the selected model’s parame-
+ters. Clicking the Draw button in this tab shows a
+graphical representation of the model:
+• The orange rectangle represents the AMR;
+• The black circle is center of the closest side of
+the AMR to the reflective stickers;
+• The green line represents the effective range,
+while the yellow line represents the invalid range;
+• The blue squares are reflective stickers that con-
+tain width information;
+• The red coordinate system represents the center
+coordinate system of two reflective stickers, used
+to express the offset position;
+• Multiple sets of green coordinate systems repre-
+sent offset positions.
+Click the two triangle icons in the interface to enlarge the visualization.
+Fig. 7-64: Querying a reflective sticker
+KUKA.AMR Studio 2.1
+82/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+
+=== PDF PAGE 83 ===
+Fig. 7-65: Reflective sticker parameters
+Model Coordinate System (CS)
+The Model Coordinate System is defined as follows:
+• The center of the CS is at the center of the two reflective stickers.
+• The X axis is perpendicular to the plane of the two reflective stickers
+and faces inward.
+• The Y axis is along the line connecting the two reflective stickers and
+points left.
+Creating or editing a model
+The model edition page can be found under: Navigation > Location >
+ReflectiveSticker > Model Editor.
+Fig. 7-66: Reflective sticker Model Editor
+Parameter Description
+reflectorIsUse Must be checked to use reflector stickers for fine lo-
+calization.
+filename Name of the model. It can contain letters, numbers,
+and underscores.
+File extension: .xml
+Note: This is the name to enter in KUKA.AMR Fleet.
+For example, if the model file name is RackRe-
+flect_demo.xml, then the Model Name entered in
+KUKA.AMR Fleet must be RackReflect_demo.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 83/133
+Navigation commissioning
+
+=== PDF PAGE 84 ===
+Parameter Description
+detectMinDis/
+detectMaxDis
+Minimum and maximum detection distances. When
+the AMR is at the detection node, only the reflective
+stickers within this range are considered. The distan-
+ces are measured from the center of the sticker to
+the center of the AMR side closest to the stickers.
+Unit: mm
+reflectorWidth The width of the reflector at the LiDAR scanning
+plane.
+Unit: mm
+reflectorDis The distance between the centers of the reflectors at
+the LiDAR scanning plane.
+Unit: mm
+endInX Target AMR X offset in the stickers’ CS.
+This offset can be positive (inside the model) or neg-
+ative (outside the model).
+Unit: mm
+endInY Target AMR Y offset in the stickers’ CS.
+This offset can be positive or negative. Furthermore,
+it can be greater than half the reflector’s distance.
+This allows for positioning outside the “legs”.
+Unit: mm
+endInTheta Target AMR theta offset in the stickers’ CS.
+This offset can be positive (counter-clockwise) or neg-
+ative (clockwise).
+Unit: rad
+ShowType Drop down menu to select the long or short side:
+. LongSide: The long side model is visualized
+. ShortSide: The short side model is visualized
+Note: After selection, click Draw.
+Offset Strategy Used to define multiple offset strategies. Each strat-
+egy is assigned a rack model name.
+Some workstations handle loads of different sizes.
+Hence, each load requires different offsets. With the
+offset strategy the user can assign different offsets for
+different container models.
+KUKA.AMR Studio 2.1
+84/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+=== PDF PAGE 85 ===
+Fig. 7-67: Case1: AMR enters a rack. Reflectors are put on the legs
+at the longer side. AMR detects the object from the longer side.
+Fig. 7-68: Case2: AMR enters a rack. Reflectors are put on the legs
+at the shorter side. AMR detects the object from the shorter side.
+7.5 Navigation map
+When a map is created, four files are generated in the AMR. These files
+have the extensions bin, pgm, yaml and xml. The following table
+describes each file.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 85/133
+Navigation commissioning
+
+=== PDF PAGE 86 ===
+Fig. 7-69: File extension
+File extension File description
+bin The original mapping data.
+pgm The map that can be directly loaded and used by the
+AMR.
+yaml Map information.
+xml Feature information such as QR codes, reflective col-
+umns, and reflective stickers.
+png A compressed version of the pgm file. This file can
+be used by KUKA.AMR Fleet.
+NOTICE
+When extending the map or doing Feature Extension, the AMR can use
+the .bin file as the old map to guarantee a higher precision.
+KUKA.AMR Studio 2.1
+86/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Navigation commissioning
+
+=== PDF PAGE 87 ===
+8 Deploying and upgrading KUKA.AMR OS
+8.1 Upgrading a single AMR
+KUKA.AMR Studio can be used to deploy or update KUKA.AMR OS to a
+single or multiple AMRs. This task should be performed by knowledgeable
+personnel only.
+The interface can be found under BaseInfo > Maintenance > DeployOS.
+Fig. 8-1: KUKA.AMR OS deployment
+Procedure
+1. Switch the operating mode of the AMR to DebugMode or Manual-
+Mode.
+2. Click the Select button to select the target OS package ZIP file from
+the host PC.
+3. Click the RefreshState button and check whether the AMR can be up-
+graded. The AMR cannot be upgraded if it is in an abnormal state,
+charging or with a low battery level. The Deployable row shows True if
+the AMR can be upgraded and False otherwise. The upgrade can be
+forced by checking the Allowed to Force Deploy  checkbox.
+4. Inspect the ROS Ids (rosid) of all AMRs within the same local network
+to ensure that they are different. If not, edit the AMRs’ rosid parame-
+ters.
+The ROS Ids must be in the range 0 - 101 or 215 - 232.
+5. Inspect the AMR Type parameter (AmrType) to ensure that it is the
+same as indicated on the hardware nameplate. If not, check the Edit
+checkbox and correct the AMR type by selecting the correct type from
+the drop-down menu.
+6. Click the Deploy button. The upgrade process starts. A progress bar
+displays the progress.
+7. Once the upgrade process is finished, restart the AMR manually.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 87/133
+Deploying and upgrading KUKA.AMR OS
+
+=== PDF PAGE 88 ===
+Fig. 8-2: Upgrade process
+NOTICE
+The system boot is upgraded automatically when the AMR is restar-
+ted. Do not turn the AMR off within three minutes after restart. Oth-
+erwise, the boot upgrade will fail.
+When selecting a KUKA.AMR OS deployment package, KUKA.AMR
+Studio automatically determines the version of the package based
+on its name and selects the corresponding value of the "KUKA.AMR
+OS Upgrade Version" drop-down menu. Confirm that the value in-
+deed corresponds to the upgrade package. Otherwise, select the
+correct value, i.e. “2.2.0 and earlier” or “2.3.0 and later”.
+8.2 Upgrading multiple AMRs
+KUKA.AMR Studio can be used to deploy or update KUKA.AMR OS to a
+single or multiple AMRs. This task should be performed by knowledgeable
+personnel only.
+The interface can be found under BaseInfo > Maintenance > DeployOS.
+Fig. 8-3: KUKA.AMR OS deployment
+Upgrading without KUKA.AMR Fleet
+1. Switch the operating mode of the AMR to DebugMode or Manual-
+Mode.
+2. Click the Select button to select the target OS package ZIP file from
+the host PC.
+3. Click the RefreshState button and check whether the AMR can be up-
+graded. AN AMR cannot be upgraded if it is in an abnormal state,
+charging or with a low battery level. The Deployable row shows True if
+KUKA.AMR Studio 2.1
+88/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Deploying and upgrading KUKA.AMR OS
+
+
+=== PDF PAGE 89 ===
+the AMR can be upgraded and False otherwise. The upgrade can be
+forced by checking the Allowed to Force Deploy  checkbox.
+4. Inspect the ROS Ids (rosid) of all AMRs within the same local network
+to ensure that they are different. If not, edit the AMRs’ rosid parame-
+ters. Note that the ROS Ids must be in the range 0 - 101 or 215 - 232
+5. Inspect the AMR Type parameter (AmrType) to ensure that it is the
+same as indicated on the hardware nameplate. If not, check the Edit
+checkbox and correct the AMR type by selecting the correct type from
+the drop-down menu.
+6. Check the AMRs to be upgraded.
+7. Click OneKeyDeploy. The upgrade process starts. A progress bar dis-
+plays the progress.
+8. Once the upgrade process is finished, restart each AMR manually.
+Fig. 8-4: Upgrading without KUKA.AMR Fleet
+Upgrading over the air (OTA) with KUKA.AMR Fleet
+Multiple AMRs can be upgraded while in the AutoMode operating mode
+using KUKA.AMR Fleet. This is especially useful when the AMRs are in
+multiple locations within the plant.
+Precondition
+• The KUKA.AMR Fleet version supports the OTA upgrade function
+(Version 1.20 or later).
+• The target AMRs are not assigned to any map (its status is Off-site).
+• The target AMRs are set to the OTA mode.
+Fig. 8-5: OTA status management
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 89/133
+Deploying and upgrading KUKA.AMR OS
+
+=== PDF PAGE 90 ===
+Procedure
+1. Click the Select button to select the deployment package.
+2. Enter the KUKA.AMR Fleet server IP address, username, and pass-
+word.
+3. Check the FromFleet checkbox.
+4. Click Scan. A list of AMRs that are in the OTA mode is retrieved.
+KUKA.AMR Studio verifies automatically the information of each AMR
+in the list and determines whether they can be upgraded. AMRs that
+pass the test are automatically selected for batch upgrading.
+5. AMRs that fail the test can be manually edited to update their AMR
+model and ROSID information.
+6. If the check still fails for an AMR, it can be forced to upgrade mode
+by checking the Allow to Force Deploy  checkbox.
+7. Click the OneKeyDeploy button to upgrade the selected AMRs.
+Fig. 8-6: Upgrading over the air with KUKA.AMR Fleet
+The specific reason for a failed check can be viewed by clicking the
+ShowLogs button. Clicking a different AMR on the deployment page
+switches the displayed log to the corresponding AMR.
+KUKA.AMR Studio 2.1
+90/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Deploying and upgrading KUKA.AMR OS
+
+
+=== PDF PAGE 91 ===
+9 Business and navigation maps management
+9.1 Binding a business map to a navigation map
+Description
+The term “Business Map” refers to the graph (nodes, edges, stations, etc.)
+that the AMR uses for path planning. A business map is bound to a navi-
+gation map. When the AMR is controlled through the VDA5050 protocol,
+KUKA.AMR OS requires a business map to handle the missions assigned
+to it from the fleet manager. In this case, the business and navigation
+maps must be linked together and downloaded to the AMR.
+The business and navigation maps management page can be found
+under App > RobotControl.
+Fig. 9-1: Business and navigation maps management
+Precondition
+• A navigation map (zip file) has been downloaded to the PC.
+• A business map (json file) and obstacle avoidance strategy (json)
+have been created and downloaded to the PC.
+Procedure
+1. Navigate to App > RobotControl.
+2. Open the NavMap tab.
+3. Click the Open button to open the local navigation map (zip file).
+4. Open the BusinessMap tab.
+5. Click the Open button to open the local business map (json).
+6. Open the ObstacleAvoidance tab.
+7. Click the Open button to open the local obstacle avoidance strategy
+file (json file).
+8. Open the MapBind tab.
+9. Open the CurMapBind tab on the right to view where the opened files
+are listed.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 91/133
+Business and navigation maps management
+
+=== PDF PAGE 92 ===
+Id Description
+ConfigXml The configuration file automati-
+cally created when the
+navigation and business maps
+are linked.
+A value of None means the two
+maps are not linked.
+BusinessMap The business map information
+ObstacleAvoid The obstacle avoidance strategy
+file information
+SLAMMap Refer to ( >>> 7.5 "Navigation
+map" Page 85 ).SLAMMapData
+SLAMMapRawData
+FeatureMap
+QRNavMap
+TextureMap Not supported.
+NavAreaMap Not supported.
+Fig. 9-2: Opened files
+10. Click the Bind button to link the two files. A link configuration file is
+created automatically. These files are packaged into a zip file that is
+saved under the user-selected folder and is named “[Business Map
+Name]#[Obstacle Avoidance Strategy File Name]#[Navigation Map
+Name]#[Timestamp]”.zip.
+Fig. 9-3: Output zip file
+KUKA.AMR Studio 2.1
+92/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Business and navigation maps management
+
+=== PDF PAGE 93 ===
+11. Click the Open button to open the zip file that was just generated.
+9.2 Loading linked maps to the AMR
+Description
+The term “Business Map” refers to the graph (nodes, edges, stations, etc.)
+that the AMR uses for path planning. A business map is bound to a navi-
+gation map. When the AMR is controlled through the VDA5050 protocol,
+KUKA.AMR OS requires a business map to handle the missions assigned
+to it from the fleet manager. In this case, the business and navigation
+maps must be linked together and downloaded to the AMR.
+The business and navigation maps management page can be found
+under App > RobotControl.
+Fig. 9-4: Business and navigation maps management
+Precondition
+• A business and navigation maps have been linked.
+Procedure
+1. Navigate to App > RobotControl > RobotControl > MapBind.
+2. Click the Open button to open the zip file that was generated after
+binding the business and navigation maps.
+3. Select the AMR.
+4. Click the Upload to AMR  button to upload the linked files to the AMR.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 93/133
+Business and navigation maps management
+
+=== PDF PAGE 94 ===
+Fig. 9-5: Loading linked maps to the AMR
+5. Click Query to query the linked files information in the AMR. The
+query result is shown in AmrMapBindList tab page.
+Fig. 9-6: Bound maps list
+9.3 Downloading linked maps to the PC
+Description
+The term “Business Map” refers to the graph (nodes, edges, stations, etc.)
+that the AMR uses for path planning. A business map is bound to a navi-
+KUKA.AMR Studio 2.1
+94/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Business and navigation maps management
+
+=== PDF PAGE 95 ===
+gation map. When the AMR is controlled through the VDA5050 protocol,
+KUKA.AMR OS requires a business map to handle the missions assigned
+to it from the fleet manager. In this case, the business and navigation
+maps must be linked together and downloaded to the AMR.
+The business and navigation maps management page can be found
+under App > RobotControl.
+Fig. 9-7: Business and navigation maps management
+Procedure
+1. Navigate to App > RobotControl > RobotControl > MapBind.
+2. Select the AMR.
+3. Click the Query button. A list of linked maps is displayed the AmrMap-
+BindList tab.
+4. Select the desired file.
+5. Click the Download button.
+6. Click Yes to confirm the information in the pop-up window. The file is
+downloaded to the PC under [KUKA.AMR Studio installation]/
+Images/RobotControl/MapBind/.
+Fig. 9-8: Downloading information
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 95/133
+Business and navigation maps management
+
+=== PDF PAGE 96 ===
+Fig. 9-9: Downloading status
+7. Click the Open button to open the zip file that was just downloaded.
+9.4 Setting the AMR on linked maps
+Description
+The term “Business Map” refers to the graph (nodes, edges, stations, etc.)
+that the AMR uses for path planning. A business map is bound to a navi-
+gation map. When the AMR is controlled through the VDA5050 protocol,
+KUKA.AMR OS requires a business map to handle the missions assigned
+to it from the fleet manager. In this case, the business and navigation
+maps must be linked together and downloaded to the AMR.
+The business and navigation maps management page can be found
+under App > RobotControl.
+Fig. 9-10: Business and navigation maps management
+Precondition
+• Linked maps are already loaded to the AMR.
+• The AMR is in DebugMode.
+Procedure
+1. Navigate to App > RobotControl > RobotControl > MapBind.
+2. Click the Query button to query the linked maps in the AMR.
+3. Open the AmrMapBindList tab, and right-click the desired ConfigXML
+entry.
+4. Click the Switch button.
+KUKA.AMR Studio 2.1
+96/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Business and navigation maps management
+
+=== PDF PAGE 97 ===
+Fig. 9-11: Switch button
+Fig. 9-12: Switch confirmation
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 97/133
+Business and navigation maps management
+
+=== PDF PAGE 98 ===
+KUKA.AMR Studio 2.1
+98/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Business and navigation maps management
+
+=== PDF PAGE 99 ===
+10 Robot control system
+10.1 Limitations/Preconditions
+KUKA.AMR Studio can be used to schedule missions to an AMR that is
+configured to use the VDA5050 protocol. Refer to ( >>> 5.4 "Fleet manag-
+er configuration" Page 27 ).
+The interface can be found under App> RobotControl > AMR.
+• This function is available only in KUKA.AMR OS 2.3.x or later.
+• The AMR must be configured to use the VDA5050 protocol.
+• The AMR must be switched to linked navigation and business maps.
+• Only a single AMR can be commanded at a time.
+• The AMR must be in AutoMode.
+Fig. 10-1: Mission scheduling
+10.2 Activating/Deactivating scheduling from KUKA.AMR Studio
+KUKA.AMR Studio can be used to schedule missions to an AMR that is
+configured to use the VDA5050 protocol. Refer to ( >>> 5.4 "Fleet manag-
+er configuration" Page 27 ).
+The interface can be found under App> RobotControl > AMR.
+Procedure
+1. Click the Activate KS Scheduling  button to activate scheduling mis-
+sions from KUKA.AMR Studio. The button text becomes Deactivate
+KS Scheduling.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 99/133
+Robot control system
+
+=== PDF PAGE 100 ===
+Fig. 10-2: Activating KS Scheduling
+2. Click the Entry button and open the linked maps.
+3. To deactivate scheduling, click Deactivate KS Scheduling .
+NOTICE
+Ensure that the AMR is not busy before deactivating scheduling.
+Fig. 10-3: Loading SLAMMap
+KUKA.AMR Studio 2.1
+100/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Robot control system
+
+=== PDF PAGE 101 ===
+Fig. 10-4: Loading Business Map
+Fig. 10-5: Loaded map
+10.3 Entering a container
+KUKA.AMR Studio can be used to schedule missions to an AMR that is
+configured to use the VDA5050 protocol. Refer to ( >>> 5.4 "Fleet manag-
+er configuration" Page 27 ).
+The interface can be found under App> RobotControl > AMR.
+Procedure
+1. Click the ContainerSetting tab.
+2. Create a new container.
+• Enter the container Id in the “ID” text field. If the container is iden-
+tified by a QR code, enter the QR Code ID, e.g. “ID:ABC105”.; If
+no QR code is affixed to the container, use any unique ID.
+• Enter the container model in the Model text field (without the .xml
+extension).
+• Click New. The container is created.
+• Click Query. The newly created container is displayed.
+3. Click the desired Rack Node on the graph, the node info will be filled
+in the Shelf Entry Point text field.
+4. Click Entry to assign the container to the Rack Node.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 101/133
+Robot control system
+
+=== PDF PAGE 102 ===
+Fig. 10-6: Container setting
+10.4 Scheduling a single mission
+KUKA.AMR Studio can be used to schedule missions to an AMR that is
+configured to use the VDA5050 protocol. Refer to ( >>> 5.4 "Fleet manag-
+er configuration" Page 27 ).
+The interface can be found under App> RobotControl > AMR.
+Scheduling a move task
+1. Click the Move tab page.
+Fig. 10-7: Move task setting
+2. Click the target node on the graph.
+3. Edit the container settings.
+These settings are only available for KUKA.AMR OS 2.3.2 or later.
+• Is Container: Whether the target node is a “Rack Node” and there
+is a container at that node.
+• Is QRCode: Whether the container at the target node has a rack
+QR Code.
+• ContainerID: The ID of the container at the target node.
+4. Click Execute to schedule the Move task.
+Scheduling a transport task
+1. Click the Carry tab.
+KUKA.AMR Studio 2.1
+102/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Robot control system
+
+
+=== PDF PAGE 103 ===
+Fig. 10-8: Transport task setting
+2. Enter the container Id in the Container ID text field. Refer to
+(>>> 10.3 "Entering a container" Page 101 ).
+3. Use the IsQRCode drop-down list to specify whether the container is
+equipped with a QR code. If so, the AMR will try to detect the QR
+Code, and adjust its pose to be at its center. It will then raise its lift to
+carry the container.
+4. Enter the location of the container (node Id) in the Shelf Node text
+field.
+5. Click the target Rack node on the graph.
+6. Click Execute to assign the transport task.
+Scheduling a lift-up task
+1. Click the Up/Down tab.
+Fig. 10-9: Lift task setting
+2. Enter the container Id in the Container ID text field. Refer to
+(>>> 10.3 "Entering a container" Page 101 ).
+3. Use the IsQRCode drop-down list to specify whether the container is
+equipped with a QR code. If so, the AMR will try to detect the QR
+Code, and adjust its pose to be at its center. It will then raise its lift to
+carry the container.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 103/133
+Robot control system
+
+=== PDF PAGE 104 ===
+4. Enter the location of the container (node Id) in the Shelf Node text
+field.
+NOTICE
+‒ For KUKA.AMR OS 2.3.2 or later, if the AMR is currently not at
+the “Shelf Node”, it will automatically move to the node, and lift
+the container.
+‒ For KUKA.AMR OS earlier than 2.3.2 the user must make sure
+that the AMR is at the “Shelf Node”.
+5. Click the LiftUp button.
+Scheduling a lift-down task
+1. Click the Up/Down tab.
+2. Enter the container Id in the Container ID text field. Refer to
+(>>> 10.3 "Entering a container" Page 101 ).
+3. Use the IsQRCode drop-down list to specify whether the container is
+equipped with a QR code.
+NOTICE
+This functionality is available only KUKA.AMR OS 2.3.2 or later.
+4. Enter the location of the AMR/container (node Id) in the Shelf Node
+text field.
+5. Click the PutDown button.
+Scheduling a charge task
+1. Click the Charge button. The AMR automatically moves to an availa-
+ble and compatible Charging Node and starts charging.
+2. To stop charging, click the ExitCharge button. The AMR stops charg-
+ing and leaves the charging node.
+Fig. 10-10: ExitCharge button
+Canceling tasks
+To cancel a task, select Cancel from the drop-down list and click Task-
+Command. Any task that has been scheduled is canceled and the AMR
+enters the Idle state.
+Fig. 10-11: Cancel command
+KUKA.AMR Studio 2.1
+104/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Robot control system
+
+=== PDF PAGE 105 ===
+10.5 Executing command scripts
+KUKA.AMR Studio can be used to schedule missions to an AMR that is
+configured to use the VDA5050 protocol. Refer to ( >>> 5.4 "Fleet manag-
+er configuration" Page 27 ).
+The interface can be found under App> RobotControl > AMR.
+KUKA.AMR Studio provides the possibility to program and execute a set
+of commands. These include motion, lift actions and charging. Further-
+more, a charging strategy can be implemented so that the AMR can auto-
+matically travel to a charging station and start charging when its battery
+level is below a specified value.
+Configuring an automatic charging strategy
+1. Click the AutoMoveScript tab.
+2. Enter the Force Charge Level . If the battery level is less than this
+percentage, the AMR will travel to a charging station and cannot be
+interrupted until reaching the Target battery level .
+3. Enter the Target Battery Level.
+4. Click the Turn On Auto Charge  button.
+5. To turn off the auto charging strategy, click the Turn Off Auto Charge
+button.
+Fig. 10-12: Automatic charging configuration
+Executing a move script
+1. Type the script in the scripting area (An example script with descrip-
+tion is shown in the interface).
+2. Click the Execute button.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 105/133
+Robot control system
+
+=== PDF PAGE 106 ===
+Fig. 10-13: Example script with description
+Terminating a script execution
+1. Click the Stop button.
+2. Select Cancel and click TaskCommand to cancel the script execu-
+tions.
+Viewing the AMR status
+The AMR status is displayed in the RobotStatus tab. The status includes
+the task status, the OS application module status, the current errors, and
+the error history.
+Fig. 10-14: AMR status
+KUKA.AMR Studio 2.1
+106/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Robot control system
+
+=== PDF PAGE 107 ===
+Syntax
+NOTICE
+• Script is case sensitive.
+• Spaces must be used to separate parameters.
+• Spaces at the beginning and/or end of a line are ignored.
+Loop command
+The loop…endloop Loop is used to repeat the inner part of the code for
+the specified number of cycles.
+Syntax of loop…endloop Loop:
+loop number of cycles
+#body of loop
+endloop
+Move command
+The move command is used to schedule a move task.
+Syntax:
+Move [Target Node] [Is Container] [Container ID] [Is QRCode]
+Example:
+Move  12 0 AA11 0
+Carry command
+The carry command is used to schedule a transport task.
+Syntax:
+Carry [Container ID] [Is QRCode] [Shelf Node] [Target Node]
+Example:
+Carry AA11 0 23 26
+Lift-up command
+The LiftUp command is used to schedule a lift up task.
+Syntax:
+LiftUp [Container ID] [Is QRCode] [Shelf Node]
+Example:
+LiftUp AA11 0 23
+Put-down command
+The PutDown command is used to schedule a lift down task.
+Syntax:
+PutDown [Container ID] [Is QRCode] [Shelf Node]
+Example:
+PutDown AA11 0 23
+Charge command
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 107/133
+Robot control system
+
+=== PDF PAGE 108 ===
+The Charge command is used to schedule a charge task.
+Syntax:
+Charge [Target Battery Level]
+Example:
+Charge 60
+Exit-charge command
+The ExitCharge command is used to stop charging.
+Syntax:
+ExitCharge
+Wait command
+The wait command is used to wait for the last task done.
+Syntax:
+wait 0
+Sleep command
+The sleep command is used to put AMR to sleep for a period of time dur-
+ing which KUKA.AMR Studio will not assign any new task to the AMR.
+Syntax:
+sleep [time(unit:ms)]
+Example:
+sleep 60000
+Comments
+A hash mark (#) at the beginning of a line indicates that line is a com-
+ment.
+Example
+loop 10
+#A Move Task. 
+Note: Parameters for Move Task: params[0]:"Target Node"; 
+params[1]:"Is Container";params[2]:"Container 
+ID";params[3]:"Is QRCode"
+Move  12 0 AA11 0
+#wait the last task done
+wait 0
+#A Carry Task
+#Note: Parameters for Carry Task: params[0]:"Container ID"; 
+params[1]:"Is QRCode"; params[2]:"Shelf Node"; 
+params[3]:"Target Node"
+Carry  AA11 0 23 26
+#wait the last task done
+wait 0
+ 
+#A Tray Rotate Task
+#Note: only available for KUKA.AMR OS >= 2.3.2.x
+KUKA.AMR Studio 2.1
+108/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Robot control system
+
+=== PDF PAGE 109 ===
+#Note: Parameters for Tray Rotate Task: params[0]:"Target 
+Degree" (unit:degree, in world frame)
+TrayRotate 90
+#wait the last task done
+wait 0
+#A Lift Up Task
+#Note: Parameters for Lift Up Task: params[0]:"Container 
+ID"; params[1]:"IsQRCode"; params[2]:"Shelf Node"
+LiftUp AA11 0 23
+#wait the last task done
+wait 0
+#A Put Down Task
+#Note: Parameters for Put Down Task: params[0]:"Container 
+ID"; params[1]:"IsQRCode"; params[2]:"Shelf Node"
+PutDown AA11 0 23
+#wait the last task done
+wait 0
+#A Charge Task
+#Note: Parameters for Charge Task: params[0]:"Target 
+Battery Level"
+Charge 60
+#wait the last task done
+wait 0
+#sleep some time, unit:ms
+sleep 60000
+#A Exit Charge Task
+ExitCharge
+#wait the last task done
+wait 0
+endloop
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 109/133
+Robot control system
+
+=== PDF PAGE 110 ===
+KUKA.AMR Studio 2.1
+110/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Robot control system
+
+=== PDF PAGE 111 ===
+11 Troubleshooting
+11.1 Online diagnosis
+11.1.1 Controller status
+Fig. 11-1: Controller status
+The status of the KUKA.AMR OS control module is displayed under Con-
+troller > Status.
+Item Description Notes
+Operation Mode The current operating
+mode of the AMR.
+Motor Status • Enabled: The mo-
+tor is enabled
+• Disabled: The mo-
+tor is disabled
+Gyro Zero • True: The gyro is
+calibrated
+• False: The gyro is
+not calibrated
+Lift Calibration • Calibrated: The lift
+is calibrated
+• Error: The lift is
+not calibrated
+Lift Status • Up: The lift is up
+• Down: The lift is
+down
+Lift Height Displays the current
+lift height
+Lift Angle The angle of the lift
+relative to the AMR
+chassis.
+Only applies to KMPs
+whose lift can rotate
+relative to the KMP
+chassis. For others,
+the lift angle is always
+zero.
+Is EStopped • True: An Estop
+button is pressed
+• False: No Estop
+button is pressed
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 111/133
+Troubleshooting
+
+=== PDF PAGE 112 ===
+Item Description Notes
+Bumper Triggered • True: The collision
+bumper is trig-
+gered.
+• False: The colli-
+sion bumper is not
+triggered.
+Is Charging • True: The AMR is
+charging.
+• False: The AMR is
+not charging.
+Battery Level The battery power lev-
+el (%)
+Refer to
+(>>> 5.6 "Power man-
+agement" Page 31 ) for
+more information.In SleepMode • True: The AMR is
+in sleep mode.
+• False: The AMR is
+not in sleep mode.
+Angular Speed The current angular
+speed of the AMR.
+Linear Speed The current linear
+speed of the AMR.
+Position The position of the
+AMR in the map coor-
+dinate system; in the
+format “X:m,Y:m,The-
+ta:deg”.
+Loc.confid. Reliability of the loca-
+tion of the AMR:
+• 0 – 50: Location is
+not reliable
+• 51 – 100: Location
+is reliable
+Localized • 1: The AMR is lo-
+calized
+• 0: The AMR is not
+localized
+Current Cmd The command that the
+KUKA.AMR OS con-
+trol module is execut-
+ing or has finished ex-
+ecuting.
+The commond type
+has the format: "Type-
+ID:Description”, e.g.
+“5: Tray_LIFTDown”.
+KUKA.AMR Studio 2.1
+112/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Troubleshooting
+
+=== PDF PAGE 113 ===
+Item Description Notes
+Cmd Status The status of the
+KUKA.AMR OS con-
+trol module is execut-
+ing or has finished ex-
+ecuting:
+• Done: The com-
+mand is completed
+successfully.
+• In Execution: The
+command is still
+being executed.
+• Error: The com-
+mand execution
+was not success-
+ful.
+If the status is “Error”,
+check the error codes
+reported by the
+KUKA.AMR OS con-
+trol module and refer
+to
+(>>> 11.1.2 "KUKA.AM
+R OS control module
+message codes"
+Page 113) for details.
+Current PathId The ID of the task the
+AMR is currently exe-
+cuting.
+Path Status
+• Done: The AMR
+has completed the
+task.
+• In Execution: The
+AMR is currently
+executing the task.
+• Error: The AMR
+has encountered
+errors and is stop-
+ped.
+If the status is “Error”,
+check the error codes
+reported by the
+KUKA.AMR OS con-
+trol module and refer
+to
+(>>> 11.1.2 "KUKA.AM
+R OS control module
+message codes"
+Page 113) for details.
+If any heading is highlighted in red, a hardware initialization is required to
+restore the AMR to its normal state. Refer to ( >>> 6.2 "Commonly used
+commands" Page 40 ).
+11.1.2 KUKA.AMR OS control module message codes
+The message codes reported by the KUKA.AMR OS control module can
+be found under Controller > Status > Current Controller Errors .
+Fig. 11-2: Current controller errors
+NOTICE
+• The messages follow the format: “time-level-Code-Cause-Remedy”.
+• For error codes not described in this table, take a log and contact
+KUKA support.
+• Messages with a “WARN” level can be ignored.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 113/133
+Troubleshooting
+
+=== PDF PAGE 114 ===
+Control-
+ler Mes-
+sage
+Code
+Level Description/Cause Remedy
+0x202 Fatal Er-
+ror
+Front bumper is trig-
+gered
+Move the AMR away
+from the obstacle and
+make sure the bumper
+is no longer triggered.
+Then press the hard-
+ware reset button for
+five seconds.
+0x203 Fatal Er-
+ror
+Rear bumper is trig-
+gered
+0x204 Fatal Er-
+ror
+Estop button is press-
+ed
+Release the Estop
+button and press the
+hardware reset button
+for five seconds.
+0x206 Error FNx error Make sure the FNA
+has been set up.
+0x207 Error Safety PLC controller
+error. There may be
+obstacles in the Pro-
+tective Field.
+Make sure there are
+no obstacles in the
+Protective Field.
+0x305 Warning Battery power level is
+lower than 20%.
+Charge the AMR.
+0x307 Fatal Er-
+ror
+Battery power level is
+lower than 10%.
+Charge the AMR and
+press the hardware re-
+set button for five sec-
+onds when the battery
+level is higher than
+15%.
+0x605 Error Location of the AMR
+is not initialized.
+Check the location of
+the AMR. Use
+KUKA.AMR Studio to
+initialize the AMR’s lo-
+cation.
+0x607 Error The AMR has been
+moving using only its
+odometer data for a
+prolonged distance. Its
+location has not been
+updated by the SLAM
+or QR Code naviga-
+tion system. The
+AMR’s location is not
+reliable.
+If the AMR is in SLAM
+navigation mode, use
+KUKA.AMR Studio to
+reinitialize the AMR’s
+location.
+If the AMR is in QR
+Code navigation
+mode, check whether
+the QR codes are
+properly affixed.
+If the ground is too
+slippery, limit the
+speed of the AMR.
+KUKA.AMR Studio 2.1
+114/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Troubleshooting
+
+=== PDF PAGE 115 ===
+Control-
+ler Mes-
+sage
+Code
+Level Description/Cause Remedy
+0x60F Error Gyro bias error Switch the AMR to
+DebugMode, then
+send an “Init Hard-
+ware” command using
+KUKA.AMR Studio.
+Do not move the AMR
+before it completes its
+hardware initialization
+process.
+0x610 Warning The location of the
+AMR in the map coor-
+dinate system publish-
+ed by the SLAM or
+QR Code navigation
+system is unreliable.
+If the AMR is in SLAM
+navigation mode, use
+KUKA.AMR Studio to
+reinitialize the AMR’s
+location.
+If the AMR is in QR
+Code navigation
+mode, check whether
+the QR codes are
+properly affixed.
+If the ground is too
+slippery, limit the
+speed of the AMR.
+0x624 Error The odometer theta
+angle is unreliable.
+Make sure no object
+is colliding with the
+AMR.
+If the ground is too
+slippery or not flat,
+limit the speed of the
+AMR.
+0x712 Error Lifting command
+failed.
+Switch the AMR to
+DebugMode, then
+send an “Init Hard-
+ware” command using
+KUKA.AMR Studio.
+0x718 Error Lift needs to be cali-
+brated again.
+0xB07 Error The controller module
+has received a “stop”
+command from
+KUKA.AMR Studio.
+Switch the AMR to
+DebugMode, then
+send a “Clear Errors”
+command using
+KUKA.AMR Studio.
+0xB28 Error The hardware initiali-
+zation process failed,
+or the AMR has en-
+countered motor er-
+rors.
+Switch the AMR to
+DebugMode, then
+send an “Init Hard-
+ware” command using
+KUKA.AMR Studio.
+11.1.3 Viewing the LiDAR scan data
+The real-time LiDAR data can be inspected. This can be helpful to diag-
+nose when the LiDAR detects “ghost” obstacles.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 115/133
+Troubleshooting
+
+=== PDF PAGE 116 ===
+Fig. 11-3: Viewing LiDAR scans
+Procedure
+1. Navigate to BaseInfo > Status > Laser.
+2. Switch to the desired tab (Front or rear LiDAR).
+3. Click the Query button. The live laser scanner data is displayed. The
+blue rectangle at the center represents the AMR with the yellow part
+representing its front. Laser scanner points are shown as green points.
+4. (Optional) To measure the distance between two points, follow these
+steps:
+• Click on the ruler button.
+• Left-click to select the first point. A small red circle is displayed.
+• Left-click to select the second point. A red line is drawn between
+the two points and the distance between them is displayed.
+• To turn off the distance measurement function, click the ruler icon
+button again.
+5. Click the Close button to end the laser points data transmission be-
+tween the AMR and KUKA.AMR Studio.
+NOTICE
+• Do not forget to click the Close button to end the laser points data
+transmission between the AMR and KUKA.AMR Studio.
+• There is no map context.
+• If no laser points are displayed after clicking the Query button, con-
+tact KUKA support.
+11.1.4 Viewing LiDAR point cloud and location status
+When the AMR reports an unreliable location or a “ghost” obstacle, it is
+important to check the point clouds and location status within the map in
+use.
+KUKA.AMR Studio 2.1
+116/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Troubleshooting
+
+=== PDF PAGE 117 ===
+Fig. 11-4: Location Initialization
+Procedure
+1. Navigate to Navigation > Location > InitLocation.
+2. Click the Map Refresh  button to view the map and the location status.
+The AMR icon indicates the pose of the AMR in the map; and the red
+points indicate the LiDAR point cloud as seen by the AMR.
+3. Verify that the map in use is correct. The name of the map is dis-
+played in the upper left corner. If the active map is incorrect, switch
+the AMR to the correct map. Refer to ( >>> 7.1.8 "Activating a map on
+the AMR" Page 57 ).
+4. Check the localization quality of the AMR. The localization quality is
+displayed in the upper left corner. If it is not “RELIABLE”, execute the
+location initialization process. Refer to ( >>> 7.2 "Localizing the AMR
+on a SLAM map" Page 62 ).
+5. Check whether the point cloud match with the map boundaries. If
+there is a significant deviation between the point cloud and the map
+boundaries, execute the location initialization process.
+6. Check whether there are areas with noise in the map. They can cause
+the AMR to falsely detect obstacles. If so, clean the map and config-
+ure the AMR to use the cleaned version.
+7. If there is no point cloud shown, contact KUKA for support.
+NOTICE
+• Scroll the mouse wheel up(down) to zoom in(out).
+• Right-click and drag to move the image.
+11.1.5 Viewing the obstacle map
+When the AMR detects an obstacle in its path, KUKA.AMR OS generates
+an obstacle map that consists of the obstacles’ position in the designated
+path. This obstacle map is useful when diagnosing root causes of the
+AMR stoppage due to collision detection.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 117/133
+Troubleshooting
+
+=== PDF PAGE 118 ===
+Fig. 11-5: Obstacle map
+• The AMR is represented by the black rectangle with a red square in
+the center.
+• The white areas represent obstacles seen by the AMR.
+• The red solid line indicates the path that the AMR is following.
+• The red dashed box indicates the projected position of the AMR at
+collision.
+Procedure
+1. Navigate to BaseInfo > Status > ObstacleMap.
+2. Click the Query button to view the obstacle map. The live map is dis-
+played.
+3. (Optional) To measure the distance between two points, follow these
+steps:
+• Click on the ruler icon button.
+• Left-click to select the first point. A small red circle is displayed.
+• Left-click to select the second point. A red line is drawn between
+the two points and the distance between them is displayed.
+• To turn off the distance measurement function, click the ruler icon
+button again.
+4. Click Close to stop the map image transmission. 
+NOTICE
+• Scroll the mouse wheel up (down) to zoom in (out).
+• Left-click and drag to move the image.
+11.1.6 Viewing QR code detection results
+KUKA.AMR Studio allows the user to inspect the QR Code detection qual-
+ity of both the upward and downward facing cameras.
+Procedure
+1. Switch the AMR to DebugMode.
+2. Navigate to BaseInfo > Status > CameraStatus.
+KUKA.AMR Studio 2.1
+118/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Troubleshooting
+
+
+=== PDF PAGE 119 ===
+Fig. 11-6: QR code detection results
+Button Description Notes
+Lamp On Turn the upward-facing light on. The lamp light for the
+down-facing camera is
+on by default.
+The button label tog-
+gles between “Lamp
+On” and “Lamp Off”.
+Lamp Off Turn the upward-facing light off.
+Play The images captured by the cam-
+era are transmitted in real-time to
+the KUKA.AMR Studio for display.
+The button label tog-
+gles between “Play”
+and “Stop”.
+Stop Stop the image transmission. 
+Record Clicking this button allows the user
+to save a recording of the
+captured images. The user is
+prompted for a local save
+directory. The video is automatical-
+ly named as “[timeStamp]_Up/
+Dn.mp4”, e.g.
+“2024-07-17-13-00-00_Dn.mp4”.
+The button label tog-
+gles between “Record”
+and “Stop Record”.
+Stop Re-
+cord
+Stop the recording.
+Capture Clicking this button allows the user
+to save the current image. The
+user is prompted for a local save
+directory. The image is automati-
+cally named as “[timeStamp]_Up/
+Dn.jpg”. e.g.
+“2024-07-17-13-24-56_Dn.jpg”.
+Enlarge Enlarges the image to fit the three
+areas of the tab.
+The button label tog-
+gles between “En-
+large” and “Restore”.Restore Restore the image display.
+11.1.7 Viewing the safety PLC Status
+KUKA.AMR Studio allows the user to inspect the state of the safety PLC.
+Furthermore, advanced authorized users can set special cases to the
+safety PLC.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 119/133
+Troubleshooting
+
+=== PDF PAGE 120 ===
+When the AMR reports safety related errors, the remote controller is not
+functioning properly, or the AMR’s brakes cannot be released, it is helpful
+to inspect the status of the Safety PLC to diagnose the root cause of the
+error.
+Fig. 11-7: Safety PLC Status
+Safety PLC types
+The safety PLC in the AMR depends on the AMR type. The table below
+shows the relationship between the KUKA AMR models and the type of
+safety PLC they use.
+The tab widget in the software automatically switches to the appropriate
+safety PLC tab page based on the selected AMR type. However, there
+may be instances where the tab page is not switched correctly due to out-
+dated versions of KUKA.AMR Studio or new KUKA AMR models that are
+not yet supported by the software. In such cases, users should ensure
+that the correct type of safety PLC for the AMR is selected.
+KUKA AMR Model Safety PLC Type
+KMP 1500P-EU-D diffDrive SickPLC
+KMP 1500P-EU-D-5G diffDrive
+KMP 1500P-EU-DIC diffDrive
+KMP 1500P-EU-DIC-5G diffDrive
+KMP 1500P-EU-1.2-D diffDrive KUKAPLC
+KMP 1500P-EU-1.2-D-5G diffDrive
+KMP 1500P-EU-1.2-DIC diffDrive
+KMP 1500P-EU-1.2-DIC-5G diff-
+Drive
+KMP 3000P-EU-2-D omniMove BeckhoffPLC
+KMP 3000P-EU-2.2-D omniMove
+KMP 600S-2 diffDrive(-E-3D) SickPLC 600S
+KMP 600S-2 diffDrive(-U-3D)
+KUKA.AMR Studio 2.1
+120/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Troubleshooting
+
+=== PDF PAGE 121 ===
+KUKA AMR Model Safety PLC Type
+KMP 600P-EU-D diffDrive KUKAPLC
+KMP 600P-EU-D-5G diffDrive
+KMP 600P-EU-DIC diffDrive
+KMP 600P-EU-DIC-5G diffDrive
+KMP 600P-EU-1.2-D diffDrive
+KMP 600P-EU-1.2-D-5G diffDrive
+KMP 600P-EU-1.2-DIC diffDrive
+KMP 600P-EU-1.2-DIC-5G diffDrive
+Status of the SickPLC and the SickPLC 600S
+Item Description
+AUTO Mode Green: The AMR is in AUTO
+Mode.
+White: The AMR is not in AUTO
+Mode
+Manual Override Green: The following three condi-
+tions are met.
+• The AMR is in Manual Mode.
+• The remote controller is con-
+nected to the AMR.
+• The remote controller is in T1
+Mode.
+White: At least one of the above
+three conditions is not met.
+Manual Mode Green: The following three condi-
+tions are met.
+• The AMR is in Manual Mode.
+• The remote controller is con-
+nected to the AMR.
+• The remote controller is in T2
+Mode.
+White: At least one of the above
+three conditions is not met.
+VehicleLock Status Green: unlocked
+White: locked
+LiftBrakes OpenAllowed Green: The lift motor’s brake is al-
+lowed to be released.
+Conditions:
+• The STO signal of the lift mo-
+tor drive is not active.
+• The motor drive is not locked.
+White: The lift motor’s brake is not
+allowed to be released.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 121/133
+Troubleshooting
+
+=== PDF PAGE 122 ===
+Item Description
+DrivesBrakes OpenAllowed Green: The wheel motor’s brake is
+allowed to be released.
+Conditions:
+• The STO signal of the wheel
+motor drive is not active.
+• The motor drive is not locked.
+White: The wheel motor’s brake is
+not allowed to be released.
+Motion Allowed Green: Motion is allowed (Safety
+Circuit is OK).
+Red: Motion is not allowed.
+Brake Release Green: The wheel motor’s brake
+has been released.
+White: The wheel motor’s brake is
+not released.
+SS1 Green: The AMR is not in the Safe
+Stop 1 process.
+Red: The AMR is in the Safe Stop
+1 process.
+StopCategory EmergencyStop Green: No stop
+Red: Safe Stop 1 triggered due to
+a pressed Estop button.
+StopCategory VelocityLimit Green: No stop
+Red: Safe Stop 1 triggered be-
+cause the speed of the AMR ex-
+ceeds the limit.
+StopCategorie ObstacleDetection Green: No stop
+Red: Safe Stop 1 triggered be-
+cause the protection field is viola-
+ted.
+StopCategorie HardwareError Green: No stop
+Red: Safe Stop 1 triggered due to
+hardware errors.
+NoAppSpecific FieldActive Green: No App Specific case is
+activated.
+White: An App Specific case is ac-
+tivated.
+LiftSenser Detected Green: Lift is down
+White: Lift is up
+Reset required Red: Need to manually press the
+reset button.
+White: No need to press the reset
+button.
+Field_1 violated White/Green: Protection Field is
+not violated.
+Red: Protection Field is violated.
+KUKA.AMR Studio 2.1
+122/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Troubleshooting
+
+=== PDF PAGE 123 ===
+Item Description
+Field_2 violated White/Green: Warning Field is not
+violated.
+Red: Warning Field is violated.
+Status of the KUKAPLC
+Item Description
+SFO (SS1) Green: The AMR is not in the Safe
+Stop 1 process.
+White: The AMR is in the Safe
+Stop 1 process.
+Motion Allowed Green: Motion is allowed.
+White: Motion is not allowed.
+Reset Green: No need to press the reset
+button.
+White: Need to manually press the
+reset button.
+isSpecial Case Green: An App Specific case is ac-
+tivated.
+White: No App Specific case is ac-
+tivated.
+Remote controller Green: The AMR is in Manual
+Mode, and the remote controller is
+connected to the AMR;
+White: The remote controller is not
+active.
+Status of the BeckhoffPLC
+Item Description
+HandleConnect Green: The AMR is in Manual
+Mode, and the remote controller is
+connected to the AMR;
+White: The remote controller is not
+active.
+AppcaseStatus Green: An App Specific case is ac-
+tivated.
+White: No App Specific case is ac-
+tivated.
+EmergencyStop Red: An Estop button is pressed.
+White: No Estop button is pressed.
+isResetPressed Green: No need to press the reset
+button.
+White: Need to manually press the
+reset button.
+AutomaticMode Green: The AMR is in AUTO
+Mode.
+White: The AMR is not in AUTO
+Mode.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 123/133
+Troubleshooting
+
+=== PDF PAGE 124 ===
+Item Description
+MaunalModeT1 Green: The following three condi-
+tions are met.
+• The AMR is in Manual Mode.
+• The remote controller is con-
+nected to the AMR.
+• The remote controller is in T1
+Mode.
+White: At least one of the above
+three conditions is not met.
+MaunalModeT2 Green: The following three condi-
+tions are met.
+• The AMR is in Manual Mode,
+• The remote controller is con-
+nected to the AMR, and
+• The remote controller is in T2
+Mode.
+White: At least one of the above
+three conditions is not met.
+MotionEnable Green: Motion execution is al-
+lowed.
+White: Motion execution is not al-
+lowed.
+SafetyCircuitOk Green: The Safety circuit is OK.
+White/Red: The Safety circuit is
+not OK.
+ProtectFieldsOk Green: The protection Field is not
+violated.
+White/Red: The protection Field is
+violated.
+VelocityStatusOK Green: The speed of the AMR is
+within the limit allowed for the cur-
+rent active field.
+White: The speed of the AMR ex-
+ceeds the limit allowed for the cur-
+rent active field.
+PersonDetectOK Green: The protection Field is not
+violated.
+White: The protection Field is vio-
+lated.
+HardwareOK Green: Hardware components are
+OK
+White: One or more hardware
+components are defective.
+SafeBrakeRampOK Green: The monitor result of the
+SBR (Safe Brake Ramp) function
+is OK.
+White: The SBR function indicates
+an incorrect deceleration.
+KUKA.AMR Studio 2.1
+124/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Troubleshooting
+
+=== PDF PAGE 125 ===
+Item Description
+isUnLocked Green: The AMR is not locked.
+White: The AMR is locked.
+LoadStatus Green: load state
+White: unload state
+11.2 Obtaining logs
+11.2.1 Obtaining KUKA.AMR OS logs
+Procedure
+1. Navigate to Log > GetLog.
+Fig. 11-8: Getting logs of KUKA.AMR OS
+2. Select the AMR.
+3. Select the StartTime and the EndTime.
+4. Select the localizer issue if needed.
+If the AMR reports location-related errors, e.g. 0x605, 0x607, the “lo-
+calizer issue” checkbox should be checked.
+5. Enter the bag numbers.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 125/133
+Troubleshooting
+
+=== PDF PAGE 126 ===
+‒ The start time must be earlier than the time when the error oc-
+curred.
+‒ The end time must be later than the time when the error occur-
+red.
+‒ If the AMR reports location-related errors, e.g. 0x605, 0x607,
+then the  “localizer issue”  checkbox must be checked. The time
+period should be no more than 15 minutes with the following re-
+strictions:
+‒ StartTime should be ten minutes before the time when the
+error occurred.
+‒ EndTime should be three minutes after the time when the er-
+ror occurred.
+‒ The value of BagNums should be 60. BagNums refers to the
+maximum number of localizer log files whose logging times
+fall in the range [StartTime, EndTime]. The BagNums entry is
+valid only when “localizer issue” is checked.
+6. Click the GetLog button. The output is displayed in the text area (log
+information), and the final log zip file is saved to the local PC. The
+path of the zip file is shown at the end of the output.
+NOTICE
+If the output shows “ERROR: the installPath has spaces!!!”, the location
+of the KUKA.AMR Studio executable includes spaces. Refer to
+(>>> 3 "Installation" Page 11 ).
+NOTICE
+Make sure that “Start Time” and “End Time” are in the reference of the
+AMR Time. If there is a significant time difference between the AMR
+Time and the local PC Time, it is suggested to perform an AMR Time
+synchronization. Refer to ( >>> 5.5 "Time synchronization" Page 30 ).
+KUKA.AMR Studio 2.1
+126/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Troubleshooting
+
+
+=== PDF PAGE 127 ===
+Fig. 11-9: AMR time and local time difference
+11.2.2 Obtaining reflective sticker detection logs
+When the task of entering the bracket through the reflective sticker model
+fails, the reason for the failure can be analyzed through this interface.
+This function is available in KUKA.AMR OS 2.2.x or later.
+Procedure
+1. Navigate to Log > RefletorLog.
+2. Select the desired AMR.
+3. Select the StartTime and the EndTime.
+4. Click the Get Log  button. The output is displayed in the left column.
+The log is saved to the local PC. The specific path is KS2.0 direc-
+tory \ logs \ ReflectorLog \ *. Raw .
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 127/133
+Troubleshooting
+
+=== PDF PAGE 128 ===
+Fig. 11-10: Getting reflective logs
+Analyzing the reflective sticker logs
+• Click the SelectLog button to select the reflective sticker log file. The
+detection result is displayed.
+Fig. 11-11: Reflective log display
+The points in the figure represent the point cloud scanned by the LiDAR.
+Red indicates that the reflection intensity of the point is greater than the
+reflection intensity threshold.
+Black indicates that it is lower than the reflection intensity threshold.
+The dashed box represents the outline of the AMR.
+The green line in front of the AMR represents the line connecting the cen-
+ters of the two reflective stickers.
+The red coordinate system represents the coordinates of the target point
+identified by the reflective stickers.
+Measurements can be performed as described in ( >>> 11.1.3 "Viewing the
+LiDAR scan data" Page 115 ).
+11.2.3 Obtaining fine localization logs
+This function is available in KUKA.AMR OS 2.2.x or later.
+KUKA.AMR Studio 2.1
+128/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Troubleshooting
+
+=== PDF PAGE 129 ===
+Procedure
+1. Navigate to Log > FineLocalizationLog.
+2. Select the desired AMR.
+3. Select the StartTime and the EndTime.
+4. Click the Get Log  button. The output is displayed in the left column.
+The log is saved to the local PC. The specific path is KS2.0 direc-
+tory \ logs \ FineLocalizationLog \ *. Raw .
+Analyzing fine localization logs
+1. Click the SelectLog button to select the Fine Localization log file.
+2. The detection result is displayed.
+• The black dashed box represents the outline of the AMR.
+• The black dots represent the LiDAR point cloud.
+• The green box in front of the AMR represents the outline of the
+rack.
+• The larger purple box represents the free space in the rack model.
+• The smaller four boxes represent the legs of the rack.
+• The coordinate system in the middle represents the pose of the
+rack recognition result.
+Fig. 11-12: Result of fine localization log analysis
+In the following figure, the results of detecting a charger is shown.
+• The black dashed box represents the outline of the AMR.
+• The black dots represent the LiDAR points cloud.
+• The purple line segment represents the outline of the charging sta-
+tion.
+• The coordinate system represents the pose of the charging station
+recognition result.
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 129/133
+Troubleshooting
+
+=== PDF PAGE 130 ===
+Fig. 11-13: Result of fine localization log analysis
+KUKA.AMR Studio 2.1
+130/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+Troubleshooting
+
+=== PDF PAGE 131 ===
+12 KUKA Service
+12.1 Requesting support
+Introduction
+This documentation provides information on operation and control and
+supports you during troubleshooting. For further support, please contact
+your local subsidiary.
+Information
+The following information is required for processing a support re-
+quest:
+• Description of the problem, including information about the duration
+and frequency of the fault
+• The greatest possible amount of information about the hardware and
+software components of the overall system
+The following list gives an indication of the information which is rele-
+vant in many cases:
+‒ Model and serial number of the kinematic system, e.g. the manip-
+ulator
+‒ Model and serial number of the controller
+‒ Model and serial number of the energy supply system
+‒ Designation and version of the system software
+‒ Designations and versions of other software components or modifi-
+cations
+‒ System software diagnosis package
+Additionally for KUKA Sunrise: Existing projects including applica-
+tions
+For versions of KUKA System Software older than V8: Archive of
+the software (Diagnosis package is not yet available here.)
+‒ Application used
+‒ External axes used
+12.2 KUKA Customer Support
+The contact details of the local subsidiaries can be found at:
+www.kuka.com/customer-service-contacts
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 131/133
+KUKA Service
+
+=== PDF PAGE 132 ===
+KUKA.AMR Studio 2.1
+132/133 | www.kuka.com KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024
+KUKA Service
+
+=== PDF PAGE 133 ===
+Index
+A
+AMR.................................................................. 8
+AMR battery strategy..................................... 31
+AMR list management....................................14
+AMR states.....................................................14
+C
+Cancel task...................................................102
+Charge task.................................................. 102
+Configuration...................................................21
+Core panel........................................................8
+D
+Deploying........................................................ 87
+Diagnosis package....................................... 131
+E
+Environment....................................................48
+Example paths................................................48
+G
+GIMP...............................................................54
+Graphical user interface.................................13
+I
+IMU................................................................... 8
+Installation....................................................... 11
+Intended use.....................................................9
+Introduction....................................................... 7
+IPC.................................................................... 8
+K
+KMP.................................................................. 8
+Knowledge, required.........................................7
+KUKA Customer Support............................. 131
+KUKA Service...............................................131
+KUKA.AMR OS control module....................111
+L
+Landmark.......................................................... 8
+Leg filter explanation......................................67
+Licenses............................................................8
+LiDAR .............................................................. 8
+Lift task......................................................... 102
+Log analysis......................................... 127, 128
+M
+Map editing.....................................................54
+Map management...........................................91
+Map toolbox....................................................54
+Mapping path..................................................48
+Misuse...............................................................9
+Model Coordinate System..............................67
+Model management........................................67
+Move task..................................................... 102
+O
+Odometer.......................................................... 8
+Offset information........................................... 61
+Overview......................................................... 13
+P
+Pose..................................................................8
+Product description...........................................9
+Q
+Quick Start wizard..........................................17
+S
+Safety instructions............................................ 7
+Safety PLC types..........................................119
+SLAM................................................................ 8
+Status of the BeckhoffPLC...........................119
+Status of the KUKAPLC...............................119
+Status of the SickPLC and the SickPLC
+600S..............................................................119
+Stop motion.................................................... 17
+Support request............................................131
+Switching between operation modes.............14
+System requirements......................................11
+T
+Target group..................................................... 7
+Terms used.......................................................8
+Trademarks.......................................................7
+Transport task...............................................102
+Troubleshooting.............................................111
+U
+Upgrading....................................................... 87
+W
+Warnings...........................................................7
+KUKA.AMR Studio 2.1
+KUKA.AMR Studio 2.1 V1 | Issued: 21.10.2024 www.kuka.com | 133/133
+Index

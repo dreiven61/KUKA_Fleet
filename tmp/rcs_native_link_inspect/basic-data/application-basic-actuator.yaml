@@ -1,0 +1,19 @@
+management:
+  server:
+    port: 7889
+  endpoints:
+    web:
+      base-path: /basic-actuator
+      exposure:
+        include:
+          - threaddump
+          - mappings
+          - metrics
+          - info
+          - health
+          - beans
+          - caches
+          - flyway
+          - scheduledtasks
+          - heapdump
+          - prometheus

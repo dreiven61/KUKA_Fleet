@@ -1,0 +1,1132 @@
+# This is the system configuration for a navigation server.
+# The server hosts the fleet manager, the services containing data to be shared between all robots,
+# and the MQTT broker along with the robot manager used to communicate with all robots in the fleet.
+services:
+   postgres:
+      image: "${REGISTRY_PATH}postgres:${TAG}"
+      container_name: postgres
+      extends:
+         file: default-service-config.yml
+         service: common
+      ports:
+         - "5434:5432" # this port is published so that content can be observed with PGAdmin.
+      volumes:
+         # Mounts the volume pgdata to container's path. It persists data even if container shuts down.
+         - pgdata:/var/lib/postgresql/data
+      environment:
+         - POSTGRES_USER=kuka
+         - POSTGRES_PASSWORD=kuka
+         - POSTGRES_DB=kuka
+      healthcheck:
+         test: [ "CMD-SHELL", "pg_isready -U kuka" ]
+         interval: 10s
+         timeout: 5s
+         retries: 5
+      networks:
+         server:
+            aliases:
+               - postgres
+
+   map:
+      image: "${REGISTRY_PATH}mrob-dataservice:${TAG}"
+      container_name: map
+      extends:
+         file: default-service-config.yml
+         service: common
+      volumes:
+         - ${LOG_HOME}:/opt/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/nav/config
+         - ${CONFIG_HOME}/map-database-config.yml:/opt/robot/config/mrob-data-service.yml
+         - ${APIS_HOME}:/apis
+      environment:
+         MODULE: MapService
+         SERVER_PORT: 50010
+      ports:
+         - "50010:50010" # mapping of the map service port
+      depends_on:
+         postgres:
+            condition: service_healthy
+      networks:
+         server:
+            aliases:
+               - map
+
+   station:
+      image: "${REGISTRY_PATH}mrob-dataservice:${TAG}"
+      container_name: station
+      extends:
+         file: default-service-config.yml
+         service: common
+      volumes:
+         - ${LOG_HOME}:/opt/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/nav/config
+         - ${CONFIG_HOME}/station-database-config.yml:/opt/robot/config/mrob-data-service.yml
+         - ${APIS_HOME}:/apis
+      environment:
+         MODULE: StationService
+         SERVER_PORT: 50110
+      ports:
+         - "50110:50110" # mapping of the station service port
+      depends_on:
+         postgres:
+            condition: service_healthy
+      networks:
+         server:
+            aliases:
+               - station
+
+   objectmodel:
+      image: "${REGISTRY_PATH}mrob-dataservice:${TAG}"
+      container_name: objectmodel
+      extends:
+         file: default-service-config.yml
+         service: common
+      volumes:
+         - ${LOG_HOME}:/opt/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/nav/config
+         - ${CONFIG_HOME}/objectmodel-database-config.yml:/opt/robot/config/mrob-data-service.yml
+         - ${APIS_HOME}:/apis
+      environment:
+         MODULE: ObjectModelService
+         SERVER_PORT: 50170
+      ports:
+         - "50170:50170" # mapping of the object model service port
+      depends_on:
+         postgres:
+            condition: service_healthy
+      networks:
+         server:
+            aliases:
+               - objectmodel
+
+   location:
+      image: "${REGISTRY_PATH}mrob-dataservice:${TAG}"
+      container_name: location
+      extends:
+         file: default-service-config.yml
+         service: common
+      volumes:
+         - ${LOG_HOME}:/opt/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/nav/config
+         - ${CONFIG_HOME}/location-database-config.yml:/opt/robot/config/mrob-data-service.yml
+         - ${APIS_HOME}:/apis
+      environment:
+         MODULE: LocationService
+         SERVER_PORT: 50100
+      ports:
+         - "50100:50100" # mapping of the location service port
+      depends_on:
+         postgres:
+            condition: service_healthy
+      networks:
+         server:
+            aliases:
+               - location
+
+   payload:
+      image: "${REGISTRY_PATH}mrob-dataservice:${TAG}"
+      container_name: payload
+      extends:
+         file: default-service-config.yml
+         service: common
+      volumes:
+         - ${LOG_HOME}:/opt/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/nav/config
+         - ${CONFIG_HOME}/payload-database-config.yml:/opt/robot/config/mrob-data-service.yml
+         - ${APIS_HOME}:/apis
+      environment:
+         MODULE: PayloadService
+         SERVER_PORT: 50120
+      ports:
+         - "50120:50120" # mapping of the service port
+      depends_on:
+         postgres:
+            condition: service_healthy
+      networks:
+         server:
+            aliases:
+               - payload
+
+   mqtt-broker:
+      image: "${REGISTRY_PATH}nav-mqtt-broker:${TAG}"
+      container_name: mqtt-broker
+      extends:
+         file: default-service-config.yml
+         service: common
+      volumes:
+         - ${CONFIG_HOME}:/opt/robot/config
+         - dbdata-mqtt-broker:/mosquitto/data
+         - ${LOG_HOME}/mosquitto/log:/mosquitto/log
+      environment:
+         - ENABLE_WEBSOCKET_LISTENER=1
+      ports:
+         - "1883:1883" # mqtt port for connecting vda5050 robots
+         - "8883:8883" # Broker port
+         - "9001:9001" # ws port
+      networks:
+         server:
+            aliases:
+               - mqtt-broker # the alias the broker is reachable by robotcontrollers
+
+   robotmanager:
+      image: "${REGISTRY_PATH}nav-robotcontroller:${TAG}"
+      container_name: robotmanager
+      extends:
+         file: default-service-config.yml
+         service: common
+      volumes:
+         - ${LOG_HOME}:/opt/nav/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/nav/config
+      environment:
+         ROBOT_CONTROLLER_SERVICE_PORT: "50090"
+         MQTT_BROKER_SCHEME: "ssl"
+         GRPC_MAX_CONCURRENT_CALLS_PER_CONNECTION: "50"
+         GRPC_MAX_CONNECTION_IDLE: "120"  # seconds (2m)
+         GRPC_MAX_CONNECTION_AGE: "43200" # seconds (12h)
+         GRPC_MAX_CONNECTION_AGE_GRACE: "30" # seconds
+         GRPC_PERMIT_KEEP_ALIVE_WITHOUT_CALLS: "true"
+         GRPC_KEEP_ALIVE_TIME: "30" # seconds
+         GRPC_KEEP_ALIVE_TIMEOUT: "10" # seconds
+         LOG4J_CONFIGURATION_FILE: >-
+            /opt/nav/config/logging/log4j2-defaults.xml,
+            /opt/nav/config/logging/log4j2-robotmanager.xml
+         JAVA_TOOL_OPTIONS: >-
+            -Xmx4096m
+         OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4317"
+         OTEL_EXPORTER_INTERVAL: "30"
+      ports:
+         - "50090:50090"
+      networks:
+         server:
+            aliases:
+               - robotmanager
+
+   maptool:
+      image: "${REGISTRY_PATH}nav-maptool:${TAG}"
+      container_name: maptool
+      extends:
+         file: default-service-config.yml
+         service: common
+      volumes:
+         - ${LOG_HOME}:/opt/nav/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/nav/config
+      profiles: [ "maptool" ]
+      networks:
+         server:
+
+   objecttool:
+      image: "${REGISTRY_PATH}nav-objecttool:${TAG}"
+      container_name: objecttool
+      extends:
+         file: default-service-config.yml
+         service: common
+      volumes:
+         - ${LOG_HOME}:/opt/nav/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/nav/config
+      profiles: [ "objecttool" ]
+      networks:
+         server:
+
+   orderengine:
+      image: "${REGISTRY_PATH}nav-orderengine:${TAG}"
+      container_name: orderengine
+      extends:
+         file: default-service-config.yml
+         service: common
+      # nav-orderengine uses a non-root user by default
+      # but as long as the mounted logs folder belongs to root, we need to run as root, in order to write logs
+      user: root
+      environment:
+         ROBOT_MANAGER_SERVICE_HOST: "robotmanager"
+         ROBOT_MANAGER_SERVICE_PORT: "50090"
+         GRAPH_SERVICE_HOST: "krcs-basic-data"
+         GRAPH_SERVICE_PORT: "7999"
+         FLEET_MANAGER_HOST: "fleetmanager"
+         FLEET_MANAGER_PORT: "50070"
+         STATION_SERVICE_HOST: "station"
+         STATION_SERVICE_PORT: "50110"
+         WCS_HOST: "kwcs-engine"
+         WCS_PORT: "7998"
+         LOG4J_CONFIGURATION_FILE: >-
+            /opt/nav/config/logging/log4j2-defaults.xml,
+            /opt/nav/config/logging/log4j2-orderengine.xml
+      volumes:
+         - ${LOG_HOME}:/var/log/order-engine
+         - ${CONFIG_HOME}:/opt/nav/config
+      ports:
+         - "50200:50200"
+      networks:
+         server:
+
+   secshostsim:
+      image: "${REGISTRY_PATH}nav-secs:${TAG}"
+      container_name: secshostsim
+      extends:
+         file: default-service-config.yml
+         service: logging-only
+      environment:
+         - CLI_ARGS=--sim
+         - LOGFILE_MESSAGES=/opt/nav/robot/bin/Log/secs/hostSim-messages.txt
+         - LOGFILE_ERRORS=/opt/nav/robot/bin/Log/secs/hostSim-errors.txt
+      volumes:
+         - ${LOG_HOME}/secshostsim:/opt/nav/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/nav/config
+         # by default, a command file is read from /sim/commands.txt; it can be placed at ${CONFIG_HOME}/secs/hostcommands/commands.txt
+         - ${CONFIG_HOME}/secs/hostcommands:/sim
+      profiles: [ "secshostsim" ]
+      networks:
+         server:
+
+   secs:
+      image: "${REGISTRY_PATH}nav-secs:${TAG}"
+      container_name: secs
+      extends:
+         file: default-service-config.yml
+         service: logging-only
+      restart: "no"
+      environment:
+         ROBOT_MANAGER_SERVICE_HOST: "robotmanager"
+         ROBOT_MANAGER_SERVICE_PORT: "50090"
+         LOG4J_CONFIGURATION_FILE: "/opt/nav/config/logging/log4j2-secs.xml"
+         MODULEDATA_RESUBSCRIPTION_INTERVAL: "120"
+         # to start the host simulation together with the secs service, uncomment the following line(s)
+         #- CLI_ARGS=-+sim
+         #- LOGFILE_MESSAGES=/opt/nav/robot/bin/Log/secs/hostSim-messages.txt
+         #- LOGFILE_ERRORS=/opt/nav/robot/bin/Log/secs/hostSim-errors.txt
+      volumes:
+         - ${LOG_HOME}:/opt/nav/robot/bin/Log:z
+         - ${CONFIG_HOME}:/opt/nav/config:z
+      ports:
+         - "50230:50230"
+         # secs connetion port when using passive connection mode
+         # - "5555:5555"
+      networks:
+         server:
+
+   wakeup:
+      image: "${REGISTRY_PATH}nav-wakeup:${TAG}"
+      container_name: wakeup
+      extends:
+         file: default-service-config.yml
+         service: common
+      volumes:
+         - ${LOG_HOME}:/opt/nav/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/nav/config
+      environment:
+         BATTERY_PORT: "5000"
+         ROBOT_MANAGER_HOST: "robotmanager"
+         ROBOT_MANAGER_PORT: "50090"
+         LOG4J_CONFIGURATION_FILE: >-
+            /opt/nav/config/logging/log4j2-defaults.xml,
+            /opt/nav/config/logging/log4j2-wakeup.xml
+      ports:
+         - "50220:50220" # mapping of the wakeup gRPC server
+      depends_on:
+         - robotmanager
+      networks:
+         server:
+            aliases:
+               - wakeup
+
+   datarecorder:
+      image: "${REGISTRY_PATH}nav-datarecorder:${TAG}"
+      container_name: datarecorder
+      volumes:
+         - ${LOG_HOME}:/opt/nav/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/robot/config
+         - ${LOG_HOME}:/output
+      profiles: [ "datarecorder" ]
+      networks:
+         server:
+
+   snapshot:
+      image: "${REGISTRY_PATH}nav-snapshot:${TAG}"
+      container_name: snapshot
+      volumes:
+         - ${LOG_HOME}:/opt/nav/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/robot/config
+      environment:
+         - SNAPSHOT_ACTION_EXECUTOR_PORT=50088
+      ports:
+         - "50088:50088" # mapping of the snapshot gRPC server
+      depends_on:
+         - robotmanager
+      networks:
+         server:
+            aliases:
+               - snapshot
+
+   cli:
+      image: "${REGISTRY_PATH}mrob-cli:${TAG}"
+      container_name: cli
+      volumes:
+         - ${LOG_HOME}:/opt/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/robot/config
+         - ${APIS_HOME}:/apis
+      tty: true
+      stdin_open: true
+      profiles: [ "cli" ]
+      networks:
+         server:
+
+   dockerproxy:
+      image: "${REGISTRY_PATH}docker-socket-proxy:${TAG}"
+      container_name: dockerproxy
+      extends:
+         file: default-service-config.yml
+         service: common
+      environment:
+         - CONTAINERS=1
+         - INFO=1
+         - SYSTEM=1
+         - EXEC=1
+         - POST=1
+      volumes:
+         - /var/run/docker.sock:/var/run/docker.sock
+      networks:
+         server:
+            aliases:
+               - dockerproxy
+
+   diagnostics:
+      image: "${REGISTRY_PATH}mrob-diagnostics:${TAG}"
+      container_name: diagnostics
+      extends:
+         file: default-service-config.yml
+         service: common
+      environment:
+         TZ: ${TIME_ZONE}
+         # ensure that $SERVER_IP is set on clients that should rsync here
+         INCOMING_RSYNC_TARGET: "rsync://$${SERVER_IP}:10873"
+         LOCAL_ROBOT_DATA_HOST: "robotmanager"
+         LOCAL_ROBOT_DATA_PORT: "50090"
+         LOG4J_CONFIGURATION_FILE: >-
+            /opt/robot/config/logging/log4j2-defaults.xml,
+            /opt/robot/config/logging/log4j2-diagnostics.xml
+         AUTHORIZATION_HOST: fleet-dmp
+         AUTHORIZATION_PORT: 8999
+         RECORD_HOST: fleet-dmp
+         RECORD_PORT: 8999
+      volumes:
+         - ${LOG_HOME}:/opt/nav/robot/bin/Log
+         - ${LOG_HOME}:/logs
+         - ${CONFIG_HOME}:/opt/robot/config
+         - ${DIAGNOSTICS_OUTPUT}:/output
+         - ${DIAGNOSTICS_OUTPUT}/webui:/tmp/webui
+         - ${MAIN_HOME}/docker-compose.yml:/opt/server/docker-compose.yml
+         - ${MAIN_HOME}/.env:/opt/server/.env
+         - ${MAIN_HOME}/info:/opt/server/info
+         - ${TELEMETRY_HOME}:/telemetry
+      extra_hosts:
+         # provide hosts for name resolution that point to the global host network
+         - "localhost:host-gateway"
+      ports:
+         - "50140:50140"
+         - "10873:873"
+      # Remove for production
+         # - "8200:8200"
+      healthcheck:
+         test: ["CMD-SHELL", "wget --spider http://localhost:8200/swagger-ui/"]
+         interval: 10s
+         timeout: 100s
+         retries: 100
+      depends_on:
+         fleet-dmp:
+            condition: service_healthy
+      networks:
+         server:
+            aliases:
+               - diagnostics
+
+   webui:
+      image: "${REGISTRY_PATH}nav-webui:${TAG}"
+      container_name: webui
+      extends:
+         file: default-service-config.yml
+         service: common
+      volumes:
+         - ${DIAGNOSTICS_OUTPUT}/webui:/usr/share/nginx/html/output
+         - ${APIS_HOME}:/usr/share/nginx/html/apis
+      networks:
+         server:
+            aliases:
+               - webui
+
+   envoy:
+      image: "${REGISTRY_PATH}nav-envoy:${TAG}"
+      container_name: envoy
+      security_opt:
+        - label=type:container_runtime_t
+      extends:
+         file: default-service-config.yml
+         service: common
+      ports:
+         - ${WEBUI_PORT}:8080
+      networks:
+         server:
+
+   ntp:
+      image: "${REGISTRY_PATH}nav-ntp:${TAG}"
+      container_name: ntp
+      extends:
+         file: default-service-config.yml
+         service: common
+      ports:
+         - 1234:123/udp
+      volumes:
+         - ${LOG_HOME}:/opt/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/robot/config
+
+   cleanup:
+      image: "${REGISTRY_PATH}mrob-cleanup-service:${TAG}"
+      container_name: cleanup
+      extends:
+        file: default-service-config.yml
+        service: common
+      volumes:
+         - ${LOG_HOME}:/opt/robot/bin/Log
+      environment:
+         FILE_PARENT_DIRECTORY: "/opt/robot/bin/Log"
+         FILE_AGE_DAYS: "2"
+
+   otel-collector:
+      image: "${REGISTRY_PATH}opentelemetry-collector-contrib:${TAG}"
+      container_name: otel-collector
+      extends:
+         file: default-service-config.yml
+         service: common
+      # otel-collector runs as user 1001 by default,
+      # but ${TELEMETRY_HOME} is created by docker daemon as root
+      user: "0:0"
+      volumes:
+         - ${TELEMETRY_HOME}:/telemetry-data
+         - ${CONFIG_HOME}/otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml
+         - /:/hostfs
+      networks:
+         server:
+
+   krcs-basic-data:
+      image: "${REGISTRY_PATH}basic-data:${TAG}"
+      container_name: krcs-basic-data
+      extends:
+         file: default-service-config.yml
+         service: common
+      volumes:
+         - ${LOG_HOME}:/var/log/kuka
+         - ${FILE_HOME}:/var/file
+      # Remove for production, uncomment when grpc interface is used
+      # ports:
+      #     - "7999:7999" # grpc
+      #     - "7888:7888" # http
+      #     - "7889:7889" # actuator
+      environment:
+         TZ: ${TIME_ZONE}
+         PARAMS: ${JAVA_PARAMS}
+         DB_HOST: krcs-basic-data-db
+         DB_PORT: 5432
+         DB_USERNAME: postgres
+         DB_PASSWORD: kuka
+         AUTHORIZATION_HOST: fleet-dmp
+         AUTHORIZATION_PORT: 8999
+         RECORD_HOST: fleet-dmp
+         RECORD_PORT: 8999
+         http_proxy: ""
+         https_proxy: ""
+         # PROJECT_CODE: ${PROJECT_CODE}
+         grpc.request.monitor.log-request: "false"
+         logging.level.com.kuka.rcs.bd.robot.observer: INFO
+         logging.level.com.kuka.rcs.bd.robot.service.impl: INFO
+         logging.level.com.kuka.rcs.bd.common.websocket.service.imp: INFO
+         logging.level.com.kuka.rcs.bd.common.grpc.subscribe: INFO
+      depends_on:
+         krcs-basic-data-db:
+            condition: service_healthy
+      networks:
+         server:
+      healthcheck:
+         test: ["CMD-SHELL", "wget --spider http://localhost:7888/swagger-ui/"]
+         interval: 10s
+         timeout: 100s
+         retries: 100
+
+   krcs-basic-data-db:
+      image: "${REGISTRY_PATH}postgres:${TAG}"
+      container_name: krcs-basic-data-db
+      extends:
+         file: default-service-config.yml
+         service: common
+      networks:
+         server:
+      environment:
+         POSTGRES_PASSWORD: kuka
+         http_proxy: ""
+         https_proxy: ""
+      volumes:
+         - "basic-data-db:/var/lib/postgresql/data"
+      privileged: true
+      healthcheck:
+         test: [ "CMD-SHELL", "pg_isready -U postgres -d postgres" ]
+         interval: 10s
+         timeout: 5s
+         retries: 5
+      # Remove for production
+      # ports:
+      #    - "5438:5432"
+
+   fleet-dmp:
+      image: "${REGISTRY_PATH}fleet-dmp:${TAG}"
+      container_name: fleet-dmp
+      extends:
+         file: default-service-config.yml
+         service: common
+      networks:
+         server:
+      volumes:
+         - ${LOG_HOME}:/var/log/kuka
+         - ${FILE_HOME}:/var/file
+      # Remove for production
+      # ports:
+      #    - "8999:8999" # http
+      #    - "9003:9003" # actuator
+      environment:
+         TZ: ${TIME_ZONE}
+         PARAMS: ${JAVA_PARAMS}
+         AI_DB_HOST: fleet-dmp-db
+         AI_DB_PORT: 5432
+         DB_USERNAME: postgres
+         DB_PASSWORD: kuka
+         BASIC_DATA_HOST: krcs-basic-data
+         BASIC_DATA_PORT: 7999
+         PROJECT_CODE: ${PROJECT_CODE}
+         http_proxy: ""
+         https_proxy: ""
+         # SSO configuration, if set to true, more configurations need to be added additionally
+         MIDEA_SSO_ENABLE: "false"
+         KUKA_SSO_ENABLE: "false"
+      depends_on:
+         fleet-dmp-db:
+            condition: service_healthy
+         krcs-basic-data:
+            condition: service_healthy
+      healthcheck:
+         test: ["CMD-SHELL", "wget --spider http://localhost:8999/swagger-ui/"]
+         interval: 10s
+         timeout: 100s
+         retries: 100
+
+   fleet-dmp-db:
+      image: "${REGISTRY_PATH}postgres:${TAG}"
+      container_name: fleet-dmp-db
+      extends:
+         file: default-service-config.yml
+         service: common
+      networks:
+         server:
+      environment:
+         POSTGRES_PASSWORD: kuka
+         http_proxy: ""
+         https_proxy: ""
+      volumes:
+         - "fleet-dmp-db:/var/lib/postgresql/data"
+      privileged: true
+      healthcheck:
+         test: [ "CMD-SHELL", "pg_isready -U postgres -d postgres" ]
+         interval: 10s
+         timeout: 5s
+         retries: 5
+      # Remove for production
+      # ports:
+      #    - "5439:5432"
+
+   pgadmin4:
+      image: "${REGISTRY_PATH}pgadmin4:${TAG}"
+      container_name: pgadmin4_fleet
+      extends:
+         file: default-service-config.yml
+         service: common
+      # manually start with command "docker compose --profile pgadmin4 up -d pgadmin4"
+      profiles: [ "pgadmin4" ]
+      networks:
+         server:
+      environment:
+         PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+         PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      privileged: true
+      ports:
+         - "5554:80"
+
+
+   krcs-algorithm-service:
+      image: "${REGISTRY_PATH}algorithm-service:${TAG}"
+      container_name: krcs-algorithm-service
+      extends:
+         file: default-service-config.yml
+         service: common
+      networks:
+         server:
+      volumes:
+         - ${LOG_HOME}:/var/log/kuka
+      # Remove for production
+      # ports:
+      #    - "9988:9988" # http
+      #    - "9888:9888" # grpc
+      depends_on:
+         krcs-basic-data:
+            condition: service_healthy
+      healthcheck:
+         test: ["CMD-SHELL", "wget --spider http://localhost:9988/swagger-ui/"]
+         interval: 10s
+         timeout: 100s
+         retries: 100
+      environment:
+         TZ: ${TIME_ZONE}
+         PARAMS: ${JAVA_PARAMS}
+         BASIC_DATA_HOST: krcs-basic-data
+         BASIC_DATA_PORT: 7999
+         http_proxy: ""
+         https_proxy: ""
+         # true means using accuracy on node，then "as.mission-graph.trans-tracking-accuracy: 0.2" is useless
+         as.topology-graph.use-node-accuracy.enabled: "true"
+         as.mission-graph.rotatory-tracking-accuracy: 3
+         # switch of using obstacle avoidance plan for planning
+         as.collision.use-safe-distance: "true"
+         # global safe distance for all robot types, unit: m
+         as.collision.default-safe-distance.global: 0.021
+         # custom safe distance for robot types that does not support obstacle avoidance plan, unit: m
+         as.collision.default-safe-distance.KMR-IISY: 0.33, 0.33, 0.1, 0.1, 0.1
+         # dynamic weight calculation
+         as.mission-graph.weight-calculation-method: DYNAMIC_COST
+         # allow jumping a queue
+         as.mission.queue-jumping-config.enabled: "false"
+         as.mission.queue-jumping-config.node-types: SINGLE_POINT_WORKSTATION, SHELF_POINT, HOLDER_POINT, PIPELINE_RELATIVE_POINT
+         # allow queuing node as a goal node
+         as.mission.waiting-node-goal-config.enabled: "false"
+         as.mission.waiting-node-goal-config.node-types: SINGLE_POINT_WORKSTATION, SHELF_POINT, HOLDER_POINT, PIPELINE_RELATIVE_POINT
+         # Target node type for pushing idle robot. Other possible node type can be SHELF_POINT
+         as.graph-planner.push-target-node-type: COMMON_POINT, AVOIDANCE_POINT, REST_POINT
+         # Turntable selection criteria
+         as.graph-planner.turntable.min-cost-for: total
+         as.graph-planner.consider-others-as-obstacles: "true"
+         # single channel avoidance function switch
+         as.graph-planner.single-channel-avoidance.enabled: "true"
+         # only use avoidance point
+         as.graph-planner.single-channel-avoidance.use-avoidance-points: "false"
+
+   krcs-mission-manager:
+      image: "${REGISTRY_PATH}mission-manager:${TAG}"
+      container_name: krcs-mission-manager
+      extends:
+         file: default-service-config.yml
+         service: common
+      networks:
+         server:
+      volumes:
+         - ${LOG_HOME}:/var/log/kuka
+      # Remove for production
+      # ports:
+      #    - "6688:6688" # http
+      #    - "6689:6689" # grpc
+      #    - "6699:6699" # actuator
+      depends_on:
+         krcs-basic-data:
+            condition: service_healthy
+         fleet-dmp:
+            condition: service_healthy
+      healthcheck:
+         test: ["CMD-SHELL", "wget --spider http://localhost:6688/swagger-ui/"]
+         interval: 10s
+         timeout: 100s
+         retries: 100
+      environment:
+         TZ: ${TIME_ZONE}
+         PARAMS: ${JAVA_PARAMS}
+         BASIC_DATA_HOST: krcs-basic-data
+         BASIC_DATA_PORT: 7999
+         AS_GRPC_HOST: krcs-algorithm-service
+         AS_GRPC_PORT: 9888
+         WCS_GRPC_HOST: kwcs-engine
+         WCS_GRPC_PORT: 7998
+         ROBOT_GRPC_HOST: krcs-robot-control
+         ROBOT_GRPC_PORT: 6999
+         RECORD_HOST: fleet-dmp
+         RECORD_PORT: 8999
+         AUTHORIZATION_HOST: fleet-dmp
+         AUTHORIZATION_PORT: 8999
+         ECS_GRPC_HOST: kecs-engine
+         ECS_GRPC_PORT: 7997
+         http_proxy: ""
+         https_proxy: ""
+         # Switch of light and music
+         robot.params.lightMusic.isOpen: "true"
+         # enable interrupting rest
+         robot.rest.interrupt.enable: "true"
+         # enable rackResting
+         robot.rest.rackResting.enable: "true"
+         # enable obstacle avoidance
+         robot.obstacle.avoidance.enable: "true"
+         # enable always allow obstacle avoidance
+         robot.obstacle.avoidance.alwaysAllow: "false"
+         # push failed robot which is waiting for replanning
+         mission.robotPushing.push-planning-error.enable: "true"
+         # push robot which in waiting in mission-manager to be planned.
+         # E.g. 100 tasks and mission-manager will handle 5 by default in one time. Other 95 robots can be pushed
+         mission.robotPushing.push-planning-in-queue.enable: "true"
+         # Only replan one task in once, then other can be pushed
+         mission.retrying.planning.batch.size.max: 1
+         # max number of missions for planning once
+         mission.planning.batch.size.max: 1
+         # adjust planning priority based on estimated cost
+         mission.planning-priority.estimate-cost.enable: "true"
+         # condition for replanning when it waits timeout: 2 robots in default depend on current robot
+         mission.planning.dependency.optimization.force.dependant-resource-count: 2
+         # logging configuration
+         logging.level.com.kuka.rcs.mm.action.dependencies.impl: INFO
+         logging.level.com.kuka.rcs.mm.mission.adapter.impl.AlgorithmServiceAdapterImpl: INFO
+         logging.level.com.kuka.rcs.rob.client.adapter: INFO
+         logging.level.com.kuka.rcs.mm.common.grpc.aspect: INFO
+         logging.level.com.kuka.rcs.rob.client.adapter.impl.StateCapabilityAdapterImpl: INFO
+
+   krcs-robot-control:
+      image: "${REGISTRY_PATH}robot-control:${TAG}"
+      container_name: krcs-robot-control
+      extends:
+         file: default-service-config.yml
+         service: common
+      networks:
+         server:
+            ipv4_address: ${ROBOT_CONTROL_SERVICE_IP} # address outside the dynamic IP pool range
+      volumes:
+         - ${LOG_HOME}:/var/log/kuka
+      ports:
+         - "8988:8988/udp" # http
+      # Remove for production
+      #    - "8866:8866" # http
+      #    - "6999:6999" # grpc
+      #    - "8868:8868" # actuator
+      depends_on:
+         krcs-basic-data:
+            condition: service_healthy
+      healthcheck:
+         test: ["CMD-SHELL", "wget --spider http://localhost:8866/swagger-ui/"]
+         interval: 10s
+         timeout: 100s
+         retries: 100
+      environment:
+         TZ: ${TIME_ZONE}
+         PARAMS: ${JAVA_PARAMS}
+         BASIC_DATA_HOST: krcs-basic-data
+         BASIC_DATA_PORT: 7999
+         KMR_RM_HOST: robotmanager
+         KMR_RM_PORT: 50090
+         http_proxy: ""
+         https_proxy: ""
+         # Switch of light and music
+         robot.params.lightMusic.isOpen: "true"
+         robot.params.lightMusic.pointOpenLight: "true"
+         #### KMR iisy #####
+         ROBOTMANAGER_SWITCH: "true"
+         robotmanager.params.safetyConfig.enable: "false"
+         robotmanager.params.cameraConfig.enable: "false"
+         ##### Kukai #####
+         # Invalid area expanding configuration (mm)
+         kukai.agv.params.avoid.expandExcludeAreaOnload: 100
+         # Switch of verifying rack code
+         kukai.agv.params.rack.verifyRackCode: "true"
+         # Re-apply obstacle avoidance time interval (ms)
+         kukai.agv.params.obstacleAvoidance.waitTimeMs: 3000
+         ##### HAI #####
+         # configuration of HAI robot with 8 packs
+         HAI_SERVER_SWITCH: "false"
+         HAI_REDIS_HOST: ${KMRES_IP}
+         HAI_KAFKA_HOST: ${KMRES_IP}
+         HAI_KAFKA_PORT: 9092
+         HAI_KAFKA_GROUP: "group-1"
+         ##### VDA5050 #####
+         # Switch of VDA 5050 robots
+         VDA_SERVER_SWITCH: "true"
+         VDA_MQTT_HOST: mqtt-broker
+         ##### DOLPHIN #####
+         # Switch of Dolphin Forklift
+         DOLPHIN_SERVER_SWITCH: "false"
+         ##### SEER #####
+         # Switch of Seer Forklift
+         SEER_SERVER_SWITCH: "false"
+         # logging configuration
+         logging.level.com.kuka.rcs.rob.service.grpc.aspect: INFO
+         logging.level.com.kuka.rcs.rob.service.grpc.interceptor: INFO
+
+   fleet-web:
+      image: "${REGISTRY_PATH}fleet-web:${TAG}"
+      container_name: fleet-web
+      extends:
+         file: default-service-config.yml
+         service: common
+      networks:
+         server:
+      ports:
+         - "5000:5000" # index
+         - "5443:5443" # https
+      volumes:
+         - ${FILE_HOME}:/var/file:z
+         - ${APIS_HOME}:/usr/share/nginx/html/v2/apis:z
+         - ${HTTPS_CERT_HOME}:/usr/share/nginx/html/v2/cert:z
+         - ${DIAGNOSTICS_OUTPUT}:/var/file/diagnostics:z
+      environment:
+         TZ: ${TIME_ZONE}
+      depends_on:
+         krcs-basic-data:
+            condition: service_healthy
+         krcs-mission-manager:
+            condition: service_healthy
+         kwcs-engine:
+            condition: service_healthy
+         kecs-engine:
+            condition: service_healthy
+         krcs-simulator:
+            condition: service_healthy
+         kuka-interface:
+            condition: service_healthy
+         fleet-dmp:
+            condition: service_healthy
+         diagnostics:
+            condition: service_healthy
+
+   krcs-simulator:
+      image: "${REGISTRY_PATH}simulator:${TAG}"
+      container_name: krcs-simulator
+      extends:
+         file: default-service-config.yml
+         service: common
+      networks:
+         server:
+      # Remove for production
+      # ports:
+      #    - "5555:5555" # http
+      #    - "8283:8283" # actuator
+      volumes:
+         - ${LOG_HOME}/simulator:/workspace/logs
+      environment:
+         TZ: ${TIME_ZONE}
+         PARAMS: ${JAVA_PARAMS}
+         RCS_HOST: krcs-robot-control
+         BASIC_HOST: krcs-basic-data
+         RECORD_HOST: fleet-dmp
+         RECORD_PORT: 8999
+         DB_HOST: krcs-basic-data-db
+         DB_PORT: 5432
+         DB_USERNAME: postgres
+         DB_PASSWORD: kuka
+         REDIS_HOST: 127.0.0.1
+         KAFKA_BOOTSTRAP_SERVER: 127.0.0.1:9092
+         SHAKE_RANGE: 0
+         mqtt.vda.server: tcp://mqtt-broker:1883
+         http_proxy: ""
+         https_proxy: ""
+         # How many minutes does it take to consume 1% of the battery in a static state
+         idle_battery_lose_speed: 10
+         # How many minutes does it take to consume 1% of the power in the moving state, supports decimals, such as 0.1
+         working_battery_lose_speed: 1
+         # Charging speed per second, the default value is 1s, increase by 1%
+         charge_speed: 1
+         # lifting up cost time, unit ms
+         lift_elapse_interval: 1000
+         # turn_table cost time, unit ms
+         turntable_elapse_interval: 1000
+         # put down cost time, unit ms
+         putdown_elapse_interval: 1000
+      depends_on:
+         krcs-basic-data-db:
+            condition: service_healthy
+         krcs-basic-data:
+            condition: service_healthy
+         fleet-dmp:
+            condition: service_healthy
+      healthcheck:
+         test: ["CMD-SHELL", "wget --spider http://localhost:5555/swagger-ui/"]
+         interval: 10s
+         timeout: 100s
+         retries: 100
+
+   kwcs-engine:
+      image: "${REGISTRY_PATH}wcs-engine:${TAG}"
+      container_name: kwcs-engine
+      extends:
+         file: default-service-config.yml
+         service: common
+      networks:
+         server:
+      volumes:
+         - ${LOG_HOME}:/var/log/kuka
+      # Remove for production, uncomment when grpc interface is used
+      # ports:
+      #    - "7998:7998" # grpc
+      #    - "8081:8081" # http
+      #    - "8280:8280" # actuator
+      healthcheck:
+         test: ["CMD-SHELL", "wget --spider http://localhost:8081/wcs/swagger-ui.html"]
+         interval: 10s
+         timeout: 100s
+         retries: 100
+      environment:
+         TZ: ${TIME_ZONE}
+         PARAMS: ${JAVA_PARAMS}
+         DB_HOST: krcs-basic-data-db
+         DB_PORT: 5432
+         DB_USER: postgres
+         DB_PASSWORD: kuka
+         BASIC_DATA_HTTP_HOST: krcs-basic-data
+         BASIC_DATA_HTTP_PORT: 7888
+         BASIC_DATA_GRPC_HOST: krcs-basic-data
+         BASIC_DATA_GRPC_PORT: 7999
+         MISSION_MANAGER_GRPC_HOST: krcs-mission-manager
+         MISSION_MANAGER_GRPC_PORT: 6689
+         DMS_GRPC_HOST: kecs-engine
+         DMS_GRPC_PORT: 7997
+         AS_GRPC_HOST: krcs-algorithm-service
+         AS_GRPC_PORT: 9888
+         AUTHORIZATION_HOST: fleet-dmp
+         AUTHORIZATION_PORT: 8999
+         ROBOT_GRPC_HOST: krcs-robot-control
+         ROBOT_GRPC_PORT: 6999
+         RECORD_HOST: fleet-dmp
+         RECORD_PORT: 8999
+         http_proxy: ""
+         https_proxy: ""
+      depends_on:
+         krcs-basic-data-db:
+            condition: service_healthy
+         krcs-basic-data:
+            condition: service_healthy
+         fleet-dmp:
+            condition: service_healthy
+
+   kecs-engine:
+      image: "${REGISTRY_PATH}ecs-engine:${TAG}"
+      container_name: kecs-engine
+      extends:
+         file: default-service-config.yml
+         service: common
+      volumes:
+         - ${LOG_HOME}:/var/log/kuka:z
+      networks:
+         server:
+      # Remove for production
+      # ports:
+      #    - "8082:8082" # http
+      #    - "2883:2883" # mqtt
+      #    - "7997:7997" # grpc
+      #    - "8281:8281" # actuator
+      environment:
+         TZ: ${TIME_ZONE}
+         PARAMS: ${JAVA_PARAMS}
+         gateways.tenants.host: "127.0.0.1"
+         gateways.tenants.port: 2883
+         SPRING_DATASOURCE_HOST: krcs-basic-data-db
+         SPRING_DATASOURCE_PORT: 5432
+         SPRING_DATASOURCE_NAME: ecs_dev
+         SPRING_DATASOURCE_USERNAME: postgres
+         SPRING_DATASOURCE_PASSWORD: kuka
+         HTTP_LOG_CONTROLLER_ERROR_STACK_TRACE: "true"
+         RCSBD_GRPC_HOST: krcs-basic-data
+         RCSBD_GRPC_PORT: 7999
+         WCS_HOST: kwcs-engine
+         AUTHORIZATION_HOST: fleet-dmp
+         AUTHORIZATION_PORT: 8999
+         RECORD_HOST: fleet-dmp
+         RECORD_PORT: 8999
+         FES_HTTP_HOST: 127.0.0.1 #kuka-fes-engine
+         FES_HTTP_PORT: 8071
+         # kuka interface grpc api
+         INTERFACE_GRPC_HOST: kuka-interface
+         INTERFACE_GRPC_PORT: 8076
+         # kuka interface http api
+         INTERFACE_HTTP_HOST: kuka-interface
+         INTERFACE_HTTP_PORT: 10870
+         ROBOT_GRPC_HOST: krcs-robot-control
+         ROBOT_GRPC_PORT: 6999
+         http_proxy: ""
+         https_proxy: ""
+      depends_on:
+         krcs-basic-data-db:
+            condition: service_healthy
+         krcs-basic-data:
+            condition: service_healthy
+         fleet-dmp:
+            condition: service_healthy
+      healthcheck:
+         test: ["CMD-SHELL", "wget --spider http://localhost:8082/swagger-ui/"]
+         interval: 10s
+         timeout: 100s
+         retries: 100
+
+   kuka-interface:
+      image: "${REGISTRY_PATH}kuka-interface:${TAG}"
+      container_name: kuka-interface
+      extends:
+         file: default-service-config.yml
+         service: common
+      networks:
+         server:
+      volumes:
+         - ${LOG_HOME}:/var/log/kuka
+         - ${PLUGIN_HOME}:/workspace/plugins:z
+      ports:
+         - "10870:10870"
+      environment:
+         TZ: ${TIME_ZONE}
+         PARAMS: ${JAVA_PARAMS}
+         DB_HOST: krcs-basic-data-db
+         DB_PORT: 5432
+         DB_USERNAME: postgres
+         DB_PASSWORD: kuka
+         AUTO_START: "false"
+         WCS_GRPC_HOST: kwcs-engine
+         WCS_GRPC_PORT: 7998
+         BD_GRPC_HOST: krcs-basic-data
+         BD_GRPC_PORT: 7999
+         http_proxy: ""
+         https_proxy: ""
+         RECORD_HOST: fleet-dmp
+         RECORD_PORT: 8999
+         AUTHORIZATION_HOST: fleet-dmp
+         AUTHORIZATION_PORT: 8999
+         PLUGIN_ACCESSCODE_ENABLE: "true"
+      depends_on:
+         krcs-basic-data-db:
+            condition: service_healthy
+         krcs-basic-data:
+            condition: service_healthy
+         kwcs-engine:
+            condition: service_healthy
+      healthcheck:
+         test: ["CMD-SHELL", "wget --spider http://localhost:10870/interfaces/doc.html"]
+         interval: 10s
+         timeout: 100s
+         retries: 100
+         start_period: 20s
+
+   # online-wiki:
+   #    image: "${REGISTRY_PATH}online-wiki:${TAG}"
+   #    container_name: online-wiki
+   #    ports:
+   #       - "6001:6001"
+   #    extends:
+   #       file: default-service-config.yml
+   #       service: common
+
+volumes:
+   pgdata:
+   dbdata-mqtt-broker:
+   sim-persistence:
+   basic-data-db:
+   fleet-dmp-db:
+
+networks:
+   server:
+      name: server
+      driver: bridge
+      ipam:
+         config:
+            - subnet: ${SUBNET}
+              gateway: ${GATEWAY}
+              ip_range: ${IP_RANGE}  # dynamic IP pool range

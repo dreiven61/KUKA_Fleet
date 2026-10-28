@@ -1,0 +1,44 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.graph.v1alpha1;
+
+import "kuka/mobilerobotics/graph/v1alpha1/graph_property.proto";
+import "kuka/mobilerobotics/graph/v1alpha1/topology_edge.proto";
+import "kuka/mobilerobotics/graph/v1alpha1/topology_node.proto";
+
+option java_package = "com.kuka.mobilerobotics.graph.v1alpha1";
+option java_outer_classname = "TopologyGraphProto";
+option java_multiple_files = true;
+
+// The graph structure with nodes and edges.
+message TopologyGraph 
+{
+  // Defines the unique identifier.
+  string uuid = 1;
+
+  // Defines the graph's name which should also be unique.
+  string name = 2;
+
+  // Defines the map on which the graph is defined. Coordinates of nodes
+  // are relative to the map's origin.
+  string map_uuid = 3;
+
+  // Defines a list of nodes.
+  repeated TopologyNode nodes = 4;
+	
+  // Defines a list of edges.
+  repeated TopologyEdge edges = 5;
+
+  // Defines a list of default node properties which are set to each node.
+  repeated GraphProperty node_properties = 6;
+	
+  // Defines a list of default edge properties which are set to each edge. 
+  repeated GraphProperty edge_properties = 7;
+}

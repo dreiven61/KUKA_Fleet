@@ -1,0 +1,68 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.applicationcontrol;
+
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.ApplicationControl";
+option java_multiple_files = true;
+option java_outer_classname = "E6PosProto";
+option java_package = "com.kuka.mobilerobotics.applicationcontrol";
+
+// Current Cartesian robot position
+// The variable of structure type E6POS defines the setpoint position of the
+// TCP in relation to the currently set BASE coordinate system.
+// The variable is write-protected. In the robot program, the variable triggers
+// an advance run stop.
+// This proto is a copy of the module management service E6Pos.
+message E6Pos
+{
+  // offset of the origin along the axes in [m]
+  double x = 1;
+
+  // offset of the origin along the axes in [m]
+  double y = 2;
+
+  // offset of the origin along the axes in [m]
+  double z = 3;
+
+  // rotational offset of the axis angles in [rad]
+  double a = 4;
+
+  // rotational offset of the axis angles in [rad]
+  double b = 5;
+
+  // rotational offset of the axis angles in [rad]
+  double c = 6;
+
+  // status for unambiguous definition of the axis positions
+  google.protobuf.Int32Value s = 7;
+
+  // turn for unambiguous definition of the axis positions
+  google.protobuf.Int32Value t = 8;
+
+  // angle values or translation values of the external axis 7 (if present)
+  google.protobuf.DoubleValue e1 = 9;
+
+  // angle values or translation values of the external axis 8 (if present)
+  google.protobuf.DoubleValue e2 = 10;
+
+  // angle values or translation values of the external axis 9 (if present)
+  google.protobuf.DoubleValue e3 = 11;
+
+  // angle values or translation values of the external axis 10 (if present)
+  google.protobuf.DoubleValue e4 = 12;
+
+  // angle values or translation values of the external axis 11 (if present)
+  google.protobuf.DoubleValue e5 = 13;
+
+  // angle values or translation values of the external axis 12 (if present)
+  google.protobuf.DoubleValue e6 = 14;
+}

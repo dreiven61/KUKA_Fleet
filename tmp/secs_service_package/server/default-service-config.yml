@@ -1,0 +1,19 @@
+services:
+  common:
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+    ulimits:
+      core:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65535
+        hard: 65535
+  logging-only:
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"

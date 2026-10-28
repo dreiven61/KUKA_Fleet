@@ -1,0 +1,56 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motioncontrol.dataprovider.v1;
+
+option csharp_namespace = "Kuka.MobileRobotics.MotionControl.DataProvider.V1";
+option java_multiple_files = true;
+option java_outer_classname = "MotionLimitsProto";
+option java_package = "com.kuka.mobilerobotics.motioncontrol.dataprovider.v1";
+
+// message to send motioncontrol velocity limit
+message MotionLimits
+{
+  // X direction positive [m/s]
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double velocityLimitTransXPos = 1;
+  // X direction negative [m/s]
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double velocityLimitTransXNeg = 2;
+  // Y direction positive [m/s]
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double velocityLimitTransYPos = 3;
+  // Y direction negative [m/s]
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double velocityLimitTransYNeg = 4;
+  // Theta direction positive [rad/s]
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double velocityLimitRotPos = 5;
+  // Theta direction negative [rad/s]
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double velocityLimitRotNeg = 6;
+  // Maximum acceleration X direction [m/s^2]
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double accelerationLimitX = 7;
+  // Maximum acceleration Y direction [m/s^2]
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double accelerationLimitY = 8;
+  // Maximum acceleration Theta direction [m/s^2]
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double angularAccelerationLimit = 9;
+  // Maximum deceleration X direction [unit m/s^2]
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double decelerationLimitX = 10;
+  // Maximum deceleration Y direction [unit m/s^2]
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double decelerationLimitY = 11;
+  // Maximum deceleration Theta direction [unit rad/s^2]
+  // protolint:disable:next FIELD_NAMES_LOWER_SNAKE_CASE
+  double angularDecelerationLimit = 12;
+}

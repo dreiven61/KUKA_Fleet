@@ -1,0 +1,90 @@
+Compiled from "TbProcessBranchNode.java"
+public class org.thingsboard.rule.engine.filter.TbProcessBranchNode implements org.thingsboard.rule.engine.api.TbNode {
+  private static final org.slf4j.Logger log;
+
+  private org.thingsboard.rule.engine.filter.TbProcessBranchNodeConfiguration config;
+
+  protected com.fasterxml.jackson.databind.ObjectMapper objectMapper;
+
+  public org.thingsboard.rule.engine.filter.TbProcessBranchNode();
+    Code:
+       0: aload_0
+       1: invokespecial #2                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: new           #3                  // class com/fasterxml/jackson/databind/ObjectMapper
+       8: dup
+       9: invokespecial #4                  // Method com/fasterxml/jackson/databind/ObjectMapper."<init>":()V
+      12: putfield      #5                  // Field objectMapper:Lcom/fasterxml/jackson/databind/ObjectMapper;
+      15: return
+
+  public void init(org.thingsboard.rule.engine.api.TbContext, org.thingsboard.rule.engine.api.TbNodeConfiguration) throws org.thingsboard.rule.engine.api.TbNodeException;
+    Code:
+       0: aload_0
+       1: aload_2
+       2: ldc           #6                  // class org/thingsboard/rule/engine/filter/TbProcessBranchNodeConfiguration
+       4: invokestatic  #7                  // Method org/thingsboard/rule/engine/api/util/TbNodeUtils.convert:(Lorg/thingsboard/rule/engine/api/TbNodeConfiguration;Ljava/lang/Class;)Ljava/lang/Object;
+       7: checkcast     #6                  // class org/thingsboard/rule/engine/filter/TbProcessBranchNodeConfiguration
+      10: putfield      #8                  // Field config:Lorg/thingsboard/rule/engine/filter/TbProcessBranchNodeConfiguration;
+      13: return
+
+  public void onMsg(org.thingsboard.rule.engine.api.TbContext, org.thingsboard.server.common.msg.TbMsg);
+    Code:
+       0: aload_1
+       1: invokeinterface #9,  1            // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.getAuditLogService:()Lorg/thingsboard/server/dao/audit/AuditLogService;
+       6: aload_2
+       7: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      10: ldc           #11                 // String ecsTaskId
+      12: invokevirtual #12                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getValue:(Ljava/lang/String;)Ljava/lang/String;
+      15: aload_2
+      16: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      19: ldc           #13                 // String taskId
+      21: invokevirtual #12                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getValue:(Ljava/lang/String;)Ljava/lang/String;
+      24: aload_1
+      25: invokeinterface #14,  1           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.getSelf:()Lorg/thingsboard/server/common/data/rule/RuleNode;
+      30: invokestatic  #15                 // Method org/thingsboard/server/common/data/audit/AuditLogData.create:(Ljava/lang/String;Ljava/lang/String;Lorg/thingsboard/server/common/data/rule/RuleNode;)Lorg/thingsboard/server/common/data/audit/AuditLogData;
+      33: aload_2
+      34: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+      37: getstatic     #17                 // Field org/thingsboard/server/common/data/audit/ActionType.PROCESS_BRANCH:Lorg/thingsboard/server/common/data/audit/ActionType;
+      40: aconst_null
+      41: aconst_null
+      42: iconst_1
+      43: anewarray     #18                 // class java/lang/Object
+      46: dup
+      47: iconst_0
+      48: aload_0
+      49: getfield      #5                  // Field objectMapper:Lcom/fasterxml/jackson/databind/ObjectMapper;
+      52: aload_0
+      53: getfield      #8                  // Field config:Lorg/thingsboard/rule/engine/filter/TbProcessBranchNodeConfiguration;
+      56: invokevirtual #19                 // Method org/thingsboard/rule/engine/filter/TbProcessBranchNodeConfiguration.getProcessBranch:()Lcom/fasterxml/jackson/databind/node/ObjectNode;
+      59: invokevirtual #20                 // Method com/fasterxml/jackson/databind/ObjectMapper.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+      62: aastore
+      63: invokeinterface #21,  7           // InterfaceMethod org/thingsboard/server/dao/audit/AuditLogService.logEntityAction:(Lorg/thingsboard/server/common/data/audit/AuditLogData;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/data/audit/ActionType;Lorg/thingsboard/server/common/data/audit/ActionStatus;Ljava/lang/Exception;[Ljava/lang/Object;)Lcom/google/common/util/concurrent/ListenableFuture;
+      68: pop
+      69: aload_2
+      70: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      73: invokevirtual #22                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+      76: invokestatic  #23                 // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+      79: ifeq          97
+      82: aload_2
+      83: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      86: ldc           #11                 // String ecsTaskId
+      88: invokestatic  #24                 // Method java/util/UUID.randomUUID:()Ljava/util/UUID;
+      91: invokevirtual #25                 // Method java/util/UUID.toString:()Ljava/lang/String;
+      94: invokevirtual #26                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+      97: aload_1
+      98: aload_2
+      99: getstatic     #27                 // Field org/thingsboard/rule/engine/api/TbRelationTypesEnum.SUCCESS:Lorg/thingsboard/rule/engine/api/TbRelationTypesEnum;
+     102: invokeinterface #28,  3           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.tellNext:(Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/rule/engine/api/TbRelationTypesEnum;)V
+     107: return
+
+  public void destroy();
+    Code:
+       0: return
+
+  static {};
+    Code:
+       0: ldc           #29                 // class org/thingsboard/rule/engine/filter/TbProcessBranchNode
+       2: invokestatic  #30                 // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #31                 // Field log:Lorg/slf4j/Logger;
+       8: return
+}

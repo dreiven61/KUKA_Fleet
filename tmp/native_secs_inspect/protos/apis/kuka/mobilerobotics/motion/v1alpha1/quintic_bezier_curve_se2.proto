@@ -1,0 +1,29 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motion.v1alpha1;
+
+import "kuka/mobilerobotics/motion/v1alpha1/quintic_bezier_curve.proto";
+
+option java_package = "com.kuka.mobilerobotics.motion.v1alpha1";
+option java_outer_classname = "QuinticBezierCurveSE2Proto";
+option java_multiple_files = true;
+
+// A compound Bezier curve in the dimensions x, y, and theta.
+message QuinticBezierCurveSE2
+{
+  // The Bezier curve for the x dimension.
+  QuinticBezierCurve x_curve = 1;
+
+  // The Bezier curve for the y dimension.
+  QuinticBezierCurve y_curve = 2;
+
+  // The Bezier curve for the theta dimension.
+  QuinticBezierCurve theta_curve = 3;
+}

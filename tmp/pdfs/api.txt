@@ -1,0 +1,2984 @@
+
+=== PDF PAGE 1 ===
+  
+V1.0        05.2025        KUKA AMR 1/51 
+Kuka-interface Standard Interface 
+Directory 
+Kuka-interface Standard Interface ............................................................................................................... 1 
+-- Mission Related APIs ................................................................................................................................. 3 
+1 Dispatch Mission (Upstream System -> Kuka System) .............................................................................. 3 
+Public Request Parameters ...................................................................................................................... 4 
+1.1 Lift AMR MISSION(missionType=RACK_MOVE) ................................................................................. 5 
+1.2 Conveyor AMR MISSION(missionType=ROLLER_MOVE) ................................................................... 7 
+1.3 Carton Transfer Unit Mission(missionType=PICKER_MOVE) ............................................................. 9 
+1.4 Forklift AMR Mission (missionType=FORKLIFT_MOVE) ................................................................... 11 
+1.5 Move Mission(missionType=MOVE) ................................................................................................ 12 
+1.6 Composite AMR Mission(missionType=ROBOTICS_MOVE) ............................................................. 13 
+2 Cancel Mission (Upstream System -> Kuka System）............................................................................. 15 
+3 Resume Workflow (Upstream System -> Kuka System） ....................................................................... 17 
+4 Query Jobs (Upstream System -> Kuka System) ...................................................................................... 18 
+-- Container Related APIs ........................................................................................................................... 21 
+5 Insert Container (Upstream System -> Kuka System） .......................................................................... 21 
+6 Remove Container (Upstream System -> Kuka System） ....................................................................... 23 
+7 Update Container (Supported: updates position and empty full  status）(Upstream System -> Kuka 
+System） .................................................................................................................................................... 24 
+8 Mission Status Callback (Upstream System -> Kuka System） ............................................................... 25 
+9 Query Container Model Codes (Upstream System -> Kuka System） .................................................... 26 
+10 Query Area Codes By Conatiner Model (Upstream System -> Kuka System） .................................... 26 
+11-1 Query Containers(Only including containers with IN/INSERTED status) (Upstream System -> Kuka 
+System） .................................................................................................................................................... 27 
+11-2 Query Containers(Both IN/INSERTED and OUT/REMOVED status) (Upstream System -> Kuka 
+System） .................................................................................................................................................... 28 
+-- Robot Module ......................................................................................................................................... 30 
+12 Query Robot by Node UUID or Node Code (Upstream System -> Kuka System) .................................. 30 
+13 Query Robots (Upstream System -> Kuka System) ............................................................................... 34 
+14 Dispatch Move Carry Task (Upstream System -> Kuka System) ............................................................ 36 
+
+=== PDF PAGE 2 ===
+  
+V1.0        05.2025        KUKA AMR 2/51 
+15 Dispatch Charge Robot Task (Upstream System -> Kuka System) ........................................................ 37 
+16 Insert The Robot Into The Map (Upstream System -> Kuka System) .................................................... 38 
+17 Remove The Robot From The Map (Upstream System -> Kuka System) .............................................. 39 
+-- AMR Map Node and Area Related Module ............................................................................................ 40 
+18 Query All WCS Area Information (Upstream System -> Kuka System) ................................................. 40 
+19 Query Nodes of the Area (Upstream System -> Kuka System) ............................................................. 41 
+20 Query Area by Map Node (Upstream System -> Kuka System) ............................................................ 43 
+21 Query All Forbidden Areas (Upstream System -> Kuka System) ........................................................... 44 
+22 Query One Forbidden Area (Upstream System -> Kuka System) .......................................................... 46 
+23 Update Forbidden Area Status (Upstream System -> Kuka System) ..................................................... 47 
+24 Query Function Node (Upstream System -> Kuka System) ................................................................... 49 
+-- Interface Response Description .............................................................................................................. 51 
+ 
+ 
+Version 
+Number 
+Modification Content Date Modifier 
+1.2.3 1. Dispatch Mission Interface adds 
+Composite Robot Type 
+2. Fields in interface callback except for 
+missionCode, missionStatus are changed to 
+optional 
+2023.11.22 Chen Wenyue 
+2.0.0 1. Conveyor AMR Mission add a new field 
+"actionInform" to indicate whether 
+upstream notification is needed after 
+the roller is picked or  placed. 
+2.Carton Transfer Unit Mission add new 
+fields "takeActionInform", 
+"putActionInform" to indicate whether 
+upstream notification is needed after 
+the carton is picked or  placed. Pick and 
+place interaction is generally used when 
+connecting to a conveyor line. 
+20240708 Nandy Li 
+2.11.1 1. Add the description for the new API: 
+/jobQuery. 
+2. Update the request parameters and 
+request body examples for forbidden area 
+related APIs and /missionCancel API. 
+Jan 25, 2025 Hechuan Zhao 
+2.11.2 1. Add the descriptions for the new API: 
+/queryRobByNodeUuidOrForeignCode,. 
+2. Update the request parameter and 
+request examples for API: 
+/updateForbiddenAreaStatus. 
+Feb 14, 2025 Qianwen 
+Zhang 
+2.11.3 1.Add new API： 20250310 Nandy Li 
+
+=== PDF PAGE 3 ===
+  
+V1.0        05.2025        KUKA AMR 3/51 
+/queryContainerAll 
+(Query containers in status of both 
+IN/INSERTED and OUT/REMOVED) 
+2.Update the API： 
+/containerIn 
+(Appoint container validation code when 
+add container) 
+2.11.4 1. Add new API: 
+/robotMoveCarry 
+2. Add new API: 
+/queryFunctionNode 
+3. Add one more status (WAITFEEDBACK) 
+for callback(When the workflow step is 
+waiting for feedbacking) 
+20250414 Hechuan Zhao 
+Nandy Li 
+2.13.0 1. Add new API: 
+/insertRobot 
+2. Add new API: 
+/removeRobot 
+3. Add new API: 
+/chargeRobot 
+20250414 Hechuan Zhao 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+-- Mission Related APIs 
+1 Dispatch Mission (Upstream System -> Kuka System) 
+⚫ API Info 
+API Name submitMission 
+API Description Dispatch mission to Fleet 
+API URL http://[IP:Port]/interfaces/api/amr/submitMission 
+HTTP Method POST 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+
+=== PDF PAGE 4 ===
+  
+V1.0        05.2025        KUKA AMR 4/51 
+Public Request Parameters 
+Name Type Max 
+Length 
+Required Defualt 
+Value 
+Description Notes 
+orgId String  T  Organization id 
+(or factory 
+code, supplier 
+code) 
+ 
+requestId String 32 T  Request Id Process request 
+idempotency 
+missionCode String  T  Mission Code Mission code should 
+be unique. 
+missionType String  T  Mission type: 
+Lift AMR 
+MISSION: 
+RACK_MOVE 
+Conveyor AMR  
+Mission: 
+ROLLER_MOVE 
+Carton Transfer 
+Unit Mission: 
+PICKER_MOVE 
+Forklift AMR  
+Mission: 
+FORKLIFT_MOVE 
+Move Mission: 
+MOVE 
+Composite AMR 
+Mission: 
+ROBOTICS_MOVE 
+ 
+viewBoardType String  F  Task board displays 
+task tpes, defined 
+by user 
+ 
+robotType String  F  Robot function 
+type: 
+Lift AMR: LIFT 
+Conveyor AMR : 
+ROLLER 
+Carton Transfer 
+Unit: PICKER 
+Forklift AMR : 
+FORKLIFT 
+HCS Box Robot: 
+HCSBOX 
+Composite Robot:  
+COMPOSITE 
+In principle, it 
+should not be 
+empty; if it is 
+empty, it will be 
+inferred through 
+specific robot  or 
+container type 
+codes. 
+robotModels List<String>  F  Robot type code Support specifying 
+multiple robot  
+models, one of 
+which will be 
+selected to execute 
+the mission. 
+robotIds List<String>  F  Robot id Support specifying
+ multiple robots, o
+ne of which will be
+
+=== PDF PAGE 5 ===
+  
+V1.0        05.2025        KUKA AMR 5/51 
+ selected to execut
+e the mission; if th
+e previous task set 
+lockRobotAfterFini
+sh = true, this field
+ is required. 
+ 
+priority Integer  F 1 Job Priority, 1 -99, 
+the smaller the 
+number, the higher 
+the priority, default 
+is 1 
+Valid when 
+dispatching batch 
+tasks 
+containerModelCode String  F  Container model 
+code 
+ 
+containerCode String  F  Container code  
+templateCode String  F  Workflow external 
+code 
+If the mission is 
+dispatched using the 
+workflow external 
+code, the workflow  
+corresponding to the 
+workflow external 
+code will be created 
+without the need to 
+set missionData. 
+lockRobotAfterFinish Boolean  F false Whether the robot 
+needs to maintain 
+the task lock status 
+after the workflow 
+ends 
+Mostly used in 
+scenarios where a 
+new workflow still 
+needs to use the 
+robot for carry after 
+the current 
+workflow ends. 
+unlockRobotId String  F  Unlock the current 
+robot from the 
+previous workflow. 
+ 
+unlockMissionCode String  F  The mission code to 
+lock the current 
+robot. 
+Used to verify 
+whether the unlock 
+is correct 
+idleNode String  F  After the workflow 
+is completed, the 
+robot will go to the 
+idleNode. 
+ 
+missionData List<?>  T  The list of node  
+included in the 
+current workflow, 
+refer to the 
+following section 
+for specific fields. 
+If templateCode is 
+setted, this field can 
+be omitted 
+ 
+ 
+ 1.1 Lift AMR MISSION(missionType=RACK_MOVE) 
+⚫ Request Parameters 
+Name Type Max Required Default Description Notes 
+
+=== PDF PAGE 6 ===
+  
+V1.0        05.2025        KUKA AMR 6/51 
+Length Value 
+sequence Integer  T  The default serial 
+number is 1, which is 
+the starting point of the 
+starting shelf, and 
+subsequent nodes 
+increase in sequence 
+ 
+position String  T  Mission target node or 
+area 
+ 
+type String  T  Mission node type: 
+Node: NODE_POINT 
+Area: NODE_AREA 
+ 
+putDown Boolean  F false Decide whether the 
+shelf needs to be 
+lowered at current node 
+ 
+passStrategy String  F AUTO Resume strategy at 
+current node: 
+Automatically resume: 
+AUTO 
+Manually resume: 
+MANUAL 
+ 
+waitingMillis Integer  F 0 The waiting time before 
+automatically triggering 
+the next node task. 
+Required when 
+passStrategy=true 
+ 
+⚫ Request Body Example 
+{ 
+  "orgId": "UNIVERSAL", 
+  "requestId": "request202309250001", 
+  "missionCode": "mission202309250001", 
+  "missionType": "RACK_MOVE", 
+  "viewBoardType": "", 
+  "robotModels": [ 
+    "KMP600I" 
+  ], 
+  "robotIds": [ 
+    "14" 
+  ], 
+  "robotType": "LIFT", 
+  "priority": 1, 
+  "containerModelCode": "10001", 
+  "containerCode": "1000002", 
+  "templateCode": "", 
+  "lockRobotAfterFinish": false, 
+  "unlockRobotId": "", 
+  "unlockMissionCode": "", 
+  "idleNode": "A000000013", 
+  "missionData": [ 
+    { 
+      "sequence": 1, 
+      "position": "M001-A001-45", 
+      "type": "NODE_POINT", 
+      "putDown": false, 
+
+=== PDF PAGE 7 ===
+  
+V1.0        05.2025        KUKA AMR 7/51 
+      "passStrategy": "AUTO", 
+      "waitingMillis": 0 
+    }, 
+    { 
+      "sequence": 2, 
+      "position": "M001-A001-40", 
+      "type": "NODE_POINT", 
+      "putDown": true, 
+      "passStrategy": "AUTO", 
+      "waitingMillis": 0 
+    } 
+  ] 
+} 
+⚫ Response Body Example 
+{ 
+  "data": null, 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+1.2 Conveyor AMR MISSION(missionType=ROLLER_MOVE) 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+sequence Integer  T  The default serial 
+number is 1, which 
+is the starting point 
+of the starting shelf, 
+and subsequent 
+nodes increase in 
+sequence 
+ 
+position String  T  Mission target node 
+or area 
+ 
+type String  T  Mission node type: 
+Node: 
+NODE_POINT 
+Area: NODE_AREA 
+ 
+binCode String  T  Conatiner code 
+carried by the 
+conveyor amr. 
+ 
+rollerLevel Integer  F 1 Level of roller car 
+layers 
+Required for 
+multi-layer 
+conveyor amr 
+deviceCode String  F  Device code When a point 
+corresponds to 
+multiple 
+devices, this 
+value needs to 
+be passed 
+actionType String  F  Actions to be 
+performed at the 
+point 
+Pick up the 
+Optional when 
+manually pick 
+or place the 
+container 
+
+=== PDF PAGE 8 ===
+  
+V1.0        05.2025        KUKA AMR 8/51 
+container: 
+ROLLER_RECEIVE 
+Place the container: 
+ROLLER_SEND 
+actionConfirm Boolean  F false Whether 
+confirmation is 
+required before 
+picking/placing 
+Generally used 
+for interaction 
+with conveyor 
+lines 
+actionInform Boolean  F false Whether 
+notification is 
+required after 
+picking/placing 
+Generally used 
+for interaction 
+with conveyor 
+lines 
+ 
+⚫ Request Body Example 
+{ 
+  "orgId": "UNIVERSAL", 
+  "requestId": "request202309250002", 
+  "missionCode": "mission202309250002", 
+  "missionType": "ROLLER_MOVE", 
+  "viewBoardType": "", 
+  "robotModels": [ 
+    "KMP600I-1-T2" 
+  ], 
+  "robotIds": [ 
+    "15" 
+  ], 
+  "robotType": "ROLLER", 
+  "priority": 1, 
+  "templateCode": "", 
+  "lockRobotAfterFinish": false, 
+  "unlockRobotId": "", 
+  "unlockMissionCode": "", 
+  "idleNode": "A000000013", 
+  "missionData": [ 
+    { 
+      "sequence": 1, 
+      "position": "M001-A001-49", 
+      "type": "NODE_POINT", 
+      "actionType": "ROLLER_RECEIVE", 
+      "binCode": "1000002", 
+      "rollerLevel": 1, 
+      "deviceCode": "bea8f740-5dcc-11ee-91ba-c7b4e0c01550", 
+      "actionConfirm": false, 
+      "actionInform": false 
+    }, 
+    { 
+      "sequence": 2, 
+      "position": "M001-A001-40", 
+      "type": "NODE_POINT", 
+      "actionType": "ROLLER_SEND", 
+      "binCode": "1000002", 
+      "rollerLevel": 1, 
+
+=== PDF PAGE 9 ===
+  
+V1.0        05.2025        KUKA AMR 9/51 
+      "deviceCode": "bea8f740-5dcc-11ee-91ba-c7b4e0c01550", 
+      "actionConfirm": false, 
+"actionInform": false 
+    } 
+  ] 
+} 
+Response Body Example 
+{ 
+  "data": null, 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+ 
+1.3 Carton Transfer Unit Mission(missionType=PICKER_MOVE) 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+sequence Integer  T  The default serial 
+number is 1, which is 
+the starting point of 
+the starting shelf, and 
+subsequent nodes 
+increase in sequence 
+ 
+startPosition String  T  Start node of the 
+carton 
+ 
+startSlotCode String  T  Slot code at the start 
+node 
+ 
+endPosition String  T  End node of the carton  
+endSlotCode String  T  Slot code at the end 
+node 
+ 
+binCode String  T  Bin code  
+takeActionConfirm Boolean  F false Whether to confirm 
+before picking up 
+the container 
+Generally used for 
+interaction with the 
+conveyor line 
+takeActionInform Boolean  F false Whether to confirm 
+before picking up the 
+container 
+Generally used for 
+interaction with the 
+conveyor line 
+putActionConfirm Boolean  F false Whether to confirm 
+after placing the 
+container 
+Generally used for 
+interaction with the 
+conveyor line 
+putActionInform Boolean  F false Whether to confirm 
+after placing the 
+container 
+Generally used for 
+interaction with the 
+conveyor line 
+ 
+⚫ Request Body Example 
+{ 
+  "orgId": "", 
+  "requestId": "", 
+  "missionCode": "", 
+  "missionType": "", 
+  "viewBoardType": "", 
+
+=== PDF PAGE 10 ===
+  
+V1.0        05.2025        KUKA AMR 10/51 
+  "robotModels": [], 
+  "robotIds": [], 
+  "robotType": "", 
+  "priority": 0, 
+  "containerModelCode": "", 
+  "containerCode": "", 
+  "templateCode": "", 
+  "lockRobotAfterFinish": true, 
+  "unlockRobotId": "", 
+  "unlockMissionCode": "", 
+  "idleNode": "", 
+  "missionData": [ 
+    { 
+      "sequence": 1, 
+      "binCode": "box-001", 
+      "startPosition": "", 
+      "startSlotCode": "", 
+      "takeActionConfirm": false, 
+      "takeActionInform": false, 
+      "endPosition": "", 
+      "endSlotCode": "", 
+      "putActionConfirm": false, 
+      "putActionInform": false 
+    }, 
+    { 
+      "sequence": 2, 
+      "binCode": "box-002", 
+      "startPosition": "", 
+      "startSlotCode": "", 
+      "takeActionConfirm": false, 
+"takeActionInform": false, 
+      "endPosition": "", 
+      "endSlotCode": "", 
+      "putActionConfirm": false, 
+"putActionInform": false 
+    }, 
+    { 
+      "sequence": 3, 
+      "binCode": "box-003", 
+      "startPosition": "", 
+      "startSlotCode": "", 
+      "takeActionConfirm": false, 
+"takeActionInform": false, 
+      "endPosition": "", 
+      "endSlotCode": "", 
+      "putActionConfirm": false, 
+"putActionInform": false 
+    } 
+  ] 
+} 
+
+=== PDF PAGE 11 ===
+  
+V1.0        05.2025        KUKA AMR 11/51 
+⚫ Response Body Example 
+{ 
+  "data": null, 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+ 
+1.4 Forklift AMR Mission (missionType=FORKLIFT_MOVE) 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+sequence Integer  T  The default serial 
+number is 1, which is 
+the starting point of 
+the starting shelf, 
+and subsequent 
+nodes increase in 
+sequence 
+ 
+position String  T  Mission target node 
+or area 
+ 
+stackNumber Integer  F 0 Number of layers 
+forked 
+Indicates the 
+number of 
+layers 
+already 
+stacked at 
+the node 
+actionConfirm Boolean  F false Whether to confirm 
+before forking or 
+placing the 
+container 
+ 
+ 
+⚫ Request Body Example 
+{ 
+  "orgId": "9001", 
+  "requestId": "request2023030800001", 
+  "missionCode": "mission2023030800001", 
+  "missionType": "FORKLIFT_MOVE", 
+  "viewBoardType": "W01", 
+  "robotType": "FORKLIFT", 
+  "robotModels": [], 
+  "robotIds": [], 
+  "priority": 1, 
+  "containerModelCode": "", 
+  "containerCode": "", 
+  "templateCode": "", 
+  "lockRobotAfterFinish": false, 
+  "unlockRobotId": "", 
+  "unlockMissionCode": "", 
+  "idleNode": "", 
+  "missionData": [ 
+    { 
+
+=== PDF PAGE 12 ===
+  
+V1.0        05.2025        KUKA AMR 12/51 
+      "sequence": 1, 
+      "position": "", 
+      "stackNumber": 0, 
+      "actionConfirm": false 
+    }, 
+    { 
+      "sequence": 2, 
+      "position": "", 
+      "stackNumber": 0, 
+      "actionConfirm": false 
+    } 
+  ] 
+} 
+⚫ Response Body Example 
+{ 
+  "data": null, 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+1.5 Move Mission(missionType=MOVE) 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+sequence Integer  T  The default serial 
+number is 1, which 
+is the starting point 
+of the starting shelf, 
+and subsequent 
+nodes increase in 
+sequence 
+ 
+position String  T  Mission target node 
+or area 
+ 
+type String  T  Mission node type: 
+Node: 
+NODE_POINT 
+Area: NODE_AREA 
+ 
+passStrategy String  F AUTO Resume strategy at 
+current node: 
+Automatically 
+resume: AUTO 
+Manually resume: 
+MANUAL 
+ 
+waitingMillis Integer  F 0 The waiting time 
+before 
+automatically 
+triggering the next 
+node task. 
+Required when 
+passStrategy=true 
+ 
+⚫ Request Body Example 
+{ 
+  "orgId": "UNIVERSAL", 
+
+=== PDF PAGE 13 ===
+  
+V1.0        05.2025        KUKA AMR 13/51 
+  "requestId": "request202309250005", 
+  "missionCode": "mission202309250005", 
+  "missionType": "MOVE", 
+  "viewBoardType": "", 
+  "robotModels": [ 
+    "KMP600I" 
+  ], 
+  "robotIds": [ 
+    "14" 
+  ], 
+  "robotType": "LIFT", 
+  "priority": 1, 
+  "templateCode": "", 
+  "lockRobotAfterFinish": false, 
+  "unlockRobotId": "", 
+  "unlockMissionCode": "", 
+  "missionData": [ 
+    { 
+      "sequence": 1, 
+      "position": "M001-A001-26", 
+      "type": "NODE_POINT", 
+      "passStrategy": " MANUAL", 
+      "waitingMillis": 0 
+    }, 
+    { 
+      "sequence": 2, 
+      "position": "M001-A001-31", 
+      "type": "NODE_POINT", 
+      "passStrategy": " MANUAL", 
+      "waitingMillis": 0 
+    } 
+  ] 
+} 
+⚫ Response Body Example 
+{ 
+  "data": null, 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+1.6 Composite AMR Mission(missionType=ROBOTICS_MOVE) 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+sequence Integer  T  The default 
+serial number is 
+1, which is the 
+starting point of 
+the starting 
+ 
+
+=== PDF PAGE 14 ===
+  
+V1.0        05.2025        KUKA AMR 14/51 
+shelf, and 
+subsequent 
+nodes increase 
+in sequence 
+position String  T  Mission target 
+node or area 
+ 
+type String  T  Mission node 
+type: 
+Node: 
+NODE_POINT 
+Area: 
+NODE_AREA 
+ 
+applicationName String  T  Application 
+name 
+ 
+params String  F  Robot Arm 
+Parameters (J  
+SON) 
+ 
+passStrategy String  F AUTO Resume 
+strategy at 
+current node: 
+Automatically 
+resume: AUTO 
+Manually 
+resume: 
+MANUAL 
+ 
+waitingMillis Integer  F 0 The waiting 
+time before 
+automatically 
+triggering the 
+next node task. 
+Required when 
+passStrategy=true 
+ 
+⚫ Request Body Example 
+{ 
+  "orgId": "UNIVERSAL", 
+  "requestId": "request202311220001", 
+  "missionCode": "mission202311220001", 
+  "missionType": "ROBOTICS_MOVE", 
+  "viewBoardType": "", 
+  "robotModels": [ 
+    "KMR-IISY" 
+  ], 
+  "robotIds": [ 
+    "15" 
+  ], 
+  "robotType": "COMPOSITE", 
+  "priority": 1, 
+  "containerModelCode": "10001", 
+  "containerCode": "1000002", 
+  "templateCode": "", 
+  "lockRobotAfterFinish": false, 
+  "unlockRobotId": "", 
+  "unlockMissionCode": "", 
+  "idleNode": "A000000014", 
+  "missionData": [ 
+
+=== PDF PAGE 15 ===
+  
+V1.0        05.2025        KUKA AMR 15/51 
+    { 
+      "sequence": 1, 
+      "position": "M001-A001-45", 
+      "type": "NODE_POINT", 
+      "applicationName ": “app”, 
+  "params": “{\"key1\": \"value1\",\"key2\": \"value2\"}”, 
+      "passStrategy": "AUTO", 
+      "waitingMillis": 0 
+    }, 
+    { 
+      "sequence": 2, 
+      "position": "M001-A001-40", 
+      "type": "NODE_POINT", 
+      "applicationName ": “app”, 
+   "params": “{\"key1\": \"value1\",\"key2\": \"value2\"}”, 
+      "passStrategy": "AUTO", 
+      "waitingMillis": 0 
+    } 
+  ] 
+} 
+⚫ Response Body Example 
+{ 
+  "data": null, 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+ 
+2 Cancel Mission (Upstream System -> Kuka System） 
+⚫ API Info 
+API Name missionCancel 
+API Description Cancel mission 
+API URL http://[IP:Port]/interfaces/api/amr/missionCancel 
+HTTP Method POST 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+requestId String 32 T  Request id, UUID32  
+
+=== PDF PAGE 16 ===
+  
+V1.0        05.2025        KUKA AMR 16/51 
+missionCode String  F  Mission code One of the 
+three 
+options must 
+be filled 
+in, 
+preferably 
+using the 
+missionCode. 
+The point is 
+used in 
+certain 
+specific 
+scenarios. 
+containerCode String  F  Container code 
+position String  F  Node UUID of the mission 
+cancelMode String  T FORCE Cancel Mode: 
+FORCE: Force cancel, 
+immediately terminate 
+the current mission. 
+NORMAL: Normal cancel, 
+does not cancel the 
+task the robot is 
+executing, waits for 
+the robot to complete 
+the current task 
+before canceling the 
+workflow. 
+REDIRECT_END: Redirect 
+to the end node of the 
+workflow, does not 
+cancel the task the 
+robot is executing, 
+waits for the robot to 
+complete the current 
+task. If the target 
+node does not require 
+lowering the rack, the 
+vehicle carries the 
+rack to the end node; 
+otherwise, the empty 
+robot moves to the end 
+node. 
+REDIRECT_START: 
+Redirect to the start 
+node of the workflow, 
+does not cancel the 
+task the robot is 
+executing, waits for 
+the robot to complete 
+the current task. If 
+the target node does 
+not require lowering 
+Currently, 
+only tasks for 
+LIFT robots 
+support all 
+strategies, 
+while other 
+types of 
+robots 
+support 
+FORCE only. 
+However, it 
+still depends 
+on whether 
+the robot 
+supports 
+cancellation. 
+
+=== PDF PAGE 17 ===
+  
+V1.0        05.2025        KUKA AMR 17/51 
+the rack, the robot 
+carries the rack back 
+to the start node; 
+otherwise, the empty 
+robot moves back to 
+the start node. 
+reason String  F  Reason to cancel  
+ 
+⚫ Request Body Example 
+{ 
+  "requestId": "request202309250006", 
+  "missionCode": "mission202309250004", 
+  "containerCode": "", 
+  "position": "", 
+  "cancelMode": "FORCE", 
+  "reason": "" 
+} 
+⚫ Response Body Example 
+{ 
+  "data": null, 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+3 Resume Workflow (Upstream System -> Kuka System） 
+⚫ API Info 
+API Name operationFeedback 
+API Description Feedback on task completion information from the upstream after 
+the node task is completed 
+API URL http://[IP:Port]/interfaces/api/amr/operationFeedback 
+HTTP Method POST 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Description Notes 
+requestId String 32 T Request id, UUID32  
+missionCode String  F Mission code of the running 
+workflow 
+Three 
+choose one 
+containerCode String  F Container code of the running 
+workflow 
+position String  F The current node of the 
+workflow 
+
+=== PDF PAGE 18 ===
+  
+V1.0        05.2025        KUKA AMR 18/51 
+⚫ Request Body Example 
+{ 
+ "requestId": "request202309250007", 
+ "containerCode": "", 
+ "missionCode": "mission202309250005", 
+ "position": "" 
+} 
+⚫ Response Body Example 
+{ 
+  "data": null, 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+ 
+4 Query Jobs (Upstream System -> Kuka System) 
+⚫ API Info 
+API Name jobQuery 
+API Description Query jobs in the job board 
+API URL http://[IP:Port]/interfaces/api/amr/jobQuery 
+HTTP Method POST 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+workflowId Long  F  Workflow id  
+containerCode String  F  Conatiner code  
+jobCode String  F  Job code Same with 
+the mission 
+code 
+status String  F  Job status: 
+Created: 10 
+Executing: 20 
+Waiting: 25 
+Cancelling: 28 
+Complete: 30 
+Cancelled: 31 
+Manual complete: 35 
+Warning: 50 
+Startup error: 60 
+ 
+robotId String  F  Robot id  
+targetCellCode String  F  Target node code of the 
+running task in the 
+ 
+
+=== PDF PAGE 19 ===
+  
+V1.0        05.2025        KUKA AMR 19/51 
+workflow 
+workflowName String  F  Name of the workflow 
+configuration 
+ 
+workflowCode String  F  Workflow code of the 
+workflow configuration 
+ 
+maps List<String>  F  Map code where the 
+workflow is running 
+ 
+createUsername String  F  Operator  
+sourceValue Integer  F  Source: 
+Interface: 2 
+PDA: 3 
+Device: 4 
+MLS: 5 
+Fleet application: 6 
+Workflow event: 7 
+ 
+limit Integer  F 10 Number of jobs in  the 
+response, default 10.  
+ 
+ 
+ 
+⚫ Response Parameters 
+Name Type Description Notes 
+jobCode String Job code Same with the 
+mission code 
+workflowId Long Workflow id  
+containerCode String Conatiner code  
+robotId String Robot id  
+status Integer Job status: 
+Created: 10 
+Executing: 20 
+Waiting: 25 
+Cancelling: 28 
+Complete: 30 
+Cancelled: 31 
+Manual complete: 35 
+Warning: 50 
+Startup error: 60 
+ 
+workflowName String Name of the workflow 
+configuration 
+Name could 
+be empty 
+when the 
+workflow is 
+generated by 
+upstream 
+system 
+workflowCode String Workflow code of the 
+workflow configuration 
+Workflow 
+code could be 
+empty when 
+the workflow 
+is generated 
+by upstream 
+system 
+workflowPriority Integer Workflow priority  
+mapCode String Map code where   
+targetCellCode String Target node code of the 
+running task in the 
+workflow 
+ 
+beginCellCode String Begin node code of the 
+running task in the 
+workflow 
+ 
+targetCellCodeForeign String Foreign code of target  
+
+=== PDF PAGE 20 ===
+  
+V1.0        05.2025        KUKA AMR 20/51 
+node code of the running 
+task in the workflow 
+beginCellCodeForeign String Foreign code of begin 
+node code of the running 
+task in the workflow 
+ 
+finalNodeCode String End node of the workflow Area code for 
+area node and 
+node code for 
+the map node 
+warnFlag Integer Warn flag: 
+Normal: 0 
+Warning: 1 
+ 
+warnCode String Warn code  
+completeTime String Workflow complete time 
+(yyyy-MM-dd HH:mm:ss) 
+ 
+spendTime Integer Workflow spend time  
+(second) 
+ 
+createUsername String Operator  
+createTime String Workflow create time 
+(yyyy-MM-dd HH:mm:ss) 
+ 
+source String Source: 
+INTERFACE, PDA, DEVICE, 
+MLS, SELF, EVENT 
+ 
+materialsInfo String Materials info Require w hen 
+users need 
+material 
+management 
+of containers 
+ 
+⚫ Request Body Example(for reference only, fill in the parameters as needed, all fields are optional) 
+{ 
+ "containerCode": "C001", 
+ "createUsername": "admin", 
+ "jobCode": "T000096284", 
+ "limit": 10, 
+ "maps": ["TEST"], 
+ "robotId": "1", 
+ "sourceValue": 6, 
+ "status": 20, 
+ "targetCellCode": "TEST-1-90", 
+ "workflowCode": " W000000587", 
+ "workflowId": 100218, 
+ "workflowName": "Carry01" 
+}  
+⚫ Response Body Example 
+{ 
+  "data": [ 
+    { 
+      "jobCode": "T000096284", 
+      "workflowId": 100218, 
+      "containerCode": "C001", 
+      "robotId":"1", 
+      "status": 20, 
+      "workflowName": "Carry01", 
+      "workflowCode": " W000000587", 
+
+=== PDF PAGE 21 ===
+  
+V1.0        05.2025        KUKA AMR 21/51 
+      "workflowPriority": 1, 
+      "mapCode": "TEST", 
+      "targetCellCode": "TEST-1-90", 
+      "beginCellCode": "TEST-1-80", 
+      "targetCellCodeForeign": "DROPPOINT", 
+      "beginCellCodeForeign": "PICKPOINT", 
+      "finalNodeCode": "TEST-1-90", 
+      "warnFlag": 0, 
+      "warnCode": null 
+      "completeTime": null, 
+      "spendTime": null, 
+      "createUsername": "admin", 
+      "createTime": "2025-01-10 16:01:42", 
+      "source": "SELF", 
+      "materialsInfo": "-" 
+    }  ], 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+ 
+-- Container Related APIs 
+5 Insert Container (Upstream System -> Kuka System） 
+⚫ API Info 
+API Name containerIn 
+API Description Insert the container 
+API URL http://[IP:Port]/interfaces/api/amr/containerIn 
+HTTP Method POST 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+requestId String 32 T  Request id, UUID32  
+containerType String  F  Container type: 
+RACK, BIN 
+ 
+ 
+containerModelCode String  F  Container model 
+code 
+Required 
+when isNew = 
+true 
+
+=== PDF PAGE 22 ===
+  
+V1.0        05.2025        KUKA AMR 22/51 
+containerCode String  T  Container code  
+enterOrientation String 32 F  Container orientation 
+after insert 
+Special 
+requirements 
+for the  
+orientation 
+when 
+inserting the 
+container. 
+position String  T  Node code where 
+inserting the 
+container 
+ 
+isNew Boolean  F false Automaticly create 
+the container before 
+inserting 
+ 
+containerValidationCode String  F  Appointed validation 
+code when creating 
+the container 
+When 
+isNew=true, 
+appointed 
+validation 
+code 
+withDefaultValidationCode Boolean  F  Using default 
+validation code when 
+creating the 
+container(the same 
+with containerCode) 
+When 
+isNew=true, 
+set the 
+container 
+validation 
+code same 
+with 
+containerCode 
+ 
+⚫ Request Body Example(Insert) 
+{ 
+  "requestId": "request202309250008", 
+  "containerCode": "10", 
+  "position": "M001-A001-31", 
+  "containerModelCode": "", 
+  "enterOrientation": "", 
+  "isNew": false 
+} 
+⚫ Request Body Example(Add and Insert with Appointed validation Code) 
+{ 
+  "requestId": "request202309250008", 
+  "containerCode": "10", 
+  "position": "M001-A001-31", 
+  "containerModelCode": "1", 
+  "enterOrientation": "0", 
+  "isNew": true, 
+   "containerValidationCode": "ID:10", 
+   "withDefaultValidationCode": false 
+} 
+⚫ Request Body Example(Add and Insert with Default validation Code) 
+{ 
+  "requestId": "request202309250008", 
+  "containerCode": "10", 
+  "position": "M001-A001-31", 
+  "containerModelCode": "1", 
+  "enterOrientation": "0", 
+  "isNew": true, 
+
+=== PDF PAGE 23 ===
+  
+V1.0        05.2025        KUKA AMR 23/51 
+   "containerValidationCode": "", 
+   "withDefaultValidationCode": true 
+} 
+ 
+⚫ Response Body Example 
+{ 
+  "data": null, 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+6 Remove Container (Upstream System -> Kuka System） 
+⚫ API Info 
+API Name containerOut 
+API Description Remove the container 
+API URL http://[IP:Port]/interfaces/api/amr/containerOut 
+HTTP Method POST 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+requestId String 32 T  Request id, UUID32  
+containerType String  F RACK Container type: RACK  
+containerCode String  T  Container code  
+position String  F  Node code of the container  
+isDelete Boolean  F false Delete container after 
+removing the container 
+ 
+ 
+⚫ Request Body Example 
+{ 
+ "requestId": "request202309250009", 
+ "containerType": "", 
+"containerCode": "10", 
+"position": "M001-A001-31", 
+ "isDelete": false 
+} 
+⚫ Response Body Example 
+{ 
+"data": null, 
+"code": "0", 
+"message": null, 
+
+=== PDF PAGE 24 ===
+  
+V1.0        05.2025        KUKA AMR 24/51 
+"success": true 
+} 
+7 Update Container (Supported: updates position and empty full  status）
+(Upstream System -> Kuka System） 
+⚫ API Info 
+API Name updateContainer 
+API Description Update container 
+API URL http://[IP:Port]/interfaces/api/amr/updateContainer 
+HTTP Method POST 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+requestId String 32 T  Request id, UUID32  
+containerType String  F  Container type: RACK  
+containerCode String  T  Container code  
+originPosition String  F  Origin node code of the 
+container 
+ 
+targetPosition String  T  Target node code of the 
+container 
+ 
+emptyStatus String  F  Container empty/full 
+status: 
+EMPTY , FULL 
+ 
+reason String  F  Reason to update  
+ 
+⚫ Request Body Example 
+{ 
+  "requestId": "request202309250010", 
+  "containerType": "BUCKET", 
+  "containerCode": "10", 
+  "originPosition": "M001-A001-31", 
+  "targetPosition": "M001-A001-30", 
+  "emptyStatus": "EMPTY", 
+  "reason": "" 
+} 
+⚫ Response Body Example 
+{ 
+  "data": null, 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+
+=== PDF PAGE 25 ===
+  
+V1.0        05.2025        KUKA AMR 25/51 
+} 
+8 Mission Status Callback (Upstream System -> Kuka System） 
+⚫ API Info 
+API Name missionStateCallback 
+API Description Mission status callback 
+API URL http://[IP:Port]/interfaces/api/amr/missionStateCallback  
+HTTP Method POST 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+missionCode String 32 T  Mission code Same with 
+the jobcode 
+of the 
+workflow 
+viewBoardType String  F  View board type  
+containerCode String  F  Conatiner code  
+currentPosition String  F  Current node code of the 
+mission 
+ 
+slotCode String  F  Current slot code  
+robotId String  F  Robot which is executing 
+the mission 
+ 
+missionStatus String  T  Mission Status: 
+MOVE_BEGIN, ARRIVED, 
+UP_CONTAINER, 
+DOWN_CONTAINER, 
+ROLLER_RECEIVE, 
+ROLLER_SEND, 
+PICKER_RECEIVE, 
+PICKER_SEND, FORK _UP, 
+FORK_DOWN,  
+WAITFEEDBACK, 
+COMPLETED, CANCELED 
+ 
+message String  F  Description message  
+missionData   F  Custom information 
+object that needs to be 
+reported 
+ 
+ 
+⚫ Request Body Example 
+{ 
+  "missionCode": "mission202309250005", 
+  "viewBoardType": "", 
+  "slotCode": "", 
+  "robotId": "14", 
+  "containerCode": "1000002", 
+  "currentPosition": "M001-A001-31", 
+  "missionStatus": "MOVE_BEGIN", 
+  "message": "", 
+  "missionData": {} 
+
+=== PDF PAGE 26 ===
+  
+V1.0        05.2025        KUKA AMR 26/51 
+} 
+9 Query Container Model Codes (Upstream System -> Kuka System） 
+⚫ API Info 
+API Name queryAllContainerModelCode 
+API Description Query all container models 
+API URL http://[IP:Port]/interfaces/api/amr/queryAllContainerModelCode 
+HTTP Method GET 
+ 
+⚫ No Request example 
+⚫ Response Body Example 
+{ 
+  "code": "0", 
+  "message": null, 
+  "success": true, 
+  "data": [ 
+    "10001" 
+  ] 
+} 
+10 Query Area Codes By Conatiner Model (Upstream System -> Kuka 
+System） 
+⚫ API Info 
+API Name queryAreaCodeForContainerModel 
+API 
+Description 
+Query areas that supports the current container model 
+API URL http://[IP:Port]/interfaces/api/amr/queryAreaCodeForContainerModel  
+HTTP Method GET 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+containerModelCode String  T  Container model code  
+noContainerFirst Boolean  F false 是否区域内无容器优先： 
+ture 是 
+false 否 
+ 
+ 
+⚫ Request URL Example 
+http://[IP:Port]/interfaces/api/amr/queryAreaCodeForContainerModel?containerModelCode= 10001& 
+noContainerFirst=false 
+⚫ Response Body Example 
+{ 
+  "code": "0", 
+  "message": "", 
+
+=== PDF PAGE 27 ===
+  
+V1.0        05.2025        KUKA AMR 27/51 
+  "success": true, 
+  "data": [ 
+    "areaCode1", 
+    "areaCode2", 
+    "areaCode3" 
+  ] 
+} 
+11-1 Query Containers(Only including containers with IN/INSERTED status) 
+(Upstream System -> Kuka System） 
+⚫ API Info 
+API Name containerQuery 
+API Description Query containers 
+API URL http://[IP:Port]/interfaces/api/amr/containerQuery 
+HTTP Method POST 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+containerCode String  F  Container code  
+nodeCode String  F  Node code  
+areaCode String  F  Area code  
+containerModelCode String  F  Container model code  
+emptyFullStatus Integer  F 2 Container empty/full 
+status: 
+EMPTY: 0 
+FULL: 1 
+ALL: 2 
+The 
+empty/full 
+status will only 
+take effect 
+when the area 
+code is not 
+empty. 
+ 
+ 
+⚫ Response Parameters 
+Name Type Description Notes 
+containerCode String Container code  
+nodeCode String Node code  
+inMapStatus Integer In map status: 
+In map: 1 
+Off map: 0 
+ 
+containerModelCode String Container model code  
+emptyFullStatus String Container empty/full 
+status: 
+EMPTY: 0 
+FULL: 1 
+ 
+
+=== PDF PAGE 28 ===
+  
+V1.0        05.2025        KUKA AMR 28/51 
+isCarry Integer Lift status: 
+Drop: 0 
+Lift: 1 
+ 
+orientation String Container orientation  
+containerCheckCode String Container check code  
+mapCode String Map code  
+districtCode String Map district code  
+ 
+⚫ Request Body Example 
+{ 
+  "nodeCode": "M001-A001-30", 
+  "containerModelCode": "10001", 
+  "containerCode": "10", 
+  "areaCode": "A000000014", 
+  "emptyFullStatus": 2 
+} 
+⚫ Response Body Example 
+{ 
+  "data": [ 
+    { 
+      "containerCode": "10", 
+      "nodeCode": "", 
+      "orientation": "0.0", 
+      "containerModelCode": "10001", 
+      "emptyFullStatus": 0, 
+      "inMapStatus": 1, 
+      "isCarry": 0, 
+      "containerCheckCode": "10", 
+"mapCode": "ABC", 
+"districtCode": "1" 
+    } 
+  ], 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+11-2 Query Containers(Both IN/INSERTED and OUT/REMOVED status) 
+(Upstream System -> Kuka System） 
+⚫ API Info 
+API Name containerQuery 
+API Description Query containers 
+API URL http://[IP:Port]/interfaces/api/amr/containerQuery 
+HTTP Method POST 
+ 
+⚫ Headers 
+
+=== PDF PAGE 29 ===
+  
+V1.0        05.2025        KUKA AMR 29/51 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+containerCode String  F  Container code  
+nodeCode String  F  Node code  
+areaCode String  F  Area code  
+mapCode String  F  Map code  
+districtCode String  F  District code  
+containerModelCode String  F  Container model code  
+emptyFullStatus Integer  F  Container empty/full 
+status: 
+EMPTY: 0 
+FULL: 1 
+ 
+inMapStatus Integer  F  IN/OUT map status 
+IN: 1 
+OUT:0 
+ 
+ 
+ 
+⚫ Response Parameters 
+Name Type Description Notes 
+containerCode String Container code  
+nodeCode String Node code  
+inMapStatus Integer In map status: 
+In map: 1 
+Off map: 0 
+ 
+containerModelCode String Container model code  
+emptyFullStatus String Container empty/full 
+status: 
+EMPTY: 0 
+FULL: 1 
+ 
+isCarry Integer Lift status: 
+Drop: 0 
+Lift: 1 
+ 
+orientation String Container orientation  
+containerCheckCode String Container check code  
+mapCode String Map code  
+districtCode String Map district code  
+ 
+⚫ Request Body Example(Query all container in map ABC) 
+{ 
+  "mapCode": "ABC" 
+} 
+⚫ Response Body Example 
+{ 
+  "data": [ 
+    { 
+      "containerCode": "10", 
+      "nodeCode": "1-1", 
+
+=== PDF PAGE 30 ===
+  
+V1.0        05.2025        KUKA AMR 30/51 
+      "orientation": "0.0", 
+      "containerModelCode": "10001", 
+      "emptyFullStatus": 0, 
+      "inMapStatus": 1, 
+      "isCarry": 0, 
+      "containerCheckCode": "10", 
+"mapCode": "ABC", 
+"districtCode": "1" 
+}, 
+{ 
+      "containerCode": "20", 
+      "nodeCode": "1-1", 
+      "orientation": "0.0", 
+      "containerModelCode": "10001", 
+      "emptyFullStatus": 0, 
+      "inMapStatus": 0, 
+      "isCarry": 0, 
+      "containerCheckCode": "", 
+"mapCode": "ABC", 
+"districtCode": "1" 
+    } 
+  ], 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+ 
+-- Robot Module 
+12 Query Robot by Node UUID or Node Code (Upstream System -> Kuka 
+System) 
+⚫ API Info 
+API Name queryRobByNodeUuidOrForeignCode 
+API Description Query robot by node UUID or node foreign code 
+API URL http://[IP:Port]/interfaces/api/amr/queryRobByNodeUuidOrForeignCode 
+HTTP Method POST 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+
+=== PDF PAGE 31 ===
+  
+V1.0        05.2025        KUKA AMR 31/51 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+nodeCode String  T  Node UUID or node 
+foreign code  
+If query ing 
+multiple 
+robots, the 
+user can pass 
+multiple 
+node 
+parameters 
+separated by 
+commas. 
+ 
+ 
+⚫ Response Parameters 
+Name Type Description Notes 
+robotId String Robot id  
+robotType String Robot type code  
+mapCode String Map code  
+floorNumber String Floor number  
+buildingCode String Building code  
+containerCode String Container code which is 
+carried by the robot 
+ 
+status Integer Departure: 1 
+Offline: 2 
+Idle: 3 
+Executing: 4 
+Charging: 5 
+Updating:6 
+Abnormal: 7 
+ 
+occupyStatus Integer Occupy status: 
+Occupied: 1 
+Idle: 0 
+ 
+batteryLevel Double Battery level (%)  
+nodeCode String  Node code  
+X String Robot current location Y 
+(millimeters) 
+ 
+Y String Robot current location X 
+(millimeters) 
+ 
+robotOrientation String Robot orientation  
+missionCode String Mission code Mission code dispatched by the upstream 
+system 
+liftStatus Integer Robot lift status: 
+Lift: 1 
+ 
+ 
+reliability Integer Location reliability: 
+Unreliable: 0 
+Reliable: 1 
+ 
+runTime String Run time  
+karOsVersion String KarOs version  
+mileage String Running mileage  
+leftMotorTemperature String Left motor temperature  
+rightMotorTemperature String Right motor temperature  
+liftMotorTemperature String Lift motor tempreature  
+rotateMotorTemperature String Rotate motor temperature  
+rotateTimes Integer Rotate times  
+liftTimes Integer Lift times  
+nodeForeignCode String Foreign code of the node When querying robots using the node 
+
+=== PDF PAGE 32 ===
+  
+V1.0        05.2025        KUKA AMR 32/51 
+where the robot locates foreign code, this field will have a 
+value. 
+ 
+⚫ Request Example: 
+1) Example 1 
+{ 
+ "nodeCode": "startNode1, startNode2" 
+} 
+ 
+2) Example 2 
+{ 
+ "nodeCode": "test01-5-91" 
+} 
+⚫ Response Body Example 
+1) Example 1 
+{ 
+  "data": [ 
+    { 
+      "robotId": "925", 
+      "robotType": "KMP600I", 
+      "mapCode": "test01", 
+      "floorNumber": "5", 
+      "buildingCode": "test", 
+      "containerCode": "", 
+      "status": 3, 
+      "occupyStatus": 0, 
+      "batteryLevel": 1, 
+      "nodeCode": "test01-5-64", 
+      "x": "3000.0", 
+      "y": "15000.0", 
+      "robotOrientation": "90.0", 
+      "missionCode": null, 
+      "liftStatus": 0, 
+      "reliability ": 1, 
+      "runTime ": "6745", 
+      "karOsVersion ": "", 
+      "mileage ": "0.0", 
+      "leftMotorTemperature ": "0.0", 
+      "rightMotorTemperature ": "0.0", 
+      "liftMotorTemperature ": "0.0", 
+      "rotateMotorTemperature ": "0.0", 
+      "rotateTimes ": 0, 
+      "liftTimes ": 0, 
+      "nodeForeignCode": " startNode1" 
+    }, 
+    { 
+      "robotId": "80211", 
+      "robotType": "KMP600I", 
+      "mapCode": "test01", 
+      "floorNumber": "5", 
+      "buildingCode": "test", 
+
+=== PDF PAGE 33 ===
+  
+V1.0        05.2025        KUKA AMR 33/51 
+      "containerCode": "", 
+      "status": 3, 
+      "occupyStatus": 0, 
+      "batteryLevel": 1, 
+      "nodeCode": "test01-5-74", 
+      "x": "1200.0", 
+      "y": "2400.0", 
+      "robotOrientation": "0.0", 
+      "missionCode": null, 
+      "liftStatus": 0, 
+      "reliability ": 1, 
+      "runTime ": "null", 
+      "karOsVersion ": "", 
+      "mileage ": "0.0", 
+      "leftMotorTemperature ": "0.0", 
+      "rightMotorTemperature ": "0.0", 
+      "liftMotorTemperature ": "0.0", 
+      "rotateMotorTemperature ": "0.0", 
+      "rotateTimes ": 0, 
+      "liftTimes ": 0, 
+      "nodeForeignCode": " startNode2" 
+    } 
+  ], 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+ 
+2) Example 2 
+{ 
+  "data": [ 
+    { 
+      "robotId": "2041", 
+      "robotType": "KMP600I", 
+      "mapCode": "test01", 
+      "floorNumber": "5", 
+      "buildingCode": "test", 
+      "containerCode": "", 
+      "status": 3, 
+      "occupyStatus": 0, 
+      "batteryLevel": 1, 
+      "nodeCode": "test01-5-91", 
+      "x": "13000.0", 
+      "y": "30000.0", 
+      "robotOrientation": "-90.0", 
+      "missionCode": null, 
+      "liftStatus": 0, 
+      "reliability ": 1, 
+      "runTime ": "6745", 
+      "karOsVersion ": "", 
+      "mileage ": "0.0", 
+
+=== PDF PAGE 34 ===
+  
+V1.0        05.2025        KUKA AMR 34/51 
+      "leftMotorTemperature ": "0.0", 
+      "rightMotorTemperature ": "0.0", 
+      "liftMotorTemperature ": "0.0", 
+      "rotateMotorTemperature ": "0.0", 
+      "rotateTimes ": 0, 
+      "liftTimes ": 0, 
+      "nodeForeignCode": "" 
+    } 
+  ], 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+ 
+13 Query Robots (Upstream System -> Kuka System) 
+⚫ API Info 
+API Name robotQuery 
+API Description Query robot (default to search all) 
+API URL http://[IP:Port]/interfaces/api/amr/robotQuery 
+HTTP Method POST 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+robotId String  F  Robot id If all 
+parameters 
+are empty, 
+then query 
+all by default.  
+ 
+Note: The 
+request 
+parameters 
+mapCode and 
+floorNumber 
+must be 
+passed 
+together. 
+robotType String  F  Robot type code 
+mapCode String  F  Map code (If map is 
+disabled, result is empty) 
+floorNumber String  F  Floor number (If map is 
+disabled, result is empty) 
+ 
+ 
+⚫ Response Parameters 
+Name Type Description Notes 
+robotId String Robot id  
+robotType String Robot type code  
+
+=== PDF PAGE 35 ===
+  
+V1.0        05.2025        KUKA AMR 35/51 
+mapCode String Map code  
+floorNumber String Floor number  
+buildingCode String Building code  
+containerCode String Container code which is 
+carried by the robot 
+ 
+status Integer Departure: 1 
+Offline: 2 
+Idle: 3 
+Executing: 4 
+Charging: 5 
+Updating:6 
+Abnormal: 7 
+ 
+occupyStatus Integer Occupy status: 
+Occupied: 1 
+Idle: 0 
+ 
+batteryLevel Double Battery level (%)  
+nodeCode String  Node code  
+X String Robot current location Y 
+(millimeters) 
+ 
+Y String Robot current location X 
+(millimeters) 
+ 
+robotOrientation String Robot orientation  
+missionCode String Mission code Mission code 
+dispatched by 
+the upstream 
+system 
+liftStatus Integer Robot lift status: 
+Lift: 1 
+ 
+ 
+reliability Integer Location reliability: 
+Unreliable: 0 
+Reliable: 1 
+ 
+runTime String Run time  
+karOsVersion String KarOs version  
+mileage String Running mileage  
+leftMotorTemperature String Left motor temperature  
+rightMotorTemperature String Right motor temperature  
+liftMotorTemperature String Lift motor tempreature  
+rotateMotorTemperature String Rotate motor temperature  
+rotateTimes Integer Rotate times  
+liftTimes Integer Lift times  
+ 
+⚫ Request Body Example 
+{ 
+ "floorNumber": "A001", 
+ "mapCode": "M001", 
+ "robotId": "13", 
+ "robotType": "KMP600I" 
+} 
+⚫ Response Body Example 
+{ 
+  "data": [ 
+    { 
+      "robotId": "13", 
+      "robotType": "KMP600I", 
+
+=== PDF PAGE 36 ===
+  
+V1.0        05.2025        KUKA AMR 36/51 
+      "mapCode": "M001", 
+      "floorNumber": "A001", 
+      "buildingCode": "W001", 
+      "containerCode": "", 
+      "status": 3, 
+      "occupyStatus": 0, 
+      "batteryLevel": 1, 
+      "nodeCode": "46", 
+      "x": "3000.0", 
+      "y": "15000.0", 
+      "robotOrientation": "90.0", 
+      "missionCode": null, 
+      "liftStatus": 0, 
+      "reliability ": 1, 
+      "runTime ": "6745", 
+      "karOsVersion ": "", 
+      "mileage ": "0.0", 
+      "leftMotorTemperature ": "0.0", 
+      "rightMotorTemperature ": "0.0", 
+      "liftMotorTemperature ": "0.0", 
+      "rotateMotorTemperature ": "0.0", 
+      "rotateTimes ": 0, 
+      "liftTimes ": 0 
+    } 
+  ], 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+ 
+14 Dispatch Move Carry Task (Upstream System -> Kuka System) 
+⚫ API Info 
+API Name robotMoveCarry 
+API Description Dispatch a move carry task to the robot. The function is the same as 
+which in the Map Monitor, directly dispatched to the Mission 
+Manager, only displayed in the Mission List, and not visible on the 
+Job Board. 
+API URL http://[IP:Port]/interfaces/api/amr/robotMoveCarry 
+HTTP Method POST 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+
+=== PDF PAGE 37 ===
+  
+V1.0        05.2025        KUKA AMR 37/51 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+robotId String  T  Robot Id  
+containerCode String  T  Container code  
+targetNodeCode String  T  Target node code  
+missionCode String  F  Mission code which 
+dispatched to the Mission 
+Manager.  
+Automatically 
+generate the 
+mission code, 
+if the 
+parameter is 
+not passed. 
+ 
+ 
+⚫ Request Body Example 
+{ 
+ "robotId": "10001", 
+ "containerCode": "C0002", 
+ "targetNodeCode": "TEST-1-45" 
+} 
+⚫ Response Body Example 
+{ 
+  "data": "I-CARRY-1744609148201", 
+  "code": "0", 
+  "message": "OK", 
+  "success": true 
+} 
+ 
+15 Dispatch Charge Robot Task (Upstream System -> Kuka System) 
+⚫ API Info 
+API Name chargeRobot 
+API Description Dispatch charge task to the robot. The function is the same as which 
+in the Map Monitor, directly dispatched to the Mission Manager, 
+only displayed in the Mission List, and not visible on the Job Board. 
+API URL http://[IP:Port]/interfaces/api/amr/chargeRobot 
+HTTP Method POST 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+robotId String  T  Robot Id  
+
+=== PDF PAGE 38 ===
+  
+V1.0        05.2025        KUKA AMR 38/51 
+necessary Integer  T  Whether to force  
+generating the  charging 
+task. 
+1:  
+Always 
+generate a 
+task and 
+queue it; 
+0: Charge 
+when below 
+lowestLevel, 
+task can be 
+directly 
+completed if 
+no resources 
+available 
+targetNodeCode String  T  Target node code  
+targetLevel Integer  T  Target battery level  
+lowestLevel Integer  F  Lowest battery level to 
+trigger charge 
+Required 
+when 
+necessary = 0 
+missionCode String  F  Mission code which 
+dispatched to the Mission 
+Manager.  
+Automatically 
+generate the 
+mission code, 
+if the 
+parameter is 
+not passed. 
+ 
+ 
+⚫ Request Body Example 
+{ 
+ "lowestLevel": 5, 
+ "necessary": 0, 
+ "robotId": "2", 
+ "targetLevel": 90 
+} 
+⚫ Response Body Example 
+{ 
+  "data": null, 
+  "code": "0", 
+  "message": "OK", 
+  "success": true 
+} 
+ 
+16 Insert The Robot Into The Map (Upstream System -> Kuka System) 
+⚫ API Info 
+API Name insertRobot 
+API Description Insert the robot into the map. Only support real AMR currently 
+(distinguished from simulated AMR). 
+API URL http://[IP:Port]/interfaces/api/amr/insertRobot 
+HTTP Method POST 
+ 
+⚫ Headers 
+
+=== PDF PAGE 39 ===
+  
+V1.0        05.2025        KUKA AMR 39/51 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+robotId String  T  Robot id  
+cellCode String  T  Node code to insert the 
+robot 
+ 
+synchroContainer Integer  T  Whether to insert with the 
+container. 
+0: No 
+1: Yes 
+ 
+ 
+⚫ Request Body Example 
+{ 
+ "cellCode": "TEST-1-69", 
+ "robotId": "2", 
+ "synchroContainer": 1 
+} 
+⚫ Response Body Example 
+{ 
+  "data": null, 
+  "code": "0", 
+  "message": "OK", 
+  "success": true 
+} 
+ 
+17 Remove The Robot From The Map (Upstream System -> Kuka System) 
+⚫ API Info 
+API Name removeRobot 
+API Description Remove the robot from the map. 
+API URL http://[IP:Port]/interfaces/api/amr/removeRobot 
+HTTP Method POST 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+robotId String  T  Robot Id  
+withContainer Integer  F 1 Whether to remove with 0: No 
+
+=== PDF PAGE 40 ===
+  
+V1.0        05.2025        KUKA AMR 40/51 
+the container. 1: Yes 
+ 
+ 
+⚫ Request Body Example 
+{ 
+ "robotId": "2", 
+ "withContainer": 1 
+} 
+⚫ Response Body Example 
+{ 
+  "data": null, 
+  "code": "0", 
+  "message": "OK", 
+  "success": true 
+} 
+ 
+-- AMR Map Node and Area Related Module 
+18 Query All WCS Area Information (Upstream System -> Kuka System) 
+⚫ API Info 
+API Name areaQuery 
+API Description 查询所有 WCS 区域信息 Query All WCS Area Information 
+API URL http://[IP:Port]/interfaces/api/amr/areaQuery 
+HTTP Method GET 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+None 
+ 
+⚫ Response Parameters 
+Name Type Description Notes 
+areaName String Area Name  
+areaCode String Area Code  
+areaType Integer Area Type 1: container 
+storage area， 
+3:temporary storage area, 
+4:buffer area, 5:dense 
+storage area, 6:exclusive 
+area, 7: fork area 
+ 
+ 
+
+=== PDF PAGE 41 ===
+  
+V1.0        05.2025        KUKA AMR 41/51 
+ 
+⚫ Request Body Example 
+⚫ Response Body Example 
+{ 
+  "data": [ 
+    { 
+      "areaName": "container storage area", 
+      "areaType": 1, 
+      "areaCode": "1-song-1732701220548" 
+    }, 
+    { 
+      "areaName": "temporary storage area", 
+      "areaType": 3, 
+      "areaCode": "1-song-1732701269477" 
+    }, 
+    { 
+      "areaName": "buffer area", 
+      "areaType": 4, 
+      "areaCode": "1-song-1732701316971" 
+    }, 
+    { 
+      "areaName": "dense storage area", 
+      "areaType": 5, 
+      "areaCode": "1-song-1732701347592" 
+    }, 
+    { 
+      "areaName": "exclusive area", 
+      "areaType": 6, 
+      "areaCode": "1-song-1732701422092" 
+    }, 
+    { 
+      "areaName": "fork area", 
+      "areaType": 7, 
+      "areaCode": "1-song-1732701459113" 
+    } 
+  ], 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+ 
+19 Query Nodes of the Area (Upstream System -> Kuka System) 
+⚫ API Info 
+API Name areaNodesQuery 
+API Description Query nodes of the area 
+API URL http://[IP:Port]/interfaces/api/amr/areaNodesQuery 
+
+=== PDF PAGE 42 ===
+  
+V1.0        05.2025        KUKA AMR 42/51 
+HTTP Method POST 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+areaCodes List<String>  T  Area codes  
+ 
+⚫ Response Parameters 
+Name Type Description Notes 
+areaCode String Area code  
+nodeList List<String> The set of external codes 
+for the nodes. If all points 
+in the area have no 
+external codes, this field 
+may be empty. 
+ 
+ 
+⚫ Request URL Example 
+1） Example 1 
+{ 
+ "areaCodes": ["A000000013","A000000014"] 
+} 
+ 
+2） Example 2 
+{ 
+ "areaCodes": ["1-song-1732612877805"] 
+} 
+ 
+ 
+⚫ Response Body Example 
+1）Example 1 
+{ 
+  "data": [ 
+    { 
+      "areaCode": "A000000014", 
+      "nodeList": [ 
+        "27" 
+      ] 
+    } , 
+    { 
+      "areaCode": "A000000013", 
+      "nodeList": [ 
+        "46", 
+        "50" 
+      ] 
+    } 
+
+=== PDF PAGE 43 ===
+  
+V1.0        05.2025        KUKA AMR 43/51 
+  ], 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+ 
+3） Example 2，all nodes within the area have no external codes 
+{ 
+  "data": [ 
+    { 
+      "areaCode": "1-song-1732612877805", 
+      "nodeList": [ 
+        "" 
+      ] 
+    } 
+  ], 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+20 Query Area by Map Node (Upstream System -> Kuka System) 
+⚫ API Info 
+API Name queryWCSAreaByMapNode 
+API 
+Descriptio
+n 
+Query area by map node 
+API URL http://[IP:Port]/interfaces/api/amr/queryWCSAreaByMapNode 
+HTTP 
+Method 
+GET 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+nodeUuid String  T  Node UUID  
+ 
+⚫ Response Parameters 
+Name Type Description Notes 
+areaCode String Area code 
+ 
+ 
+containerModelCode String  
+Model code of containers 
+Not 
+required 
+
+=== PDF PAGE 44 ===
+  
+V1.0        05.2025        KUKA AMR 44/51 
+that can be placed in the 
+area 
+ 
+⚫ Request URL Example 
+http://[IP:Port]/interfaces/api/amr/queryWCSAreaByMapNode?nodeUuid= 1-song-44 
+ 
+⚫ Response Body Example 
+1) Query the area to which the node belongs, and the area is not configured with a container 
+model code that can be placed 
+{ 
+  "data": { 
+    "areaCode": "1-song-1732612831825", 
+    "containerModelCode": "" 
+  }, 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+ 
+2. Query the area to which the node belongs, and the area is not configured with a container model 
+code that can be placed. 
+2)  
+{ 
+  "data": { 
+    "areaCode": "1-song-1732612877805", 
+    "containerModelCode": "600i" 
+  }, 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+ 
+3）Can not find the area to which the point belongs 
+ 
+{ 
+  "data": null, 
+  "code": "100001", 
+  "message": "No such node in the graph.[7788]", 
+  "success": false 
+} 
+ 
+21 Query All Forbidden Areas (Upstream System -> Kuka System) 
+⚫ API Info 
+API Name queryAllForbiddenAreas 
+
+=== PDF PAGE 45 ===
+  
+V1.0        05.2025        KUKA AMR 45/51 
+API Description Query all forbidden areas 
+API URL http://[IP:Port]/interfaces/api/amr/queryAllForbiddenAreas 
+HTTP Method GET 
+ 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+None 
+ 
+⚫ Response Parameters 
+Name Type Description Notes 
+forbiddenAreaId Integer Forbidden area ID 
+ 
+ 
+mapCode String Map code where the area 
+locates 
+ 
+floorNumber String District code where the 
+area locates 
+ 
+description String Area description  
+forbiddenAreaStrategy Integer Area strategy:0-default;1-
+allow AMR parking 
+ 
+status Integer Status: 0-disabled; 1-
+enabled; 2-effective; 3-
+ineffective 
+ 
+enableType Integer Effective strategy: 0-
+immediately; 1-effective 
+according to the given 
+time period 
+ 
+ 
+⚫ Request Body Example 
+None 
+ 
+⚫ Response Body Example 
+{ 
+  "data": [ 
+    { 
+      "forbiddenAreaId": 3, 
+      "mapCode": "1", 
+      "floorNumber": "song", 
+      "description": "", 
+      "forbiddenAreaStrategy": 0, 
+      "status": 1, 
+      "enableType": 0 
+    }, 
+    { 
+      "forbiddenAreaId": 4, 
+      "mapCode": "1", 
+
+=== PDF PAGE 46 ===
+  
+V1.0        05.2025        KUKA AMR 46/51 
+      "floorNumber": "1", 
+      "description": "", 
+      "forbiddenAreaStrategy": 0, 
+      "status": 1, 
+      "enableType": 0 
+    }, 
+    { 
+      "forbiddenAreaId": 2, 
+      "mapCode": "1", 
+      "floorNumber": "song", 
+      "description": "forbidden area1 of map song", 
+      "forbiddenAreaStrategy": 0, 
+      "status": 1, 
+      "enableType": 0 
+    } 
+  ], 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+}  ], 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+ 
+ 
+22 Query One Forbidden Area (Upstream System -> Kuka System) 
+⚫ API Info 
+API Name queryOneForbiddenArea 
+API Description Query one forbidden area 
+API URL http://[IP:Port]/interfaces/api/amr/queryOneForbiddenArea 
+HTTP Method GET 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+forbiddenAreaId Integer  T  Forbidden area ID  
+ 
+⚫ Response Parameters 
+Name Type Description Notes 
+
+=== PDF PAGE 47 ===
+  
+V1.0        05.2025        KUKA AMR 47/51 
+forbiddenAreaId Integer Forbidden area ID 
+ 
+ 
+mapCode String Map cpde where the area 
+locates 
+ 
+floorNumber String District code where the 
+area locates 
+ 
+description String Area description Not required 
+forbiddenAreaStrategy Integer Area strategy:0-default;1-
+allow AMR parking 
+ 
+status Integer Status: 0-disabled; 1-
+enabled; 2-effective; 3-
+ineffective 
+ 
+enableType Integer Effective strategy: 0-
+immediately; 1-effective 
+according to the given 
+time period 
+ 
+ 
+⚫ Request URL Example 
+http://[IP:Port]/interfaces/api/amr/queryOneForbiddenArea?forbiddenAreaId=2 
+ 
+⚫ Response Body Example 
+Example 1 
+{ 
+  "data": { 
+    "forbiddenAreaId": 2, 
+    "mapCode": "1", 
+    "floorNumber": "song", 
+    "description": "forbidden area1 of map song", 
+    "forbiddenAreaStrategy": 0, 
+    "status": 1, 
+    "enableType": 0 
+  }, 
+  "code": "0", 
+  "message": null, 
+  "success": true 
+} 
+ 
+23 Update Forbidden Area Status (Upstream System -> Kuka System) 
+⚫ API Info 
+API Name updateForbiddenAreaStatus 
+API Description Update forbidden area status 
+API URL http://[IP:Port]/interfaces/api/amr/updateForbiddenAreaStatus 
+HTTP Method POST 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+
+=== PDF PAGE 48 ===
+  
+V1.0        05.2025        KUKA AMR 48/51 
+ 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+forbiddenAreaId Integer  T 0 Forbidden 
+area ID 
+Only one of 
+forbiddenAreaId or 
+forbiddenAreaCode 
+can be selected as a 
+parameter in the 
+request body at a 
+time. 
+forbiddenAreaCode String  T  Forbidden 
+area code 
+status String  T  Forbidden 
+area status: 0-
+disabled; 1 -
+enabled 
+ 
+ 
+⚫ Response Parameters 
+None 
+ 
+⚫ Request Body Examples 
+1. Example 1 
+{ 
+    "forbiddenAreaId": 2,  
+    "status": "0" 
+} 
+2. Example 2 
+{ 
+"forbiddenAreaCode": "map1-01-1739427001143",  
+     "status": "0" 
+} 
+ 
+ 
+⚫  Response Body Example 
+1) Modify status successfully 
+{ 
+    "data": null, 
+    "code": "0", 
+    "message": null, 
+    "success": true 
+} 
+2) Fail to modify status 
+Error reason: The status of the forbidden area is already 0 (disabled). If you still attempt to change its 
+status to 0, you will receive the following error. If the status is already 1 (enabled) and you attempt to 
+change its status to 1 again, you will receive a similar error.  
+{ 
+    "data": null, 
+    "code": "100001", 
+    "message": "RCS returns error[[D]com.kuka.rcs.bd.common.grpc.util.CommonGrpcErrorCode.16[can not 
+update [ MAP_ZONE_STATUS_DISABLE ]]]", 
+    "success": false 
+} 
+
+=== PDF PAGE 49 ===
+  
+V1.0        05.2025        KUKA AMR 49/51 
+ 
+3) an error in passing the parameters 
+Error reason: Only one of forbiddenAreaId or forbiddenAreaCode can be selected as a parameter in 
+the request body at a time. 
+{ 
+    "data": null, 
+    "code": "100001", 
+    "message": "only one of area ID or area code can be filled in", 
+    "success": false 
+} 
+ 
+24 Query Function Node (Upstream System -> Kuka System) 
+⚫ API Info 
+API Name queryFunctionNode 
+API Description Query function node 
+API URL http://[IP:Port]/interfaces/api/amr/queryFunctionNode 
+HTTP Method POST 
+ 
+⚫ Headers 
+Param Name Param Value Required Example Notes 
+Content-Type application/json T   
+ 
+ 
+⚫ Request Parameters 
+Name Type Max 
+Length 
+Required Default 
+Value 
+Description Notes 
+functionType Integer  T  Node function 
+type 
+1: Workstation 
+2: Shelf point 
+3: Rest point 
+4: Charging entry 
+point 
+5: Interaction point 
+6: Avoidance point 
+7: Rotation point 
+8: Queuing point 
+9: Check point 
+10: Charging point 
+11: Elevator point 
+12: Box shelf point 
+13: Pipeline point 
+15: Voice broadcast 
+point 
+16: Mobile box shelf 
+point 
+17: Pipeline relative 
+point 
+18: Wireless 
+charging point 
+19: Connect point 
+
+=== PDF PAGE 50 ===
+  
+V1.0        05.2025        KUKA AMR 50/51 
+20: CTU loader node 
+point 
+mapCode String  T  Map code  
+floorNumber String  T  Floor number  
+robotTypeClass String  F  Robot type 
+class 
+ 
+containerModel String  F  Container 
+model code 
+ 
+ 
+⚫ Response Parameters 
+Name Type Description Notes 
+nodeCode String Node code  
+externalCode String Node external code  
+functionType Integer Node function type  
+containerModelCode List<String> Node supported container 
+model code 
+ 
+robotTypeCode List<String> Node supported robot 
+type code 
+ 
+ 
+⚫ Request Body Examples 
+{ 
+ "floorNumber": "1", 
+ "functionType": 1, 
+ "mapCode": "TEST" 
+} 
+⚫  Response Body Example 
+{ 
+  "data": [ 
+    { 
+      "nodeCode": "TEST-1-53", 
+      "externalCode": "", 
+      "functionType": 1, 
+      "containerModelCode": [ 
+        "model1" 
+      ], 
+      "robotTypeCode": [ 
+        "KMP600I" 
+      ] 
+    }, 
+    { 
+      "nodeCode": "TEST-1-1", 
+      "externalCode": "", 
+      "functionType": 1, 
+      "containerModelCode": [], 
+      "robotTypeCode": [] 
+    } 
+  ], 
+  "code": "0", 
+  "message": "lang.wcs.common.ok", 
+  "success": true 
+} 
+ 
+
+=== PDF PAGE 51 ===
+  
+V1.0        05.2025        KUKA AMR 51/51 
+-- Interface Response Description 
+⚫ Success Response 
+{ 
+  "code": "0", 
+  "message": "", 
+  "success": true, 
+  "data": "" 
+} 
+⚫ Failure Response 
+{ 
+  "code": "", //Error code 
+  "message": "", //Error description 
+  "success": false, 
+  "data": null 
+} 
+Common error description: 
+Error description Error code Message 
+Unexpected error 100001 UNKNOW ERROR 
+Invalid parameter 100002 INVALID PARAMETER 
+Required param missing 100404 MISS PARAM 
+Enum value not exists 100013 INVALID ENUM VALUE 
+No such node code 100204 NO SUCH NODE 
+Robot or robot type not exists 100301 ROBOT NOT EXISTS 
+Request id is duplicate 100408 API REQUEST ID IS DUPLICATE 
+Mission code is duplicate 100409 API MISSION CODE IS DUPLICATE 
+ 
+ 
+ 
+ 
+ 
+ 

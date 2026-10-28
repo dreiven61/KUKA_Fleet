@@ -1,0 +1,2828 @@
+Compiled from "DefaultWcsRpcService.java"
+public class org.thingsboard.server.service.rpc.DefaultWcsRpcService {
+  private static final org.slf4j.Logger log;
+
+  protected org.thingsboard.server.dao.rule.RuleChainService ruleChainService;
+
+  private org.thingsboard.server.dao.device.DeviceService deviceService;
+
+  private com.kuka.ecs.grpc.trigger.EcsTriggerGrpc$EcsTriggerFutureStub triggerFutureStub;
+
+  private com.kuka.ecs.grpc.callback.EcsCallbackGrpc$EcsCallbackFutureStub callbackFutureStub;
+
+  private com.kuka.wcs.grpc.platform.robot.WcsRobotServiceGrpc$WcsRobotServiceFutureStub robotServiceFutureStub;
+
+  private com.kuka.wcs.grpc.platform.robot.WcsRobotServiceGrpc$WcsRobotServiceStub robotServiceStub;
+
+  private com.kuka.wcs.grpc.mission.WcsMissionServiceGrpc$WcsMissionServiceStub missionServiceStub;
+
+  private static final java.util.concurrent.ConcurrentMap<java.lang.String, com.kuka.wcs.grpc.platform.robot.WcsRobStatusStandardResponse> robotInfoStandardMapCache;
+
+  private static final java.util.concurrent.ConcurrentMap<java.lang.String, com.kuka.wcs.grpc.mission.WcsMissionStatusResponse> missionStatusStandardMapCache;
+
+  private static final java.util.concurrent.ConcurrentMap<java.lang.String, com.kuka.wcs.grpc.platform.robot.RobotInfoResponse> robotInfoMapCache;
+
+  private static final java.util.concurrent.ConcurrentMap<java.lang.String, java.util.Map<java.lang.String, java.lang.String>> robotInfoMapUpdateHistory;
+
+  private java.util.concurrent.ScheduledExecutorService executor;
+
+  private static java.util.List<org.thingsboard.server.common.data.Device> runningDevices;
+
+  public org.thingsboard.server.service.rpc.DefaultWcsRpcService();
+    Code:
+       0: aload_0
+       1: invokespecial #6                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public void init();
+    Code:
+       0: invokestatic  #7                  // Method com/kuka/ecs/grpc/client/GrpcClientManager.getClientMap:()Ljava/util/Map;
+       3: getstatic     #8                  // Field com/kuka/ecs/grpc/GrpcClientCode.WCS:Lcom/kuka/ecs/grpc/GrpcClientCode;
+       6: invokevirtual #9                  // Method com/kuka/ecs/grpc/GrpcClientCode.name:()Ljava/lang/String;
+       9: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      14: checkcast     #11                 // class java/util/Map
+      17: astore_1
+      18: aload_0
+      19: aload_1
+      20: getstatic     #12                 // Field com/kuka/ecs/grpc/GrpcCallApiMethod.TRIGGER:Lcom/kuka/ecs/grpc/GrpcCallApiMethod;
+      23: invokevirtual #13                 // Method com/kuka/ecs/grpc/GrpcCallApiMethod.name:()Ljava/lang/String;
+      26: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      31: checkcast     #14                 // class com/kuka/ecs/grpc/trigger/EcsTriggerGrpc$EcsTriggerFutureStub
+      34: putfield      #15                 // Field triggerFutureStub:Lcom/kuka/ecs/grpc/trigger/EcsTriggerGrpc$EcsTriggerFutureStub;
+      37: aload_0
+      38: aload_1
+      39: getstatic     #16                 // Field com/kuka/ecs/grpc/GrpcCallApiMethod.CALLBACK:Lcom/kuka/ecs/grpc/GrpcCallApiMethod;
+      42: invokevirtual #13                 // Method com/kuka/ecs/grpc/GrpcCallApiMethod.name:()Ljava/lang/String;
+      45: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      50: checkcast     #17                 // class com/kuka/ecs/grpc/callback/EcsCallbackGrpc$EcsCallbackFutureStub
+      53: putfield      #18                 // Field callbackFutureStub:Lcom/kuka/ecs/grpc/callback/EcsCallbackGrpc$EcsCallbackFutureStub;
+      56: aload_0
+      57: aload_1
+      58: getstatic     #19                 // Field com/kuka/ecs/grpc/GrpcCallApiMethod.ROBOT_SERVICE:Lcom/kuka/ecs/grpc/GrpcCallApiMethod;
+      61: invokevirtual #13                 // Method com/kuka/ecs/grpc/GrpcCallApiMethod.name:()Ljava/lang/String;
+      64: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      69: checkcast     #20                 // class com/kuka/wcs/grpc/platform/robot/WcsRobotServiceGrpc$WcsRobotServiceFutureStub
+      72: putfield      #21                 // Field robotServiceFutureStub:Lcom/kuka/wcs/grpc/platform/robot/WcsRobotServiceGrpc$WcsRobotServiceFutureStub;
+      75: aload_0
+      76: aload_1
+      77: getstatic     #22                 // Field com/kuka/ecs/grpc/GrpcCallApiMethod.SUBSCRIBE_ROBOT_SERVICE:Lcom/kuka/ecs/grpc/GrpcCallApiMethod;
+      80: invokevirtual #13                 // Method com/kuka/ecs/grpc/GrpcCallApiMethod.name:()Ljava/lang/String;
+      83: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      88: checkcast     #23                 // class com/kuka/wcs/grpc/platform/robot/WcsRobotServiceGrpc$WcsRobotServiceStub
+      91: putfield      #24                 // Field robotServiceStub:Lcom/kuka/wcs/grpc/platform/robot/WcsRobotServiceGrpc$WcsRobotServiceStub;
+      94: aload_0
+      95: aload_1
+      96: getstatic     #25                 // Field com/kuka/ecs/grpc/GrpcCallApiMethod.SUBSCRIBE_MISSION_SERVICE:Lcom/kuka/ecs/grpc/GrpcCallApiMethod;
+      99: invokevirtual #13                 // Method com/kuka/ecs/grpc/GrpcCallApiMethod.name:()Ljava/lang/String;
+     102: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     107: checkcast     #26                 // class com/kuka/wcs/grpc/mission/WcsMissionServiceGrpc$WcsMissionServiceStub
+     110: putfield      #27                 // Field missionServiceStub:Lcom/kuka/wcs/grpc/mission/WcsMissionServiceGrpc$WcsMissionServiceStub;
+     113: aload_0
+     114: invokestatic  #28                 // Method java/util/concurrent/Executors.newSingleThreadScheduledExecutor:()Ljava/util/concurrent/ScheduledExecutorService;
+     117: putfield      #29                 // Field executor:Ljava/util/concurrent/ScheduledExecutorService;
+     120: aload_0
+     121: getfield      #29                 // Field executor:Ljava/util/concurrent/ScheduledExecutorService;
+     124: aload_0
+     125: invokedynamic #30,  0             // InvokeDynamic #0:run:(Lorg/thingsboard/server/service/rpc/DefaultWcsRpcService;)Ljava/lang/Runnable;
+     130: aconst_null
+     131: iconst_1
+     132: invokestatic  #31                 // Method org/springframework/scheduling/support/TaskUtils.decorateTaskWithErrorHandler:(Ljava/lang/Runnable;Lorg/springframework/util/ErrorHandler;Z)Lorg/springframework/scheduling/support/DelegatingErrorHandlingRunnable;
+     135: ldc2_w        #32                 // long 3000l
+     138: ldc2_w        #32                 // long 3000l
+     141: getstatic     #34                 // Field java/util/concurrent/TimeUnit.MILLISECONDS:Ljava/util/concurrent/TimeUnit;
+     144: invokeinterface #35,  7           // InterfaceMethod java/util/concurrent/ScheduledExecutorService.scheduleWithFixedDelay:(Ljava/lang/Runnable;JJLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture;
+     149: pop
+     150: return
+
+  public void manualInformList(java.util.List<com.kuka.ecs.grpc.req.DeviceChangeInfoBuilder>);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #36                 // Method assembleChangeListReq:(Ljava/util/List;)Lcom/kuka/ecs/grpc/trigger/EcsDeviceChangeListRequest;
+       5: astore_2
+       6: aload_2
+       7: ifnonnull     11
+      10: return
+      11: aload_0
+      12: getfield      #15                 // Field triggerFutureStub:Lcom/kuka/ecs/grpc/trigger/EcsTriggerGrpc$EcsTriggerFutureStub;
+      15: aload_2
+      16: invokevirtual #37                 // Method com/kuka/ecs/grpc/trigger/EcsTriggerGrpc$EcsTriggerFutureStub.manualInformList:(Lcom/kuka/ecs/grpc/trigger/EcsDeviceChangeListRequest;)Lcom/google/common/util/concurrent/ListenableFuture;
+      19: astore_3
+      20: aload_3
+      21: ldc2_w        #38                 // long 10l
+      24: getstatic     #40                 // Field java/util/concurrent/TimeUnit.SECONDS:Ljava/util/concurrent/TimeUnit;
+      27: invokeinterface #41,  4           // InterfaceMethod com/google/common/util/concurrent/ListenableFuture.get:(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;
+      32: checkcast     #42                 // class com/kuka/ecs/grpc/trigger/EcsTriggerReply
+      35: astore        4
+      37: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+      40: ldc           #43                 // String manual sync replay: {}
+      42: getstatic     #44                 // Field org/thingsboard/common/util/GsonUtil.GSON:Lcom/google/gson/Gson;
+      45: aload         4
+      47: invokevirtual #45                 // Method com/google/gson/Gson.toJson:(Ljava/lang/Object;)Ljava/lang/String;
+      50: invokeinterface #46,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      55: goto          83
+      58: astore        4
+      60: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+      63: aload         4
+      65: invokevirtual #48                 // Method java/lang/Exception.getMessage:()Ljava/lang/String;
+      68: invokeinterface #49,  2           // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;)V
+      73: new           #50                 // class java/lang/RuntimeException
+      76: dup
+      77: aload         4
+      79: invokespecial #51                 // Method java/lang/RuntimeException."<init>":(Ljava/lang/Throwable;)V
+      82: athrow
+      83: return
+    Exception table:
+       from    to  target type
+          20    55    58   Class java/lang/Exception
+
+  private com.kuka.ecs.grpc.trigger.EcsDeviceChangeListRequest assembleChangeListReq(java.util.List<com.kuka.ecs.grpc.req.DeviceChangeInfoBuilder>);
+    Code:
+       0: aload_1
+       1: invokestatic  #52                 // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+       4: ifeq          9
+       7: aconst_null
+       8: areturn
+       9: aload_1
+      10: invokeinterface #53,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      15: invokedynamic #54,  0             // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+      20: invokeinterface #55,  2           // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      25: invokestatic  #56                 // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+      28: invokeinterface #57,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+      33: checkcast     #58                 // class java/util/List
+      36: astore_2
+      37: invokestatic  #59                 // Method java/util/UUID.randomUUID:()Ljava/util/UUID;
+      40: invokevirtual #60                 // Method java/util/UUID.toString:()Ljava/lang/String;
+      43: astore_3
+      44: invokestatic  #61                 // Method com/kuka/ecs/grpc/common/RequestHeader.newBuilder:()Lcom/kuka/ecs/grpc/common/RequestHeader$Builder;
+      47: aload_3
+      48: invokevirtual #62                 // Method com/kuka/ecs/grpc/common/RequestHeader$Builder.setRequestId:(Ljava/lang/String;)Lcom/kuka/ecs/grpc/common/RequestHeader$Builder;
+      51: invokevirtual #63                 // Method com/kuka/ecs/grpc/common/RequestHeader$Builder.build:()Lcom/kuka/ecs/grpc/common/RequestHeader;
+      54: astore        4
+      56: invokestatic  #64                 // Method com/kuka/ecs/grpc/trigger/EcsDeviceChangeListRequest.newBuilder:()Lcom/kuka/ecs/grpc/trigger/EcsDeviceChangeListRequest$Builder;
+      59: aload         4
+      61: invokevirtual #65                 // Method com/kuka/ecs/grpc/trigger/EcsDeviceChangeListRequest$Builder.setHeader:(Lcom/kuka/ecs/grpc/common/RequestHeader;)Lcom/kuka/ecs/grpc/trigger/EcsDeviceChangeListRequest$Builder;
+      64: aload_2
+      65: invokevirtual #66                 // Method com/kuka/ecs/grpc/trigger/EcsDeviceChangeListRequest$Builder.addAllDeviceChangeInfo:(Ljava/lang/Iterable;)Lcom/kuka/ecs/grpc/trigger/EcsDeviceChangeListRequest$Builder;
+      68: invokevirtual #67                 // Method com/kuka/ecs/grpc/trigger/EcsDeviceChangeListRequest$Builder.build:()Lcom/kuka/ecs/grpc/trigger/EcsDeviceChangeListRequest;
+      71: astore        5
+      73: aload         5
+      75: areturn
+
+  public void informList(java.util.List<com.kuka.ecs.grpc.req.DeviceChangeInfoBuilder>);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #36                 // Method assembleChangeListReq:(Ljava/util/List;)Lcom/kuka/ecs/grpc/trigger/EcsDeviceChangeListRequest;
+       5: astore_2
+       6: aload_2
+       7: ifnonnull     11
+      10: return
+      11: iconst_1
+      12: istore_3
+      13: iload_3
+      14: iconst_4
+      15: if_icmpge     210
+      18: aload_0
+      19: getfield      #15                 // Field triggerFutureStub:Lcom/kuka/ecs/grpc/trigger/EcsTriggerGrpc$EcsTriggerFutureStub;
+      22: aload_2
+      23: invokevirtual #68                 // Method com/kuka/ecs/grpc/trigger/EcsTriggerGrpc$EcsTriggerFutureStub.informList:(Lcom/kuka/ecs/grpc/trigger/EcsDeviceChangeListRequest;)Lcom/google/common/util/concurrent/ListenableFuture;
+      26: astore        4
+      28: aload         4
+      30: ldc2_w        #38                 // long 10l
+      33: getstatic     #40                 // Field java/util/concurrent/TimeUnit.SECONDS:Ljava/util/concurrent/TimeUnit;
+      36: invokeinterface #41,  4           // InterfaceMethod com/google/common/util/concurrent/ListenableFuture.get:(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;
+      41: checkcast     #42                 // class com/kuka/ecs/grpc/trigger/EcsTriggerReply
+      44: astore        5
+      46: aload         5
+      48: ifnonnull     68
+      51: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+      54: ldc           #69                 // String EcsDeviceChange inform WCS return null,times:{}
+      56: iload_3
+      57: invokestatic  #70                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      60: invokeinterface #71,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;)V
+      65: goto          204
+      68: getstatic     #72                 // Field com/kuka/ecs/grpc/common/ResponseStatus.SUCCESS:Lcom/kuka/ecs/grpc/common/ResponseStatus;
+      71: invokevirtual #73                 // Method com/kuka/ecs/grpc/common/ResponseStatus.getCode:()I
+      74: aload         5
+      76: invokevirtual #74                 // Method com/kuka/ecs/grpc/trigger/EcsTriggerReply.getBody:()Lcom/kuka/ecs/grpc/trigger/ResponseBody;
+      79: invokevirtual #75                 // Method com/kuka/ecs/grpc/trigger/ResponseBody.getStatus:()I
+      82: if_icmpeq     127
+      85: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+      88: ldc           #76                 // String EcsDeviceChange inform WCS, WCS return FAILURE,resp:{},deviceChangeInfoBuilders:{},times:{}
+      90: iconst_3
+      91: anewarray     #77                 // class java/lang/Object
+      94: dup
+      95: iconst_0
+      96: getstatic     #44                 // Field org/thingsboard/common/util/GsonUtil.GSON:Lcom/google/gson/Gson;
+      99: aload         5
+     101: invokevirtual #45                 // Method com/google/gson/Gson.toJson:(Ljava/lang/Object;)Ljava/lang/String;
+     104: aastore
+     105: dup
+     106: iconst_1
+     107: aload_1
+     108: invokestatic  #78                 // Method org/thingsboard/common/util/JacksonUtil.toString:(Ljava/lang/Object;)Ljava/lang/String;
+     111: aastore
+     112: dup
+     113: iconst_2
+     114: iload_3
+     115: invokestatic  #70                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     118: aastore
+     119: invokeinterface #79,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;[Ljava/lang/Object;)V
+     124: goto          166
+     127: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+     130: ldc           #80                 // String EcsDeviceChange inform WCS, WCS return SUCCESS,resp:{},deviceChangeInfoBuilders:{},times:{}
+     132: iconst_3
+     133: anewarray     #77                 // class java/lang/Object
+     136: dup
+     137: iconst_0
+     138: getstatic     #44                 // Field org/thingsboard/common/util/GsonUtil.GSON:Lcom/google/gson/Gson;
+     141: aload         5
+     143: invokevirtual #45                 // Method com/google/gson/Gson.toJson:(Ljava/lang/Object;)Ljava/lang/String;
+     146: aastore
+     147: dup
+     148: iconst_1
+     149: aload_1
+     150: invokestatic  #78                 // Method org/thingsboard/common/util/JacksonUtil.toString:(Ljava/lang/Object;)Ljava/lang/String;
+     153: aastore
+     154: dup
+     155: iconst_2
+     156: iload_3
+     157: invokestatic  #70                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     160: aastore
+     161: invokeinterface #81,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+     166: goto          210
+     169: astore        4
+     171: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+     174: ldc           #82                 // String EcsDeviceChange inform WCS occurred exception,deviceChangeInfoBuilder:{},times:{}
+     176: iconst_3
+     177: anewarray     #77                 // class java/lang/Object
+     180: dup
+     181: iconst_0
+     182: aload_1
+     183: invokestatic  #78                 // Method org/thingsboard/common/util/JacksonUtil.toString:(Ljava/lang/Object;)Ljava/lang/String;
+     186: aastore
+     187: dup
+     188: iconst_1
+     189: iload_3
+     190: invokestatic  #70                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     193: aastore
+     194: dup
+     195: iconst_2
+     196: aload         4
+     198: aastore
+     199: invokeinterface #79,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;[Ljava/lang/Object;)V
+     204: iinc          3, 1
+     207: goto          13
+     210: return
+    Exception table:
+       from    to  target type
+          18    65   169   Class java/lang/Exception
+          68   166   169   Class java/lang/Exception
+
+  public void createDeviceInformWCS(org.thingsboard.server.common.data.Device);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #83                 // Method createDeviceChangeInfoBuilders:(Lorg/thingsboard/server/common/data/Device;)Ljava/util/List;
+       5: astore_2
+       6: aload_0
+       7: aload_2
+       8: invokevirtual #84                 // Method informList:(Ljava/util/List;)V
+      11: return
+
+  public java.util.List<com.kuka.ecs.grpc.req.DeviceChangeInfoBuilder> createDeviceChangeInfoBuilders(org.thingsboard.server.common.data.Device);
+    Code:
+       0: new           #85                 // class java/util/ArrayList
+       3: dup
+       4: invokespecial #86                 // Method java/util/ArrayList."<init>":()V
+       7: astore_2
+       8: aload_1
+       9: invokevirtual #87                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+      12: invokevirtual #88                 // Method org/thingsboard/server/common/data/device/data/DeviceData.getTransportConfiguration:()Lorg/thingsboard/server/common/data/device/data/DeviceTransportConfiguration;
+      15: invokeinterface #89,  1           // InterfaceMethod org/thingsboard/server/common/data/device/data/DeviceTransportConfiguration.getType:()Lorg/thingsboard/server/common/data/DeviceTransportType;
+      20: invokestatic  #90                 // Method org/thingsboard/server/common/data/DeviceTransportType.isV2GroupType:(Lorg/thingsboard/server/common/data/DeviceTransportType;)Z
+      23: ifeq          51
+      26: aload_1
+      27: invokevirtual #87                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+      30: invokevirtual #91                 // Method org/thingsboard/server/common/data/device/data/DeviceData.getGroupsJsonNode:()Lcom/fasterxml/jackson/databind/JsonNode;
+      33: invokevirtual #92                 // Method com/fasterxml/jackson/databind/JsonNode.elements:()Ljava/util/Iterator;
+      36: aload_1
+      37: aload_2
+      38: invokedynamic #93,  0             // InvokeDynamic #2:accept:(Lorg/thingsboard/server/common/data/Device;Ljava/util/List;)Ljava/util/function/Consumer;
+      43: invokeinterface #94,  2           // InterfaceMethod java/util/Iterator.forEachRemaining:(Ljava/util/function/Consumer;)V
+      48: goto          95
+      51: aload_1
+      52: iconst_4
+      53: anewarray     #95                 // class org/thingsboard/server/common/data/DeviceTransportType
+      56: dup
+      57: iconst_0
+      58: getstatic     #96                 // Field org/thingsboard/server/common/data/DeviceTransportType.HTTP:Lorg/thingsboard/server/common/data/DeviceTransportType;
+      61: aastore
+      62: dup
+      63: iconst_1
+      64: getstatic     #97                 // Field org/thingsboard/server/common/data/DeviceTransportType.TCP:Lorg/thingsboard/server/common/data/DeviceTransportType;
+      67: aastore
+      68: dup
+      69: iconst_2
+      70: getstatic     #98                 // Field org/thingsboard/server/common/data/DeviceTransportType.UDP:Lorg/thingsboard/server/common/data/DeviceTransportType;
+      73: aastore
+      74: dup
+      75: iconst_3
+      76: getstatic     #99                 // Field org/thingsboard/server/common/data/DeviceTransportType.E82:Lorg/thingsboard/server/common/data/DeviceTransportType;
+      79: aastore
+      80: invokestatic  #100                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+      83: invokestatic  #101                // Method org/thingsboard/server/common/data/rule/RuleChainVersion.checkTransportType:(Lorg/thingsboard/server/common/data/Device;Ljava/util/List;)Z
+      86: ifeq          95
+      89: aload_0
+      90: aload_1
+      91: aload_2
+      92: invokespecial #102                // Method buildChangeInfosForV1DeviceCreate:(Lorg/thingsboard/server/common/data/Device;Ljava/util/List;)V
+      95: aload_2
+      96: areturn
+
+  private void buildChangeInfosForV1DeviceCreate(org.thingsboard.server.common.data.Device, java.util.List<com.kuka.ecs.grpc.req.DeviceChangeInfoBuilder>);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #103                // Method getConnectorOrDeviceJsonNode:(Lorg/thingsboard/server/common/data/Device;)Lcom/fasterxml/jackson/databind/JsonNode;
+       5: astore_3
+       6: aload_3
+       7: ifnull        90
+      10: aload_3
+      11: ldc           #104                // String groups
+      13: invokevirtual #105                // Method com/fasterxml/jackson/databind/JsonNode.has:(Ljava/lang/String;)Z
+      16: ifeq          90
+      19: aload_3
+      20: ldc           #104                // String groups
+      22: invokevirtual #106                // Method com/fasterxml/jackson/databind/JsonNode.get:(Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonNode;
+      25: iconst_0
+      26: invokevirtual #107                // Method com/fasterxml/jackson/databind/JsonNode.get:(I)Lcom/fasterxml/jackson/databind/JsonNode;
+      29: ldc           #108                // String eventAttributes
+      31: invokevirtual #106                // Method com/fasterxml/jackson/databind/JsonNode.get:(Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonNode;
+      34: new           #109                // class org/thingsboard/server/service/rpc/DefaultWcsRpcService$1
+      37: dup
+      38: aload_0
+      39: invokespecial #110                // Method org/thingsboard/server/service/rpc/DefaultWcsRpcService$1."<init>":(Lorg/thingsboard/server/service/rpc/DefaultWcsRpcService;)V
+      42: invokestatic  #111                // Method org/thingsboard/common/util/JacksonUtil.convertValue:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/type/TypeReference;)Ljava/lang/Object;
+      45: checkcast     #58                 // class java/util/List
+      48: astore        4
+      50: aload         4
+      52: invokeinterface #53,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      57: aload_1
+      58: invokedynamic #112,  0            // InvokeDynamic #3:apply:(Lorg/thingsboard/server/common/data/Device;)Ljava/util/function/Function;
+      63: invokeinterface #55,  2           // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      68: invokestatic  #56                 // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+      71: invokeinterface #57,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+      76: checkcast     #58                 // class java/util/List
+      79: astore        5
+      81: aload_2
+      82: aload         5
+      84: invokeinterface #113,  2          // InterfaceMethod java/util/List.addAll:(Ljava/util/Collection;)Z
+      89: pop
+      90: return
+
+  private com.fasterxml.jackson.databind.JsonNode getConnectorOrDeviceJsonNode(org.thingsboard.server.common.data.Device);
+    Code:
+       0: aconst_null
+       1: astore_2
+       2: aload_1
+       3: getstatic     #96                 // Field org/thingsboard/server/common/data/DeviceTransportType.HTTP:Lorg/thingsboard/server/common/data/DeviceTransportType;
+       6: invokestatic  #114                // Method java/util/Collections.singletonList:(Ljava/lang/Object;)Ljava/util/List;
+       9: invokestatic  #101                // Method org/thingsboard/server/common/data/rule/RuleChainVersion.checkTransportType:(Lorg/thingsboard/server/common/data/Device;Ljava/util/List;)Z
+      12: ifeq          31
+      15: aload_1
+      16: invokevirtual #87                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+      19: invokevirtual #115                // Method org/thingsboard/server/common/data/device/data/DeviceData.getConnector:()Lcom/fasterxml/jackson/databind/JsonNode;
+      22: ldc           #116                // String device
+      24: invokevirtual #106                // Method com/fasterxml/jackson/databind/JsonNode.get:(Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonNode;
+      27: astore_2
+      28: goto          71
+      31: aload_1
+      32: iconst_3
+      33: anewarray     #95                 // class org/thingsboard/server/common/data/DeviceTransportType
+      36: dup
+      37: iconst_0
+      38: getstatic     #97                 // Field org/thingsboard/server/common/data/DeviceTransportType.TCP:Lorg/thingsboard/server/common/data/DeviceTransportType;
+      41: aastore
+      42: dup
+      43: iconst_1
+      44: getstatic     #98                 // Field org/thingsboard/server/common/data/DeviceTransportType.UDP:Lorg/thingsboard/server/common/data/DeviceTransportType;
+      47: aastore
+      48: dup
+      49: iconst_2
+      50: getstatic     #99                 // Field org/thingsboard/server/common/data/DeviceTransportType.E82:Lorg/thingsboard/server/common/data/DeviceTransportType;
+      53: aastore
+      54: invokestatic  #100                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+      57: invokestatic  #101                // Method org/thingsboard/server/common/data/rule/RuleChainVersion.checkTransportType:(Lorg/thingsboard/server/common/data/Device;Ljava/util/List;)Z
+      60: ifeq          71
+      63: aload_1
+      64: invokevirtual #87                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+      67: invokevirtual #115                // Method org/thingsboard/server/common/data/device/data/DeviceData.getConnector:()Lcom/fasterxml/jackson/databind/JsonNode;
+      70: astore_2
+      71: aload_2
+      72: areturn
+
+  public void updateDeviceInformWCS(org.thingsboard.server.common.data.Device, org.thingsboard.server.common.data.Device);
+    Code:
+       0: new           #85                 // class java/util/ArrayList
+       3: dup
+       4: invokespecial #86                 // Method java/util/ArrayList."<init>":()V
+       7: astore_3
+       8: iconst_0
+       9: istore        4
+      11: aload_1
+      12: invokevirtual #117                // Method org/thingsboard/server/common/data/Device.getName:()Ljava/lang/String;
+      15: aload_2
+      16: invokevirtual #117                // Method org/thingsboard/server/common/data/Device.getName:()Ljava/lang/String;
+      19: invokestatic  #118                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      22: ifne          65
+      25: aload_3
+      26: new           #119                // class com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder
+      29: dup
+      30: getstatic     #120                // Field com/kuka/ecs/grpc/req/ChangeTypeEnum.MAIN_DEVICE:Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;
+      33: aload_1
+      34: invokevirtual #121                // Method org/thingsboard/server/common/data/Device.getId:()Lorg/thingsboard/server/common/data/id/DeviceId;
+      37: invokevirtual #122                // Method org/thingsboard/server/common/data/id/DeviceId.toString:()Ljava/lang/String;
+      40: aload_1
+      41: invokevirtual #117                // Method org/thingsboard/server/common/data/Device.getName:()Ljava/lang/String;
+      44: aconst_null
+      45: aconst_null
+      46: aconst_null
+      47: aconst_null
+      48: iconst_2
+      49: iconst_0
+      50: iconst_0
+      51: aconst_null
+      52: aconst_null
+      53: invokespecial #123                // Method com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder."<init>":(Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;)V
+      56: invokeinterface #124,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      61: pop
+      62: iconst_1
+      63: istore        4
+      65: aload_1
+      66: invokevirtual #87                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+      69: invokevirtual #88                 // Method org/thingsboard/server/common/data/device/data/DeviceData.getTransportConfiguration:()Lorg/thingsboard/server/common/data/device/data/DeviceTransportConfiguration;
+      72: invokeinterface #89,  1           // InterfaceMethod org/thingsboard/server/common/data/device/data/DeviceTransportConfiguration.getType:()Lorg/thingsboard/server/common/data/DeviceTransportType;
+      77: invokestatic  #90                 // Method org/thingsboard/server/common/data/DeviceTransportType.isV2GroupType:(Lorg/thingsboard/server/common/data/DeviceTransportType;)Z
+      80: ifeq          941
+      83: aload_2
+      84: invokevirtual #87                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+      87: invokevirtual #91                 // Method org/thingsboard/server/common/data/device/data/DeviceData.getGroupsJsonNode:()Lcom/fasterxml/jackson/databind/JsonNode;
+      90: new           #125                // class org/thingsboard/server/service/rpc/DefaultWcsRpcService$2
+      93: dup
+      94: aload_0
+      95: invokespecial #126                // Method org/thingsboard/server/service/rpc/DefaultWcsRpcService$2."<init>":(Lorg/thingsboard/server/service/rpc/DefaultWcsRpcService;)V
+      98: invokestatic  #111                // Method org/thingsboard/common/util/JacksonUtil.convertValue:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/type/TypeReference;)Ljava/lang/Object;
+     101: checkcast     #58                 // class java/util/List
+     104: astore        5
+     106: aload_1
+     107: invokevirtual #87                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+     110: invokevirtual #91                 // Method org/thingsboard/server/common/data/device/data/DeviceData.getGroupsJsonNode:()Lcom/fasterxml/jackson/databind/JsonNode;
+     113: new           #127                // class org/thingsboard/server/service/rpc/DefaultWcsRpcService$3
+     116: dup
+     117: aload_0
+     118: invokespecial #128                // Method org/thingsboard/server/service/rpc/DefaultWcsRpcService$3."<init>":(Lorg/thingsboard/server/service/rpc/DefaultWcsRpcService;)V
+     121: invokestatic  #111                // Method org/thingsboard/common/util/JacksonUtil.convertValue:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/type/TypeReference;)Ljava/lang/Object;
+     124: checkcast     #58                 // class java/util/List
+     127: astore        6
+     129: aload         5
+     131: invokestatic  #52                 // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+     134: ifeq          162
+     137: aload         6
+     139: invokestatic  #52                 // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+     142: ifne          162
+     145: aload         6
+     147: aload_1
+     148: aload_3
+     149: invokedynamic #129,  0            // InvokeDynamic #4:accept:(Lorg/thingsboard/server/common/data/Device;Ljava/util/List;)Ljava/util/function/Consumer;
+     154: invokeinterface #130,  2          // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+     159: goto          938
+     162: aload         5
+     164: invokestatic  #52                 // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+     167: ifne          916
+     170: aload         6
+     172: invokestatic  #52                 // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+     175: ifne          916
+     178: aload         5
+     180: invokeinterface #53,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     185: invokedynamic #131,  0            // InvokeDynamic #5:apply:()Ljava/util/function/Function;
+     190: invokeinterface #132,  2          // InterfaceMethod java/util/stream/Stream.flatMap:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+     195: invokestatic  #133                // Method java/util/stream/Collectors.toSet:()Ljava/util/stream/Collector;
+     198: invokeinterface #57,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     203: checkcast     #134                // class java/util/Set
+     206: astore        7
+     208: aload         6
+     210: invokeinterface #53,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     215: invokedynamic #135,  0            // InvokeDynamic #6:apply:()Ljava/util/function/Function;
+     220: invokeinterface #132,  2          // InterfaceMethod java/util/stream/Stream.flatMap:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+     225: invokestatic  #133                // Method java/util/stream/Collectors.toSet:()Ljava/util/stream/Collector;
+     228: invokeinterface #57,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     233: checkcast     #134                // class java/util/Set
+     236: astore        8
+     238: aload         7
+     240: aload         8
+     242: invokestatic  #136                // Method org/apache/commons/collections/CollectionUtils.union:(Ljava/util/Collection;Ljava/util/Collection;)Ljava/util/Collection;
+     245: checkcast     #85                 // class java/util/ArrayList
+     248: astore        9
+     250: aload         7
+     252: invokeinterface #137,  1          // InterfaceMethod java/util/Set.stream:()Ljava/util/stream/Stream;
+     257: invokedynamic #138,  0            // InvokeDynamic #7:apply:()Ljava/util/function/Function;
+     262: invokedynamic #139,  0            // InvokeDynamic #8:apply:()Ljava/util/function/Function;
+     267: invokedynamic #140,  0            // InvokeDynamic #9:apply:()Ljava/util/function/BinaryOperator;
+     272: invokestatic  #141                // Method java/util/stream/Collectors.toMap:(Ljava/util/function/Function;Ljava/util/function/Function;Ljava/util/function/BinaryOperator;)Ljava/util/stream/Collector;
+     275: invokeinterface #57,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     280: checkcast     #11                 // class java/util/Map
+     283: astore        10
+     285: aload         8
+     287: invokeinterface #137,  1          // InterfaceMethod java/util/Set.stream:()Ljava/util/stream/Stream;
+     292: invokedynamic #138,  0            // InvokeDynamic #7:apply:()Ljava/util/function/Function;
+     297: invokedynamic #142,  0            // InvokeDynamic #10:apply:()Ljava/util/function/Function;
+     302: invokedynamic #143,  0            // InvokeDynamic #11:apply:()Ljava/util/function/BinaryOperator;
+     307: invokestatic  #141                // Method java/util/stream/Collectors.toMap:(Ljava/util/function/Function;Ljava/util/function/Function;Ljava/util/function/BinaryOperator;)Ljava/util/stream/Collector;
+     310: invokeinterface #57,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     315: checkcast     #11                 // class java/util/Map
+     318: astore        11
+     320: aload         6
+     322: invokeinterface #53,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     327: invokedynamic #144,  0            // InvokeDynamic #12:apply:()Ljava/util/function/Function;
+     332: invokedynamic #145,  0            // InvokeDynamic #13:apply:()Ljava/util/function/Function;
+     337: invokestatic  #146                // Method java/util/stream/Collectors.toMap:(Ljava/util/function/Function;Ljava/util/function/Function;)Ljava/util/stream/Collector;
+     340: invokeinterface #57,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     345: checkcast     #11                 // class java/util/Map
+     348: astore        12
+     350: aload         5
+     352: invokeinterface #53,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     357: invokedynamic #144,  0            // InvokeDynamic #12:apply:()Ljava/util/function/Function;
+     362: invokedynamic #145,  0            // InvokeDynamic #13:apply:()Ljava/util/function/Function;
+     367: invokestatic  #146                // Method java/util/stream/Collectors.toMap:(Ljava/util/function/Function;Ljava/util/function/Function;)Ljava/util/stream/Collector;
+     370: invokeinterface #57,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     375: checkcast     #11                 // class java/util/Map
+     378: astore        13
+     380: aload         9
+     382: invokeinterface #147,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     387: astore        14
+     389: aload         14
+     391: invokeinterface #148,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     396: ifeq          913
+     399: aload         14
+     401: invokeinterface #149,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     406: checkcast     #150                // class org/thingsboard/server/common/data/device/connector/modbus/EventAttribute
+     409: astore        15
+     411: aload         11
+     413: aload         15
+     415: invokevirtual #151                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventId:()Ljava/lang/String;
+     418: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     423: checkcast     #150                // class org/thingsboard/server/common/data/device/connector/modbus/EventAttribute
+     426: astore        16
+     428: aload         10
+     430: aload         15
+     432: invokevirtual #151                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventId:()Ljava/lang/String;
+     435: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     440: checkcast     #150                // class org/thingsboard/server/common/data/device/connector/modbus/EventAttribute
+     443: astore        17
+     445: aload         16
+     447: ifnull        564
+     450: aload         17
+     452: ifnonnull     564
+     455: aload         16
+     457: invokevirtual #151                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventId:()Ljava/lang/String;
+     460: astore        18
+     462: aload_1
+     463: aload         12
+     465: aload         16
+     467: invokevirtual #152                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getIndex:()Ljava/lang/Integer;
+     470: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     475: checkcast     #153                // class java/lang/String
+     478: aload         16
+     480: invokevirtual #154                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventName:()Ljava/lang/String;
+     483: invokevirtual #155                // Method org/thingsboard/server/common/data/Device.getV2DeviceEventName:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+     486: astore        19
+     488: aload         16
+     490: invokevirtual #156                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.isReceiveEvent:()Z
+     493: ifeq          500
+     496: iconst_1
+     497: goto          501
+     500: iconst_2
+     501: istore        20
+     503: new           #119                // class com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder
+     506: dup
+     507: getstatic     #157                // Field com/kuka/ecs/grpc/req/ChangeTypeEnum.EVENT:Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;
+     510: aload_1
+     511: invokevirtual #121                // Method org/thingsboard/server/common/data/Device.getId:()Lorg/thingsboard/server/common/data/id/DeviceId;
+     514: invokevirtual #122                // Method org/thingsboard/server/common/data/id/DeviceId.toString:()Ljava/lang/String;
+     517: aload_1
+     518: invokevirtual #117                // Method org/thingsboard/server/common/data/Device.getName:()Ljava/lang/String;
+     521: aload         18
+     523: aload         19
+     525: aconst_null
+     526: aconst_null
+     527: iconst_1
+     528: iload         20
+     530: aload         16
+     532: invokevirtual #152                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getIndex:()Ljava/lang/Integer;
+     535: invokevirtual #158                // Method java/lang/Integer.intValue:()I
+     538: aload         16
+     540: invokevirtual #159                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventCode:()Ljava/lang/String;
+     543: aload_1
+     544: invokevirtual #160                // Method org/thingsboard/server/common/data/Device.getDeviceType:()Ljava/lang/String;
+     547: invokespecial #123                // Method com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder."<init>":(Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;)V
+     550: astore        21
+     552: aload_3
+     553: aload         21
+     555: invokeinterface #124,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     560: pop
+     561: goto          910
+     564: aload         16
+     566: ifnonnull     680
+     569: aload         17
+     571: ifnull        680
+     574: aload         17
+     576: invokevirtual #151                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventId:()Ljava/lang/String;
+     579: astore        18
+     581: aload_1
+     582: aload         13
+     584: aload         17
+     586: invokevirtual #152                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getIndex:()Ljava/lang/Integer;
+     589: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     594: checkcast     #153                // class java/lang/String
+     597: aload         17
+     599: invokevirtual #154                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventName:()Ljava/lang/String;
+     602: invokevirtual #155                // Method org/thingsboard/server/common/data/Device.getV2DeviceEventName:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+     605: astore        19
+     607: aload         17
+     609: invokevirtual #156                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.isReceiveEvent:()Z
+     612: ifeq          619
+     615: iconst_1
+     616: goto          620
+     619: iconst_2
+     620: istore        20
+     622: new           #119                // class com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder
+     625: dup
+     626: getstatic     #157                // Field com/kuka/ecs/grpc/req/ChangeTypeEnum.EVENT:Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;
+     629: aload_2
+     630: invokevirtual #121                // Method org/thingsboard/server/common/data/Device.getId:()Lorg/thingsboard/server/common/data/id/DeviceId;
+     633: invokevirtual #161                // Method org/thingsboard/server/common/data/id/DeviceId.getId:()Ljava/util/UUID;
+     636: invokevirtual #60                 // Method java/util/UUID.toString:()Ljava/lang/String;
+     639: aconst_null
+     640: aload         18
+     642: aload         19
+     644: aconst_null
+     645: aconst_null
+     646: iconst_3
+     647: iload         20
+     649: aload         17
+     651: invokevirtual #152                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getIndex:()Ljava/lang/Integer;
+     654: invokevirtual #158                // Method java/lang/Integer.intValue:()I
+     657: aload         17
+     659: invokevirtual #159                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventCode:()Ljava/lang/String;
+     662: aconst_null
+     663: invokespecial #123                // Method com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder."<init>":(Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;)V
+     666: astore        21
+     668: aload_3
+     669: aload         21
+     671: invokeinterface #124,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     676: pop
+     677: goto          910
+     680: aload         16
+     682: ifnull        910
+     685: aload         16
+     687: invokevirtual #151                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventId:()Ljava/lang/String;
+     690: astore        18
+     692: aload_1
+     693: aload         12
+     695: aload         16
+     697: invokevirtual #152                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getIndex:()Ljava/lang/Integer;
+     700: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     705: checkcast     #153                // class java/lang/String
+     708: aload         16
+     710: invokevirtual #154                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventName:()Ljava/lang/String;
+     713: invokevirtual #155                // Method org/thingsboard/server/common/data/Device.getV2DeviceEventName:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+     716: astore        19
+     718: aload         16
+     720: invokevirtual #156                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.isReceiveEvent:()Z
+     723: ifeq          730
+     726: iconst_1
+     727: goto          731
+     730: iconst_2
+     731: istore        20
+     733: aload         17
+     735: invokevirtual #162                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getStatus:()Lorg/thingsboard/server/common/data/device/connector/modbus/AttributeStatus;
+     738: getstatic     #163                // Field org/thingsboard/server/common/data/device/connector/modbus/AttributeStatus.NEW:Lorg/thingsboard/server/common/data/device/connector/modbus/AttributeStatus;
+     741: if_acmpne     798
+     744: aload_3
+     745: new           #119                // class com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder
+     748: dup
+     749: getstatic     #157                // Field com/kuka/ecs/grpc/req/ChangeTypeEnum.EVENT:Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;
+     752: aload_1
+     753: invokevirtual #121                // Method org/thingsboard/server/common/data/Device.getId:()Lorg/thingsboard/server/common/data/id/DeviceId;
+     756: invokevirtual #122                // Method org/thingsboard/server/common/data/id/DeviceId.toString:()Ljava/lang/String;
+     759: aload_1
+     760: invokevirtual #117                // Method org/thingsboard/server/common/data/Device.getName:()Ljava/lang/String;
+     763: aload         18
+     765: aload         19
+     767: aconst_null
+     768: aconst_null
+     769: iconst_1
+     770: iload         20
+     772: aload         16
+     774: invokevirtual #152                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getIndex:()Ljava/lang/Integer;
+     777: invokevirtual #158                // Method java/lang/Integer.intValue:()I
+     780: aload         16
+     782: invokevirtual #159                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventCode:()Ljava/lang/String;
+     785: aload_1
+     786: invokevirtual #160                // Method org/thingsboard/server/common/data/Device.getDeviceType:()Ljava/lang/String;
+     789: invokespecial #123                // Method com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder."<init>":(Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;)V
+     792: invokeinterface #124,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     797: pop
+     798: aload         12
+     800: aload         16
+     802: invokevirtual #152                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getIndex:()Ljava/lang/Integer;
+     805: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     810: aload         13
+     812: aload         17
+     814: invokevirtual #152                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getIndex:()Ljava/lang/Integer;
+     817: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     822: invokestatic  #118                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     825: ifne          832
+     828: iconst_1
+     829: goto          833
+     832: iconst_0
+     833: istore        21
+     835: aload         16
+     837: invokevirtual #154                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventName:()Ljava/lang/String;
+     840: aload         17
+     842: invokevirtual #154                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventName:()Ljava/lang/String;
+     845: invokestatic  #118                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     848: ifne          855
+     851: iconst_1
+     852: goto          856
+     855: iconst_0
+     856: istore        22
+     858: iload         4
+     860: ifne          873
+     863: iload         21
+     865: ifne          873
+     868: iload         22
+     870: ifeq          910
+     873: aload_3
+     874: new           #119                // class com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder
+     877: dup
+     878: getstatic     #157                // Field com/kuka/ecs/grpc/req/ChangeTypeEnum.EVENT:Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;
+     881: aload_1
+     882: invokevirtual #121                // Method org/thingsboard/server/common/data/Device.getId:()Lorg/thingsboard/server/common/data/id/DeviceId;
+     885: invokevirtual #122                // Method org/thingsboard/server/common/data/id/DeviceId.toString:()Ljava/lang/String;
+     888: aconst_null
+     889: aload         18
+     891: aload         19
+     893: aconst_null
+     894: aconst_null
+     895: iconst_2
+     896: iload         20
+     898: iconst_0
+     899: aconst_null
+     900: aconst_null
+     901: invokespecial #123                // Method com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder."<init>":(Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;)V
+     904: invokeinterface #124,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     909: pop
+     910: goto          389
+     913: goto          938
+     916: aload         5
+     918: invokestatic  #52                 // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+     921: ifne          938
+     924: aload         5
+     926: aload_1
+     927: aload_3
+     928: invokedynamic #164,  0            // InvokeDynamic #14:accept:(Lorg/thingsboard/server/common/data/Device;Ljava/util/List;)Ljava/util/function/Consumer;
+     933: invokeinterface #130,  2          // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+     938: goto          1352
+     941: aload_2
+     942: invokevirtual #165                // Method org/thingsboard/server/common/data/Device.isAsMainController:()Z
+     945: ifne          955
+     948: aload_1
+     949: invokevirtual #165                // Method org/thingsboard/server/common/data/Device.isAsMainController:()Z
+     952: ifeq          1190
+     955: aload_1
+     956: invokevirtual #166                // Method org/thingsboard/server/common/data/Device.getChildDevices:()Ljava/util/List;
+     959: invokestatic  #52                 // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+     962: ifne          1190
+     965: aload_1
+     966: invokevirtual #166                // Method org/thingsboard/server/common/data/Device.getChildDevices:()Ljava/util/List;
+     969: invokeinterface #147,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     974: astore        5
+     976: aload         5
+     978: invokeinterface #148,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     983: ifeq          1190
+     986: aload         5
+     988: invokeinterface #149,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     993: checkcast     #167                // class org/thingsboard/server/common/data/ChildDevice
+     996: astore        6
+     998: getstatic     #168                // Field org/thingsboard/server/common/data/ChildDeviceStatus.DELETED:Lorg/thingsboard/server/common/data/ChildDeviceStatus;
+    1001: invokevirtual #169                // Method org/thingsboard/server/common/data/ChildDeviceStatus.name:()Ljava/lang/String;
+    1004: aload         6
+    1006: invokevirtual #170                // Method org/thingsboard/server/common/data/ChildDevice.getStatus:()Ljava/lang/String;
+    1009: invokestatic  #118                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+    1012: ifeq          1059
+    1015: aload_3
+    1016: new           #119                // class com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder
+    1019: dup
+    1020: getstatic     #171                // Field com/kuka/ecs/grpc/req/ChangeTypeEnum.CHILD_DEVICE:Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;
+    1023: aload_1
+    1024: invokevirtual #121                // Method org/thingsboard/server/common/data/Device.getId:()Lorg/thingsboard/server/common/data/id/DeviceId;
+    1027: invokevirtual #122                // Method org/thingsboard/server/common/data/id/DeviceId.toString:()Ljava/lang/String;
+    1030: aconst_null
+    1031: aconst_null
+    1032: aconst_null
+    1033: aload         6
+    1035: invokevirtual #172                // Method org/thingsboard/server/common/data/ChildDevice.getId:()Lorg/thingsboard/server/common/data/id/ChildDeviceId;
+    1038: invokevirtual #173                // Method org/thingsboard/server/common/data/id/ChildDeviceId.toString:()Ljava/lang/String;
+    1041: aconst_null
+    1042: iconst_3
+    1043: iconst_0
+    1044: iconst_0
+    1045: aconst_null
+    1046: aconst_null
+    1047: invokespecial #123                // Method com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder."<init>":(Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;)V
+    1050: invokeinterface #124,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+    1055: pop
+    1056: goto          1187
+    1059: getstatic     #174                // Field org/thingsboard/server/common/data/ChildDeviceStatus.UPDATED:Lorg/thingsboard/server/common/data/ChildDeviceStatus;
+    1062: invokevirtual #169                // Method org/thingsboard/server/common/data/ChildDeviceStatus.name:()Ljava/lang/String;
+    1065: aload         6
+    1067: invokevirtual #170                // Method org/thingsboard/server/common/data/ChildDevice.getStatus:()Ljava/lang/String;
+    1070: invokestatic  #118                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+    1073: ifeq          1187
+    1076: aload_2
+    1077: invokevirtual #166                // Method org/thingsboard/server/common/data/Device.getChildDevices:()Ljava/util/List;
+    1080: invokeinterface #53,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+    1085: invokedynamic #175,  0            // InvokeDynamic #15:apply:()Ljava/util/function/Function;
+    1090: invokedynamic #176,  0            // InvokeDynamic #16:apply:()Ljava/util/function/Function;
+    1095: invokedynamic #177,  0            // InvokeDynamic #17:apply:()Ljava/util/function/BinaryOperator;
+    1100: invokestatic  #141                // Method java/util/stream/Collectors.toMap:(Ljava/util/function/Function;Ljava/util/function/Function;Ljava/util/function/BinaryOperator;)Ljava/util/stream/Collector;
+    1103: invokeinterface #57,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+    1108: checkcast     #11                 // class java/util/Map
+    1111: astore        7
+    1113: aload         6
+    1115: invokevirtual #178                // Method org/thingsboard/server/common/data/ChildDevice.getCode:()Ljava/lang/String;
+    1118: aload         7
+    1120: aload         6
+    1122: invokevirtual #172                // Method org/thingsboard/server/common/data/ChildDevice.getId:()Lorg/thingsboard/server/common/data/id/ChildDeviceId;
+    1125: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+    1130: checkcast     #167                // class org/thingsboard/server/common/data/ChildDevice
+    1133: invokevirtual #178                // Method org/thingsboard/server/common/data/ChildDevice.getCode:()Ljava/lang/String;
+    1136: invokestatic  #118                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+    1139: ifne          1187
+    1142: aload_3
+    1143: new           #119                // class com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder
+    1146: dup
+    1147: getstatic     #171                // Field com/kuka/ecs/grpc/req/ChangeTypeEnum.CHILD_DEVICE:Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;
+    1150: aload_1
+    1151: invokevirtual #121                // Method org/thingsboard/server/common/data/Device.getId:()Lorg/thingsboard/server/common/data/id/DeviceId;
+    1154: invokevirtual #122                // Method org/thingsboard/server/common/data/id/DeviceId.toString:()Ljava/lang/String;
+    1157: aconst_null
+    1158: aconst_null
+    1159: aconst_null
+    1160: aload         6
+    1162: invokevirtual #172                // Method org/thingsboard/server/common/data/ChildDevice.getId:()Lorg/thingsboard/server/common/data/id/ChildDeviceId;
+    1165: invokevirtual #173                // Method org/thingsboard/server/common/data/id/ChildDeviceId.toString:()Ljava/lang/String;
+    1168: aload         6
+    1170: invokevirtual #178                // Method org/thingsboard/server/common/data/ChildDevice.getCode:()Ljava/lang/String;
+    1173: iconst_2
+    1174: iconst_0
+    1175: iconst_0
+    1176: aconst_null
+    1177: aconst_null
+    1178: invokespecial #123                // Method com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder."<init>":(Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;)V
+    1181: invokeinterface #124,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+    1186: pop
+    1187: goto          976
+    1190: iload         4
+    1192: ifeq          1352
+    1195: aload_0
+    1196: aload_1
+    1197: invokespecial #103                // Method getConnectorOrDeviceJsonNode:(Lorg/thingsboard/server/common/data/Device;)Lcom/fasterxml/jackson/databind/JsonNode;
+    1200: astore        5
+    1202: aconst_null
+    1203: astore        6
+    1205: aload         5
+    1207: ldc           #104                // String groups
+    1209: invokevirtual #105                // Method com/fasterxml/jackson/databind/JsonNode.has:(Ljava/lang/String;)Z
+    1212: ifeq          1281
+    1215: aload         5
+    1217: ldc           #104                // String groups
+    1219: invokevirtual #106                // Method com/fasterxml/jackson/databind/JsonNode.get:(Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonNode;
+    1222: iconst_0
+    1223: invokevirtual #107                // Method com/fasterxml/jackson/databind/JsonNode.get:(I)Lcom/fasterxml/jackson/databind/JsonNode;
+    1226: ldc           #108                // String eventAttributes
+    1228: invokevirtual #106                // Method com/fasterxml/jackson/databind/JsonNode.get:(Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonNode;
+    1231: new           #179                // class org/thingsboard/server/service/rpc/DefaultWcsRpcService$4
+    1234: dup
+    1235: aload_0
+    1236: invokespecial #180                // Method org/thingsboard/server/service/rpc/DefaultWcsRpcService$4."<init>":(Lorg/thingsboard/server/service/rpc/DefaultWcsRpcService;)V
+    1239: invokestatic  #111                // Method org/thingsboard/common/util/JacksonUtil.convertValue:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/type/TypeReference;)Ljava/lang/Object;
+    1242: checkcast     #58                 // class java/util/List
+    1245: astore        7
+    1247: aload         7
+    1249: invokeinterface #53,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+    1254: aload_1
+    1255: invokedynamic #181,  0            // InvokeDynamic #18:apply:(Lorg/thingsboard/server/common/data/Device;)Ljava/util/function/Function;
+    1260: invokeinterface #55,  2           // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+    1265: invokestatic  #56                 // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+    1268: invokeinterface #57,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+    1273: checkcast     #58                 // class java/util/List
+    1276: astore        6
+    1278: goto          1343
+    1281: aload_0
+    1282: getfield      #182                // Field ruleChainService:Lorg/thingsboard/server/dao/rule/RuleChainService;
+    1285: aload_1
+    1286: invokevirtual #183                // Method org/thingsboard/server/common/data/Device.getRuleChainId:()Lorg/thingsboard/server/common/data/id/RuleChainId;
+    1289: invokevirtual #184                // Method org/thingsboard/server/common/data/id/RuleChainId.toString:()Ljava/lang/String;
+    1292: invokestatic  #185                // Method java/util/UUID.fromString:(Ljava/lang/String;)Ljava/util/UUID;
+    1295: invokeinterface #186,  2          // InterfaceMethod org/thingsboard/server/dao/rule/RuleChainService.findRuleNodesByRuleChainId:(Ljava/util/UUID;)Ljava/util/List;
+    1300: astore        7
+    1302: aload         7
+    1304: invokeinterface #53,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+    1309: invokedynamic #187,  0            // InvokeDynamic #19:test:()Ljava/util/function/Predicate;
+    1314: invokeinterface #188,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+    1319: aload_1
+    1320: invokedynamic #189,  0            // InvokeDynamic #20:apply:(Lorg/thingsboard/server/common/data/Device;)Ljava/util/function/Function;
+    1325: invokeinterface #55,  2           // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+    1330: invokestatic  #56                 // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+    1333: invokeinterface #57,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+    1338: checkcast     #58                 // class java/util/List
+    1341: astore        6
+    1343: aload_3
+    1344: aload         6
+    1346: invokeinterface #113,  2          // InterfaceMethod java/util/List.addAll:(Ljava/util/Collection;)Z
+    1351: pop
+    1352: aload_0
+    1353: aload_3
+    1354: invokevirtual #84                 // Method informList:(Ljava/util/List;)V
+    1357: return
+
+  private void cacheAllRobotInfos(java.util.List<com.kuka.wcs.grpc.platform.robot.RobotInfoResponse>);
+    Code:
+       0: getstatic     #190                // Field robotInfoMapCache:Ljava/util/concurrent/ConcurrentMap;
+       3: invokeinterface #191,  1          // InterfaceMethod java/util/concurrent/ConcurrentMap.clear:()V
+       8: aload_1
+       9: invokestatic  #52                 // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+      12: ifne          26
+      15: aload_1
+      16: invokedynamic #192,  0            // InvokeDynamic #21:accept:()Ljava/util/function/Consumer;
+      21: invokeinterface #130,  2          // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      26: return
+
+  public java.util.Map<java.lang.String, java.lang.String> getRobotInfoById(org.thingsboard.server.common.data.Device, java.lang.String);
+    Code:
+       0: aload_1
+       1: invokevirtual #87                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+       4: invokevirtual #193                // Method org/thingsboard/server/common/data/device/data/DeviceData.isEnableSubscribeRobotInfo:()Z
+       7: ifeq          31
+      10: aload_0
+      11: aload_1
+      12: getstatic     #4                  // Field robotInfoStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+      15: aload_2
+      16: invokeinterface #194,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      21: checkcast     #195                // class com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse
+      24: invokevirtual #196                // Method getRobotInfo:(Lorg/thingsboard/server/common/data/Device;Lcom/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse;)Ljava/util/Map;
+      27: astore_3
+      28: goto          452
+      31: new           #197                // class java/util/HashMap
+      34: dup
+      35: invokespecial #198                // Method java/util/HashMap."<init>":()V
+      38: astore_3
+      39: getstatic     #190                // Field robotInfoMapCache:Ljava/util/concurrent/ConcurrentMap;
+      42: aload_2
+      43: invokeinterface #199,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.containsKey:(Ljava/lang/Object;)Z
+      48: ifeq          353
+      51: getstatic     #190                // Field robotInfoMapCache:Ljava/util/concurrent/ConcurrentMap;
+      54: aload_2
+      55: invokeinterface #194,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      60: checkcast     #200                // class com/kuka/wcs/grpc/platform/robot/RobotInfoResponse
+      63: invokevirtual #201                // Method com/kuka/wcs/grpc/platform/robot/RobotInfoResponse.getAllFields:()Ljava/util/Map;
+      66: aload_3
+      67: invokedynamic #202,  0            // InvokeDynamic #22:accept:(Ljava/util/Map;)Ljava/util/function/BiConsumer;
+      72: invokeinterface #203,  2          // InterfaceMethod java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+      77: aload_3
+      78: ldc           #204                // String liveBit
+      80: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+      85: ifeq          105
+      88: aload_3
+      89: ldc           #204                // String liveBit
+      91: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      96: checkcast     #206                // class java/lang/CharSequence
+      99: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+     102: ifeq          116
+     105: aload_3
+     106: ldc           #204                // String liveBit
+     108: ldc           #208                // String true
+     110: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     115: pop
+     116: aload_3
+     117: ldc           #210                // String robTaskCode
+     119: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     124: ifeq          144
+     127: aload_3
+     128: ldc           #210                // String robTaskCode
+     130: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     135: checkcast     #206                // class java/lang/CharSequence
+     138: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+     141: ifeq          155
+     144: aload_3
+     145: ldc           #210                // String robTaskCode
+     147: ldc           #211                // String \"\"
+     149: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     154: pop
+     155: aload_3
+     156: ldc           #212                // String WPCId
+     158: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     163: ifeq          183
+     166: aload_3
+     167: ldc           #212                // String WPCId
+     169: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     174: checkcast     #206                // class java/lang/CharSequence
+     177: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+     180: ifeq          194
+     183: aload_3
+     184: ldc           #212                // String WPCId
+     186: ldc           #211                // String \"\"
+     188: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     193: pop
+     194: aload_3
+     195: ldc           #213                // String robPosition
+     197: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     202: ifeq          222
+     205: aload_3
+     206: ldc           #213                // String robPosition
+     208: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     213: checkcast     #206                // class java/lang/CharSequence
+     216: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+     219: ifeq          233
+     222: aload_3
+     223: ldc           #213                // String robPosition
+     225: ldc           #214                // String 0
+     227: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     232: pop
+     233: aload_3
+     234: ldc           #216                // String robWarningCode
+     236: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     241: ifeq          261
+     244: aload_3
+     245: ldc           #216                // String robWarningCode
+     247: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     252: checkcast     #206                // class java/lang/CharSequence
+     255: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+     258: ifeq          272
+     261: aload_3
+     262: ldc           #216                // String robWarningCode
+     264: ldc           #214                // String 0
+     266: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     271: pop
+     272: aload_3
+     273: ldc           #217                // String WPCNo
+     275: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     280: ifeq          300
+     283: aload_3
+     284: ldc           #217                // String WPCNo
+     286: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     291: checkcast     #206                // class java/lang/CharSequence
+     294: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+     297: ifeq          311
+     300: aload_3
+     301: ldc           #217                // String WPCNo
+     303: ldc           #214                // String 0
+     305: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     310: pop
+     311: aload_3
+     312: ldc           #218                // String areaForeignCode
+     314: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     319: ifeq          339
+     322: aload_3
+     323: ldc           #218                // String areaForeignCode
+     325: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     330: checkcast     #206                // class java/lang/CharSequence
+     333: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+     336: ifeq          452
+     339: aload_3
+     340: ldc           #218                // String areaForeignCode
+     342: ldc           #214                // String 0
+     344: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     349: pop
+     350: goto          452
+     353: aload_3
+     354: ldc           #204                // String liveBit
+     356: ldc           #219                // String false
+     358: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     363: pop
+     364: aload_3
+     365: ldc           #220                // String robStatus
+     367: ldc           #214                // String 0
+     369: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     374: pop
+     375: aload_3
+     376: ldc           #210                // String robTaskCode
+     378: ldc           #211                // String \"\"
+     380: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     385: pop
+     386: aload_3
+     387: ldc           #221                // String robId
+     389: ldc           #214                // String 0
+     391: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     396: pop
+     397: aload_3
+     398: ldc           #212                // String WPCId
+     400: ldc           #211                // String \"\"
+     402: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     407: pop
+     408: aload_3
+     409: ldc           #213                // String robPosition
+     411: ldc           #214                // String 0
+     413: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     418: pop
+     419: aload_3
+     420: ldc           #216                // String robWarningCode
+     422: ldc           #214                // String 0
+     424: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     429: pop
+     430: aload_3
+     431: ldc           #217                // String WPCNo
+     433: ldc           #214                // String 0
+     435: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     440: pop
+     441: aload_3
+     442: ldc           #218                // String areaForeignCode
+     444: ldc           #214                // String 0
+     446: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     451: pop
+     452: getstatic     #4                  // Field robotInfoStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+     455: aload_2
+     456: invokeinterface #194,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     461: ifnull        528
+     464: getstatic     #4                  // Field robotInfoStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+     467: aload_2
+     468: invokeinterface #194,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     473: checkcast     #195                // class com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse
+     476: invokevirtual #222                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getVelocity:()Lcom/google/protobuf/DoubleValue;
+     479: invokevirtual #223                // Method com/google/protobuf/DoubleValue.getValue:()D
+     482: dconst_0
+     483: dcmpl
+     484: ifeq          528
+     487: aload_3
+     488: ldc           #225                // String velocity
+     490: getstatic     #4                  // Field robotInfoStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+     493: aload_2
+     494: invokeinterface #194,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     499: checkcast     #195                // class com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse
+     502: invokevirtual #222                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getVelocity:()Lcom/google/protobuf/DoubleValue;
+     505: invokevirtual #223                // Method com/google/protobuf/DoubleValue.getValue:()D
+     508: invokestatic  #226                // Method java/lang/Math.abs:(D)D
+     511: ldc2_w        #227                // double 1000.0d
+     514: dmul
+     515: d2i
+     516: invokestatic  #229                // Method java/lang/String.valueOf:(I)Ljava/lang/String;
+     519: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     524: pop
+     525: goto          539
+     528: aload_3
+     529: ldc           #225                // String velocity
+     531: ldc           #214                // String 0
+     533: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     538: pop
+     539: aload_1
+     540: invokevirtual #87                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+     543: invokevirtual #230                // Method org/thingsboard/server/common/data/device/data/DeviceData.isAllowPublishSameRobotInfo:()Z
+     546: ifne          583
+     549: aload_3
+     550: getstatic     #231                // Field robotInfoMapUpdateHistory:Ljava/util/concurrent/ConcurrentMap;
+     553: aload_0
+     554: aload_1
+     555: aload_2
+     556: invokespecial #232                // Method getRobotInfoMapUpdateHistoryKey:(Lorg/thingsboard/server/common/data/Device;Ljava/lang/String;)Ljava/lang/String;
+     559: invokeinterface #194,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     564: invokestatic  #118                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     567: ifeq          583
+     570: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+     573: ldc           #233                // String There are no updates for robotId [{}]
+     575: aload_2
+     576: invokeinterface #46,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+     581: aconst_null
+     582: areturn
+     583: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+     586: ldc           #234                // String There are some updates for robotId [{}], robotInfoMap [{}]
+     588: aload_2
+     589: aload_3
+     590: invokeinterface #235,  4          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+     595: getstatic     #231                // Field robotInfoMapUpdateHistory:Ljava/util/concurrent/ConcurrentMap;
+     598: aload_0
+     599: aload_1
+     600: aload_2
+     601: invokespecial #232                // Method getRobotInfoMapUpdateHistoryKey:(Lorg/thingsboard/server/common/data/Device;Ljava/lang/String;)Ljava/lang/String;
+     604: aload_3
+     605: invokeinterface #236,  3          // InterfaceMethod java/util/concurrent/ConcurrentMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     610: pop
+     611: aload_3
+     612: areturn
+
+  public void queryRobotInfos();
+    Code:
+       0: aload_0
+       1: getfield      #237                // Field deviceService:Lorg/thingsboard/server/dao/device/DeviceService;
+       4: getstatic     #238                // Field org/thingsboard/server/common/data/device/DeviceStatus.ENABLED:Lorg/thingsboard/server/common/data/device/DeviceStatus;
+       7: invokeinterface #239,  2          // InterfaceMethod org/thingsboard/server/dao/device/DeviceService.findDevicesByStatus:(Lorg/thingsboard/server/common/data/device/DeviceStatus;)Ljava/util/List;
+      12: putstatic     #3                  // Field runningDevices:Ljava/util/List;
+      15: getstatic     #3                  // Field runningDevices:Ljava/util/List;
+      18: invokestatic  #52                 // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+      21: ifeq          25
+      24: return
+      25: getstatic     #3                  // Field runningDevices:Ljava/util/List;
+      28: invokeinterface #53,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      33: invokedynamic #240,  0            // InvokeDynamic #23:test:()Ljava/util/function/Predicate;
+      38: invokeinterface #241,  2          // InterfaceMethod java/util/stream/Stream.anyMatch:(Ljava/util/function/Predicate;)Z
+      43: ifeq          122
+      46: aload_0
+      47: getfield      #21                 // Field robotServiceFutureStub:Lcom/kuka/wcs/grpc/platform/robot/WcsRobotServiceGrpc$WcsRobotServiceFutureStub;
+      50: invokestatic  #242                // Method com/kuka/wcs/grpc/platform/robot/RobInfoRequest.newBuilder:()Lcom/kuka/wcs/grpc/platform/robot/RobInfoRequest$Builder;
+      53: invokevirtual #243                // Method com/kuka/wcs/grpc/platform/robot/RobInfoRequest$Builder.build:()Lcom/kuka/wcs/grpc/platform/robot/RobInfoRequest;
+      56: invokevirtual #244                // Method com/kuka/wcs/grpc/platform/robot/WcsRobotServiceGrpc$WcsRobotServiceFutureStub.getAllRobotInfo:(Lcom/kuka/wcs/grpc/platform/robot/RobInfoRequest;)Lcom/google/common/util/concurrent/ListenableFuture;
+      59: astore_1
+      60: aload_1
+      61: ldc2_w        #245                // long 3l
+      64: getstatic     #40                 // Field java/util/concurrent/TimeUnit.SECONDS:Ljava/util/concurrent/TimeUnit;
+      67: invokeinterface #41,  4           // InterfaceMethod com/google/common/util/concurrent/ListenableFuture.get:(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;
+      72: checkcast     #247                // class com/kuka/wcs/grpc/platform/robot/MultiRobotInfoResponse
+      75: astore_2
+      76: aload_2
+      77: ifnull        107
+      80: aload_2
+      81: invokevirtual #248                // Method com/kuka/wcs/grpc/platform/robot/MultiRobotInfoResponse.getSuccess:()Z
+      84: ifeq          107
+      87: aload_2
+      88: invokevirtual #249                // Method com/kuka/wcs/grpc/platform/robot/MultiRobotInfoResponse.getResultCode:()Ljava/lang/String;
+      91: ldc           #214                // String 0
+      93: invokevirtual #250                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      96: ifeq          107
+      99: aload_0
+     100: aload_2
+     101: invokevirtual #251                // Method com/kuka/wcs/grpc/platform/robot/MultiRobotInfoResponse.getRobInfosList:()Ljava/util/List;
+     104: invokespecial #252                // Method cacheAllRobotInfos:(Ljava/util/List;)V
+     107: goto          122
+     110: astore_1
+     111: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+     114: ldc           #253                // String failed to query robot info
+     116: aload_1
+     117: invokeinterface #254,  3          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     122: return
+    Exception table:
+       from    to  target type
+          46   107   110   Class java/lang/Exception
+
+  public void queryAndPublishRobotStatus(org.thingsboard.server.cluster.TbClusterService);
+    Code:
+       0: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+       3: ldc           #255                // String start query robot status
+       5: invokeinterface #256,  2          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;)V
+      10: getstatic     #3                  // Field runningDevices:Ljava/util/List;
+      13: invokestatic  #52                 // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+      16: ifeq          20
+      19: return
+      20: getstatic     #3                  // Field runningDevices:Ljava/util/List;
+      23: invokeinterface #53,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      28: invokedynamic #257,  0            // InvokeDynamic #24:test:()Ljava/util/function/Predicate;
+      33: invokeinterface #188,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+      38: invokestatic  #56                 // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+      41: invokeinterface #57,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+      46: checkcast     #58                 // class java/util/List
+      49: astore_2
+      50: aload_2
+      51: invokestatic  #52                 // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+      54: ifne          171
+      57: aload_0
+      58: getfield      #21                 // Field robotServiceFutureStub:Lcom/kuka/wcs/grpc/platform/robot/WcsRobotServiceGrpc$WcsRobotServiceFutureStub;
+      61: invokestatic  #242                // Method com/kuka/wcs/grpc/platform/robot/RobInfoRequest.newBuilder:()Lcom/kuka/wcs/grpc/platform/robot/RobInfoRequest$Builder;
+      64: invokevirtual #243                // Method com/kuka/wcs/grpc/platform/robot/RobInfoRequest$Builder.build:()Lcom/kuka/wcs/grpc/platform/robot/RobInfoRequest;
+      67: invokevirtual #258                // Method com/kuka/wcs/grpc/platform/robot/WcsRobotServiceGrpc$WcsRobotServiceFutureStub.getWcsRobInfoStandard:(Lcom/kuka/wcs/grpc/platform/robot/RobInfoRequest;)Lcom/google/common/util/concurrent/ListenableFuture;
+      70: astore_3
+      71: aload_3
+      72: ldc2_w        #245                // long 3l
+      75: getstatic     #40                 // Field java/util/concurrent/TimeUnit.SECONDS:Ljava/util/concurrent/TimeUnit;
+      78: invokeinterface #41,  4           // InterfaceMethod com/google/common/util/concurrent/ListenableFuture.get:(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;
+      83: checkcast     #259                // class com/kuka/wcs/grpc/platform/robot/MultiRobInfoStandardResponse
+      86: astore        4
+      88: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+      91: ldc_w         #260                // String multiRobInfoStandardResponseListenableFuture onNext:{}
+      94: aload         4
+      96: invokeinterface #46,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+     101: aload         4
+     103: ifnull        156
+     106: aload         4
+     108: invokevirtual #261                // Method com/kuka/wcs/grpc/platform/robot/MultiRobInfoStandardResponse.getSuccess:()Z
+     111: ifeq          156
+     114: aload         4
+     116: invokevirtual #262                // Method com/kuka/wcs/grpc/platform/robot/MultiRobInfoStandardResponse.getResultCode:()Ljava/lang/String;
+     119: ldc           #214                // String 0
+     121: invokevirtual #250                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     124: ifeq          156
+     127: aload         4
+     129: invokevirtual #263                // Method com/kuka/wcs/grpc/platform/robot/MultiRobInfoStandardResponse.getRobInfosList:()Ljava/util/List;
+     132: invokestatic  #52                 // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+     135: ifne          156
+     138: aload         4
+     140: invokevirtual #263                // Method com/kuka/wcs/grpc/platform/robot/MultiRobInfoStandardResponse.getRobInfosList:()Ljava/util/List;
+     143: aload_0
+     144: aload_2
+     145: aload_1
+     146: invokedynamic #264,  0            // InvokeDynamic #25:accept:(Lorg/thingsboard/server/service/rpc/DefaultWcsRpcService;Ljava/util/List;Lorg/thingsboard/server/cluster/TbClusterService;)Ljava/util/function/Consumer;
+     151: invokeinterface #130,  2          // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+     156: goto          171
+     159: astore_3
+     160: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+     163: ldc           #253                // String failed to query robot info
+     165: aload_3
+     166: invokeinterface #254,  3          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     171: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+     174: ldc_w         #265                // String end query robot status
+     177: invokeinterface #256,  2          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;)V
+     182: return
+    Exception table:
+       from    to  target type
+          57   156   159   Class java/lang/Exception
+
+  public void subscribeAndPublishRobotStatus(org.thingsboard.server.cluster.TbClusterService);
+    Code:
+       0: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+       3: ldc_w         #266                // String start subscribe robot status
+       6: invokeinterface #256,  2          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;)V
+      11: aload_0
+      12: getfield      #24                 // Field robotServiceStub:Lcom/kuka/wcs/grpc/platform/robot/WcsRobotServiceGrpc$WcsRobotServiceStub;
+      15: invokestatic  #267                // Method com/kuka/wcs/grpc/platform/common/NoParameterRequest.newBuilder:()Lcom/kuka/wcs/grpc/platform/common/NoParameterRequest$Builder;
+      18: invokevirtual #268                // Method com/kuka/wcs/grpc/platform/common/NoParameterRequest$Builder.build:()Lcom/kuka/wcs/grpc/platform/common/NoParameterRequest;
+      21: new           #269                // class org/thingsboard/server/service/rpc/DefaultWcsRpcService$5
+      24: dup
+      25: aload_0
+      26: aload_1
+      27: invokespecial #270                // Method org/thingsboard/server/service/rpc/DefaultWcsRpcService$5."<init>":(Lorg/thingsboard/server/service/rpc/DefaultWcsRpcService;Lorg/thingsboard/server/cluster/TbClusterService;)V
+      30: invokevirtual #271                // Method com/kuka/wcs/grpc/platform/robot/WcsRobotServiceGrpc$WcsRobotServiceStub.subscribeAMRStatus:(Lcom/kuka/wcs/grpc/platform/common/NoParameterRequest;Lio/grpc/stub/StreamObserver;)V
+      33: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+      36: ldc_w         #272                // String end subscribe robot status
+      39: invokeinterface #256,  2          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;)V
+      44: return
+
+  public void publishRobotStatus(org.thingsboard.server.cluster.TbClusterService, org.thingsboard.server.common.data.Device, com.kuka.wcs.grpc.platform.robot.WcsRobStatusStandardResponse);
+    Code:
+       0: getstatic     #273                // Field org/thingsboard/server/common/data/DeviceTransportType.S7:Lorg/thingsboard/server/common/data/DeviceTransportType;
+       3: aload_2
+       4: invokevirtual #274                // Method org/thingsboard/server/common/data/Device.getType:()Lorg/thingsboard/server/common/data/DeviceTransportType;
+       7: if_acmpeq     40
+      10: getstatic     #275                // Field org/thingsboard/server/common/data/DeviceTransportType.MODBUS:Lorg/thingsboard/server/common/data/DeviceTransportType;
+      13: aload_2
+      14: invokevirtual #274                // Method org/thingsboard/server/common/data/Device.getType:()Lorg/thingsboard/server/common/data/DeviceTransportType;
+      17: if_acmpeq     40
+      20: getstatic     #276                // Field org/thingsboard/server/common/data/DeviceTransportType.ADS:Lorg/thingsboard/server/common/data/DeviceTransportType;
+      23: aload_2
+      24: invokevirtual #274                // Method org/thingsboard/server/common/data/Device.getType:()Lorg/thingsboard/server/common/data/DeviceTransportType;
+      27: if_acmpeq     40
+      30: getstatic     #277                // Field org/thingsboard/server/common/data/DeviceTransportType.OPCUA:Lorg/thingsboard/server/common/data/DeviceTransportType;
+      33: aload_2
+      34: invokevirtual #274                // Method org/thingsboard/server/common/data/Device.getType:()Lorg/thingsboard/server/common/data/DeviceTransportType;
+      37: if_acmpne     610
+      40: aload_2
+      41: invokevirtual #87                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+      44: invokevirtual #115                // Method org/thingsboard/server/common/data/device/data/DeviceData.getConnector:()Lcom/fasterxml/jackson/databind/JsonNode;
+      47: ldc_w         #278                // class org/thingsboard/server/common/data/device/connector/s7/S7DeviceConnector
+      50: invokestatic  #279                // Method org/thingsboard/common/util/JacksonUtil.treeToValue:(Lcom/fasterxml/jackson/databind/JsonNode;Ljava/lang/Class;)Ljava/lang/Object;
+      53: checkcast     #278                // class org/thingsboard/server/common/data/device/connector/s7/S7DeviceConnector
+      56: astore        4
+      58: aload         4
+      60: invokevirtual #280                // Method org/thingsboard/server/common/data/device/connector/s7/S7DeviceConnector.getDevice:()Lorg/thingsboard/server/common/data/device/connector/s7/S7DeviceConfig;
+      63: invokevirtual #281                // Method org/thingsboard/server/common/data/device/connector/s7/S7DeviceConfig.getGroups:()Ljava/util/List;
+      66: invokestatic  #52                 // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+      69: ifne          610
+      72: aload         4
+      74: invokevirtual #280                // Method org/thingsboard/server/common/data/device/connector/s7/S7DeviceConnector.getDevice:()Lorg/thingsboard/server/common/data/device/connector/s7/S7DeviceConfig;
+      77: invokevirtual #281                // Method org/thingsboard/server/common/data/device/connector/s7/S7DeviceConfig.getGroups:()Ljava/util/List;
+      80: invokeinterface #147,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      85: astore        5
+      87: aload         5
+      89: invokeinterface #148,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      94: ifeq          610
+      97: aload         5
+      99: invokeinterface #149,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     104: checkcast     #282                // class org/thingsboard/server/common/data/device/connector/s7/S7ConfigGroup
+     107: astore        6
+     109: aload         6
+     111: invokevirtual #283                // Method org/thingsboard/server/common/data/device/connector/s7/S7ConfigGroup.getName:()Ljava/lang/String;
+     114: aload         6
+     116: invokevirtual #283                // Method org/thingsboard/server/common/data/device/connector/s7/S7ConfigGroup.getName:()Ljava/lang/String;
+     119: ldc_w         #284                // String -
+     122: invokevirtual #285                // Method java/lang/String.lastIndexOf:(Ljava/lang/String;)I
+     125: iconst_1
+     126: iadd
+     127: invokevirtual #286                // Method java/lang/String.substring:(I)Ljava/lang/String;
+     130: astore        7
+     132: aload         6
+     134: invokevirtual #287                // Method org/thingsboard/server/common/data/device/connector/s7/S7ConfigGroup.isEnable:()Z
+     137: ifeq          607
+     140: aload_3
+     141: invokevirtual #288                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobId:()Lcom/google/protobuf/StringValue;
+     144: invokevirtual #289                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+     147: aload         7
+     149: invokevirtual #250                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     152: ifeq          607
+     155: aload_0
+     156: aload_2
+     157: aload_3
+     158: invokevirtual #196                // Method getRobotInfo:(Lorg/thingsboard/server/common/data/Device;Lcom/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse;)Ljava/util/Map;
+     161: astore        8
+     163: aload         8
+     165: getstatic     #231                // Field robotInfoMapUpdateHistory:Ljava/util/concurrent/ConcurrentMap;
+     168: aload_0
+     169: aload_2
+     170: aload         7
+     172: invokespecial #232                // Method getRobotInfoMapUpdateHistoryKey:(Lorg/thingsboard/server/common/data/Device;Ljava/lang/String;)Ljava/lang/String;
+     175: invokeinterface #194,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     180: invokestatic  #118                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     183: ifeq          202
+     186: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+     189: ldc_w         #290                // String no update for robotId [{}]
+     192: aload         7
+     194: invokeinterface #46,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+     199: goto          610
+     202: aload         8
+     204: getstatic     #231                // Field robotInfoMapUpdateHistory:Ljava/util/concurrent/ConcurrentMap;
+     207: aload_0
+     208: aload_2
+     209: aload         7
+     211: invokespecial #232                // Method getRobotInfoMapUpdateHistoryKey:(Lorg/thingsboard/server/common/data/Device;Ljava/lang/String;)Ljava/lang/String;
+     214: invokeinterface #194,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     219: checkcast     #11                 // class java/util/Map
+     222: invokestatic  #291                // Method extractDiffMap:(Ljava/util/Map;Ljava/util/Map;)Ljava/util/Map;
+     225: astore        9
+     227: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+     230: ldc_w         #292                // String update for robotId [{}], update content [{}]
+     233: aload         7
+     235: aload         9
+     237: invokeinterface #235,  4          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+     242: getstatic     #231                // Field robotInfoMapUpdateHistory:Ljava/util/concurrent/ConcurrentMap;
+     245: aload_0
+     246: aload_2
+     247: aload         7
+     249: invokespecial #232                // Method getRobotInfoMapUpdateHistoryKey:(Lorg/thingsboard/server/common/data/Device;Ljava/lang/String;)Ljava/lang/String;
+     252: aload         8
+     254: invokeinterface #236,  3          // InterfaceMethod java/util/concurrent/ConcurrentMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     259: pop
+     260: new           #293                // class org/thingsboard/server/common/msg/TbMsgMetaData
+     263: dup
+     264: invokespecial #294                // Method org/thingsboard/server/common/msg/TbMsgMetaData."<init>":()V
+     267: astore        10
+     269: aload         10
+     271: ldc_w         #295                // String deviceName
+     274: aload_2
+     275: invokevirtual #117                // Method org/thingsboard/server/common/data/Device.getName:()Ljava/lang/String;
+     278: invokevirtual #296                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     281: aload         10
+     283: ldc_w         #297                // String deviceType
+     286: aload_2
+     287: invokevirtual #160                // Method org/thingsboard/server/common/data/Device.getDeviceType:()Ljava/lang/String;
+     290: invokevirtual #296                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     293: aload         10
+     295: ldc_w         #298                // String deviceTransportType
+     298: aload_2
+     299: invokevirtual #274                // Method org/thingsboard/server/common/data/Device.getType:()Lorg/thingsboard/server/common/data/DeviceTransportType;
+     302: invokevirtual #299                // Method org/thingsboard/server/common/data/DeviceTransportType.name:()Ljava/lang/String;
+     305: invokevirtual #296                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     308: aload         10
+     310: ldc_w         #300                // String notifyDevice
+     313: ldc           #219                // String false
+     315: invokevirtual #296                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     318: aload         10
+     320: ldc_w         #301                // String warehouseCode
+     323: aload_2
+     324: invokevirtual #302                // Method org/thingsboard/server/common/data/Device.getWarehouseInfo:()Lorg/thingsboard/server/common/data/device/data/WarehouseInfo;
+     327: invokevirtual #303                // Method org/thingsboard/server/common/data/device/data/WarehouseInfo.getCode:()Ljava/lang/String;
+     330: invokevirtual #296                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     333: aload         10
+     335: ldc_w         #305                // String groupIndex
+     338: aload         6
+     340: invokevirtual #306                // Method org/thingsboard/server/common/data/device/connector/s7/S7ConfigGroup.getIndex:()I
+     343: invokestatic  #229                // Method java/lang/String.valueOf:(I)Ljava/lang/String;
+     346: invokevirtual #296                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     349: aload         10
+     351: ldc_w         #307                // String groupId
+     354: aload         6
+     356: invokevirtual #308                // Method org/thingsboard/server/common/data/device/connector/s7/S7ConfigGroup.getId:()Ljava/lang/String;
+     359: invokevirtual #296                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     362: aload         10
+     364: ldc_w         #309                // String groupName
+     367: aload         6
+     369: invokevirtual #283                // Method org/thingsboard/server/common/data/device/connector/s7/S7ConfigGroup.getName:()Ljava/lang/String;
+     372: invokevirtual #296                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     375: aload         10
+     377: ldc_w         #310                // String deviceFeatureVersion
+     380: invokestatic  #311                // Method org/thingsboard/server/common/data/rule/RuleChainVersion.latestDeviceVersion:()Ljava/lang/String;
+     383: invokevirtual #296                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     386: aload         10
+     388: ldc_w         #312                // String robotId
+     391: aload         7
+     393: invokevirtual #296                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     396: aload         10
+     398: ldc_w         #313                // String ecsTaskId
+     401: invokestatic  #59                 // Method java/util/UUID.randomUUID:()Ljava/util/UUID;
+     404: invokevirtual #60                 // Method java/util/UUID.toString:()Ljava/lang/String;
+     407: invokevirtual #296                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     410: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+     413: ldc_w         #314                // String write data for robotId [{}], ecsTaskId [{}]
+     416: aload         7
+     418: aload         10
+     420: invokevirtual #315                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+     423: invokeinterface #235,  4          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+     428: aload_2
+     429: invokevirtual #87                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+     432: invokevirtual #230                // Method org/thingsboard/server/common/data/device/data/DeviceData.isAllowPublishSameRobotInfo:()Z
+     435: ifeq          453
+     438: aload         10
+     440: invokevirtual #316                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getData:()Ljava/util/Map;
+     443: aload         8
+     445: invokeinterface #317,  2          // InterfaceMethod java/util/Map.putAll:(Ljava/util/Map;)V
+     450: goto          465
+     453: aload         10
+     455: invokevirtual #316                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getData:()Ljava/util/Map;
+     458: aload         9
+     460: invokeinterface #317,  2          // InterfaceMethod java/util/Map.putAll:(Ljava/util/Map;)V
+     465: aload_3
+     466: invokevirtual #222                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getVelocity:()Lcom/google/protobuf/DoubleValue;
+     469: invokevirtual #223                // Method com/google/protobuf/DoubleValue.getValue:()D
+     472: dconst_0
+     473: dcmpl
+     474: ifeq          511
+     477: aload         10
+     479: invokevirtual #316                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getData:()Ljava/util/Map;
+     482: ldc           #225                // String velocity
+     484: aload_3
+     485: invokevirtual #222                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getVelocity:()Lcom/google/protobuf/DoubleValue;
+     488: invokevirtual #223                // Method com/google/protobuf/DoubleValue.getValue:()D
+     491: invokestatic  #226                // Method java/lang/Math.abs:(D)D
+     494: ldc2_w        #227                // double 1000.0d
+     497: dmul
+     498: d2i
+     499: invokestatic  #229                // Method java/lang/String.valueOf:(I)Ljava/lang/String;
+     502: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     507: pop
+     508: goto          526
+     511: aload         10
+     513: invokevirtual #316                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getData:()Ljava/util/Map;
+     516: ldc           #225                // String velocity
+     518: ldc           #214                // String 0
+     520: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     525: pop
+     526: aload         10
+     528: invokevirtual #316                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getData:()Ljava/util/Map;
+     531: ldc_w         #318                // String missionStatus
+     534: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     539: ifne          558
+     542: aload         10
+     544: invokevirtual #316                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getData:()Ljava/util/Map;
+     547: ldc_w         #318                // String missionStatus
+     550: ldc           #211                // String \"\"
+     552: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     557: pop
+     558: ldc_w         #319                // String RPC_CALL_FROM_SERVER_TO_DEVICE
+     561: aload_2
+     562: invokevirtual #121                // Method org/thingsboard/server/common/data/Device.getId:()Lorg/thingsboard/server/common/data/id/DeviceId;
+     565: aload         10
+     567: getstatic     #320                // Field org/thingsboard/server/common/msg/TbMsgDataType.JSON:Lorg/thingsboard/server/common/msg/TbMsgDataType;
+     570: ldc_w         #321                // String {}
+     573: invokestatic  #322                // Method org/thingsboard/server/common/msg/TbMsg.newMsg:(Ljava/lang/String;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/msg/TbMsgMetaData;Lorg/thingsboard/server/common/msg/TbMsgDataType;Ljava/lang/String;)Lorg/thingsboard/server/common/msg/TbMsg;
+     576: astore        11
+     578: aload         11
+     580: aload         6
+     582: invokevirtual #308                // Method org/thingsboard/server/common/data/device/connector/s7/S7ConfigGroup.getId:()Ljava/lang/String;
+     585: invokestatic  #323                // Method org/thingsboard/server/common/data/id/ChildDeviceId.fromString:(Ljava/lang/String;)Lorg/thingsboard/server/common/data/id/ChildDeviceId;
+     588: invokevirtual #324                // Method org/thingsboard/server/common/msg/TbMsg.setChildDeviceId:(Lorg/thingsboard/server/common/data/id/ChildDeviceId;)V
+     591: aload_1
+     592: invokestatic  #325                // Method org/thingsboard/server/common/data/id/TenantId.defaultId:()Lorg/thingsboard/server/common/data/id/TenantId;
+     595: aload_2
+     596: invokevirtual #121                // Method org/thingsboard/server/common/data/Device.getId:()Lorg/thingsboard/server/common/data/id/DeviceId;
+     599: aload         11
+     601: aconst_null
+     602: invokeinterface #326,  5          // InterfaceMethod org/thingsboard/server/cluster/TbClusterService.pushMsgToRuleEngine:(Lorg/thingsboard/server/common/data/id/TenantId;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/server/queue/TbQueueCallback;)V
+     607: goto          87
+     610: return
+
+  public java.util.Map<java.lang.String, java.lang.String> getRobotInfo(org.thingsboard.server.common.data.Device, com.kuka.wcs.grpc.platform.robot.WcsRobStatusStandardResponse);
+    Code:
+       0: new           #197                // class java/util/HashMap
+       3: dup
+       4: invokespecial #198                // Method java/util/HashMap."<init>":()V
+       7: astore_3
+       8: aload_2
+       9: ifnull        1286
+      12: aload_2
+      13: invokevirtual #327                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getAllFields:()Ljava/util/Map;
+      16: aload_0
+      17: aload_3
+      18: invokedynamic #328,  0            // InvokeDynamic #26:accept:(Lorg/thingsboard/server/service/rpc/DefaultWcsRpcService;Ljava/util/Map;)Ljava/util/function/BiConsumer;
+      23: invokeinterface #203,  2          // InterfaceMethod java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+      28: aload_3
+      29: ldc_w         #329                // String batteryLevel
+      32: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+      37: ifeq          58
+      40: aload_3
+      41: ldc_w         #329                // String batteryLevel
+      44: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      49: checkcast     #206                // class java/lang/CharSequence
+      52: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+      55: ifeq          73
+      58: aload_3
+      59: ldc_w         #329                // String batteryLevel
+      62: ldc           #214                // String 0
+      64: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      69: pop
+      70: goto          103
+      73: aload_3
+      74: ldc_w         #329                // String batteryLevel
+      77: aload_3
+      78: ldc_w         #329                // String batteryLevel
+      81: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      86: checkcast     #153                // class java/lang/String
+      89: ldc_w         #330                // String \\.
+      92: invokevirtual #331                // Method java/lang/String.split:(Ljava/lang/String;)[Ljava/lang/String;
+      95: iconst_0
+      96: aaload
+      97: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     102: pop
+     103: aload_3
+     104: ldc           #220                // String robStatus
+     106: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     111: ifeq          131
+     114: aload_3
+     115: ldc           #220                // String robStatus
+     117: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     122: checkcast     #206                // class java/lang/CharSequence
+     125: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+     128: ifeq          142
+     131: aload_3
+     132: ldc           #220                // String robStatus
+     134: ldc           #214                // String 0
+     136: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     141: pop
+     142: aload_3
+     143: ldc           #216                // String robWarningCode
+     145: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     150: ifeq          170
+     153: aload_3
+     154: ldc           #216                // String robWarningCode
+     156: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     161: checkcast     #206                // class java/lang/CharSequence
+     164: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+     167: ifeq          181
+     170: aload_3
+     171: ldc           #216                // String robWarningCode
+     173: ldc           #214                // String 0
+     175: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     180: pop
+     181: aload_3
+     182: ldc_w         #332                // String isLoaded
+     185: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     190: ifeq          211
+     193: aload_3
+     194: ldc_w         #332                // String isLoaded
+     197: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     202: checkcast     #206                // class java/lang/CharSequence
+     205: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+     208: ifeq          223
+     211: aload_3
+     212: ldc_w         #332                // String isLoaded
+     215: ldc           #214                // String 0
+     217: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     222: pop
+     223: aload_3
+     224: ldc           #221                // String robId
+     226: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     231: ifeq          242
+     234: ldc           #221                // String robId
+     236: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+     239: ifeq          253
+     242: aload_3
+     243: ldc           #221                // String robId
+     245: ldc           #214                // String 0
+     247: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     252: pop
+     253: aload_3
+     254: ldc           #210                // String robTaskCode
+     256: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     261: ifeq          281
+     264: aload_3
+     265: ldc           #210                // String robTaskCode
+     267: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     272: checkcast     #206                // class java/lang/CharSequence
+     275: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+     278: ifeq          292
+     281: aload_3
+     282: ldc           #210                // String robTaskCode
+     284: ldc           #211                // String \"\"
+     286: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     291: pop
+     292: aload_3
+     293: ldc_w         #333                // String passedNode
+     296: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     301: ifeq          322
+     304: aload_3
+     305: ldc_w         #333                // String passedNode
+     308: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     313: checkcast     #206                // class java/lang/CharSequence
+     316: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+     319: ifeq          334
+     322: aload_3
+     323: ldc_w         #333                // String passedNode
+     326: ldc           #214                // String 0
+     328: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     333: pop
+     334: aload_3
+     335: ldc_w         #334                // String nextNode
+     338: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     343: ifeq          364
+     346: aload_3
+     347: ldc_w         #334                // String nextNode
+     350: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     355: checkcast     #206                // class java/lang/CharSequence
+     358: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+     361: ifeq          537
+     364: getstatic     #231                // Field robotInfoMapUpdateHistory:Ljava/util/concurrent/ConcurrentMap;
+     367: aload_0
+     368: aload_1
+     369: aload_2
+     370: invokevirtual #288                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobId:()Lcom/google/protobuf/StringValue;
+     373: invokevirtual #289                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+     376: invokespecial #232                // Method getRobotInfoMapUpdateHistoryKey:(Lorg/thingsboard/server/common/data/Device;Ljava/lang/String;)Ljava/lang/String;
+     379: invokeinterface #199,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.containsKey:(Ljava/lang/Object;)Z
+     384: ifeq          473
+     387: getstatic     #231                // Field robotInfoMapUpdateHistory:Ljava/util/concurrent/ConcurrentMap;
+     390: aload_0
+     391: aload_1
+     392: aload_2
+     393: invokevirtual #288                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobId:()Lcom/google/protobuf/StringValue;
+     396: invokevirtual #289                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+     399: invokespecial #232                // Method getRobotInfoMapUpdateHistoryKey:(Lorg/thingsboard/server/common/data/Device;Ljava/lang/String;)Ljava/lang/String;
+     402: invokeinterface #194,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     407: checkcast     #11                 // class java/util/Map
+     410: ldc_w         #334                // String nextNode
+     413: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     418: checkcast     #206                // class java/lang/CharSequence
+     421: ldc           #214                // String 0
+     423: invokestatic  #335                // Method org/apache/commons/lang3/StringUtils.equals:(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z
+     426: ifne          473
+     429: aload_3
+     430: ldc_w         #334                // String nextNode
+     433: getstatic     #231                // Field robotInfoMapUpdateHistory:Ljava/util/concurrent/ConcurrentMap;
+     436: aload_0
+     437: aload_1
+     438: aload_2
+     439: invokevirtual #288                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobId:()Lcom/google/protobuf/StringValue;
+     442: invokevirtual #289                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+     445: invokespecial #232                // Method getRobotInfoMapUpdateHistoryKey:(Lorg/thingsboard/server/common/data/Device;Ljava/lang/String;)Ljava/lang/String;
+     448: invokeinterface #194,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     453: checkcast     #11                 // class java/util/Map
+     456: ldc_w         #334                // String nextNode
+     459: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     464: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     469: pop
+     470: goto          537
+     473: aload_3
+     474: ldc_w         #333                // String passedNode
+     477: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     482: ifeq          525
+     485: aload_3
+     486: ldc_w         #333                // String passedNode
+     489: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     494: checkcast     #206                // class java/lang/CharSequence
+     497: invokestatic  #336                // Method org/apache/commons/lang3/StringUtils.isNotEmpty:(Ljava/lang/CharSequence;)Z
+     500: ifeq          525
+     503: aload_3
+     504: ldc_w         #334                // String nextNode
+     507: aload_3
+     508: ldc_w         #333                // String passedNode
+     511: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     516: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     521: pop
+     522: goto          537
+     525: aload_3
+     526: ldc_w         #334                // String nextNode
+     529: ldc           #214                // String 0
+     531: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     536: pop
+     537: getstatic     #2                  // Field missionStatusStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+     540: aload_2
+     541: invokevirtual #288                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobId:()Lcom/google/protobuf/StringValue;
+     544: invokevirtual #289                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+     547: invokeinterface #199,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.containsKey:(Ljava/lang/Object;)Z
+     552: ifeq          622
+     555: getstatic     #2                  // Field missionStatusStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+     558: aload_2
+     559: invokevirtual #288                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobId:()Lcom/google/protobuf/StringValue;
+     562: invokevirtual #289                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+     565: invokeinterface #194,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     570: checkcast     #337                // class com/kuka/wcs/grpc/mission/WcsMissionStatusResponse
+     573: invokevirtual #338                // Method com/kuka/wcs/grpc/mission/WcsMissionStatusResponse.getMissionStatus:()Lcom/kuka/wcs/grpc/mission/MissionStatusGto;
+     576: invokevirtual #339                // Method com/kuka/wcs/grpc/mission/MissionStatusGto.name:()Ljava/lang/String;
+     579: iconst_2
+     580: anewarray     #206                // class java/lang/CharSequence
+     583: dup
+     584: iconst_0
+     585: getstatic     #340                // Field com/kuka/wcs/grpc/mission/MissionStatusGto.CANCEL_COMPLETED:Lcom/kuka/wcs/grpc/mission/MissionStatusGto;
+     588: invokevirtual #339                // Method com/kuka/wcs/grpc/mission/MissionStatusGto.name:()Ljava/lang/String;
+     591: aastore
+     592: dup
+     593: iconst_1
+     594: getstatic     #341                // Field com/kuka/wcs/grpc/mission/MissionStatusGto.TASK_COMPLETED:Lcom/kuka/wcs/grpc/mission/MissionStatusGto;
+     597: invokevirtual #339                // Method com/kuka/wcs/grpc/mission/MissionStatusGto.name:()Ljava/lang/String;
+     600: aastore
+     601: invokestatic  #342                // Method org/apache/commons/lang3/StringUtils.containsAny:(Ljava/lang/CharSequence;[Ljava/lang/CharSequence;)Z
+     604: ifeq          622
+     607: aload_3
+     608: ldc_w         #343                // String desNode
+     611: ldc           #214                // String 0
+     613: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     618: pop
+     619: goto          792
+     622: getstatic     #2                  // Field missionStatusStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+     625: aload_2
+     626: invokevirtual #288                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobId:()Lcom/google/protobuf/StringValue;
+     629: invokevirtual #289                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+     632: invokeinterface #199,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.containsKey:(Ljava/lang/Object;)Z
+     637: ifeq          701
+     640: getstatic     #2                  // Field missionStatusStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+     643: aload_2
+     644: invokevirtual #288                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobId:()Lcom/google/protobuf/StringValue;
+     647: invokevirtual #289                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+     650: invokeinterface #194,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     655: checkcast     #337                // class com/kuka/wcs/grpc/mission/WcsMissionStatusResponse
+     658: invokevirtual #344                // Method com/kuka/wcs/grpc/mission/WcsMissionStatusResponse.getNextNodeCode:()Ljava/lang/String;
+     661: invokestatic  #336                // Method org/apache/commons/lang3/StringUtils.isNotEmpty:(Ljava/lang/CharSequence;)Z
+     664: ifeq          701
+     667: aload_3
+     668: ldc_w         #343                // String desNode
+     671: getstatic     #2                  // Field missionStatusStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+     674: aload_2
+     675: invokevirtual #288                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobId:()Lcom/google/protobuf/StringValue;
+     678: invokevirtual #289                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+     681: invokeinterface #194,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     686: checkcast     #337                // class com/kuka/wcs/grpc/mission/WcsMissionStatusResponse
+     689: invokevirtual #344                // Method com/kuka/wcs/grpc/mission/WcsMissionStatusResponse.getNextNodeCode:()Ljava/lang/String;
+     692: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     697: pop
+     698: goto          792
+     701: getstatic     #2                  // Field missionStatusStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+     704: aload_2
+     705: invokevirtual #288                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobId:()Lcom/google/protobuf/StringValue;
+     708: invokevirtual #289                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+     711: invokeinterface #199,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.containsKey:(Ljava/lang/Object;)Z
+     716: ifeq          780
+     719: getstatic     #2                  // Field missionStatusStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+     722: aload_2
+     723: invokevirtual #288                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobId:()Lcom/google/protobuf/StringValue;
+     726: invokevirtual #289                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+     729: invokeinterface #194,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     734: checkcast     #337                // class com/kuka/wcs/grpc/mission/WcsMissionStatusResponse
+     737: invokevirtual #345                // Method com/kuka/wcs/grpc/mission/WcsMissionStatusResponse.getCurrentNodeCode:()Ljava/lang/String;
+     740: invokestatic  #336                // Method org/apache/commons/lang3/StringUtils.isNotEmpty:(Ljava/lang/CharSequence;)Z
+     743: ifeq          780
+     746: aload_3
+     747: ldc_w         #343                // String desNode
+     750: getstatic     #2                  // Field missionStatusStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+     753: aload_2
+     754: invokevirtual #288                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobId:()Lcom/google/protobuf/StringValue;
+     757: invokevirtual #289                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+     760: invokeinterface #194,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     765: checkcast     #337                // class com/kuka/wcs/grpc/mission/WcsMissionStatusResponse
+     768: invokevirtual #345                // Method com/kuka/wcs/grpc/mission/WcsMissionStatusResponse.getCurrentNodeCode:()Ljava/lang/String;
+     771: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     776: pop
+     777: goto          792
+     780: aload_3
+     781: ldc_w         #343                // String desNode
+     784: ldc           #214                // String 0
+     786: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     791: pop
+     792: aload_3
+     793: ldc_w         #346                // String runningMode
+     796: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     801: ifeq          822
+     804: aload_3
+     805: ldc_w         #346                // String runningMode
+     808: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     813: checkcast     #206                // class java/lang/CharSequence
+     816: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+     819: ifeq          834
+     822: aload_3
+     823: ldc_w         #346                // String runningMode
+     826: ldc           #211                // String \"\"
+     828: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     833: pop
+     834: ldc_w         #347                // String AUTO
+     837: aload_2
+     838: invokevirtual #348                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRunningMode:()Lcom/google/protobuf/StringValue;
+     841: invokevirtual #289                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+     844: invokevirtual #250                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     847: ifeq          865
+     850: aload_3
+     851: ldc_w         #349                // String automatic
+     854: ldc           #208                // String true
+     856: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     861: pop
+     862: goto          877
+     865: aload_3
+     866: ldc_w         #349                // String automatic
+     869: ldc           #219                // String false
+     871: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     876: pop
+     877: aload_2
+     878: invokevirtual #350                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobStatus:()Lcom/google/protobuf/Int32Value;
+     881: invokevirtual #351                // Method com/google/protobuf/Int32Value.getValue:()I
+     884: bipush        7
+     886: if_icmpeq     900
+     889: aload_2
+     890: invokevirtual #350                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobStatus:()Lcom/google/protobuf/Int32Value;
+     893: invokevirtual #351                // Method com/google/protobuf/Int32Value.getValue:()I
+     896: iconst_2
+     897: if_icmpne     915
+     900: aload_3
+     901: ldc_w         #353                // String error
+     904: ldc           #208                // String true
+     906: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     911: pop
+     912: goto          927
+     915: aload_3
+     916: ldc_w         #353                // String error
+     919: ldc           #219                // String false
+     921: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     926: pop
+     927: aload_2
+     928: invokevirtual #354                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getIsLoaded:()Lcom/google/protobuf/Int32Value;
+     931: invokevirtual #351                // Method com/google/protobuf/Int32Value.getValue:()I
+     934: iconst_1
+     935: if_icmpne     953
+     938: aload_3
+     939: ldc_w         #355                // String notLoaded
+     942: ldc           #219                // String false
+     944: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     949: pop
+     950: goto          965
+     953: aload_3
+     954: ldc_w         #355                // String notLoaded
+     957: ldc           #208                // String true
+     959: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     964: pop
+     965: aload_2
+     966: invokevirtual #222                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getVelocity:()Lcom/google/protobuf/DoubleValue;
+     969: invokevirtual #223                // Method com/google/protobuf/DoubleValue.getValue:()D
+     972: dconst_0
+     973: dcmpl
+     974: ifeq          988
+     977: aload_2
+     978: invokevirtual #350                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobStatus:()Lcom/google/protobuf/Int32Value;
+     981: invokevirtual #351                // Method com/google/protobuf/Int32Value.getValue:()I
+     984: iconst_3
+     985: if_icmpne     1003
+     988: aload_3
+     989: ldc_w         #356                // String isMoving
+     992: ldc           #219                // String false
+     994: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     999: pop
+    1000: goto          1015
+    1003: aload_3
+    1004: ldc_w         #356                // String isMoving
+    1007: ldc           #208                // String true
+    1009: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1014: pop
+    1015: aload_3
+    1016: ldc_w         #357                // String liftState
+    1019: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+    1024: ifeq          1045
+    1027: aload_3
+    1028: ldc_w         #357                // String liftState
+    1031: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+    1036: checkcast     #206                // class java/lang/CharSequence
+    1039: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+    1042: ifeq          1057
+    1045: aload_3
+    1046: ldc_w         #357                // String liftState
+    1049: ldc           #219                // String false
+    1051: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1056: pop
+    1057: aload_3
+    1058: ldc_w         #358                // String liftHeight
+    1061: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+    1066: ifeq          1087
+    1069: aload_3
+    1070: ldc_w         #358                // String liftHeight
+    1073: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+    1078: checkcast     #206                // class java/lang/CharSequence
+    1081: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+    1084: ifeq          1102
+    1087: aload_3
+    1088: ldc_w         #358                // String liftHeight
+    1091: ldc           #214                // String 0
+    1093: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1098: pop
+    1099: goto          1132
+    1102: aload_3
+    1103: ldc_w         #358                // String liftHeight
+    1106: aload_3
+    1107: ldc_w         #358                // String liftHeight
+    1110: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+    1115: checkcast     #153                // class java/lang/String
+    1118: ldc_w         #330                // String \\.
+    1121: invokevirtual #331                // Method java/lang/String.split:(Ljava/lang/String;)[Ljava/lang/String;
+    1124: iconst_0
+    1125: aaload
+    1126: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1131: pop
+    1132: aload_3
+    1133: ldc_w         #359                // String containerCode
+    1136: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+    1141: ifeq          1162
+    1144: aload_3
+    1145: ldc_w         #359                // String containerCode
+    1148: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+    1153: checkcast     #206                // class java/lang/CharSequence
+    1156: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+    1159: ifeq          1174
+    1162: aload_3
+    1163: ldc_w         #359                // String containerCode
+    1166: ldc           #214                // String 0
+    1168: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1173: pop
+    1174: getstatic     #2                  // Field missionStatusStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+    1177: aload_2
+    1178: invokevirtual #288                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobId:()Lcom/google/protobuf/StringValue;
+    1181: invokevirtual #289                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+    1184: invokeinterface #199,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.containsKey:(Ljava/lang/Object;)Z
+    1189: ifeq          1229
+    1192: aload_3
+    1193: ldc_w         #318                // String missionStatus
+    1196: getstatic     #2                  // Field missionStatusStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+    1199: aload_2
+    1200: invokevirtual #288                // Method com/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse.getRobId:()Lcom/google/protobuf/StringValue;
+    1203: invokevirtual #289                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+    1206: invokeinterface #194,  2          // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+    1211: checkcast     #337                // class com/kuka/wcs/grpc/mission/WcsMissionStatusResponse
+    1214: invokevirtual #338                // Method com/kuka/wcs/grpc/mission/WcsMissionStatusResponse.getMissionStatus:()Lcom/kuka/wcs/grpc/mission/MissionStatusGto;
+    1217: invokevirtual #339                // Method com/kuka/wcs/grpc/mission/MissionStatusGto.name:()Ljava/lang/String;
+    1220: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1225: pop
+    1226: goto          1241
+    1229: aload_3
+    1230: ldc_w         #318                // String missionStatus
+    1233: ldc           #211                // String \"\"
+    1235: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1240: pop
+    1241: aload_3
+    1242: ldc_w         #360                // String rfid
+    1245: invokeinterface #205,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+    1250: ifeq          1271
+    1253: aload_3
+    1254: ldc_w         #360                // String rfid
+    1257: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+    1262: checkcast     #206                // class java/lang/CharSequence
+    1265: invokestatic  #207                // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+    1268: ifeq          1511
+    1271: aload_3
+    1272: ldc_w         #360                // String rfid
+    1275: ldc           #214                // String 0
+    1277: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1282: pop
+    1283: goto          1511
+    1286: aload_3
+    1287: ldc_w         #329                // String batteryLevel
+    1290: ldc           #214                // String 0
+    1292: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1297: pop
+    1298: aload_3
+    1299: ldc           #220                // String robStatus
+    1301: ldc           #214                // String 0
+    1303: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1308: pop
+    1309: aload_3
+    1310: ldc           #216                // String robWarningCode
+    1312: ldc           #214                // String 0
+    1314: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1319: pop
+    1320: aload_3
+    1321: ldc_w         #332                // String isLoaded
+    1324: ldc           #214                // String 0
+    1326: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1331: pop
+    1332: aload_3
+    1333: ldc           #221                // String robId
+    1335: ldc           #214                // String 0
+    1337: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1342: pop
+    1343: aload_3
+    1344: ldc           #210                // String robTaskCode
+    1346: ldc           #211                // String \"\"
+    1348: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1353: pop
+    1354: aload_3
+    1355: ldc_w         #333                // String passedNode
+    1358: ldc           #214                // String 0
+    1360: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1365: pop
+    1366: aload_3
+    1367: ldc_w         #334                // String nextNode
+    1370: ldc           #214                // String 0
+    1372: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1377: pop
+    1378: aload_3
+    1379: ldc_w         #343                // String desNode
+    1382: ldc           #214                // String 0
+    1384: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1389: pop
+    1390: aload_3
+    1391: ldc_w         #346                // String runningMode
+    1394: ldc_w         #361                // String UNKNOWN
+    1397: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1402: pop
+    1403: aload_3
+    1404: ldc_w         #349                // String automatic
+    1407: ldc           #219                // String false
+    1409: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1414: pop
+    1415: aload_3
+    1416: ldc_w         #353                // String error
+    1419: ldc           #219                // String false
+    1421: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1426: pop
+    1427: aload_3
+    1428: ldc_w         #355                // String notLoaded
+    1431: ldc           #219                // String false
+    1433: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1438: pop
+    1439: aload_3
+    1440: ldc_w         #356                // String isMoving
+    1443: ldc           #219                // String false
+    1445: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1450: pop
+    1451: aload_3
+    1452: ldc_w         #359                // String containerCode
+    1455: ldc           #214                // String 0
+    1457: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1462: pop
+    1463: aload_3
+    1464: ldc_w         #357                // String liftState
+    1467: ldc           #219                // String false
+    1469: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1474: pop
+    1475: aload_3
+    1476: ldc_w         #358                // String liftHeight
+    1479: ldc           #214                // String 0
+    1481: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1486: pop
+    1487: aload_3
+    1488: ldc_w         #318                // String missionStatus
+    1491: ldc           #211                // String \"\"
+    1493: invokeinterface #215,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1498: pop
+    1499: aload_3
+    1500: ldc_w         #360                // String rfid
+    1503: ldc           #214                // String 0
+    1505: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    1510: pop
+    1511: aload_3
+    1512: areturn
+
+  private java.lang.String getValueAsString(java.lang.Object);
+    Code:
+       0: aload_1
+       1: ifnonnull     6
+       4: aconst_null
+       5: areturn
+       6: aload_1
+       7: instanceof    #153                // class java/lang/String
+      10: ifeq          18
+      13: aload_1
+      14: checkcast     #153                // class java/lang/String
+      17: areturn
+      18: aload_1
+      19: instanceof    #362                // class com/google/protobuf/StringValue
+      22: ifeq          33
+      25: aload_1
+      26: checkcast     #362                // class com/google/protobuf/StringValue
+      29: invokevirtual #289                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+      32: areturn
+      33: aload_1
+      34: instanceof    #363                // class com/google/protobuf/Int32Value
+      37: ifeq          51
+      40: aload_1
+      41: checkcast     #363                // class com/google/protobuf/Int32Value
+      44: invokevirtual #351                // Method com/google/protobuf/Int32Value.getValue:()I
+      47: invokestatic  #229                // Method java/lang/String.valueOf:(I)Ljava/lang/String;
+      50: areturn
+      51: aload_1
+      52: instanceof    #364                // class com/google/protobuf/DoubleValue
+      55: ifeq          69
+      58: aload_1
+      59: checkcast     #364                // class com/google/protobuf/DoubleValue
+      62: invokevirtual #223                // Method com/google/protobuf/DoubleValue.getValue:()D
+      65: invokestatic  #365                // Method java/lang/String.valueOf:(D)Ljava/lang/String;
+      68: areturn
+      69: aload_1
+      70: invokevirtual #366                // Method java/lang/Object.toString:()Ljava/lang/String;
+      73: areturn
+
+  public void subscribeAndPublishMissionStatus(org.thingsboard.server.cluster.TbClusterService);
+    Code:
+       0: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+       3: ldc_w         #367                // String start subscribe mission status
+       6: invokeinterface #256,  2          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;)V
+      11: aload_0
+      12: getfield      #27                 // Field missionServiceStub:Lcom/kuka/wcs/grpc/mission/WcsMissionServiceGrpc$WcsMissionServiceStub;
+      15: invokestatic  #368                // Method com/kuka/wcs/grpc/mission/EmptyParameterRequest.newBuilder:()Lcom/kuka/wcs/grpc/mission/EmptyParameterRequest$Builder;
+      18: invokevirtual #369                // Method com/kuka/wcs/grpc/mission/EmptyParameterRequest$Builder.build:()Lcom/kuka/wcs/grpc/mission/EmptyParameterRequest;
+      21: new           #370                // class org/thingsboard/server/service/rpc/DefaultWcsRpcService$6
+      24: dup
+      25: aload_0
+      26: aload_1
+      27: invokespecial #371                // Method org/thingsboard/server/service/rpc/DefaultWcsRpcService$6."<init>":(Lorg/thingsboard/server/service/rpc/DefaultWcsRpcService;Lorg/thingsboard/server/cluster/TbClusterService;)V
+      30: invokevirtual #372                // Method com/kuka/wcs/grpc/mission/WcsMissionServiceGrpc$WcsMissionServiceStub.subscribeMissionStatus:(Lcom/kuka/wcs/grpc/mission/EmptyParameterRequest;Lio/grpc/stub/StreamObserver;)V
+      33: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+      36: ldc_w         #373                // String end subscribe mission status
+      39: invokeinterface #256,  2          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;)V
+      44: return
+
+  private java.lang.String getRobotInfoMapUpdateHistoryKey(org.thingsboard.server.common.data.Device, java.lang.String);
+    Code:
+       0: new           #374                // class java/lang/StringBuilder
+       3: dup
+       4: invokespecial #375                // Method java/lang/StringBuilder."<init>":()V
+       7: aload_1
+       8: invokevirtual #117                // Method org/thingsboard/server/common/data/Device.getName:()Ljava/lang/String;
+      11: invokevirtual #376                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      14: ldc_w         #284                // String -
+      17: invokevirtual #376                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      20: aload_2
+      21: invokevirtual #376                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      24: invokevirtual #377                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      27: areturn
+
+  private static <K, V> java.util.Map<K, V> extractDiffMap(java.util.Map<K, V>, java.util.Map<K, V>);
+    Code:
+       0: aload_0
+       1: invokestatic  #378                // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Map;)Z
+       4: ifne          14
+       7: aload_1
+       8: invokestatic  #378                // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Map;)Z
+      11: ifeq          16
+      14: aload_0
+      15: areturn
+      16: aload_0
+      17: invokeinterface #379,  1          // InterfaceMethod java/util/Map.keySet:()Ljava/util/Set;
+      22: invokeinterface #137,  1          // InterfaceMethod java/util/Set.stream:()Ljava/util/stream/Stream;
+      27: aload_0
+      28: aload_1
+      29: invokedynamic #380,  0            // InvokeDynamic #27:test:(Ljava/util/Map;Ljava/util/Map;)Ljava/util/function/Predicate;
+      34: invokeinterface #188,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+      39: invokedynamic #381,  0            // InvokeDynamic #28:apply:()Ljava/util/function/Function;
+      44: aload_0
+      45: dup
+      46: invokevirtual #382                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      49: pop
+      50: invokedynamic #383,  0            // InvokeDynamic #29:apply:(Ljava/util/Map;)Ljava/util/function/Function;
+      55: invokestatic  #146                // Method java/util/stream/Collectors.toMap:(Ljava/util/function/Function;Ljava/util/function/Function;)Ljava/util/stream/Collector;
+      58: invokeinterface #57,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+      63: checkcast     #11                 // class java/util/Map
+      66: areturn
+
+  private static java.lang.Object lambda$extractDiffMap$26(java.lang.Object);
+    Code:
+       0: aload_0
+       1: areturn
+
+  private static boolean lambda$extractDiffMap$25(java.util.Map, java.util.Map, java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_2
+       2: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       7: aload_1
+       8: aload_2
+       9: invokeinterface #10,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      14: invokestatic  #118                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      17: ifne          24
+      20: iconst_1
+      21: goto          25
+      24: iconst_0
+      25: ireturn
+
+  private void lambda$getRobotInfo$24(java.util.Map, com.google.protobuf.Descriptors$FieldDescriptor, java.lang.Object);
+    Code:
+       0: aload_2
+       1: invokevirtual #384                // Method com/google/protobuf/Descriptors$FieldDescriptor.getJsonName:()Ljava/lang/String;
+       4: iconst_4
+       5: anewarray     #206                // class java/lang/CharSequence
+       8: dup
+       9: iconst_0
+      10: ldc_w         #385                // String xCoordinate
+      13: aastore
+      14: dup
+      15: iconst_1
+      16: ldc_w         #386                // String yCoordinate
+      19: aastore
+      20: dup
+      21: iconst_2
+      22: ldc           #225                // String velocity
+      24: aastore
+      25: dup
+      26: iconst_3
+      27: ldc_w         #387                // String robOrientation
+      30: aastore
+      31: invokestatic  #342                // Method org/apache/commons/lang3/StringUtils.containsAny:(Ljava/lang/CharSequence;[Ljava/lang/CharSequence;)Z
+      34: ifne          53
+      37: aload_1
+      38: aload_2
+      39: invokevirtual #384                // Method com/google/protobuf/Descriptors$FieldDescriptor.getJsonName:()Ljava/lang/String;
+      42: aload_0
+      43: aload_3
+      44: invokespecial #388                // Method getValueAsString:(Ljava/lang/Object;)Ljava/lang/String;
+      47: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      52: pop
+      53: return
+
+  private void lambda$queryAndPublishRobotStatus$23(java.util.List, org.thingsboard.server.cluster.TbClusterService, com.kuka.wcs.grpc.platform.robot.WcsRobStatusStandardResponse);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: aload_2
+       3: aload_3
+       4: invokedynamic #389,  0            // InvokeDynamic #30:accept:(Lorg/thingsboard/server/service/rpc/DefaultWcsRpcService;Lorg/thingsboard/server/cluster/TbClusterService;Lcom/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse;)Ljava/util/function/Consumer;
+       9: invokeinterface #130,  2          // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      14: return
+
+  private void lambda$null$22(org.thingsboard.server.cluster.TbClusterService, com.kuka.wcs.grpc.platform.robot.WcsRobStatusStandardResponse, org.thingsboard.server.common.data.Device);
+    Code:
+       0: getstatic     #390                // Field org/thingsboard/server/common/data/device/data/PublishRobotInfoMode.REALTIME:Lorg/thingsboard/server/common/data/device/data/PublishRobotInfoMode;
+       3: aload_3
+       4: invokevirtual #87                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+       7: invokevirtual #391                // Method org/thingsboard/server/common/data/device/data/DeviceData.getPublishRobotInfoMode:()Lorg/thingsboard/server/common/data/device/data/PublishRobotInfoMode;
+      10: if_acmpne     20
+      13: aload_0
+      14: aload_1
+      15: aload_3
+      16: aload_2
+      17: invokevirtual #392                // Method publishRobotStatus:(Lorg/thingsboard/server/cluster/TbClusterService;Lorg/thingsboard/server/common/data/Device;Lcom/kuka/wcs/grpc/platform/robot/WcsRobStatusStandardResponse;)V
+      20: return
+
+  private static boolean lambda$queryAndPublishRobotStatus$21(org.thingsboard.server.common.data.Device);
+    Code:
+       0: aload_0
+       1: invokevirtual #87                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+       4: invokevirtual #193                // Method org/thingsboard/server/common/data/device/data/DeviceData.isEnableSubscribeRobotInfo:()Z
+       7: ifeq          24
+      10: aload_0
+      11: invokevirtual #87                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+      14: invokevirtual #393                // Method org/thingsboard/server/common/data/device/data/DeviceData.isEnablePublishRobotInfo:()Z
+      17: ifeq          24
+      20: iconst_1
+      21: goto          25
+      24: iconst_0
+      25: ireturn
+
+  private static boolean lambda$queryRobotInfos$20(org.thingsboard.server.common.data.Device);
+    Code:
+       0: aload_0
+       1: invokevirtual #87                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+       4: invokevirtual #393                // Method org/thingsboard/server/common/data/device/data/DeviceData.isEnablePublishRobotInfo:()Z
+       7: ifeq          24
+      10: aload_0
+      11: invokevirtual #87                 // Method org/thingsboard/server/common/data/Device.getDeviceData:()Lorg/thingsboard/server/common/data/device/data/DeviceData;
+      14: invokevirtual #193                // Method org/thingsboard/server/common/data/device/data/DeviceData.isEnableSubscribeRobotInfo:()Z
+      17: ifne          24
+      20: iconst_1
+      21: goto          25
+      24: iconst_0
+      25: ireturn
+
+  private static void lambda$getRobotInfoById$19(java.util.Map, com.google.protobuf.Descriptors$FieldDescriptor, java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #384                // Method com/google/protobuf/Descriptors$FieldDescriptor.getJsonName:()Ljava/lang/String;
+       5: aload_2
+       6: invokestatic  #394                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+       9: invokeinterface #209,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      14: pop
+      15: return
+
+  private static void lambda$cacheAllRobotInfos$18(com.kuka.wcs.grpc.platform.robot.RobotInfoResponse);
+    Code:
+       0: getstatic     #190                // Field robotInfoMapCache:Ljava/util/concurrent/ConcurrentMap;
+       3: aload_0
+       4: invokevirtual #395                // Method com/kuka/wcs/grpc/platform/robot/RobotInfoResponse.getRobId:()Ljava/lang/String;
+       7: aload_0
+       8: invokeinterface #236,  3          // InterfaceMethod java/util/concurrent/ConcurrentMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      13: pop
+      14: return
+
+  private static com.kuka.ecs.grpc.req.DeviceChangeInfoBuilder lambda$updateDeviceInformWCS$17(org.thingsboard.server.common.data.Device, org.thingsboard.server.common.data.rule.RuleNode);
+    Code:
+       0: aload_1
+       1: invokestatic  #396                // Method org/thingsboard/rule/engine/event/EventConfig.getEventNodeConfiguration:(Lorg/thingsboard/server/common/data/rule/RuleNode;)Lorg/thingsboard/rule/engine/event/EventConfig;
+       4: astore_2
+       5: ldc_w         #398                // String org.thingsboard.rule.engine.event.TbReceiveEventNode
+       8: aload_1
+       9: invokevirtual #399                // Method org/thingsboard/server/common/data/rule/RuleNode.getType:()Ljava/lang/String;
+      12: invokestatic  #118                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      15: ifeq          22
+      18: iconst_1
+      19: goto          23
+      22: iconst_2
+      23: istore_3
+      24: aload_0
+      25: aload_1
+      26: invokevirtual #400                // Method org/thingsboard/server/common/data/rule/RuleNode.getName:()Ljava/lang/String;
+      29: invokevirtual #401                // Method org/thingsboard/server/common/data/Device.getV1DeviceEventName:(Ljava/lang/String;)Ljava/lang/String;
+      32: astore        4
+      34: new           #119                // class com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder
+      37: dup
+      38: getstatic     #157                // Field com/kuka/ecs/grpc/req/ChangeTypeEnum.EVENT:Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;
+      41: aload_0
+      42: invokevirtual #121                // Method org/thingsboard/server/common/data/Device.getId:()Lorg/thingsboard/server/common/data/id/DeviceId;
+      45: invokevirtual #122                // Method org/thingsboard/server/common/data/id/DeviceId.toString:()Ljava/lang/String;
+      48: aconst_null
+      49: aload_2
+      50: invokevirtual #402                // Method org/thingsboard/rule/engine/event/EventConfig.getEventId:()Ljava/lang/String;
+      53: aload         4
+      55: aconst_null
+      56: aconst_null
+      57: iconst_2
+      58: iload_3
+      59: iconst_0
+      60: aconst_null
+      61: aconst_null
+      62: invokespecial #123                // Method com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder."<init>":(Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;)V
+      65: areturn
+
+  private static com.kuka.ecs.grpc.req.DeviceChangeInfoBuilder lambda$updateDeviceInformWCS$16(org.thingsboard.server.common.data.Device, org.thingsboard.server.common.data.device.connector.modbus.EventAttribute);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #154                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventName:()Ljava/lang/String;
+       5: invokevirtual #401                // Method org/thingsboard/server/common/data/Device.getV1DeviceEventName:(Ljava/lang/String;)Ljava/lang/String;
+       8: astore_2
+       9: aload_1
+      10: invokevirtual #156                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.isReceiveEvent:()Z
+      13: ifeq          20
+      16: iconst_1
+      17: goto          21
+      20: iconst_2
+      21: istore_3
+      22: new           #119                // class com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder
+      25: dup
+      26: getstatic     #157                // Field com/kuka/ecs/grpc/req/ChangeTypeEnum.EVENT:Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;
+      29: aload_0
+      30: invokevirtual #121                // Method org/thingsboard/server/common/data/Device.getId:()Lorg/thingsboard/server/common/data/id/DeviceId;
+      33: invokevirtual #122                // Method org/thingsboard/server/common/data/id/DeviceId.toString:()Ljava/lang/String;
+      36: aconst_null
+      37: aload_1
+      38: invokevirtual #151                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventId:()Ljava/lang/String;
+      41: aload_2
+      42: aconst_null
+      43: aconst_null
+      44: iconst_2
+      45: iload_3
+      46: aload_1
+      47: invokevirtual #152                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getIndex:()Ljava/lang/Integer;
+      50: invokevirtual #158                // Method java/lang/Integer.intValue:()I
+      53: aload_1
+      54: invokevirtual #159                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventCode:()Ljava/lang/String;
+      57: aconst_null
+      58: invokespecial #123                // Method com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder."<init>":(Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;)V
+      61: areturn
+
+  private static org.thingsboard.server.common.data.ChildDevice lambda$updateDeviceInformWCS$15(org.thingsboard.server.common.data.ChildDevice, org.thingsboard.server.common.data.ChildDevice);
+    Code:
+       0: aload_0
+       1: areturn
+
+  private static org.thingsboard.server.common.data.ChildDevice lambda$updateDeviceInformWCS$14(org.thingsboard.server.common.data.ChildDevice);
+    Code:
+       0: aload_0
+       1: areturn
+
+  private static org.thingsboard.server.common.data.id.ChildDeviceId lambda$updateDeviceInformWCS$13(org.thingsboard.server.common.data.ChildDevice);
+    Code:
+       0: aload_0
+       1: invokevirtual #172                // Method org/thingsboard/server/common/data/ChildDevice.getId:()Lorg/thingsboard/server/common/data/id/ChildDeviceId;
+       4: areturn
+
+  private static void lambda$updateDeviceInformWCS$12(org.thingsboard.server.common.data.Device, java.util.List, org.thingsboard.server.common.data.device.connector.BaseGroup);
+    Code:
+       0: aload_2
+       1: invokevirtual #403                // Method org/thingsboard/server/common/data/device/connector/BaseGroup.getEventAttributes:()Ljava/util/Set;
+       4: invokeinterface #137,  1          // InterfaceMethod java/util/Set.stream:()Ljava/util/stream/Stream;
+       9: aload_0
+      10: aload_2
+      11: invokedynamic #404,  0            // InvokeDynamic #31:apply:(Lorg/thingsboard/server/common/data/Device;Lorg/thingsboard/server/common/data/device/connector/BaseGroup;)Ljava/util/function/Function;
+      16: invokeinterface #55,  2           // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      21: invokestatic  #56                 // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+      24: invokeinterface #57,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+      29: checkcast     #58                 // class java/util/List
+      32: astore_3
+      33: aload_1
+      34: aload_3
+      35: invokeinterface #113,  2          // InterfaceMethod java/util/List.addAll:(Ljava/util/Collection;)Z
+      40: pop
+      41: return
+
+  private static com.kuka.ecs.grpc.req.DeviceChangeInfoBuilder lambda$null$11(org.thingsboard.server.common.data.Device, org.thingsboard.server.common.data.device.connector.BaseGroup, org.thingsboard.server.common.data.device.connector.modbus.EventAttribute);
+    Code:
+       0: aload_2
+       1: invokevirtual #156                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.isReceiveEvent:()Z
+       4: ifeq          11
+       7: iconst_1
+       8: goto          12
+      11: iconst_2
+      12: istore_3
+      13: aload_2
+      14: invokevirtual #151                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventId:()Ljava/lang/String;
+      17: astore        4
+      19: aload_0
+      20: aload_1
+      21: invokevirtual #405                // Method org/thingsboard/server/common/data/device/connector/BaseGroup.getName:()Ljava/lang/String;
+      24: aload_2
+      25: invokevirtual #154                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventName:()Ljava/lang/String;
+      28: invokevirtual #155                // Method org/thingsboard/server/common/data/Device.getV2DeviceEventName:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      31: astore        5
+      33: new           #119                // class com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder
+      36: dup
+      37: getstatic     #157                // Field com/kuka/ecs/grpc/req/ChangeTypeEnum.EVENT:Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;
+      40: aload_0
+      41: invokevirtual #121                // Method org/thingsboard/server/common/data/Device.getId:()Lorg/thingsboard/server/common/data/id/DeviceId;
+      44: invokevirtual #122                // Method org/thingsboard/server/common/data/id/DeviceId.toString:()Ljava/lang/String;
+      47: aload_0
+      48: invokevirtual #117                // Method org/thingsboard/server/common/data/Device.getName:()Ljava/lang/String;
+      51: aload         4
+      53: aload         5
+      55: aconst_null
+      56: aconst_null
+      57: iconst_3
+      58: iload_3
+      59: aload_2
+      60: invokevirtual #152                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getIndex:()Ljava/lang/Integer;
+      63: invokevirtual #158                // Method java/lang/Integer.intValue:()I
+      66: aload_2
+      67: invokevirtual #159                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventCode:()Ljava/lang/String;
+      70: aload_0
+      71: invokevirtual #160                // Method org/thingsboard/server/common/data/Device.getDeviceType:()Ljava/lang/String;
+      74: invokespecial #123                // Method com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder."<init>":(Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;)V
+      77: areturn
+
+  private static org.thingsboard.server.common.data.device.connector.modbus.EventAttribute lambda$updateDeviceInformWCS$10(org.thingsboard.server.common.data.device.connector.modbus.EventAttribute, org.thingsboard.server.common.data.device.connector.modbus.EventAttribute);
+    Code:
+       0: aload_0
+       1: areturn
+
+  private static org.thingsboard.server.common.data.device.connector.modbus.EventAttribute lambda$updateDeviceInformWCS$9(org.thingsboard.server.common.data.device.connector.modbus.EventAttribute);
+    Code:
+       0: aload_0
+       1: areturn
+
+  private static org.thingsboard.server.common.data.device.connector.modbus.EventAttribute lambda$updateDeviceInformWCS$8(org.thingsboard.server.common.data.device.connector.modbus.EventAttribute, org.thingsboard.server.common.data.device.connector.modbus.EventAttribute);
+    Code:
+       0: aload_0
+       1: areturn
+
+  private static org.thingsboard.server.common.data.device.connector.modbus.EventAttribute lambda$updateDeviceInformWCS$7(org.thingsboard.server.common.data.device.connector.modbus.EventAttribute);
+    Code:
+       0: aload_0
+       1: areturn
+
+  private static java.util.stream.Stream lambda$updateDeviceInformWCS$6(org.thingsboard.server.common.data.device.connector.BaseGroup);
+    Code:
+       0: aload_0
+       1: invokevirtual #403                // Method org/thingsboard/server/common/data/device/connector/BaseGroup.getEventAttributes:()Ljava/util/Set;
+       4: invokeinterface #137,  1          // InterfaceMethod java/util/Set.stream:()Ljava/util/stream/Stream;
+       9: areturn
+
+  private static java.util.stream.Stream lambda$updateDeviceInformWCS$5(org.thingsboard.server.common.data.device.connector.BaseGroup);
+    Code:
+       0: aload_0
+       1: invokevirtual #403                // Method org/thingsboard/server/common/data/device/connector/BaseGroup.getEventAttributes:()Ljava/util/Set;
+       4: invokeinterface #137,  1          // InterfaceMethod java/util/Set.stream:()Ljava/util/stream/Stream;
+       9: areturn
+
+  private static void lambda$updateDeviceInformWCS$4(org.thingsboard.server.common.data.Device, java.util.List, org.thingsboard.server.common.data.device.connector.BaseGroup);
+    Code:
+       0: aload_2
+       1: invokevirtual #403                // Method org/thingsboard/server/common/data/device/connector/BaseGroup.getEventAttributes:()Ljava/util/Set;
+       4: invokeinterface #137,  1          // InterfaceMethod java/util/Set.stream:()Ljava/util/stream/Stream;
+       9: aload_0
+      10: aload_2
+      11: invokedynamic #406,  0            // InvokeDynamic #32:apply:(Lorg/thingsboard/server/common/data/Device;Lorg/thingsboard/server/common/data/device/connector/BaseGroup;)Ljava/util/function/Function;
+      16: invokeinterface #55,  2           // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      21: invokestatic  #56                 // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+      24: invokeinterface #57,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+      29: checkcast     #58                 // class java/util/List
+      32: astore_3
+      33: aload_1
+      34: aload_3
+      35: invokeinterface #113,  2          // InterfaceMethod java/util/List.addAll:(Ljava/util/Collection;)Z
+      40: pop
+      41: return
+
+  private static com.kuka.ecs.grpc.req.DeviceChangeInfoBuilder lambda$null$3(org.thingsboard.server.common.data.Device, org.thingsboard.server.common.data.device.connector.BaseGroup, org.thingsboard.server.common.data.device.connector.modbus.EventAttribute);
+    Code:
+       0: aload_2
+       1: invokevirtual #156                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.isReceiveEvent:()Z
+       4: ifeq          11
+       7: iconst_1
+       8: goto          12
+      11: iconst_2
+      12: istore_3
+      13: aload_2
+      14: invokevirtual #151                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventId:()Ljava/lang/String;
+      17: astore        4
+      19: aload_0
+      20: aload_1
+      21: invokevirtual #405                // Method org/thingsboard/server/common/data/device/connector/BaseGroup.getName:()Ljava/lang/String;
+      24: aload_2
+      25: invokevirtual #154                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventName:()Ljava/lang/String;
+      28: invokevirtual #155                // Method org/thingsboard/server/common/data/Device.getV2DeviceEventName:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      31: astore        5
+      33: new           #119                // class com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder
+      36: dup
+      37: getstatic     #157                // Field com/kuka/ecs/grpc/req/ChangeTypeEnum.EVENT:Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;
+      40: aload_0
+      41: invokevirtual #121                // Method org/thingsboard/server/common/data/Device.getId:()Lorg/thingsboard/server/common/data/id/DeviceId;
+      44: invokevirtual #122                // Method org/thingsboard/server/common/data/id/DeviceId.toString:()Ljava/lang/String;
+      47: aload_0
+      48: invokevirtual #117                // Method org/thingsboard/server/common/data/Device.getName:()Ljava/lang/String;
+      51: aload         4
+      53: aload         5
+      55: aconst_null
+      56: aconst_null
+      57: iconst_1
+      58: iload_3
+      59: aload_2
+      60: invokevirtual #152                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getIndex:()Ljava/lang/Integer;
+      63: invokevirtual #158                // Method java/lang/Integer.intValue:()I
+      66: aload_2
+      67: invokevirtual #159                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventCode:()Ljava/lang/String;
+      70: aload_0
+      71: invokevirtual #160                // Method org/thingsboard/server/common/data/Device.getDeviceType:()Ljava/lang/String;
+      74: invokespecial #123                // Method com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder."<init>":(Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;)V
+      77: areturn
+
+  private static com.kuka.ecs.grpc.req.DeviceChangeInfoBuilder lambda$buildChangeInfosForV1DeviceCreate$2(org.thingsboard.server.common.data.Device, org.thingsboard.server.common.data.device.connector.modbus.EventAttribute);
+    Code:
+       0: aload_1
+       1: invokevirtual #156                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.isReceiveEvent:()Z
+       4: ifeq          11
+       7: iconst_1
+       8: goto          12
+      11: iconst_2
+      12: istore_2
+      13: aload_0
+      14: aload_1
+      15: invokevirtual #154                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventName:()Ljava/lang/String;
+      18: invokevirtual #401                // Method org/thingsboard/server/common/data/Device.getV1DeviceEventName:(Ljava/lang/String;)Ljava/lang/String;
+      21: astore_3
+      22: new           #119                // class com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder
+      25: dup
+      26: getstatic     #157                // Field com/kuka/ecs/grpc/req/ChangeTypeEnum.EVENT:Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;
+      29: aload_0
+      30: invokevirtual #121                // Method org/thingsboard/server/common/data/Device.getId:()Lorg/thingsboard/server/common/data/id/DeviceId;
+      33: invokevirtual #122                // Method org/thingsboard/server/common/data/id/DeviceId.toString:()Ljava/lang/String;
+      36: aload_0
+      37: invokevirtual #117                // Method org/thingsboard/server/common/data/Device.getName:()Ljava/lang/String;
+      40: aload_1
+      41: invokevirtual #151                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventId:()Ljava/lang/String;
+      44: aload_3
+      45: aconst_null
+      46: aconst_null
+      47: iconst_1
+      48: iload_2
+      49: iconst_0
+      50: aload_1
+      51: invokevirtual #159                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventCode:()Ljava/lang/String;
+      54: aload_0
+      55: invokevirtual #160                // Method org/thingsboard/server/common/data/Device.getDeviceType:()Ljava/lang/String;
+      58: invokespecial #123                // Method com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder."<init>":(Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;)V
+      61: areturn
+
+  private static void lambda$createDeviceChangeInfoBuilders$1(org.thingsboard.server.common.data.Device, java.util.List, com.fasterxml.jackson.databind.JsonNode);
+    Code:
+       0: aload_2
+       1: ldc_w         #407                // String name
+       4: invokevirtual #106                // Method com/fasterxml/jackson/databind/JsonNode.get:(Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonNode;
+       7: ldc_w         #408                // String
+      10: invokevirtual #409                // Method com/fasterxml/jackson/databind/JsonNode.asText:(Ljava/lang/String;)Ljava/lang/String;
+      13: astore_3
+      14: aload_2
+      15: ldc           #108                // String eventAttributes
+      17: invokevirtual #106                // Method com/fasterxml/jackson/databind/JsonNode.get:(Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonNode;
+      20: invokevirtual #92                 // Method com/fasterxml/jackson/databind/JsonNode.elements:()Ljava/util/Iterator;
+      23: aload_0
+      24: aload_3
+      25: aload_1
+      26: invokedynamic #410,  0            // InvokeDynamic #33:accept:(Lorg/thingsboard/server/common/data/Device;Ljava/lang/String;Ljava/util/List;)Ljava/util/function/Consumer;
+      31: invokeinterface #94,  2           // InterfaceMethod java/util/Iterator.forEachRemaining:(Ljava/util/function/Consumer;)V
+      36: return
+
+  private static void lambda$null$0(org.thingsboard.server.common.data.Device, java.lang.String, java.util.List, com.fasterxml.jackson.databind.JsonNode);
+    Code:
+       0: aload_3
+       1: ldc           #150                // class org/thingsboard/server/common/data/device/connector/modbus/EventAttribute
+       3: invokestatic  #279                // Method org/thingsboard/common/util/JacksonUtil.treeToValue:(Lcom/fasterxml/jackson/databind/JsonNode;Ljava/lang/Class;)Ljava/lang/Object;
+       6: checkcast     #150                // class org/thingsboard/server/common/data/device/connector/modbus/EventAttribute
+       9: astore        4
+      11: aload         4
+      13: invokevirtual #156                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.isReceiveEvent:()Z
+      16: ifeq          23
+      19: iconst_1
+      20: goto          24
+      23: iconst_2
+      24: istore        5
+      26: aload         4
+      28: invokevirtual #151                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventId:()Ljava/lang/String;
+      31: astore        6
+      33: aload_0
+      34: aload_1
+      35: aload         4
+      37: invokevirtual #154                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventName:()Ljava/lang/String;
+      40: invokevirtual #155                // Method org/thingsboard/server/common/data/Device.getV2DeviceEventName:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      43: astore        7
+      45: aload_2
+      46: new           #119                // class com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder
+      49: dup
+      50: getstatic     #157                // Field com/kuka/ecs/grpc/req/ChangeTypeEnum.EVENT:Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;
+      53: aload_0
+      54: invokevirtual #121                // Method org/thingsboard/server/common/data/Device.getId:()Lorg/thingsboard/server/common/data/id/DeviceId;
+      57: invokevirtual #122                // Method org/thingsboard/server/common/data/id/DeviceId.toString:()Ljava/lang/String;
+      60: aload_0
+      61: invokevirtual #117                // Method org/thingsboard/server/common/data/Device.getName:()Ljava/lang/String;
+      64: aload         6
+      66: aload         7
+      68: aconst_null
+      69: aconst_null
+      70: iconst_1
+      71: iload         5
+      73: aload         4
+      75: invokevirtual #152                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getIndex:()Ljava/lang/Integer;
+      78: invokevirtual #158                // Method java/lang/Integer.intValue:()I
+      81: aload         4
+      83: invokevirtual #159                // Method org/thingsboard/server/common/data/device/connector/modbus/EventAttribute.getEventCode:()Ljava/lang/String;
+      86: aload_0
+      87: invokevirtual #160                // Method org/thingsboard/server/common/data/Device.getDeviceType:()Ljava/lang/String;
+      90: invokespecial #123                // Method com/kuka/ecs/grpc/req/DeviceChangeInfoBuilder."<init>":(Lcom/kuka/ecs/grpc/req/ChangeTypeEnum;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;)V
+      93: invokeinterface #124,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      98: pop
+      99: return
+
+  static org.slf4j.Logger access$000();
+    Code:
+       0: getstatic     #5                  // Field log:Lorg/slf4j/Logger;
+       3: areturn
+
+  static java.util.concurrent.ConcurrentMap access$100();
+    Code:
+       0: getstatic     #4                  // Field robotInfoStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+       3: areturn
+
+  static java.util.List access$200();
+    Code:
+       0: getstatic     #3                  // Field runningDevices:Ljava/util/List;
+       3: areturn
+
+  static java.util.concurrent.ConcurrentMap access$300();
+    Code:
+       0: getstatic     #2                  // Field missionStatusStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+       3: areturn
+
+  static {};
+    Code:
+       0: ldc_w         #411                // class org/thingsboard/server/service/rpc/DefaultWcsRpcService
+       3: invokestatic  #412                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       6: putstatic     #5                  // Field log:Lorg/slf4j/Logger;
+       9: new           #413                // class java/util/concurrent/ConcurrentHashMap
+      12: dup
+      13: iconst_5
+      14: invokespecial #414                // Method java/util/concurrent/ConcurrentHashMap."<init>":(I)V
+      17: putstatic     #4                  // Field robotInfoStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+      20: new           #413                // class java/util/concurrent/ConcurrentHashMap
+      23: dup
+      24: iconst_5
+      25: invokespecial #414                // Method java/util/concurrent/ConcurrentHashMap."<init>":(I)V
+      28: putstatic     #2                  // Field missionStatusStandardMapCache:Ljava/util/concurrent/ConcurrentMap;
+      31: new           #413                // class java/util/concurrent/ConcurrentHashMap
+      34: dup
+      35: iconst_5
+      36: invokespecial #414                // Method java/util/concurrent/ConcurrentHashMap."<init>":(I)V
+      39: putstatic     #190                // Field robotInfoMapCache:Ljava/util/concurrent/ConcurrentMap;
+      42: new           #413                // class java/util/concurrent/ConcurrentHashMap
+      45: dup
+      46: iconst_5
+      47: invokespecial #414                // Method java/util/concurrent/ConcurrentHashMap."<init>":(I)V
+      50: putstatic     #231                // Field robotInfoMapUpdateHistory:Ljava/util/concurrent/ConcurrentMap;
+      53: invokestatic  #415                // Method java/util/Collections.emptyList:()Ljava/util/List;
+      56: putstatic     #3                  // Field runningDevices:Ljava/util/List;
+      59: return
+}

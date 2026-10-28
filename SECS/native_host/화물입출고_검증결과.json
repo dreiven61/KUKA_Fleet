@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-28",
+  "plugin": "1.1.0",
+  "virtualMcs": "2.1.0",
+  "liveDeployment": false,
+  "liveRobotActions": false,
+  "realScannerIntegration": false,
+  "javaRegressionChecks": 1518,
+  "javaInventoryChecks": 58,
+  "pcRegressionChecks": 283,
+  "pcInventoryChecks": 30,
+  "loopbackHsmsReportsAcknowledged": 19,
+  "loopbackTransportCount": 1,
+  "uiOfflineRender": "VirtualMCS/artifacts/cargo-ui-release-2.1.0.png",
+  "files": {
+    "SECS/fleet_transfer_plugin/build/servostar-mes-transfer-1.1.0.jar": "1e7268cc084f3c9cf461c0694952715a479f525431d2ebb11c2d627971cf9970",
+    "VirtualMCS/dist-2.1.0/KukaVirtualMCS.dll": "0d1f57708d4b1435c507cdba6b31f91fc21491f9e1f99eb4baf66722c6bb34c1",
+    "VirtualMCS/KukaVirtualMCS-2.1.0-win-x64.zip": "449f1b2ade398df4e0643c50e166886fc9867f808a1bd004d1ffa3b514439be9"
+  },
+  "limits": [
+    "Custom inventory RCMD and CEID9001/9002, native5557 only",
+    "Manual scan test406 is not hardware evidence or pickup interlock",
+    "Deploy and live inventory/transport validation remain user steps"
+  ]
+}

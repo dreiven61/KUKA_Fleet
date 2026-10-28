@@ -1,0 +1,181 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.jogging.v1alpha1;
+
+option csharp_namespace = "Kuka.Mobilerobotics.Jogging.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "JoggingServiceProto";
+option java_package = "com.kuka.mobilerobotics.jogging.v1alpha1";
+
+// Jogging API
+//
+// This service provides manual jogging functionalities.
+//
+// A typical call sequence may look like this:
+// 1. StartJogging
+// 2. UpdateJogging
+// ...
+// n-1. UpdateJogging
+// n. StopJogging
+//
+// Limitations: Currently only one client can jog one device at the same time.
+service JoggingService {
+  // Requests to start the jogging of one device (with the specified
+  // degree(s) of freedom). This method requests the right to jog. Optionally an
+  // initial set of directions can be provided. Further directions must by
+  // cyclically set using the 'UpdateJogging' method. The response message
+  // defines the timeout that will stop the device, when no 'UpdateJogging'
+  // method is called. Furthermore a token is returned, which must be set in
+  // each 'UpdateJoggingRequest' and the final 'StopJoggingRequest'. A granted
+  // jogging permit can be returned by calling 'StopJogging'.
+  //
+  // Error codes:
+  //   INVALID_ARGUMENT    -> if any of the provided jogging directions is
+  //                          invalid, or if the amount of `jog_directions` does
+  //                          not match the supported degrees of freedom of the
+  //                          device
+  //   FAILED_PRECONDITION -> if jogging for the specified device is already
+  //                          active, or
+  //                          if device cannot be moved in the current state
+  //   RESOURCE_EXHAUSTED  -> if jogging for another device is already active
+  rpc StartJogging(StartJoggingRequest) returns (StartJoggingResponse);
+
+  // Starts or updates jogging of the specified degree(s) of freedom.
+  // The request must contain a full list of directions
+  // for all degrees of freedom that can be jogged (and are
+  // supported by the device).
+  //
+  // This method must be called cyclically at a rate shorter than the timeout
+  // (`jogging_update_timeout`) returned by 'StartJoggingResponse', otherwise
+  // any jogging will be stopped after a timeout and the jogging permit is
+  // revoked.
+  //
+  // Updates that couldn't be processed will be ignored, i.e. a client does not
+  // have to wait for a response before sending a new update, but a client may
+  // do this to make sure every request will be processed.
+  //
+  // Error codes:
+  //   INVALID_ARGUMENT    -> if a parameter is invalid (e.g. jogging direction
+  //   value is too high), or
+  //                          if the amount of `jog_directions` does not match
+  //                          the supported degrees of freedom of the device.
+  //   FAILED_PRECONDITION -> if jogging is not active, i.e. 'StartJogging' has
+  //   not been called, or jogging has been
+  //                             stopped because 'jogging_update_timeout' has
+  //                             been exceeded, or
+  //                          if device cannot be moved in the current state
+  //   PERMISSION_DENIED   -> if the token is invalid.
+  rpc UpdateJogging(UpdateJoggingRequest) returns (UpdateJoggingResponse);
+
+  // Stops jogging for the controlled device and invalidates the jogging permit.
+  //
+  // Error codes:
+  //   FAILED_PRECONDITION -> if jogging is not active, i.e. 'StartJogging' has
+  //   not been called, or jogging has been
+  //                             stopped because 'jogging_update_timeout' has
+  //                             been exceeded
+  //   PERMISSION_DENIED   -> if the token is invalid.
+  rpc StopJogging(StopJoggingRequest) returns (StopJoggingResponse);
+
+  // Sets the override.
+  // Error codes:
+  //   INVALID_ARGUMENT    -> if the override value is outside of the boundary
+  //   of [0; 1]
+  rpc SetOverride(SetOverrideRequest) returns (SetOverrideResponse);
+
+  // Gets the override.
+  rpc GetOverride(GetOverrideRequest) returns (GetOverrideResponse);
+
+  // Subscribe to the override value.
+  rpc SubscribeOverride(SubscribeOverrideRequest) returns (stream OverrideValue);
+}
+
+// Request message for StartJogging.
+message StartJoggingRequest {
+  // A list of jog directions.
+  JogDirections jog_directions = 2;
+}
+
+// Response message for StartJogging.
+message StartJoggingResponse {
+  // The token for this jogging permit. The token must be provided for each
+  // 'UpdateJoggingRequest' and the final 'StopJoggingRequest'. After calling
+  // 'StopJogging' the token becomes invalid.
+  bytes token = 1;
+
+  // The timeout (in milliseconds) after that a jogging command is stopped, when
+  // 'UpdateJogging' calls are sent.
+  int32 jogging_update_timeout = 2;
+}
+
+// Request message for UpdateJogging.
+message UpdateJoggingRequest {
+  // Required. The token returned by 'StartJogging'.
+  bytes token = 1;
+
+  // A list of jog directions.
+  JogDirections jog_directions = 2;
+}
+
+// Response message for UpdateJogging.
+message UpdateJoggingResponse {
+  // Empty
+}
+
+// Required. Request message for StopJogging.
+message StopJoggingRequest {
+  // The token returned by 'StartJogging'.
+  bytes token = 1;
+}
+
+// Response message for StopJogging.
+message StopJoggingResponse {
+  // Empty
+}
+
+// Request message for setting the override.
+message SetOverrideRequest {
+  // Required. The override value in percentage between [0; 1].
+  double override_value = 1;
+}
+
+// Response message for setting the override.
+message SetOverrideResponse {
+  // Empty
+}
+
+// Request message for getting the override.
+message GetOverrideRequest {
+  //Empty
+}
+
+// Response message for getting the override.
+message GetOverrideResponse {
+  // Required. The override value in percentage between [0; 1].
+  double override_value = 1;
+}
+
+// Request to subscribe for the override.
+message SubscribeOverrideRequest {
+  //Empty
+}
+
+// Value for Override subscriptions result stream
+message OverrideValue {
+  // Required. The override value in percentage between [0; 1].
+  double override_value = 1;
+}
+
+// An array of directions.
+message JogDirections {
+  // Can be set to [-1; 0; 1]
+  repeated double values = 1;
+}
+

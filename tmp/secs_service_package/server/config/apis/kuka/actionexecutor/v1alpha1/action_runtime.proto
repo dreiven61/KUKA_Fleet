@@ -1,0 +1,37 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.actionexecutor.v1alpha1;
+
+import "google/protobuf/any.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "kuka/common/v1alpha1/progress_info.proto";
+
+option csharp_namespace = "Kuka.ActionExecutor.V1alpha1";
+option java_package = "com.kuka.actionexecutor.v1alpha1";
+option java_outer_classname = "ActionRuntimeProto";
+option java_multiple_files = true;
+
+
+// Contains runtime information about an action.
+message ActionRuntime
+{
+  // The action specific, i.e. type specific, runtime information.
+  google.protobuf.Any data = 1;
+	
+  // The time the action started execution.
+  google.protobuf.Timestamp start_time = 2;
+    
+  // The estimated total duration of the action.
+  google.protobuf.Duration estimated_duration = 3;
+
+  // A detailed progress information about the running action.
+  kuka.common.v1alpha1.ProgressInfo progress = 4;
+}

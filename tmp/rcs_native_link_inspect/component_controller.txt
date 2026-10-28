@@ -1,0 +1,145 @@
+Compiled from "ComponentDescriptorController.java"
+public class org.thingsboard.server.controller.ComponentDescriptorController extends org.thingsboard.server.controller.BaseController {
+  private static final org.slf4j.Logger log;
+
+  private static final java.lang.String COMPONENT_DESCRIPTOR_DEFINITION;
+
+  private static final java.util.List<java.lang.String> HIDE_NODE_TYPES;
+
+  public org.thingsboard.server.controller.ComponentDescriptorController();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method org/thingsboard/server/controller/BaseController."<init>":()V
+       4: return
+
+  public java.util.List<org.thingsboard.server.common.data.plugin.ComponentDescriptor> getComponentDescriptorsByTypes(java.lang.String[], java.lang.String) throws org.thingsboard.server.common.data.exception.ThingsboardException;
+    Code:
+       0: aload_0
+       1: ldc           #2                  // String componentTypes
+       3: aload_1
+       4: invokevirtual #3                  // Method checkArrayParameter:(Ljava/lang/String;[Ljava/lang/String;)V
+       7: new           #4                  // class java/util/HashSet
+      10: dup
+      11: invokespecial #5                  // Method java/util/HashSet."<init>":()V
+      14: astore_3
+      15: aload_1
+      16: astore        4
+      18: aload         4
+      20: arraylength
+      21: istore        5
+      23: iconst_0
+      24: istore        6
+      26: iload         6
+      28: iload         5
+      30: if_icmpge     58
+      33: aload         4
+      35: iload         6
+      37: aaload
+      38: astore        7
+      40: aload_3
+      41: aload         7
+      43: invokestatic  #6                  // Method org/thingsboard/server/common/data/plugin/ComponentType.valueOf:(Ljava/lang/String;)Lorg/thingsboard/server/common/data/plugin/ComponentType;
+      46: invokeinterface #7,  2            // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+      51: pop
+      52: iinc          6, 1
+      55: goto          26
+      58: aload_0
+      59: aload_3
+      60: aload_0
+      61: aload_2
+      62: invokespecial #8                  // Method getRuleChainType:(Ljava/lang/String;)Lorg/thingsboard/server/common/data/rule/RuleChainType;
+      65: invokevirtual #9                  // Method checkComponentDescriptorsByTypes:(Ljava/util/Set;Lorg/thingsboard/server/common/data/rule/RuleChainType;)Ljava/util/List;
+      68: astore        4
+      70: aload         4
+      72: invokeinterface #10,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      77: astore        5
+      79: aload         5
+      81: invokeinterface #11,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      86: ifeq          127
+      89: aload         5
+      91: invokeinterface #12,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      96: checkcast     #13                 // class org/thingsboard/server/common/data/plugin/ComponentDescriptor
+      99: invokevirtual #14                 // Method org/thingsboard/server/common/data/plugin/ComponentDescriptor.getClazz:()Ljava/lang/String;
+     102: astore        6
+     104: getstatic     #15                 // Field HIDE_NODE_TYPES:Ljava/util/List;
+     107: aload         6
+     109: invokeinterface #16,  2           // InterfaceMethod java/util/List.contains:(Ljava/lang/Object;)Z
+     114: ifeq          124
+     117: aload         5
+     119: invokeinterface #17,  1           // InterfaceMethod java/util/Iterator.remove:()V
+     124: goto          79
+     127: aload_0
+     128: aload         4
+     130: invokespecial #18                 // Method i18nComponentDescriptorList:(Ljava/util/List;)V
+     133: aload         4
+     135: areturn
+     136: astore_3
+     137: getstatic     #20                 // Field log:Lorg/slf4j/Logger;
+     140: ldc           #21                 // String getComponentDescriptorsByTypes occurred exception
+     142: aload_3
+     143: invokeinterface #22,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     148: aload_0
+     149: aload_3
+     150: invokevirtual #23                 // Method handleException:(Ljava/lang/Exception;)Lorg/thingsboard/server/common/data/exception/ThingsboardException;
+     153: athrow
+    Exception table:
+       from    to  target type
+           7   135   136   Class java/lang/Exception
+
+  private void i18nComponentDescriptorList(java.util.List<org.thingsboard.server.common.data.plugin.ComponentDescriptor>);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: invokedynamic #24,  0             // InvokeDynamic #0:accept:(Lorg/thingsboard/server/controller/ComponentDescriptorController;)Ljava/util/function/Consumer;
+       7: invokeinterface #25,  2           // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      12: return
+
+  private org.thingsboard.server.common.data.rule.RuleChainType getRuleChainType(java.lang.String);
+    Code:
+       0: aload_1
+       1: invokestatic  #26                 // Method org/apache/commons/lang3/StringUtils.isEmpty:(Ljava/lang/CharSequence;)Z
+       4: ifeq          14
+       7: getstatic     #27                 // Field org/thingsboard/server/common/data/rule/RuleChainType.CORE:Lorg/thingsboard/server/common/data/rule/RuleChainType;
+      10: astore_2
+      11: goto          19
+      14: aload_1
+      15: invokestatic  #28                 // Method org/thingsboard/server/common/data/rule/RuleChainType.valueOf:(Ljava/lang/String;)Lorg/thingsboard/server/common/data/rule/RuleChainType;
+      18: astore_2
+      19: aload_2
+      20: areturn
+
+  private void lambda$i18nComponentDescriptorList$0(org.thingsboard.server.common.data.plugin.ComponentDescriptor);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: getfield      #29                 // Field messageSource:Lorg/thingsboard/server/common/data/i18n/TbMessageSource;
+       5: invokevirtual #30                 // Method org/thingsboard/server/common/data/plugin/ComponentDescriptor.i18nSelf:(Lorg/thingsboard/server/common/data/i18n/TbMessageSource;)V
+       8: return
+
+  static {};
+    Code:
+       0: ldc           #31                 // class org/thingsboard/server/controller/ComponentDescriptorController
+       2: invokestatic  #32                 // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #20                 // Field log:Lorg/slf4j/Logger;
+       8: iconst_4
+       9: anewarray     #33                 // class java/lang/String
+      12: dup
+      13: iconst_0
+      14: ldc           #35                 // String org.thingsboard.rule.engine.transform.TbTransformMsgNode
+      16: aastore
+      17: dup
+      18: iconst_1
+      19: ldc           #36                 // String org.thingsboard.rule.engine.filter.TbMsgTypeFilterNode
+      21: aastore
+      22: dup
+      23: iconst_2
+      24: ldc           #37                 // String org.thingsboard.rule.engine.rest.TbRestApiCallNode
+      26: aastore
+      27: dup
+      28: iconst_3
+      29: ldc           #38                 // String org.thingsboard.rule.engine.grpc.TbInterfacePlatformCallNode
+      31: aastore
+      32: invokestatic  #39                 // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+      35: putstatic     #15                 // Field HIDE_NODE_TYPES:Ljava/util/List;
+      38: return
+}

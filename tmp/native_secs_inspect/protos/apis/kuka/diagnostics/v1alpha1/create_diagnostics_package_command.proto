@@ -1,0 +1,56 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.diagnostics.v1alpha1;
+
+option java_package = "com.kuka.diagnostics.v1alpha1";
+option java_outer_classname = "CreateDiagnosticsPackageCommandProto";
+option java_multiple_files = true;
+
+// The command to request the creation of a diagnostics package (zip file containing e.g. log files) from the diagnostics component.
+message CreateDiagnosticsPackageCommand
+{
+	// the target URI or file path where the resulting diagnostics package will be stored.
+	// might be either a directory or the resulting file path.
+	// e.g. "/output/diagnostics/", "file:///output/diagnostics/", or "file:///output/diagnostics/diagnostics.zip"
+	// if not given, the defaultPackageDestinationFolder value of the "diagnostics-config.yml" configuration file is used.
+	// rsync:
+	// 		additionally, 'rsync' is a supported scheme, which will invoke rsync to deliver the resulting diagnostics package to a network host.
+	// 		e.g. "rsync://host:port/module/path" will be directly passed to rsync as destination parameter. see rsync documentation (https://download.samba.org/pub/rsync/rsync.1) for more details.
+	// 		this rsync scheme supports all destination parameter variations of rsync. in general, the leading "rsync:" is cut and not passed as part of the destination parameter to rsync. 
+	// 		the only exception is the "rsync://" daemon mode, where this rule is not applied.
+	// 		also supported rsync scheme variations: "rsync:host::module/path" (daemon mode), "rsync:host:path" (remote shell (ssh) mode)
+	//		the rsync scheme also supports a URI query, and all query parts will be passed to rsync as additional parameters.
+	//		e.g. "rsync://host:port/module/path?--mkpath&--port=10873" will pass "--mkpath" and "--port=10873" to rsync.
+	// 		for convenience, if host is omitted, the IP address of the CreateDiagnosticsPackageCommand issuer will be used, so the requester does not need to know its public IP address,
+	//		but this is only useful if the CreateDiagnosticsPackageCommand is directly sent to the diagnostics service, otherwise the delivery will most likely fail (e.g. if sent via a robot-controller/manager).
+	//		since the network transfer could fail for many reasons, when the rsync scheme is used, the resulting diagnostics package will always be kept in the default output directory of the service's host.
+	string package_destination = 1;
+
+	// a map of supported diagnostics package content and whether it shall be included.
+	// options that are given here will overwrite the default configuration, for options that are not given, their default configuration determines whether they will be included.
+	// the string, a simple regular expression, is matched against the name, the srcPath and the destPath of an entry of the "diagnostics-config.yml" configuration file. 
+	// this matching supports the asterisk '*' that matches any string. 
+	// e.g. "db://*" will match any string, that starts with "db://", most probably only the srcPaths contains such, at least in the default diagnostics config file.
+	// e.g. "logs/" will exactly match all entries "logs/", probably only used as destPath 
+	map<string, bool> options = 2;
+
+	// if > 0, this amount of seconds is used to exclude all files with an older modification time.
+	// if <= 0, all files will be included.
+	int64 time_filter_seconds = 3;
+
+	// if the diagnostics service is configured to include diagnostics packages from other diagnostics services,
+	// this field is used to restrict the included diagnostics packages to those given here.
+	// this field should contain all resource UUIDs (robot UUIDs) of which a diagnostics package shall be included.
+	// if empty, or not set, the diagnostics package of each available resource (robot) will be included.
+	// for simplified usage, the given entries are matched against the robot UUIDs. 
+	// matching starts at the beginning of the resource UUID and is not case-sensitive. 
+	// for example: the given filter string 'rob' will match any resource UUIDs starting with 'rob', 'ROB', 'Rob', and so on...
+	repeated string uuid_filter = 4;
+}

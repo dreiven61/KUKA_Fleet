@@ -1,0 +1,77 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.order.v1alpha1;
+
+import "kuka/core/state/v1/error_state.proto";
+
+option java_package = "com.kuka.mobilerobotics.order.v1alpha1";
+option java_outer_classname = "TaskStateProto";
+option java_multiple_files = true;
+
+// Contains the state of a task.
+message TaskState
+{
+  // Enumerates the task states.
+  enum Enum 
+  {
+    // The state is unspecified.
+    //
+    // This is not considered part of the state machine's transition system.
+    UNSPECIFIED = 0;
+
+    // The task is created and waits to be started.
+    //
+    // This is the initial state.
+    // The possible following states are
+    //    MOVING: task started, robot began its trip
+    //    EXECUTING: task started, robot skips trip because it already is at destination
+    //    FAILED: task was canceled before it started
+    CREATED = 1;
+
+    // The task started, the robot currently moves to the destination.
+    // 
+    // The possible following states are
+    //    EXECUTING: robot arrived, action started
+    //    FAILED: task was canceled before the action started
+    MOVING = 2;
+
+    // The task started, the action at the station is in progress.
+    // 
+    // The possible following states are
+    //    FINISHED: task finished, action completed
+    //    FAILED: task was canceled before the action completed
+    EXECUTING = 3;
+
+    // The task finished, it completed successfully.
+    // The task maybe also was canceled, but the cancel request could have been
+    // too late or the executor did not support or react to the cancelation.
+    // 
+    // This is a terminal state.
+    FINISHED = 4;
+
+    // The task failed, it did not complete.
+    // Tasks usually fail when they were canceled or when a non-recoverable 
+    // error occurs. Eventually the purpose of the task, namely picking or 
+    // dropping payload, was not accomplished.
+    // 
+    // This is a terminal state.
+    FAILED = 5;
+  }
+
+  Enum task_state = 1;
+
+  // The current state of the error state machine.
+  // [optional] If not set, defaults to OK.
+  kuka.core.state.v1.ErrorState error_state = 2;
+
+  // Indicates whether canceling the task was requested.
+  // Canceled tasks still can reach the FINISHED state.
+  bool canceled = 3;
+}

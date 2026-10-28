@@ -1,0 +1,27 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.finelocalization.v1alpha1;
+
+import "kuka/database/v1alpha1/manage_data_command_type.proto";
+import "kuka/mobilerobotics/finelocalization/v1alpha1/location.proto";
+
+option java_package = "com.kuka.mobilerobotics.finelocalization.v1alpha1";
+option java_outer_classname = "ManageLocationDataCommandProto";
+option java_multiple_files = true;
+
+// Manages a location data element in the location service. Provides a way to import, update and delete a location.
+message ManageLocationDataCommand
+{
+  // Type field. Please see the enum "ManageDataCommandType" description.
+  kuka.database.v1alpha1.ManageDataCommandType type = 1;
+  // The new location's data.
+  // Please refer to the "Type" enum description for details about how the location data is used.
+  Location data = 2;
+}

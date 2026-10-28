@@ -1,0 +1,27 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.core.state.v1;
+
+import "google/protobuf/any.proto";
+
+option java_package = "com.kuka.core.state.v1";
+option java_outer_classname = "NamedStatusDetailProto";
+option java_multiple_files = true;
+
+// Represents a formatted entry of an error or warning detail.
+// It contains a key defining the entry name and the actual content of this entry.
+message NamedStatusDetail
+{
+  // A key representing the entry.
+  string name = 1;
+
+  // Contains the actual detail for this entry
+  google.protobuf.Any value = 2;
+}

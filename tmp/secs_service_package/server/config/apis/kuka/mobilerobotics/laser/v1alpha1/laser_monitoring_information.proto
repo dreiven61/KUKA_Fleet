@@ -1,0 +1,31 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.laser.v1alpha1;
+
+import "kuka/core/geometry/v1/transform_2d.proto";
+import "kuka/mobilerobotics/laser/v1alpha1/laser_monitoring_case.proto";
+import "kuka/mobilerobotics/laser/v1alpha1/laser_field_data.proto";
+
+option java_package = "com.kuka.mobilerobotics.laser.v1alpha1";
+option java_outer_classname = "LaserMonitoringInformationProto";
+option java_multiple_files = true;
+
+// represents all available monitoring cases
+message LaserMonitoringInformation
+{
+    // The ID of the laser that issues this data, matches LaserData.id
+    int32 laser_id = 1;
+    // the kind of laser, e.g. Sick MicroScan3
+    string laser_type = 2;
+    // The calibrated pose of the scanner relative to the robot's odometry center
+    kuka.core.geometry.v1.Transform2D local_pose = 3;
+    repeated LaserMonitoringCase monitoring_cases = 4;
+    repeated LaserFieldData laser_fields = 5;
+}

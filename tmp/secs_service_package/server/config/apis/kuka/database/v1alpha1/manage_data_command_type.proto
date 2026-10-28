@@ -1,0 +1,41 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.database.v1alpha1;
+
+option csharp_namespace = "Kuka.Database.V1alpha1";
+option java_package = "com.kuka.database.v1alpha1";
+option java_outer_classname = "ManageDataCommandTypeProto";
+option java_multiple_files = true;
+
+// To Manage a data element in the corresponding service. 
+// A command is provided in the following way:
+// 
+// message Manage[Sometype]DataCommand{
+//      ManageDataCommandType type;
+//      Sometype              data;
+// }
+// The ManageDataCommandType is the selector which tells this service to import, update and delete a data entry.
+enum ManageDataCommandType
+{
+  // If this type is set, this command is discarded. No changes are applied.
+  UNSPECIFIED = 0;
+
+  // Imports data into the service.
+  // If a data UUID was not provided, then one is created.
+  INSERT = 1;
+
+  // Applies new data to the referenced data, whose UUID is used to find the corresponding data to modify.
+  // If no data with such UUID is found, then this action fails.
+  UPDATE = 2;
+
+  // Deletes the data referenced by the "data"'s UUID.
+  // The content of "data" does not have to contain the actual data.
+  DELETE = 3;
+}

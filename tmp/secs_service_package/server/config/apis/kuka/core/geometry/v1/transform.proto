@@ -1,0 +1,55 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.core.geometry.v1;
+
+import "kuka/core/geometry/v1/matrix_nxm.proto";
+import "kuka/core/geometry/v1/quaternion.proto";
+import "kuka/core/geometry/v1/vector.proto";
+import "kuka/core/v1/reliability.proto";
+
+option csharp_namespace = "Kuka.Core.Geometry.V1";
+option java_package = "com.kuka.core.geometry.v1";
+option java_outer_classname = "TransformProto";
+option java_multiple_files = true;
+
+
+// Represents a transform between two coordinate frames in 3D space.
+// <br>
+// When performing the transformation first the rotational component
+// and then the translational component is to be applied.
+message Transform
+{
+  Vector translation = 1;
+  Quaternion rotation = 2;
+}
+
+// Contains a transform and reliability information
+// (uncertainty or information matrix).
+//
+// This message extends a Transform with uncertainty data,
+// i.e. how "reliable" the value is that is stored in the
+// transform field. This uncertainty information is either
+// stored as covariance or as information matrix in the field
+// reliability_matrix and the field reliability_type defines
+// which of the two cases is stored in the matrix.
+// The field reliablity_matrix is optional. If not set also
+// reliability_type must be empty.
+message TransformWithReliability
+{
+  Transform transform = 1;
+
+  // The type of the reliability matrix.
+  kuka.core.v1.ReliabilityMatrixType reliability_type = 2;
+
+  // Covariance or information matrix for the transformation.
+  // Only lower half of matrix is stored.
+  // The type of this matrix is encoded in the field <tt>reliability_type</tt>.
+  MatrixNxM reliability_matrix = 3;
+}

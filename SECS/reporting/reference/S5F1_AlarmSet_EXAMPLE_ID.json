@@ -1,0 +1,23 @@
+{
+  "referenceOnly": true,
+  "stream": 5,
+  "function": 1,
+  "wait": true,
+  "body": {
+    "type": "L",
+    "value": [
+      {
+        "type": "B",
+        "value": 134
+      },
+      {
+        "type": "U4",
+        "value": 900001
+      },
+      {
+        "type": "A",
+        "value": "TEST_ONLY_VEHICLE_WARNING"
+      }
+    ]
+  }
+}

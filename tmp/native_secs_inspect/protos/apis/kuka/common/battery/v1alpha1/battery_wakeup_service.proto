@@ -1,0 +1,42 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.common.battery.v1alpha1;
+
+import "kuka/core/v1/message_header.proto";
+
+option csharp_namespace = "Kuka.Common.Battery.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "BatteryWakeupServiceProto";
+option java_package = "com.kuka.common.battery.v1alpha1";
+
+// Responsible for switching operation mode of the battery from STANDBY to ON
+service BatteryWakeupService
+{
+  // BatteryWakeup
+  rpc BatteryWakeup(BatteryWakeupRequest) returns (BatteryWakeupResponse);
+}
+
+// BatteryWakeupRequest
+message BatteryWakeupRequest
+{
+  // header containing information about the origin of this message
+  kuka.core.v1.MessageHeader header = 1;
+}
+
+// BatteryWakeupResponse
+message BatteryWakeupResponse
+{
+  // header containing information about the origin of this message
+  kuka.core.v1.MessageHeader header = 1;
+
+  // This signals if the battery has accepted the wakeup request
+  // true if battery will wake up
+  bool accepted = 2; 
+}

@@ -1,0 +1,74 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.battery.v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.Battery.V1";
+option java_multiple_files = true;
+option java_outer_classname = "BatteryStateProto";
+option java_package = "com.kuka.mobilerobotics.battery.v1";
+
+// The minimum data set of a battery.
+message BatteryState
+{
+  // The state of charge of the battery or group of batteries. Range [0, 1].
+  // 0 = empty, 1 = full.
+  // protolint:disable:next FIELD_NAMES_EXCLUDE_PREPOSITIONS
+  double state_of_charge = 2;
+  
+  // Indicates, whether the battery is currently being charged.
+  google.protobuf.BoolValue is_charging = 3;
+
+  // Indicates, whether a reference charge of the battery is needed.
+  // True, if a reference charge is needed, False otherwise.
+  google.protobuf.BoolValue is_reference_charging_needed = 4;
+
+  // The state of health of the battery. Within [0, 1]
+  // 0 = bad, 1 = good
+  // protolint:disable:next FIELD_NAMES_EXCLUDE_PREPOSITIONS
+  google.protobuf.DoubleValue state_of_health = 5;
+  
+  // The current flow to or from the battery [Ampere].
+  // negative when discharging
+  // positive when charging
+  google.protobuf.DoubleValue current = 6;
+  
+  // The battery voltage [Volt].
+  google.protobuf.DoubleValue voltage = 7;
+
+  // A timestamp as close as possible to the source of the contained data.
+  google.protobuf.Timestamp timestamp = 8;
+  
+  // The temperature of the coolest battery cell [Celsius]
+  google.protobuf.DoubleValue min_cell_temperature = 9;
+  
+  // The temperature of the hottest battery cell [Celsius]
+  google.protobuf.DoubleValue max_cell_temperature = 10;
+  
+  // The voltage of the battery cell with the lowest voltage [Volt]
+  google.protobuf.DoubleValue min_cell_voltage = 11;
+  
+  // The voltage of the battery cell with the highest voltage [Volt]
+  google.protobuf.DoubleValue max_cell_voltage = 12;
+
+  // The battery operation time.
+  // Unit of measurement [h]
+  google.protobuf.DoubleValue operating_hours = 13;
+
+  // The battery full cycle equivalent.
+  // Unit of measurement [-]
+  google.protobuf.DoubleValue operating_cycles = 14;
+
+  // Indicates, whether the battery state of charge is currently low.
+  // protolint:disable:next FIELD_NAMES_EXCLUDE_PREPOSITIONS
+  google.protobuf.BoolValue is_low_state_of_charge = 15;
+}

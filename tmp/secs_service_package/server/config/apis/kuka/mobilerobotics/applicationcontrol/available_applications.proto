@@ -1,0 +1,22 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.applicationcontrol;
+
+option csharp_namespace = "Kuka.MobileRobotics.AvailableApplications";
+option java_multiple_files = true;
+option java_outer_classname = "AvailableApplicationsProto";
+option java_package = "com.kuka.mobilerobotics.applicationcontrol";
+
+// Message containing the list of the currently available KRL applications
+message AvailableApplications
+{
+  // The names of the available KRL applications
+  repeated string application_names = 1;
+}

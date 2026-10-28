@@ -1,0 +1,678 @@
+Compiled from "AnnotationComponentDiscoveryService.java"
+public class org.thingsboard.server.service.component.AnnotationComponentDiscoveryService implements org.thingsboard.server.service.component.ComponentDiscoveryService {
+  private static final org.slf4j.Logger log;
+
+  public static final int MAX_OPTIMISITC_RETRIES;
+
+  private java.lang.String[] scanPackages;
+
+  private org.springframework.core.env.Environment environment;
+
+  private org.thingsboard.server.dao.component.ComponentDescriptorService componentDescriptorService;
+
+  private java.util.Map<java.lang.String, org.thingsboard.server.common.data.plugin.ComponentDescriptor> components;
+
+  private java.util.Map<org.thingsboard.server.common.data.plugin.ComponentType, java.util.List<org.thingsboard.server.common.data.plugin.ComponentDescriptor>> coreComponentsMap;
+
+  private com.fasterxml.jackson.databind.ObjectMapper mapper;
+
+  public org.thingsboard.server.service.component.AnnotationComponentDiscoveryService();
+    Code:
+       0: aload_0
+       1: invokespecial #2                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: new           #3                  // class java/util/HashMap
+       8: dup
+       9: invokespecial #4                  // Method java/util/HashMap."<init>":()V
+      12: putfield      #5                  // Field components:Ljava/util/Map;
+      15: aload_0
+      16: new           #3                  // class java/util/HashMap
+      19: dup
+      20: invokespecial #4                  // Method java/util/HashMap."<init>":()V
+      23: putfield      #6                  // Field coreComponentsMap:Ljava/util/Map;
+      26: aload_0
+      27: new           #7                  // class com/fasterxml/jackson/databind/ObjectMapper
+      30: dup
+      31: invokespecial #8                  // Method com/fasterxml/jackson/databind/ObjectMapper."<init>":()V
+      34: putfield      #9                  // Field mapper:Lcom/fasterxml/jackson/databind/ObjectMapper;
+      37: return
+
+  private boolean isInstall();
+    Code:
+       0: aload_0
+       1: getfield      #10                 // Field environment:Lorg/springframework/core/env/Environment;
+       4: iconst_1
+       5: anewarray     #11                 // class java/lang/String
+       8: dup
+       9: iconst_0
+      10: ldc           #12                 // String install
+      12: aastore
+      13: invokestatic  #13                 // InterfaceMethod org/springframework/core/env/Profiles.of:([Ljava/lang/String;)Lorg/springframework/core/env/Profiles;
+      16: invokeinterface #14,  2           // InterfaceMethod org/springframework/core/env/Environment.acceptsProfiles:(Lorg/springframework/core/env/Profiles;)Z
+      21: ireturn
+
+  public void init();
+    Code:
+       0: aload_0
+       1: invokespecial #15                 // Method isInstall:()Z
+       4: ifne          11
+       7: aload_0
+       8: invokevirtual #16                 // Method discoverComponents:()V
+      11: return
+
+  private void registerRuleNodeComponents();
+    Code:
+       0: aload_0
+       1: ldc           #17                 // class org/thingsboard/rule/engine/api/RuleNode
+       3: invokespecial #18                 // Method getBeanDefinitions:(Ljava/lang/Class;)Ljava/util/Set;
+       6: astore_1
+       7: aload_1
+       8: invokeinterface #19,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      13: astore_2
+      14: aload_2
+      15: invokeinterface #20,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      20: ifeq          249
+      23: aload_2
+      24: invokeinterface #21,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      29: checkcast     #22                 // class org/springframework/beans/factory/config/BeanDefinition
+      32: astore_3
+      33: iconst_0
+      34: istore        4
+      36: aconst_null
+      37: astore        5
+      39: iload         4
+      41: iconst_3
+      42: if_icmpge     189
+      45: aload_3
+      46: invokeinterface #24,  1           // InterfaceMethod org/springframework/beans/factory/config/BeanDefinition.getBeanClassName:()Ljava/lang/String;
+      51: astore        6
+      53: aload         6
+      55: invokestatic  #25                 // Method java/lang/Class.forName:(Ljava/lang/String;)Ljava/lang/Class;
+      58: astore        7
+      60: aload         7
+      62: ldc           #17                 // class org/thingsboard/rule/engine/api/RuleNode
+      64: invokevirtual #26                 // Method java/lang/Class.getAnnotation:(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;
+      67: checkcast     #17                 // class org/thingsboard/rule/engine/api/RuleNode
+      70: astore        8
+      72: aload         8
+      74: invokeinterface #27,  1           // InterfaceMethod org/thingsboard/rule/engine/api/RuleNode.type:()Lorg/thingsboard/server/common/data/plugin/ComponentType;
+      79: astore        9
+      81: aload_0
+      82: aload_3
+      83: aload         9
+      85: invokespecial #28                 // Method scanAndPersistComponent:(Lorg/springframework/beans/factory/config/BeanDefinition;Lorg/thingsboard/server/common/data/plugin/ComponentType;)Lorg/thingsboard/server/common/data/plugin/ComponentDescriptor;
+      88: astore        10
+      90: aload_0
+      91: getfield      #5                  // Field components:Ljava/util/Map;
+      94: aload         10
+      96: invokevirtual #29                 // Method org/thingsboard/server/common/data/plugin/ComponentDescriptor.getClazz:()Ljava/lang/String;
+      99: aload         10
+     101: invokeinterface #30,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     106: pop
+     107: aload_0
+     108: aload         9
+     110: aload         8
+     112: aload         10
+     114: invokespecial #31                 // Method putComponentIntoMaps:(Lorg/thingsboard/server/common/data/plugin/ComponentType;Lorg/thingsboard/rule/engine/api/RuleNode;Lorg/thingsboard/server/common/data/plugin/ComponentDescriptor;)V
+     117: goto          189
+     120: astore        6
+     122: getstatic     #33                 // Field log:Lorg/slf4j/Logger;
+     125: ldc           #34                 // String Can\'t initialize component {}, due to {}
+     127: iconst_3
+     128: anewarray     #35                 // class java/lang/Object
+     131: dup
+     132: iconst_0
+     133: aload_3
+     134: invokeinterface #24,  1           // InterfaceMethod org/springframework/beans/factory/config/BeanDefinition.getBeanClassName:()Ljava/lang/String;
+     139: aastore
+     140: dup
+     141: iconst_1
+     142: aload         6
+     144: invokevirtual #36                 // Method java/lang/Exception.getMessage:()Ljava/lang/String;
+     147: aastore
+     148: dup
+     149: iconst_2
+     150: aload         6
+     152: aastore
+     153: invokeinterface #37,  3           // InterfaceMethod org/slf4j/Logger.trace:(Ljava/lang/String;[Ljava/lang/Object;)V
+     158: aload         6
+     160: astore        5
+     162: iinc          4, 1
+     165: ldc2_w        #38                 // long 1000l
+     168: invokestatic  #40                 // Method java/lang/Thread.sleep:(J)V
+     171: goto          186
+     174: astore        7
+     176: new           #42                 // class java/lang/RuntimeException
+     179: dup
+     180: aload         7
+     182: invokespecial #43                 // Method java/lang/RuntimeException."<init>":(Ljava/lang/Throwable;)V
+     185: athrow
+     186: goto          39
+     189: aload         5
+     191: ifnull        246
+     194: iload         4
+     196: iconst_3
+     197: if_icmpne     246
+     200: getstatic     #33                 // Field log:Lorg/slf4j/Logger;
+     203: ldc           #34                 // String Can\'t initialize component {}, due to {}
+     205: iconst_3
+     206: anewarray     #35                 // class java/lang/Object
+     209: dup
+     210: iconst_0
+     211: aload_3
+     212: invokeinterface #24,  1           // InterfaceMethod org/springframework/beans/factory/config/BeanDefinition.getBeanClassName:()Ljava/lang/String;
+     217: aastore
+     218: dup
+     219: iconst_1
+     220: aload         5
+     222: invokevirtual #36                 // Method java/lang/Exception.getMessage:()Ljava/lang/String;
+     225: aastore
+     226: dup
+     227: iconst_2
+     228: aload         5
+     230: aastore
+     231: invokeinterface #44,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;[Ljava/lang/Object;)V
+     236: new           #42                 // class java/lang/RuntimeException
+     239: dup
+     240: aload         5
+     242: invokespecial #43                 // Method java/lang/RuntimeException."<init>":(Ljava/lang/Throwable;)V
+     245: athrow
+     246: goto          14
+     249: return
+    Exception table:
+       from    to  target type
+          45   117   120   Class java/lang/Exception
+         165   171   174   Class java/lang/InterruptedException
+
+  private void putComponentIntoMaps(org.thingsboard.server.common.data.plugin.ComponentType, org.thingsboard.rule.engine.api.RuleNode, org.thingsboard.server.common.data.plugin.ComponentDescriptor);
+    Code:
+       0: aload_2
+       1: invokevirtual #45                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #46                 // String ruleChainTypes
+       6: iconst_0
+       7: anewarray     #47                 // class java/lang/Class
+      10: invokevirtual #48                 // Method java/lang/Class.getMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+      13: pop
+      14: iconst_1
+      15: istore        4
+      17: goto          41
+      20: astore        5
+      22: getstatic     #33                 // Field log:Lorg/slf4j/Logger;
+      25: ldc           #50                 // String [{}] does not have ruleChainTypes. Probably extension class compiled before 3.3 release. Please update your extensions and compile using latest 3.3 release dependency
+      27: aload_2
+      28: invokeinterface #51,  1           // InterfaceMethod org/thingsboard/rule/engine/api/RuleNode.name:()Ljava/lang/String;
+      33: invokeinterface #52,  3           // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;)V
+      38: iconst_0
+      39: istore        4
+      41: iload         4
+      43: ifeq          90
+      46: aload_0
+      47: getstatic     #53                 // Field org/thingsboard/server/common/data/rule/RuleChainType.CORE:Lorg/thingsboard/server/common/data/rule/RuleChainType;
+      50: aload_2
+      51: invokeinterface #54,  1           // InterfaceMethod org/thingsboard/rule/engine/api/RuleNode.ruleChainTypes:()[Lorg/thingsboard/server/common/data/rule/RuleChainType;
+      56: invokespecial #55                 // Method ruleChainTypeContainsArray:(Lorg/thingsboard/server/common/data/rule/RuleChainType;[Lorg/thingsboard/server/common/data/rule/RuleChainType;)Z
+      59: ifeq          115
+      62: aload_0
+      63: getfield      #6                  // Field coreComponentsMap:Ljava/util/Map;
+      66: aload_1
+      67: invokedynamic #56,  0             // InvokeDynamic #0:apply:()Ljava/util/function/Function;
+      72: invokeinterface #57,  3           // InterfaceMethod java/util/Map.computeIfAbsent:(Ljava/lang/Object;Ljava/util/function/Function;)Ljava/lang/Object;
+      77: checkcast     #58                 // class java/util/List
+      80: aload_3
+      81: invokeinterface #59,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      86: pop
+      87: goto          115
+      90: aload_0
+      91: getfield      #6                  // Field coreComponentsMap:Ljava/util/Map;
+      94: aload_1
+      95: invokedynamic #60,  0             // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+     100: invokeinterface #57,  3           // InterfaceMethod java/util/Map.computeIfAbsent:(Ljava/lang/Object;Ljava/util/function/Function;)Ljava/lang/Object;
+     105: checkcast     #58                 // class java/util/List
+     108: aload_3
+     109: invokeinterface #59,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     114: pop
+     115: return
+    Exception table:
+       from    to  target type
+           0    17    20   Class java/lang/NoSuchMethodException
+
+  private boolean ruleChainTypeContainsArray(org.thingsboard.server.common.data.rule.RuleChainType, org.thingsboard.server.common.data.rule.RuleChainType[]);
+    Code:
+       0: aload_2
+       1: astore_3
+       2: aload_3
+       3: arraylength
+       4: istore        4
+       6: iconst_0
+       7: istore        5
+       9: iload         5
+      11: iload         4
+      13: if_icmpge     39
+      16: aload_3
+      17: iload         5
+      19: aaload
+      20: astore        6
+      22: aload_1
+      23: aload         6
+      25: invokevirtual #61                 // Method org/thingsboard/server/common/data/rule/RuleChainType.equals:(Ljava/lang/Object;)Z
+      28: ifeq          33
+      31: iconst_1
+      32: ireturn
+      33: iinc          5, 1
+      36: goto          9
+      39: iconst_0
+      40: ireturn
+
+  private org.thingsboard.server.common.data.plugin.ComponentDescriptor scanAndPersistComponent(org.springframework.beans.factory.config.BeanDefinition, org.thingsboard.server.common.data.plugin.ComponentType);
+    Code:
+       0: new           #62                 // class org/thingsboard/server/common/data/plugin/ComponentDescriptor
+       3: dup
+       4: invokespecial #63                 // Method org/thingsboard/server/common/data/plugin/ComponentDescriptor."<init>":()V
+       7: astore_3
+       8: aload_1
+       9: invokeinterface #24,  1           // InterfaceMethod org/springframework/beans/factory/config/BeanDefinition.getBeanClassName:()Ljava/lang/String;
+      14: astore        4
+      16: aload_3
+      17: aload_2
+      18: invokevirtual #64                 // Method org/thingsboard/server/common/data/plugin/ComponentDescriptor.setType:(Lorg/thingsboard/server/common/data/plugin/ComponentType;)V
+      21: aload         4
+      23: invokestatic  #25                 // Method java/lang/Class.forName:(Ljava/lang/String;)Ljava/lang/Class;
+      26: astore        5
+      28: aload         5
+      30: ldc           #17                 // class org/thingsboard/rule/engine/api/RuleNode
+      32: invokevirtual #26                 // Method java/lang/Class.getAnnotation:(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;
+      35: checkcast     #17                 // class org/thingsboard/rule/engine/api/RuleNode
+      38: astore        6
+      40: aload_3
+      41: aload         6
+      43: invokeinterface #51,  1           // InterfaceMethod org/thingsboard/rule/engine/api/RuleNode.name:()Ljava/lang/String;
+      48: invokevirtual #65                 // Method org/thingsboard/server/common/data/plugin/ComponentDescriptor.setName:(Ljava/lang/String;)V
+      51: aload_3
+      52: aload         6
+      54: invokeinterface #66,  1           // InterfaceMethod org/thingsboard/rule/engine/api/RuleNode.scope:()Lorg/thingsboard/server/common/data/plugin/ComponentScope;
+      59: invokevirtual #67                 // Method org/thingsboard/server/common/data/plugin/ComponentDescriptor.setScope:(Lorg/thingsboard/server/common/data/plugin/ComponentScope;)V
+      62: aload_0
+      63: aload         6
+      65: invokespecial #68                 // Method prepareNodeDefinition:(Lorg/thingsboard/rule/engine/api/RuleNode;)Lorg/thingsboard/rule/engine/api/NodeDefinition;
+      68: astore        7
+      70: aload_0
+      71: getfield      #9                  // Field mapper:Lcom/fasterxml/jackson/databind/ObjectMapper;
+      74: invokevirtual #69                 // Method com/fasterxml/jackson/databind/ObjectMapper.createObjectNode:()Lcom/fasterxml/jackson/databind/node/ObjectNode;
+      77: astore        8
+      79: aload_0
+      80: getfield      #9                  // Field mapper:Lcom/fasterxml/jackson/databind/ObjectMapper;
+      83: aload         7
+      85: invokevirtual #70                 // Method com/fasterxml/jackson/databind/ObjectMapper.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+      88: astore        9
+      90: aload         8
+      92: ldc           #71                 // String nodeDefinition
+      94: aload         9
+      96: invokevirtual #72                 // Method com/fasterxml/jackson/databind/node/ObjectNode.set:(Ljava/lang/String;Lcom/fasterxml/jackson/databind/JsonNode;)Lcom/fasterxml/jackson/databind/JsonNode;
+      99: pop
+     100: aload_3
+     101: aload         8
+     103: invokevirtual #73                 // Method org/thingsboard/server/common/data/plugin/ComponentDescriptor.setConfigurationDescriptor:(Lcom/fasterxml/jackson/databind/JsonNode;)V
+     106: aload_3
+     107: aload         4
+     109: invokevirtual #74                 // Method org/thingsboard/server/common/data/plugin/ComponentDescriptor.setClazz:(Ljava/lang/String;)V
+     112: getstatic     #33                 // Field log:Lorg/slf4j/Logger;
+     115: ldc           #75                 // String Processing scanned component: {}
+     117: aload_3
+     118: invokeinterface #76,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+     123: goto          174
+     126: astore        5
+     128: getstatic     #33                 // Field log:Lorg/slf4j/Logger;
+     131: ldc           #34                 // String Can\'t initialize component {}, due to {}
+     133: iconst_3
+     134: anewarray     #35                 // class java/lang/Object
+     137: dup
+     138: iconst_0
+     139: aload_1
+     140: invokeinterface #24,  1           // InterfaceMethod org/springframework/beans/factory/config/BeanDefinition.getBeanClassName:()Ljava/lang/String;
+     145: aastore
+     146: dup
+     147: iconst_1
+     148: aload         5
+     150: invokevirtual #36                 // Method java/lang/Exception.getMessage:()Ljava/lang/String;
+     153: aastore
+     154: dup
+     155: iconst_2
+     156: aload         5
+     158: aastore
+     159: invokeinterface #44,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;[Ljava/lang/Object;)V
+     164: new           #42                 // class java/lang/RuntimeException
+     167: dup
+     168: aload         5
+     170: invokespecial #43                 // Method java/lang/RuntimeException."<init>":(Ljava/lang/Throwable;)V
+     173: athrow
+     174: aload_0
+     175: getfield      #77                 // Field componentDescriptorService:Lorg/thingsboard/server/dao/component/ComponentDescriptorService;
+     178: getstatic     #78                 // Field org/thingsboard/server/common/data/id/TenantId.SYS_TENANT_ID:Lorg/thingsboard/server/common/data/id/TenantId;
+     181: aload         4
+     183: invokeinterface #79,  3           // InterfaceMethod org/thingsboard/server/dao/component/ComponentDescriptorService.findByClazz:(Lorg/thingsboard/server/common/data/id/TenantId;Ljava/lang/String;)Lorg/thingsboard/server/common/data/plugin/ComponentDescriptor;
+     188: astore        5
+     190: aload         5
+     192: ifnonnull     223
+     195: getstatic     #33                 // Field log:Lorg/slf4j/Logger;
+     198: ldc           #80                 // String Persisting new component: {}
+     200: aload_3
+     201: invokeinterface #76,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+     206: aload_0
+     207: getfield      #77                 // Field componentDescriptorService:Lorg/thingsboard/server/dao/component/ComponentDescriptorService;
+     210: getstatic     #78                 // Field org/thingsboard/server/common/data/id/TenantId.SYS_TENANT_ID:Lorg/thingsboard/server/common/data/id/TenantId;
+     213: aload_3
+     214: invokeinterface #81,  3           // InterfaceMethod org/thingsboard/server/dao/component/ComponentDescriptorService.saveComponent:(Lorg/thingsboard/server/common/data/id/TenantId;Lorg/thingsboard/server/common/data/plugin/ComponentDescriptor;)Lorg/thingsboard/server/common/data/plugin/ComponentDescriptor;
+     219: astore_3
+     220: goto          303
+     223: aload_3
+     224: aload         5
+     226: invokevirtual #82                 // Method org/thingsboard/server/common/data/plugin/ComponentDescriptor.equals:(Ljava/lang/Object;)Z
+     229: ifeq          250
+     232: getstatic     #33                 // Field log:Lorg/slf4j/Logger;
+     235: ldc           #83                 // String Component is already persisted: {}
+     237: aload         5
+     239: invokeinterface #76,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+     244: aload         5
+     246: astore_3
+     247: goto          303
+     250: getstatic     #33                 // Field log:Lorg/slf4j/Logger;
+     253: ldc           #84                 // String Component {} will be updated to {}
+     255: aload         5
+     257: aload_3
+     258: invokeinterface #85,  4           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+     263: aload_0
+     264: getfield      #77                 // Field componentDescriptorService:Lorg/thingsboard/server/dao/component/ComponentDescriptorService;
+     267: getstatic     #78                 // Field org/thingsboard/server/common/data/id/TenantId.SYS_TENANT_ID:Lorg/thingsboard/server/common/data/id/TenantId;
+     270: aload         5
+     272: invokevirtual #29                 // Method org/thingsboard/server/common/data/plugin/ComponentDescriptor.getClazz:()Ljava/lang/String;
+     275: invokeinterface #86,  3           // InterfaceMethod org/thingsboard/server/dao/component/ComponentDescriptorService.deleteByClazz:(Lorg/thingsboard/server/common/data/id/TenantId;Ljava/lang/String;)V
+     280: aload_3
+     281: aload         5
+     283: invokevirtual #87                 // Method org/thingsboard/server/common/data/plugin/ComponentDescriptor.getId:()Lorg/thingsboard/server/common/data/id/ComponentDescriptorId;
+     286: invokevirtual #88                 // Method org/thingsboard/server/common/data/plugin/ComponentDescriptor.setId:(Lorg/thingsboard/server/common/data/id/UUIDBased;)V
+     289: aload_0
+     290: getfield      #77                 // Field componentDescriptorService:Lorg/thingsboard/server/dao/component/ComponentDescriptorService;
+     293: getstatic     #78                 // Field org/thingsboard/server/common/data/id/TenantId.SYS_TENANT_ID:Lorg/thingsboard/server/common/data/id/TenantId;
+     296: aload_3
+     297: invokeinterface #81,  3           // InterfaceMethod org/thingsboard/server/dao/component/ComponentDescriptorService.saveComponent:(Lorg/thingsboard/server/common/data/id/TenantId;Lorg/thingsboard/server/common/data/plugin/ComponentDescriptor;)Lorg/thingsboard/server/common/data/plugin/ComponentDescriptor;
+     302: astore_3
+     303: aload_3
+     304: areturn
+    Exception table:
+       from    to  target type
+          16   123   126   Class java/lang/Exception
+
+  private org.thingsboard.rule.engine.api.NodeDefinition prepareNodeDefinition(org.thingsboard.rule.engine.api.RuleNode) throws java.lang.Exception;
+    Code:
+       0: new           #89                 // class org/thingsboard/rule/engine/api/NodeDefinition
+       3: dup
+       4: invokespecial #90                 // Method org/thingsboard/rule/engine/api/NodeDefinition."<init>":()V
+       7: astore_2
+       8: aload_2
+       9: aload_1
+      10: invokeinterface #91,  1           // InterfaceMethod org/thingsboard/rule/engine/api/RuleNode.nodeDetails:()Ljava/lang/String;
+      15: invokevirtual #92                 // Method org/thingsboard/rule/engine/api/NodeDefinition.setDetails:(Ljava/lang/String;)V
+      18: aload_2
+      19: aload_1
+      20: invokeinterface #93,  1           // InterfaceMethod org/thingsboard/rule/engine/api/RuleNode.nodeDescription:()Ljava/lang/String;
+      25: invokevirtual #94                 // Method org/thingsboard/rule/engine/api/NodeDefinition.setDescription:(Ljava/lang/String;)V
+      28: aload_2
+      29: aload_0
+      30: aload_1
+      31: invokespecial #95                 // Method getRelationTypesWithFailureRelation:(Lorg/thingsboard/rule/engine/api/RuleNode;)[Ljava/lang/String;
+      34: invokevirtual #96                 // Method org/thingsboard/rule/engine/api/NodeDefinition.setRelationTypes:([Ljava/lang/String;)V
+      37: aload_2
+      38: aload_1
+      39: invokeinterface #97,  1           // InterfaceMethod org/thingsboard/rule/engine/api/RuleNode.customRelations:()Z
+      44: invokevirtual #98                 // Method org/thingsboard/rule/engine/api/NodeDefinition.setCustomRelations:(Z)V
+      47: aload_1
+      48: invokeinterface #99,  1           // InterfaceMethod org/thingsboard/rule/engine/api/RuleNode.configClazz:()Ljava/lang/Class;
+      53: astore_3
+      54: aload_3
+      55: iconst_0
+      56: anewarray     #47                 // class java/lang/Class
+      59: invokevirtual #100                // Method java/lang/Class.getDeclaredConstructor:([Ljava/lang/Class;)Ljava/lang/reflect/Constructor;
+      62: iconst_0
+      63: anewarray     #35                 // class java/lang/Object
+      66: invokevirtual #101                // Method java/lang/reflect/Constructor.newInstance:([Ljava/lang/Object;)Ljava/lang/Object;
+      69: checkcast     #102                // class org/thingsboard/rule/engine/api/NodeConfiguration
+      72: astore        4
+      74: aload         4
+      76: invokeinterface #103,  1          // InterfaceMethod org/thingsboard/rule/engine/api/NodeConfiguration.defaultConfiguration:()Lorg/thingsboard/rule/engine/api/NodeConfiguration;
+      81: astore        5
+      83: aload_2
+      84: aload_0
+      85: getfield      #9                  // Field mapper:Lcom/fasterxml/jackson/databind/ObjectMapper;
+      88: aload         5
+      90: invokevirtual #70                 // Method com/fasterxml/jackson/databind/ObjectMapper.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+      93: invokevirtual #104                // Method org/thingsboard/rule/engine/api/NodeDefinition.setDefaultConfiguration:(Lcom/fasterxml/jackson/databind/JsonNode;)V
+      96: aload_2
+      97: aload_1
+      98: invokeinterface #105,  1          // InterfaceMethod org/thingsboard/rule/engine/api/RuleNode.uiResources:()[Ljava/lang/String;
+     103: invokevirtual #106                // Method org/thingsboard/rule/engine/api/NodeDefinition.setUiResources:([Ljava/lang/String;)V
+     106: aload_2
+     107: aload_1
+     108: invokeinterface #107,  1          // InterfaceMethod org/thingsboard/rule/engine/api/RuleNode.configDirective:()Ljava/lang/String;
+     113: invokevirtual #108                // Method org/thingsboard/rule/engine/api/NodeDefinition.setConfigDirective:(Ljava/lang/String;)V
+     116: aload_2
+     117: aload_1
+     118: invokeinterface #109,  1          // InterfaceMethod org/thingsboard/rule/engine/api/RuleNode.configSchema:()Ljava/lang/String;
+     123: invokevirtual #110                // Method org/thingsboard/rule/engine/api/NodeDefinition.setConfigSchema:(Ljava/lang/String;)V
+     126: aload_2
+     127: areturn
+
+  private java.lang.String[] getRelationTypesWithFailureRelation(org.thingsboard.rule.engine.api.RuleNode);
+    Code:
+       0: new           #111                // class java/util/ArrayList
+       3: dup
+       4: aload_1
+       5: invokeinterface #112,  1          // InterfaceMethod org/thingsboard/rule/engine/api/RuleNode.relationTypes:()[Lorg/thingsboard/rule/engine/api/TbRelationTypesEnum;
+      10: invokestatic  #113                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+      13: invokespecial #114                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+      16: astore_2
+      17: aload_2
+      18: getstatic     #115                // Field org/thingsboard/rule/engine/api/TbRelationTypesEnum.FAILURE:Lorg/thingsboard/rule/engine/api/TbRelationTypesEnum;
+      21: invokeinterface #116,  2          // InterfaceMethod java/util/List.contains:(Ljava/lang/Object;)Z
+      26: ifne          39
+      29: aload_2
+      30: getstatic     #115                // Field org/thingsboard/rule/engine/api/TbRelationTypesEnum.FAILURE:Lorg/thingsboard/rule/engine/api/TbRelationTypesEnum;
+      33: invokeinterface #59,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      38: pop
+      39: aload_2
+      40: invokeinterface #117,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      45: invokedynamic #118,  0            // InvokeDynamic #2:apply:()Ljava/util/function/Function;
+      50: invokeinterface #119,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      55: invokedynamic #120,  0            // InvokeDynamic #3:apply:()Ljava/util/function/IntFunction;
+      60: invokeinterface #121,  2          // InterfaceMethod java/util/stream/Stream.toArray:(Ljava/util/function/IntFunction;)[Ljava/lang/Object;
+      65: checkcast     #122                // class "[Ljava/lang/String;"
+      68: areturn
+
+  private java.util.Set<org.springframework.beans.factory.config.BeanDefinition> getBeanDefinitions(java.lang.Class<? extends java.lang.annotation.Annotation>);
+    Code:
+       0: new           #123                // class org/springframework/context/annotation/ClassPathScanningCandidateComponentProvider
+       3: dup
+       4: iconst_0
+       5: invokespecial #124                // Method org/springframework/context/annotation/ClassPathScanningCandidateComponentProvider."<init>":(Z)V
+       8: astore_2
+       9: aload_2
+      10: new           #125                // class org/springframework/core/type/filter/AnnotationTypeFilter
+      13: dup
+      14: aload_1
+      15: invokespecial #126                // Method org/springframework/core/type/filter/AnnotationTypeFilter."<init>":(Ljava/lang/Class;)V
+      18: invokevirtual #127                // Method org/springframework/context/annotation/ClassPathScanningCandidateComponentProvider.addIncludeFilter:(Lorg/springframework/core/type/filter/TypeFilter;)V
+      21: new           #128                // class java/util/HashSet
+      24: dup
+      25: invokespecial #129                // Method java/util/HashSet."<init>":()V
+      28: astore_3
+      29: aload_0
+      30: getfield      #130                // Field scanPackages:[Ljava/lang/String;
+      33: astore        4
+      35: aload         4
+      37: arraylength
+      38: istore        5
+      40: iconst_0
+      41: istore        6
+      43: iload         6
+      45: iload         5
+      47: if_icmpge     76
+      50: aload         4
+      52: iload         6
+      54: aaload
+      55: astore        7
+      57: aload_3
+      58: aload_2
+      59: aload         7
+      61: invokevirtual #131                // Method org/springframework/context/annotation/ClassPathScanningCandidateComponentProvider.findCandidateComponents:(Ljava/lang/String;)Ljava/util/Set;
+      64: invokeinterface #132,  2          // InterfaceMethod java/util/Set.addAll:(Ljava/util/Collection;)Z
+      69: pop
+      70: iinc          6, 1
+      73: goto          43
+      76: aload_3
+      77: areturn
+
+  public void discoverComponents();
+    Code:
+       0: aload_0
+       1: invokespecial #133                // Method registerRuleNodeComponents:()V
+       4: getstatic     #33                 // Field log:Lorg/slf4j/Logger;
+       7: ldc           #134                // String Found following definitions: {}
+       9: aload_0
+      10: getfield      #5                  // Field components:Ljava/util/Map;
+      13: invokeinterface #135,  1          // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+      18: invokeinterface #76,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      23: return
+
+  public java.util.List<org.thingsboard.server.common.data.plugin.ComponentDescriptor> getComponents(org.thingsboard.server.common.data.plugin.ComponentType, org.thingsboard.server.common.data.rule.RuleChainType);
+    Code:
+       0: getstatic     #53                 // Field org/thingsboard/server/common/data/rule/RuleChainType.CORE:Lorg/thingsboard/server/common/data/rule/RuleChainType;
+       3: aload_2
+       4: invokevirtual #61                 // Method org/thingsboard/server/common/data/rule/RuleChainType.equals:(Ljava/lang/Object;)Z
+       7: ifeq          44
+      10: aload_0
+      11: getfield      #6                  // Field coreComponentsMap:Ljava/util/Map;
+      14: aload_1
+      15: invokeinterface #136,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+      20: ifeq          40
+      23: aload_0
+      24: getfield      #6                  // Field coreComponentsMap:Ljava/util/Map;
+      27: aload_1
+      28: invokeinterface #137,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      33: checkcast     #58                 // class java/util/List
+      36: invokestatic  #138                // Method java/util/Collections.unmodifiableList:(Ljava/util/List;)Ljava/util/List;
+      39: areturn
+      40: invokestatic  #139                // Method java/util/Collections.emptyList:()Ljava/util/List;
+      43: areturn
+      44: getstatic     #33                 // Field log:Lorg/slf4j/Logger;
+      47: ldc           #140                // String Unsupported rule chain type {}
+      49: aload_2
+      50: invokeinterface #141,  3          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;)V
+      55: new           #42                 // class java/lang/RuntimeException
+      58: dup
+      59: new           #142                // class java/lang/StringBuilder
+      62: dup
+      63: invokespecial #143                // Method java/lang/StringBuilder."<init>":()V
+      66: ldc           #144                // String Unsupported rule chain type
+      68: invokevirtual #145                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      71: aload_2
+      72: invokevirtual #146                // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+      75: invokevirtual #147                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      78: invokespecial #148                // Method java/lang/RuntimeException."<init>":(Ljava/lang/String;)V
+      81: athrow
+
+  public java.util.List<org.thingsboard.server.common.data.plugin.ComponentDescriptor> getComponents(java.util.Set<org.thingsboard.server.common.data.plugin.ComponentType>, org.thingsboard.server.common.data.rule.RuleChainType);
+    Code:
+       0: getstatic     #53                 // Field org/thingsboard/server/common/data/rule/RuleChainType.CORE:Lorg/thingsboard/server/common/data/rule/RuleChainType;
+       3: aload_2
+       4: invokevirtual #61                 // Method org/thingsboard/server/common/data/rule/RuleChainType.equals:(Ljava/lang/Object;)Z
+       7: ifeq          20
+      10: aload_0
+      11: aload_1
+      12: aload_0
+      13: getfield      #6                  // Field coreComponentsMap:Ljava/util/Map;
+      16: invokespecial #149                // Method getComponents:(Ljava/util/Set;Ljava/util/Map;)Ljava/util/List;
+      19: areturn
+      20: getstatic     #33                 // Field log:Lorg/slf4j/Logger;
+      23: ldc           #140                // String Unsupported rule chain type {}
+      25: aload_2
+      26: invokeinterface #141,  3          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;)V
+      31: new           #42                 // class java/lang/RuntimeException
+      34: dup
+      35: new           #142                // class java/lang/StringBuilder
+      38: dup
+      39: invokespecial #143                // Method java/lang/StringBuilder."<init>":()V
+      42: ldc           #144                // String Unsupported rule chain type
+      44: invokevirtual #145                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      47: aload_2
+      48: invokevirtual #146                // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+      51: invokevirtual #147                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      54: invokespecial #148                // Method java/lang/RuntimeException."<init>":(Ljava/lang/String;)V
+      57: athrow
+
+  public java.util.Optional<org.thingsboard.server.common.data.plugin.ComponentDescriptor> getComponent(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #5                  // Field components:Ljava/util/Map;
+       4: aload_1
+       5: invokeinterface #137,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      10: invokestatic  #150                // Method java/util/Optional.ofNullable:(Ljava/lang/Object;)Ljava/util/Optional;
+      13: areturn
+
+  private java.util.List<org.thingsboard.server.common.data.plugin.ComponentDescriptor> getComponents(java.util.Set<org.thingsboard.server.common.data.plugin.ComponentType>, java.util.Map<org.thingsboard.server.common.data.plugin.ComponentType, java.util.List<org.thingsboard.server.common.data.plugin.ComponentDescriptor>>);
+    Code:
+       0: new           #111                // class java/util/ArrayList
+       3: dup
+       4: invokespecial #151                // Method java/util/ArrayList."<init>":()V
+       7: astore_3
+       8: aload_1
+       9: invokeinterface #152,  1          // InterfaceMethod java/util/Set.stream:()Ljava/util/stream/Stream;
+      14: aload_2
+      15: dup
+      16: invokevirtual #45                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      19: pop
+      20: invokedynamic #153,  0            // InvokeDynamic #4:test:(Ljava/util/Map;)Ljava/util/function/Predicate;
+      25: invokeinterface #154,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+      30: aload_3
+      31: aload_2
+      32: invokedynamic #155,  0            // InvokeDynamic #5:accept:(Ljava/util/List;Ljava/util/Map;)Ljava/util/function/Consumer;
+      37: invokeinterface #156,  2          // InterfaceMethod java/util/stream/Stream.forEach:(Ljava/util/function/Consumer;)V
+      42: aload_3
+      43: areturn
+
+  private static void lambda$getComponents$3(java.util.List, java.util.Map, org.thingsboard.server.common.data.plugin.ComponentType);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokeinterface #137,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       8: checkcast     #157                // class java/util/Collection
+      11: invokeinterface #158,  2          // InterfaceMethod java/util/List.addAll:(Ljava/util/Collection;)Z
+      16: pop
+      17: return
+
+  private static java.lang.String[] lambda$getRelationTypesWithFailureRelation$2(int);
+    Code:
+       0: iload_0
+       1: anewarray     #11                 // class java/lang/String
+       4: areturn
+
+  private static java.util.List lambda$putComponentIntoMaps$1(org.thingsboard.server.common.data.plugin.ComponentType);
+    Code:
+       0: new           #111                // class java/util/ArrayList
+       3: dup
+       4: invokespecial #151                // Method java/util/ArrayList."<init>":()V
+       7: areturn
+
+  private static java.util.List lambda$putComponentIntoMaps$0(org.thingsboard.server.common.data.plugin.ComponentType);
+    Code:
+       0: new           #111                // class java/util/ArrayList
+       3: dup
+       4: invokespecial #151                // Method java/util/ArrayList."<init>":()V
+       7: areturn
+
+  static {};
+    Code:
+       0: ldc           #23                 // class org/thingsboard/server/service/component/AnnotationComponentDiscoveryService
+       2: invokestatic  #159                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #33                 // Field log:Lorg/slf4j/Logger;
+       8: return
+}

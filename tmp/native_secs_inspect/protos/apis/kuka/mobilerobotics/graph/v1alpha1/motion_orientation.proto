@@ -1,0 +1,27 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.graph.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.graph.v1alpha1";
+option java_outer_classname = "MotionOrientationProto";
+option java_multiple_files = true;
+
+// Definition of the allowed motion orientations which can be set for an edge.
+message MotionOrientation
+{
+  // Allowed orientations on the edge in radians.
+  // These orientations are set relatively to the reference frame 
+  // orientation (map).
+  repeated double orientations_radians = 1;
+    
+  // Allowed orientations on the path in radians.
+  // These orientations are set relatively to the path tangent (edge).
+  repeated double path_orientations_radians = 2;
+}

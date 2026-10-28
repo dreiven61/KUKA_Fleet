@@ -1,0 +1,23 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.graph.v1alpha1;
+
+import "kuka/mobilerobotics/motion/v1alpha1/goal_accuracy.proto";
+
+option java_package = "com.kuka.mobilerobotics.graph.v1alpha1";
+option java_outer_classname = "NodeAccuracyPropertyProto";
+option java_multiple_files = true;
+
+// Definition of the motion parameter which can be set for a node.
+message NodeAccuracyProperty
+{
+  // The maximum allowed translational difference (in meters) and rotational difference (in radians) at the goal.
+  kuka.mobilerobotics.motion.v1alpha1.GoalAccuracy goal_accuracy = 1;
+}

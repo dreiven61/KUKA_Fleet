@@ -1,0 +1,31 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.graph.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.graph.v1alpha1";
+option java_outer_classname = "WaitingNodesPropertyProto";
+option java_multiple_files = true;
+
+
+// Definition of the waiting nodes which can be set for a node.
+message WaitingNodesProperty
+{
+  // List of node ids defining the waiting nodes for a node.<br/><br/>
+  // No id may occur more than once and the node to which
+  // this property is added must not occur in the list.
+  // The last id in the list corresponds to the first waiting
+  // node which must be visited, the second-last id
+  // corresponds to the second waiting node, etc.
+  repeated string queue = 1;
+
+  // The estimated time in seconds that a vehicle spends at
+  // the node defining the waiting zone.
+  double estimated_time_of_stay_seconds = 2;
+}

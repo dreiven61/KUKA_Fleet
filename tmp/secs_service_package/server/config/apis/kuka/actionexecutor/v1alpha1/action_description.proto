@@ -1,0 +1,40 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.actionexecutor.v1alpha1;
+
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Kuka.ActionExecutor.V1alpha1";
+option java_package = "com.kuka.actionexecutor.v1alpha1";
+option java_outer_classname = "ActionDescriptionProto";
+option java_multiple_files = true;
+
+// An action description contains a command with the parameters of an action.
+//
+// An action is a command that can be executed by an action executor service
+// (example actions: motion of a robotic arm, motion of an AGV,
+// opening and closing of a gripper, moving a lift, opening and
+// closing a sliding gate, example services able to execute actions:
+// gRPC API for moving a robot arm or an AGV, gRPC API for a PLC).
+
+message ActionDescription {
+  // The uuid of this action.
+  string uuid = 1;
+
+  // The uuid of the resource to execute this action.
+  string resource_uuid = 2;
+
+  // The timestamp corresponding to the time of the creation of this action description.
+  google.protobuf.Timestamp timestamp = 3;
+
+  // The action command with all its parameters.
+  google.protobuf.Any command = 4;
+}

@@ -1,0 +1,58 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.sensopartcamera.jobmanagement.v1;
+
+option csharp_namespace = "Kuka.SensopartCamera.JobManagement.V1";
+option java_multiple_files = true;
+option java_outer_classname = "JobSynchronizationServiceProto";
+option java_package = "com.kuka.sensopartcamera.jobmanagement.v1";
+
+// Service to download and upload the Sensopart camera device Jobset file.
+service JobSynchronizationService {
+  
+  // Gets the jobset file from the VISOR camera device    
+  rpc GetJobset (GetJobsetRequest) returns (GetJobsetResponse);
+
+  // Sets the jobset file to the VISOR camera device    
+  rpc SetJobset (SetJobsetRequest) returns (SetJobsetResponse);
+
+  // Sets the default jobset file to the VISOR camera device    
+  rpc SetDefaultJobset (SetDefaultJobsetRequest) returns (SetDefaultJobsetResponse);
+}
+
+// Request for GetJobset
+message GetJobsetRequest { 
+}
+
+// Response for GetJobset
+message GetJobsetResponse {
+
+  // content of the file 
+  bytes data = 1; 
+}
+
+// Request for SetJobset
+message SetJobsetRequest {
+   
+  // content of the file 
+  bytes data = 1; 
+}
+
+// Response for SetJobset
+message SetJobsetResponse {
+}
+
+// Response for SetJobset
+message SetDefaultJobsetRequest {
+}
+
+// Response for SetJobset
+message SetDefaultJobsetResponse {
+}

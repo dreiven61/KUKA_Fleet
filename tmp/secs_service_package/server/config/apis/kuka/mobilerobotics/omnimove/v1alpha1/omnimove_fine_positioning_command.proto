@@ -1,0 +1,37 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.omnimove.v1alpha1;
+
+import "kuka/mobilerobotics/motion/v1alpha1/goal_accuracy.proto";
+import "kuka/core/geometry/v1/transform_2d.proto";
+import "google/protobuf/timestamp.proto";
+
+option java_package = "com.kuka.mobilerobotics.omnimove.v1alpha1";
+option java_outer_classname = "OmnimoveFinePositioningCommandProto";
+option java_multiple_files = true;
+
+// Contains information for the fine positioning command 
+message OmnimoveFinePositioningCommand {
+	
+  // Time stamp when the positioning was commanded (when this stamp changes, the target position is recomputed)
+  google.protobuf.Timestamp timestamp = 1;
+
+  // The relative x,y target position and theta orientation in robot coordinates. [m] [rad]
+  kuka.core.geometry.v1.Transform2D goal_pose = 2;
+
+  // Precision of the goal pose for translation [m] and rotation [rad]
+  kuka.mobilerobotics.motion.v1alpha1.GoalAccuracy goal_precision = 3;
+
+  // Maximum allowed distance to the goal pose in odometry coordinates system. This is used to avoid control errors in which the platform drives away from the target.
+  double translational_range = 4;
+
+  // Maximum allowed rotational difference to the goal orientation in odometry coordinates system. This is used to avoid control errors in which the platform rotates away from the target orientation.
+  double rotational_range = 5;
+}

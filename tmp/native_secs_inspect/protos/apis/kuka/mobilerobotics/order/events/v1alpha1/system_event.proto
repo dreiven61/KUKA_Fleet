@@ -1,0 +1,48 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.order.events.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.order.events.v1alpha1";
+option java_outer_classname = "SystemEventProto";
+option java_multiple_files = true;
+
+// Represents an system event.
+message SystemEvent {
+
+	// The type of the system event
+	enum SystemEventType {
+	  UNSPECIFIED = 0;
+	  
+	  // While this state is active, the system maintains the OFF-LINE state. It awaits operator instructions to attempt to go ON-LINE.
+	  EQUIPMENT_OFFLINE = 1;
+	  
+	  // Operation of the equipment is implemented by direct action of an operator. The host access is restricted.
+	  CONTROL_STATE_LOCAL = 2;
+	  
+	  // The host has access, through the communications interface, to the necessary commands to operate the
+	  // equipment through the full process cycle in an automated manner. The host access is not restricted.
+	  CONTROL_STATE_REMOTE = 3;
+	  
+	  // System runs through its startup sequence.
+	  INITIALIZING = 4;
+	  
+	  // TSC is requested to pause.
+	  PAUSING = 5;
+	  
+	  // System started up successfully. All loads and unloads are complete(d).
+	  // No new acquires or deposits will occur. Outstanding acquires and deposits will complete.
+	  PAUSED = 6;
+	  
+	  // TSC is resumed.
+	  RESUMED = 7;
+	}
+
+  SystemEventType action = 1;
+}

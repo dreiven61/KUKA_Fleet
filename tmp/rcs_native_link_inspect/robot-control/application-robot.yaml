@@ -1,0 +1,484 @@
+# robot params
+robot:
+  params:
+    netty:
+      tcp:
+        port: 8988
+      udp:
+        port: 8988
+    connection:
+      message:
+        everyHandleTimeThresholdMs: 1000
+        averageHandleTimeThresholdMs: 1000
+      unreliableTimeoutMs: 3000
+      disconnectedTimeoutMs: 15000
+      udp:
+        resendInterval: 5000
+        checkInterval: 100
+        maxResendTimes: 10
+    cancel:
+      timeoutMs: 60000
+    offline:
+      command:
+        timeoutMs: 60000
+      charge:
+        timeoutMs: 3600000
+    containerUpdate:
+      timeoutMs: 5000
+    charge:
+      rotate:
+        angularAcceleration: 100
+        angularDeceleration: 80
+        angleVelocity: 60
+      stop:
+        timeoutMs: 60000
+    lightMusic:
+      isOpen: false
+      pointOpenLightMusicMonitor: false
+      stop:
+        timeoutMs: 3000
+    grpc:
+      response:
+        timeoutMs: 20000
+    # 货架角度的精度，单位°
+    rack:
+      orientation:
+        accuracy: 3.0
+    ### hairou server
+    kubo:
+      isEnabled: ${KUBO_SERVER_SWITCH:false}
+    haiserver:
+      ### if enable hairou server
+      isEnabled: ${HAI_SERVER_SWITCH:false}
+      ### hairou redis config
+      redis:
+        host: ${HAI_REDIS_HOST:localhost}
+        password: ${HAI_REDIS_PASSWORD:}
+        timeout: ${HAI_REDIS_TIMEOUT:2000}
+        database: ${HAI_REDIS_DATABASE:0}
+      jedis:
+        max:
+          wait: 2000
+          total: 10
+          idle: 4
+        min:
+          idle: 2
+        timeBetweenEvictionRuns: 120000
+        minEvictableIdleTime: 60000
+      ### hairou kafka config
+      kafka:
+        server: static://${HAI_KAFKA_HOST:localhost}:${HAI_KAFKA_PORT:9092}
+        groupId: ${HAI_KAFKA_GROUP:group-1}
+        security:
+          protocol: ${HAI_KAFKA_SECURITY_PROTOCOL:SASL_PLAINTEXT}
+        sasl:
+          mechanism: ${HAI_KAFKA_SASL_MECHANISM:PLAIN}
+        username: ${HAI_KAFKA_USERNAME:}
+        password: ${HAI_KAFKA_PASSWORD:}
+        producer:
+          topic: ${HAI_KAFKA_PRODUCER_TOPIC:ll}
+        consumer:
+          topic: ${HAI_KAFKA_CONSUMER_TOPIC:ss}
+    #seer agv params
+    seer:
+      seer: ${SEER_SERVER_SWITCH:false}
+      forkliftMoveHeight: -1.0
+      rotateTypeEnabled: false
+
+  # 无需更新端口到db的车型
+  ignore-port-types:
+    - AM15
+    - KMP1500I
+    - HaiRou-Slam
+    - BasiclineA42-SLAM
+    - HAIPICKA42
+    - HAIPICKA42-g-E4
+
+#vda5050 agv params
+vda:
+  agv:
+    isEnabled: ${VDA_SERVER_SWITCH:false}
+    params:
+      host: tcp://${VDA_MQTT_HOST:mqtt-broker}:${VDA_MQTT_PORT:1883}
+
+#robot manager params for Robot with Nav 2.0, like KMR iisy
+robotmanager:
+  params:
+    enable: ${ROBOTMANAGER_SWITCH:false}
+    collisionAvoidance:
+      defaultMaxDistance: 2
+    safetyConfig:
+      enable: false
+    cameraConfig:
+      enable: false
+
+# hik agv params
+## obstacle avoidance
+
+hik:
+  agv:
+    params:
+      # target accuracy strategy
+      accuracyLevel: 0
+      distanceAccuracy: 8
+      angleAccuracy: 2000
+      rackAngleAccuracy: 2000
+      avoid:
+        distanceThreshold: 1000
+        ### stop area
+        frontSafeDistance4Stop: 150
+        backSafeDistance4Stop: 50
+        leftSafeDistance4Stop: 50
+        rightSafeDistance4Stop: 50
+        ### slow down area 1
+        frontSafeDistance4Slow1: 1000
+        backSafeDistance4Slow1: 200
+        leftSafeDistance4Slow1: 200
+        rightSafeDistance4Slow1: 200
+        velocity4Slow1: 200
+        deceleration4Slow1: 300
+        ### slow down area 2
+        frontSafeDistance4Slow2: 400
+        backSafeDistance4Slow2: 100
+        leftSafeDistance4Slow2: 100
+        rightSafeDistance4Slow2: 100
+        velocity4Slow2: 100
+        deceleration4Slow2: 200
+      lift:
+        # 举货架精度, 举货架前, 货架与小车之间距离需满足的精度 (mm)
+        upAccuracy: 30
+        # 降货架精度, 下放货架的精度 (mm)
+        downAccuracy: 20
+        # 下降是否采用盲降
+        downBlind: false
+      rack:
+        delay: 1000
+  ## cancel stop space
+  cancel:
+    stop:
+      space: 3000
+  ctu:
+    obstacleShieldArea: 0
+
+kuka:
+  vda:
+    params:
+      server:
+        isEnabled: false
+        host: tcp://127.0.0.1:1883
+        clientId: kuka-1
+        userName: admin
+        password: admin
+        topicPrefix: uagv/v1/kuka/
+      accuracyLevel: 0
+      distanceAccuracy: 8
+      angleAccuracy: 1
+      rackAngleAccuracy: 1
+      avoid:
+        # stop areafrontSafeDistance4Stop
+        frontSafeDistance4Stop: 0.1
+        backSafeDistance4Stop: 0.05
+        leftSafeDistance4Stop: 0.05
+        rightSafeDistance4Stop: 0.05
+        # 障碍物检测范围
+        nearExcludeXmin: 0
+        farExcludeXmax: 4
+        rightExcludeYmin: -2
+        leftExcludeYmax: 2
+        lowDetectZmin: -0.2
+        highDetectZmax: 2
+        # 空车状态下无效区的膨胀参数 单位m
+        expandExcludeArea: 0
+        expandExcludeAreaOnload: 0.1
+        rotateSafeAreaOffset: 0.1
+        relativeAngleAccuracy: 10
+        onloadZmax: 1
+        # 进出支架时安全区的参数（空车） 单位mm
+        accessHolderZmax: 0
+        accessHolderY: 0
+        # 进出货架时安全区的参数（空车） 单位m
+        accessContainerZmax: 0.05
+        accessContainerX: 0.1
+        accessContainerY: 0.02
+        # 进出电梯时安全区的参数（空车） 单位m
+        accessElevatorX: 0.25
+        accessElevatorY: 0
+      move:
+        maxAngularVelocity: 1
+        linearAcceleration: 1
+        linearDeceleration: 1
+        angularAcceleration: 40
+        angularDeceleration: 40
+      rack:
+        hasBucketModel: true
+        verifyRackCode: true
+      lift:
+        liftWithGoalNode: false
+
+# kukai agv params
+## obstacle avoidance
+kukai:
+  remote:
+    openRemoteStartup: false
+    wifi:
+      port: 8143
+  agv:
+    params:
+      avoid:
+        distanceThreshold: 1000
+        ### stop area
+        frontSafeDistance4Stop: 250
+        backSafeDistance4Stop: 0
+        leftSafeDistance4Stop: 50
+        rightSafeDistance4Stop: 50
+        ### slow down area 1
+        frontSafeDistance4Slow1: 1000
+        backSafeDistance4Slow1: 200
+        leftSafeDistance4Slow1: 200
+        rightSafeDistance4Slow1: 200
+        velocity4Slow1: 200
+        deceleration4Slow1: 300
+        ### slow down area 2
+        frontSafeDistance4Slow2: 400
+        backSafeDistance4Slow2: 100
+        leftSafeDistance4Slow2: 100
+        rightSafeDistance4Slow2: 100
+        velocity4Slow2: 100
+        deceleration4Slow2: 200
+        ### obstacle Exclude area
+        nearExcludeXmin: -500
+        farExcludeXmax: 500
+        rightExcludeYmin: -500
+        leftExcludeYmax: 500
+        lowDetectZmin: -2000
+        highDetectZmax: 0
+        # 空车状态下无效区的膨胀参数 单位mm
+        expandExcludeArea: 0
+        # 举升状态下无效区的膨胀参数 单位mm
+        # 因顶起货架后，有可能不完全在中心，多加的安全距离
+        expandExcludeAreaOnload: 100
+        # 旋转时安全区的膨胀参数（空车/举升） 单位mm
+        rotateSafeAreaOffset: 100
+        # 进出货架时安全区的参数（空车） 单位mm
+        accessContainerZmax: 180
+        accessContainerZmax1500p: 50
+        accessContainerX: 100
+        accessContainerY: 20
+        # 进出支架时安全区的参数 单位mm
+        accessHolderZmax: 180
+        accessHolderZmax1500p: 50
+        accessHolderY: 20
+        # 进出电梯时安全区的参数（空车） 单位mm
+        accessElevatorX: 250
+        accessElevatorY: 20
+        # 判断货架与小车是否正交的角度误差值 单位degree
+        relativeAngleAccuracy: 10
+      rack:
+        # 是否需要校验货码
+        verifyRackCode: true
+        # 是否传支架点上的货架模型
+        hasBucketModel: true
+      obstacleAvoidance:
+        # 绕障不允许之后，重启申请的时间间隔 (ms)
+        waitTimeMs: 3000
+      recover:
+        # 重新恢复后是否更新货架角度
+        updatePayloadOri: true
+      broadcast:
+        # 语音播报曲目配置
+        index: 1
+        # 语音播报音量配置
+        volume: 255
+      lift:
+        # 二维码模式下举升/下降是否发送目标点坐标
+        liftWithGoalNode: false
+      move:
+        # 是否支持连续下发action
+        continuousDeliveryCommand: false
+        maxAngularVelocity: 1
+        linearAcceleration: 1
+        linearDeceleration: 1
+        angularAcceleration: 40
+        angularDeceleration: 40
+        # 切换导航方式时是否停车
+        switchNavStopRobot: true
+        # 直线移动是否下发货架目标角度
+        sendRackTargetAngle: false
+        # 是否校验切换地图指令
+        verifySwitchMap: false
+      opportunity-charging:
+        # 产生机会充电指令的空闲时长(s)
+        timeout: 20
+        # 小车和点位的距离误差 (m)
+        poseErrorRange: 0.3
+        # 机会充电启动充电下限
+        chargingLowerLimit: 80.0
+  ## cancel stop space
+  cancel:
+    stop:
+      space: 3000
+
+# kukas agv params
+kukas:
+  agv:
+    params:
+      netty:
+        tcp:
+          port: 8112
+        udp:
+          port: 8112
+      virtualLineFollower:
+        defaultTransAccuracy: 0.05
+        defaultAngleAccuracyDeg: 1.0
+        defaultTransGoalAccuracy: 0.025
+        defaultAngleGoalAccuracyDeg: 0.5
+      SplineMotion:
+        trackingAccuracyTrans: 0.05
+        trackingAccuracyRot: 0.05236
+        accuracyTrans: 0.5
+        accuracyRot: 0.0872665
+      RelativeMotion:
+        accuracyTransMin: 0.03
+        accuracyRotMinDeg: 2.0
+        transNormMin: 0
+        transNormMax: 5
+        rotNormMinDeg: 0
+        rotNormMaxDeg: 180
+      skillLift:
+        liftTimeout: 300.0
+      charge:
+        chargeGrpcPort: 47254
+        chargerModelName: 600s-2-charger
+        chargerEntireRetryCount: 2
+        chargerEnableProtectionFieldSetting: true
+        chargerDelayProtectionFieldSettingChargeFinishMs: 20000
+        chargerDelayProtectionFieldSettingNormalFinishMs: 5000
+        chargerDelayDetectExecuteMs: 1000
+        chargerDetectErrorRetryCount: 20
+        chargerDetectMinX: -5
+        chargerDetectMaxX: 0
+        chargerDetectMinY: -1
+        chargerDetectMaxY: 1
+        chargerDetectTrustMinScore: 0.6
+        chargerDetectTrustMinX: -2.5
+        chargerDetectTrustMaxX: -0.5
+        chargerDetectTrustMinY: -0.5
+        chargerDetectTrustMaxY: 0.5
+        chargerDetectTrustMaxAngleDegDeviation: 5
+        chargerDetectMainAxisDistanceM: -0.58
+        chargerDetectMinorAxisMaxOffsetM: 0.05
+        chargerDetectRelativeMoveDistanceM: -0.2
+        chargerTrackingGoalDistanceAccuracy: 0.05
+        chargerTrackingGoalAngularAccuracy: 0.1
+        chargerTrackingRecoverStartPoseMaxTrans: 0.5
+        chargerTrackingRecoverStartPoseMaxRot: 1.0471975511965976
+        chargerTrackingRecoverPathMaxTrans: 0.5
+        chargerTrackingRecoverPathMaxRot: 1.0471975511965976
+        chargerTrackingVelocity: 0.2
+        chargerTrackingAngularVelocity: 0.2
+        chargerDelayStartChargeMs: 3000
+        chargerStartChargeErrorRetryCount: 3
+        chargerFallbackGoalAngularAccuracyDeg: 80
+        chargeWaitingTimeout: 60000
+      stopCharge:
+        stopChargeRelativeMotionDistance: 0.4
+        stopChargeVirtualLineMotionEnable: false
+      rack:
+        isBlindCarry: true
+        holderModelName: 600s-2-holder
+        rackModelName: 600s-2-rack
+        leaveHolderRelativeDistance: 1.0
+        holderToTargetVelocity: 1.0
+        rackTrackingVelocity: 0.2
+        rackTrackingRecoverStartPoseMaxTrans: 0.5
+        rackTrackingRecoverStartPoseMaxRot: 1.047
+        rackTrackingRecoverPathMaxTrans: 0.5
+        rackTrackingRecoverPathMaxRot: 1.047
+        rackTrackingAngularVelocity: 0.2
+        rackTrackingGoalDistanceAccuracy: 0.05
+        rackTrackingGoalAngularAccuracy: 0.1
+        rackDetectErrorRetryCount: 30
+        rackDetectMainAxisDistanceM: 0
+        rackDetectRelativeMoveDistanceM: 0.3
+        rackDetectMinX: -5
+        rackDetectMaxX: 5
+        rackDetectMinY: -1.2
+        rackDetectMaxY: 1.2
+        rackDetectTrustMinX: 0.5
+        rackDetectTrustMaxX: 2.5
+        rackDetectTrustMinY: -0.5
+        rackDetectTrustMaxY: 0.5
+        rackDelayDetectExecuteMs: 200
+        rackDetectMinorAxisMaxOffsetM: 0.2
+        rackDetectRadianOffset: 0.2
+        leavingRackDynamicDistance: 0.5
+      move:
+        stopWhenUnreliable: true
+        stopWhenUndecided: false
+      lift:
+        retryMs: 30000
+      protection:
+        protectionGrpcPort: 47251
+      safety:
+        safetyGrpcPort: 5008
+        specialCaseTimeoutLimit: 55000
+        checkSafetyPort: 47260
+        openProtectionFieldCheck: false
+        checkSafetyTimes: 5000
+      led:
+        ledStripGrpcPort: 8995
+      template:
+        object-templates:
+          - name: 600s-charger
+            clazz: com.kuka.nav.provider.geometry.NavSpatialObject
+            properties:
+              - name: detectionModel
+                type: LayerGroup
+                value: '<layer name="DetectionModel" groupName="" domainRange=""><shape name=""><transformationToParent><pose x="-0.012750000000000032" y="-0.5196875000000001" theta="0.0"/></transformationToParent><polygon points="-0.03825000000000003,0.009187500000000126 -0.03825000000000001,-0.01706249999999998 -0.03825000000000001,-0.022312499999999957 0.06375000000000003,-0.022312499999999957 0.06375000000000003,0.003937500000000038 0.06375000000000004,0.01968750000000008 -0.03825000000000003,0.01968750000000008 -0.03825000000000003,0.009187500000000126"/></shape><shape name=""><transformationToParent><pose x="-0.017000000000000005" y="0.518375" theta="0.0"/></transformationToParent><polygon points="-0.034,-0.01837500000000003 0.068,-0.01837500000000003 0.068,0.023625000000000007 -0.034,0.023625000000000007 -0.034,0.007874999999999965 -0.034,-0.01837500000000003"/></shape></layer>'
+              - name: footprintModel
+                type: LayerGroup
+                value: '<layer name="FootprintModel" groupName="" domainRange=""><shape name=""><transformationToParent><pose x="-0.012750000000000032" y="-0.5196875000000001" theta="0.0"/></transformationToParent><polygon points="-0.03825000000000003,0.009187500000000126 -0.03825000000000001,-0.01706249999999998 -0.03825000000000001,-0.022312499999999957 0.06375000000000003,-0.022312499999999957 0.06375000000000003,0.003937500000000038 0.06375000000000004,0.01968750000000008 -0.03825000000000003,0.01968750000000008 -0.03825000000000003,0.009187500000000126"/></shape><shape name=""><transformationToParent><pose x="-0.017000000000000005" y="0.518375" theta="0.0"/></transformationToParent><polygon points="-0.034,-0.01837500000000003 0.068,-0.01837500000000003 0.068,0.023625000000000007 -0.034,0.023625000000000007 -0.034,0.007874999999999965 -0.034,-0.01837500000000003"/></shape></layer>'
+              - name: freespaceModel
+                type: LayerGroup
+                value: '<layer name="FreespaceModel" groupName="" domainRange=""><shape name=""><transformationToParent><pose x="-0.010200000000000032" y="-0.3126" theta="0.0"/></transformationToParent><polygon points="-0.04080000000000003,-0.19789999999999996 -0.04080000000000002,-0.22940000000000005 0.06120000000000003,-0.22940000000000005 0.06120000000000003,0.8546 -0.04080000000000003,-0.19789999999999996"/></shape></layer>'
+              - name: maskingModel
+                type: LayerGroup
+                value: '<layer name="LaserMaskingModel" groupName="" domainRange=""></layer>'
+              - name: guiModel
+                type: LayerGroup
+                value: '<layer name="VisualisationModel" groupName="" domainRange=""><shape name=""><transformationToParent><pose x="-0.012750000000000032" y="-0.5196875000000001" theta="0.0"/></transformationToParent><polygon points="-0.03825000000000003,0.009187500000000126 -0.03825000000000001,-0.01706249999999998 -0.03825000000000001,-0.022312499999999957 0.06375000000000003,-0.022312499999999957 0.06375000000000003,0.003937500000000038 0.06375000000000004,0.01968750000000008 -0.03825000000000003,0.01968750000000008 -0.03825000000000003,0.009187500000000126"/></shape><shape name=""><transformationToParent><pose x="-0.017000000000000005" y="0.518375" theta="0.0"/></transformationToParent><polygon points="-0.034,-0.01837500000000003 0.068,-0.01837500000000003 0.068,0.023625000000000007 -0.034,0.023625000000000007 -0.034,0.007874999999999965 -0.034,-0.01837500000000003"/></shape></layer>'
+          - name: 600s-2-charger
+            clazz: com.kuka.nav.provider.geometry.NavSpatialObject
+            properties:
+              - name: detectionModel
+                type: LayerGroup
+                value: '<layer name="DetectionModel" groupName="" domainRange=""><shape name=""><transformationToParent><pose x="0.10887957329225101" y="0.002499330655957202" theta="0.0"/></transformationToParent><polygon points="-0.11237957329228065,-0.2499993306559572 -0.11031369373644799,-0.25246135003848774 -0.10987957329228067,-0.2524993306559572 0.16512042670778038,-0.2524993306559572 0.16758244609030948,-0.2504334511001229 0.16762042670777866,-0.2499993306559572 0.1676204267077786,-0.22018005354752343 0.16762042670777855,-0.19036077643908975 0.1676204267077785,-0.160541499330656 0.16762042670777844,-0.1307222222222222 0.16762042670777816,0.01837416331994648 0.1676204267077781,0.04819344042838025 0.16762042670777805,0.07801271753681399 0.167620426707778,0.10783199464524776 0.16762042670777788,0.16747054886211524 0.16762042670777783,0.197289825970549 0.16762042670777777,0.22710910307898274 0.16762042670777771,0.245000669344043 0.165554547151945,0.24746268872657354 0.1651204267077203,0.24750066934404313 -0.10390131242271451,0.24750066934404313 -0.10987957329228228,0.24750066934404302 -0.11234159267481071,0.24543478978820782 -0.11237957329227974,0.245000669344043 -0.11237957329225017,0.231500669344043 -0.10887957329225029,0.20250066934404282 -0.09094860888597917,0.1860697049377716 -0.07040990337814025,0.1655309994299326 -0.07040990337814027,0.13947033925815278 -0.09094860888597928,0.1189316337503139 -0.10887957329225201,0.1025006693440428 -0.108879573292251,0.0725006693440428 -0.108879573292251,0.0425006693440428 -0.10887957329225101,0.01250066934404281 -0.10887957329225102,-0.04149933065595719 -0.10887957329225102,-0.0654993306559572 -0.10887957329225102,-0.0954993306559572 -0.10887957329225108,-0.1074993306559572 -0.09094860888597996,-0.12393029506222836 -0.07040990337814106,-0.14446900057006734 -0.070409903378141,-0.17052966074184722 -0.09094860888598001,-0.1910683662496862 -0.10887957329225281,-0.20749933065595721 -0.11237957329225134,-0.23649933065595702 -0.11237957329228065,-0.2499993306559572"/></shape><shape name=""><transformationToParent><pose x="0.9086326491983987" y="0.25008911327544187" theta="0.0"/></transformationToParent><polygon points="-0.2648527709694992,-0.11085164129633737 -0.2648147903520296,-0.11128576174050228 -0.26278689141366374,-0.11331366067886595 -0.26235277096949905,-0.11335164129633499 -0.2488527709694991,-0.11335164129630537 -0.21985277096949896,-0.10985164129630548 -0.20342180656322773,-0.09192067689003441 -0.18288310105538874,-0.07138197138219551 -0.15682244088360886,-0.07138197138219546 -0.13628373537577,-0.09192067689003447 -0.11985277096949898,-0.10985164129630715 -0.0906861043028323,-0.10985164129630615 0.08431389569716785,-0.10985164129630615 0.09014722903050121,-0.10985164129630628 0.10657819343677222,-0.09192067689003514 0.12711689894461098,-0.07138197138219621 0.15317755911639086,-0.07138197138219615 0.17371626462423007,-0.09192067689003516 0.19014722903050152,-0.10985164129630798 0.21914722903050032,-0.11335164129630648 0.2326472290305015,-0.11335164129633576 0.23308134947466708,-0.11331366067886658 0.23510924841303193,-0.11128576174050309 0.23514722903050145,-0.11085164129633743 0.23514722903050034,-0.08406592701062218 0.23514722903049834,-0.05771527765997733 0.23514722903049878,-0.028624368569068248 0.23514722903049923,4.665405218408636E-4 0.2351472290304999,0.029557449612749975 0.23514722903050034,0.05864835870365909 0.23514722903050078,0.08773926779456814 0.23514722903050145,0.11683017688547725 0.23514722903050145,0.16414835870365557 0.2351092484130317,0.16458247914783236 0.23308134947467707,0.16661037808619317 0.23264722903050017,0.16664835870366423 0.20320278458605645,0.16664835870366423 0.17564722903050023,0.16664835870365746 0.1458816040305002,0.16664835870366634 -0.1815402709694991,0.16664835870366634 -0.20935277096949845,0.166648358703665 -0.23879721541394294,0.16664835870366512 -0.2623527709694987,0.1666483587036649 -0.2627868914136655,0.16661037808619555 -0.26481479035202926,0.16458247914783225 -0.26485277096949866,0.1641483587036655 -0.26485277096949866,0.1373626444179512 -0.2648527709694991,0.11101199506730136 -0.2648527709694991,-0.06353345947815323 -0.2648527709694992,-0.0840659270106213 -0.2648527709694992,-0.11085164129633737"/></shape></layer>'
+              - name: footprintModel
+                type: LayerGroup
+                value: '<layer name="FootprintModel" groupName="" domainRange=""><shape name=""><transformationToParent><pose x="0.10887957329225101" y="0.002499330655957202" theta="0.0"/></transformationToParent><polygon points="-0.11237957329228065,-0.2499993306559572 -0.11031369373644799,-0.25246135003848774 -0.10987957329228067,-0.2524993306559572 0.16512042670778038,-0.2524993306559572 0.16758244609030948,-0.2504334511001229 0.16762042670777866,-0.2499993306559572 0.1676204267077786,-0.22018005354752343 0.16762042670777855,-0.19036077643908975 0.1676204267077785,-0.160541499330656 0.16762042670777844,-0.1307222222222222 0.16762042670777816,0.01837416331994648 0.1676204267077781,0.04819344042838025 0.16762042670777805,0.07801271753681399 0.167620426707778,0.10783199464524776 0.16762042670777788,0.16747054886211524 0.16762042670777783,0.197289825970549 0.16762042670777777,0.22710910307898274 0.16762042670777771,0.245000669344043 0.165554547151945,0.24746268872657354 0.1651204267077203,0.24750066934404313 -0.10390131242271451,0.24750066934404313 -0.10987957329228228,0.24750066934404302 -0.11234159267481071,0.24543478978820782 -0.11237957329227974,0.245000669344043 -0.11237957329225017,0.231500669344043 -0.10887957329225029,0.20250066934404282 -0.09094860888597917,0.1860697049377716 -0.07040990337814025,0.1655309994299326 -0.07040990337814027,0.13947033925815278 -0.09094860888597928,0.1189316337503139 -0.10887957329225201,0.1025006693440428 -0.108879573292251,0.0725006693440428 -0.108879573292251,0.0425006693440428 -0.10887957329225101,0.01250066934404281 -0.10887957329225102,-0.04149933065595719 -0.10887957329225102,-0.0654993306559572 -0.10887957329225102,-0.0954993306559572 -0.10887957329225108,-0.1074993306559572 -0.09094860888597996,-0.12393029506222836 -0.07040990337814106,-0.14446900057006734 -0.070409903378141,-0.17052966074184722 -0.09094860888598001,-0.1910683662496862 -0.10887957329225281,-0.20749933065595721 -0.11237957329225134,-0.23649933065595702 -0.11237957329228065,-0.2499993306559572"/></shape><shape name=""><transformationToParent><pose x="0.9086326491983987" y="0.25008911327544187" theta="0.0"/></transformationToParent><polygon points="-0.2648527709694992,-0.11085164129633737 -0.2648147903520296,-0.11128576174050228 -0.26278689141366374,-0.11331366067886595 -0.26235277096949905,-0.11335164129633499 -0.2488527709694991,-0.11335164129630537 -0.21985277096949896,-0.10985164129630548 -0.20342180656322773,-0.09192067689003441 -0.18288310105538874,-0.07138197138219551 -0.15682244088360886,-0.07138197138219546 -0.13628373537577,-0.09192067689003447 -0.11985277096949898,-0.10985164129630715 -0.0906861043028323,-0.10985164129630615 0.08431389569716785,-0.10985164129630615 0.09014722903050121,-0.10985164129630628 0.10657819343677222,-0.09192067689003514 0.12711689894461098,-0.07138197138219621 0.15317755911639086,-0.07138197138219615 0.17371626462423007,-0.09192067689003516 0.19014722903050152,-0.10985164129630798 0.21914722903050032,-0.11335164129630648 0.2326472290305015,-0.11335164129633576 0.23308134947466708,-0.11331366067886658 0.23510924841303193,-0.11128576174050309 0.23514722903050145,-0.11085164129633743 0.23514722903050034,-0.08406592701062218 0.23514722903049834,-0.05771527765997733 0.23514722903049878,-0.028624368569068248 0.23514722903049923,4.665405218408636E-4 0.2351472290304999,0.029557449612749975 0.23514722903050034,0.05864835870365909 0.23514722903050078,0.08773926779456814 0.23514722903050145,0.11683017688547725 0.23514722903050145,0.16414835870365557 0.2351092484130317,0.16458247914783236 0.23308134947467707,0.16661037808619317 0.23264722903050017,0.16664835870366423 0.20320278458605645,0.16664835870366423 0.17564722903050023,0.16664835870365746 0.1458816040305002,0.16664835870366634 -0.1815402709694991,0.16664835870366634 -0.20935277096949845,0.166648358703665 -0.23879721541394294,0.16664835870366512 -0.2623527709694987,0.1666483587036649 -0.2627868914136655,0.16661037808619555 -0.26481479035202926,0.16458247914783225 -0.26485277096949866,0.1641483587036655 -0.26485277096949866,0.1373626444179512 -0.2648527709694991,0.11101199506730136 -0.2648527709694991,-0.06353345947815323 -0.2648527709694992,-0.0840659270106213 -0.2648527709694992,-0.11085164129633737"/></shape></layer>'
+              - name: freespaceModel
+                type: LayerGroup
+                value: '<layer name="FreespaceModel" groupName="" domainRange=""><shape name=""><transformationToParent><pose x="0.5937134030142394" y="0.11645559308513356" theta="0.0"/></transformationToParent><polygon points="-0.5972134030142691,-0.3639555930851336 -0.5951475234584364,-0.3664176124676641 -0.594713403014269,-0.36645559308513354 -0.319713403014208,-0.36645559308513354 0.5480005956588264,0.020319859511441718 0.5500284945971913,0.022347758449805216 0.5500664752146608,0.022781878893970875 0.5500664752146608,0.2977818788939639 0.550028494597191,0.2982159993381407 0.5480005956588364,0.30024389827650144 0.5475664752146595,0.3002818788939725 0.05213235477049383,0.3002438982765039 -0.5947134030142707,0.13354440691486666 -0.5971754223967991,0.13147852735903146 -0.5972134030142691,-0.3639555930851336"/></shape></layer>'
+              - name: maskingModel
+                type: LayerGroup
+                value: '<layer name="LaserMaskingModel" groupName="" domainRange=""></layer>'
+              - name: guiModel
+                type: LayerGroup
+                value: '<layer name="VisualisationModel" groupName="" domainRange=""><shape name=""><transformationToParent><pose x="0.10887957329225101" y="0.002499330655957202" theta="0.0"/></transformationToParent><polygon points="-0.11237957329228065,-0.2499993306559572 -0.11031369373644799,-0.25246135003848774 -0.10987957329228067,-0.2524993306559572 0.16512042670778038,-0.2524993306559572 0.16758244609030948,-0.2504334511001229 0.16762042670777866,-0.2499993306559572 0.1676204267077786,-0.22018005354752343 0.16762042670777855,-0.19036077643908975 0.1676204267077785,-0.160541499330656 0.16762042670777844,-0.1307222222222222 0.16762042670777816,0.01837416331994648 0.1676204267077781,0.04819344042838025 0.16762042670777805,0.07801271753681399 0.167620426707778,0.10783199464524776 0.16762042670777788,0.16747054886211524 0.16762042670777783,0.197289825970549 0.16762042670777777,0.22710910307898274 0.16762042670777771,0.245000669344043 0.165554547151945,0.24746268872657354 0.1651204267077203,0.24750066934404313 -0.10390131242271451,0.24750066934404313 -0.10987957329228228,0.24750066934404302 -0.11234159267481071,0.24543478978820782 -0.11237957329227974,0.245000669344043 -0.11237957329225017,0.231500669344043 -0.10887957329225029,0.20250066934404282 -0.09094860888597917,0.1860697049377716 -0.07040990337814025,0.1655309994299326 -0.07040990337814027,0.13947033925815278 -0.09094860888597928,0.1189316337503139 -0.10887957329225201,0.1025006693440428 -0.108879573292251,0.0725006693440428 -0.108879573292251,0.0425006693440428 -0.10887957329225101,0.01250066934404281 -0.10887957329225102,-0.04149933065595719 -0.10887957329225102,-0.0654993306559572 -0.10887957329225102,-0.0954993306559572 -0.10887957329225108,-0.1074993306559572 -0.09094860888597996,-0.12393029506222836 -0.07040990337814106,-0.14446900057006734 -0.070409903378141,-0.17052966074184722 -0.09094860888598001,-0.1910683662496862 -0.10887957329225281,-0.20749933065595721 -0.11237957329225134,-0.23649933065595702 -0.11237957329228065,-0.2499993306559572"/></shape><shape name=""><transformationToParent><pose x="0.9086326491983987" y="0.25008911327544187" theta="0.0"/></transformationToParent><polygon points="-0.2648527709694992,-0.11085164129633737 -0.2648147903520296,-0.11128576174050228 -0.26278689141366374,-0.11331366067886595 -0.26235277096949905,-0.11335164129633499 -0.2488527709694991,-0.11335164129630537 -0.21985277096949896,-0.10985164129630548 -0.20342180656322773,-0.09192067689003441 -0.18288310105538874,-0.07138197138219551 -0.15682244088360886,-0.07138197138219546 -0.13628373537577,-0.09192067689003447 -0.11985277096949898,-0.10985164129630715 -0.0906861043028323,-0.10985164129630615 0.08431389569716785,-0.10985164129630615 0.09014722903050121,-0.10985164129630628 0.10657819343677222,-0.09192067689003514 0.12711689894461098,-0.07138197138219621 0.15317755911639086,-0.07138197138219615 0.17371626462423007,-0.09192067689003516 0.19014722903050152,-0.10985164129630798 0.21914722903050032,-0.11335164129630648 0.2326472290305015,-0.11335164129633576 0.23308134947466708,-0.11331366067886658 0.23510924841303193,-0.11128576174050309 0.23514722903050145,-0.11085164129633743 0.23514722903050034,-0.08406592701062218 0.23514722903049834,-0.05771527765997733 0.23514722903049878,-0.028624368569068248 0.23514722903049923,4.665405218408636E-4 0.2351472290304999,0.029557449612749975 0.23514722903050034,0.05864835870365909 0.23514722903050078,0.08773926779456814 0.23514722903050145,0.11683017688547725 0.23514722903050145,0.16414835870365557 0.2351092484130317,0.16458247914783236 0.23308134947467707,0.16661037808619317 0.23264722903050017,0.16664835870366423 0.20320278458605645,0.16664835870366423 0.17564722903050023,0.16664835870365746 0.1458816040305002,0.16664835870366634 -0.1815402709694991,0.16664835870366634 -0.20935277096949845,0.166648358703665 -0.23879721541394294,0.16664835870366512 -0.2623527709694987,0.1666483587036649 -0.2627868914136655,0.16661037808619555 -0.26481479035202926,0.16458247914783225 -0.26485277096949866,0.1641483587036655 -0.26485277096949866,0.1373626444179512 -0.2648527709694991,0.11101199506730136 -0.2648527709694991,-0.06353345947815323 -0.2648527709694992,-0.0840659270106213 -0.2648527709694992,-0.11085164129633737"/></shape></layer>'
+
+# Thread pool
+## datagram packet
+dp:
+  executor:
+    thread:
+      core-pool-size: 50
+      max-pool-size: 200
+      queue-capacity: 10000
+      keep-alive-seconds: 60
+      rejected-policy-type: 1
+      thread-name-prefix: PacketExecutor
+
+# Thread pool stats
+tp:
+  stats:
+    period-seconds: 60

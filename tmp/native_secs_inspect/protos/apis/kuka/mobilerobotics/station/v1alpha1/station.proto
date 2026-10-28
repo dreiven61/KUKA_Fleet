@@ -1,0 +1,34 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.station.v1alpha1;
+
+import "google/protobuf/any.proto";
+import "kuka/mobilerobotics/station/v1alpha1/station_capacity.proto";
+
+option java_package = "com.kuka.mobilerobotics.station.v1alpha1";
+option java_outer_classname = "StationProto";
+option java_multiple_files = true;
+
+// Contains the description of a Station.
+message Station
+{
+  // The Station's unique identifier.
+  string uuid = 1;
+
+  // A human readable name for this station. The name does not have to be unique.
+  string name = 2;
+
+  // Customer specific extensions
+  repeated google.protobuf.Any custom = 3;
+
+  // [optional] If not specified, the station can not store payload.
+  StationCapacity capacity = 4;
+
+}

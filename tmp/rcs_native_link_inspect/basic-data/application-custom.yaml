@@ -1,0 +1,19 @@
+#############################################################################################
+# For custom configuration, please copy the configuration from application.yaml and change the value
+#############################################################################################
+
+server:
+  port: 7888
+
+DB_HOST: localhost
+DB_PORT: 5432
+DB_USERNAME: postgres
+DB_PASSWORD: kuka
+PROJECT_CODE: PROJECT
+
+
+
+
+
+
+

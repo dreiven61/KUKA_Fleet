@@ -1,0 +1,1393 @@
+
+=== PDF PAGE 1 ===
+
+
+=== PDF PAGE 2 ===
+Page: 2
+Insert presentation title | Insert name | Insert date | www.kuka.com
+KUKA AMR training
+AMR.Fleet & AMR.OS
+
+=== PDF PAGE 3 ===
+Page: 3
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Index
+1. KUKA AMR
+2. AMR.Studio
+2.1. Login as Admin
+2.2. Main menu
+2.3. AMR List
+2.4. AMR States
+2.5. Wizard ( Quick Setup )
+2.6. Setup connection with AMR Fleet and AMR
+2.7. Battery power cut-off
+2.8. Sleep Mode
+2.9. Speaker language and volume
+2.10. Jogging
+
+=== PDF PAGE 4 ===
+Page: 4 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Index
+2.11. Commonly used commands 
+2.12. Turn Command
+2.13. Navigation commissioning
+2.14. Creating a SLAM map
+2.15. Mapping path Guide
+2.16. Renaming a map in the AMR
+2.17. Downloading maps to the PC
+2.18. Uploading a map to the AMR
+2.19. Activating a map on the AMR
+2.20. Uploading a map to KUKA.AMR Fleet
+2.21. Localizing the AMR on a SLAM map
+
+=== PDF PAGE 5 ===
+Page: 5 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Index
+3. AMR.Fleet
+3.1. Access to AMR.Fleet
+3.2. Topology Map Drawing
+3.3. Command Robots
+3.4. Workflow 
+4.    Interface
+Topology Map Drawing
+Command Robots
+• Workflow
+
+=== PDF PAGE 6 ===
+Page: 6 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+KUKA AMR - KMR
+
+=== PDF PAGE 7 ===
+Page: 7 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR Milestones
+
+=== PDF PAGE 8 ===
+Page: 8 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+
+
+=== PDF PAGE 9 ===
+Page: 9 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+KMP 600P
+-
+C
+-
+U
+KMP 1500P
+-
+EU
+-
+D
+ KMP 
+600i
+KMP 400i
+KMP+ SMT
+KMP 1500i
+KMP+
+HCS
+KMP+ Double 
+Roller
+KMP+ PCB
+KMP 600S
+-
+2
+KMP 600i
+-
+C
+KMP+ 
+Roller
+KUKA AMR/AGV Product Family
+KMP+ Custom Top loaded
+KMP Standard  - Lifting Model
+
+=== PDF PAGE 10 ===
+Page: 10 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+KMF – KUKA Mobile Forklift
+
+=== PDF PAGE 11 ===
+Page: 11 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+KUKA AMR_ 
+KMF 
+Series Features  
+KMF 1500i-PJ             KMF1500i-CB KMF1500i-PS              KMP 1500P-CB             
+
+
+=== PDF PAGE 12 ===
+Page: 12 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+KMF 1500i-PS
+Product Features
+SLAM navigation
+Millimeter-level 
+navigation & position 
+accuracy
+Laser obstacle avoidance 
+and fork collision detection
+Forward, backward, 
+stationary turning, 
+curved turning, etc.
+Voice alert +
+Light alert +
+Emergency button
+Intelligent planning，
+autonomous obstacle
+avoidance
+Support fork 
+customization
+ Support 5G communication
+Long battery life，
+intelligent charging 
+management
+Suitable for manufacturing 
+industry  scenarios ，
+warehousing and logistics
+Basic Parameter
+Category Performance Parameter Category Performance Parameter
+Basic 
+Parameter
+Navigation 
+mode SLAM Velocity Speed(Empty/Full) 1.2/1.0 m/s
+Minimum 
+turning radius 1550mm Fork Fork size 175*60*1150mm
+Dimension 1725*1040*2115mm
+Accuracy
+Location accuracy ±10mm
+Load center 600mm Stop accuracy ±10mm
+Fork outer width 505/685mm Stop angel accuracy ±1°
+Lifting height 2300/3500mm
+Battery
+Battery type Lithium Iron 
+Phosphate
+Weight 1050kg Battery endurance 8h
+Performance
+Parameter
+Rated loading 1500kg Charging time
+（10%-80%） 1.5h
+Step capacity <10mm Battery life 2000 times
+Gap capacity <30mm Environment
+temperature
+Using temperature 0℃~45℃
+Gap capacity Empty<10%
+Full＜5% Noise <75dB
+❑ Equipment selection
+
+
+=== PDF PAGE 13 ===
+Page: 13 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+
+
+=== PDF PAGE 14 ===
+Page: 14 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+
+
+=== PDF PAGE 15 ===
+Page: 15 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+KMT
+
+=== PDF PAGE 16 ===
+Page: 16 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Requirements of the tractor for the size of the roadway 
+when the minimum turning radius is set to 1m:
+8.4
+m
+2.5
+m
+2m
+1.2
+m 4m
+3m
+5m
+1m
+ （m）
+The distance to the other side is 
+determined by the specific trailer size, the 
+specific edge distance is recommended to 
+be 500mm or more.
+
+=== PDF PAGE 17 ===
+Page: 17 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+
+
+=== PDF PAGE 18 ===
+Page: 18 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+
+
+=== PDF PAGE 19 ===
+Page: 19 
+Insert presentation title | Insert name | Insert date | www.kuka.com 19
+
+
+=== PDF PAGE 20 ===
+Page: 20 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Handling form
+Directly lifting goods
+Additional conveyor 
+device
+Shelf
+Caster shelf
+Drag / tow
+
+
+=== PDF PAGE 21 ===
+Page: 21 
+Insert presentation title | Insert name | Insert date | www.kuka.com 21
+
+
+=== PDF PAGE 22 ===
+Page: 22 
+Insert presentation title | Insert name | Insert date | www.kuka.com 22
+
+
+=== PDF PAGE 23 ===
+Page: 23 
+Insert presentation title | Insert name | Insert date | www.kuka.com 23
+
+
+=== PDF PAGE 24 ===
+Page: 24 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+KUKA AMR_ Which Product Line for which Country?
+Non-CE Product Line
+• Korea
+• Singapore
+• Thailand
+• India
+• Indonesia
+• Malaysia
+• Vietnam
+CE Product Line
+• Taiwan
+• Japan
+• EU
+• North America (UL)
+
+
+=== PDF PAGE 25 ===
+Page: 25 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Integrated Lifting Devices 
+✓ Max 60mm lifting stroke
+Payload 
+✓ max. 400kg / 600kg / 1500kg 
+Li-Ion/LFP Batteries
+✓8 hours running time
+✓Less than 2 hours charging time
+Touch Display
+✓
+ Status / Control menue
+High Safety
+✓ 1x laser scanner in front
+✓ 3D camera in the front, and rear 
+✓ 4x emergency stops
+✓ Sound alarm & visual signaling
+Differential drive
+✓ Preferred driving direction
+(+ turn on spot)
+✓ Up to 2.3 m/s speed
+Load Detection Camera
+✓
+Load identification & tracking
+Easy Maintenance
+✓Easy exchangeable control & power
+electronics cabinet
+KUKA Navigation Solution
+✓ SLAM Navigation (based on laser scanners)
+✓
+ QR Code Navigation (based on bottom camera)
+✓ Fleet Management system
+✓ Highest flexibility without external efforts
+Remote Controller 
+✓ Only for trained people
+KUKA AMR_ 
+KMP 
+i
+ Series Features
+
+
+=== PDF PAGE 26 ===
+Page: 26 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Integrated Lifting Devices 
+✓ Max 60mm lifting stroke
+Payload 
+✓ max. 400kg
+Li-Ion/LFP Batteries
+✓8 hours running time
+✓Less than 2 hours charging time
+Touch Display
+✓
+ Status / Control menue
+High Safety
+✓ 1x laser scanner in front
+✓ 1x 3D camera in the front, rear (optional)
+✓ 4x emergency stops
+✓ Sound alarm & visual signaling
+Differential drive
+✓ Preferred driving direction
+(+ turn on spot)
+✓ Up to 2m/s speed
+Load Detection Camera
+✓
+Load identification & tracking
+Easy Maintenance
+✓Easy exchangeable control & power
+electronics cabinet
+KUKA Navigation Solution
+✓ SLAM Navigation (based on laser scanners)
+✓
+ QR Code Navigation (based on bottom camera)
+✓ Fleet Management system
+✓ Highest flexibility without external efforts
+Remote Controller 
+✓ Only for trained people
+KUKA AMR_ 
+KMP 400i
+
+
+=== PDF PAGE 27 ===
+Page: 27 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Integrated Lifting Devices 
+✓ Max 60mm lifting stroke
+Payload 
+✓ max. 600kg
+Li-Ion/LFP Batteries
+✓8 hours running time
+✓Less than 2 hours charging time
+Touch Display
+✓
+ Status / Control menue
+High Safety
+✓ 1x laser scanner in front
+✓ 1x 3D camera in the front, rear (optional)
+✓ 4x emergency stops
+✓ Sound alarm & visual signaling
+Differential drive
+✓ Preferred driving direction
+(+ turn on spot)
+✓ Up to 2m/s speed
+Load Detection Camera
+✓
+Load identification & tracking
+Easy Maintenance
+✓Easy exchangeable control & power
+electronics cabinet
+KUKA Navigation Solution
+✓ SLAM Navigation (based on laser scanners)
+✓
+ QR Code Navigation (based on bottom camera)
+✓ Fleet Management system
+✓ Highest flexibility without external efforts
+Remote Controller 
+✓ Only for trained people
+KUKA AMR_ 
+KMP 600i
+
+
+=== PDF PAGE 28 ===
+Page: 28 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Integrated Lifting Devices 
+✓ Max 60mm lifting stroke
+Payload 
+✓ max. 1500kg
+Li-Ion/LFP Batteries
+✓8 hours running time
+✓Less than 2 hours charging time
+Touch Display
+✓
+ Status / Control menue
+High Safety
+✓ 1x laser scanner in front
+✓ 1x 3D camera in the front, rear (optional)
+✓ 4x emergency stops
+✓ Sound alarm & visual signaling
+Differential drive
+✓ Preferred driving direction
+(+ turn on spot)
+✓ Up to 2m/s speed
+Load Detection Camera
+✓
+Load identification & tracking
+Easy Maintenance
+✓Easy exchangeable control & power
+electronics cabinet
+KUKA Navigation Solution
+✓ SLAM Navigation (based on laser scanners)
+✓
+ QR Code Navigation (based on bottom camera)
+✓ Fleet Management system
+✓ Highest flexibility without external efforts
+Remote Controller 
+✓ Only for trained people
+KUKA AMR_ 
+KMP 1500i
+
+
+=== PDF PAGE 29 ===
+Page: 29 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Manual 
+Controller
+_Only for trained
+ people
+KUKA AMR_ 
+KMP 3000i 
+Integrated Lifting Devices 
+_80mm lifting stroke
+Payload 
+_max. 3000 kg
+LFP Batteries
+_6
+-
+8 hours running time
+_Less than 2 hours charging time (10
+ -
+90%)
+_Inductive charging on the ground
+High Safety
+_2x laser scanner front and rear 
+_2x 3D camera in the front and rear 
+_4x emergency stops & side bumpers
+_Sound alarm & visual signaling
+KUKA Navigation
+_SLAM Navigation (based on laser scanners)
+_QR Code Navigation (based on bottom camera)
+_VDA 5050 interface
+_Highest flexibility without external efforts
+Omnidirectional drive
+_Omnidirectional movement
+_Unloaded max velocity 1.2m/s (flat)
+_Loaded max velocity 1.0m/s (flat)
+Easy maintaining functions
+_Side disassembly of wheel units
+and inductive charger
+Touch Display 
+_Status / Control menue
+_Display screen 5“
+Load Detection Camera
+_Load Identification & tracking
+
+
+=== PDF PAGE 30 ===
+Page: 30 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Integrated Lifting Devices 
+✓
+ 60/80(600p)mm lifting stroke
+Payload 
+✓
+ max. 600kg / 1500 kg 
+Li
+-
+Ion/LFP Batteries
+✓
+ 8 hours running time
+✓
+ Less than 2 hours charging time
+✓
+ Less than 1 hour recharged 80% SOC
+High Safety
+✓
+ 2x laser scanner in opposite corner (360
+°
+ Protection)
+✓
+ 3D camera in the front and rear
+✓
+ Reduced velocity and sound alarm for backwards driving
+✓
+ 4x emergency stops & side bumpers
+✓
+ Sound alarm & visual signaling
+KUKA Navigation
+✓
+ SLAM Navigation (based on laser scanners)
+✓
+ QR Code Navigation (based on bottom camera)
+✓
+ Fleet Management
+✓
+ Highest flexibility without external efforts
+ Differential drive
+✓
+ Preferred driving direction
+(+ turn on spot)
+✓
+ Up to 1.8 m/s speed
+C
+ertification
+✓
+ UL certification by TÜV 
+Rheinland
+FCC Options
+IP 54 Protection
+✓
+ Splash water
+✓
+ Dust
+Easy Maintenance
+✓
+ Easy exchangeable control & power 
+electronics cabinet
+Manual 
+Controller 
+✓
+ Only for trained
+ people
+Touch Display 
+✓
+ Status / Control menue
+Load Detection Camera
+✓
+ Load Identification & tracking
+KUKA AMR_ 
+KMP P 
+Series Features  
+
+
+=== PDF PAGE 31 ===
+Page: 31 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Integrated Lifting Devices 
+_80mm lifting stroke
+Payload 
+_max. 600 kg
+LFP Batteries, Inductive charging option
+_Up to 8 hours running time
+_1.5 hour recharged 20% 
+-
+ 80% SOC （
+TBD）
+High Safety
+_2
+ laser scanners (diagonal for 360
+°
+ protection)
+_ 3D camera in the front and rear
+_Reduced velocity and sound alarm for backwards driving
+_4x emergency stops & side bumpers
+_Sound alarm & visual signaling
+KUKA Navigation
+_SLAM Navigation (based on laser scanners)
+_QR Code Navigation (based on bottom camera)
+_Fleet Management
+Differential drive
+_Up to 2m/s speed unloaded
+_ 1,5m/s loaded
+C
+ertification
+_ CE certification by TÜV
+_
+cUL
+ and UL certification by TÜV
+_FCC Options
+IP 54 Protection
+_Splash water
+_Dust
+Easy Maintenance
+_Easy exchangeable control & power 
+electronics cabinet
+Manual 
+Controller 
+_Only for trained
+ people
+Touch Display 
+_Status / Control menu
+Load Detection Camera
+_Load Identification & tracking
+KUKA AMR_ 
+KMP 600P (PL July 2024, shipment Dec 24) 
+
+
+=== PDF PAGE 32 ===
+Page: 32 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Technology | 
+KMP 1500P
+ 
+Integrated Lifting Device
+_max 60mm lifting stroke
+Payload
+_max. 1500 kg
+Li-Ion/LFP Batteries
+_up to 10 hours running time
+_Less than 2 hours charging time
+_Less than 1 hour recharged 20% - 80% SOC
+High Safety
+_laser scanners in front and rear (360
+° Protection)
+_3D cameras in the front and rear
+_Reduced velocity and sound alarm for backwards driving
+_4x emergency stops & side bumpers
+_Sound alarm & visual signaling
+KUKA Navigation
+_SLAM Navigation (based on laser scanners)
+_QR Code Navigation (based on bottom camera)
+_Fleet Management
+_Highest flexibility without external efforts
+Differential drive
+_Preferred driving direction
+(+ turn on spot)
+_Up to 1,5m/s speed
+Certification
+_UL certification by TÜV Rheinland
+_FCC Options
+IP 54 Protection 
+_Splash water
+_Dust
+Easy Maintenance
+_Easy exchangeable control & power 
+electronics cabinet
+Manual Controller
+_Only for trained people
+Touch Display 
+_Status / Control menue
+Load Detection Camera
+_Load Identification & tracking
+
+
+=== PDF PAGE 33 ===
+Page: 33 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Manual 
+Controller
+_Only for trained
+ people
+KUKA AMR_ 
+KMP 3000P 
+Integrated Lifting Devices 
+_100mm lifting stroke
+Payload 
+_max. 3000 kg
+LFP Batteries
+_6
+-
+8 hours running time
+_Less than 2 hours charging time (10
+ -
+90%)
+_Inductive charging on the ground
+High Safety
+_2x laser scanner front and rear (360
+°
+ Protection)
+_4x 3D camera in the front and rear 
+_6x emergency stops & side bumpers
+_Sound alarm & visual signaling
+KUKA Navigation
+_SLAM Navigation (based on laser scanners)
+_QR Code Navigation (based on bottom camera)
+_VDA 5050 interface
+_Highest flexibility without external efforts
+ Omnidirectional drive
+_Omnidirectional movement
+_Unloaded max velocity 1.2m/s (flat)
+_Loaded max velocity 1.0m/s (flat)
+C
+ertification
+_CE and UL certification 
+IP 54 Protection 
+_Splash water
+_Dust
+Easy maintaining functions
+_Side disassembly of wheel units
+and inductive charger
+Touch Display 
+_Status / Control menue
+_Display screen 5“
+Load Detection Camera
+_Load Identification & 
+ tracking
+
+
+=== PDF PAGE 34 ===
+Page: 34 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Integrated Lifting Devices 
+✓ Max 60mm lifting stroke
+Payload 
+✓ max. 600kg
+LFP Batteries
+✓8 hours running time
+✓Less than 2 hours charging time
+High Safety
+✓ 2x laser scanner in front and rear
+✓2x 3D camera in the front and rear(optional)
+✓4x emergency stops
+✓visual signaling
+KUKA Navigation
+✓ SLAM Navigation (based on laser scanners)
+✓ Fleet Management system
+✓ Highest flexibility without external efforts
+Differential drive
+✓ Preferred driving direction
+(+ turn on spot)
+✓ Up to 2m/s speed
+Certification
+✓DOI for Europe
+✓ UL certification by TÜV Rheinland
+✓FCC Options
+IP 54 Protection(without 3D camera)
+✓ Splash water
+✓ Dust
+Easy Maintenance
+✓Easy exchangeable control & power
+electronics cabinet
+Remote Controller 
+✓ Only for trained people
+KUKA AMR_ 
+KMP 600S
+-
+2
+
+
+=== PDF PAGE 35 ===
+Page: 35 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Actual operation / KMP1500P Introduction
+Nr. KMP1500P Elements
+1 E-STOP button
+2 Mode switch button
+3 Reset button
+4 Power button
+5 Start button
+6 Debugging the 
+network port
+7 Debug interfaces
+
+=== PDF PAGE 36 ===
+Page: 36 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+Actual operation / KMP1500P Remote control Introduction
+Nr. Function Details
+1 Mode Normal works, Diff and Crab don't
+2 Enable Any action button needs to be combined with the "Enable" button at the same time to execute the action, and the 
+"Enable" button and other operation buttons are in linkage mode.Except for the unlocking brake button. 
+3 T1/T2
+Button  not pressed T1: walking speed limit 0.3m/s (from 0-0.3 ten-step speed change, maximum speed deviation 
+range 0.23-0.3m/s)
+Button press T2: walking speed limit 0.7m/s (from 0-0.7 ten-step speed change, maximum speed deviation range 
+0.63-0.7m/s)
+4 Forward
+5 Backward
+6 Left Turning: Minimum turning radius (±10% deviation)
+7 Right Right turn: Minimum turning radius (±10% deviation)
+8 Up ↑ Pallet lifting
+9 Down ↓ Pallet droping
+10 RotateCCW Rotate counterclockwise around the AMR
+11 RotateCW Rotate clockwise around the AMR
+12 2nd 2nd function button (differential wheel is invalid, omnidirectional car is valid)
+13 Forward/left Forward left turn: 2 times the minimum turning radius
+14 Forward/Right Forward right turn: 2 times the minimum turning radius
+15 Backward/Left Left turn back: 2 times the minimum turning radius
+16 Backward/Rig
+ht
+Right turn back: 2 times the minimum turning radius
+
+=== PDF PAGE 37 ===
+Page: 37 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+KUKA AMR.Studio
+
+=== PDF PAGE 38 ===
+Page: 38 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+• Login as Admin
+ID : kuka
+PW : 68kuka1secpw59
+• KUKA AMR.Studio ( K-Studio ) 는 로봇 설정
+프로그램 입니다. Ex) 연결할 서버의 IP 주소
+설정, 로봇의 IP , 배터리 상태, 랙모델 업로드,
+매핑, KarOS 업데이트 등
+
+
+=== PDF PAGE 39 ===
+Page: 39 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+1. Main menu
+• Wizard
+AMR 셋업 마법사
+• BaseInfo
+AMR 의 기본 정보
+• Controller
+AMR을 컨트롤 할 수 있는 탭 이며 기본 동작을 할
+수 있습니다.
+• Navigation
+매핑, Fine Localization Model Creation, 로케이션
+이니셜라이제이션
+• App
+단순 AMR 조작.
+• Log
+AMR 의 로그 파일 생성.
+
+
+=== PDF PAGE 40 ===
+Page: 40 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+2. AMR List
+3. Navigation Bar
+4. Jogging Panel
+5. Page Area
+6. Status Bar
+7. 언어 선택 또는 K-Studio 버전 확인
+
+
+=== PDF PAGE 41 ===
+Page: 41 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+AMR List
+• AddIP
+AMR을 추가 할 수 있습니다. 
+• Delete
+AMR List 에서 선택된 AMR 을 제거
+• Modify 
+추가된 AMR 의 IP 를 수정
+• Refresh
+AMR 의 상태를 Refresh 
+
+
+=== PDF PAGE 42 ===
+Page: 42 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Different AMR States
+• Disconnected
+연결 끊김. 
+• Connected
+K-Studio 와 연결은 되어 있으나 KarOS 의 상태 를 확인 할 수
+없을 때
+• AutoMode
+AMR Fleet 에서 Command 를 통해 조작이 가능한 상태
+• DebugMode
+명령을 K-Studio 에서 할 수 있는 상태
+• ManualMode
+무선 컨트롤러와 AMR이 연결된 상태
+• BrakeReleaseMode
+드라이브 모터의 브레이크가 풀린 상태이며, 밀 수 있는 상태
+
+=== PDF PAGE 43 ===
+Page: 43 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Wizard
+• Pic.1
+AMR 을 유선 연결하여 가이드를 통해 로봇을 설정
+가능
+( 대부분의 AMR의 유선 IP는 101.101.2.15 )
+• Pic.2
+AMR 을 연결 할 무선 네트워크 설정
+• 가이드를 따라 하시면 AMR.Fleet 과 연결이 가능
+합니다
+
+
+=== PDF PAGE 44 ===
+Page: 44 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Wizard
+• AMR과 K-Studio 를 무선 연결
+• 위 과정을 완료 하신 뒤, 유선 랜 케이블 연결을
+해제하세요
+• AMR 에 할당된 IP 를 추가하여 무선 연결을
+확인하세요
+
+
+=== PDF PAGE 45 ===
+Page: 45 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Setup connection with AMR Fleet and AMR 
+• AMR.Fleet 과 연결 할 AMR 의 IP 를 왼쪽 리스트에서
+클릭
+• BaseInfo > SiteConfiguration > Platform and select 
+Proprietary Protocol 
+• Query 버튼을 눌러 현재 설정을 로드
+• 아래 테이블을 참고하여 데이터 수정
+• Set 버튼을 누른 뒤 AMR 을 재부팅 하여 값 적용
+Item Description
+Device Number The AMR ID. 
+Min: 1  /  Max: 4294967295 
+AMR Model The AMR type. 
+KUKA.AMR Fleet IP IP address of the KUKA.AMR 
+Fleet server.
+
+
+=== PDF PAGE 46 ===
+Page: 46 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Battery power cut-off
+• AMR.Fleet 로 AMR 의 배터리 충전 량을 확인 할 수
+있으며, 각 모델 별로 자동 충전 관련 세팅이 가능
+합니다.
+• 배터리가 20% 이하일 때, AMR 의 속도는 0.5m/s 로 제한
+됩니다
+• 배터리가 10% 이하 일 때, 에러 상태로 표시 되며 명령
+또는 조깅이 되지 않습니다. 하지만 전원은 여전히 켜
+져 있을 수 있습니다.
+• 배터리 레벨이 power cut-off level 에 도달 하면 로봇의
+전원이 차단되며 이 값은 유저가 설정 가능
+• 설정 이후, Set 버튼 이후 AMR 을 재시작
+
+
+=== PDF PAGE 47 ===
+Page: 47 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Sleep mode
+• AMR은 일정 시간 이후, Sleep 모드에 진입 합니다. 
+로봇의 전원을 효율 적으로 사용 가능하게 합니다.
+Sleep 모드에서 명령을 받으면 자동으로 해제되어
+움직이게 됩니다.
+• 설정을 위해서 Set 버튼 클릭 이후 AMR 을 재시작
+하세요
+
+
+=== PDF PAGE 48 ===
+Page: 48 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Speaker language and volume
+• 사용자에 의해 AMR 의 볼륨과 언어 선택이
+가능합니다. 또는 Edge 설정에서 볼륨 설정이
+가능합니다.
+• 영어, 중국어만 지원
+• 설정을 위해서, Set 버튼 클릭 이후 AMR 재부팅
+
+
+=== PDF PAGE 49 ===
+Page: 49 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Jogging
+• K-Studio 에서 AMR 수동 조작이 가능하며 다양한
+상황에서 사용 가능 합니다. Ex) 매핑
+• 조작시 아래의 테이블을 참고 하세요
+No Name Description
+1 Left Wheel Angle Only for KMP 3000P series
+2 Right Wheel Angle Only for KMP 3000P series
+3 Enable
+Checked: The jogging feature is 
+enabled. 
+Unchecked: The jogging feature is 
+disabled.
+4 Mode
+Diff: This mode is only applicable to 
+AMRs with a differential drive chassis, 
+such as the KMP 1500P series and 
+KMP 600P series
+The others : Only for KMP 3000P 
+series
+5 Arrow Keys Status
+Status of the arrow keys. A yellow 
+color indicates that the corresponding
+arrow key is pressed
+
+=== PDF PAGE 50 ===
+Page: 50 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Commonly used commands 
+• Force DebugMode
+AMR 이 Auto Mode일 때, Debug Mode 로 전환 할 수 있는 버튼
+• Restore AutoMode
+AMR 이 Debug Mode 일 때, Auto Mode 로 전환 할 수 있는 버튼
+• Clear Errors 
+KarOS 의 에러를 Clear 할 수 있는 버튼
+• Init Hardware : 하드웨어 초기화 버튼
+• Stop : AMR 의 동작을 멈출 수 있는 버튼
+• Lift Up : 리프트 Down 버튼
+• Lift Down : 리프트 Up 버튼
+
+
+=== PDF PAGE 51 ===
+Page: 51 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Turn command
+• (Controller – Status – ControlParams) or (Controller – Curve)
+AMR 이 디버그 모드여야 사용 가능
+• With Tray
+체크가 되어있다면, 리프트만 회전이 가능합니다.
+각도는 AMR.Fleet 맵 각도에 영향을 받습니다
+• Relative rotation
+맵을 기준으로 현재 AMR 각도에 기반하여 회전을 합니다.
+
+
+=== PDF PAGE 52 ===
+Page: 52 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Navigation commissioning
+• Creating and managing maps
+Navigation > Mapping > MapMgrUnit > Map Manager
+• Viewing current maps
+Query 버튼을 누르면, 현재 AMR 에서 사용 가능한 맵
+리스트 조회가 가능합니다.
+
+
+=== PDF PAGE 53 ===
+Page: 53 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Creating a SLAM map
+• 매핑시, AMR 이 움직이는 모든 공간을 매핑 해 주셔야
+합니다.K-Studio 는 AMR과 유선 무선 연결 에 관계없이
+매핑이 가능하나, 유선 상태에서 매핑 하는 것을 권장
+드립니다.
+• Navigation > Mapping > MapMgrUnit > Map Create > 
+Mapping Start
+• 맵의 이름, 건물 명, 층수 를 입력 하세요. 이러한
+파라미터는 수정 가능합니다.
+
+
+=== PDF PAGE 54 ===
+Page: 54 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Creating a SLAM map
+• Mapping Start 버튼을 누르고 나면 파란색 사각형이 AMR로
+표시되고 주변 사물 또는 벽이 빨간색 선으로 표시됩니다.
+• 매핑 이후, Mapping Stop 버튼을 눌러 매핑을 종료 할 수
+있습니다. 이후, 진행 상태 표시 바가 100%가 되면 매핑이
+종료됩니다.
+• 매핑한 맵은, Map Manager 탭에서 확인 가능 합니다.
+
+
+=== PDF PAGE 55 ===
+Page: 55 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Mapping path Guide
+
+
+=== PDF PAGE 56 ===
+Page: 56 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Renaming a map in the AMR
+• Navigate to Navigation > Mapping > MapMgrUnit > Map 
+Manager
+• AMR 클릭 후, Query 버튼을 누르세요. 이후 수정을
+원하는 맵 파일을 선택 후 Rename 버튼을 눌러
+수정하세요.
+
+
+=== PDF PAGE 57 ===
+Page: 57 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Downloading maps to the PC
+• AMR SLAMMaps tab 으로 이동하세요
+• Query 버튼을 눌러 현재 사용 가능한 맵을 로드하세요
+• 원하는 맵을 클릭 후, 다운로드 버튼을 클릭하세요
+• 맵 파일을 저장할 경로를 설정하세요
+• 맵 파일은 Zip 압축 파일 형태로 다운로드 되며 총 5개의
+파일을 포함 하고 있습니다.
+bin,xml, yaml, pgm, and png
+
+
+=== PDF PAGE 58 ===
+Page: 58 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Uploading a map to the AMR
+• K-Studio 는 맵 파일을 AMR 에 업로드 할 때 사용 가능
+합니다.
+• Navigation > Mapping > MapMgrUnit > Map Manager
+• K-Studio 에서 Load 버튼을 눌러 압축 저장된 Map 파일을
+선택하세요.
+• Upload to AMR 버튼을 눌러 Map 파일을 AMR 에 업로드
+합니다.
+
+
+=== PDF PAGE 59 ===
+Page: 59 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Activating a map on the AMR
+• Navigate to Navigation > Mapping > MapMgrUnit > Map 
+Manager
+• Query 버튼을 누르세요
+• AMR 이 움직일 공간이 매핑된 파일을 선택 하세요
+• Switch 버튼을 눌러 설정을 완료 하세요
+
+
+=== PDF PAGE 60 ===
+Page: 60 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Uploading a map to KUKA.AMR Fleet
+• AMR.Fleet 에서 로봇을 조작 하기 위해선, Map 파일이
+AMR.Fleet 서버에 업로드 되어야 합니다. K-Studio 
+에서는 해당 Map 파일을 직접 업로드 할 수 있습니다.
+• Navigation > Mapping > MapMgrUnit > Map Manager
+• AMR Fleet 에 업로드 할 맵을 선택하세요
+• Upload to Fleet 버튼을 누르세요
+• AMR Fleet 에 Admin 사용자 권한이 있는 ID / PW 를
+입력하여 업로드를 완료합니다.
+
+
+=== PDF PAGE 61 ===
+Page: 61 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Localizing the AMR on a SLAM map
+• Navigation > Location > initLocation
+• Map Refresh 버튼을 클릭하여 현재 AMR 이 인식 하고
+있는 주변 데이터를 빨간색 선을 통해 확인 할 수
+있습니다.
+• Map Refresh 버튼 아래, 현재 AMR 과 Map 상의 관계를
+확인 할 수 있습니다.
+• Quality : 현재 설정된 위치 값이 올바른지를 표시
+Pointnumber : 현재 인식 하고 있는 좌표값
+error_info : 에러 메시지 표시
+
+
+=== PDF PAGE 62 ===
+Page: 62 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Studio
+Localizing the AMR on a SLAM map
+• 좌 클릭을 하여 로봇의 위치를 설정 하거나, 우측 상단의
+화살표, 회전 버튼을 통해 미세조정 하여 AMR 의 위치를
+설정 하세요. 이후 Location Initialization 버튼을 클릭하여
+데이터를 설정 합니다.
+• Map Refresh 이후, 위치를 맞췄다면, 빨간색 선이 주변의
+Map 과 일치 할 것입니다. 검정색 선, 빨간색 선 그리고
+주변의 Map 이 모두 일치 한다면 설정을 마칩니다. 불일치
+할 시, Unreliable 상태가 표시되고, 위 과정을 반복하세요.
+
+
+=== PDF PAGE 63 ===
+Page: 63 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR. Fleet
+
+=== PDF PAGE 64 ===
+Page: 64 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+KUKA AMR_ 
+KUKA.AMR Fleet
+RCS
+-
+Robot Control System
+WCS
+-
+Workflow Control System
+Workflow
+Arrangement
+Job
+Dashboard
+Interaction
+Management
+Area
+Management
+ PDA
+Events 
+Configuration
+Map 
+Management
+Real
+-
+Time
+Monitor
+Path Planning
+Traffic Control
+Mission 
+Management
+AMR 
+Management
+ECS
+-
+Equipment Control System
+Protocol 
+Management
+Equipment
+Management
+Realtime
+Monitoring
+Rack
+Management
+KUKA.AMR OS
+Map Creation
+Parameter Setting
+Network Setting
+KUKA.AMR Studio
+KUKA.AMR Fleet
+ERP TMSOMSWMSMES
+UDP/VDA5050
+
+=== PDF PAGE 65 ===
+Page: 65 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Fleet
+• AMR.Fleet 웹 페이지에 접속 하세요: 
+xxx.xxx.xxx.xxx:5000
+• 현재 KUKA Korea 의 AMR.Fleet 웹
+페이지는 10.82.13.181:5000 입니다.
+• Default ID  : admin
+Default PW : Admin
+
+=== PDF PAGE 66 ===
+Page: 66 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Fleet
+Topology Map Drawing
+• AMR.Fleet 페이지를 열고, 우측 1번
+그림의 경로를 들어가 New Building 
+버튼을 클릭하여 새로운 Building 을
+만들어 주세요
+• 우측 2번 그림을 참고하여 New Layout 
+버튼을 클릭하여 새로운 Layout 을 생성
+합니다.
+
+
+=== PDF PAGE 67 ===
+Page: 67 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Fleet
+Topology Map Drawing
+• 레이아웃 생성시, Related Layout 에
+생성한 Building 을 선택하고, 나머지
+Required 로 표시된 빈칸을 채워주세요
+• 생성 이후, Select Map 버튼을 클릭하여
+로봇이 움직일 Map 을 선택 해 주세요
+• 로봇이 움직일 Map은 K-Studio 에서
+Switch Map 으로 선택한 Map 과 이름, 
+파일이 일치 해야 합니다.
+• 그래프는 로봇이 움직일 경로를
+나타냅니다.
+
+
+=== PDF PAGE 68 ===
+Page: 68 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Fleet
+Topology Map Drawing
+• 왼쪽의 도구들을 활용하여 그래프를
+그리거나 설정 할 수 있습니다. AMR의
+경로, 워크스테이션, 랙, 충전 노드 설정
+등
+• 그래프 설정이 모두 끝났다면 우측의
+그림을 참고하여 저장하세요.
+
+
+=== PDF PAGE 69 ===
+Page: 69 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Fleet
+Topology Map Drawing
+• Building 을 Activate 하여 설정을 완료
+해주세요.
+활성화 되어 있지 않다면, 로봇을 맵 상에
+위치시킬 수 없습니다.
+• 우측 2번 그림을 참고하여 Robot List 에
+들어간 이후, Map 상에 위치시킬 로봇
+우측의 Insert&Update 버튼을 누르세요.
+• 이후, Building Code, Enabled Layout, 
+District, Lastest Node Number ( 현재
+위치한 로봇과 가장 가까운 노드 ) 를
+설정하세요
+
+
+=== PDF PAGE 70 ===
+Page: 70 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Fleet
+Command Robots
+• 상단 탭의 Monitor 를 클릭하세요.
+• 매핑한 맵을 볼 수 있습니다.. 
+현재 창에서 로봇을 움직일 수
+있습니다.
+• 우측 2번 그림을 참고하여 로봇을
+선택하거나, 맵 상에서 로봇을 직접
+클릭 합니다.
+
+
+=== PDF PAGE 71 ===
+Page: 71 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Fleet
+Command Robots
+Action
+• Move : 특정 목적지로 AMR 이동.
+• Charge : 로봇 수동 충전
+• Off-map: 로봇을 해당 Map 상에서 제거
+• Raise : AMR Lift up
+• Lower : AMR’s lift down
+• Carry Move : 원하는 목적지로 Rack 이동
+Advanced debugging
+• Retry : 현재 로봇의 미션 재 시도
+• Cancel : 현재 로봇의 미션 취소
+• Force Cancel : 현재 로봇의 미션 강제 취소
+• Pause : 현재 로봇의 미션 일시
+정지
+Resume : 일시 정지된 로봇의 미션
+재개
+
+
+=== PDF PAGE 72 ===
+Page: 72 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Fleet
+Workflow
+• Workflow > New Workflow Config
+• Layout Code : 워크플로우를 실행
+할 맵 선택
+• Workflow Name : 워크플로우의 이름
+• Robot Type Class :  로봇 타입 선택
+• Virtual Button : Monitor 상에서
+버튼을 클릭하여 워크플로우를 실행
+시키고 싶다면 해당 버튼 체크.
+
+
+=== PDF PAGE 73 ===
+Page: 73 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Fleet
+Workflow
+• 좌측의 Node 상자를 우측으로 드래그 하세요
+• Config Name : 노드의 이름
+• Node : AMR 이 움직일 목적지 노드
+• Workflow Name : 해당 워크플로우의 이름
+• Robot Type name : 만약 특정 AMR 
+모델에게만 해당 워크플로우를 적용 시키고
+싶다면, 해당 모델을 선택
+• Robot ID : 특정 AMR 만 해당
+워크플로우를 실행 해야 한다면, RobotID 입력
+
+
+=== PDF PAGE 74 ===
+Page: 74 
+Insert presentation title | Insert name | Insert date | www.kuka.com
+AMR.Fleet
+Workflow
+• ‘Trigger Once’ 버튼을 눌러 워크플로우
+실행
+• 만약 워크플로우를 수정 하고 싶다면
+‘Switch Status’ 버튼을 클릭하여
+Unrelease 
+• 워크플로우는 Unrelease 상태에서는
+실행이 불가능 합니다. ‘Edit’ , ‘Trigger 
+Once’ 버튼의 활성화 여부를 통해 구분
+할 수 있습니다.

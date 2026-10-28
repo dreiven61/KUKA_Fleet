@@ -1,0 +1,26 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.fleetmanager.v1alpha1;
+
+import "kuka/mobilerobotics/graph/v1alpha1/topology_node_reference.proto";
+
+option java_package = "com.kuka.mobilerobotics.fleetmanager.v1alpha1";
+option java_outer_classname = "PlanStepProto";
+option java_multiple_files = true;
+
+// Represents a step in a plan. Each step consists of a reference to a topology node and an orientation.
+message PlanStep
+{
+  // The node which is visited in this plan step.
+  kuka.mobilerobotics.graph.v1alpha1.TopologyNodeReference node = 1;
+	
+  // The orientation that should be attained at the topology node to be visited in this plan step in radians.
+  double orientation = 2;
+}

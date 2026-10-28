@@ -1,0 +1,60 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.localizer.v1alpha1;
+
+import "kuka/core/geometry/v1/vector_2d.proto";
+
+option java_package = "com.kuka.mobilerobotics.localizer.v1alpha1";
+option java_outer_classname = "MapProto";
+option java_multiple_files = true;
+
+// Contains the description of a map in the localization system.
+// Maps are used together with the localizer to determine the global pose of a robot in the map's coordinate system.
+message Map
+{
+  // The map's unique identifier.
+  string uuid = 1;
+
+  // A human readable name for this map. The name does not have to be unique.
+  string name = 2;
+
+  // The size of one cell (in meter) in the real world.
+  float resolution = 3;
+
+  // The size (width, height) of the map.
+  kuka.core.geometry.v1.Vector2D size = 4;
+
+  // The location of cell 0,0 (i.e.: the origin of the map coordinate system) in world coordinates.
+  kuka.core.geometry.v1.Vector2D offset = 5;
+
+  // The cell data contained in this map. There shall be width*height cells, where width and height are
+  // defined by the size field.
+  // Data is defined row by row.
+  // The first cell in the list corresponds to the top left corner of the map.
+  repeated MapCell cells = 6;
+}
+
+// Represents the data in a map cell.
+message MapCell
+{
+  // The occupancy score of this cell in the range [0,1].
+  // 1 means that the cell is occupied, 0 means that the cell is free.
+  // Values between 0 and 1 represent the probability that an obstacle occupies this cell.
+  // Implementations (e.g. obstacle avoidance, localization, ...) shall choose an appropriate
+  // threshold to determine cell occupancy.
+  float value = 1;
+
+  // Information whether a reflector is occupying this cell.
+  // This information is only available if the laser scanners provide the ability to detect
+  // reflectors. Otherwise the value is false.
+  // *Note*: If "value" is smaller than the threshold used to determine the cell occupancy
+  // (see "value"'s description), then the reflector information is discarded.
+  bool is_reflector = 2;
+}

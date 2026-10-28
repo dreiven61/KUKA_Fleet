@@ -1,0 +1,62 @@
+[
+  {
+    "key": "hardware_p",
+    "file": "C:\\work\\KUKA\\교육\\BA_KMP_1500P_series_en.pdf",
+    "pages": 215,
+    "characters": 259108,
+    "empty_pages": []
+  },
+  {
+    "key": "hardware_i",
+    "file": "C:\\work\\KUKA\\교육\\KMP_1500I_diffDrive_en_V2.0.pdf",
+    "pages": 97,
+    "characters": 111302,
+    "empty_pages": [
+      80
+    ]
+  },
+  {
+    "key": "studio21",
+    "file": "C:\\work\\KUKA\\교육\\AMR training\\KUKA.AMR_Studio_2.1_en_V1.pdf",
+    "pages": 133,
+    "characters": 137260,
+    "empty_pages": []
+  },
+  {
+    "key": "fleet214",
+    "file": "C:\\work\\KUKA\\교육\\AMR training\\KUKA_AMR_Fleet_2.14_en V2.pdf",
+    "pages": 699,
+    "characters": 817398,
+    "empty_pages": []
+  },
+  {
+    "key": "training_ko",
+    "file": "C:\\work\\KUKA\\교육\\AMR training\\AMR 교육자료-Kor 260120.pdf",
+    "pages": 74,
+    "characters": 27669,
+    "empty_pages": [
+      1
+    ]
+  },
+  {
+    "key": "api",
+    "file": "C:\\work\\KUKA\\교육\\AMR training\\KUKA.AMR Fleet Standard API Documentation_EN.pdf",
+    "pages": 51,
+    "characters": 65445,
+    "empty_pages": []
+  },
+  {
+    "key": "release2151",
+    "file": "C:\\work\\KUKA\\SW\\KUKA.AMR_Fleet_2.15.1\\KUKA.AMR Fleet 2.15.1 Release Notes - EN.pdf",
+    "pages": 4,
+    "characters": 8788,
+    "empty_pages": []
+  },
+  {
+    "key": "fleet215",
+    "file": "C:\\work\\KUKA\\SW\\KUKA.AMR_Fleet_2.15.1\\KUKA_AMR_Fleet_2.15_en_V2.pdf",
+    "pages": 719,
+    "characters": 864181,
+    "empty_pages": []
+  }
+]

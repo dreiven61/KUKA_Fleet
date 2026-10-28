@@ -1,0 +1,40 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.safety.dataprovider.v1;
+
+option csharp_namespace = "Kuka.Mobilerobotics.Safety.DataProvider.V1";
+option java_multiple_files = true;
+option java_outer_classname = "SafePositionDataProto";
+option java_package = "com.kuka.mobilerobotics.safety.dataprovider.v1";
+
+// message to send Safe Position data
+message SafePositionData
+{
+  // Active tag information for safety setting, 0 = No marker identified, 1-61 = Number of markers.
+  double safe_position_marker_id = 1;
+  // Offset of the marker in X-Direction from the origin of the camera coordinate system.
+  double safe_position_x_offset = 2;
+  // Offset of the marker in Y-Direction from the origin of the camera coordinate system.
+  double safe_position_y_offset = 3;
+  // Offset of the marker in Theta-Direction from the origin of the camera coordinate system.
+  double safe_position_theta_offset = 4;
+  // Offset of the marker in Z-Direction from the origin of the camera coordinate system.
+  double safe_position_z_offset = 5;
+  // Velocity on markers.
+  double safe_position_speed = 6;
+  // Diagnostic data.
+  double safe_position_quality = 7;
+  // Diagnostic data.
+  double safe_position_warnings = 8;
+  // Diagnostic data.
+  double safe_position_codes = 9;
+  // Diagnostic data.
+  double safe_position_status = 10;
+}

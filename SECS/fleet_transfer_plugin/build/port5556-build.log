@@ -1,0 +1,117 @@
+Note: C:\work\KUKA\SECS\fleet_transfer_plugin\src\servostar\fleet\transfer\NativeHostService.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: C:\work\KUKA\SECS\fleet_transfer_plugin\src\servostar\fleet\transfer\TransferJournal.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+Bundled 7327 gRPC runtime files from the supplied SDK.
+Bundled 393 SECS transport files from the installed Fleet library. No vendor server patches.
+Note: C:\work\KUKA\SECS\fleet_transfer_plugin\test\NativeHostTest.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: C:\work\KUKA\SECS\fleet_transfer_plugin\test\TransferTest.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+PASS: 37 validation, wire-format, auth, preview, deduplication and uncertain-outcome checks; loopback mock only.
+10�� 28, 2026 2:39:36 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 84 reporting checks; captured WCS replay, final-state fixtures, duplicates, gaps, cancellation and restart. No live calls.
+10�� 28, 2026 2:39:37 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 98 vehicle lifecycle checks; actual callback replay and mock queries only.
+10�� 28, 2026 2:39:38 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 47 automatic dispatch checks; robots 1/2/3, correlation, release and restart. No live calls.
+10�� 28, 2026 2:39:39 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 1172 work-port checks across 90 routes; callback replay and mock final-state checks, no live actions.
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+10�� 28, 2026 2:39:41 ���� servostar.fleet.transfer.WcsStatusMonitor watchTransport
+INFO: WCS status transport ready; progress/completion still require observed events
+10�� 28, 2026 2:39:41 ���� servostar.fleet.transfer.WcsStatusMonitor lost
+WARNING: WCS status subscription lost (UNAVAILABLE); incomplete commands blocked; reconnect in 5 seconds
+10�� 28, 2026 2:39:46 ���� servostar.fleet.transfer.WcsStatusMonitor watchTransport
+INFO: WCS status transport ready; progress/completion still require observed events
+10�� 28, 2026 2:39:46 ���� servostar.fleet.transfer.WcsStatusMonitor lost
+WARNING: WCS status subscription lost (UNAVAILABLE); incomplete commands blocked; reconnect in 5 seconds
+PASS: 16 status monitor checks. Loopback RPC and mock transport only; no Fleet calls.
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+10�� 28, 2026 2:39:47 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:48 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:48 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:48 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:48 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:48 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:48 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:48 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:48 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:48 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:48 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:48 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:48 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:48 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:48 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:48 ���� servostar.fleet.transfer.NativeHostService start
+INFO: Native SECS passive listener started on 11469, session 3000. No automatic transport submission.
+10�� 28, 2026 2:39:49 ���� servostar.fleet.transfer.NativeHostService deliver
+WARNING: Report DATAID 1 blocked by host ACK; explicit report retry required
+PASS: 65 native SECS acceptance/control/alarm/restart/ACK checks; local fixtures and loopback sockets only.
+10�� 28, 2026 2:39:59 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:59 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:59 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:59 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+10�� 28, 2026 2:39:59 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+10�� 28, 2026 2:39:59 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 58 inventory/scan/multi-carrier/no-replay checks; mock Fleet only.
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+PASS: isolated gRPC runtime, transport provider and WCS stub loaded; no RPC sent.
+PASS: SBP/PF4J loaded packaged JAR, started child context, registered eleven routes. WCS connection disabled in test.
+PASS: plugin stop removed its routes.
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          DBBC2B9F74C9583C79434B4648BE1C95547AF1730C0F64D5BCD512A5F7E1854B       C:\work\KUKA\SECS\fleet_transfer…
+

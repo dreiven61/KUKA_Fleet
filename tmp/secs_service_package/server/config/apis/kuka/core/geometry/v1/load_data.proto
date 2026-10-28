@@ -1,0 +1,34 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.core.geometry.v1;
+
+import "kuka/core/geometry/v1/inertia.proto";
+import "kuka/core/geometry/v1/transform.proto";
+
+option csharp_namespace = "Kuka.Core.Geometry.V1";
+option java_package = "com.kuka.core.geometry.v1";
+option java_outer_classname = "LoadDataProto";
+option java_multiple_files = true;
+
+
+// Contains the load data (mass, inertia and center of mass)
+// of some physical object.
+message LoadData
+{
+  // The mass of the physical object in [kg].
+  double mass = 1;
+    
+  // The inertia of the physical object.
+  Inertia inertia = 2;
+    
+  // The center of mass relative to the coordinate system
+  // the physical object is defined in.
+  Transform center_of_mass = 3;
+}

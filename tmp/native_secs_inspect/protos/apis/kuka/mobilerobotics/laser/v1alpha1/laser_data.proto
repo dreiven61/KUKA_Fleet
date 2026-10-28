@@ -1,0 +1,45 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.laser.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+import "kuka/core/geometry/v1/transform_2d.proto";
+import "kuka/core/geometry/v1/velocity_2d.proto";
+import "kuka/mobilerobotics/laser/v1alpha1/laser_beam_data.proto";
+import "kuka/mobilerobotics/laser/v1alpha1/laser_configuration_data.proto";
+
+option java_package = "com.kuka.mobilerobotics.laser.v1alpha1";
+option java_outer_classname = "LaserDataProto";
+option java_multiple_files = true;
+
+// Contains data about a laser scan, including the pose of the lasers from the time when the scan was created.
+message LaserData
+{
+  // The timestamp at which the laser data was generated.
+  google.protobuf.Timestamp timestamp = 1;
+
+  // The ID of the laser that issues this data
+  int32 id = 2;
+
+  // the beam data for each laser beam on this scan. In particular, the beam ranges are contained here.
+  repeated LaserBeamData beam_data = 3;
+
+  // The pose of the laser scanner in the odometry coordinate system when receiving this data.
+  kuka.core.geometry.v1.Transform2D laser_pose = 4;
+
+  // The pose of the robot center in the odometry coordinate system when receiving this data.
+  kuka.core.geometry.v1.Transform2D robot_pose = 5;
+
+  // The robot velocity at its center when for each dimension in [m/s, m/s, rad/s] when receiving this data.
+  kuka.core.geometry.v1.Velocity2D robot_velocity = 6;
+
+  // The scanner configuration
+  LaserConfigurationData configuration = 7;
+}

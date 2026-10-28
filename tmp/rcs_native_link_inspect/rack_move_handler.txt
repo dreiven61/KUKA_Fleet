@@ -1,0 +1,936 @@
+Compiled from "RackMoveNodeActionHandler.java"
+public class com.kuka.interfaces.plugin.handle.RackMoveNodeActionHandler extends com.kuka.interfaces.plugin.handle.AbstractNodeActionHandler {
+  private static final org.slf4j.Logger log;
+
+  private com.kuka.interfaces.plugin.services.WcsGrpcAdapterService wcsGrpcAdapterService;
+
+  public com.kuka.interfaces.plugin.handle.RackMoveNodeActionHandler();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method com/kuka/interfaces/plugin/handle/AbstractNodeActionHandler."<init>":()V
+       4: return
+
+  protected java.util.List<com.kuka.interfaces.plugin.entity.NodeActionDO> doHandle(com.kuka.interfaces.plugin.entity.AgvTaskDto);
+    Code:
+       0: invokestatic  #2                  // Method com/kuka/interfaces/plugin/common/ObjectMapperUtil.getObjectMapper:()Lcom/fasterxml/jackson/databind/ObjectMapper;
+       3: astore_2
+       4: aload_1
+       5: invokevirtual #3                  // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getMissionData:()Ljava/util/List;
+       8: astore_3
+       9: invokestatic  #4                  // Method com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;
+      12: astore        4
+      14: aload_3
+      15: aload_2
+      16: aload         4
+      18: invokedynamic #5,  0              // InvokeDynamic #0:accept:(Lcom/fasterxml/jackson/databind/ObjectMapper;Ljava/util/List;)Ljava/util/function/Consumer;
+      23: invokeinterface #6,  2            // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      28: aload         4
+      30: invokeinterface #7,  1            // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      35: invokedynamic #8,  0              // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+      40: invokeinterface #9,  2            // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      45: invokedynamic #10,  0             // InvokeDynamic #2:apply:()Ljava/util/function/Function;
+      50: invokestatic  #11                 // InterfaceMethod java/util/Comparator.comparing:(Ljava/util/function/Function;)Ljava/util/Comparator;
+      53: invokeinterface #12,  2           // InterfaceMethod java/util/stream/Stream.sorted:(Ljava/util/Comparator;)Ljava/util/stream/Stream;
+      58: invokestatic  #13                 // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+      61: invokeinterface #14,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+      66: checkcast     #15                 // class java/util/List
+      69: astore        5
+      71: aload         5
+      73: invokeinterface #16,  1           // InterfaceMethod java/util/List.size:()I
+      78: istore        6
+      80: invokestatic  #4                  // Method com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;
+      83: astore        7
+      85: aload         5
+      87: invokeinterface #7,  1            // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      92: invokedynamic #17,  0             // InvokeDynamic #3:test:()Ljava/util/function/Predicate;
+      97: invokeinterface #18,  2           // InterfaceMethod java/util/stream/Stream.anyMatch:(Ljava/util/function/Predicate;)Z
+     102: ifeq          177
+     105: iconst_0
+     106: istore        8
+     108: iload         8
+     110: iload         6
+     112: if_icmpge     168
+     115: aload         7
+     117: aload_0
+     118: aload_1
+     119: aload         5
+     121: iload         8
+     123: invokeinterface #19,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     128: checkcast     #20                 // class com/kuka/interfaces/plugin/entity/RackMoveDto
+     131: iload         8
+     133: iconst_1
+     134: iadd
+     135: invokestatic  #21                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     138: aload         5
+     140: iload         8
+     142: invokeinterface #19,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     147: checkcast     #20                 // class com/kuka/interfaces/plugin/entity/RackMoveDto
+     150: invokevirtual #22                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getActionType:()Ljava/lang/String;
+     153: invokevirtual #23                 // Method buildAction:(Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;Lcom/kuka/interfaces/plugin/entity/RackMoveDto;Ljava/lang/Integer;Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/NodeActionDO;
+     156: invokeinterface #24,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     161: pop
+     162: iinc          8, 1
+     165: goto          108
+     168: aload_0
+     169: aload         7
+     171: invokespecial #25                 // Method validateWcsDeviceCommand:(Ljava/util/List;)V
+     174: aload         7
+     176: areturn
+     177: aload         4
+     179: invokeinterface #16,  1           // InterfaceMethod java/util/List.size:()I
+     184: iconst_2
+     185: if_icmpge     192
+     188: iconst_1
+     189: goto          193
+     192: iconst_0
+     193: invokestatic  #26                 // Method com/kuka/interfaces/plugin/common/MisUtils.isTrue:(Z)Lcom/kuka/interfaces/plugin/function/ThrowExceptionMsgFunction;
+     196: ldc           #27                 // String missionData length is less than 2
+     198: invokeinterface #28,  2           // InterfaceMethod com/kuka/interfaces/plugin/function/ThrowExceptionMsgFunction.throwMsg:(Ljava/lang/String;)V
+     203: aload         5
+     205: iconst_0
+     206: invokeinterface #19,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     211: checkcast     #20                 // class com/kuka/interfaces/plugin/entity/RackMoveDto
+     214: astore        8
+     216: aload_0
+     217: aload_1
+     218: aload         8
+     220: iconst_1
+     221: invokestatic  #21                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     224: ldc           #30                 // String UP_CONTAINER
+     226: invokevirtual #23                 // Method buildAction:(Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;Lcom/kuka/interfaces/plugin/entity/RackMoveDto;Ljava/lang/Integer;Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/NodeActionDO;
+     229: astore        9
+     231: aload_1
+     232: invokevirtual #31                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getContainerCode:()Ljava/lang/String;
+     235: invokestatic  #32                 // Method org/springframework/util/StringUtils.isEmpty:(Ljava/lang/Object;)Z
+     238: ifeq          472
+     241: aload         8
+     243: invokevirtual #33                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getType:()Ljava/lang/String;
+     246: getstatic     #34                 // Field com/kuka/interfaces/plugin/common/ConfigConstants.NODE_POINT:Ljava/lang/String;
+     249: invokestatic  #35                 // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     252: ifeq          472
+     255: aload_0
+     256: getfield      #36                 // Field wcsGrpcAdapterService:Lcom/kuka/interfaces/plugin/services/WcsGrpcAdapterService;
+     259: aload         9
+     261: invokevirtual #37                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNodeCode:()Ljava/lang/String;
+     264: invokevirtual #38                 // Method com/kuka/interfaces/plugin/services/WcsGrpcAdapterService.getContainerByNode:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/WcsContainerResponse;
+     267: astore        10
+     269: aload_1
+     270: invokevirtual #39                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getContainerModelCode:()Ljava/lang/String;
+     273: invokestatic  #32                 // Method org/springframework/util/StringUtils.isEmpty:(Ljava/lang/Object;)Z
+     276: ifne          391
+     279: aload         10
+     281: invokevirtual #40                 // Method com/kuka/wcs/grpc/mission/WcsContainerResponse.getContainerList:()Ljava/util/List;
+     284: invokeinterface #7,  1            // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     289: aload_1
+     290: invokedynamic #41,  0             // InvokeDynamic #4:test:(Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;)Ljava/util/function/Predicate;
+     295: invokeinterface #42,  2           // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+     300: invokestatic  #13                 // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+     303: invokeinterface #14,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     308: checkcast     #15                 // class java/util/List
+     311: astore        11
+     313: aload         10
+     315: invokevirtual #43                 // Method com/kuka/wcs/grpc/mission/WcsContainerResponse.getSuccess:()Z
+     318: ifeq          329
+     321: aload         11
+     323: invokestatic  #44                 // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+     326: ifeq          333
+     329: iconst_1
+     330: goto          334
+     333: iconst_0
+     334: invokestatic  #26                 // Method com/kuka/interfaces/plugin/common/MisUtils.isTrue:(Z)Lcom/kuka/interfaces/plugin/function/ThrowExceptionMsgFunction;
+     337: new           #45                 // class java/lang/StringBuilder
+     340: dup
+     341: invokespecial #46                 // Method java/lang/StringBuilder."<init>":()V
+     344: ldc           #47                 // String no container in start node:[{
+     346: invokevirtual #48                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     349: aload         9
+     351: invokevirtual #37                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNodeCode:()Ljava/lang/String;
+     354: invokevirtual #48                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     357: ldc           #49                 // String }]
+     359: invokevirtual #48                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     362: invokevirtual #50                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     365: invokeinterface #28,  2           // InterfaceMethod com/kuka/interfaces/plugin/function/ThrowExceptionMsgFunction.throwMsg:(Ljava/lang/String;)V
+     370: aload_1
+     371: aload         11
+     373: iconst_0
+     374: invokeinterface #19,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     379: checkcast     #51                 // class com/kuka/wcs/grpc/mission/WcsContainerGto
+     382: invokevirtual #52                 // Method com/kuka/wcs/grpc/mission/WcsContainerGto.getContainerCode:()Ljava/lang/String;
+     385: invokevirtual #53                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.setContainerCode:(Ljava/lang/String;)V
+     388: goto          472
+     391: aload         10
+     393: invokevirtual #43                 // Method com/kuka/wcs/grpc/mission/WcsContainerResponse.getSuccess:()Z
+     396: ifeq          410
+     399: aload         10
+     401: invokevirtual #40                 // Method com/kuka/wcs/grpc/mission/WcsContainerResponse.getContainerList:()Ljava/util/List;
+     404: invokestatic  #44                 // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+     407: ifeq          414
+     410: iconst_1
+     411: goto          415
+     414: iconst_0
+     415: invokestatic  #26                 // Method com/kuka/interfaces/plugin/common/MisUtils.isTrue:(Z)Lcom/kuka/interfaces/plugin/function/ThrowExceptionMsgFunction;
+     418: new           #45                 // class java/lang/StringBuilder
+     421: dup
+     422: invokespecial #46                 // Method java/lang/StringBuilder."<init>":()V
+     425: ldc           #47                 // String no container in start node:[{
+     427: invokevirtual #48                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     430: aload         9
+     432: invokevirtual #37                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNodeCode:()Ljava/lang/String;
+     435: invokevirtual #48                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     438: ldc           #49                 // String }]
+     440: invokevirtual #48                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     443: invokevirtual #50                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     446: invokeinterface #28,  2           // InterfaceMethod com/kuka/interfaces/plugin/function/ThrowExceptionMsgFunction.throwMsg:(Ljava/lang/String;)V
+     451: aload_1
+     452: aload         10
+     454: invokevirtual #40                 // Method com/kuka/wcs/grpc/mission/WcsContainerResponse.getContainerList:()Ljava/util/List;
+     457: iconst_0
+     458: invokeinterface #19,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     463: checkcast     #51                 // class com/kuka/wcs/grpc/mission/WcsContainerGto
+     466: invokevirtual #52                 // Method com/kuka/wcs/grpc/mission/WcsContainerGto.getContainerCode:()Ljava/lang/String;
+     469: invokevirtual #53                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.setContainerCode:(Ljava/lang/String;)V
+     472: aload         7
+     474: aload         9
+     476: invokeinterface #24,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     481: pop
+     482: iconst_1
+     483: istore        10
+     485: iload         10
+     487: iload         6
+     489: iconst_1
+     490: isub
+     491: if_icmpge     554
+     494: aload         5
+     496: iload         10
+     498: invokeinterface #19,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     503: checkcast     #20                 // class com/kuka/interfaces/plugin/entity/RackMoveDto
+     506: astore        11
+     508: aload         7
+     510: aload_0
+     511: aload_1
+     512: aload         11
+     514: iload         10
+     516: iconst_1
+     517: iadd
+     518: invokestatic  #21                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     521: aload         11
+     523: invokevirtual #54                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getPutDown:()Ljava/lang/Boolean;
+     526: invokevirtual #55                 // Method java/lang/Boolean.booleanValue:()Z
+     529: ifeq          537
+     532: ldc           #56                 // String DOWN_AND_UP_ACTION
+     534: goto          539
+     537: ldc           #57                 // String
+     539: invokevirtual #23                 // Method buildAction:(Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;Lcom/kuka/interfaces/plugin/entity/RackMoveDto;Ljava/lang/Integer;Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/NodeActionDO;
+     542: invokeinterface #24,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     547: pop
+     548: iinc          10, 1
+     551: goto          485
+     554: aload         5
+     556: iload         6
+     558: iconst_1
+     559: isub
+     560: invokeinterface #19,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     565: checkcast     #20                 // class com/kuka/interfaces/plugin/entity/RackMoveDto
+     568: astore        10
+     570: aload_0
+     571: aload_1
+     572: aload         10
+     574: iload         6
+     576: invokestatic  #21                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     579: aload         10
+     581: invokevirtual #54                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getPutDown:()Ljava/lang/Boolean;
+     584: invokevirtual #55                 // Method java/lang/Boolean.booleanValue:()Z
+     587: ifeq          595
+     590: ldc           #58                 // String DOWN_CONTAINER
+     592: goto          597
+     595: ldc           #57                 // String
+     597: invokevirtual #23                 // Method buildAction:(Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;Lcom/kuka/interfaces/plugin/entity/RackMoveDto;Ljava/lang/Integer;Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/NodeActionDO;
+     600: astore        11
+     602: aload         7
+     604: aload         11
+     606: invokeinterface #24,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     611: pop
+     612: aload_0
+     613: aload         7
+     615: invokespecial #25                 // Method validateWcsDeviceCommand:(Ljava/util/List;)V
+     618: aload         7
+     620: areturn
+
+  protected com.kuka.interfaces.plugin.entity.NodeActionDO buildAction(com.kuka.interfaces.plugin.entity.AgvTaskDto, com.kuka.interfaces.plugin.entity.RackMoveDto, java.lang.Integer, java.lang.String);
+    Code:
+       0: iconst_0
+       1: invokestatic  #21                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       4: astore        5
+       6: getstatic     #59                 // Field java/lang/Boolean.TRUE:Ljava/lang/Boolean;
+       9: aload_2
+      10: invokevirtual #60                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getActionConfirm:()Ljava/lang/Boolean;
+      13: invokevirtual #61                 // Method java/lang/Boolean.equals:(Ljava/lang/Object;)Z
+      16: ifeq          27
+      19: getstatic     #62                 // Field com/kuka/interfaces/plugin/common/NeedCallbackType.NEED_ADD_BEFORE:Lcom/kuka/interfaces/plugin/common/NeedCallbackType;
+      22: invokevirtual #63                 // Method com/kuka/interfaces/plugin/common/NeedCallbackType.getValue:()Ljava/lang/Integer;
+      25: astore        5
+      27: getstatic     #59                 // Field java/lang/Boolean.TRUE:Ljava/lang/Boolean;
+      30: aload_2
+      31: invokevirtual #64                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getActionInform:()Ljava/lang/Boolean;
+      34: invokevirtual #61                 // Method java/lang/Boolean.equals:(Ljava/lang/Object;)Z
+      37: ifeq          48
+      40: getstatic     #65                 // Field com/kuka/interfaces/plugin/common/NeedCallbackType.NEED_ADD_AFTER:Lcom/kuka/interfaces/plugin/common/NeedCallbackType;
+      43: invokevirtual #63                 // Method com/kuka/interfaces/plugin/common/NeedCallbackType.getValue:()Ljava/lang/Integer;
+      46: astore        5
+      48: getstatic     #59                 // Field java/lang/Boolean.TRUE:Ljava/lang/Boolean;
+      51: aload_2
+      52: invokevirtual #60                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getActionConfirm:()Ljava/lang/Boolean;
+      55: invokevirtual #61                 // Method java/lang/Boolean.equals:(Ljava/lang/Object;)Z
+      58: ifeq          82
+      61: getstatic     #59                 // Field java/lang/Boolean.TRUE:Ljava/lang/Boolean;
+      64: aload_2
+      65: invokevirtual #64                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getActionInform:()Ljava/lang/Boolean;
+      68: invokevirtual #61                 // Method java/lang/Boolean.equals:(Ljava/lang/Object;)Z
+      71: ifeq          82
+      74: getstatic     #66                 // Field com/kuka/interfaces/plugin/common/NeedCallbackType.NEED_ADD_BEFORE_AND_AFTER:Lcom/kuka/interfaces/plugin/common/NeedCallbackType;
+      77: invokevirtual #63                 // Method com/kuka/interfaces/plugin/common/NeedCallbackType.getValue:()Ljava/lang/Integer;
+      80: astore        5
+      82: invokestatic  #67                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO.builder:()Lcom/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder;
+      85: aload_2
+      86: invokevirtual #68                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getPosition:()Ljava/lang/String;
+      89: invokevirtual #69                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder.nodeCode:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder;
+      92: aload_3
+      93: invokevirtual #70                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder.nodeSequence:(Ljava/lang/Integer;)Lcom/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder;
+      96: aload_2
+      97: invokevirtual #33                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getType:()Ljava/lang/String;
+     100: invokevirtual #71                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder.nodeType:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder;
+     103: aload         5
+     105: invokevirtual #72                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder.needCallback:(Ljava/lang/Integer;)Lcom/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder;
+     108: aload_2
+     109: invokevirtual #73                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getPassStrategy:()Ljava/lang/String;
+     112: invokevirtual #74                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder.passStrategy:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder;
+     115: aload_2
+     116: invokevirtual #75                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getWaitingMillis:()Ljava/lang/Integer;
+     119: invokevirtual #76                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder.delayForAuto:(Ljava/lang/Integer;)Lcom/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder;
+     122: iconst_1
+     123: invokestatic  #21                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     126: invokevirtual #77                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder.actionSequence:(Ljava/lang/Integer;)Lcom/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder;
+     129: ldc           #78                 // String arrive
+     131: invokevirtual #79                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder.actionMoment:(Ljava/lang/String;)Lcom/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder;
+     134: invokevirtual #80                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO$NodeActionDOBuilder.build:()Lcom/kuka/interfaces/plugin/entity/NodeActionDO;
+     137: astore        6
+     139: aload_2
+     140: invokevirtual #81                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getContainerStopAngle:()Ljava/lang/String;
+     143: invokestatic  #82                 // Method org/springframework/util/StringUtils.hasText:(Ljava/lang/String;)Z
+     146: ifeq          158
+     149: aload         6
+     151: aload_2
+     152: invokevirtual #81                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getContainerStopAngle:()Ljava/lang/String;
+     155: invokevirtual #83                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO.setContainerStopAngle:(Ljava/lang/String;)V
+     158: aload         4
+     160: invokestatic  #82                 // Method org/springframework/util/StringUtils.hasText:(Ljava/lang/String;)Z
+     163: ifeq          210
+     166: aload         6
+     168: aload         4
+     170: invokevirtual #84                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO.setActionType:(Ljava/lang/String;)V
+     173: aload         6
+     175: ldc           #85                 // String Action-%s-%s-%s
+     177: iconst_3
+     178: anewarray     #86                 // class java/lang/Object
+     181: dup
+     182: iconst_0
+     183: aload_1
+     184: invokevirtual #87                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getMissionCode:()Ljava/lang/String;
+     187: aastore
+     188: dup
+     189: iconst_1
+     190: aload         6
+     192: invokevirtual #88                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNodeSequence:()Ljava/lang/Integer;
+     195: aastore
+     196: dup
+     197: iconst_2
+     198: aload         6
+     200: invokevirtual #89                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getActionSequence:()Ljava/lang/Integer;
+     203: aastore
+     204: invokestatic  #90                 // Method java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+     207: invokevirtual #91                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO.setActionId:(Ljava/lang/String;)V
+     210: aload         6
+     212: areturn
+
+  public java.util.List<com.kuka.wcs.grpc.mission.NodeGto> buildNodeGto(java.util.List<com.kuka.interfaces.plugin.entity.NodeActionDO>);
+    Code:
+       0: invokestatic  #4                  // Method com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;
+       3: astore_2
+       4: aload_1
+       5: invokeinterface #92,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      10: astore_3
+      11: aload_3
+      12: invokeinterface #93,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      17: ifeq          880
+      20: aload_3
+      21: invokeinterface #94,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      26: checkcast     #95                 // class com/kuka/interfaces/plugin/entity/NodeActionDO
+      29: astore        4
+      31: aload         4
+      33: invokevirtual #96                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNodeType:()Ljava/lang/String;
+      36: astore        5
+      38: invokestatic  #97                 // Method com/kuka/wcs/grpc/mission/NodeGto.newBuilder:()Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+      41: aload         4
+      43: invokevirtual #88                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNodeSequence:()Ljava/lang/Integer;
+      46: invokevirtual #98                 // Method java/lang/Integer.intValue:()I
+      49: invokevirtual #99                 // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.setSequence:(I)Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+      52: iconst_1
+      53: invokevirtual #100                // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.setLockRobot:(Z)Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+      56: aload         4
+      58: invokevirtual #37                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNodeCode:()Ljava/lang/String;
+      61: invokevirtual #101                // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.setCode:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+      64: aload         5
+      66: invokestatic  #102                // Method com/kuka/wcs/grpc/mission/NodeTypeGto.valueOf:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/NodeTypeGto;
+      69: invokevirtual #103                // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.setType:(Lcom/kuka/wcs/grpc/mission/NodeTypeGto;)Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+      72: aload         4
+      74: invokevirtual #104                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getPassStrategy:()Ljava/lang/String;
+      77: invokestatic  #105                // Method com/kuka/wcs/grpc/mission/PassStrategyGto.valueOf:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/PassStrategyGto;
+      80: invokevirtual #106                // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.setPassStrategy:(Lcom/kuka/wcs/grpc/mission/PassStrategyGto;)Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+      83: astore        6
+      85: aload         4
+      87: invokevirtual #104                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getPassStrategy:()Ljava/lang/String;
+      90: ldc           #107                // String AUTO
+      92: invokestatic  #35                 // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      95: ifeq          112
+      98: aload         6
+     100: aload         4
+     102: invokevirtual #108                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getDelayForAuto:()Ljava/lang/Integer;
+     105: invokevirtual #98                 // Method java/lang/Integer.intValue:()I
+     108: invokevirtual #109                // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.setDelayMillisecondsForAutoPass:(I)Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+     111: pop
+     112: aload         4
+     114: invokevirtual #110                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getContainerStopAngle:()Ljava/lang/String;
+     117: invokestatic  #82                 // Method org/springframework/util/StringUtils.hasText:(Ljava/lang/String;)Z
+     120: ifeq          134
+     123: aload         6
+     125: aload         4
+     127: invokevirtual #110                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getContainerStopAngle:()Ljava/lang/String;
+     130: invokevirtual #111                // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.setContainerOrientation:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+     133: pop
+     134: iconst_1
+     135: istore        7
+     137: aload         4
+     139: invokevirtual #112                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getActionType:()Ljava/lang/String;
+     142: astore        8
+     144: aload         8
+     146: invokestatic  #82                 // Method org/springframework/util/StringUtils.hasText:(Ljava/lang/String;)Z
+     149: ifeq          569
+     152: invokestatic  #4                  // Method com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;
+     155: astore        9
+     157: getstatic     #62                 // Field com/kuka/interfaces/plugin/common/NeedCallbackType.NEED_ADD_BEFORE:Lcom/kuka/interfaces/plugin/common/NeedCallbackType;
+     160: invokevirtual #63                 // Method com/kuka/interfaces/plugin/common/NeedCallbackType.getValue:()Ljava/lang/Integer;
+     163: aload         4
+     165: invokevirtual #113                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNeedCallback:()Ljava/lang/Integer;
+     168: invokevirtual #114                // Method java/lang/Integer.equals:(Ljava/lang/Object;)Z
+     171: ifne          191
+     174: getstatic     #66                 // Field com/kuka/interfaces/plugin/common/NeedCallbackType.NEED_ADD_BEFORE_AND_AFTER:Lcom/kuka/interfaces/plugin/common/NeedCallbackType;
+     177: invokevirtual #63                 // Method com/kuka/interfaces/plugin/common/NeedCallbackType.getValue:()Ljava/lang/Integer;
+     180: aload         4
+     182: invokevirtual #113                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNeedCallback:()Ljava/lang/Integer;
+     185: invokevirtual #114                // Method java/lang/Integer.equals:(Ljava/lang/Object;)Z
+     188: ifeq          270
+     191: invokestatic  #115                // Method com/kuka/wcs/grpc/mission/ActionGto.newBuilder:()Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     194: new           #45                 // class java/lang/StringBuilder
+     197: dup
+     198: invokespecial #46                 // Method java/lang/StringBuilder."<init>":()V
+     201: aload         4
+     203: invokevirtual #116                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getActionId:()Ljava/lang/String;
+     206: invokevirtual #48                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     209: ldc           #117                // String -1
+     211: invokevirtual #48                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     214: invokevirtual #50                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     217: invokevirtual #118                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setActionId:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     220: ldc           #119                // String DEVICE_ACTION
+     222: invokestatic  #120                // Method com/kuka/wcs/grpc/mission/ActionTypeGto.valueOf:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/ActionTypeGto;
+     225: invokevirtual #121                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setType:(Lcom/kuka/wcs/grpc/mission/ActionTypeGto;)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     228: aload_0
+     229: aload         4
+     231: invokevirtual #37                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNodeCode:()Ljava/lang/String;
+     234: aload         4
+     236: invokevirtual #112                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getActionType:()Ljava/lang/String;
+     239: ldc           #122                // String before
+     241: invokespecial #123                // Method com/kuka/interfaces/plugin/handle/AbstractNodeActionHandler.generateDeviceCommandCode:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+     244: invokevirtual #124                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setActionCode:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     247: iload         7
+     249: invokevirtual #125                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setSequence:(I)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     252: invokevirtual #126                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.build:()Lcom/kuka/wcs/grpc/mission/ActionGto;
+     255: astore        10
+     257: iinc          7, 1
+     260: aload         9
+     262: aload         10
+     264: invokeinterface #24,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     269: pop
+     270: ldc           #56                 // String DOWN_AND_UP_ACTION
+     272: aload         8
+     274: invokestatic  #35                 // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     277: ifeq          403
+     280: invokestatic  #115                // Method com/kuka/wcs/grpc/mission/ActionGto.newBuilder:()Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     283: new           #45                 // class java/lang/StringBuilder
+     286: dup
+     287: invokespecial #46                 // Method java/lang/StringBuilder."<init>":()V
+     290: aload         4
+     292: invokevirtual #116                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getActionId:()Ljava/lang/String;
+     295: invokevirtual #48                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     298: ldc           #127                // String #DOWN_CONTAINER
+     300: invokevirtual #48                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     303: invokevirtual #50                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     306: invokevirtual #118                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setActionId:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     309: getstatic     #128                // Field com/kuka/wcs/grpc/mission/ActionTypeGto.DOWN_CONTAINER:Lcom/kuka/wcs/grpc/mission/ActionTypeGto;
+     312: invokevirtual #121                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setType:(Lcom/kuka/wcs/grpc/mission/ActionTypeGto;)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     315: iload         7
+     317: iinc          7, 1
+     320: invokevirtual #125                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setSequence:(I)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     323: invokevirtual #126                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.build:()Lcom/kuka/wcs/grpc/mission/ActionGto;
+     326: astore        10
+     328: aload         9
+     330: aload         10
+     332: invokeinterface #24,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     337: pop
+     338: invokestatic  #115                // Method com/kuka/wcs/grpc/mission/ActionGto.newBuilder:()Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     341: new           #45                 // class java/lang/StringBuilder
+     344: dup
+     345: invokespecial #46                 // Method java/lang/StringBuilder."<init>":()V
+     348: aload         4
+     350: invokevirtual #116                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getActionId:()Ljava/lang/String;
+     353: invokevirtual #48                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     356: ldc           #129                // String #UP_CONTAINER
+     358: invokevirtual #48                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     361: invokevirtual #50                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     364: invokevirtual #118                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setActionId:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     367: getstatic     #130                // Field com/kuka/wcs/grpc/mission/ActionTypeGto.UP_CONTAINER:Lcom/kuka/wcs/grpc/mission/ActionTypeGto;
+     370: invokevirtual #121                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setType:(Lcom/kuka/wcs/grpc/mission/ActionTypeGto;)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     373: iconst_1
+     374: invokevirtual #125                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setSequence:(I)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     377: invokevirtual #126                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.build:()Lcom/kuka/wcs/grpc/mission/ActionGto;
+     380: astore        11
+     382: aload         6
+     384: iconst_1
+     385: anewarray     #131                // class com/kuka/wcs/grpc/mission/ActionGto
+     388: dup
+     389: iconst_0
+     390: aload         11
+     392: aastore
+     393: invokestatic  #132                // Method com/google/common/collect/Lists.newArrayList:([Ljava/lang/Object;)Ljava/util/ArrayList;
+     396: invokevirtual #133                // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.addAllActionOnLeaving:(Ljava/lang/Iterable;)Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+     399: pop
+     400: goto          448
+     403: invokestatic  #115                // Method com/kuka/wcs/grpc/mission/ActionGto.newBuilder:()Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     406: aload         4
+     408: invokevirtual #116                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getActionId:()Ljava/lang/String;
+     411: invokevirtual #118                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setActionId:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     414: aload         4
+     416: invokevirtual #112                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getActionType:()Ljava/lang/String;
+     419: invokestatic  #120                // Method com/kuka/wcs/grpc/mission/ActionTypeGto.valueOf:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/ActionTypeGto;
+     422: invokevirtual #121                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setType:(Lcom/kuka/wcs/grpc/mission/ActionTypeGto;)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     425: iload         7
+     427: iinc          7, 1
+     430: invokevirtual #125                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setSequence:(I)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     433: invokevirtual #126                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.build:()Lcom/kuka/wcs/grpc/mission/ActionGto;
+     436: astore        10
+     438: aload         9
+     440: aload         10
+     442: invokeinterface #24,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     447: pop
+     448: getstatic     #65                 // Field com/kuka/interfaces/plugin/common/NeedCallbackType.NEED_ADD_AFTER:Lcom/kuka/interfaces/plugin/common/NeedCallbackType;
+     451: invokevirtual #63                 // Method com/kuka/interfaces/plugin/common/NeedCallbackType.getValue:()Ljava/lang/Integer;
+     454: aload         4
+     456: invokevirtual #113                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNeedCallback:()Ljava/lang/Integer;
+     459: invokevirtual #114                // Method java/lang/Integer.equals:(Ljava/lang/Object;)Z
+     462: ifne          482
+     465: getstatic     #66                 // Field com/kuka/interfaces/plugin/common/NeedCallbackType.NEED_ADD_BEFORE_AND_AFTER:Lcom/kuka/interfaces/plugin/common/NeedCallbackType;
+     468: invokevirtual #63                 // Method com/kuka/interfaces/plugin/common/NeedCallbackType.getValue:()Ljava/lang/Integer;
+     471: aload         4
+     473: invokevirtual #113                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNeedCallback:()Ljava/lang/Integer;
+     476: invokevirtual #114                // Method java/lang/Integer.equals:(Ljava/lang/Object;)Z
+     479: ifeq          561
+     482: invokestatic  #115                // Method com/kuka/wcs/grpc/mission/ActionGto.newBuilder:()Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     485: new           #45                 // class java/lang/StringBuilder
+     488: dup
+     489: invokespecial #46                 // Method java/lang/StringBuilder."<init>":()V
+     492: aload         4
+     494: invokevirtual #116                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getActionId:()Ljava/lang/String;
+     497: invokevirtual #48                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     500: ldc           #134                // String -2
+     502: invokevirtual #48                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     505: invokevirtual #50                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     508: invokevirtual #118                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setActionId:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     511: ldc           #119                // String DEVICE_ACTION
+     513: invokestatic  #120                // Method com/kuka/wcs/grpc/mission/ActionTypeGto.valueOf:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/ActionTypeGto;
+     516: invokevirtual #121                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setType:(Lcom/kuka/wcs/grpc/mission/ActionTypeGto;)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     519: aload_0
+     520: aload         4
+     522: invokevirtual #37                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNodeCode:()Ljava/lang/String;
+     525: aload         4
+     527: invokevirtual #112                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getActionType:()Ljava/lang/String;
+     530: ldc           #135                // String after
+     532: invokespecial #123                // Method com/kuka/interfaces/plugin/handle/AbstractNodeActionHandler.generateDeviceCommandCode:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+     535: invokevirtual #124                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setActionCode:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     538: iload         7
+     540: iinc          7, 1
+     543: invokevirtual #125                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.setSequence:(I)Lcom/kuka/wcs/grpc/mission/ActionGto$Builder;
+     546: invokevirtual #126                // Method com/kuka/wcs/grpc/mission/ActionGto$Builder.build:()Lcom/kuka/wcs/grpc/mission/ActionGto;
+     549: astore        10
+     551: aload         9
+     553: aload         10
+     555: invokeinterface #24,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     560: pop
+     561: aload         6
+     563: aload         9
+     565: invokevirtual #136                // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.addAllActionOnArrived:(Ljava/lang/Iterable;)Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+     568: pop
+     569: iconst_0
+     570: istore        9
+     572: invokestatic  #137                // Method com/kuka/wcs/grpc/mission/NodeStrategyGto.newBuilder:()Lcom/kuka/wcs/grpc/mission/NodeStrategyGto$Builder;
+     575: astore        10
+     577: aload         4
+     579: invokevirtual #138                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getContainerOperateType:()Ljava/lang/Integer;
+     582: invokestatic  #139                // Method java/util/Objects.nonNull:(Ljava/lang/Object;)Z
+     585: ifeq          693
+     588: iconst_1
+     589: istore        9
+     591: getstatic     #140                // Field com/kuka/interfaces/plugin/common/ContainerOperateType.END_AUTO_OUT:Lcom/kuka/interfaces/plugin/common/ContainerOperateType;
+     594: invokevirtual #141                // Method com/kuka/interfaces/plugin/common/ContainerOperateType.getValue:()Ljava/lang/Integer;
+     597: aload         4
+     599: invokevirtual #138                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getContainerOperateType:()Ljava/lang/Integer;
+     602: invokevirtual #114                // Method java/lang/Integer.equals:(Ljava/lang/Object;)Z
+     605: ifeq          626
+     608: aload         10
+     610: invokestatic  #142                // Method com/kuka/wcs/grpc/mission/NodeContainerStrategyGto.newBuilder:()Lcom/kuka/wcs/grpc/mission/NodeContainerStrategyGto$Builder;
+     613: getstatic     #143                // Field com/kuka/wcs/grpc/mission/NodeContainerHandlerTypeGto.CONTAINER_DEPARTURE:Lcom/kuka/wcs/grpc/mission/NodeContainerHandlerTypeGto;
+     616: invokevirtual #144                // Method com/kuka/wcs/grpc/mission/NodeContainerStrategyGto$Builder.setType:(Lcom/kuka/wcs/grpc/mission/NodeContainerHandlerTypeGto;)Lcom/kuka/wcs/grpc/mission/NodeContainerStrategyGto$Builder;
+     619: invokevirtual #145                // Method com/kuka/wcs/grpc/mission/NodeStrategyGto$Builder.setContainerStrategy:(Lcom/kuka/wcs/grpc/mission/NodeContainerStrategyGto$Builder;)Lcom/kuka/wcs/grpc/mission/NodeStrategyGto$Builder;
+     622: pop
+     623: goto          693
+     626: getstatic     #146                // Field com/kuka/interfaces/plugin/common/ContainerOperateType.END_AUTO_REMOVE:Lcom/kuka/interfaces/plugin/common/ContainerOperateType;
+     629: invokevirtual #141                // Method com/kuka/interfaces/plugin/common/ContainerOperateType.getValue:()Ljava/lang/Integer;
+     632: aload         4
+     634: invokevirtual #138                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getContainerOperateType:()Ljava/lang/Integer;
+     637: invokevirtual #114                // Method java/lang/Integer.equals:(Ljava/lang/Object;)Z
+     640: ifeq          661
+     643: aload         10
+     645: invokestatic  #142                // Method com/kuka/wcs/grpc/mission/NodeContainerStrategyGto.newBuilder:()Lcom/kuka/wcs/grpc/mission/NodeContainerStrategyGto$Builder;
+     648: getstatic     #147                // Field com/kuka/wcs/grpc/mission/NodeContainerHandlerTypeGto.CONTAINER_DEPARTURE_AND_REMOVE:Lcom/kuka/wcs/grpc/mission/NodeContainerHandlerTypeGto;
+     651: invokevirtual #144                // Method com/kuka/wcs/grpc/mission/NodeContainerStrategyGto$Builder.setType:(Lcom/kuka/wcs/grpc/mission/NodeContainerHandlerTypeGto;)Lcom/kuka/wcs/grpc/mission/NodeContainerStrategyGto$Builder;
+     654: invokevirtual #145                // Method com/kuka/wcs/grpc/mission/NodeStrategyGto$Builder.setContainerStrategy:(Lcom/kuka/wcs/grpc/mission/NodeContainerStrategyGto$Builder;)Lcom/kuka/wcs/grpc/mission/NodeStrategyGto$Builder;
+     657: pop
+     658: goto          693
+     661: getstatic     #148                // Field com/kuka/interfaces/plugin/common/ContainerOperateType.START_AUTO_IN_BY_RECOGNITION:Lcom/kuka/interfaces/plugin/common/ContainerOperateType;
+     664: invokevirtual #141                // Method com/kuka/interfaces/plugin/common/ContainerOperateType.getValue:()Ljava/lang/Integer;
+     667: aload         4
+     669: invokevirtual #138                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getContainerOperateType:()Ljava/lang/Integer;
+     672: invokevirtual #114                // Method java/lang/Integer.equals:(Ljava/lang/Object;)Z
+     675: ifeq          693
+     678: aload         10
+     680: invokestatic  #142                // Method com/kuka/wcs/grpc/mission/NodeContainerStrategyGto.newBuilder:()Lcom/kuka/wcs/grpc/mission/NodeContainerStrategyGto$Builder;
+     683: getstatic     #149                // Field com/kuka/wcs/grpc/mission/NodeContainerHandlerTypeGto.CONTAINER_ENTRANCE_BY_AMR_CAMERA_RECOGNITION:Lcom/kuka/wcs/grpc/mission/NodeContainerHandlerTypeGto;
+     686: invokevirtual #144                // Method com/kuka/wcs/grpc/mission/NodeContainerStrategyGto$Builder.setType:(Lcom/kuka/wcs/grpc/mission/NodeContainerHandlerTypeGto;)Lcom/kuka/wcs/grpc/mission/NodeContainerStrategyGto$Builder;
+     689: invokevirtual #145                // Method com/kuka/wcs/grpc/mission/NodeStrategyGto$Builder.setContainerStrategy:(Lcom/kuka/wcs/grpc/mission/NodeContainerStrategyGto$Builder;)Lcom/kuka/wcs/grpc/mission/NodeStrategyGto$Builder;
+     692: pop
+     693: aload         4
+     695: invokevirtual #150                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNodeStrategys:()Ljava/util/List;
+     698: astore        11
+     700: aload         11
+     702: invokestatic  #44                 // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+     705: ifne          849
+     708: iconst_1
+     709: istore        9
+     711: aload         11
+     713: getstatic     #151                // Field com/kuka/interfaces/plugin/common/NodeStrategyType.WAIT_CONTAINER:Ljava/lang/Integer;
+     716: invokeinterface #152,  2          // InterfaceMethod java/util/List.contains:(Ljava/lang/Object;)Z
+     721: ifeq          733
+     724: aload         10
+     726: getstatic     #153                // Field com/kuka/wcs/grpc/mission/NodeExceptionHandlerTypeGto.CONTAINER_QUEUE_UP:Lcom/kuka/wcs/grpc/mission/NodeExceptionHandlerTypeGto;
+     729: invokevirtual #154                // Method com/kuka/wcs/grpc/mission/NodeStrategyGto$Builder.setType:(Lcom/kuka/wcs/grpc/mission/NodeExceptionHandlerTypeGto;)Lcom/kuka/wcs/grpc/mission/NodeStrategyGto$Builder;
+     732: pop
+     733: aload         11
+     735: getstatic     #155                // Field com/kuka/interfaces/plugin/common/NodeStrategyType.DEPEND_ON_RELATED_NODE:Ljava/lang/Integer;
+     738: invokeinterface #152,  2          // InterfaceMethod java/util/List.contains:(Ljava/lang/Object;)Z
+     743: ifeq          793
+     746: aload         4
+     748: invokevirtual #156                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getRelatedNode:()Ljava/lang/String;
+     751: invokestatic  #82                 // Method org/springframework/util/StringUtils.hasText:(Ljava/lang/String;)Z
+     754: ifeq          771
+     757: aload         10
+     759: aload         4
+     761: invokevirtual #156                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getRelatedNode:()Ljava/lang/String;
+     764: invokevirtual #157                // Method com/kuka/wcs/grpc/mission/NodeStrategyGto$Builder.setRelatedCellCode:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/NodeStrategyGto$Builder;
+     767: pop
+     768: goto          793
+     771: aload         4
+     773: invokevirtual #158                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getRelatedArea:()Ljava/lang/String;
+     776: invokestatic  #82                 // Method org/springframework/util/StringUtils.hasText:(Ljava/lang/String;)Z
+     779: ifeq          793
+     782: aload         10
+     784: aload         4
+     786: invokevirtual #158                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getRelatedArea:()Ljava/lang/String;
+     789: invokevirtual #159                // Method com/kuka/wcs/grpc/mission/NodeStrategyGto$Builder.setRelatedAreaCode:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/NodeStrategyGto$Builder;
+     792: pop
+     793: aload         11
+     795: getstatic     #160                // Field com/kuka/interfaces/plugin/common/NodeStrategyType.TEMP_STORAGE_AREA_QUEUE:Ljava/lang/Integer;
+     798: invokeinterface #152,  2          // InterfaceMethod java/util/List.contains:(Ljava/lang/Object;)Z
+     803: ifeq          849
+     806: aload         10
+     808: getstatic     #161                // Field com/kuka/wcs/grpc/mission/NodeExceptionHandlerTypeGto.TEMP_STORAGE_AREA_QUEUE_UP:Lcom/kuka/wcs/grpc/mission/NodeExceptionHandlerTypeGto;
+     811: invokevirtual #154                // Method com/kuka/wcs/grpc/mission/NodeStrategyGto$Builder.setType:(Lcom/kuka/wcs/grpc/mission/NodeExceptionHandlerTypeGto;)Lcom/kuka/wcs/grpc/mission/NodeStrategyGto$Builder;
+     814: aload         4
+     816: invokevirtual #162                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getTmpStorageArea:()Ljava/lang/String;
+     819: invokevirtual #163                // Method com/kuka/wcs/grpc/mission/NodeStrategyGto$Builder.setTemporaryStorageAreaCode:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/mission/NodeStrategyGto$Builder;
+     822: aload         4
+     824: invokevirtual #164                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getTmpStorageContainerHandleStrategy:()Ljava/lang/Integer;
+     827: invokestatic  #139                // Method java/util/Objects.nonNull:(Ljava/lang/Object;)Z
+     830: ifeq          844
+     833: aload         4
+     835: invokevirtual #164                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getTmpStorageContainerHandleStrategy:()Ljava/lang/Integer;
+     838: invokevirtual #98                 // Method java/lang/Integer.intValue:()I
+     841: goto          845
+     844: iconst_1
+     845: invokevirtual #165                // Method com/kuka/wcs/grpc/mission/NodeStrategyGto$Builder.setTemporaryStorageAreaContainerHandleStrategy:(I)Lcom/kuka/wcs/grpc/mission/NodeStrategyGto$Builder;
+     848: pop
+     849: iload         9
+     851: ifeq          865
+     854: aload         6
+     856: aload         10
+     858: invokevirtual #166                // Method com/kuka/wcs/grpc/mission/NodeStrategyGto$Builder.build:()Lcom/kuka/wcs/grpc/mission/NodeStrategyGto;
+     861: invokevirtual #167                // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.setNodeStragety:(Lcom/kuka/wcs/grpc/mission/NodeStrategyGto;)Lcom/kuka/wcs/grpc/mission/NodeGto$Builder;
+     864: pop
+     865: aload_2
+     866: aload         6
+     868: invokevirtual #168                // Method com/kuka/wcs/grpc/mission/NodeGto$Builder.build:()Lcom/kuka/wcs/grpc/mission/NodeGto;
+     871: invokeinterface #24,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     876: pop
+     877: goto          11
+     880: aload_2
+     881: areturn
+
+  private void validateWcsDeviceCommand(java.util.List<com.kuka.interfaces.plugin.entity.NodeActionDO>);
+    Code:
+       0: aload_1
+       1: invokeinterface #92,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       6: astore_2
+       7: aload_2
+       8: invokeinterface #93,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      13: ifeq          190
+      16: aload_2
+      17: invokeinterface #94,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      22: checkcast     #95                 // class com/kuka/interfaces/plugin/entity/NodeActionDO
+      25: astore_3
+      26: aload_3
+      27: invokevirtual #112                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getActionType:()Ljava/lang/String;
+      30: astore        4
+      32: aload         4
+      34: invokestatic  #82                 // Method org/springframework/util/StringUtils.hasText:(Ljava/lang/String;)Z
+      37: ifne          43
+      40: goto          7
+      43: aload_3
+      44: invokevirtual #37                 // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNodeCode:()Ljava/lang/String;
+      47: astore        5
+      49: aload_0
+      50: aload_3
+      51: invokespecial #169                // Method needBeforeDeviceCommand:(Lcom/kuka/interfaces/plugin/entity/NodeActionDO;)Z
+      54: ifeq          118
+      57: aload_0
+      58: aload         5
+      60: aload         4
+      62: ldc           #122                // String before
+      64: invokespecial #123                // Method com/kuka/interfaces/plugin/handle/AbstractNodeActionHandler.generateDeviceCommandCode:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      67: astore        6
+      69: aload_0
+      70: getfield      #36                 // Field wcsGrpcAdapterService:Lcom/kuka/interfaces/plugin/services/WcsGrpcAdapterService;
+      73: aload         6
+      75: invokevirtual #170                // Method com/kuka/interfaces/plugin/services/WcsGrpcAdapterService.queryCommand:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/platform/data/WcsQueryCommandResponse;
+      78: astore        7
+      80: aload         7
+      82: invokestatic  #139                // Method java/util/Objects.nonNull:(Ljava/lang/Object;)Z
+      85: ifeq          118
+      88: aload         7
+      90: invokevirtual #171                // Method com/kuka/wcs/grpc/platform/data/WcsQueryCommandResponse.getSuccess:()Z
+      93: ifne          118
+      96: new           #172                // class com/kuka/interfaces/plugin/common/InterfaceAPIException
+      99: dup
+     100: ldc           #173                // String Device command(%s) does not exist, please check it
+     102: iconst_1
+     103: anewarray     #86                 // class java/lang/Object
+     106: dup
+     107: iconst_0
+     108: aload         6
+     110: aastore
+     111: invokestatic  #90                 // Method java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+     114: invokespecial #174                // Method com/kuka/interfaces/plugin/common/InterfaceAPIException."<init>":(Ljava/lang/String;)V
+     117: athrow
+     118: aload_0
+     119: aload_3
+     120: invokespecial #175                // Method needAfterDeviceCommand:(Lcom/kuka/interfaces/plugin/entity/NodeActionDO;)Z
+     123: ifeq          187
+     126: aload_0
+     127: aload         5
+     129: aload         4
+     131: ldc           #135                // String after
+     133: invokespecial #123                // Method com/kuka/interfaces/plugin/handle/AbstractNodeActionHandler.generateDeviceCommandCode:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+     136: astore        6
+     138: aload_0
+     139: getfield      #36                 // Field wcsGrpcAdapterService:Lcom/kuka/interfaces/plugin/services/WcsGrpcAdapterService;
+     142: aload         6
+     144: invokevirtual #170                // Method com/kuka/interfaces/plugin/services/WcsGrpcAdapterService.queryCommand:(Ljava/lang/String;)Lcom/kuka/wcs/grpc/platform/data/WcsQueryCommandResponse;
+     147: astore        7
+     149: aload         7
+     151: invokestatic  #139                // Method java/util/Objects.nonNull:(Ljava/lang/Object;)Z
+     154: ifeq          187
+     157: aload         7
+     159: invokevirtual #171                // Method com/kuka/wcs/grpc/platform/data/WcsQueryCommandResponse.getSuccess:()Z
+     162: ifne          187
+     165: new           #172                // class com/kuka/interfaces/plugin/common/InterfaceAPIException
+     168: dup
+     169: ldc           #173                // String Device command(%s) does not exist, please check it
+     171: iconst_1
+     172: anewarray     #86                 // class java/lang/Object
+     175: dup
+     176: iconst_0
+     177: aload         6
+     179: aastore
+     180: invokestatic  #90                 // Method java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+     183: invokespecial #174                // Method com/kuka/interfaces/plugin/common/InterfaceAPIException."<init>":(Ljava/lang/String;)V
+     186: athrow
+     187: goto          7
+     190: return
+
+  private boolean needAfterDeviceCommand(com.kuka.interfaces.plugin.entity.NodeActionDO);
+    Code:
+       0: getstatic     #65                 // Field com/kuka/interfaces/plugin/common/NeedCallbackType.NEED_ADD_AFTER:Lcom/kuka/interfaces/plugin/common/NeedCallbackType;
+       3: invokevirtual #63                 // Method com/kuka/interfaces/plugin/common/NeedCallbackType.getValue:()Ljava/lang/Integer;
+       6: aload_1
+       7: invokevirtual #113                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNeedCallback:()Ljava/lang/Integer;
+      10: invokevirtual #114                // Method java/lang/Integer.equals:(Ljava/lang/Object;)Z
+      13: ifne          32
+      16: getstatic     #66                 // Field com/kuka/interfaces/plugin/common/NeedCallbackType.NEED_ADD_BEFORE_AND_AFTER:Lcom/kuka/interfaces/plugin/common/NeedCallbackType;
+      19: invokevirtual #63                 // Method com/kuka/interfaces/plugin/common/NeedCallbackType.getValue:()Ljava/lang/Integer;
+      22: aload_1
+      23: invokevirtual #113                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNeedCallback:()Ljava/lang/Integer;
+      26: invokevirtual #114                // Method java/lang/Integer.equals:(Ljava/lang/Object;)Z
+      29: ifeq          36
+      32: iconst_1
+      33: goto          37
+      36: iconst_0
+      37: ireturn
+
+  private boolean needBeforeDeviceCommand(com.kuka.interfaces.plugin.entity.NodeActionDO);
+    Code:
+       0: getstatic     #62                 // Field com/kuka/interfaces/plugin/common/NeedCallbackType.NEED_ADD_BEFORE:Lcom/kuka/interfaces/plugin/common/NeedCallbackType;
+       3: invokevirtual #63                 // Method com/kuka/interfaces/plugin/common/NeedCallbackType.getValue:()Ljava/lang/Integer;
+       6: aload_1
+       7: invokevirtual #113                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNeedCallback:()Ljava/lang/Integer;
+      10: invokevirtual #114                // Method java/lang/Integer.equals:(Ljava/lang/Object;)Z
+      13: ifne          32
+      16: getstatic     #66                 // Field com/kuka/interfaces/plugin/common/NeedCallbackType.NEED_ADD_BEFORE_AND_AFTER:Lcom/kuka/interfaces/plugin/common/NeedCallbackType;
+      19: invokevirtual #63                 // Method com/kuka/interfaces/plugin/common/NeedCallbackType.getValue:()Ljava/lang/Integer;
+      22: aload_1
+      23: invokevirtual #113                // Method com/kuka/interfaces/plugin/entity/NodeActionDO.getNeedCallback:()Ljava/lang/Integer;
+      26: invokevirtual #114                // Method java/lang/Integer.equals:(Ljava/lang/Object;)Z
+      29: ifeq          36
+      32: iconst_1
+      33: goto          37
+      36: iconst_0
+      37: ireturn
+
+  public java.lang.String getMissionType();
+    Code:
+       0: getstatic     #176                // Field com/kuka/interfaces/plugin/common/MissionType.RACK_MOVE:Lcom/kuka/interfaces/plugin/common/MissionType;
+       3: invokevirtual #177                // Method com/kuka/interfaces/plugin/common/MissionType.name:()Ljava/lang/String;
+       6: areturn
+
+  private static boolean lambda$doHandle$6(com.kuka.interfaces.plugin.entity.AgvTaskDto, com.kuka.wcs.grpc.mission.WcsContainerGto);
+    Code:
+       0: aload_1
+       1: invokevirtual #178                // Method com/kuka/wcs/grpc/mission/WcsContainerGto.getContainerModelCode:()Ljava/lang/String;
+       4: invokestatic  #32                 // Method org/springframework/util/StringUtils.isEmpty:(Ljava/lang/Object;)Z
+       7: ifne          22
+      10: aload_0
+      11: invokevirtual #39                 // Method com/kuka/interfaces/plugin/entity/AgvTaskDto.getContainerModelCode:()Ljava/lang/String;
+      14: aload_1
+      15: invokevirtual #178                // Method com/kuka/wcs/grpc/mission/WcsContainerGto.getContainerModelCode:()Ljava/lang/String;
+      18: invokevirtual #179                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      21: ireturn
+      22: iconst_0
+      23: ireturn
+
+  private static boolean lambda$doHandle$5(com.kuka.interfaces.plugin.entity.RackMoveDto);
+    Code:
+       0: aload_0
+       1: invokevirtual #22                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getActionType:()Ljava/lang/String;
+       4: invokestatic  #82                 // Method org/springframework/util/StringUtils.hasText:(Ljava/lang/String;)Z
+       7: ireturn
+
+  private static com.kuka.interfaces.plugin.entity.RackMoveDto lambda$doHandle$4(com.kuka.interfaces.plugin.entity.RackMoveDto);
+    Code:
+       0: aload_0
+       1: invokevirtual #54                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getPutDown:()Ljava/lang/Boolean;
+       4: invokestatic  #180                // Method com/kuka/interfaces/plugin/common/MisUtils.null2Default:(Ljava/lang/Object;)Lcom/kuka/interfaces/plugin/function/NullToDefaultHandler;
+       7: aload_0
+       8: invokedynamic #181,  0            // InvokeDynamic #5:run:(Lcom/kuka/interfaces/plugin/entity/RackMoveDto;)Ljava/lang/Runnable;
+      13: invokeinterface #182,  2          // InterfaceMethod com/kuka/interfaces/plugin/function/NullToDefaultHandler.nullToDefaultHandle:(Ljava/lang/Runnable;)V
+      18: aload_0
+      19: invokevirtual #73                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getPassStrategy:()Ljava/lang/String;
+      22: invokestatic  #180                // Method com/kuka/interfaces/plugin/common/MisUtils.null2Default:(Ljava/lang/Object;)Lcom/kuka/interfaces/plugin/function/NullToDefaultHandler;
+      25: aload_0
+      26: invokedynamic #183,  0            // InvokeDynamic #6:run:(Lcom/kuka/interfaces/plugin/entity/RackMoveDto;)Ljava/lang/Runnable;
+      31: invokeinterface #182,  2          // InterfaceMethod com/kuka/interfaces/plugin/function/NullToDefaultHandler.nullToDefaultHandle:(Ljava/lang/Runnable;)V
+      36: aload_0
+      37: invokevirtual #75                 // Method com/kuka/interfaces/plugin/entity/RackMoveDto.getWaitingMillis:()Ljava/lang/Integer;
+      40: invokestatic  #180                // Method com/kuka/interfaces/plugin/common/MisUtils.null2Default:(Ljava/lang/Object;)Lcom/kuka/interfaces/plugin/function/NullToDefaultHandler;
+      43: aload_0
+      44: invokedynamic #184,  0            // InvokeDynamic #7:run:(Lcom/kuka/interfaces/plugin/entity/RackMoveDto;)Ljava/lang/Runnable;
+      49: invokeinterface #182,  2          // InterfaceMethod com/kuka/interfaces/plugin/function/NullToDefaultHandler.nullToDefaultHandle:(Ljava/lang/Runnable;)V
+      54: aload_0
+      55: areturn
+
+  private static void lambda$null$3(com.kuka.interfaces.plugin.entity.RackMoveDto);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: invokestatic  #21                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       5: invokevirtual #185                // Method com/kuka/interfaces/plugin/entity/RackMoveDto.setWaitingMillis:(Ljava/lang/Integer;)V
+       8: return
+
+  private static void lambda$null$2(com.kuka.interfaces.plugin.entity.RackMoveDto);
+    Code:
+       0: aload_0
+       1: ldc           #107                // String AUTO
+       3: invokevirtual #186                // Method com/kuka/interfaces/plugin/entity/RackMoveDto.setPassStrategy:(Ljava/lang/String;)V
+       6: return
+
+  private static void lambda$null$1(com.kuka.interfaces.plugin.entity.RackMoveDto);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: invokestatic  #187                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+       5: invokevirtual #188                // Method com/kuka/interfaces/plugin/entity/RackMoveDto.setPutDown:(Ljava/lang/Boolean;)V
+       8: return
+
+  private static void lambda$doHandle$0(com.fasterxml.jackson.databind.ObjectMapper, java.util.List, java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_2
+       2: ldc           #20                 // class com/kuka/interfaces/plugin/entity/RackMoveDto
+       4: invokevirtual #189                // Method com/fasterxml/jackson/databind/ObjectMapper.convertValue:(Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/Object;
+       7: checkcast     #20                 // class com/kuka/interfaces/plugin/entity/RackMoveDto
+      10: astore_3
+      11: aload_3
+      12: invokestatic  #190                // Method com/kuka/interfaces/plugin/common/ValidatorUtil.validate:(Ljava/lang/Object;)Ljava/lang/String;
+      15: astore        4
+      17: aload         4
+      19: invokestatic  #82                 // Method org/springframework/util/StringUtils.hasText:(Ljava/lang/String;)Z
+      22: invokestatic  #26                 // Method com/kuka/interfaces/plugin/common/MisUtils.isTrue:(Z)Lcom/kuka/interfaces/plugin/function/ThrowExceptionMsgFunction;
+      25: aload         4
+      27: invokeinterface #28,  2           // InterfaceMethod com/kuka/interfaces/plugin/function/ThrowExceptionMsgFunction.throwMsg:(Ljava/lang/String;)V
+      32: aload_1
+      33: aload_3
+      34: invokeinterface #24,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      39: pop
+      40: return
+
+  static {};
+    Code:
+       0: ldc           #191                // class com/kuka/interfaces/plugin/handle/RackMoveNodeActionHandler
+       2: invokestatic  #192                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #193                // Field log:Lorg/slf4j/Logger;
+       8: return
+}

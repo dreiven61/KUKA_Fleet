@@ -1,0 +1,40 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.localizer.v1alpha1;
+
+import "kuka/core/geometry/v1/transform_2d.proto";
+import "kuka/mobilerobotics/laser/v1alpha1/laser_data.proto";
+import "kuka/mobilerobotics/localizer/v1alpha1/map.proto";
+
+option java_package = "com.kuka.mobilerobotics.localizer.v1alpha1";
+option java_outer_classname = "MapperResultProto";
+option java_multiple_files = true;
+
+// The message is the result of a MapperCommand - this will be send as update when a laser been processed after an action update
+message MapperResult
+{
+    message MapperLaserData
+    {
+        // identifier of used laser
+        int64 id = 1;
+        // the laserdata is only available for the last added set or if requested a full update
+        kuka.mobilerobotics.laser.v1alpha1.LaserData laser_data = 2;
+        // the processed origin of the robot pose
+        kuka.core.geometry.v1.Transform2D origin = 3;
+        
+    }
+    repeated MapperLaserData laser_data = 1;
+    // if include_map true the full generated map otherwise just the parameters provided by the Command including the uuid if upload succeeded
+    kuka.mobilerobotics.localizer.v1alpha1.Map map=2;
+};
+
+
+
+

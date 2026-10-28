@@ -1,0 +1,57 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motion.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/velocity_constraints.proto";
+
+option java_package = "com.kuka.mobilerobotics.motion.v1alpha1";
+option java_outer_classname = "MotionRuntimeInformationProto";
+option java_multiple_files = true;
+
+// The runtime information of a motion. This includes information like
+// the estimated time to the goal, the driven distance, and statistics
+// about the tracking accuracy, etc.
+message MotionRuntimeInformation
+{
+  // The timestamp corresponding to the time of the creation of this runtime info.
+  google.protobuf.Timestamp timestamp = 1;
+	
+  // The currently active velocity constraints of this motion.
+  VelocityConstraints velocity_constraints = 2;
+
+  // The currently active maximum translational velocity constraint (in m/s).
+  google.protobuf.DoubleValue max_translational_velocity = 3;
+
+  // The traveled distance of this motion (in meters).
+  double traveled_distance = 4;
+   
+  // The estimated remaining distance to the goal (in meters).
+  double estimated_distance_to_goal = 5;
+
+  // The current translational distance from the path (in meters).
+  double translational_distance_to_path = 6;
+
+  // The current rotational distance from the path (in radians).
+  double rotational_distance_to_path = 7;
+
+  // The maximum translational distance from the path during this motion (in meters).
+  double max_translational_distance_to_path = 8;
+
+  // The maximum rotational distance from the path during this motion (in radians).
+  double max_rotational_distance_to_path = 9;
+
+  // The average translational distance from the path during this motion (in meters).
+  double average_translational_distance_to_path = 10;
+
+  // The average rotational distance from the path during this motion (in radians).
+  double average_rotational_distance_to_path = 11;
+}

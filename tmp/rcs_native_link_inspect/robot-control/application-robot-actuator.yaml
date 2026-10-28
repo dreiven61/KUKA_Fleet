@@ -1,0 +1,19 @@
+management:
+  server:
+    port: 6889
+  endpoints:
+    web:
+      base-path: /robot-actuator
+      exposure:
+        include:
+          - threaddump
+          - mappings
+          - metrics
+          - info
+          - health
+          - beans
+          - caches
+          - flyway
+          - scheduledtasks
+          - heapdump
+          - prometheus

@@ -1,0 +1,2475 @@
+
+=== PDF PAGE 1 ===
+ 
+ 
+ 
+ 
+ 
+MCS Basic Specification 
+(IB-SEM) 
+ 
+ 
+SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 
+ 
+문서번호: PS9902 
+ 
+ 
+Version 1.0 
+ 
+2021-10-25 
+ 
+ 
+ 
+ 
+ 
+ 
+ Confidential 
+
+=== PDF PAGE 2 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+2 
+ 
+ Confidential 
+사 용 권 한 
+ 
+본 문서에 대한 서명은 SK Innovation 내부에서 본 문서에 대하여 수행 및 
+유지관리의 책임이 있음을 인정하는 것임. 
+ 
+본 문서는 작성, 검토, 승인하여 승인된 원본을 보관한다. 
+작성자:  일자:  
+ 
+검토자:  일자:  
+ 
+ 
+본인은 서명으로써 본 문서가 SK Innovation 의 업무활동 범위 내에서 사용될 것을 
+인가함. 
+ 
+ 
+승인자:  일자:  
+ 
+ 
+제.개정 이력 
+ 
+버전 변경일자 제.개정 내용 작성자 
+0.1 2021-04-02 -. 최초 등록 황인소 
+0.2 2021-06-11 
+-. 포맷 및 일부 이미지 변경 
+-. Page 21. Port  
+ State EVENT 전체 CEID 변경 
+-. Page 30. EnhanceTransfers  EnhancedTransfers  
+오타 수정  
+-. CEID 402 Added & LotID DVVAL Added 
+-. Page 21 CarrierLotMapping Event추가 
+-. Page 22-23 Port Transfer State EVENT 전체 변경 
+ CarrierType, ProductEmpty 추가  
+-. Page 23 CarrierLoadRequest, CarrierUnLoadRequest, 
+PortTypeChanged, PortModeChanged Event 추가 
+-. Page 25 RTP ‘10’, ‘11’ 추가 
+이재상 
+
+=== PDF PAGE 3 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+3 
+ 
+ Confidential 
+-. Page 35 PortInOutType, PortAccessMode추가 
+-. Page 35 EnhancedPort, PortTransferState 변경,  
+EnhancedPortInfo 변경, PortState, CarrierType 추가 
+0.3 2021-06-23 -. CEID403, 404, 405 Added 이재상 
+0.4 2021-07-08 
+-. CEID 402 LotID 삭제 
+-. CarrierState 삭제  
+-. RPTID 12 추가  
+-. CEID 809 RPT ID 변경(9 -> 12) 
+-. Page 23 ~ 24 port Event DVVAL 정보 변경 
+-. Page 36 DVVAL ProductQuantity, TurretCore 추가 
+이진철 
+0.5 2021-07-22 
+-. Page21 CEID 402 ~ 405 삭제 
+-. Page21 CEID 406 CarrierIDRead 추가  
+-. Page23 CEID 801 ~ 805 RPTID 수정(9->4) 
+-. Page23 CEID 808, 809 항목 수정 
+-. Page25 RPTID 9 항목 수정 
+-. Page25 RTPID 10 항목 삭제 
+-. Page25 RPTID 14, 15 항목 추가 
+-. Page34 ResultCode 항목 수정(7, 8 추가) 
+-. Page36 Valiable 68 ~ 7 항목 추가 
+이진철 
+0.6 2021-08-17 -. Variable 추가 (WinderChangeFlag) 문종석 
+0.7 2021-09-08 
+-. Variable 추가 (VehicleLoc, CarrierIDUp, CarrierLocUp, 
+CarrierLocDw, CarrierIDDw, IDReadStausUp, IDReadStausDw) 
+-. CEID 406, 612, 812 항목 수정 
+-. RPTID 14, 15, 16 항목 수정 
+이진철 
+0.8 2021-10-12 -. Variable 추가 (MagazineType, MagazineModel) 문종석 
+0.9 2021-10-15 -. PalletizeCompleted 관련 CEID, Variable 추가 문종석 
+0.9 2021-10-18 -. IDREAD 관련 Variable 수정 
+-. CarrierUnloadRequest Variable 수정 
+이진철 
+1.0 2021-10-25 
+-. Page38 VID 76 항목 삭제  
+-. Page38 VID 77 항목 삭제 
+-. Page38 VID 80 항목 삭제 
+이정호 
+
+=== PDF PAGE 4 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+4 
+ 
+ Confidential 
+ 
+Table of Contents 
+1. SPECIFICATION DEFINI TION ................................ ................................ ...............  6 
+1.1 Referenced Documentation ................................ ................................ ..................  6 
+1.2 State Model List ................................ ................................ ................................ ....... 6 
+1.3 Technical Terms ................................ ................................ ................................ ...... 6 
+1.4 Basic Communication Standard  ................................ ................................ .......... 7 
+1.4.1 Communication Protocol ................................ ................................ ..... 7 
+1.4.2 Overview of HSMS message ................................ ..............................  7 
+1.4.3 Message Format................................ ................................ ...................  7 
+1.5 Communication Standard Summary  ................................ ................................ ... 8 
+1.6 Connection Mode ................................ ................................ ................................ .... 9 
+1.7 HSMS Communication Sequence  ................................ ................................ ........ 9 
+2 IBSEM STATES MODEL  ................................ ................................ ......................  10 
+2.1 TSC State Model Entities ................................ ................................ ..........................  10 
+2.2 TSC State Model ................................ ................................ ................................ .... 11 
+2.2.1 TSC State Model Diagram  ................................ ................................ .....................  11 
+2.2.2 TSC State Model Diagram  ................................ ................................ .....................  11 
+2.3 Transfer Command State Model ................................ ................................ ........ 12 
+2.3.1 Transfer Command State Model Diagram  ................................ ...... 12 
+2.3.2 Transfer Command State Transition Table  ................................ .... 12 
+2.4 Vehicle State Model ................................ ................................ ..............................  13 
+2.4.1 Vehicle State Model Diagram  ................................ ...........................  13 
+2.4.2 Vehicle State Transition Table ................................ .........................  13 
+2.5 EQ Port Transfer State Requirement  ................................ ................................  15 
+2.5.1 EQ Port Transfer State Model ................................ ...........................  15 
+2.6 Carrier State Model ................................ ................................ ...............................  17 
+2.6.1 Carrier State Model Diagram  ................................ ............................  17 
+2.6.2 Carrier State Transition Table  ................................ ..........................  17 
+2.7 Machine State Model ................................ ................................ ............................  17 
+2.7.1 Machine State Model Diagram  ................................ .........................  17 
+2.7.2 Machine State Definitions  ................................ ................................ . 18 
+2.7.3 Equipment State Transition Table  ................................ ...................  18 
+3. COLLECTION EVENT ID LIST ................................ ................................ .....................  19 
+3.1 Collection Event List ................................ ................................ ............................  19 
+3.2 TSC State Transition Events ................................ ................................ ...............  19 
+3.3 TRANSFER Command State Transition Events  ................................ .............  20 
+3.4 Carrier State Transition Events ................................ ................................ .......... 20 
+3.5 Non-Transition Event ................................ ................................ ...........................  21 
+3.6 Machine State Transition Events  ................................ ................................ ....... 22 
+3.7 Vehicle State Transition Events ................................ ................................ ......... 22 
+
+=== PDF PAGE 5 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+5 
+ 
+ Confidential 
+3.8 Unit Alarm State Transition Events  ................................ ................................ ... 23 
+3.9 Control State Transition Event ................................ ................................ ........... 23 
+3.10 Port Transfer State Transition Event  ................................ ................................  23 
+4 REPORT ID EVENT LIST ................................ ................................ ......................  25 
+4.1 Transfer System Event Report ................................ ................................ ........... 25 
+5 DATA ITEM DICTIONARY  ................................ ................................ ....................  28 
+5.1 SECS Data Item Dictionary ................................ ................................ .................  28 
+5.1.1 SECS Data Items  ................................ ................................ ...............  28 
+5.1.2 SECS Data Items Table  ................................ ................................ .... 28 
+5.2 Variable Data Items Dictionary ................................ ................................ ........... 31 
+5.3 Variable Data Items ................................ ................................ ...............................  32 
+5.4 Variable Data Items Table ................................ ................................ ....................  32 
+ 
+
+=== PDF PAGE 6 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+6 
+ 
+ Confidential 
+1. SPECIFICATION DEFINITION  
+This document is applied to BATTERY, SEMI-CONDUCTOR, or some circumstances, defined as the 
+communication specification to be used in online communication with the intrabay/interbay transport 
+system. 
+Complement all the modifications that will be conducted by the SK Corporation. 
+ 
+1.1  Referenced Documentation 
+ SEMI E5 : SEMI EQUIPMENT COMMUNICATIONS STANDARD 2 MESSAGE CONTENT 
+(SECS-II) 
+ SEMI E30 : GENERIC MODEL FOR COMMUNICATIONS AND CONTROLS OF 
+MANUFACTURING EQUIPMENT (GEM) 
+ SEMI E37 : HIGH-SPEED SECS MESSAGE SERVICES (HSMS) GENERIC SERVICES 
+ SEMI E37.1 : HIGH-SPEED SECS MESSAGE SETVICES SINGLE-SESSION MODE (HSMS-
+SS) 
+ SEMI E82 : SPECIFICATION FOR INTERBAY/INTRABAY AMHS SEM (IBSEM) 
+ 
+1.2  State Model List  
+The state model to be included in the TSC is described in both SEM and GEM. The following is a list 
+of those state models 
+ Communication State Model (refer to GEM 3.2) 
+ Controller State Model (refer to GEM 3.3) 
+ TSC State Model (refer to Chapter2) 
+ Transfer Command State Model (refer to Chapter2) 
+ Carrier State Model (refer to Chapter2) 
+ Vehicle State Model (refer to Chapter2) 
+※ The TSC also contains an HSMS-SS state model (Refer to section 5 of SEMI E37.1 HSMS-SS) 
+ 
+1.3 Technical Terms  
+ AGV (MGV): Automatic (manual), the device's Vehicle 
+ OHT: Overhead Hoist Transfer 
+ OHS: Overhead Shuttle 
+ Loader Port: Interface position of equipment where cassette is delivered 
+
+=== PDF PAGE 7 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+7 
+ 
+ Confidential 
+ Transfer Port: When Cassette is the emergence, on the point of the transfer system cassette 
+ownership is changed 
+ Cassette: Container glass is put 
+ Cassette ID: ID cassette is separated by 
+ 
+1.4  Basic Communication Standard  
+1.4.1  Communication Protocol  
+ Communication: TCP/IP 
+ Communication Speed: 10/100Mbps  
+ 
+1.4.2 Overview of HSMS message 
+Byte Description 
+0~3 Bytes Message length (Notify message header and bytes of message text) 
+4~13 Bytes Message header 
+14~n Bytes Message text (Format notified on PType of message header) 
+ 
+1.4.3 Message Format 
+Length 
+ 
+(0~3 bytes) 
+Header 
+ 
+(4~13 bytes) 
+Text 
+ 
+(14~n bytes) 
+ 
+ Message Length Field: The Format of the message Length is 4 byte unsigned integer, writes 
+byte of message header and message text  
+ Message Header Field 
+Bytes Description 
+~1 Session ID (Device ID) 
+2 Header Byte 2 
+3 Header Byte 3 
+4 PType 
+5 SType 
+6~9 System Bytes 
+
+=== PDF PAGE 8 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+8 
+ 
+ Confidential 
+※ PType, SType = 0, text contains valid SECS -II message 
+ 
+1.5  Communication Standard Summary  
+※ TBD = To be defined  
+ 
+ 
+ 
+ 
+No. 
+Symbol Parameter Name Description Default Range Resolution 
+1 N.A. Host Name MCS Name TBD  N.A. 
+2 N.A. TCP Port Number TCP Port Number TBD 1-65535  
+3 N.A. MCS Side IP Address MCS IP Address TBD   
+4  TSC Side IP Address TSC IP Address TBD   
+5 N.A. Connection Mode Connection Mode 
+Passive 
+for SC 
+Passive only  
+for Eqp. side 
+N.A. 
+6 T3 Reply Timeout 
+Reply Message timeout 
+occur 
+45 sec 1-120 sec 1 sec 
+7 T5 
+Connection 
+Separation Timeout 
+Trial time interval when 
+Connection is failed 
+10 sec 1-240 sec 1 sec 
+8 T6 Control Timeout 
+Control message timeout 
+occur 
+5 sec 1-240 sec 1 sec 
+9 T7 
+Connection Idle  
+Timeout 
+ 
+Before connection failure  
+first connection is succeed 
+for using to HSMS 
+communication 
+occurred, The time until 
+10 sec 1-240 sec 1 sec 
+10 T8 Network Character Timeout 
+In a message, timeout 
+happened between the 
+connection characters 
+5 sec 1-120 sec 1 sec 
+11 N.A. 
+Maximum Message  
+Size 
+ 
+When Communication, The 
+maximum Message Size to 
+send or received 
+4096   
+12 N.A. 
+Maximum Concurrent  
+Opened Transactions 
+After access to HSMS The  
+maximum number the 
+concurrent possible 
+transactions 
+1024   
+13 N.A. 
+Number of Device ID to be 
+used 
+Number of max equipment  
+to be connected to HSMS 
+9   
+
+=== PDF PAGE 9 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+9 
+ 
+ Confidential 
+1.6  Connection Mode 
+Active Mode Entity : initiate TCP/IP Connection by sending Connection Request to Passive Mode 
+Entity. 
+Passive Mode Entity : listen for an incoming connection request from Active mode Entity. 
+ 
+ 
+1.7  HSMS Communication Sequence  
+AGV/OHT/OHS Controller          MCS  
+ 
+
+=== PDF PAGE 10 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+10 
+ 
+ Confidential 
+2 IBSEM STATES MODEL  
+2.1 TSC State Model Entities  
+The following illustration indicates the entities contained in the state models listed on the previous 
+page. For example, in the TSC State Model , the TSC is the entity in that model. Likewise, the in 
+the case of the Carrier State Model, the carrier is the entity in that model. So, in the TSC State 
+Model, there is only one entity, the TSC. However, in the Carrier State Model, there are as many 
+entities as there are carriers. The following illustration indicates how things look from the host's 
+perspective but the standard does not define whether or not this the actual condition.  
+ 
+ 
+ 
+
+=== PDF PAGE 11 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+11 
+ 
+ Confidential 
+2.2  TSC State Model  
+2.2.1 TSC State Model Diagram  
+ 
+2.2.2 TSC State Model Diagram  
+No. Previous State Trigger New State Actions Comments 
+1 None TSC Initiation TSC Init S6F11 
+TSCAutoInitiated  
+2 TSC INIT 
+System started up 
+successfully. All Cassette 
+movement stopped 
+PAUSED S6F11 TSCPaused  
+3 PAUSED RESUME command AUTO S6F11 
+TSCAutoCompleted  
+4 AUTO PAUSE command PAUSING S6F11 
+TSCPauseInitiated  
+5 PAUSING RESUME command AUTO S6F11 
+TSCAutoCompleted  
+6 PAUSING All Cassette movement 
+has competed PAUSED S6F11 
+TSCPauseCompleted  
+7 NO ALARMS Alarm Set ALARMS S6F11 AlarmSet  
+8 ALARMS All Alarms cleared NO 
+ALARMS S6F11 AlarmCleared  
+9 ALARMS Alarm Set ALARMS S6F11 AlarmSet  
+ 
+
+=== PDF PAGE 12 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+12 
+ 
+ Confidential 
+2.3  Transfer Command State Model  
+2.3.1 Transfer Command State Model Diagram  
+ 
+2.3.2 Transfer Command State Transition Table  
+No. Previous State Trigger New State Actions 
+1 None 
+The Host generated TRANSFER 
+command is successfully acknowledge 
+by the TSC 
+QUEUED  
+2 QUEUED 
+The TRANSFER command has been 
+initiated by the TSC 
+WAITING S6F11 TransferInitiated 
+3 WAITING 
+The acquire of the first carrier of the 
+transfer unit begins 
+TRANSFERRING S6F11 Transferring 
+4 NOT ACTIVE 
+Host sends CANCEL command for a 
+specified TRANSFER command to TSC  
+CANCELING S6F11 TransferCancelInitiated  
+5 CANCELING 
+Transport system is unable to cancel the 
+TRANSFER command 
+Previous NOT 
+ACTIVE sub state 
+S6F11 TransferCancelFailed 
+6 CANCELING 
+The cancel procedure for the 
+TRANSFER command has completed 
+by the transport system and TSC  
+None 
+S6F11 
+TransferCancelCompleted 
+7 TRANSFERRING 
+The TSC resumes execution of the 
+TRANSFER command due to an 
+anomaly condition 
+PAUSED S6F11 TransferPaused 
+8 PAUSED 
+The TSC resumes execution of the 
+TRANSFER command since the 
+anomaly condition has been cleared  
+TRANSFERRING S6F11 TransferResumed 
+
+=== PDF PAGE 13 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+13 
+ 
+ Confidential 
+9 ACTIVE 
+Host initiates an abort of TRANSFER 
+command 
+ABORTING S6F11 TransferAbortInitiated 
+10 ABORTING 
+The abort procedure for the TRANSFER 
+command has completed by the 
+transport system and TSC 
+None S6F11 TransferAbortCompleted 
+11 ACTIVE 
+The TRANSFER command has 
+completed by the transport system and 
+SC (either successfully or 
+unsuccessfully) 
+None 
+S6F11 TransferCompleted sent 
+to Host with ResultCode 
+ResultCode=0 : successful  
+nonzero : unsuccessful 
+12 ABORTING 
+Transport system is physically unable to 
+abort the TRANSFER command  
+Previous ACTIVE 
+substate 
+S6F11 TransferAbortfailed 
+13 CANCELING 
+Transport system is unable to cancel 
+because the transfer is now ACTIVE  
+TRANSFERRING S6F11 Transferring 
+ 
+2.4  Vehicle State Model 
+2.4.1 Vehicle State Model Diagram  
+ 
+ 
+2.4.2 Vehicle State Transition Table  
+No. Previous State Trigger New State Actions 
+1 ENROUTE 
+Vehicle arrives at a transfer port associated with 
+an ACTIVE transfer command  
+PARKED S6F11 VehicleArrived 
+2 PARKED 
+Vehicle departs a transfer port associated with 
+an ACTIVE transfer command  
+ENROUTE S6F11 VehicleDeparted 
+
+=== PDF PAGE 14 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+14 
+ 
+ Confidential 
+3 PARKED 
+The carrier handoff parallel I/O starts for the 
+vehicle to acquire (load) the transfer unit  
+ACQUIRING S6F11 VehicleAcquireStarted 
+4 ACQUIRING 
+The carrier handoff parallel I/O completes for the 
+vehicle to acquire (unload) the transfer unit  
+PARKED S6F11 VehicleAcquireComleted 
+5 PARKED 
+The carrier handoff parallel I/O starts for the 
+vehicle deposit (unload) the transfer unit  
+DEPOSITING S6F11 VehicleDepositStarted 
+6 DEPOSITING 
+The carrier handoff parallel I/O completes for the 
+vehicle to deposit (unload) the transfer unit  
+PARKED S6F11 VehicleAcquireComleted 
+7 ACQUIRING 
+The carrier handoff parallel I/O completes for the 
+vehicle to acquire (load) the transfer unit and 
+starts for the vehicle to deposit (unload) the 
+carrier 
+DEPOSITING S6F11 VehicleDepositStarted 
+8 DEPOSITING 
+The carrier handoff parallel I/O completes for the 
+vehicle to deposit (unload) the transfer unit and 
+starts for the vehicle to acquire (load) the carrier  
+ACQUIRING S6F11 VehicleAcquireStarted 
+9 ASSIGNED 
+Vehicle is no longer being utilized for the 
+specified command 
+NOT 
+ASSIGNED 
+S6F11 VehicleUnassigned 
+10 NOT ASSIGNED Vehicle is allocated to TRANSFER command  ASSIGNED S6F11 VehicleAssigned 
+11 INSTALLED 
+Vehicle is removed from use of transfer 
+commands 
+REMOVED S6F11 VehicleRemoved 
+12 REMOVED Vehicle is installed for use of transfer commands INSTALLED S6F11 VehicleInstalled 
+
+=== PDF PAGE 15 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+15 
+ 
+ Confidential 
+2.5  EQ Port Transfer State Requirement  
+2.5.1 EQ Port Transfer State Model  
+ 
+ 
+No. Previous State Trigger New State Actions Comments 
+1 None System reset 
+OUTOFSERVIC
+E 
+Or 
+INSERVICE 
+S6F11 PortOutofService 
+Or 
+S6F11 
+PortInService 
+The new state is based on the 
+current status of the port or the 
+state prior to system reset 
+2 
+OUTOFSERVI
+CE 
+The equipment has 
+determined that the port 
+can be utilized for 
+transfers. 
+INSERVICE 
+S6F11 
+PortInService 
+ 
+3 INSERVICE 
+The equipment has 
+determined that the port 
+should not be used for 
+transfers. 
+OUTOFSERVIC
+E 
+S6F11 PortOutofService 
+This could be the result of an 
+alarm condition that affects only 
+the port, the entire device, or a 
+portion of the device which 
+includes the port 
+4 Node System reset 
+TRANSFER 
+BLOCKED 
+S6F11 
+PortTransferBlocked 
+The new state is based on the 
+current status of the port 
+
+
+=== PDF PAGE 16 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+16 
+ 
+ Confidential 
+READY 
+TOLOAD 
+READY 
+TOUNLOAD 
+S6F11 
+PortReadyToLoad 
+S6F11 
+PortReadyToUnload 
+5 
+TRANSFER 
+BLOCKED 
+Port ready for carrier 
+delivery 
+READY 
+TOLOAD 
+S6F11 
+PortReadyToLoad 
+ 
+6 
+TRANSFER 
+BLOCKED 
+Port ready for carrier 
+removal 
+READY 
+TOUNLOAD 
+S6F11 
+PortReadyToUnload 
+ 
+7 
+READY 
+TOLOAD 
+No carrier transfer 
+allowed 
+TRANSFER 
+BLOCKED 
+S6F11 
+PortTransferBlocked 
+ 
+8 
+READY 
+TOUNLOAD 
+No carrier transfer 
+allowed 
+TRANSFER 
+BLOCKED 
+S6F11 
+PortTransferBlocked 
+ 
+9 
+READY 
+TOLOAD 
+Port ready for carrier 
+removal 
+READY 
+TOUNLOAD 
+S6F11 
+PortReadyToUnload 
+ 
+10 
+READY 
+TOUNLOAD 
+Port ready for carrier 
+delivery 
+READY 
+TOLOAD 
+S6F11 
+PortReadyToLoad 
+  
+ 
+1.8.1.1. PORT OUTOFSERVICE 
+Transfer To/From this port is disabled and the port should not be used in any Transfer command  
+issued by the host. If the SC state is "Alarm" and the port cannot be accessed normally, the port  
+transfer state shall be "Out of Service". This includes situations where the "Alarm" may not be  
+directly related to the port. This mean if MGV Port is "out of service", other ports(AGV In/Out,  
+etc...) are available. But crane (Rack Master) is "Alarm", all ports (EQ port / AGV In/Out, MGV/) are 
+"Out of Service" until crane is "Normal.(No Alarm).  
+ 
+1.8.1.2. PORT INSERVICE 
+Transfer To/From port this port enabled.  
+ 
+1.8.1.3. TRANSFER BLOCKED 
+The state is neither READY TO LOAD nor READY TO UNLOAD  
+ 
+1.8.1.4. READY TO LOAD 
+The port is able to accept (be loaded with) a carrier from the Stocker SEM equipment  
+ 
+1.8.1.5. READY TO UNLOAD 
+The port is able to have a carrier removed (unloaded) by the Stocker SEM equipment  
+
+=== PDF PAGE 17 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+17 
+ 
+ Confidential 
+2.6  Carrier State Model 
+2.6.1 Carrier State Model Diagram  
+ 
+ 
+2.6.2 Carrier State Transition Table  
+No. Previous State Trigger New State Actions 
+1 None 
+A TSC database entry is created for 
+the carrier 
+INSTALLED S6F11 CarrierInstalled 
+2 INSTALLED 
+A TSC database entry is removed for 
+the carrier 
+None S6F11 CarrierRemoved 
+ 
+ 
+2.7  Machine State Model  
+2.7.1 Machine State Model Diagram  
+ 
+ 
+1-1  
+ 
+① InService  
+2-1                                                   3-1 
+2-2                                3-2 
+ 
+4-1 
+② OutOfService                               ③ PM 
+4-2 
+ 
+ 
+
+=== PDF PAGE 18 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+18 
+ 
+ Confidential 
+2.7.2 Machine State Definitions  
+① InService 
+: In this state, Machine is in performing its  intended function and there is No trouble. Default state  
+② OutOfService 
+: The Machine state would be changed to OutOfService when Machine is stopped by Alarm or by 
+other reason, and could not be recovered by itself.  
+③ PM 
+: In this state, Machine is not in performing its intended function.  
+(PM state is selected by engineer for engineering purpose such as process development, 
+characterization or maintenance)  
+ 
+2.7.3 Equipment State Transition Table  
+No. Previous State Trigger New State Actions Comments 
+1-1 - Power On or Reset InService 
+NONE 
+ 
+Initially Power On 
+and there no 
+alarm  
+2-1 InService 
+The machine decides to be out of 
+order due to a condition such as 
+alarm 
+OutOfServic
+e 
+NONE  
+2-1 OutOfService Machine is ready for processing InService NONE  
+3-1 PM 
+Equipment itself or Operator Select 
+InService and no alarm 
+InService NONE  
+3-2 InService 
+Machine itself or Operator Select PM 
+mode change 
+PM NONE  
+4-1 OutOfService 
+Equipment itself or Operator Select 
+PM mode change 
+PM NONE  
+4-2 PM 
+When Machine has heavy alarm, if 
+Machine is trying to change mode to 
+InService 
+OutOfServic
+e 
+NONE 
+Only specific 
+machines are 
+applied by this 
+state 
+※ NOTE: Equipment must change it's Process State automatically when transition condition is 
+satisfied. 
+ 
+
+=== PDF PAGE 19 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+19 
+ 
+ Confidential 
+3. COLLECTION EVENT ID LIST  
+The transport system supports the event reports based on the "Dynamic Event Report Setting 
+Modifications" included in GEM.  
+This chapter explains the type’s events used by the transport system.  
+ 
+3.1  Collection Event List 
+This section identifies data collection events and defines (Stream 6) suggested associated variable 
+data items. The host can use the report definition scenario  defined in SEMI E30 to define reports at 
+IBSEM defined levels. The intent is to demonstrate that certain suggested data is available at specific 
+events. 
+ CEID (101~): TSC State Transition Event  
+ CEID (201~): Transfer Command State Transition Event  
+ CEID (301~): Carrier State Transition Event  
+ CEID (401~): Non-Transition Event  
+ CEID (501~): Machine State Transition Event  
+ CEID (601~): Vehicle State Tr ansition Event 
+ CEID (701~): Unit Alarm State Transition Events  
+ CEID (1~3): Control State Transition Event  
+ 
+3.2  TSC State Transition Events 
+CEID EVENT NAME FROM STATE TO STATE DVVALs RPT ID 
+101 AlarmCleared ALARMS NO ALARMS 
+CommandID 
+VehicleInfo 
+1 
+102 AlarmSet 
+NO ALARMS 
+ALARMS 
+ALARMS 
+ALARMS 
+CommandID 
+VehicleInfo 
+1 
+103 TSCAutoCompleted 
+PAUSED 
+PAUSING 
+AUTO 
+AUTO 
+N/A  
+104 TSCAutoInitiated None TSC INIT N/A  
+105 TSCPauseCompleted PAUSING PAUSED N/A  
+106 TSCPaused TSC INIT PAUSED N/A  
+107 TSCPauseInitiated AUTO PAUSING N/A  
+ 
+ 
+ 
+ 
+
+=== PDF PAGE 20 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+20 
+ 
+ Confidential 
+ 
+ 
+ 
+ 
+3.3  TRANSFER Command State Transition Events  
+CEID EVENT NAME FROM STATE TO STATE DVVALs RPT ID 
+201 TransferAbortCompleted ABORTING None 
+CommandID 
+TransferCompleteInfo 
+2 
+202 TransferAbortFailed ABORTING ACTIVE (History) CommandID 2 
+203 TransferAbortInitiated ACTIVE ABORTING CommandID 2 
+204 TransferCancelCompleted CANCELING None CommandID 2 
+205 TransferCancelFailed CANCELING NOT ACTIVE (History) CommandID 2 
+206 TransferCancelInitiated NOT ACTIVE CANCELING CommandID 2 
+207 TransferCompleted ACTIVE None 
+CommandInfo 
+TransferCompleteInfo 
+ResultCode 
+2 
+208 TransferInitiated QUEUED WAITING CommandID 2 
+209 TransferPaused TRANSFERRING PAUSED CommandID 2 
+210 TransferResumed PAUSED TRANSFERRING CommandID 2 
+211 Transferring 
+WAITING 
+CANCELING 
+TRANSFERRING 
+TRANSFERRING 
+CommandID 2 
+212 TransferUpdateCompleted ACTIVE ACTIVE CommandID 2 
+213 TransferUpdateFailed ACTIVE ACTIVE CommandID 2 
+ 
+3.4  Carrier State Transition Events 
+CEID EVENT NAME FROM STATE TO STATE DVVALs RPT ID 
+301 CarrierInstalled None INSTALLED 
+VehicleID 
+CarrierID 
+CarrierLoc 
+CommandID 
+3 
+302 CarrierRemoved INSTALLED None 
+VehicleID 
+CarrierID 
+CarrierLoc 
+CommandID 
+3 
+303 CarrierLocationChanged None None 
+CarrierID 
+CarrierLoc 
+3 
+ 
+ 
+
+=== PDF PAGE 21 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+21 
+ 
+ Confidential 
+ 
+ 
+ 
+ 
+ 
+3.5  Non-Transition Event 
+CEID EVENT NAME EVENT DESCRIPTION DVVALs RPT ID 
+401 OperatorInitiatedAction 
+The operator initiated an action from the Transport 
+System Controller. The related State Transition 
+Events defined in Table 6 shall be required after 
+this “OperatorInitiatedAction” event  
+CommandID 
+CommandType 
+CarrierID 
+SourcePort 
+DestPort 
+Priority 
+8 
+402 CarrierLotMapping Carrier And Lot Combined Event 
+CarrierID 
+CarrierLoc 
+LotID 
+10 
+403 DirectionChangeReport Foil Bobbin Direction Change Report  
+PortID 
+PortState 
+PortTransferState 
+CarrierID 
+CarrierState 
+CarrierType 
+ProductEmpty 
+9 
+404 DirectionChangeStart Foil Bobbin Direction Change Start 
+PortID 
+PortState 
+PortTransferState 
+CarrierID 
+CarrierState 
+CarrierType 
+ProductEmpty 
+9 
+405 DirectionChangeEnd Foil Bobbin Direction Change End 
+PortID 
+PortState 
+PortTransferState 
+CarrierID 
+CarrierState 
+CarrierType 
+ProductEmpty 
+9 
+406 CarrierIDRead 
+A carrier identification has been performed by the 
+vehicle system.  
+CarrierID 
+CarrierLoc 
+IDReadStatus 
+CarrierIDDw 
+CarrierLocDw 
+IDReadStatusDw 
+14 
+
+=== PDF PAGE 22 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+22 
+ 
+ Confidential 
+ 
+3.6  Machine State Transition Events  
+CEID EVENT NAME FROM STATE TO STATE DVVALs RPT ID 
+501 MachineInService 
+None 
+OUT OF SERVICE 
+IN SERVICE N/A  
+502 MachineOutOfService 
+None 
+IN SERVICE 
+OUT OF SERVICE N/A  
+ 
+3.7  Vehicle State Transition Events 
+CEID EVENT NAME FROM STATE TO STATE DVVALs RPT ID 
+601 VehicleArrived ENROUTE PARKED 
+VehicleID 
+TransferPortList 
+5 
+602 VehicleAcquireStarted 
+PARKED 
+DEPOSITING 
+ACQUIRING 
+ACQUIRING 
+VehicleID 
+TransferPortList 
+CarrierIDList 
+5 
+603 VehicleAcquireCompleted ACQUIRING PARKED 
+VehicleID 
+TransferPortList 
+CarrierIDList 
+5 
+604 VehicleAssigned NOT ASSIGNED ASSIGNED 
+VehicleID 
+CommandID 
+5 
+605 VehicleDeparted PARKED ENROUTE 
+VehicleID 
+TransferPortList 
+5 
+606 VehicleDepositStarted 
+PARKED 
+ACQUIRING 
+DEPOSITING 
+DEPOSITING 
+VehicleID 
+TransferPortList 
+CarrierIDList 
+5 
+607 VehicleDepositCompleted DEPOSITING PARKED 
+VehicleID 
+TransferPortList 
+CarrierIDList 
+5 
+608 VehicleInstalled REMOVED INSTALLED VehicleID 5 
+609 VehicleRemoved INSTALLED REMOVED VehicleID 5 
+610 VehicleUnassigned ASSIGNED NOT ASSIGNED 
+VehicleID 
+CommandID 
+5 
+611 VehicleStatusChanged 
+IDLE 
+DOWN 
+DOWN 
+IDLE 
+VehicleID 
+VehicleStatus 
+7 
+612 VehicleLocationChanged   
+VehicleID 
+VehicleLoc 
+16 
+ 
+ 
+ 
+
+=== PDF PAGE 23 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+23 
+ 
+ Confidential 
+3.8  Unit Alarm State Transition Events  
+CEID EVENT NAME FROM STATE TO STATE DVVALs RPT ID 
+701 UnitAlarmCleared ALARM NO ALARM 
+UnitiD 
+AlarmID 
+AlarmText 
+6 
+702 UnitAlarmSet NO ALARM ALARM 
+UnitiD 
+AlarmID 
+AlarmText 
+6 
+ 
+3.9  Control State Transition Event 
+CEID EVENT NAME FROM STATE TO STATE DVVALs RPT ID 
+1 Offline ONLINE OFFLINE   
+3 OnlineRemote 
+OFFLINE 
+ONLINE-LOCAL 
+ONLINE-REMOTE   
+ 
+3.10 Port Transfer State Transition Event 
+CEID EVENT NAME FROM STATE TO STATE DVVALs RPT ID 
+801 PortInService 
+None 
+OUT OF SERVICE 
+IN SERVICE PortID 4 
+802 PortOutOfService 
+None 
+IN SERVICE 
+OUT OF SERVICE PortID 4 
+803 PortTransferBlocked Any TRANSFER BLOCKED PortID 4 
+804 PortReadyToLoad Any READY TO LOAD PortID 4 
+805 PortReadyToUnload Any READY TO UNLOAD PortID 4 
+806 PortTypeChanged IN/OUT/BOTH IN/OUT/BOTH 
+PortID 
+PortInOutType 
+11 
+807 PortModeChanged AUTO/MANUAL AUTO/MANUAL 
+PortID 
+PortAccessMode 
+11 
+808 CarrierLoadRequest READY TO LOAD READY TO LOAD 
+PortID 
+CarrierType 
+WinderDirection 
+9 
+809 CarrierUnLoadRequest READY TO UNLOAD READY TO UNLOAD 
+PortID 
+CarrierID 
+CarrierType 
+ProductEmpty 
+ProductQuantity  
+ProductEnd 
+WinderDirection 
+12 
+
+=== PDF PAGE 24 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+24 
+ 
+ Confidential 
+Polarity 
+ValidationCheck 
+PalletSize 
+810 LoadCompleted   
+CarrierID 
+PortID 
+TurretCore 
+13 
+811 UnLoadCompleted   
+CarrierID 
+PortID 
+TurretCore 
+13 
+812 VLoadCompleted   
+VehicleID 
+CarrierLod 
+15 
+813 PalletizeCompleted   
+PortID 
+CarrierID 
+FirstLot 
+SecondLot 
+ThirdLot 
+FourthLot 
+FifthLot 
+SixthLot 
+SeventhLot 
+EighthLot 
+17 
+
+=== PDF PAGE 25 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+25 
+ 
+ Confidential 
+4 REPORT ID EVENT LIST  
+The following chart reveals the report format (default) the host uses in regards to the transport 
+system as an example of a dynamic event report.  
+ 
+4.1  Transfer System Event Report  
+REPORT ID VARIABLE FORMAT 
+1 
+CommandID 
+VehicleInfo 
+1. <A64 CommandID> 
+2. <L[2] 
+1. <A32 VehicleID> 
+2. <U2 VehicleState> 
+> 
+2 
+CommandID 
+TransferCompleteInfo 
+ResultCode 
+1. <A64 CommandID> 
+2. <L[1] 
+1. <L[2] 
+1. <L[3] 
+1. <A64 CarrierID> 
+2. <A64 SourcePort> 
+3. <A64 DestPort> 
+> 
+2. <A64 CarrierLoc> 
+> 
+> 
+3. <U2 ResultCode> 
+3 
+VehicleID 
+CarrierID 
+CarrierLoc 
+CommandID 
+1. <A32 VehicleID> 
+2. <A64 CarrierID> 
+3. <A64 CarrierLoc> 
+4. <A64 CommandID> 
+4 PortID 1. <A64 PortID> 
+5 
+VehicleID 
+CommandID 
+TransferPortList 
+CarrierIDList 
+1. <A32 VehicleID> 
+2. <A64 CommandID> 
+3. <L[1] 
+1. <A64 TransferPort> 
+> 
+4. <L[1] 
+1. <A64 CarrierID> 
+> 
+6 
+UnitID 
+AlarmID 
+AlarmText 
+1. <A64 UnitID> 
+2. <U4 AlarmID> 
+3. <A80 AlarmText> 
+7 
+VehicleID 
+VehicleStatus 
+1. <A32 VehicleID> 
+2. <U2  VehicleStatus>  
+
+=== PDF PAGE 26 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+26 
+ 
+ Confidential 
+8 
+CommandID 
+CommandType 
+CarrierID 
+SourcePort 
+DestPort 
+Priority 
+1. <A64 CommandID> 
+2. <A20 CommandType> 
+3. <A64 CarrierID> 
+4. <A64 SourcePort> 
+5. <A64 DestPort> 
+6. <U2 Priority> 
+9 
+PortID 
+CarrierType 
+WinderDirection 
+1. <A64 PortID> 
+2. <A64 CarrierType> 
+3. <U2 WinderDirection > 
+10 
+CarrierID 
+CarrierLoc 
+LotID 
+1. <A64 CarrierID> 
+2. <A64 CarrierLoc> 
+3. <L[1] 
+1. <A64 LotID > 
+> 
+11 
+PortID 
+PortInOutType 
+PortAccessMode 
+1. <A64 PortID> 
+2. <U2 PortInOutType> 
+3. <U2 PortAccessMode> 
+12 
+PortID 
+CarrierID 
+CarrierType 
+ProductEmpty 
+ProductQuantity  
+TurretCore 
+WinderDirection 
+Polarity 
+ValidationCheck 
+PalletSize 
+1. <A64 PortID> 
+2. <A64 CarrierID> 
+3. <A64 CarrierType> 
+3. <U2 ProductEmpty> 
+4. <U4 ProductQuantity> 
+5. < U2 TurretCore> 
+6. <U2 WinderDirection > 
+7. <U2 Polarity> 
+8. <U2 ValidationCheck> 
+9. <A64 PalletSize> 
+13 
+PortID 
+CrrierID 
+TurretCore 
+1. <A64 PortID> 
+2. <A64 CarrierID> 
+3. <U2 TurretCore > 
+14 
+CarrierID 
+CarrierLoc 
+IDReadStatus 
+CarrierIDDw 
+CarrierLocDw 
+IDReadStatusDw 
+1. <A64 CarrierID> 
+2. <A64 CarrierLoc> 
+3. <U2 IDReadStatus> 
+4. <A64 CarrierIDDw> 
+5. <A64 CarrierLocDw> 
+6. <U2 IDReadStatusDw> 
+15 
+VehicleID 
+CarrierLoc 
+1. <A32 VehicleID> 
+2. <A64 CarrierLoc> 
+16 
+VehicleID 
+VehicleLoc 
+1. <A32 VehicleID> 
+2. <A64 VehicleLoc> 
+17 
+PortID 
+CarrierID 
+FirstLot 
+SecondLot 
+ThirdLot 
+1. <A64 PortID> 
+2. <A64 CarrierID> 
+3. <A64 FirstLot> 
+4. <A64 SecondLot> 
+5. <A64 ThirdLot> 
+
+=== PDF PAGE 27 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+27 
+ 
+ Confidential 
+FourthLot 
+FifthLot 
+SixthLot 
+SeventhLot 
+EighthLot 
+6. <A64 FourthLot> 
+7. <A64 FifthLot> 
+8. <A64 SixthLot> 
+9. <A64 SeventhLot> 
+10. <A64 EiththLot> 
+ 
+
+=== PDF PAGE 28 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+28 
+ 
+ Confidential 
+5 Data Item Dictionary  
+5.1  SECS Data Item Dictionary  
+This chapter explains the SECS message data items used by the transport system. 
+ 
+5.1.1 SECS Data Items  
+The following chart contains the SECS message data items used by the transport system. The 
+features of the chart are as follows:  
+ NAME : The name of the data item.  
+ FORMAT : The format  of the data item value. (However, "Ux" is sent as "U2" from the host) 
+ SIZE : The size of the data item value.  
+ EXPLANATION : An explanation of the data item and/or the range of the  data. 
+ 
+5.1.2 SECS Data Items Table  
+NAME FORMAT SIZE EXPLANATION 
+ACKC5 B 1 
+■ 0 = ACK 
+■ >0 = Error, Could not ACK 
+■ 1-63 = Hold 
+ACKC6 B 1 
+■  0 = ACK  
+■ >0 = Error, Could not ACK 
+■ 1-63 = Hold 
+ACKC10 B 1 
+■ 0 = ACK 
+■ 1 = Message not displayed  
+■ 2-63 = Hold 
+ALCD B 1 
+■ bit 8 = 1 Generated alarm status  
+■ bit 8 = 0 Clear alarm status  
+■ bit 1~7 = 0 Not used 
+■ bit 1~7 = 1 Personal safety 
+■ bit 1~7 = 2 Equipment safety  
+■ bit 1~7 = 3 Parameter control warning  
+■ bit 1~7 = 4 Parameter control error  
+■ bit 1~7 = 5 Irrecoverable error 
+■ bit 1~7 = 6 Equipment status warning  
+■ bit 1~7 = 7 Attention flags 
+■ bit 1~7 = 8 Data integrity 
+■ bit 1~7 = 9 Other categories  
+ALED B 1 
+■ bit 8 = 1 Alarm enabled 
+■ bit 8 = 0 Alarm disabled 
+
+=== PDF PAGE 29 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+29 
+ 
+ Confidential 
+ALID U4 1 ■ Alarm ID 
+ALTX A Max : 80 ■ Alarm text 
+CEED BOOLEAN 1 
+■ FALSE = not valid 
+■ TRUE = valid 
+CEID U2 2 ■ Collection event ID 
+CEPACK L, U1  
+■ 0 = No error 
+■ 1 = CPNAME doesn't exist 
+■ 2 = the incorrect value is specified in CEPVAL  
+■ 3 = the incorrect format is specified in CEPVAL  
+■ 4 = the CPNAME usage isn't valid  
+CEPVAL 
+A, B, BOOLEAN, Fx, 
+lx, J, Ux 
+ ■ the command extension parameter value 
+COMMACK B 1 
+■ 0 = ACK 
+■ 1 = Denied, Try Again 
+■ 2-63 = Hold 
+CPACK B 1 
+■ 0 = No error 
+■ 1 = CPNAME doesn't exist 
+■ 2 = the incorrect value is specified in CPVAL  
+■ 3 = the incorrect format is specified in CPVAL ■ >3 = Another 
+equipment error 
+■ 4-63 = Hold 
+CPNAME A Max : 40 ■ Command parameter name  
+CPVAL 
+A, B, BOOLEAN, Fx, 
+lx, J, Ux 
+ ■ Command parameter value 
+DATAID U4 4 
+■ Data ID 
+■ Always sends DATAID = 0 
+DRACK B 1 
+■ 0 = ACK 
+■ 1 = Denied. Insufficient space  
+■ 2 = Denied. Invalid format 
+■ 3 = Denied. At least one RPTID is already defined  
+■ 4 = Denied. At least VID is already defined ■ >4 = Some other 
+error. 
+■ 5-63 = Hold 
+EAC B 1 
+■ 0 = ACK 
+■ 1 = Denied, there isn't at least one constant  
+■ 2 = Denied, Busy 
+■ 3 = Denied, At least constant is beyond the allowed range  
+■ >3 = Some other error 
+■ 4-63 = Hold 
+ECDEF 
+A, B, BOOLEAN, Fx, 
+lx, J, Ux 
+ ■ Equipment constant default value  
+ECID U2  ■ Equipment constant ID 
+ECMAX A, B, BOOLEAN, Fx,  ■ Equipment constant maximum value  
+
+=== PDF PAGE 30 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+30 
+ 
+ Confidential 
+lx, J, Ux 
+ECMIN 
+A, B, BOOLEAN, Fx, 
+lx, J, Ux 
+ ■ Equipment constant minimum value  
+ECNAME A  ■ Equipment constant name  
+ECV 
+A, B, BOOLEAN, Fx, 
+lx, J, Ux 
+ ■ Equipment constant 
+ERACK B 1 
+■ 0 = ACK 
+■ 1 = Denied. there isn't at least one CEID  
+■ >1 = Some other error 
+■ 2-63 = Hold 
+HCACK B 1 
+■ 0 = Confirmed, the command was executed  
+(The transfer system doesn't use this value, Confirmation is made 
+using the number 4 value) 
+■ 1 = Command does not exist  
+■ 2 = Currently not able to execute  
+■ 3 = At least one parameter is invalid  
+■ 4 = Confirmed, the command will be executed and completion 
+will be notified by an event 
+■ 5 = Rejected, Already requested  
+■ 6 = Object doesn't exist 
+■ 7-63 = Hold 
+LRACK B 1 
+■ 0 = ACK 
+■ 1 = Denied. Insufficient space  
+■ 2 = Denied. Invalid format 
+■ 3 = Denied. At least one CEID link is already defined  
+■ 4 = Denied. there isn't at least one CEID  
+■ 5 = Denied. there isn't at least one RPTID  
+■ >5 = Some other error 
+■ 6-63 = Hold 
+MDLN A Max : 6 ■ Equipment format 
+MEXP A  ■ SxxFyy 
+MHEAD B  Message header of the message that is in error 
+OBJSPEC A  
+■ The text string used to indicate the specified object instance  
+■ The emulator always sends OJSPEC = NULL  
+OFLACK B  
+■ 0 = Offline Confirmed 
+■ 1-63 = Hold 
+ONLACK B  
+■ 0 = ON_LINE REMOTE Confirmed  
+■ 1 = ON_LINE REMOTE Not Allowed 
+■ 2 = Equipment Already ON_LINE REMOTE  
+■ 3-63 = Hold 
+RCMD A  
+■ Remote command or command sequence  
+'PAUSE', 'RESUME', 'CANCEL', 'ABORT', 
+'TRANSFER_CST_SIZE' 
+
+=== PDF PAGE 31 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+31 
+ 
+ Confidential 
+RPTID U2 2 ■ Report ID 
+SHEAD B 1 ■ Message headers related to the transaction time r 
+SOFTREV A Max : 6 ■ Software revision code 
+SV 
+A, B, BOOLEAN, Fx, 
+lx, J, Ux 
+ ■ Status variable data 
+SVID U2 2 ■ Status variable ID 
+SVNAME A  ■ Status variable name 
+TEXT A  ■ One line of text 
+TIACK B 1 
+Time confirmation code 
+■ 0 = OK 
+■ 1 = Error, Not OK  
+■ 2-63 = Hold 
+TID B 1 
+■ 0 = Single or main terminal  
+■ >0 = Additional terminal of the same equipment  
+TIME A 16 ■ YYYYMMDDhhmmsscc 
+UNITS A  ■ Those allowed by section 9 of SEMI E5  
+V 
+A, B, BOOLEAN, Fx, 
+lx, J, Ux 
+ ■ Variable data 
+VID U2 2 ■ Variable ID 
+ 
+5.2  Variable Data Items Dictionary  
+This section explains the transport system variables and VIDs. Values of these variables will be 
+available to the host via collection event reports and host status queries.  
+ Equipment Constants (ECV): The value can be changed by the host using S2F15. The operator  
+may have the ability to change some or all of the values. The value of an equipment constant  
+may be queried at any time by the host using the S2F13/14 transaction or Stream 6 reports.  
+ Status Variables (SV): The values are valid at all times. A SV may not be changed by the host or 
+operator, but may be changed by the equipment. A host or operator command may change an 
+equipment status thus changing a SV. The value of status variables may be queried by the host at 
+any time using the S1F3/4 or Stream 6 reports.  
+ Data Variables (DVVAL): These are variables which are valid upon the occurrence of a specific  
+collection event, and may or may not be valid at other times depending upon the equipment.  
+An attempt to read a variable data item when it's invalid will not result in an error, but the data 
+reported may not have relevant meaning.  
+Variable Data (V): This is a class of variable data which includes all the previously defined types of 
+variables. 
+ 
+
+=== PDF PAGE 32 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+32 
+ 
+ Confidential 
+5.3 Variable Data Items  
+The features of the chart are as follows:  
+ VID : ID of the variable  
+ VARIABLE NAME : A unique name for the variable data item.  
+  CLASS : The data type of the item.  
+FORMAT : <SECS Message Language (SML) mnemonic>acceptable formats are SEMI E5 lists, 
+ASCII, floating point, unsigned integer or signed integer. A description of .ANY., indicates that only 
+the above formats are acceptable and is left to the supplier to decide.  
+EXPLANATION : Any additional information pertinent to the variable name. 
+ 
+5.4 Variable Data Items Table 
+VID VARIABLE NAME CLASS FORMAT DESCRIPTION COMMENTS 
+1 AlarmID DVVAL U4 Alarm ID  
+2 AlarmIDi SV U4   
+3 UnitAlarmStatList SV 
+L,n 
+   L,3 
+      1. <UnitIDi>  
+   2. <AlarmIDi> 
+      3. <AlarmTexti> 
+  
+4 AlarmText DVVAL A[1-80] Alarm Text  
+5 AlarmTexti SV A[1-80] Alarm Text  
+6 CarrierID DVVAL A[1-64] 
+ID of the carrier 
+being moved. 
+CarrierID must be 
+unique for each 
+carrier within the 
+TSC. 
+ 
+7 CarrierIDi SV A[1-64] ID of the ith carrier.  
+8 CarrierIDList DVVAL 
+L,n 
+1.<CarrierID1> 
+. 
+. 
+n.<CarrierIDn> 
+The IDs of the 
+Carriers being 
+moved. 
+ 
+9 CarrierLoc DVVAL A[1-64] 
+Unique location of 
+the carrier within 
+ITS as reported by 
+the TSC. 
+ 
+10 CarrierLoci SV A[1-64] 
+Unique location of 
+the ith  carrier 
+ 
+
+=== PDF PAGE 33 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+33 
+ 
+ Confidential 
+within ITS as 
+reported by the 
+TSC. 
+11 CommandID DVVAL A[1-64] 
+Remote Command 
+ID Command ID 
+generated by TSC. 
+ 
+12 CommandIDi DVVAL A[1-64] 
+The ith Remote 
+Command ID The 
+ith Command ID 
+generated by TSC. 
+ 
+13 CommandInfo DVVAL 
+L,2 
+1. <CommandID> 
+2. <Priority> 
+Command 
+information 
+associated with a 
+particular transfer 
+command. 
+ 
+14 CommandInfoi SV 
+L,2 
+1. <CommandIDi> 
+2. <Priorityi> 
+Command 
+information 
+associated with 
+the ith transfer 
+command. 
+ 
+15 CommandName DVVAL A[1-20] 
+Host command 
+issued to 
+controller. 
+ 
+16 CommandType DVVAL A[1-20] 
+The type of 
+Command being 
+initiated. 
+Valid Values are 
+“TRANSFER’, 
+‘CANCEL’, ‘ABORT’ 
+17 ControlState SV U2 Control State 
+1=offline/equipment 
+offline 
+2=offline/going to offline 
+3=offline/host offline 
+5=online/remote 
+19 DestPort DVVAL A[1-64] 
+Destination port 
+unique identifier. 
+ 
+20 DestPorti SV A[1-64] 
+The ith Destination 
+port unique 
+identifier. 
+ 
+21 EnhancedCarriers SV 
+L,n 
+1. 
+<EnhancedCarrierInfoi1> 
+. 
+. 
+n. 
+<EnhancedCarrierInfoin> 
+List Current status 
+of all carrier 
+information in the 
+TSC database. 
+This includes all 
+carriers for which 
+there are Transfer 
+commands. 
+ 
+
+=== PDF PAGE 34 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+34 
+ 
+ Confidential 
+22 
+EnhancedCarrierInfo
+i 
+SV 
+L,4 
+1. <CarrierIDi> 
+2. <VehicleIDi> 
+3. <CarrierLoci> 
+4. <InstallTimei> 
+All database 
+information 
+associated with a 
+particular carrier. 
+ 
+23 EnhancedTransfers SV 
+L,n 
+1. 
+<EnhancedTransferCommandi
+1> 
+. 
+. 
+n.<EnhancedTransferCom
+mandin> 
+List current status 
+of ALL transfer 
+commands 
+ 
+24 
+EnhancedTransferc
+ommandi 
+SV 
+L,3 
+1. <CommandInfoi> 
+2. <TransferStatei> 
+3. L,n 
+1. <TransferInfo1> 
+. 
+n. <TransferInfon> 
+Information 
+associated with a 
+particular Transfer 
+command. 
+ 
+25 EnhancedVehicles SV 
+L,n 
+1. <EnhancedVehicleInfoi> 
+. 
+. 
+n.<EnhancedVehicleInfoin
+> 
+List current status 
+of all 
+vehicles available 
+or being 
+used for 
+TRANSFER 
+commands. 
+ 
+26 
+EnhancedVehicleInf
+oi 
+SV 
+L,3 
+1. <VehicleID> 
+2. <VehicleState> 
+3. <VehicleStatus> 
+Information 
+associated with a 
+particular vehicle. 
+ 
+27 InstallTimei SV TIME (A16) 
+Time the carrier 
+was created 
+in the TSC 
+database. 
+yyyymmddhhmmsscc 
+28 PortID DVVAL A[1–64] ID of the port.  
+29 PortIDi SV A[1–64] ID of the port.  
+32 Priority DVVAL U2 
+Remote command 
+priority. 
+0 is not valid 
+1 is the LOWEST 
+priority, 
+99 is the highest priority 
+33 Priorityi SV U2 
+The ith Remote 
+command priority. 
+0 is not valid 
+1 is the LOWEST 
+priority, 
+
+=== PDF PAGE 35 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+35 
+ 
+ Confidential 
+99 is the highest priority 
+34 ResultCode DVVAL 
+U2 
+ 
+Successful = 0 
+Unsuccessful ≠ 0 
+ResultCodes that must be 
+implemented are: 
+Canceled 
+Aborted 
+Result Code of a 
+transport 
+system command. 
+Associated with 
+the command 
+completion event. 
+0 : OK 
+5 : Source Interlock 
+Error 
+6 : Dest Interlock Error 
+7 : CarrierMisMatch 
+8 : ValidationCheckNG 
+35 SourcePort DVVAL A[1–64] 
+Source port 
+unique identifier. 
+ 
+36 SourcePorti SV A[1–64] 
+The ith Source port 
+unique identifier. 
+ 
+37 SpecVersion SV A[0–20] 
+Version of SEMI 
+E82 to which the 
+equipment is 
+compliant. 
+ 
+38 TransferCommand DVVAL 
+L,n 
+1. <CommandInfo> 
+2. <TransferInfo1> 
+. 
+.. 
+n. <TransferInfom> 
+Information 
+associated with a 
+particular 
+TRANSFER 
+command. 
+ 
+39 TransferCommandi SV 
+L,2 
+1. <CommandInfoi> 
+2. L, m 
+1. <TransferInfo1> 
+. 
+.. 
+m. <TransferInfom> 
+Information 
+associated with 
+the ith TRANSFER 
+command. 
+ 
+40 
+TransferCompleteInf
+o 
+DVVAL 
+L,1 
+1.<L,2 
+1. <TransferInfo1> 
+2. <CarrierLoc1 
+#1> 
+: 
+: 
+n.<L,2> 
+1. <TransferInfon> 
+2. <CarrierLocn 
+#1> 
+Carrier information 
+associated with a 
+transfer. 
+ 
+41 TransferInfo DVVAL 
+L,3 
+1. <CarrierID> 
+2. <SourcePort> 
+3. <DestPort> 
+Carrier information 
+associated with a 
+particular transfer 
+command. 
+ 
+
+=== PDF PAGE 36 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+36 
+ 
+ Confidential 
+42 TransferInfoi SV 
+L,3 
+1. <CarrierIDi> 
+2. <SourcePorti> 
+3. <DestPorti> 
+Carrier information 
+associated with 
+the ith transfer 
+command. 
+ 
+43 TransferPort DVVAL A[1–64] 
+Transfer Port 
+unique identifier. 
+ 
+44 TransferPortList DVVAL 
+L,n 
+1. <TransferPort1> 
+2. <TransferPort2> 
+. 
+. 
+. 
+n. <TransferPortn> 
+Transfer Port 
+information 
+associated with a 
+particular vehicle 
+arrival or 
+departure event. 
+ 
+45 TransferStatei SV U2 
+State of Transfer 
+Command. 
+1. Queued 
+2. Transferring 
+3. Paused 
+4. Canceling 
+5. Aborting 
+6. Waiting 
+46 TSCState SV U2 
+TSC State 
+(SYSTEM). 
+1 = TSC Init 
+2 = Paused 
+3 = Auto 
+4 = Pausing 
+47 UnitID DVVAL A[1–64] 
+The Id of the 
+‘transport unit’. 
+ 
+48 UnitIDi SV A[1–64] 
+The Id of the 
+‘transport unit’. 
+ 
+49 VehicleID DVVAL A[1–32] 
+Unique 
+identification of a 
+vehicle associated 
+with an event. 
+ 
+50 VehicleIDi SV A[1–32] 
+Unique 
+identification of the 
+ith vehicle. 
+ 
+51 VehicleInfo DVVAL 
+L,2 
+1. <VehicleID> 
+2. <VehicleState> 
+Information 
+associated with a 
+particular vehicle. 
+ 
+52 VehicleState DVVAL U2 
+The state of the 
+vehicle. 
+1 = Removed 
+2 = Not Assigned 
+3 = Enroute 
+4 = Parked 
+5 = Acquiring 
+6 = Depositing 
+53 VehicleStatei SV U2 
+The state of the ith 
+vehicle. 
+ 
+
+=== PDF PAGE 37 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+37 
+ 
+ Confidential 
+54 VehicleStatus DVVAL U2 
+The status of the 
+vehicle 
+1 = Idle 
+2 = Down 
+55 VehicleStatusi SV U2 
+The status of the 
+ith vehicle. 
+ 
+56 PortTransferState SV U2 
+Port Transfer 
+State. 
+1 = TransferBlocked 
+2 = ReadyToLoad 
+3 = ReadyToUnLoad 
+57 EnhancedPortInfo SV 
+L,5 
+   1. <PortIDi> 
+   2. <PortTransferState> 
+3. <PortState> 
+   4. <CarrierID> 
+   5. <ProductEmpty> 
+  
+58 EnhancedPorts SV 
+L,n 
+    1. <EnhancedPortInfo 1> 
+    … 
+    2. <EnhancedPortInfo n> 
+> 
+  
+59 CarrierState DVVAL A[1-64] 
+Carrier Full / 
+Empty 
+State 
+FULL 
+EMPTY 
+60 LotID DVVAL A[1-64] LotID  
+61 PortInOutType DVVAL U2  
+0 = Unknown(for BP,OP) 
+1 = Input 
+2 = Output 
+3 = Both 
+62 PortAccessMode DVVAL U2  
+1 = AUTO 
+2 = MANUAL 
+63 ProductEmpty DVVAL U2  
+1 = FULL 
+2 = EMPTY 
+64 PortState SV U2 Port State. 
+1 = OutOfSerivce 
+2 = InService 
+65 CarrierType DVVAL A[1-64] 
+Carrier Type  
+Ex) Plate, Tray…. 
+ 
+66 ProductQuantity DVVAL U4 Length / Floor  
+67 TurretCore DVVAL U2 
+Turret Core Info 
+A.B 
+0 = None 
+1= A 
+2 = B 
+68 WinderDirection DVVAL U2 UP / DOWN 
+0 = None 
+1 = Up 
+2 = Down 
+69 ValidationCheck DVVAL U2 OK / NG(Reason) 
+0 = OK 
+99 = Powder STK return 
+Etc = Error 
+
+=== PDF PAGE 38 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+38 
+ 
+ Confidential 
+70 IDReadStatus DVVAL U2 
+Result Code of an 
+ID read event 
+0 = Success  
+1 = Failure  
+2 = Duplicate  
+3 = Mismatch  
+71 CarrierLotInfo DVVAL 
+L,2 
+   1. <CarrierLoc> 
+   2. <CarrierID> 
+  
+72 CarrierLotInfoList DVVAL 
+L,n 
+   1. < CarrierLotInfo 1> 
+    … 
+    n. < CarrierLotInfo n> 
+ 
+  
+73 Polarity DVVAL U2  
+0 = none 
+1 = Anode 
+2= Cathode 
+74 WinderChangeFlag DVVAL U2  
+0 = None 
+1 = True 
+2 = False 
+75 VehicleLoc DVVAL A[1-64] Vehicle Location  
+76 CarrierIDUp DVVAL A[1-64] Vehicle ID read  
+77 CarrierLocUp DVVAL A[1-64] Vehicle ID read  
+78 CarrierIDDw DVVAL A[1-64] Vehicle ID read  
+79 CarrierLocDw DVVAL A[1-64] Vehicle ID read  
+80 IDReadStatusUp DVVAL U2 
+Result Code of an 
+ID read event 
+0 = Success  
+1 = Failure  
+2 = Duplicate  
+3 = Mismatch  
+81 IDReadStatusDw DVVAL U2 
+Result Code of an 
+ID read event 
+0 = Success  
+1 = Failure  
+2 = Duplicate  
+3 = Mismatch  
+82 MagazineType DVVAL A[1-64] Magazine Type  
+83 MagazineModel DVVAL A[1-64] Magazine Model  
+84 FirstLot DVVAL A[1-64] First Lot ID  
+85 SecondLot DVVAL A[1-64] Second Lot ID  
+86 ThirdLot DVVAL A[1-64] Third Lot ID  
+87 FourthLot DVVAL A[1-64] Fourth Lot ID  
+88 FifthLot DVVAL A[1-64] Fifth Lot ID  
+89 SixthLot DVVAL A[1-64] Sixth Lot ID  
+90 SeventhLot DVVAL A[1-64] Seventh Lot ID  
+91 EighthLot DVVAL A[1-64] Eighth Lot ID  
+
+=== PDF PAGE 39 ===
+ 
+MCS Basic Specification (IB-SEM) 
+ 
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+  
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+39 
+ 
+ Confidential 
+92 PalletSize DVVAL A[1-64] PalletSize[A, B]  
+ 

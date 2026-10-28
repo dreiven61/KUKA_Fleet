@@ -1,0 +1,43 @@
+spring:
+  profiles:
+    include:
+      - robot
+      - rob-actuator
+      - custom
+  application:
+    name: robot-control-application
+server:
+  port: 8866
+  servlet:
+    encoding:
+      force: true
+      charset: UTF-8
+logging:
+  config: classpath:log4j2.xml
+springfox:
+  documentation:
+    enabled: true
+grpc:
+  server:
+    port: 6999
+    health-service-enabled: true
+    reflection-service-enabled: true
+  client:
+    bd:
+      # 用于bd断开时异常抛出的服务名称
+      name: Basic data service
+      address: static://${BASIC_DATA_HOST:localhost}:${BASIC_DATA_PORT:7999}
+      negotiation-type: plaintext
+      max-inbound-message-size: 2147483647
+      # bd断开后重连间隔
+      resubscribe-interval: 5000
+    kmr_rm:
+      name: Kmr RobotManager service
+      address: static://${KMR_RM_HOST:localhost}:${KMR_RM_PORT:50090}
+      negotiation-type: plaintext
+      max-inbound-message-size: 2147483647
+      resubscribe-interval: 5000
+  request:
+    monitor:
+      enable: true
+      log-request: true

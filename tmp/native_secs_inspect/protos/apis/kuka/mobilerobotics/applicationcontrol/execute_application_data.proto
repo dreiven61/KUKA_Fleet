@@ -1,0 +1,31 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.applicationcontrol;
+
+import "kuka/mobilerobotics/applicationcontrol/application_control_parameters.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.ApplicationControlData";
+option java_multiple_files = true;
+option java_outer_classname = "ExecuteApplicationDataProto";
+option java_package = "com.kuka.mobilerobotics.applicationcontrol";
+
+// Data type for describing the state of application parameters
+message ExecuteApplicationData
+{
+  // UUID of the action that is being executed. Empty if there is no action executor action.
+  string action_uuid = 1;
+
+  // Name of the program to be executed.
+  // Empty if there is no action executor action (such as manually ran application).
+  string requested_program_name = 2;
+
+  // Values set by the application
+  ApplicationControlParameters data = 3;
+}

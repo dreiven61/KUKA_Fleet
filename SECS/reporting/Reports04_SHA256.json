@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "C:\\work\\KUKA\\VirtualMCS\\KukaVirtualMCS-1.2.0-win-x64.zip",
+    "Hash": "56F353EABE6438CB239166C1BD5765BAE73059C69E07F8D5BD069B6CFCF62DB1"
+  },
+  {
+    "Path": "C:\\work\\KUKA\\SECS\\reporting\\ecs_candidate\\SecsTransferReports04_IMPORT_CANDIDATE.json",
+    "Hash": "EFF3E0EACA52C9916517970D410713924D9E7C11755EAB750B5D28CD9008B5CD"
+  },
+  {
+    "Path": "C:\\work\\KUKA\\SECS\\reporting\\ecs_candidate\\SecsTransferReports04_Ready_LOCAL_WITH_TOKEN.json",
+    "Hash": "736F5A1132A8E414A50ABEB5F61500E9B7D2C2E66E4C97DC23407E1F79C53ADC"
+  }
+]

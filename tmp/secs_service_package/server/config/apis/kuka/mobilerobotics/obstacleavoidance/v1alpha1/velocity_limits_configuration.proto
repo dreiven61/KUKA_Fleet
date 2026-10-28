@@ -1,0 +1,42 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.obstacleavoidance.v1alpha1;
+
+import "kuka/core/geometry/v1/vector_2d.proto";
+import "kuka/core/geometry/v1/velocity_2d.proto";
+
+option java_package = "com.kuka.mobilerobotics.obstacleavoidance.v1alpha1";
+option java_outer_classname = "VelocityLimitsConfigurationProto";
+option java_multiple_files = true;
+
+// - the `distance_x` and `distance_y` values specify the maximum distance in meters **from the platform center** at which the velocity limit is in effect
+// - the `max-velocity` value specifies the velocity values valid for the given distance.
+//   - they are in meters and hava a x-direction (forwards or backwards in platform terms),
+//     a y-direction (sideways) and an angle (rotation)
+// - the distances are calculated from the center of the platform, not from the outer hull.
+// - they always apply symmetrically
+//   -  i.e. to the front and back and to the left and right side of the platform
+message VelocityDistanceLimit
+{
+  double distance_x = 1;
+  double distance_y = 2;
+  kuka.core.geometry.v1.Velocity2D velocity = 3;
+}
+
+// this message contains a list of entries where each one represents velocity limits for a certain distance
+//- when sorted from nearest to farthest, both distance values have to be at least as high as the previous one.
+//  - i.e. the next "field" has to encompass the previous "field" completely
+//- the velocity limits for a "field" closer to the platform have to be lower or at most as high as the next, more distant, field
+//- users can specify as few or as many limits as they want
+
+message VelocityLimitsConfiguration
+{
+  repeated VelocityDistanceLimit limits = 1;
+}

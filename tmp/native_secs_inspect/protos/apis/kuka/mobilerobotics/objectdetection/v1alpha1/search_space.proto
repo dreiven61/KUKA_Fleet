@@ -1,0 +1,94 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.objectdetection.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+
+option java_package = "com.kuka.mobilerobotics.objectdetection.v1alpha1";
+option java_outer_classname = "SearchSpaceProto";
+option java_multiple_files = true;
+
+
+// Defines the search space for an object detection command. 
+//
+// The search space specifies the region in which to search for an object, 
+// whereby the object's pose is defined as the origin of the reference frame
+// in which its shape has been defined. All values are optional, e.g. it is 
+// possible to just define a max_x value without specifying a min_x value 
+// (this would correspond to defining a half-plane as the search space).
+// 
+// Specifying a search space has two benefits: first, it speeds up the 
+// object detection command, and second, it helps to unwanted detections 
+// when the approximate region where the object is located is already known
+// in advance.
+message SearchSpace {
+
+  // The region (anywhere, front, back, left, right, inside) in which the
+  // object is expected.
+  RegionType search_space_region = 1;
+	
+  // The minimal contour distance between the robot and the object. The contour 
+  // distance corresponds to the minimal distance of any point on the 
+  // robot's shape to any point on the object's shape for a given object 
+  // pose relative to the robot.
+  // Optional.
+  google.protobuf.DoubleValue search_space_min_contour_dist = 2;
+	
+  // The maximal contour distance between the robot and the object. The contour 
+  // distance corresponds to the minimal distance of any point on the 
+  // robot's shape to any point on the object's shape for a given object 
+  // pose relative to the robot.
+  // Optional.
+  google.protobuf.DoubleValue search_space_max_contour_dist = 3;
+	
+  // The minimal X coordinate of the object pose.
+  // Optional.
+  google.protobuf.DoubleValue search_space_min_x = 4;
+	
+  // The maximal X coordinate of the object pose.
+  // Optional.
+  google.protobuf.DoubleValue search_space_max_x = 5;
+	
+  // The minimal Y coordinate of the object pose.
+  // Optional.
+  google.protobuf.DoubleValue search_space_min_y = 6;
+	
+  // The maximal Y coordinate of the object pose.
+  // Optional.
+  google.protobuf.DoubleValue search_space_max_y = 7;
+	
+  // The start angle and end angle define the allowed interval for
+  // the object's pose theta value (its orientation). The interval 
+  // starts at the start angle in mathematical positive direction up
+  // to the end angle. The start and end angle must be either defined
+  // both or not at all.
+  // Optional.
+  google.protobuf.DoubleValue start_angle = 8;
+	
+  // The start angle and end angle define the allowed interval for
+  // the object's pose theta value (its orientation). The interval 
+  // starts at the start angle in mathematical positive direction up
+  // to the end angle. The start and end angle must be either defined
+  // both or not at all.
+  // Optional.
+  google.protobuf.DoubleValue end_angle = 9;
+
+  // The search space region type.
+  enum RegionType
+	{
+    UNSPECIFIED = 0;
+    ANYWHERE = 1;
+    FRONT = 2;
+    BACK = 3;
+    LEFT = 4;
+    RIGHT = 5;
+    INSIDE = 6;
+  }
+}

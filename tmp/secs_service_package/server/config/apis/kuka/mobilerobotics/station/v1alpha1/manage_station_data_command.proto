@@ -1,0 +1,27 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.station.v1alpha1;
+
+import "kuka/database/v1alpha1/manage_data_command_type.proto";
+import "kuka/mobilerobotics/station/v1alpha1/station.proto";
+
+option java_package = "com.kuka.mobilerobotics.station.v1alpha1";
+option java_outer_classname = "ManageStationDataCommandProto";
+option java_multiple_files = true;
+
+// Manages a Station data element in the Station service. Provides a way to import, update and delete a Station.
+message ManageStationDataCommand
+{
+  // Type field. Please see the enum "ManageDataCommandType" description.
+  kuka.database.v1alpha1.ManageDataCommandType type = 1;
+  // The new Station's data.
+  // Please refer to the "ManageDataCommandType" enum description for details about how the Station data is used.
+  Station data = 2;
+}

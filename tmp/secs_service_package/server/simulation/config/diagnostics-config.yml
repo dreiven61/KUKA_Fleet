@@ -1,0 +1,127 @@
+# This file contains the configuration for the diagnostics service
+
+# defaultPackageDestinationDirectory: the default final destination where the newly created diagnostics package will be placed, used when not defined by the CreateDiagnosticsPackageCommand
+# The newly created diagnostics package will also be placed into this directory when the CreateDiagnosticsPackageCommand defines a remote final destination, e.g. by a rsync:// URI
+defaultPackageDestinationDirectory: "/output/"
+
+# packageLifespan_days: the minimum age (in days) a file in the defaultPackageDestinationDirectory will survive before it might get removed automatically, sub-directories are not cleaned up
+# Set to 0 to disable automatic cleanup of the defaultPackageDestinationDirectory
+# packageLifespan_days: 3
+
+# packageConstructionTempDirectory: defines the temporary directory where the all the files to be included in the diagnostics package are copied to. 
+# If not set, the systems temporary folder will be used.
+# This is just the root temporary directory, each diagnostics package creation will have its own sub-directory.
+# packageConstructionTempDirectory: "/tmp/diagnosticsBuild/"
+
+
+# contains the UUID of the host that runs this diagnostics service. Used to avoid requesting a diagnostics package from ourself.
+# If not set in the config, the value is either read from an evnironment variable or read in from the *robot-controller-config.yml*.
+# hostUuid: String
+
+# the connection target string to reach the rsync daemon of this service.
+# Will be overwritten by the INCOMING_RSYNC_TARGET environment variable, if existing.
+# Used as authority part of the package destination parameter for all CreateDiagnosticsPackageCommands that will be sent to other resources,
+# so that those diagnostics packages will be sent to this service and can be included in our diagnostics package.
+# incomingRsyncTarget: String
+
+
+# maximum time to wait for all remote CreateDiagnosticsPackageCommands to finish.
+# requestDiagActionMaxWaitTime_s: 3 * 60
+
+# time interval to report the state and to notify that this action is still alive during the requestDiagActionMaxWaitTime_s.
+# requestDiagActionSendStateInterval_s: 10
+
+# if the amount of reconnections would exceed this value, then the connection will be closed and finalized.
+# requestDiagActionMaxReconnectionRetries: 3
+
+# the wait time before a reconnection is attempted.
+# requestDiagActionOnReconnectionSleep_ms: 500
+
+
+# Sources configuration, each entry of sources must contain:
+#  name: name of the entry, should be unique, it's used to reference the include configuration given by the CreateDiagnosticsPackageCommand
+#  srcPath: the source (path / URI) of the data to include
+#  dstPath: the resulting file / folder inside the diagnostics package
+#  defaultIncluded: whether this entry is included when not defined by the CreateDiagnosticsPackageCommand
+#
+#  the following case insensitive URI schemes are supported for srcPath:
+#    - file://
+#        denotes a file path that will be included in the diagnostics package, either a single file or a whole directory.
+#        The files are copied at execution time, thererfore, by default, all file entries of this config file are executed after all other entries.
+#        e.g. file:///logs <=> /logs
+#
+#    - postgre:// 
+#    - postgreSQL:// 
+#    - db:// 
+#        are all equally treated and will create a database dump file using pg_dump
+#        the syntax is:
+#           db://[username:password@host:port]/[DatabaseName][?Query]
+#        When DatabaseName is the asterisk '*' or omitted, all databases will be dumped using pg_dumpall.
+#        The default postgreSQL port 5432 is used when the URI does not contain a port.
+#        The Query, can be used to pass custom parameter to pg_dump(all); each query part, delimited by '&', is passed as a separate parameter.
+#
+#        The dstPath will be treated as file to dump into, if it denotes an empty or blank file name, a best effort will be made to choose a proper name, e.g. the database or host name, appended by '.dump'.
+#        An existing file will not be overwritten!
+#        e.g. 
+#          srcPath: "db://kuka:kuka@graphdb/GraphDatabase"
+#          dstPath: "databases/"
+#            Will place the dump of the GraphDatabase from the db server graphdb into the file databases/GraphDatabase.dump
+#
+#          srcPath: "db://kuka:kuka@graphdb/"
+#          dstPath: "databases/"
+#            Will place the dump of all databases from the db server graphdb into the file databases/graphdb.dump
+#
+#    - exec:
+#    - execOrFail:
+#        will execute the given command
+#        e.g. srcPath: "exec:bash -c \"ls -l >ls.txt\""
+#        or   srcPath: exec:bash -c "ls -l >ls.txt"
+#        The dstPath will be treated as working directory (relative to the temporary directory) of the command.
+#        In contrast to exec, execOrFail will stop and fail the whole CreateDiagnosticsPackageCommand when the command execution failed (result code != 0)
+#
+#    - diag:
+#        needs the connection target to the robot manager and will request and include a diagnostics package from all known robots
+#        An optional query may contain default command parameters (delimited by '&'), but they might be overridden by the actual incomming command (esp. the time_filter_seconds).
+#        e.g. srcPath: "diag://robotmanager:50090/?options='diag://*':false,'databases/':false&time_filter_seconds=86400"
+#           will connect to the robot manager at the address 'robotmanager:50090' and will add the entries 'diag://*':false and 'databases/':false to the CreateDiagnosticsPackageCommands' options parameter,
+#           which will actually disable each configuration where name, srcPath or dstPath starts with diag:// or equals databases/.
+#           Additionally, the time_filter_seconds parameter will be set with value 86400.
+#        The dstPath will be treated as directory, where the requested diag packages will be placed.
+#        For simplification, the names robotmanager and localhost will be resolved to the host running this diagnostics service, so that the diagnostics service can connect to the robotmanager service.
+#
+
+sources:
+- name: "log files"
+  srcPath: "/logs"
+  dstPath: "logs"
+  defaultIncluded: true
+
+- name: "operation data"
+  srcPath: "/operationdata"
+  dstPath: "operation-data"
+  defaultIncluded: true
+
+- name: "persistent data"
+  srcPath: "/persistence"
+  dstPath: "persistent-data"
+  defaultIncluded: true
+
+- name: "docker/containers"
+  srcPath: "exec:/bin/bash -c \"curl 'http://dockerproxy:2375/containers/json?all=true&size=true' > containers.json 2> containers-stderr.log\""
+  dstPath: "docker/"
+  defaultIncluded: true
+
+- name: "docker/info"
+  srcPath: "exec:/bin/bash -c \"curl 'http://dockerproxy:2375/info' > info.json 2> info-stderr.log\""
+  dstPath: "docker/"
+  defaultIncluded: true
+
+- name: "docker/system/df"
+  srcPath: "exec:/bin/bash -c \"curl 'http://dockerproxy:2375/system/df' > system-df.json 2> system-df-stderr.log\""
+  dstPath: "docker/"
+  defaultIncluded: true
+
+- name: "docker/version"
+  srcPath: "exec:/bin/bash -c \"curl 'http://dockerproxy:2375/version' > version.json 2> version-stderr.log\""
+  dstPath: "docker/"
+  defaultIncluded: true

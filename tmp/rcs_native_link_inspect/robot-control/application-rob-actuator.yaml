@@ -1,0 +1,23 @@
+# Usage:
+# http://{ip}:8868/rob-actuator/threaddump
+# http://{ip}:8868/rob-actuator/mappings
+#
+management:
+  server:
+    port: 8868
+  endpoints:
+    web:
+      base-path: /rob-actuator
+      exposure:
+        include:
+          - threaddump
+          - mappings
+          - metrics
+          - info
+          - health
+          - beans
+          - caches
+          - flyway
+          - scheduledtasks
+          - heapdump
+          - prometheus

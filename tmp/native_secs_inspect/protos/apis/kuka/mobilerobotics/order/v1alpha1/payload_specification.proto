@@ -1,0 +1,30 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.order.v1alpha1;
+import "kuka/mobilerobotics/order/v1alpha1/location_specification.proto";
+
+import "google/protobuf/wrappers.proto";
+
+option java_package = "com.kuka.mobilerobotics.order.v1alpha1";
+option java_outer_classname = "PayloadSpecificationProto";
+option java_multiple_files = true;
+
+// A message that identifies a payload.
+message PayloadSpecification
+{
+  oneof payload {
+    // The uuid of the payload.
+    google.protobuf.StringValue payload_uuid = 1;
+
+    // Specifies where the payload currently is.
+    // If the location has more than one compartment, it must be defined.
+    LocationSpecification location = 2;
+  }
+}

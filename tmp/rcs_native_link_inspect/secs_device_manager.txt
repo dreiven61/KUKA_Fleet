@@ -1,0 +1,161 @@
+Compiled from "SecsDeviceManager.java"
+public class org.thingsboard.server.common.transport.SecsDeviceManager implements org.thingsboard.server.common.transport.DeviceTransportManager {
+  private static final org.slf4j.Logger log;
+
+  private final java.util.concurrent.ConcurrentMap<java.util.UUID, com.kuka.ecs.common.transport.secs.client.SecsClient> clients;
+
+  private org.springframework.context.ApplicationEventPublisher applicationEventPublisher;
+
+  private org.thingsboard.server.cluster.TbClusterService clusterService;
+
+  private org.thingsboard.server.dao.device.DeviceExceptionWarningService deviceExceptionWarningService;
+
+  public org.thingsboard.server.common.transport.SecsDeviceManager();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: new           #2                  // class java/util/concurrent/ConcurrentHashMap
+       8: dup
+       9: invokespecial #3                  // Method java/util/concurrent/ConcurrentHashMap."<init>":()V
+      12: putfield      #4                  // Field clients:Ljava/util/concurrent/ConcurrentMap;
+      15: return
+
+  public boolean connect(org.thingsboard.server.common.data.Device);
+    Code:
+       0: aload_0
+       1: getfield      #4                  // Field clients:Ljava/util/concurrent/ConcurrentMap;
+       4: aload_1
+       5: invokevirtual #5                  // Method org/thingsboard/server/common/data/Device.getUuidId:()Ljava/util/UUID;
+       8: new           #6                  // class com/kuka/ecs/common/transport/secs/client/SecsClient
+      11: dup
+      12: aload_1
+      13: aload_0
+      14: getfield      #7                  // Field applicationEventPublisher:Lorg/springframework/context/ApplicationEventPublisher;
+      17: aload_0
+      18: getfield      #8                  // Field clusterService:Lorg/thingsboard/server/cluster/TbClusterService;
+      21: aload_0
+      22: getfield      #9                  // Field deviceExceptionWarningService:Lorg/thingsboard/server/dao/device/DeviceExceptionWarningService;
+      25: invokespecial #10                 // Method com/kuka/ecs/common/transport/secs/client/SecsClient."<init>":(Lorg/thingsboard/server/common/data/Device;Lorg/springframework/context/ApplicationEventPublisher;Lorg/thingsboard/server/cluster/TbClusterService;Lorg/thingsboard/server/dao/device/DeviceExceptionWarningService;)V
+      28: invokeinterface #11,  3           // InterfaceMethod java/util/concurrent/ConcurrentMap.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      33: checkcast     #6                  // class com/kuka/ecs/common/transport/secs/client/SecsClient
+      36: astore_2
+      37: aload_2
+      38: invokevirtual #12                 // Method com/kuka/ecs/common/transport/secs/client/SecsClient.tryConnect:()V
+      41: aload_0
+      42: getfield      #4                  // Field clients:Ljava/util/concurrent/ConcurrentMap;
+      45: aload_1
+      46: invokevirtual #5                  // Method org/thingsboard/server/common/data/Device.getUuidId:()Ljava/util/UUID;
+      49: invokeinterface #13,  2           // InterfaceMethod java/util/concurrent/ConcurrentMap.containsKey:(Ljava/lang/Object;)Z
+      54: ifne          72
+      57: aload_0
+      58: getfield      #4                  // Field clients:Ljava/util/concurrent/ConcurrentMap;
+      61: aload_1
+      62: invokevirtual #5                  // Method org/thingsboard/server/common/data/Device.getUuidId:()Ljava/util/UUID;
+      65: aload_2
+      66: invokeinterface #14,  3           // InterfaceMethod java/util/concurrent/ConcurrentMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      71: pop
+      72: iconst_1
+      73: ireturn
+
+  public boolean destroy(org.thingsboard.server.common.data.Device);
+    Code:
+       0: aload_0
+       1: getfield      #4                  // Field clients:Ljava/util/concurrent/ConcurrentMap;
+       4: aload_1
+       5: invokevirtual #5                  // Method org/thingsboard/server/common/data/Device.getUuidId:()Ljava/util/UUID;
+       8: invokeinterface #13,  2           // InterfaceMethod java/util/concurrent/ConcurrentMap.containsKey:(Ljava/lang/Object;)Z
+      13: ifeq          68
+      16: getstatic     #15                 // Field log:Lorg/slf4j/Logger;
+      19: ldc           #16                 // String shutdown secs device: {}
+      21: aload_1
+      22: invokevirtual #5                  // Method org/thingsboard/server/common/data/Device.getUuidId:()Ljava/util/UUID;
+      25: invokeinterface #17,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      30: aload_0
+      31: getfield      #4                  // Field clients:Ljava/util/concurrent/ConcurrentMap;
+      34: aload_1
+      35: invokevirtual #5                  // Method org/thingsboard/server/common/data/Device.getUuidId:()Ljava/util/UUID;
+      38: invokeinterface #18,  2           // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      43: checkcast     #6                  // class com/kuka/ecs/common/transport/secs/client/SecsClient
+      46: astore_2
+      47: aload_2
+      48: invokevirtual #19                 // Method com/kuka/ecs/common/transport/secs/client/SecsClient.destroy:()Z
+      51: istore_3
+      52: aload_0
+      53: getfield      #4                  // Field clients:Ljava/util/concurrent/ConcurrentMap;
+      56: aload_1
+      57: invokevirtual #5                  // Method org/thingsboard/server/common/data/Device.getUuidId:()Ljava/util/UUID;
+      60: invokeinterface #20,  2           // InterfaceMethod java/util/concurrent/ConcurrentMap.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+      65: pop
+      66: iload_3
+      67: ireturn
+      68: iconst_0
+      69: ireturn
+
+  public boolean sendSecs2ToHost(org.thingsboard.server.common.data.Device, int, int, boolean, com.kuka.ecs.common.transport.secs.secs2.Secs2);
+    Code:
+       0: aload_0
+       1: getfield      #4                  // Field clients:Ljava/util/concurrent/ConcurrentMap;
+       4: aload_1
+       5: invokevirtual #5                  // Method org/thingsboard/server/common/data/Device.getUuidId:()Ljava/util/UUID;
+       8: invokeinterface #13,  2           // InterfaceMethod java/util/concurrent/ConcurrentMap.containsKey:(Ljava/lang/Object;)Z
+      13: ifeq          60
+      16: getstatic     #15                 // Field log:Lorg/slf4j/Logger;
+      19: ldc           #21                 // String send secs message to host: {}
+      21: aload_1
+      22: invokevirtual #5                  // Method org/thingsboard/server/common/data/Device.getUuidId:()Ljava/util/UUID;
+      25: invokeinterface #17,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      30: aload_0
+      31: getfield      #4                  // Field clients:Ljava/util/concurrent/ConcurrentMap;
+      34: aload_1
+      35: invokevirtual #5                  // Method org/thingsboard/server/common/data/Device.getUuidId:()Ljava/util/UUID;
+      38: invokeinterface #18,  2           // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      43: checkcast     #6                  // class com/kuka/ecs/common/transport/secs/client/SecsClient
+      46: astore        6
+      48: aload         6
+      50: iload_2
+      51: iload_3
+      52: iload         4
+      54: aload         5
+      56: invokevirtual #22                 // Method com/kuka/ecs/common/transport/secs/client/SecsClient.sendSecs2ToHost:(IIZLcom/kuka/ecs/common/transport/secs/secs2/Secs2;)Z
+      59: ireturn
+      60: iconst_0
+      61: ireturn
+
+  public boolean replySecs2ToHost(org.thingsboard.server.common.data.Device, com.kuka.ecs.common.transport.secs.SecsMessage, int, int, com.kuka.ecs.common.transport.secs.secs2.Secs2);
+    Code:
+       0: aload_0
+       1: getfield      #4                  // Field clients:Ljava/util/concurrent/ConcurrentMap;
+       4: aload_1
+       5: invokevirtual #5                  // Method org/thingsboard/server/common/data/Device.getUuidId:()Ljava/util/UUID;
+       8: invokeinterface #13,  2           // InterfaceMethod java/util/concurrent/ConcurrentMap.containsKey:(Ljava/lang/Object;)Z
+      13: ifeq          60
+      16: getstatic     #15                 // Field log:Lorg/slf4j/Logger;
+      19: ldc           #23                 // String reply secs message to host: {}
+      21: aload_1
+      22: invokevirtual #5                  // Method org/thingsboard/server/common/data/Device.getUuidId:()Ljava/util/UUID;
+      25: invokeinterface #17,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      30: aload_0
+      31: getfield      #4                  // Field clients:Ljava/util/concurrent/ConcurrentMap;
+      34: aload_1
+      35: invokevirtual #5                  // Method org/thingsboard/server/common/data/Device.getUuidId:()Ljava/util/UUID;
+      38: invokeinterface #18,  2           // InterfaceMethod java/util/concurrent/ConcurrentMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      43: checkcast     #6                  // class com/kuka/ecs/common/transport/secs/client/SecsClient
+      46: astore        6
+      48: aload         6
+      50: aload_2
+      51: iload_3
+      52: iload         4
+      54: aload         5
+      56: invokevirtual #24                 // Method com/kuka/ecs/common/transport/secs/client/SecsClient.replySecs2ToHost:(Lcom/kuka/ecs/common/transport/secs/SecsMessage;IILcom/kuka/ecs/common/transport/secs/secs2/Secs2;)Z
+      59: ireturn
+      60: iconst_0
+      61: ireturn
+
+  static {};
+    Code:
+       0: ldc           #25                 // class org/thingsboard/server/common/transport/SecsDeviceManager
+       2: invokestatic  #26                 // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #15                 // Field log:Lorg/slf4j/Logger;
+       8: return
+}

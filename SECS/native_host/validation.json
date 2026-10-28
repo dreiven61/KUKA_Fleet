@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-28",
+  "status": "LOCAL_VALIDATED_NOT_DEPLOYED",
+  "pluginVersion": "1.0.0",
+  "mcsVersion": "2.0.0",
+  "nativePort": 5557,
+  "nativeChecks": 64,
+  "legacyJavaChecks": 1454,
+  "pcChecks": 283,
+  "crossLibraryHSMS": "PASS_JAVA_TO_SECS4NET_14_ACKED_REPORTS_ONE_SUBMIT",
+  "wpfPreview": "VirtualMCS/artifacts/controls-2.0.0.png",
+  "liveFleetChanged": false,
+  "liveTransportSent": false,
+  "testAlarmMapping": {
+    "PP_NoPath": 900001
+  },
+  "testGenericFailureResult": 9000,
+  "sha256": {
+    "SECS/fleet_transfer_plugin/build/servostar-mes-transfer-1.0.0.jar": "0D3F0AC42149F4ADC7FDD34F2E0F3867CED5C22AC370117DF0F8AFF6AEAE25BB",
+    "SECS/fleet_transfer_plugin/lib/secs-2.11.0.jar": "656A9B6D81998C27990AFBFF09CE72AD6DBEEAF7893EE43F952D8A51B69186B1",
+    "VirtualMCS/dist-2.0.0/KukaVirtualMCS.exe": "BF5D32B1A28EBE8B8F00358FE712CBE4D4B9D7DAF6DD6E05CFAEEB74777A13AA",
+    "VirtualMCS/dist-2.0.0/KukaVirtualMCS.dll": "F63CF27A036A85E42F6DEC3543D29D3F48EF3313287C584F72D4F1F44E9502A1",
+    "VirtualMCS/dist-2.0.0/KukaMcs.Core.dll": "140D4EBAD8A6AF94E475C6E30B2F711BED2FFE7BF907906D8A190AC4E1231821",
+    "VirtualMCS/KukaVirtualMCS-2.0.0-win-x64.zip": "2DE07D7485BEB80BCB0EC56C4C6030CEBAECE66B271226909E1396086C00B74B"
+  }
+}

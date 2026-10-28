@@ -1,0 +1,256 @@
+Compiled from "AddStationFactChange.java"
+public final class com.kuka.mobilerobotics.orderengine.allocate.change.AddStationFactChange extends com.kuka.mobilerobotics.orderengine.allocate.change.AbstractTaskScheduleChange {
+  private final com.kuka.mobilerobotics.orderengine.model.Station _station;
+
+  public com.kuka.mobilerobotics.orderengine.allocate.change.AddStationFactChange(com.kuka.mobilerobotics.station.v1alpha1.Station);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #1                  // Method com/kuka/mobilerobotics/orderengine/model/Station.create:(Lcom/kuka/mobilerobotics/station/v1alpha1/Station;)Lcom/kuka/mobilerobotics/orderengine/model/Station;
+       5: invokespecial #7                  // Method "<init>":(Lcom/kuka/mobilerobotics/orderengine/model/Station;)V
+       8: return
+
+  public com.kuka.mobilerobotics.orderengine.allocate.change.AddStationFactChange(com.kuka.mobilerobotics.orderengine.model.Station);
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method com/kuka/mobilerobotics/orderengine/allocate/change/AbstractTaskScheduleChange."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #18                 // Field _station:Lcom/kuka/mobilerobotics/orderengine/model/Station;
+       9: return
+
+  protected void doChange(com.kuka.mobilerobotics.orderengine.model.solver.TaskScheduleScoreDirector);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: getfield      #18                 // Field _station:Lcom/kuka/mobilerobotics/orderengine/model/Station;
+       5: invokevirtual #22                 // Method com/kuka/mobilerobotics/orderengine/model/solver/TaskScheduleScoreDirector.lookUpWorkingObjectOrReturnNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       8: checkcast     #2                  // class com/kuka/mobilerobotics/orderengine/model/Station
+      11: astore_2
+      12: aload_2
+      13: ifnull        117
+      16: aload_2
+      17: invokevirtual #28                 // Method com/kuka/mobilerobotics/orderengine/model/Station.isPlaceholder:()Z
+      20: ifne          43
+      23: new           #32                 // class java/lang/IllegalStateException
+      26: dup
+      27: aload_0
+      28: getfield      #18                 // Field _station:Lcom/kuka/mobilerobotics/orderengine/model/Station;
+      31: invokestatic  #34                 // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      34: invokedynamic #40,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      39: invokespecial #44                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      42: athrow
+      43: aload_0
+      44: aload_1
+      45: aload_2
+      46: invokevirtual #47                 // Method initializeStationLoad:(Lcom/kuka/mobilerobotics/orderengine/model/solver/TaskScheduleScoreDirector;Lcom/kuka/mobilerobotics/orderengine/model/Station;)V
+      49: aload_0
+      50: aload_1
+      51: invokevirtual #51                 // Method initializeStationNodes:(Lcom/kuka/mobilerobotics/orderengine/model/solver/TaskScheduleScoreDirector;)V
+      54: aload_0
+      55: aload_1
+      56: invokevirtual #55                 // Method rebaseFixedStationAnchor:(Lcom/kuka/mobilerobotics/orderengine/model/solver/TaskScheduleScoreDirector;)V
+      59: aload_2
+      60: invokevirtual #58                 // Method com/kuka/mobilerobotics/orderengine/model/Station.getNextStationTask:()Lcom/kuka/mobilerobotics/orderengine/model/Task;
+      63: astore_3
+      64: aload_0
+      65: getfield      #18                 // Field _station:Lcom/kuka/mobilerobotics/orderengine/model/Station;
+      68: aload_3
+      69: invokevirtual #62                 // Method com/kuka/mobilerobotics/orderengine/model/Station.setNextStationTask:(Lcom/kuka/mobilerobotics/orderengine/model/Task;)V
+      72: aload_1
+      73: aload_3
+      74: aload_0
+      75: getfield      #18                 // Field _station:Lcom/kuka/mobilerobotics/orderengine/model/Station;
+      78: invokevirtual #66                 // Method com/kuka/mobilerobotics/orderengine/model/solver/TaskScheduleScoreDirector.setPreviousTaskOrStation:(Lcom/kuka/mobilerobotics/orderengine/model/Task;Lcom/kuka/mobilerobotics/orderengine/model/StationChain;)V
+      81: aload_3
+      82: astore        4
+      84: aload         4
+      86: ifnull        108
+      89: aload         4
+      91: aload_0
+      92: getfield      #18                 // Field _station:Lcom/kuka/mobilerobotics/orderengine/model/Station;
+      95: invokevirtual #70                 // Method com/kuka/mobilerobotics/orderengine/model/Task.setStation:(Lcom/kuka/mobilerobotics/orderengine/model/Station;)V
+      98: aload         4
+     100: invokevirtual #75                 // Method com/kuka/mobilerobotics/orderengine/model/Task.getNextStationTask:()Lcom/kuka/mobilerobotics/orderengine/model/Task;
+     103: astore        4
+     105: goto          84
+     108: aload_1
+     109: aload_2
+     110: invokevirtual #76                 // Method com/kuka/mobilerobotics/orderengine/model/solver/TaskScheduleScoreDirector.removeStation:(Lcom/kuka/mobilerobotics/orderengine/model/Station;)V
+     113: aload_1
+     114: invokevirtual #79                 // Method com/kuka/mobilerobotics/orderengine/model/solver/TaskScheduleScoreDirector.triggerVariableListeners:()V
+     117: aload_1
+     118: aload_0
+     119: getfield      #18                 // Field _station:Lcom/kuka/mobilerobotics/orderengine/model/Station;
+     122: invokevirtual #82                 // Method com/kuka/mobilerobotics/orderengine/model/solver/TaskScheduleScoreDirector.addStation:(Lcom/kuka/mobilerobotics/orderengine/model/Station;)V
+     125: aload_1
+     126: invokevirtual #79                 // Method com/kuka/mobilerobotics/orderengine/model/solver/TaskScheduleScoreDirector.triggerVariableListeners:()V
+     129: return
+
+  private void rebaseFixedStationAnchor(com.kuka.mobilerobotics.orderengine.model.solver.TaskScheduleScoreDirector);
+    Code:
+       0: aload_1
+       1: invokevirtual #85                 // Method com/kuka/mobilerobotics/orderengine/model/solver/TaskScheduleScoreDirector.getWorkingSolution:()Lcom/kuka/mobilerobotics/orderengine/model/schedule/TaskSchedule;
+       4: invokevirtual #89                 // Method com/kuka/mobilerobotics/orderengine/model/schedule/TaskSchedule.getTasks:()Ljava/util/List;
+       7: invokeinterface #95,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      12: astore_2
+      13: aload_2
+      14: invokeinterface #101,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      19: ifeq          57
+      22: aload_2
+      23: invokeinterface #106,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      28: checkcast     #71                 // class com/kuka/mobilerobotics/orderengine/model/Task
+      31: astore_3
+      32: aload_0
+      33: getfield      #18                 // Field _station:Lcom/kuka/mobilerobotics/orderengine/model/Station;
+      36: aload_3
+      37: invokevirtual #110                // Method com/kuka/mobilerobotics/orderengine/model/Task.getFixedStationAnchor:()Lcom/kuka/mobilerobotics/orderengine/model/Station;
+      40: invokevirtual #114                // Method com/kuka/mobilerobotics/orderengine/model/Station.equals:(Ljava/lang/Object;)Z
+      43: ifeq          54
+      46: aload_3
+      47: aload_0
+      48: getfield      #18                 // Field _station:Lcom/kuka/mobilerobotics/orderengine/model/Station;
+      51: invokevirtual #118                // Method com/kuka/mobilerobotics/orderengine/model/Task.setFixedStationAnchor:(Lcom/kuka/mobilerobotics/orderengine/model/Station;)V
+      54: goto          13
+      57: return
+
+  private void initializeStationNodes(com.kuka.mobilerobotics.orderengine.model.solver.TaskScheduleScoreDirector);
+    Code:
+       0: aload_1
+       1: invokevirtual #85                 // Method com/kuka/mobilerobotics/orderengine/model/solver/TaskScheduleScoreDirector.getWorkingSolution:()Lcom/kuka/mobilerobotics/orderengine/model/schedule/TaskSchedule;
+       4: invokevirtual #121                // Method com/kuka/mobilerobotics/orderengine/model/schedule/TaskSchedule.getParametrization:()Lcom/kuka/mobilerobotics/orderengine/model/schedule/TaskScheduleParametrization;
+       7: invokevirtual #125                // Method com/kuka/mobilerobotics/orderengine/model/schedule/TaskScheduleParametrization.getGraph:()Lcom/kuka/mobilerobotics/orderengine/model/schedule/PlantGraph;
+      10: invokevirtual #131                // Method com/kuka/mobilerobotics/orderengine/model/schedule/PlantGraph.vertexSet:()Ljava/util/Set;
+      13: invokeinterface #137,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      18: astore_2
+      19: aload_2
+      20: invokeinterface #101,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      25: ifeq          85
+      28: aload_2
+      29: invokeinterface #106,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      34: checkcast     #140                // class com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode
+      37: astore_3
+      38: aload_3
+      39: invokevirtual #142                // Method com/kuka/mobilerobotics/graph/v1alpha1/TopologyNode.getPropertiesList:()Ljava/util/List;
+      42: invokeinterface #95,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      47: astore        4
+      49: aload         4
+      51: invokeinterface #101,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      56: ifeq          82
+      59: aload         4
+      61: invokeinterface #106,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      66: checkcast     #145                // class com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty
+      69: astore        5
+      71: aload_0
+      72: aload_1
+      73: aload_3
+      74: aload         5
+      76: invokevirtual #147                // Method addStationProperty:(Lcom/kuka/mobilerobotics/orderengine/model/solver/TaskScheduleScoreDirector;Lcom/kuka/mobilerobotics/graph/v1alpha1/TopologyNode;Lcom/kuka/mobilerobotics/graph/v1alpha1/GraphProperty;)V
+      79: goto          49
+      82: goto          19
+      85: return
+
+  private void addStationProperty(com.kuka.mobilerobotics.orderengine.model.solver.TaskScheduleScoreDirector, com.kuka.mobilerobotics.graph.v1alpha1.TopologyNode, com.kuka.mobilerobotics.graph.v1alpha1.GraphProperty);
+    Code:
+       0: aload_3
+       1: invokevirtual #151                // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty.getProperty:()Lcom/google/protobuf/Any;
+       4: invokestatic  #155                // Method com/kuka/mobilerobotics/graph/v1alpha1/StationProperty.getDefaultInstance:()Lcom/kuka/mobilerobotics/graph/v1alpha1/StationProperty;
+       7: invokevirtual #161                // Method com/google/protobuf/Any.isSameTypeAs:(Lcom/google/protobuf/Message;)Z
+      10: ifne          14
+      13: return
+      14: aload_3
+      15: invokevirtual #151                // Method com/kuka/mobilerobotics/graph/v1alpha1/GraphProperty.getProperty:()Lcom/google/protobuf/Any;
+      18: ldc           #156                // class com/kuka/mobilerobotics/graph/v1alpha1/StationProperty
+      20: invokevirtual #167                // Method com/google/protobuf/Any.unpack:(Ljava/lang/Class;)Lcom/google/protobuf/Message;
+      23: checkcast     #156                // class com/kuka/mobilerobotics/graph/v1alpha1/StationProperty
+      26: astore        4
+      28: goto          47
+      31: astore        5
+      33: aload_0
+      34: getfield      #173                // Field LOG:Lorg/slf4j/Logger;
+      37: ldc           #177                // String
+      39: aload         5
+      41: invokeinterface #179,  3          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+      46: return
+      47: aload_0
+      48: getfield      #18                 // Field _station:Lcom/kuka/mobilerobotics/orderengine/model/Station;
+      51: invokevirtual #185                // Method com/kuka/mobilerobotics/orderengine/model/Station.getUuid:()Ljava/lang/String;
+      54: aload         4
+      56: invokevirtual #189                // Method com/kuka/mobilerobotics/graph/v1alpha1/StationProperty.getStationUuid:()Ljava/lang/String;
+      59: invokevirtual #192                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      62: ifeq          79
+      65: aload_0
+      66: getfield      #18                 // Field _station:Lcom/kuka/mobilerobotics/orderengine/model/Station;
+      69: invokevirtual #193                // Method com/kuka/mobilerobotics/orderengine/model/Station.getNodes:()Ljava/util/List;
+      72: aload_2
+      73: invokeinterface #196,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      78: pop
+      79: return
+    Exception table:
+       from    to  target type
+          14    28    31   Class com/google/protobuf/InvalidProtocolBufferException
+
+  private void initializeStationLoad(com.kuka.mobilerobotics.orderengine.model.solver.TaskScheduleScoreDirector, com.kuka.mobilerobotics.orderengine.model.Station);
+    Code:
+       0: aload_2
+       1: invokevirtual #199                // Method com/kuka/mobilerobotics/orderengine/model/Station.getCapacity:()Lcom/kuka/mobilerobotics/orderengine/model/Capacity;
+       4: invokevirtual #203                // Method com/kuka/mobilerobotics/orderengine/model/Capacity.getPlaces:()Ljava/util/Map;
+       7: invokeinterface #209,  1          // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+      12: invokeinterface #215,  1          // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+      17: astore_3
+      18: aload_3
+      19: invokeinterface #101,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      24: ifeq          114
+      27: aload_3
+      28: invokeinterface #106,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      33: checkcast     #218                // class com/kuka/mobilerobotics/orderengine/model/Place
+      36: astore        4
+      38: aload         4
+      40: invokevirtual #220                // Method com/kuka/mobilerobotics/orderengine/model/Place.getLoad:()Lcom/kuka/mobilerobotics/orderengine/model/Load;
+      43: astore        5
+      45: aload         5
+      47: ifnull        111
+      50: aload_0
+      51: getfield      #18                 // Field _station:Lcom/kuka/mobilerobotics/orderengine/model/Station;
+      54: invokevirtual #199                // Method com/kuka/mobilerobotics/orderengine/model/Station.getCapacity:()Lcom/kuka/mobilerobotics/orderengine/model/Capacity;
+      57: aload         4
+      59: invokevirtual #224                // Method com/kuka/mobilerobotics/orderengine/model/Capacity.getPlace:(Lcom/kuka/mobilerobotics/orderengine/model/Place;)Lcom/kuka/mobilerobotics/orderengine/model/Place;
+      62: astore        6
+      64: aload         6
+      66: ifnonnull     95
+      69: aload         4
+      71: invokevirtual #228                // Method com/kuka/mobilerobotics/orderengine/model/Place.getPlanningId:()Lcom/kuka/mobilerobotics/orderengine/common/storage/PlaceId;
+      74: aload_0
+      75: getfield      #18                 // Field _station:Lcom/kuka/mobilerobotics/orderengine/model/Station;
+      78: invokestatic  #232                // Method com/kuka/mobilerobotics/orderengine/model/Place.createPlaceholder:(Lcom/kuka/mobilerobotics/orderengine/common/storage/PlaceId;Lcom/kuka/mobilerobotics/orderengine/model/Capacitated;)Lcom/kuka/mobilerobotics/orderengine/model/Place;
+      81: astore        6
+      83: aload_0
+      84: getfield      #18                 // Field _station:Lcom/kuka/mobilerobotics/orderengine/model/Station;
+      87: invokevirtual #199                // Method com/kuka/mobilerobotics/orderengine/model/Station.getCapacity:()Lcom/kuka/mobilerobotics/orderengine/model/Capacity;
+      90: aload         6
+      92: invokevirtual #236                // Method com/kuka/mobilerobotics/orderengine/model/Capacity.addPlace:(Lcom/kuka/mobilerobotics/orderengine/model/Place;)V
+      95: aload_1
+      96: aload         6
+      98: aload         5
+     100: invokevirtual #240                // Method com/kuka/mobilerobotics/orderengine/model/solver/TaskScheduleScoreDirector.setPlaceLoad:(Lcom/kuka/mobilerobotics/orderengine/model/Place;Lcom/kuka/mobilerobotics/orderengine/model/Load;)V
+     103: aload_1
+     104: aload         5
+     106: aload         6
+     108: invokevirtual #244                // Method com/kuka/mobilerobotics/orderengine/model/solver/TaskScheduleScoreDirector.setLoadPlace:(Lcom/kuka/mobilerobotics/orderengine/model/Load;Lcom/kuka/mobilerobotics/orderengine/model/Place;)V
+     111: goto          18
+     114: return
+
+  public java.lang.String toString();
+    Code:
+       0: ldc           #248                // String add station %s
+       2: iconst_1
+       3: anewarray     #250                // class java/lang/Object
+       6: dup
+       7: iconst_0
+       8: aload_0
+       9: getfield      #18                 // Field _station:Lcom/kuka/mobilerobotics/orderengine/model/Station;
+      12: invokestatic  #252                // Method com/kuka/mobilerobotics/orderengine/model/ModelFormatter.format:(Lcom/kuka/mobilerobotics/orderengine/model/Station;)Ljava/lang/StringBuilder;
+      15: aastore
+      16: invokestatic  #258                // Method java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+      19: areturn
+}

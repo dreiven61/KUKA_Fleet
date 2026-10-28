@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration xmlns="https://logging.apache.org/xml/ns"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="https://logging.apache.org/xml/ns https://logging.apache.org/xml/ns/log4j-config-2.xsd"
+               monitorInterval="30">
+    <Properties>
+        <Property name="logging.file.name" value="/opt/nav/robot/bin/Log/diagnostics.log" />
+        <Property name="logging.file.pattern" value="/opt/nav/robot/bin/Log/diagnostics-%i.log" />
+    </Properties>
+    <Appenders />
+    <Loggers>
+        <!-- CUSTOM_LOG_LEVELS_START -->
+        <!--
+        <Logger name="com.kuka.mobilerobotics" level="WARN"/>
+        -->
+        <!-- CUSTOM_LOG_LEVELS_END -->
+    </Loggers>
+</Configuration>

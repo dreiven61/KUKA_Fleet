@@ -1,0 +1,32 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.robotmanager.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.robotmanager.v1alpha1";
+option java_outer_classname = "LocalRobotDataProto";
+option java_multiple_files = true;
+
+// Contains information about the local robot controller.
+message LocalRobotData
+{
+  // The robot controller UUID.
+  string uuid = 1;
+
+  // The name of the robot.
+  string name = 2;
+
+  // The address of the remote navigation server.
+  string server_ip = 3;
+
+  // Whether the local robot is connected to the remote navigation server.
+  // If true, the robot is connected to the MQTT broker of AMR Fleet,
+  // but the server does not have to be in a healthy state.
+  bool server_online = 4;
+}

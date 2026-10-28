@@ -1,0 +1,32 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motion.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+
+option java_package = "com.kuka.mobilerobotics.motion.v1alpha1";
+option java_outer_classname = "TrackingAccuracyProto";
+option java_multiple_files = true;
+
+// The tracking accuracy that needs to be respected during a motion.
+message TrackingAccuracy
+{
+  // The maximum allowed translational difference (in meters) on the path.
+  // If this value is not provided, then a platform-specific default parameter
+  // will be used.
+  // Optional.
+  google.protobuf.DoubleValue translational_tracking_accuracy = 1;
+	
+  // The maximum allowed rotational difference (in radians) on the path.
+  // If this value is not provided, then a platform-specific default parameter
+  // will be used.
+  // Optional.
+  google.protobuf.DoubleValue rotational_tracking_accuracy = 2;
+}

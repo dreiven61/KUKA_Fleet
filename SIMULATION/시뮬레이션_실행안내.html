@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KUKA Fleet · 가상 AMR 3대 운반</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f1f4f8;color:#233149;font:16px/1.7 system-ui,"Malgun Gothic",sans-serif}main{max-width:960px;margin:50px auto;padding:32px;background:white;border-radius:16px;box-shadow:0 10px 45px #22304712}h1{font-size:28px;margin:0 0 8px}h2{font-size:19px;margin:26px 0 8px}.eyebrow{font-size:13px;font-weight:700;color:#e76a00;letter-spacing:1px}p{margin:6px 0 16px}.routes{display:flex;gap:14px;margin:24px 0}.route{flex:1;padding:18px;background:#f6f8fb;border:1px solid #e3e8ef;border-radius:10px}.route b{display:block;color:#d35d00}.route span{display:block;font-size:23px;font-weight:700;margin:8px 0}.route small{font-size:12px;color:#627188}button,.button{display:inline-block;text-decoration:none;border:0;border-radius:8px;padding:13px 22px;background:#ea6b00;color:white;font:700 15px system-ui;cursor:pointer;margin:6px 8px 6px 0}.button{background:#25334b}ol{padding-left:23px}li{margin:10px 0}code{background:#eef2f7;padding:3px 6px;border-radius:4px;font-size:14px}details{margin-top:22px}textarea{width:100%;height:260px;font:12px/1.5 monospace;white-space:pre;tab-size:2}.notice{padding:14px 18px;border-left:4px solid #ee8c36;background:#fff8ef;font-size:14px}#copy-status{color:#14724f;font-size:14px}footer{color:#69778c;font-size:13px;margin-top:24px}@media(max-width:650px){main{margin:10px;padding:20px}.routes{flex-direction:column}}
+</style><main>
+<div class="eyebrow">KUKA AMR FLEET / lay01 · dist1</div>
+<h1>가상 AMR 3대 자동 운반</h1>
+<p>현재 Fleet Monitor에 가상 로봇과 트레이를 추가하고, 각 구간에서 왕복 운반합니다.</p>
+<div class="routes"><div class="route"><b>AMR 90101</b><span>89 ↔ 97</span><small>시작 68 · SIM_CARGO_001</small></div><div class="route"><b>AMR 90102</b><span>84 ↔ 86</span><small>시작 69 · SIM_CARGO_002</small></div><div class="route"><b>AMR 90103</b><span>94 ↔ 96</span><small>시작 67 · SIM_CARGO_003</small></div></div>
+<h2>실행 순서</h2>
+<ol><li>Fleet에서 <b>lay01</b>을 Enable하고 로그인 상태를 유지합니다. <b>SIM_TRAY_001</b> 모델이 있어야 합니다.</li>
+<li>아래 <b>실행 코드 복사</b>를 누르고, Fleet 탭에서 <b>F12 → Console</b>에 붙여넣어 Enter를 누릅니다.</li>
+<li>Fleet 화면 오른쪽 아래 제어창에서 <b>① 3대·트레이 준비 → ② 왕복 시작</b>을 누릅니다. 움직임은 Fleet <b>Monitor</b>에서 확인합니다.</li></ol>
+<button id="copy">실행 코드 복사</button><a class="button" href="http://192.168.0.45:5000/" target="_blank" rel="noopener">Fleet 열기</a><span id="copy-status"></span>
+<div class="notice">같은 지도에 실물 또는 가상 여부가 확인되지 않은 로봇이 있으면 실행을 차단합니다. <b>반복 정지</b>는 다음 작업 전송을 중단하며, 이미 보낸 작업은 계속됩니다. 탭을 닫으면 반복 제어도 중단됩니다.</div>
+<h2>다시 실행할 때</h2><p>동일한 Fleet 탭·브라우저에서 실행 코드를 다시 붙여넣으면 제어창이 표시됩니다. 새로고침했다면 <b>① 준비</b>로 기존 가상 AMR을 확인한 후 시작하세요. 이전 작업이 미확정이면 기록된 작업 번호부터 확인합니다.</p>
+<details><summary>실행 코드 보기 · 복사가 안 되면 직접 선택</summary><textarea id="source" readonly>/* KUKA Fleet 2.15: same-origin simulator controller, no external libraries.
+ * Run in the already authenticated Fleet tab. Never creates API credentials.
+ */
+(function (root, factory) {
+  const lib = factory();
+  if (typeof module === &#x27;object&#x27; &amp;&amp; module.exports) module.exports = lib;
+  else lib.install(root);
+})(typeof window === &#x27;undefined&#x27; ? globalThis : window, function () {
+  &#x27;use strict&#x27;;
+  const PLAN = Object.freeze({
+    mapCode: &#x27;lay01&#x27;, floorNumber: &#x27;dist1&#x27;, modelCode: &#x27;SIM_TRAY_001&#x27;,
+    pollMs: 2500, dwellMs: 2500, missionTimeoutMs: 300000,
+    robots: [
+      {id:&#x27;90101&#x27;, tray:&#x27;SIM_CARGO_001&#x27;, start:&#x27;68&#x27;, ends:[&#x27;89&#x27;,&#x27;97&#x27;]},
+      {id:&#x27;90102&#x27;, tray:&#x27;SIM_CARGO_002&#x27;, start:&#x27;69&#x27;, ends:[&#x27;84&#x27;,&#x27;86&#x27;]},
+      {id:&#x27;90103&#x27;, tray:&#x27;SIM_CARGO_003&#x27;, start:&#x27;67&#x27;, ends:[&#x27;94&#x27;,&#x27;96&#x27;]}
+    ]
+  });
+  const PATH = {
+    maps:&#x27;/apibd/api/v1/data/map-building/select/all&#x27;,
+    types:&#x27;/apibd/api/v1/data/mobile-robot-type/select/all&#x27;,
+    models:&#x27;/apibd/api/v1/data/container-model/select/all&#x27;,
+    sims:&#x27;/apisim/api/v1/simu/getRobotStatus&#x27;,
+    createSim:&#x27;/apisim/api/v1/simu/insertNewRobot&#x27;,
+    position:&#x27;/apimm/api/robot/location&#x27;,
+    simPosition:&#x27;/apisim/api/v1/simu/ModifyRobotInfo&#x27;,
+    createContainer:&#x27;/apibd/api/v1/data/container/insert&#x27;,
+    dispatch:&#x27;/apimm/api/mission/dispatch&#x27;
+  };
+  const clone = x =&gt; JSON.parse(JSON.stringify(x));
+  const eq = (a,b) =&gt; String(a) === String(b);
+  const encode = encodeURIComponent;
+  function rows(value) {
+    const data = value &amp;&amp; Object.prototype.hasOwnProperty.call(value,&#x27;data&#x27;) ? value.data : value;
+    if (Array.isArray(data)) return data;
+    if (data &amp;&amp; Array.isArray(data.content)) return data.content;
+    if (data == null) return [];
+    throw new Error(&#x27;Fleet 목록 응답 형식이 예상과 다릅니다. 반복을 중지했습니다.&#x27;);
+  }
+  function dataOf(value) {
+    return value &amp;&amp; Object.prototype.hasOwnProperty.call(value,&#x27;data&#x27;) ? value.data : value;
+  }
+  function nodeNumber(record) {
+    return String(record?.stayNodeNumber ?? record?.nodeNumber ?? record?.lastNodeNumber ?? &#x27;&#x27;);
+  }
+  class FleetDemo {
+    constructor({request,storage,onChange=()=&gt;{},now=()=&gt;Date.now(),delay=ms=&gt;new Promise(r=&gt;setTimeout(r,ms)),plan=PLAN}) {
+      this.request=request; this.storage=storage; this.onChange=onChange;
+      this.now=now; this.delay=delay; this.plan=clone(plan);
+      this.key=&#x27;kuka-fleet-simulation-v1-&#x27;+plan.mapCode+&#x27;-&#x27;+plan.floorNumber;
+      this.saved=JSON.parse(storage.getItem(this.key)||&#x27;null&#x27;)||{robots:{},containers:{},missions:{},counts:{}};
+      for (const k of [&#x27;robots&#x27;,&#x27;containers&#x27;,&#x27;missions&#x27;,&#x27;counts&#x27;]) this.saved[k] ||= {};
+      this.running=false; this.busy=false; this.logs=[]; this.error=&#x27;&#x27;; this.setupReady=false;
+      this.status=Object.fromEntries(plan.robots.map(r=&gt;[r.id,&#x27;준비 전&#x27;]));
+      this.roster=[]; this.nodes={}; this.model=null; this.type=null; this.map=null;
+    }
+    save() {this.storage.setItem(this.key,JSON.stringify(this.saved)); this.emit();}
+    emit() {this.onChange(this.snapshot());}
+    snapshot() {return {running:this.running,busy:this.busy,ready:this.setupReady,error:this.error,
+      statuses:clone(this.status),counts:clone(this.saved.counts),missions:clone(this.saved.missions),logs:[...this.logs]};}
+    log(text) {this.logs.unshift(new Date(this.now()).toLocaleTimeString()+&#x27; &#x27;+text); this.logs=this.logs.slice(0,70); this.emit();}
+    async call(path,method=&#x27;GET&#x27;,body,allowMissing=false) {
+      const response=await this.request(path,method,body);
+      if (response &amp;&amp; !Array.isArray(response)) {
+        if (allowMissing &amp;&amp; response.success===false &amp;&amp; /data_not_exist|not_found/i.test(String(response.code))) return {data:null};
+        if (response.success===false || response.succ===false) throw new Error(String(response.message||response.msg||response.code));
+        if (response.code &amp;&amp; [&#x27;NOT_LOGIN&#x27;,&#x27;TOKEN_EXPIRED&#x27;,&#x27;NO_ACCESS&#x27;,&#x27;LICENSE_HAS_EXPIRED&#x27;].includes(response.code)) throw new Error(response.code);
+        if (response.code!=null &amp;&amp; ![&#x27;0&#x27;,&#x27;200&#x27;,&#x27;OK&#x27;].includes(String(response.code)) &amp;&amp; response.success!==true &amp;&amp; response.succ!==true) throw new Error(String(response.message||response.msg||response.code));
+      }
+      return response;
+    }
+    async simRecords(ids) {return rows(await this.call(PATH.sims,&#x27;POST&#x27;,ids));}
+    async assertSim(id) {
+      const sims=await this.simRecords([id]);
+      if (!sims.some(r=&gt;eq(r.robotId,id))) throw new Error(id+&#x27;: 시뮬레이터 등록이 확인되지 않아 명령을 차단했습니다.&#x27;);
+    }
+    async robot(id) {
+      return dataOf(await this.call(&#x27;/apibd/api/v1/data/mobile-robot/getRobotByRobotId?robotId=&#x27;+encode(id),&#x27;GET&#x27;,undefined,true));
+    }
+    async container(code) {
+      return dataOf(await this.call(&#x27;/apibd/api/v1/data/container/select/code/&#x27;+encode(code),&#x27;GET&#x27;,undefined,true));
+    }
+    async checkLayout() {
+      const maps=rows(await this.call(PATH.maps));
+      this.map=maps.find(m=&gt;eq(m.mapCode,this.plan.mapCode));
+      if (!this.map) throw new Error(&#x27;lay01 레이아웃을 먼저 Enable하세요. 프로그램은 레이아웃을 자동 활성화하지 않습니다.&#x27;);
+      if (!this.map.buildingCode) throw new Error(&#x27;레이아웃의 Building Code를 확인하지 못했습니다.&#x27;);
+      const rt=dataOf(await this.call(&#x27;/apibd/api/v1/data/mobile-robot/getRealtimeInfo?floorNumber=&#x27;+encode(this.plan.floorNumber)+&#x27;&amp;isFirst=true&amp;mapCode=&#x27;+encode(this.plan.mapCode)));
+      if (!rt || !Array.isArray(rt.robotRealtimeList)) throw new Error(&#x27;현재 지도 로봇 목록을 확인하지 못했습니다.&#x27;);
+      this._lastRealtime=rt;
+      const active=rt.robotRealtimeList;
+      if (active.length) {
+        const sim=await this.simRecords(active.map(r=&gt;String(r.robotId)));
+        const virtual=new Set(sim.map(r=&gt;String(r.robotId)));
+        const physical=active.filter(r=&gt;!virtual.has(String(r.robotId)));
+        if (physical.length) throw new Error(&#x27;같은 지도에 실물 또는 가상 여부가 확인되지 않은 로봇이 있습니다: &#x27;+physical.map(r=&gt;r.robotId).join(&#x27;, &#x27;));
+      }
+      const labels=new Set(this.plan.robots.flatMap(r=&gt;[r.start,...r.ends]));
+      for (const label of labels) {
+        const n=dataOf(await this.call(&#x27;/apibd/api/v1/data/node/select/map/&#x27;+encode(this.plan.mapCode)+&#x27;/floor/&#x27;+encode(this.plan.floorNumber)+&#x27;/number/&#x27;+encode(label)));
+        if (!n) throw new Error(&#x27;노드 &#x27;+label+&#x27;가 없습니다. v2 지도를 가져오세요.&#x27;);
+        this.nodes[label]=n;
+      }
+      const types=rows(await this.call(PATH.types,&#x27;POST&#x27;,{allType:true}));
+      const models=rows(await this.call(PATH.models,&#x27;POST&#x27;,{}));
+      this.model=models.find(m=&gt;eq(m.modelCode,this.plan.modelCode));
+      if (!this.model || this.model.id==null) throw new Error(&#x27;SIM_TRAY_001 모델을 먼저 생성하세요.&#x27;);
+      const typeCodes=String(this.model.robotTypeCode||this.model.robotType||&#x27;&#x27;).split(&#x27;,&#x27;).map(s=&gt;s.trim());
+      this.type=types.find(t=&gt;typeCodes.includes(String(t.robotTypeCode)) &amp;&amp; /1500i/i.test(String(t.robotTypeCode)+&#x27; &#x27;+String(t.robotTypeName)));
+      if (!this.type) this.type=types.find(t=&gt;/^KMP1500I$/i.test(String(t.robotTypeCode)));
+      if (!this.type || !(Number(this.type.robotLength)&gt;0) || !(Number(this.type.robotWidth)&gt;0)) throw new Error(&#x27;KMP 1500i 로봇 타입과 크기를 확인하지 못했습니다.&#x27;);
+      // Preflight all model/endpoint compatibility before adding any data.
+      if (typeCodes.filter(Boolean).length &amp;&amp; !typeCodes.includes(String(this.type.robotTypeCode))) throw new Error(&#x27;트레이 모델에 KMP 1500i 호환 타입을 설정하세요.&#x27;);
+      for (const r of this.plan.robots) for (const label of r.ends) {
+        const n=this.nodes[label];
+        const functions=n.fullFunctionNode||[];
+        const raw=n.functionList||[];
+        if (functions.length || raw.length) {
+          const matches=functions.map(f=&gt;f.mainFunction).concat(raw).filter(Boolean).filter(f=&gt;Number(f.functionType)===1);
+          if (!matches.length) throw new Error(label+&#x27;: Workstation 설정이 없습니다.&#x27;);
+          if (!matches.some(f=&gt;String(f.containerModel||&#x27;&#x27;).split(&#x27;,&#x27;).includes(this.plan.modelCode))) throw new Error(label+&#x27;: SIM_TRAY_001 모델 연결이 없습니다.&#x27;);
+        }
+      }
+    }
+    async setup() {
+      if (this.busy||this.running) throw new Error(&#x27;현재 작업이 진행 중입니다.&#x27;);
+      this.busy=true; this.error=&#x27;&#x27;; this.setupReady=false; this.emit();
+      try {
+        await this.checkLayout();
+        const ids=this.plan.robots.map(r=&gt;r.id);
+        const sims=await this.simRecords(ids);
+        // All ID conflicts are checked before the first mutation.
+        for (const r of this.plan.robots) {
+          const live=await this.robot(r.id);
+          const known=this.saved.robots[r.id];
+          const sim=sims.some(x=&gt;eq(x.robotId,r.id));
+          if ((live||sim) &amp;&amp; !known) throw new Error(r.id+&#x27;: 이미 사용 중인 ID입니다. 기존 로봇을 덮어쓰지 않습니다.&#x27;);
+          if (live &amp;&amp; !sim) throw new Error(r.id+&#x27;: 가상 로봇이 아니므로 중지했습니다.&#x27;);
+          const container=await this.container(r.tray);
+          if (container &amp;&amp; !this.saved.containers[r.tray]) throw new Error(r.tray+&#x27;: 기존 컨테이너와 충돌합니다.&#x27;);
+          if (container &amp;&amp; !eq(container.modelCode,this.plan.modelCode)) throw new Error(r.tray+&#x27;: 모델이 다릅니다.&#x27;);
+          // Check that both route stations are free of someone else&#x27;s containers.
+          for (const label of r.ends) {
+            if ((rtContainers(this._lastRealtime)||[]).some(c=&gt;eq(c.stayNodeNumber,label)&amp;&amp;!eq(c.code,r.tray))) throw new Error(label+&#x27;: 다른 컨테이너가 있습니다.&#x27;);
+          }
+        }
+        for (const r of this.plan.robots) {
+          this.status[r.id]=&#x27;가상 AMR 준비&#x27;; this.emit();
+          await this.ensureRobot(r);
+          await this.ensureContainer(r);
+          this.status[r.id]=&#x27;준비 완료&#x27;; this.emit();
+        }
+        this.setupReady=true;
+        this.log(&#x27;가상 AMR 3대와 가상 트레이 3개 준비 완료. Fleet Monitor에서 확인하세요.&#x27;);
+      } catch(e) {this.error=e.message; this.log(&#x27;중지: &#x27;+e.message); throw e;}
+      finally {this.busy=false; this.emit();}
+    }
+    async ensureRobot(r) {
+      let sim=(await this.simRecords([r.id])).find(x=&gt;eq(x.robotId,r.id));
+      let live=await this.robot(r.id);
+      const position=this.nodes[r.start];
+      if (!sim) {
+        if (live) throw new Error(r.id+&#x27;: 기존 로봇이 있어 생성하지 않았습니다.&#x27;);
+        const previous=this.saved.robots[r.id];
+        if (previous &amp;&amp; previous.stage!==&#x27;create-pending&#x27;) throw new Error(r.id+&#x27;: 생성 기록은 있으나 서버에서 사라졌습니다. 상태를 확인하세요.&#x27;);
+        this.saved.robots[r.id]={stage:&#x27;create-pending&#x27;}; this.save();
+        await this.call(PATH.createSim,&#x27;POST&#x27;,{
+          robotId:r.id,robotType:this.type.robotTypeCode,robotLen:Number(this.type.robotLength)*1000,
+          robotWidth:Number(this.type.robotWidth)*1000,mapCode:this.plan.mapCode,floorNumber:this.plan.floorNumber,
+          initInfo:{batteryLevel:100,posX:Number(position.xCoordinate),posY:Number(position.yCoordinate),theta:90}
+        });
+        await this.assertSim(r.id);
+        this.saved.robots[r.id]={stage:&#x27;created&#x27;}; this.save();
+      }
+      await this.assertSim(r.id);
+      // Registration can take a short time. Do not replay creation.
+      for (let i=0;!live &amp;&amp; i&lt;15;i++) {await this.delay(1000);live=await this.robot(r.id);}
+      if (!live) throw new Error(r.id+&#x27;: 생성 후 Fleet 등록을 기다리는 중입니다. 준비 버튼으로 재확인하세요.&#x27;);
+      if (!eq(live.robotTypeCode,this.type.robotTypeCode)) throw new Error(r.id+&#x27;: 로봇 타입 불일치&#x27;);
+      if ([1,&#x27;1&#x27;,&#x27;OFF_MAP&#x27;,&#x27;Off-map&#x27;].includes(live.status)) {
+        if (this.saved.missions[r.id]) throw new Error(r.id+&#x27;: 진행 기록이 있어 위치를 재설정하지 않습니다.&#x27;);
+        await this.call(PATH.position,&#x27;PUT&#x27;,{buildingCode:this.map.buildingCode,floorNumber:this.plan.floorNumber,
+          lastNodeNumber:Number(r.start),mapCode:this.plan.mapCode,robotId:r.id});
+        await this.call(PATH.simPosition,&#x27;POST&#x27;,{robotId:r.id,posX:Number(position.xCoordinate),posY:Number(position.yCoordinate)});
+        await this.call(&#x27;/apimm/api/robot/entrance?robotId=&#x27;+encode(r.id)+&#x27;&amp;withContainer=false&#x27;,&#x27;POST&#x27;,null);
+        for (let i=0;i&lt;15;i++) {
+          live=await this.robot(r.id);
+          if (live &amp;&amp; eq(live.mapCode,this.plan.mapCode)&amp;&amp;![1,&#x27;1&#x27;].includes(live.status)) break;
+          await this.delay(1000);
+        }
+      }
+      if (!eq(live.mapCode,this.plan.mapCode) || !eq(live.floorNumber,this.plan.floorNumber)||[1,&#x27;1&#x27;,2,&#x27;2&#x27;].includes(live.status)) throw new Error(r.id+&#x27;: 지도 진입을 확인하지 못했습니다.&#x27;);
+      this.saved.robots[r.id]={stage:&#x27;ready&#x27;};this.save();
+    }
+    async ensureContainer(r) {
+      let c=await this.container(r.tray);
+      if (c) {
+        if (!eq(c.modelCode,this.plan.modelCode)||!eq(c.mapCode,this.plan.mapCode)||!eq(c.floorNumber,this.plan.floorNumber)||Number(c.inMapStatus)!==1) throw new Error(r.tray+&#x27;: 기존 생성 상태를 확인하세요.&#x27;);
+      } else {
+        this.saved.containers[r.tray]={stage:&#x27;create-pending&#x27;};this.save();
+        await this.call(PATH.createContainer,&#x27;POST&#x27;,{
+          buildingCode:this.map.buildingCode,mapCode:this.plan.mapCode,floorNumber:this.plan.floorNumber,
+          code:r.tray,modelId:Number(this.model.id),orientation:0,entranceNodeNumber:Number(r.ends[0]),
+          enterNodeNumber:Number(r.ends[0]),defaultNodeNumber:-1,status:0,inMapStatus:1,
+          checkCode:null,loadStatus:1,remark:&#x27;KUKA Fleet virtual demo&#x27;
+        });
+        c=await this.container(r.tray);
+        if (!c || Number(c.inMapStatus)!==1) throw new Error(r.tray+&#x27;: 생성 결과를 확인하지 못했습니다.&#x27;);
+      }
+      this.saved.containers[r.tray]={stage:&#x27;ready&#x27;};this.save();
+    }
+    stop() {this.running=false;this.log(&#x27;반복 중지 요청. 이미 전달된 운반 작업은 완료될 때까지 진행합니다.&#x27;);}
+    async start() {
+      if (this.running||this.busy) throw new Error(&#x27;현재 작업이 진행 중입니다.&#x27;);
+      if (!this.setupReady) throw new Error(&#x27;먼저 가상 AMR·트레이 준비를 실행하세요.&#x27;);
+      this.busy=true;this.error=&#x27;&#x27;;this.emit();
+      try {await this.checkLayout();for (const r of this.plan.robots) await this.assertSim(r.id);}
+      finally {this.busy=false;this.emit();}
+      this.running=true;this.log(&#x27;3대 자동 왕복 운반 시작&#x27;);
+      this.loopPromise=Promise.all(this.plan.robots.map(r=&gt;this.worker(r))).finally(()=&gt;{this.running=false;this.emit();});
+      return this.snapshot();
+    }
+    async worker(r) {
+      try {
+        while (this.running) {
+          let pending=this.saved.missions[r.id];
+          if (pending) {
+            if (!await this.waitMission(r,pending)) break;
+            this.saved.counts[r.id]=(this.saved.counts[r.id]||0)+1;
+            delete this.saved.missions[r.id];this.save();
+            this.log(r.id+&#x27; 운반 완료 (&#x27;+this.saved.counts[r.id]+&#x27;회)&#x27;);
+            if (!this.running) break;
+            await this.delay(this.plan.dwellMs);
+            if (!this.running) break;
+          }
+          await this.assertSim(r.id);
+          const live=await this.robot(r.id),c=await this.container(r.tray);
+          if (!live||!eq(live.mapCode,this.plan.mapCode)||!eq(live.floorNumber,this.plan.floorNumber)) throw new Error(r.id+&#x27;: 지도 상태 불일치&#x27;);
+          if (Number(live.status)!==3 || Number(live.occupyStatus)!==0) throw new Error(r.id+&#x27;: 유휴 상태가 아닙니다. 기존 작업을 확인하세요.&#x27;);
+          if (!c||Number(c.inMapStatus)!==1||Number(c.isCarry)!==0) throw new Error(r.tray+&#x27;: 지도에 내려놓은 트레이가 아닙니다.&#x27;);
+          const from=nodeNumber(c);
+          if (!r.ends.includes(from)) throw new Error(r.tray+&#x27;: 예상 구간 밖에 있습니다 (&#x27;+from+&#x27;).&#x27;);
+          const target=r.ends.find(n=&gt;n!==from),code=&#x27;SIM&#x27;+r.id+&#x27;_&#x27;+this.now().toString(36)+&#x27;_&#x27;+Math.random().toString(36).slice(2,7);
+          pending={code,target,source:from,created:this.now(),ack:false};
+          // Persist BEFORE submitting; a timeout will never trigger a blind resubmit.
+          this.saved.missions[r.id]=pending;this.save();
+          this.status[r.id]=from+&#x27; → &#x27;+target;this.emit();
+          await this.assertSim(r.id);
+          if (!this.running) {delete this.saved.missions[r.id];this.save();break;}
+          await this.call(PATH.dispatch,&#x27;POST&#x27;,{
+            completedLock:0,priority:2,rackCodes:[r.tray],targetNodes:[{targetNodeLabel:target}],
+            floorNumber:this.plan.floorNumber,mapCode:this.plan.mapCode,templateCode:&#x27;T1&#x27;,robotId:r.id,
+            originNodeLabel:&#x27;&#x27;,upstreamNumber:code
+          });
+          pending.ack=true;this.save();
+        }
+        this.status[r.id]=this.saved.missions[r.id]?&#x27;진행 중인 작업 추적 대기&#x27;:&#x27;반복 중지&#x27;;
+      } catch(e) {
+        this.running=false;this.error=e.message;this.status[r.id]=&#x27;확인 필요&#x27;;
+        this.log(&#x27;중지: &#x27;+e.message+&#x27; (작업 번호는 보존됩니다)&#x27;);
+      }
+      this.emit();
+    }
+    async waitMission(r,pending) {
+      this.status[r.id]=pending.source+&#x27; → &#x27;+pending.target+&#x27; (진행 확인)&#x27;;this.emit();
+      const waitStarted=this.now();
+      for (;;) {
+        await this.assertSim(r.id);
+        const response=await this.call(&#x27;/apibd/api/v1/data/mission/select/code/&#x27;+encode(pending.code),&#x27;GET&#x27;,undefined,true);
+        const mission=dataOf(response);
+        if (mission) {
+          const status=String(mission.status||mission.missionStatus||&#x27;&#x27;).toUpperCase();
+          if ([&#x27;CANCELED&#x27;,&#x27;CANCELLED&#x27;,&#x27;FAILED&#x27;,&#x27;ERROR&#x27;,&#x27;ABORTED&#x27;,&#x27;SUSPENDED&#x27;].includes(status)||mission.errorCode&amp;&amp;String(mission.errorCode)!==&#x27;0&#x27;) throw new Error(pending.code+&#x27;: &#x27;+status+&#x27; &#x27;+(mission.errorMessage||mission.errorCode||&#x27;&#x27;));
+          if ([&#x27;FINISHED&#x27;,&#x27;COMPLETED&#x27;,&#x27;COMPLETE&#x27;].includes(status)) {
+            const c=await this.container(r.tray),robot=await this.robot(r.id);
+            if (c &amp;&amp; nodeNumber(c)===pending.target &amp;&amp; Number(c.isCarry)===0 &amp;&amp; Number(robot?.status)===3 &amp;&amp; Number(robot?.occupyStatus)===0) return true;
+          }
+        }
+        if (this.now()-waitStarted&gt;this.plan.missionTimeoutMs) throw new Error(pending.code+&#x27;: 결과 확인 시간 초과. 중복 전송 없이 중지합니다.&#x27;);
+        if (!this.running) return false;
+        await this.delay(this.plan.pollMs);
+      }
+    }
+  }
+  function rtContainers(rt) {return rt?.containerRealtimeList||[];}
+  function install(win) {
+    if (!/^https?:$/.test(win.location.protocol) || !win.location.pathname.startsWith(&#x27;/v&#x27;)) throw new Error(&#x27;로그인한 KUKA Fleet 페이지에서 실행하세요.&#x27;);
+    if (win.KukaFleetSim) {win.KukaFleetSim.show();return;}
+    const host=win.document.createElement(&#x27;div&#x27;);host.id=&#x27;kuka-sim-controller&#x27;;
+    host.style.cssText=&#x27;position:fixed;right:18px;bottom:18px;width:390px;z-index:2147483000&#x27;;
+    const shadow=host.attachShadow({mode:&#x27;open&#x27;});
+    shadow.innerHTML=`&lt;style&gt;
+      *{box-sizing:border-box}section{font:13px/1.55 system-ui,sans-serif;color:#263248;background:#fff;border:1px solid #d9dee7;border-radius:12px;box-shadow:0 8px 36px #0003;overflow:hidden}
+      header{background:#202b3d;color:#fff;padding:13px 16px;display:flex;justify-content:space-between;align-items:center}h2{font-size:15px;margin:0}main{padding:14px}p{margin:0 0 10px}button{cursor:pointer;border:1px solid #cbd2df;background:#fff;border-radius:6px;padding:8px 10px;font:inherit}button:disabled{opacity:.45;cursor:default}button.primary{background:#ea6b00;color:#fff;border-color:#ea6b00}.actions{display:flex;gap:6px;margin:10px 0}table{width:100%;border-collapse:collapse;font-size:12px}td,th{text-align:left;padding:7px 2px;border-bottom:1px solid #edf0f5}#log{max-height:120px;overflow:auto;font-size:11px;color:#58657b;background:#f6f8fb;padding:8px;margin-top:10px;white-space:pre-wrap}#error{color:#bd2929;overflow-wrap:anywhere}small{color:#68768c}header button{padding:1px 7px;background:transparent;color:white;border:0}.hidden main{display:none}
+      &lt;/style&gt;&lt;section&gt;&lt;header&gt;&lt;h2&gt;가상 AMR 3대 · 자동 운반&lt;/h2&gt;&lt;button id=&quot;fold&quot;&gt;접기&lt;/button&gt;&lt;/header&gt;&lt;main&gt;
+      &lt;p&gt;lay01 / dist1 · KMP 1500i · 가상 트레이&lt;/p&gt;
+      &lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;AMR&lt;/th&gt;&lt;th&gt;운반 구간&lt;/th&gt;&lt;th&gt;완료&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;
+      ${PLAN.robots.map(r=&gt;`&lt;tr&gt;&lt;td&gt;${r.id}&lt;/td&gt;&lt;td&gt;${r.ends.join(&#x27; ↔ &#x27;)}&lt;/td&gt;&lt;td id=&quot;count-${r.id}&quot;&gt;0&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;3&quot; id=&quot;state-${r.id}&quot;&gt;준비 전&lt;/td&gt;&lt;/tr&gt;`).join(&#x27;&#x27;)}&lt;/tbody&gt;&lt;/table&gt;
+      &lt;div class=&quot;actions&quot;&gt;&lt;button id=&quot;setup&quot; class=&quot;primary&quot;&gt;① 3대·트레이 준비&lt;/button&gt;&lt;button id=&quot;start&quot;&gt;② 왕복 시작&lt;/button&gt;&lt;button id=&quot;stop&quot;&gt;반복 정지&lt;/button&gt;&lt;/div&gt;
+      &lt;small&gt;반복 정지는 새 작업 전송을 멈춥니다. 진행 중인 작업은 Fleet에서 계속됩니다. 페이지를 닫아도 전달된 작업은 취소되지 않습니다.&lt;/small&gt;
+      &lt;p id=&quot;error&quot;&gt;&lt;/p&gt;&lt;div id=&quot;log&quot;&gt;기존 Fleet 로그인 세션을 사용합니다. 비밀번호·토큰을 저장하지 않습니다.&lt;/div&gt;
+      &lt;/main&gt;&lt;/section&gt;`;
+    win.document.body.appendChild(host);
+    function view(s) {
+      for (const r of PLAN.robots) {
+        shadow.getElementById(&#x27;count-&#x27;+r.id).textContent=s.counts[r.id]||0;
+        shadow.getElementById(&#x27;state-&#x27;+r.id).textContent=s.statuses[r.id];
+      }
+      shadow.getElementById(&#x27;error&#x27;).textContent=s.error;
+      shadow.getElementById(&#x27;log&#x27;).textContent=s.logs.join(&#x27;\n&#x27;);
+      shadow.getElementById(&#x27;setup&#x27;).disabled=s.running||s.busy;
+      shadow.getElementById(&#x27;start&#x27;).disabled=s.running||s.busy||!s.ready;
+      shadow.getElementById(&#x27;stop&#x27;).disabled=!s.running;
+    }
+    const request=async(path,method,body)=&gt;{
+      const token=win.localStorage.getItem(&#x27;token&#x27;);
+      if (!token) throw new Error(&#x27;Fleet에 로그인한 뒤 다시 실행하세요.&#x27;);
+      const controller=new AbortController(),timer=setTimeout(()=&gt;controller.abort(),15000);
+      try {
+        const response=await win.fetch(path,{method,credentials:&#x27;same-origin&#x27;,signal:controller.signal,
+          headers:{authorization:token,&#x27;Content-Type&#x27;:&#x27;application/json&#x27;,language:&#x27;en&#x27;,fleetuser:win.localStorage.getItem(&#x27;username&#x27;)||&#x27;&#x27;},
+          body:body===undefined?undefined:JSON.stringify(body)});
+        if (!response.ok) throw new Error(&#x27;Fleet HTTP &#x27;+response.status+&#x27; : &#x27;+path);
+        return await response.json();
+      } finally {clearTimeout(timer);}
+    };
+    const demo=new FleetDemo({request,storage:win.localStorage,onChange:view});
+    const invoke=fn=&gt;async()=&gt;{try{await fn();}catch(e){demo.error=e.message;demo.log(e.message);}};
+    shadow.getElementById(&#x27;setup&#x27;).onclick=invoke(()=&gt;demo.setup());
+    shadow.getElementById(&#x27;start&#x27;).onclick=invoke(()=&gt;demo.start());
+    shadow.getElementById(&#x27;stop&#x27;).onclick=()=&gt;demo.stop();
+    shadow.getElementById(&#x27;fold&#x27;).onclick=()=&gt;shadow.querySelector(&#x27;section&#x27;).classList.toggle(&#x27;hidden&#x27;);
+    win.KukaFleetSim={demo,show:()=&gt;{host.style.display=&#x27;block&#x27;;shadow.querySelector(&#x27;section&#x27;).classList.remove(&#x27;hidden&#x27;);},stop:()=&gt;demo.stop()};
+    view(demo.snapshot());
+    demo.log(&#x27;① 준비 → Fleet Monitor에서 3대 확인 → ② 왕복 시작&#x27;);
+  }
+  return {PLAN,PATH,FleetDemo,rows,install};
+});
+</textarea></details>
+<footer>실제 서버 2.15 프런트엔드 API와 첨부 매뉴얼을 기준으로 작성. 실서버 인증 후 생성·운반은 아직 검증하지 않았습니다. 비밀번호·토큰은 외부 전송하거나 파일에 저장하지 않습니다. 가상 로봇·트레이는 Fleet에 유지됩니다.</footer>
+</main><script>
+document.getElementById('copy').onclick=async()=>{const field=document.getElementById('source');try{await navigator.clipboard.writeText(field.value);document.getElementById('copy-status').textContent='복사 완료. Fleet 탭의 F12 → Console에 붙여넣으세요.';}catch(e){field.parentElement.open=true;field.focus();field.select();const ok=document.execCommand('copy');document.getElementById('copy-status').textContent=ok?'복사 완료':'아래 선택된 코드를 Ctrl+C로 복사하세요.';}};
+</script></html>

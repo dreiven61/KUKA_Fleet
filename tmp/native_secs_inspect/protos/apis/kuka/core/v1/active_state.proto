@@ -1,0 +1,35 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.core.v1;
+
+option java_package = "com.kuka.core.v1";
+option java_outer_classname = "ActiveStateProto";
+option java_multiple_files = true;
+
+
+// Represents the active state of an entitiy.
+enum ActiveState
+{
+  // No value has been specified.
+  // If the entity allowed partial updates
+  // (i.e. patch updates) the previous
+  // value will not be overridden.
+  UNSPECIFIED_ACTIVE_STATE = 0;
+    
+  // The received value is not known in this version.
+  // This is a response-only value.
+  UNKNOWN_ACTIVE_STATE = 1;
+
+  // The entity is still active.
+  ACTIVE = 2;
+    
+  // The entity has been deleted.
+  DELETED = 3;
+}

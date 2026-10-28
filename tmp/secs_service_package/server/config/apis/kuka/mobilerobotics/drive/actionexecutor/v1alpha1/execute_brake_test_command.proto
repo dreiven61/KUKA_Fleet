@@ -1,0 +1,20 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.drive.actionexecutor.v1alpha1;
+
+option csharp_namespace = "Kuka.Mobilerobotics.Drive.ActionExecutor.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "ExecuteBrakeTestCommandProto";
+option java_package = "com.kuka.mobilerobotics.drive.actionexecutor.v1alpha1";
+
+// Triggers a brake test in PLC and waits until the test finishes.
+message ExecuteBrakeTestCommand
+{
+}

@@ -1,0 +1,67 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motion.v1alpha1;
+
+import "kuka/mobilerobotics/objects/v1alpha1/shape_2d_layers.proto";
+import "kuka/core/geometry/v1/transform_2d.proto";
+
+option java_package = "com.kuka.mobilerobotics.motion.v1alpha1";
+option java_outer_classname = "MotionReferenceFrameProto";
+option java_multiple_files = true;
+
+// All required information to initialize a localizer using a 2D object map.
+message ObjectInitializationInfo
+{
+  // object shapes can be provided within this message or reference to a stored model in the service 
+  oneof object_shapes
+  {
+    // The definition of the object's shapes as a list of circles and polygons.
+    kuka.mobilerobotics.objects.v1alpha1.Shape2DLayers shapes = 1;
+    // The definition of the object's shapes as a list of circles and polygons stored in the objectmodel service.
+    string model_uuid = 2;
+  }
+  
+
+  // The initial pose of the AGV relative to object reference frame.
+  // This pose should be the result of an ObjectDetectionCommand.
+  kuka.core.geometry.v1.Transform2DWithReliability initial_pose_distribution = 3;
+}
+
+// The definition of the reference frame that the motion is defined in.
+message MotionReferenceFrame
+{
+  // Defines the type of reference frame to be used by this motion.
+  enum FrameType
+	{
+    // Unspecified. Must not be used.
+    UNSPECIFIED = 0;
+		
+    // The motion is defined with respect to a 2D grid map.
+    MAP = 1;
+		
+    // The motion is defined with respect to the odometry.
+    ODOMETRY = 2;
+
+    // The motion is defined with respect to a 2D object map.
+    OBJECT = 3;
+  }
+	
+  // The type of reference frame to be used by this motion.
+  FrameType frame_type = 1;
+	
+  // The initialization info which is required, if the associated
+  // localizer for this reference frame needs to be initialized first.
+  // Currently only required for 'object' based motions.
+  // Optional.
+  oneof initialization_info 
+	{
+    ObjectInitializationInfo object_init_info = 2;
+  }
+}

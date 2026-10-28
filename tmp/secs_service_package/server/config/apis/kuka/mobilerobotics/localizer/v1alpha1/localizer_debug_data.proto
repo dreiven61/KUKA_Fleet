@@ -1,0 +1,71 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.localizer.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "kuka/core/geometry/v1/transform_2d.proto";
+import "kuka/core/geometry/v1/segment_2d.proto";
+import "kuka/mobilerobotics/localizer/v1alpha1/localizer_data.proto";
+import "kuka/mobilerobotics/laser/v1alpha1/laser_beam_data.proto";
+
+option java_package = "com.kuka.mobilerobotics.localizer.v1alpha1";
+option java_outer_classname = "LocalizerDebugDataProto";
+option java_multiple_files = true;
+
+message LaserBeam {
+  // The start and end point of the beam
+  kuka.core.geometry.v1.Segment2D segment = 1;
+
+  // Additional beam data
+  kuka.mobilerobotics.laser.v1alpha1.LaserBeamData data = 2;
+}
+
+message Observation {
+  // The timestamp originating from the laser data the observation is based on
+  google.protobuf.Timestamp timestamp = 1;
+
+  // The segments representing the laser beams
+  repeated LaserBeam beams = 2;
+
+  // The odometry pose delta since the last observation
+  kuka.core.geometry.v1.Transform2D odometry_pose_delta = 3;
+}
+
+message Particle {
+  // The current particle pose
+  kuka.core.geometry.v1.Transform2D pose = 1;
+
+  // The current particle weight
+  google.protobuf.DoubleValue weight = 2;
+}
+
+message LocalizerDebugData {
+  // The localizer data resulting from the particle state
+  LocalizerData localizer_data = 1;
+
+  // Key value pairs with debug information of the pose quality tracker
+  map<string, string> pose_quality_tracker_debug = 2;
+
+  // The unweighted mean pose
+  kuka.core.geometry.v1.Transform2D unweighted_mean = 3;
+
+  // The weighted number of effective particles
+  google.protobuf.DoubleValue effective_particles_count = 4;
+
+  // Whether the particles got resampled since the last step
+  google.protobuf.BoolValue resampled = 5;
+
+  // The particles of the current filter state
+  repeated Particle particles = 6;
+
+  // The last observations of all lasers leading to the current particle state
+  repeated Observation last_observations = 7;
+}

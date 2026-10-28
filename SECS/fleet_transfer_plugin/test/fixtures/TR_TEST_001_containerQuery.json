@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "containerCode": "SIM_CARGO_001",
+      "nodeCode": "SECS_ST_97",
+      "orientation": "0.0",
+      "containerModelCode": "SIM_TRAY_001",
+      "emptyFullStatus": 1,
+      "inMapStatus": 1,
+      "isCarry": 0,
+      "containerCheckCode": "",
+      "mapCode": "lay01",
+      "districtCode": "dist1",
+      "customStatus": ""
+    }
+  ],
+  "code": "0",
+  "message": null,
+  "success": true
+}

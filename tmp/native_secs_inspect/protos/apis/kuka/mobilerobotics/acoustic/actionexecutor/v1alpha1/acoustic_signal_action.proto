@@ -1,0 +1,22 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.acoustic.actionexecutor.v1alpha1;
+
+option csharp_namespace = "Kuka.MobileRobotics.Acoustic.ActionExecutor.V1alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "AcousticSignalActionProto";
+option java_package = "com.kuka.mobilerobotics.acoustic.actionexecutor.v1alpha1";
+
+// Action to execute the specified user defined sound effect.
+message AcousticSignalAction
+{
+  // The type of the sound effect. File name or key from the lookup table.
+  string effect_type = 1;
+}

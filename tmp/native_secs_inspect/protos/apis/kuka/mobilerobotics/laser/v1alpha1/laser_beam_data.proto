@@ -1,0 +1,46 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.laser.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+
+option java_package = "com.kuka.mobilerobotics.laser.v1alpha1";
+option java_outer_classname = "LaserBeamDataProto";
+option java_multiple_files = true;
+
+// Message containing information related to a single laser beam, part of a laser scan.
+// Beam data contain in particular range information, but may also include additional data
+// depending on the type of laser scanner from where it originates.
+message LaserBeamData
+{
+  // The distance in meters measured by the laser scanner for this beam
+  float range = 1;
+
+  // Remission value for each beam of this laser scan [0;1]
+  // See: https://www.sick.com/de/en/glossary/remission/g/p544247
+  // Remission is a measurement of diffuse reflection on surfaces, expressed as a percentage.
+  // Remission indicates the proportion of the light that is diffusely reflected based on the
+  // proportion that would be reflected in a reference value (defined white). Thus, 100% remission
+  // does not mean that all of the light is reflected, but rather that exactly the same amount
+  // of light is reflected as in the defined white surface.
+  float remission = 2;
+
+  // Optional intensity provided by the laser scanners.
+  google.protobuf.FloatValue intensity = 3;
+
+  // Optional flag indicating whether this beam triggered the violation of a protection field.
+  google.protobuf.BoolValue protection_field_violated = 4;
+
+  // Optional flag indicating that the scanner was dazzled at this beam.
+  google.protobuf.BoolValue scanner_dazzled = 5;
+
+  // Optional flag indicating that a reflector was detected.
+  google.protobuf.BoolValue reflector_detected = 6;
+}

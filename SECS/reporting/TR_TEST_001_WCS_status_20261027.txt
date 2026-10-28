@@ -1,0 +1,376 @@
+2026-10-27 13:12:51.271 [grpc-default-executor-37] INFO  o.t.s.s.rpc.DefaultWcsRpcService|783 - missionStatusResponse onNext:success: true
+resultCode: "0"
+message: "lang.wcs.common.ok"
+responseId: "fb752aff-ee1a-4605-bf5d-84ba8435017e"
+taskCode: "TR_TEST_001"
+taskType: LOAD
+containerCode: "SIM_CARGO_001"
+currentNodeCode: "-1"
+missionType: MOVE
+missionStatus: MOVE_BEGIN
+containerModelCode: "SIM_TRAY_001"
+robotId: "1"
+outerRobotId: 1
+actionTime: "2026-10-27 13:12:51"
+robotModel: "KMP1500I"
+nextNodeCode: "lay01-dist1-89"
+nextNodeOuterCode: "SECS_ST_89"
+robotX: "12.0"
+robotY: "23.0"
+containerLocationCode: "lay01-dist1-89"
+containerOrientation: "0.0"
+nodeSequence {
+  value: 1
+}
+instanceId: "6837"
+
+2026-10-27 13:12:51.282 [grpc-default-executor-37] INFO  o.t.s.s.rpc.DefaultWcsRpcService|783 - missionStatusResponse onNext:success: true
+resultCode: "0"
+message: "lang.wcs.common.ok"
+responseId: "b2f46231-e7a4-4fb0-aa74-1b91ab0ecec7"
+taskCode: "TR_TEST_001"
+taskType: LOAD
+containerCode: "SIM_CARGO_001"
+currentNodeCode: "lay01-dist1-89"
+currentNodeOuterCode: "SECS_ST_89"
+missionType: MOVE
+missionStatus: MOVE_END
+containerModelCode: "SIM_TRAY_001"
+robotId: "1"
+outerRobotId: 1
+actionTime: "2026-10-27 13:12:51"
+robotModel: "KMP1500I"
+startTime: "2026-10-27 13:12:51"
+endTime: "2026-10-27 13:12:51"
+beginRobotMileage: "0.0"
+endRobotMileage: "0.0"
+robotX: "12.0"
+robotY: "23.0"
+containerLocationCode: "lay01-dist1-89"
+containerOrientation: "0.0"
+mapCode: "lay01"
+floorNumber: "dist1"
+nodeSequence {
+  value: 1
+}
+instanceId: "6837"
+
+2026-10-27 13:12:51.786 [grpc-default-executor-37] INFO  o.t.s.s.rpc.DefaultWcsRpcService|783 - missionStatusResponse onNext:success: true
+resultCode: "0"
+message: "lang.wcs.common.ok"
+responseId: "5a033803-66ba-4b57-b6dc-2c01df8a8120"
+taskCode: "TR_TEST_001"
+taskType: LOAD
+containerCode: "SIM_CARGO_001"
+currentNodeCode: "lay01-dist1-89"
+currentNodeOuterCode: "SECS_ST_89"
+missionType: ACTION
+actionId: "Action-TR_TEST_001-1-1"
+missionStatus: ACTION_BEGIN
+containerModelCode: "SIM_TRAY_001"
+robotId: "1"
+actionTime: "2026-10-27 13:12:51"
+actionType: UP_CONTAINER
+actionCode: "LIFT"
+containerLocationCode: "SECS_ST_89"
+containerOrientation: "0.0"
+mapCode: "lay01"
+floorNumber: "dist1"
+actionExecutePhase {
+}
+nodeSequence {
+  value: 1
+}
+mmMissionType: 1
+instanceId: "6837"
+
+2026-10-27 13:12:51.790 [grpc-default-executor-37] INFO  o.t.s.s.rpc.DefaultWcsRpcService|783 - missionStatusResponse onNext:success: true
+resultCode: "0"
+message: "lang.wcs.common.ok"
+responseId: "be4c2e8b-cf15-4f5d-bec3-db798ab1c670"
+taskCode: "TR_TEST_001"
+taskType: LOAD
+containerCode: "SIM_CARGO_001"
+currentNodeCode: "lay01-dist1-89"
+currentNodeOuterCode: "SECS_ST_89"
+missionType: ACTION
+actionId: "Action-TR_TEST_001-1-1"
+missionStatus: ACTION_BEGIN
+containerModelCode: "SIM_TRAY_001"
+robotId: "1"
+actionTime: "2026-10-27 13:12:51"
+actionType: UP_CONTAINER
+actionCode: "LIFT"
+containerLocationCode: "SECS_ST_89"
+containerOrientation: "0.0"
+mapCode: "lay01"
+floorNumber: "dist1"
+actionExecutePhase {
+}
+nodeSequence {
+  value: 1
+}
+mmMissionType: 1
+instanceId: "6837"
+
+2026-10-27 13:12:52.794 [grpc-default-executor-37] INFO  o.t.s.s.rpc.DefaultWcsRpcService|783 - missionStatusResponse onNext:success: true
+resultCode: "0"
+message: "lang.wcs.common.ok"
+responseId: "da6b3fac-6553-47ed-adce-073697dcd26a"
+taskCode: "TR_TEST_001"
+taskType: LOAD
+containerCode: "SIM_CARGO_001"
+currentNodeCode: "lay01-dist1-89"
+currentNodeOuterCode: "SECS_ST_89"
+missionType: ACTION
+actionId: "Action-TR_TEST_001-1-1"
+missionStatus: ACTION_END
+containerModelCode: "SIM_TRAY_001"
+robotId: "1"
+actionTime: "2026-10-27 13:12:52"
+actionType: UP_CONTAINER
+actionCode: "LIFT"
+startTime: "2026-10-27 13:12:51"
+endTime: "2026-10-27 13:12:52"
+containerLocationCode: "SECS_ST_89"
+containerOrientation: "0.0"
+mapCode: "lay01"
+floorNumber: "dist1"
+actionExecutePhase {
+}
+nodeSequence {
+  value: 1
+}
+mmMissionType: 1
+instanceId: "6837"
+
+2026-10-27 13:12:52.803 [grpc-default-executor-37] INFO  o.t.s.s.rpc.DefaultWcsRpcService|783 - missionStatusResponse onNext:success: true
+resultCode: "0"
+message: "lang.wcs.common.ok"
+responseId: "fb8218e2-440d-41a2-8043-b8c9fd69f541"
+taskCode: "TR_TEST_001"
+taskType: LOAD
+containerCode: "SIM_CARGO_001"
+currentNodeCode: "lay01-dist1-89"
+currentNodeOuterCode: "SECS_ST_89"
+missionType: NODE
+missionStatus: NODE_COMPLETE
+robotId: "1"
+outerRobotId: 1
+mapCode: "lay01"
+floorNumber: "dist1"
+nodeSequence {
+  value: 1
+}
+passStrategy: AUTO
+instanceId: "6837"
+
+2026-10-27 13:12:53.303 [grpc-default-executor-37] INFO  o.t.s.s.rpc.DefaultWcsRpcService|783 - missionStatusResponse onNext:success: true
+resultCode: "0"
+message: "lang.wcs.common.ok"
+responseId: "5ed9bb0c-9879-4fa7-94e5-e6458880e39a"
+taskCode: "TR_TEST_001"
+taskType: LOAD
+containerCode: "SIM_CARGO_001"
+currentNodeCode: "lay01-dist1-89"
+currentNodeOuterCode: "SECS_ST_89"
+missionType: MOVE
+missionStatus: MOVE_BEGIN
+containerModelCode: "SIM_TRAY_001"
+robotId: "1"
+outerRobotId: 1
+actionTime: "2026-10-27 13:12:52"
+robotModel: "KMP1500I"
+nextNodeCode: "lay01-dist1-97"
+nextNodeOuterCode: "SECS_ST_97"
+robotX: "12.0"
+robotY: "23.0"
+containerLocationCode: "lay01-dist1-89"
+containerOrientation: "0.0"
+mapCode: "lay01"
+floorNumber: "dist1"
+nodeSequence {
+  value: 2
+}
+instanceId: "6837"
+
+2026-10-27 13:13:02.309 [grpc-default-executor-37] INFO  o.t.s.s.rpc.DefaultWcsRpcService|783 - missionStatusResponse onNext:success: true
+resultCode: "0"
+message: "lang.wcs.common.ok"
+responseId: "f8598f81-ca67-46d4-8777-7164e0c46b2e"
+taskCode: "TR_TEST_001"
+taskType: LOAD
+containerCode: "SIM_CARGO_001"
+currentNodeCode: "lay01-dist1-97"
+currentNodeOuterCode: "SECS_ST_97"
+missionType: MOVE
+missionStatus: MOVE_END
+containerModelCode: "SIM_TRAY_001"
+robotId: "1"
+outerRobotId: 1
+actionTime: "2026-10-27 13:13:01"
+robotModel: "KMP1500I"
+startTime: "2026-10-27 13:12:52"
+endTime: "2026-10-27 13:13:01"
+beginRobotMileage: "0.0"
+endRobotMileage: "0.0"
+robotX: "12.0"
+robotY: "11.0"
+containerLocationCode: "lay01-dist1-97"
+containerOrientation: "0.0"
+mapCode: "lay01"
+floorNumber: "dist1"
+nodeSequence {
+  value: 2
+}
+instanceId: "6837"
+
+2026-10-27 13:13:02.313 [grpc-default-executor-37] INFO  o.t.s.s.rpc.DefaultWcsRpcService|783 - missionStatusResponse onNext:success: true
+resultCode: "0"
+message: "lang.wcs.common.ok"
+responseId: "416926fa-47c0-43a4-a252-216b4e2ae1ef"
+taskCode: "TR_TEST_001"
+taskType: LOAD
+containerCode: "SIM_CARGO_001"
+currentNodeCode: "lay01-dist1-97"
+currentNodeOuterCode: "SECS_ST_97"
+missionType: ACTION
+actionId: "Action-TR_TEST_001-2-1"
+missionStatus: ACTION_BEGIN
+containerModelCode: "SIM_TRAY_001"
+robotId: "1"
+actionTime: "2026-10-27 13:13:02"
+actionType: DOWN_CONTAINER
+actionCode: "DOWN"
+containerLocationCode: "SECS_ST_97"
+containerOrientation: "0.0"
+mapCode: "lay01"
+floorNumber: "dist1"
+actionExecutePhase {
+}
+nodeSequence {
+  value: 2
+}
+mmMissionType: 1
+instanceId: "6837"
+
+2026-10-27 13:13:02.320 [grpc-default-executor-37] INFO  o.t.s.s.rpc.DefaultWcsRpcService|783 - missionStatusResponse onNext:success: true
+resultCode: "0"
+message: "lang.wcs.common.ok"
+responseId: "c9580200-d33b-447d-a0a1-69186831f8a5"
+taskCode: "TR_TEST_001"
+taskType: LOAD
+containerCode: "SIM_CARGO_001"
+currentNodeCode: "lay01-dist1-97"
+currentNodeOuterCode: "SECS_ST_97"
+missionType: ACTION
+actionId: "Action-TR_TEST_001-2-1"
+missionStatus: ACTION_BEGIN
+containerModelCode: "SIM_TRAY_001"
+robotId: "1"
+actionTime: "2026-10-27 13:13:02"
+actionType: DOWN_CONTAINER
+actionCode: "DOWN"
+containerLocationCode: "SECS_ST_97"
+containerOrientation: "0.0"
+mapCode: "lay01"
+floorNumber: "dist1"
+actionExecutePhase {
+}
+nodeSequence {
+  value: 2
+}
+mmMissionType: 1
+instanceId: "6837"
+
+2026-10-27 13:13:03.324 [grpc-default-executor-37] INFO  o.t.s.s.rpc.DefaultWcsRpcService|783 - missionStatusResponse onNext:success: true
+resultCode: "0"
+message: "lang.wcs.common.ok"
+responseId: "e64f26f0-2158-4e8b-b626-2f586cd5d8ca"
+taskCode: "TR_TEST_001"
+taskType: LOAD
+containerCode: "SIM_CARGO_001"
+currentNodeCode: "lay01-dist1-97"
+currentNodeOuterCode: "SECS_ST_97"
+missionType: ACTION
+actionId: "Action-TR_TEST_001-2-1"
+missionStatus: ACTION_END
+containerModelCode: "SIM_TRAY_001"
+robotId: "1"
+actionTime: "2026-10-27 13:13:03"
+actionType: DOWN_CONTAINER
+actionCode: "DOWN"
+startTime: "2026-10-27 13:13:02"
+endTime: "2026-10-27 13:13:03"
+containerLocationCode: "SECS_ST_97"
+containerOrientation: "0.0"
+mapCode: "lay01"
+floorNumber: "dist1"
+actionExecutePhase {
+}
+nodeSequence {
+  value: 2
+}
+mmMissionType: 1
+instanceId: "6837"
+
+2026-10-27 13:13:03.331 [grpc-default-executor-37] INFO  o.t.s.s.rpc.DefaultWcsRpcService|783 - missionStatusResponse onNext:success: true
+resultCode: "0"
+message: "lang.wcs.common.ok"
+responseId: "e90b6126-be6f-4f8e-b9a6-5211c18a12c2"
+taskCode: "TR_TEST_001"
+taskType: LOAD
+containerCode: "SIM_CARGO_001"
+currentNodeCode: "lay01-dist1-97"
+currentNodeOuterCode: "SECS_ST_97"
+missionType: NODE
+missionStatus: NODE_COMPLETE
+robotId: "1"
+outerRobotId: 1
+mapCode: "lay01"
+floorNumber: "dist1"
+nodeSequence {
+  value: 2
+}
+passStrategy: AUTO
+instanceId: "6837"
+49: {
+  1: 1
+}
+
+2026-10-27 13:13:03.840 [grpc-default-executor-37] INFO  o.t.s.s.rpc.DefaultWcsRpcService|783 - missionStatusResponse onNext:success: true
+resultCode: "0"
+message: "lang.wcs.common.ok"
+responseId: "1daa98ed-5ed1-4ce5-9a9b-e270efd89665"
+taskCode: "TR_TEST_001"
+taskType: LOAD
+containerCode: "SIM_CARGO_001"
+currentNodeCode: "lay01-dist1-97"
+currentNodeOuterCode: "SECS_ST_97"
+missionType: TASK
+missionStatus: TASK_COMPLETED
+containerModelCode: "SIM_TRAY_001"
+robotId: "1"
+outerRobotId: 1
+actionTime: "2026-10-27 13:13:03"
+robotModel: "KMP1500I"
+startTime: "2026-10-27 13:12:50"
+endTime: "2026-10-27 13:13:03"
+beginRobotMileage: "0.0"
+endRobotMileage: "0.0"
+robotX: "12.0"
+robotY: "11.0"
+containerLocationCode: "lay01-dist1-97"
+containerOrientation: "0.0"
+mapCode: "lay01"
+floorNumber: "dist1"
+nodeSequence {
+  value: 2
+}
+instanceId: "6837"
+
+2026-10-27 13:13:44.890 [SchedulerService-38-thread-1] INFO  o.t.s.s.audit.AuditLogServiceImpl|77 - AuditLog deleted size 0
+2026-10-27 13:13:44.890 [SchedulerService-38-thread-1] INFO  o.t.s.s.d.DeviceExecuteInfoServiceImpl|77 - DeviceExecuteInfo deleted size 0
+2026-10-27 13:13:44.891 [SchedulerService-38-thread-1] INFO  o.t.s.d.device.DeviceTaskServiceImpl|90 - DeviceTask deleted size 0
+2026-10-27 13:13:44.891 [SchedulerService-38-thread-1] INFO  o.t.s.s.s.DefaultSchedulerService|70 - clean history data success
+2026-10-27 13:14:44.892 [SchedulerService-38-thread-1] INFO  o.t.s.s.audit.AuditLogServiceImpl|77 - AuditLog deleted size 0

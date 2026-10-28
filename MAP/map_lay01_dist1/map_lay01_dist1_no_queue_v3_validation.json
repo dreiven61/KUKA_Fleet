@@ -1,0 +1,153 @@
+{
+  "source": "map_lay01_dist1_o4h.json",
+  "source_sha256": "5643bed66bdf0fefafa13f207f82a54ff68958c09493ff8bff85967e6951621d",
+  "output": "map_lay01_dist1_no_queue_v3.json",
+  "output_sha256": "8222b158676f0f8f946c9132b9c6cbdaa84ece0ac1dd77ded832e635e925539e",
+  "map_code": "lay01",
+  "district": "dist1",
+  "nodes": 27,
+  "directed_edges": 68,
+  "spacing_m": 2,
+  "removed_queue_functions": [
+    {
+      "node": "67",
+      "previous_workstation": "94"
+    },
+    {
+      "node": "68",
+      "previous_workstation": "89"
+    },
+    {
+      "node": "69",
+      "previous_workstation": "84"
+    },
+    {
+      "node": "70",
+      "previous_workstation": "90"
+    },
+    {
+      "node": "56",
+      "previous_workstation": "97"
+    },
+    {
+      "node": "57",
+      "previous_workstation": "86"
+    },
+    {
+      "node": "58",
+      "previous_workstation": "98"
+    },
+    {
+      "node": "59",
+      "previous_workstation": "95"
+    },
+    {
+      "node": "61",
+      "previous_workstation": "96"
+    },
+    {
+      "node": "65",
+      "previous_workstation": "93"
+    }
+  ],
+  "retained_workstations": [
+    "84",
+    "86",
+    "89",
+    "90",
+    "93",
+    "94",
+    "95",
+    "96",
+    "97",
+    "98"
+  ],
+  "charging_entries": [
+    "62",
+    "64"
+  ],
+  "charging_docks": [
+    "87",
+    "88"
+  ],
+  "updated_direction_edges": 67,
+  "all_edges_orientation": "0,180",
+  "static_directed_path_checks": 702,
+  "example_static_paths": {
+    "89->97": [
+      "89",
+      "68",
+      "65",
+      "62",
+      "59",
+      "56",
+      "97"
+    ],
+    "97->89": [
+      "97",
+      "56",
+      "59",
+      "62",
+      "65",
+      "68",
+      "89"
+    ],
+    "84->86": [
+      "84",
+      "69",
+      "66",
+      "63",
+      "60",
+      "57",
+      "86"
+    ],
+    "86->84": [
+      "86",
+      "57",
+      "60",
+      "63",
+      "66",
+      "69",
+      "84"
+    ],
+    "94->96": [
+      "94",
+      "67",
+      "64",
+      "61",
+      "96"
+    ],
+    "96->94": [
+      "96",
+      "61",
+      "64",
+      "67",
+      "94"
+    ],
+    "60->61": [
+      "60",
+      "61"
+    ]
+  },
+  "checks": [
+    "only queue functions and edge orientations changed",
+    "original bytes unchanged",
+    "identities and coordinates unchanged",
+    "all directions have a reverse edge",
+    "all edges axis aligned and exactly 2m",
+    "all function references exist",
+    "charging links and settings preserved",
+    "no QUEUING_POINT remains",
+    "station routes bypass occupied center nodes",
+    "JSON round trip"
+  ],
+  "fleet_import_verified": false,
+  "fleet_motion_verified": false,
+  "limitations": [
+    "Static graph checks do not execute the Fleet planner or collision avoidance.",
+    "Existing suspended missions and robot/container runtime state are not changed.",
+    "WCS workflow/event configs, areas, and server queue policies are not in this map export.",
+    "Physical floor geometry and payload clearance are not qualified; virtual simulation only.",
+    "Predecessor waiting/queue behavior is intentionally removed per the latest request."
+  ]
+}

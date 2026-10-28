@@ -1,0 +1,30 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.obstacleavoidance.v1alpha1;
+
+import "kuka/mobilerobotics/obstacleavoidance/v1alpha1/velocity_limits_configuration.proto";
+import "google/protobuf/timestamp.proto";
+
+option java_package = "com.kuka.mobilerobotics.obstacleavoidance.v1alpha1";
+option java_outer_classname = "VelocityLimitsConfigurationDataProto";
+option java_multiple_files = true;
+
+
+message VelocityLimitsConfigurationData
+{
+  // whether the published data was overridden by a command
+  bool override = 1;
+  // currently valid config
+  VelocityLimitsConfiguration config = 2;
+  // latest change to this configuration
+  google.protobuf.Timestamp timestamp = 3;
+  // whether the camera module currently restricts platform velocity according to this table
+  bool active = 4;
+}

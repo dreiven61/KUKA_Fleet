@@ -1,0 +1,2 @@
+PASS: Java/.NET real HSMS: create, query, out, 406 mismatch, 19 acknowledged reports and one transport.
+PASS: Java equipment -> Secs4Net: 14 acknowledged reports, one submit.

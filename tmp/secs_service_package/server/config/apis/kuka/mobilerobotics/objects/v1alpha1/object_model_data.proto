@@ -1,0 +1,22 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.objects.v1alpha1;
+
+import "kuka/mobilerobotics/objects/v1alpha1/object_model.proto";
+
+option java_package = "com.kuka.mobilerobotics.objects.v1alpha1";
+option java_outer_classname = "ObjectModelDataProto";
+option java_multiple_files = true;
+
+// Contains a list of object models. See "kuka.mobilerobotics.objects.v1alpha1.ObjectModel" for more information.
+message ObjectModelData
+{
+    repeated ObjectModel objects = 1;
+}

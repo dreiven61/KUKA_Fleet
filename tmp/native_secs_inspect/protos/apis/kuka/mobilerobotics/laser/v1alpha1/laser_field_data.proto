@@ -1,0 +1,43 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.laser.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.laser.v1alpha1";
+option java_outer_classname = "LaserFieldDataProto";
+option java_multiple_files = true;
+
+// The geometric properties of a laser field
+message LaserFieldData
+{
+  // ID of the laser this field is associated with
+  int32 laser_id = 1;
+
+  // the index of this field, to be referenced in other data
+  int32 field_set_index = 2;
+
+  string field_name = 3;
+
+  bool is_warning = 4;
+  
+  bool is_protective = 5;
+
+  // angle of the first beam relative to the center of the laser (in rad)
+  double start_angle = 6;
+
+  // angle of the last beam relative to the center of the laser (in rad)
+  double end_angle = 7;
+
+  // angular resolution (distance between two entries) of the laser (in rad)
+  double angular_resolution = 8;
+
+  // distance between center and field border (in meters)
+  // each entry has angular_resolution distance to the next entry, they start at start_angle
+  repeated double beam_distance = 9;
+}

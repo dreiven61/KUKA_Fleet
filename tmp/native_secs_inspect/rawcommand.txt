@@ -1,0 +1,64 @@
+Compiled from "SecsRawCommand.java"
+public class com.kuka.secs4kuka.app.msgs.SecsRawCommand extends com.kuka.secs4kuka.app.msgs.SecsCommand {
+  protected java.lang.String _secsCommandName;
+
+  protected com.kuka.secs4kuka.app.msgs.SecsRawCommand$DataSupplier _dataSupplier;
+
+  public com.kuka.secs4kuka.app.msgs.SecsRawCommand(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aconst_null
+       3: checkcast     #1                  // class com/kuka/secs4kuka/app/msgs/SecsRawCommand$DataSupplier
+       6: aconst_null
+       7: invokespecial #3                  // Method "<init>":(Ljava/lang/String;Lcom/kuka/secs4kuka/app/msgs/SecsRawCommand$DataSupplier;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)V
+      10: return
+
+  public com.kuka.secs4kuka.app.msgs.SecsRawCommand(java.lang.String, com.kuka.secs4kuka.app.msgs.ReplyInfo);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aconst_null
+       3: checkcast     #1                  // class com/kuka/secs4kuka/app/msgs/SecsRawCommand$DataSupplier
+       6: aload_2
+       7: invokespecial #3                  // Method "<init>":(Ljava/lang/String;Lcom/kuka/secs4kuka/app/msgs/SecsRawCommand$DataSupplier;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)V
+      10: return
+
+  public com.kuka.secs4kuka.app.msgs.SecsRawCommand(java.lang.String, org.ozsoft.secs4j.format.Data<?>, com.kuka.secs4kuka.app.msgs.ReplyInfo);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: new           #9                  // class com/kuka/secs4kuka/app/msgs/SecsRawCommand$1
+       5: dup
+       6: aload_2
+       7: invokespecial #11                 // Method com/kuka/secs4kuka/app/msgs/SecsRawCommand$1."<init>":(Lorg/ozsoft/secs4j/format/Data;)V
+      10: aload_3
+      11: invokespecial #3                  // Method "<init>":(Ljava/lang/String;Lcom/kuka/secs4kuka/app/msgs/SecsRawCommand$DataSupplier;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)V
+      14: return
+
+  public com.kuka.secs4kuka.app.msgs.SecsRawCommand(java.lang.String, com.kuka.secs4kuka.app.msgs.SecsRawCommand$DataSupplier, com.kuka.secs4kuka.app.msgs.ReplyInfo);
+    Code:
+       0: aload_0
+       1: aload_3
+       2: invokespecial #14                 // Method com/kuka/secs4kuka/app/msgs/SecsCommand."<init>":(Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)V
+       5: aload_0
+       6: aload_1
+       7: putfield      #19                 // Field _secsCommandName:Ljava/lang/String;
+      10: aload_0
+      11: aload_2
+      12: putfield      #23                 // Field _dataSupplier:Lcom/kuka/secs4kuka/app/msgs/SecsRawCommand$DataSupplier;
+      15: return
+
+  public java.lang.String getName();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _secsCommandName:Ljava/lang/String;
+       4: areturn
+
+  public org.ozsoft.secs4j.format.Data<?> getParamData();
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field _dataSupplier:Lcom/kuka/secs4kuka/app/msgs/SecsRawCommand$DataSupplier;
+       4: invokeinterface #27,  1           // InterfaceMethod com/kuka/secs4kuka/app/msgs/SecsRawCommand$DataSupplier.get:()Lorg/ozsoft/secs4j/format/Data;
+       9: areturn
+}

@@ -1,0 +1,21 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.safety.actionexecutor.v1;
+
+option csharp_namespace = "Kuka.MobileRobotics.Safety.ActionExecutor.V1";
+option java_multiple_files = true;
+option java_outer_classname = "BrakeReplaceCommandProto";
+option java_package = "com.kuka.mobilerobotics.safety.actionexecutor.v1";
+
+// Resets the safety stop0 counter since the last brake replacement and saves the current timestamp.
+message BrakeReplaceCommand
+{
+
+}

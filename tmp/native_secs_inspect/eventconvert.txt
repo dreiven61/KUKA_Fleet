@@ -1,0 +1,293 @@
+Compiled from "EventConversionUtil.java"
+public class com.kuka.mobilerobotics.secs.EventConversionUtil {
+  protected static final org.slf4j.Logger LOG;
+
+  public com.kuka.mobilerobotics.secs.EventConversionUtil();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static java.util.List<com.kuka.mobilerobotics.secs.secs.eventreporting.ApplicationEvent> convertEvents(java.util.List<?>);
+    Code:
+       0: new           #7                  // class java/util/ArrayList
+       3: dup
+       4: invokespecial #9                  // Method java/util/ArrayList."<init>":()V
+       7: astore_1
+       8: aload_0
+       9: invokeinterface #10,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      14: astore_2
+      15: aload_2
+      16: invokeinterface #16,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      21: ifeq          103
+      24: aload_2
+      25: invokeinterface #22,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      30: astore_3
+      31: ldc           #26                 // class com/kuka/mobilerobotics/order/events/v1alpha1/Event
+      33: aload_3
+      34: invokevirtual #28                 // Method java/lang/Class.isInstance:(Ljava/lang/Object;)Z
+      37: ifeq          57
+      40: aload_1
+      41: aload_3
+      42: checkcast     #26                 // class com/kuka/mobilerobotics/order/events/v1alpha1/Event
+      45: invokestatic  #34                 // Method convertEvent:(Lcom/kuka/mobilerobotics/order/events/v1alpha1/Event;)Lcom/kuka/mobilerobotics/secs/secs/eventreporting/ApplicationEvent;
+      48: invokeinterface #40,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      53: pop
+      54: goto          100
+      57: ldc           #43                 // class com/kuka/mobilerobotics/order/events/v1alpha1/ExecutionEvent
+      59: aload_3
+      60: invokevirtual #28                 // Method java/lang/Class.isInstance:(Ljava/lang/Object;)Z
+      63: ifeq          83
+      66: aload_1
+      67: aload_3
+      68: checkcast     #43                 // class com/kuka/mobilerobotics/order/events/v1alpha1/ExecutionEvent
+      71: invokestatic  #45                 // Method convertEvent:(Lcom/kuka/mobilerobotics/order/events/v1alpha1/ExecutionEvent;)Lcom/kuka/mobilerobotics/secs/secs/eventreporting/ApplicationEvent;
+      74: invokeinterface #40,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      79: pop
+      80: goto          100
+      83: new           #48                 // class java/lang/IllegalArgumentException
+      86: dup
+      87: aload_3
+      88: invokestatic  #50                 // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      91: invokedynamic #56,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      96: invokespecial #60                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      99: athrow
+     100: goto          15
+     103: aload_1
+     104: areturn
+
+  public static com.kuka.mobilerobotics.secs.secs.eventreporting.ApplicationEvent convertEvent(com.kuka.mobilerobotics.order.events.v1alpha1.ExecutionEvent);
+    Code:
+       0: getstatic     #63                 // Field com/kuka/mobilerobotics/secs/EventConversionUtil$1.$SwitchMap$com$kuka$mobilerobotics$order$events$v1alpha1$ExecutionEvent$TypeCase:[I
+       3: aload_0
+       4: invokevirtual #69                 // Method com/kuka/mobilerobotics/order/events/v1alpha1/ExecutionEvent.getTypeCase:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/ExecutionEvent$TypeCase;
+       7: invokevirtual #73                 // Method com/kuka/mobilerobotics/order/events/v1alpha1/ExecutionEvent$TypeCase.ordinal:()I
+      10: iaload
+      11: tableswitch   { // 1 to 3
+                     1: 36
+                     2: 44
+                     3: 52
+               default: 60
+          }
+      36: aload_0
+      37: invokevirtual #79                 // Method com/kuka/mobilerobotics/order/events/v1alpha1/ExecutionEvent.getAbortingEvent:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/AbortingEvent;
+      40: invokestatic  #83                 // Method convertAbortingEvent:(Lcom/kuka/mobilerobotics/order/events/v1alpha1/AbortingEvent;)Lcom/kuka/mobilerobotics/secs/secs/eventreporting/AbortingEvent;
+      43: areturn
+      44: aload_0
+      45: invokevirtual #87                 // Method com/kuka/mobilerobotics/order/events/v1alpha1/ExecutionEvent.getTerminateEvent:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/TerminateEvent;
+      48: invokestatic  #91                 // Method convertTerminateEvent:(Lcom/kuka/mobilerobotics/order/events/v1alpha1/TerminateEvent;)Lcom/kuka/mobilerobotics/secs/secs/eventreporting/TerminateEvent;
+      51: areturn
+      52: aload_0
+      53: invokevirtual #95                 // Method com/kuka/mobilerobotics/order/events/v1alpha1/ExecutionEvent.getTransportEvent:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/TransportEvent;
+      56: invokestatic  #99                 // Method convertTransportEvent:(Lcom/kuka/mobilerobotics/order/events/v1alpha1/TransportEvent;)Lcom/kuka/mobilerobotics/secs/secs/eventreporting/TransportEvent;
+      59: areturn
+      60: new           #48                 // class java/lang/IllegalArgumentException
+      63: dup
+      64: aload_0
+      65: invokevirtual #69                 // Method com/kuka/mobilerobotics/order/events/v1alpha1/ExecutionEvent.getTypeCase:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/ExecutionEvent$TypeCase;
+      68: invokestatic  #50                 // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      71: invokedynamic #103,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      76: invokespecial #60                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      79: athrow
+
+  public static com.kuka.mobilerobotics.secs.secs.eventreporting.ApplicationEvent convertEvent(com.kuka.mobilerobotics.order.events.v1alpha1.Event);
+    Code:
+       0: getstatic     #104                // Field com/kuka/mobilerobotics/secs/EventConversionUtil$1.$SwitchMap$com$kuka$mobilerobotics$order$events$v1alpha1$Event$TypeCase:[I
+       3: aload_0
+       4: invokevirtual #107                // Method com/kuka/mobilerobotics/order/events/v1alpha1/Event.getTypeCase:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/Event$TypeCase;
+       7: invokevirtual #110                // Method com/kuka/mobilerobotics/order/events/v1alpha1/Event$TypeCase.ordinal:()I
+      10: iaload
+      11: tableswitch   { // 1 to 5
+                     1: 44
+                     2: 52
+                     3: 60
+                     4: 68
+                     5: 76
+               default: 84
+          }
+      44: aload_0
+      45: invokevirtual #113                // Method com/kuka/mobilerobotics/order/events/v1alpha1/Event.getAbortingEvent:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/AbortingEvent;
+      48: invokestatic  #83                 // Method convertAbortingEvent:(Lcom/kuka/mobilerobotics/order/events/v1alpha1/AbortingEvent;)Lcom/kuka/mobilerobotics/secs/secs/eventreporting/AbortingEvent;
+      51: areturn
+      52: aload_0
+      53: invokevirtual #114                // Method com/kuka/mobilerobotics/order/events/v1alpha1/Event.getSystemEvent:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/SystemEvent;
+      56: invokestatic  #118                // Method convertSystemEvent:(Lcom/kuka/mobilerobotics/order/events/v1alpha1/SystemEvent;)Lcom/kuka/mobilerobotics/secs/secs/eventreporting/SystemEvent;
+      59: areturn
+      60: aload_0
+      61: invokevirtual #122                // Method com/kuka/mobilerobotics/order/events/v1alpha1/Event.getTerminateEvent:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/TerminateEvent;
+      64: invokestatic  #91                 // Method convertTerminateEvent:(Lcom/kuka/mobilerobotics/order/events/v1alpha1/TerminateEvent;)Lcom/kuka/mobilerobotics/secs/secs/eventreporting/TerminateEvent;
+      67: areturn
+      68: aload_0
+      69: invokevirtual #123                // Method com/kuka/mobilerobotics/order/events/v1alpha1/Event.getTransportEvent:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/TransportEvent;
+      72: invokestatic  #99                 // Method convertTransportEvent:(Lcom/kuka/mobilerobotics/order/events/v1alpha1/TransportEvent;)Lcom/kuka/mobilerobotics/secs/secs/eventreporting/TransportEvent;
+      75: areturn
+      76: aload_0
+      77: invokevirtual #124                // Method com/kuka/mobilerobotics/order/events/v1alpha1/Event.getVehicleEvent:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/VehicleEvent;
+      80: invokestatic  #128                // Method convertVehicleEvent:(Lcom/kuka/mobilerobotics/order/events/v1alpha1/VehicleEvent;)Lcom/kuka/mobilerobotics/secs/secs/eventreporting/ApplicationEvent;
+      83: areturn
+      84: new           #48                 // class java/lang/IllegalArgumentException
+      87: dup
+      88: aload_0
+      89: invokevirtual #107                // Method com/kuka/mobilerobotics/order/events/v1alpha1/Event.getTypeCase:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/Event$TypeCase;
+      92: invokestatic  #50                 // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      95: invokedynamic #103,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     100: invokespecial #60                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+     103: athrow
+
+  public static com.kuka.mobilerobotics.secs.secs.eventreporting.AbortingEvent convertAbortingEvent(com.kuka.mobilerobotics.order.events.v1alpha1.AbortingEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #132                // Method com/kuka/mobilerobotics/order/events/v1alpha1/AbortingEvent.hasCommandSpecification:()Z
+       4: ifeq          17
+       7: aload_0
+       8: invokevirtual #137                // Method com/kuka/mobilerobotics/order/events/v1alpha1/AbortingEvent.getCommandSpecification:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/CommandSpecification;
+      11: invokevirtual #141                // Method com/kuka/mobilerobotics/order/events/v1alpha1/CommandSpecification.hasCommandIdSpecification:()Z
+      14: ifne          37
+      17: getstatic     #146                // Field LOG:Lorg/slf4j/Logger;
+      20: ldc           #150                // String Can not handle AbortingEvent due to missing CommandIdSpecification! {}
+      22: aload_0
+      23: new           #152                // class java/lang/RuntimeException
+      26: dup
+      27: ldc           #154                // String Incomplete AbortingEvent
+      29: invokespecial #156                // Method java/lang/RuntimeException."<init>":(Ljava/lang/String;)V
+      32: invokeinterface #157,  4          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      37: new           #163                // class com/kuka/mobilerobotics/secs/secs/eventreporting/AbortingEvent
+      40: dup
+      41: aload_0
+      42: invokevirtual #137                // Method com/kuka/mobilerobotics/order/events/v1alpha1/AbortingEvent.getCommandSpecification:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/CommandSpecification;
+      45: invokevirtual #165                // Method com/kuka/mobilerobotics/order/events/v1alpha1/CommandSpecification.getCommandIdSpecification:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/CommandIdSpecification;
+      48: invokevirtual #169                // Method com/kuka/mobilerobotics/order/events/v1alpha1/CommandIdSpecification.getSubCommandId:()Lcom/google/protobuf/StringValue;
+      51: invokevirtual #175                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+      54: aload_0
+      55: invokevirtual #181                // Method com/kuka/mobilerobotics/order/events/v1alpha1/AbortingEvent.getVehicleId:()Ljava/lang/String;
+      58: aload_0
+      59: invokevirtual #184                // Method com/kuka/mobilerobotics/order/events/v1alpha1/AbortingEvent.getAlternativeEquipmentPortId:()Ljava/lang/String;
+      62: invokespecial #187                // Method com/kuka/mobilerobotics/secs/secs/eventreporting/AbortingEvent."<init>":(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+      65: areturn
+
+  public static com.kuka.mobilerobotics.secs.secs.eventreporting.SystemEvent convertSystemEvent(com.kuka.mobilerobotics.order.events.v1alpha1.SystemEvent);
+    Code:
+       0: new           #190                // class com/kuka/mobilerobotics/secs/secs/eventreporting/SystemEvent
+       3: dup
+       4: aload_0
+       5: invokevirtual #192                // Method com/kuka/mobilerobotics/order/events/v1alpha1/SystemEvent.getAction:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/SystemEvent$SystemEventType;
+       8: invokevirtual #198                // Method com/kuka/mobilerobotics/order/events/v1alpha1/SystemEvent$SystemEventType.name:()Ljava/lang/String;
+      11: invokestatic  #203                // Method com/kuka/mobilerobotics/secs/secs/eventreporting/SystemEvent$SystemEventType.valueOf:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/secs/secs/eventreporting/SystemEvent$SystemEventType;
+      14: invokespecial #208                // Method com/kuka/mobilerobotics/secs/secs/eventreporting/SystemEvent."<init>":(Lcom/kuka/mobilerobotics/secs/secs/eventreporting/SystemEvent$SystemEventType;)V
+      17: areturn
+
+  public static com.kuka.mobilerobotics.secs.secs.eventreporting.TerminateEvent convertTerminateEvent(com.kuka.mobilerobotics.order.events.v1alpha1.TerminateEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #211                // Method com/kuka/mobilerobotics/order/events/v1alpha1/TerminateEvent.hasCommandSpecification:()Z
+       4: ifeq          17
+       7: aload_0
+       8: invokevirtual #214                // Method com/kuka/mobilerobotics/order/events/v1alpha1/TerminateEvent.getCommandSpecification:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/CommandSpecification;
+      11: invokevirtual #141                // Method com/kuka/mobilerobotics/order/events/v1alpha1/CommandSpecification.hasCommandIdSpecification:()Z
+      14: ifne          37
+      17: getstatic     #146                // Field LOG:Lorg/slf4j/Logger;
+      20: ldc           #215                // String Can not handle TerminateEvent due to missing CommandIdSpecification! {}
+      22: aload_0
+      23: new           #152                // class java/lang/RuntimeException
+      26: dup
+      27: ldc           #217                // String Incomplete TerminateEvent
+      29: invokespecial #156                // Method java/lang/RuntimeException."<init>":(Ljava/lang/String;)V
+      32: invokeinterface #157,  4          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      37: new           #219                // class com/kuka/mobilerobotics/secs/secs/eventreporting/TerminateEvent
+      40: dup
+      41: aload_0
+      42: invokevirtual #214                // Method com/kuka/mobilerobotics/order/events/v1alpha1/TerminateEvent.getCommandSpecification:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/CommandSpecification;
+      45: invokevirtual #165                // Method com/kuka/mobilerobotics/order/events/v1alpha1/CommandSpecification.getCommandIdSpecification:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/CommandIdSpecification;
+      48: invokevirtual #169                // Method com/kuka/mobilerobotics/order/events/v1alpha1/CommandIdSpecification.getSubCommandId:()Lcom/google/protobuf/StringValue;
+      51: invokevirtual #175                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+      54: aload_0
+      55: invokevirtual #221                // Method com/kuka/mobilerobotics/order/events/v1alpha1/TerminateEvent.getVehicleId:()Ljava/lang/String;
+      58: aload_0
+      59: invokevirtual #222                // Method com/kuka/mobilerobotics/order/events/v1alpha1/TerminateEvent.getResultCode:()I
+      62: invokespecial #225                // Method com/kuka/mobilerobotics/secs/secs/eventreporting/TerminateEvent."<init>":(Ljava/lang/String;Ljava/lang/String;I)V
+      65: areturn
+
+  public static com.kuka.mobilerobotics.secs.secs.eventreporting.TransportEvent convertTransportEvent(com.kuka.mobilerobotics.order.events.v1alpha1.TransportEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #228                // Method com/kuka/mobilerobotics/order/events/v1alpha1/TransportEvent.hasCommandSpecification:()Z
+       4: ifeq          17
+       7: aload_0
+       8: invokevirtual #231                // Method com/kuka/mobilerobotics/order/events/v1alpha1/TransportEvent.getCommandSpecification:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/CommandSpecification;
+      11: invokevirtual #141                // Method com/kuka/mobilerobotics/order/events/v1alpha1/CommandSpecification.hasCommandIdSpecification:()Z
+      14: ifne          37
+      17: getstatic     #146                // Field LOG:Lorg/slf4j/Logger;
+      20: ldc           #232                // String Can not handle TransportEvent due to missing CommandIdSpecification! {}
+      22: aload_0
+      23: new           #152                // class java/lang/RuntimeException
+      26: dup
+      27: ldc           #234                // String Incomplete TransportEvent
+      29: invokespecial #156                // Method java/lang/RuntimeException."<init>":(Ljava/lang/String;)V
+      32: invokeinterface #157,  4          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      37: new           #236                // class com/kuka/mobilerobotics/secs/secs/eventreporting/TransportEvent
+      40: dup
+      41: aload_0
+      42: invokevirtual #238                // Method com/kuka/mobilerobotics/order/events/v1alpha1/TransportEvent.getAction:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/TransportEvent$TransportEventType;
+      45: invokevirtual #241                // Method com/kuka/mobilerobotics/order/events/v1alpha1/TransportEvent$TransportEventType.name:()Ljava/lang/String;
+      48: invokestatic  #244                // Method com/kuka/mobilerobotics/secs/secs/eventreporting/TransportEvent$TransportType.valueOf:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/secs/secs/eventreporting/TransportEvent$TransportType;
+      51: aload_0
+      52: invokevirtual #249                // Method com/kuka/mobilerobotics/order/events/v1alpha1/TransportEvent.getVehicleId:()Ljava/lang/String;
+      55: aload_0
+      56: invokevirtual #250                // Method com/kuka/mobilerobotics/order/events/v1alpha1/TransportEvent.getCarrierId:()Ljava/lang/String;
+      59: aload_0
+      60: invokevirtual #231                // Method com/kuka/mobilerobotics/order/events/v1alpha1/TransportEvent.getCommandSpecification:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/CommandSpecification;
+      63: invokevirtual #165                // Method com/kuka/mobilerobotics/order/events/v1alpha1/CommandSpecification.getCommandIdSpecification:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/CommandIdSpecification;
+      66: invokevirtual #253                // Method com/kuka/mobilerobotics/order/events/v1alpha1/CommandIdSpecification.getCommandId:()Ljava/lang/String;
+      69: aload_0
+      70: invokevirtual #231                // Method com/kuka/mobilerobotics/order/events/v1alpha1/TransportEvent.getCommandSpecification:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/CommandSpecification;
+      73: invokevirtual #165                // Method com/kuka/mobilerobotics/order/events/v1alpha1/CommandSpecification.getCommandIdSpecification:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/CommandIdSpecification;
+      76: invokevirtual #169                // Method com/kuka/mobilerobotics/order/events/v1alpha1/CommandIdSpecification.getSubCommandId:()Lcom/google/protobuf/StringValue;
+      79: invokevirtual #175                // Method com/google/protobuf/StringValue.getValue:()Ljava/lang/String;
+      82: aload_0
+      83: invokevirtual #256                // Method com/kuka/mobilerobotics/order/events/v1alpha1/TransportEvent.getVehiclePayloadCompartmentId:()Ljava/lang/String;
+      86: aload_0
+      87: invokevirtual #259                // Method com/kuka/mobilerobotics/order/events/v1alpha1/TransportEvent.getEquipmentPortId:()Ljava/lang/String;
+      90: aload_0
+      91: invokevirtual #262                // Method com/kuka/mobilerobotics/order/events/v1alpha1/TransportEvent.getErrorCode:()I
+      94: invokespecial #265                // Method com/kuka/mobilerobotics/secs/secs/eventreporting/TransportEvent."<init>":(Lcom/kuka/mobilerobotics/secs/secs/eventreporting/TransportEvent$TransportType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)V
+      97: areturn
+
+  public static com.kuka.mobilerobotics.secs.secs.eventreporting.ApplicationEvent convertVehicleEvent(com.kuka.mobilerobotics.order.events.v1alpha1.VehicleEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #268                // Method com/kuka/mobilerobotics/order/events/v1alpha1/VehicleEvent.getAction:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/VehicleEvent$VehicleEventType;
+       4: getstatic     #273                // Field com/kuka/mobilerobotics/order/events/v1alpha1/VehicleEvent$VehicleEventType.VEHICLE_STATE_CHANGED:Lcom/kuka/mobilerobotics/order/events/v1alpha1/VehicleEvent$VehicleEventType;
+       7: if_acmpne     32
+      10: new           #279                // class com/kuka/mobilerobotics/secs/secs/eventreporting/VehicleAppStateChangedEvent
+      13: dup
+      14: aload_0
+      15: invokevirtual #281                // Method com/kuka/mobilerobotics/order/events/v1alpha1/VehicleEvent.getVehicleId:()Ljava/lang/String;
+      18: aload_0
+      19: invokevirtual #282                // Method com/kuka/mobilerobotics/order/events/v1alpha1/VehicleEvent.getVehicleState:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/VehicleEvent$VehicleState;
+      22: invokevirtual #286                // Method com/kuka/mobilerobotics/order/events/v1alpha1/VehicleEvent$VehicleState.name:()Ljava/lang/String;
+      25: invokestatic  #289                // Method com/kuka/mobilerobotics/secs/state/VehicleState.valueOf:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/secs/state/VehicleState;
+      28: invokespecial #294                // Method com/kuka/mobilerobotics/secs/secs/eventreporting/VehicleAppStateChangedEvent."<init>":(Ljava/lang/String;Lcom/kuka/mobilerobotics/secs/state/VehicleState;)V
+      31: areturn
+      32: new           #297                // class com/kuka/mobilerobotics/secs/secs/eventreporting/VehicleEvent
+      35: dup
+      36: aload_0
+      37: invokevirtual #281                // Method com/kuka/mobilerobotics/order/events/v1alpha1/VehicleEvent.getVehicleId:()Ljava/lang/String;
+      40: new           #299                // class java/util/HashSet
+      43: dup
+      44: aload_0
+      45: invokevirtual #301                // Method com/kuka/mobilerobotics/order/events/v1alpha1/VehicleEvent.getVehiclePayloadCompartmentIdList:()Lcom/google/protobuf/ProtocolStringList;
+      48: invokespecial #305                // Method java/util/HashSet."<init>":(Ljava/util/Collection;)V
+      51: aload_0
+      52: invokevirtual #268                // Method com/kuka/mobilerobotics/order/events/v1alpha1/VehicleEvent.getAction:()Lcom/kuka/mobilerobotics/order/events/v1alpha1/VehicleEvent$VehicleEventType;
+      55: invokevirtual #308                // Method com/kuka/mobilerobotics/order/events/v1alpha1/VehicleEvent$VehicleEventType.name:()Ljava/lang/String;
+      58: invokestatic  #309                // Method com/kuka/mobilerobotics/secs/secs/eventreporting/VehicleEvent$ActionType.valueOf:(Ljava/lang/String;)Lcom/kuka/mobilerobotics/secs/secs/eventreporting/VehicleEvent$ActionType;
+      61: invokespecial #314                // Method com/kuka/mobilerobotics/secs/secs/eventreporting/VehicleEvent."<init>":(Ljava/lang/String;Ljava/util/Set;Lcom/kuka/mobilerobotics/secs/secs/eventreporting/VehicleEvent$ActionType;)V
+      64: areturn
+
+  static {};
+    Code:
+       0: ldc           #35                 // class com/kuka/mobilerobotics/secs/EventConversionUtil
+       2: invokestatic  #317                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #146                // Field LOG:Lorg/slf4j/Logger;
+       8: return
+}

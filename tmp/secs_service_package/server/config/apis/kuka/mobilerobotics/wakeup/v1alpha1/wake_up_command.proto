@@ -1,0 +1,43 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.wakeup.v1alpha1;
+
+import "kuka/common/v1alpha1/host_port.proto";
+import "google/protobuf/duration.proto";
+
+option java_package = "com.kuka.mobilerobotics.wakeup.v1alpha1";
+option java_outer_classname = "WakeUpCommandProto";
+option java_multiple_files = true;
+
+// A wake up command which can be executed by the fleet manager. Wakes up the robot by sending a gRPC request to the
+// robot's Battery Management System.
+message WakeUpCommand
+{
+    // Identify which robot should wake up by its uuid or ip address / port
+    oneof robot_identifier
+    {
+        // The uuid of the robot which should be woken up.
+        string robot_uuid = 1;
+
+        // ip address and port of the robot's battery management system
+        kuka.common.v1alpha1.HostPort bms_address = 2;
+    }
+
+    // optional.
+    // timeout in seconds
+    // If set (value greater than 0), the service will wait the given time period for the robot to register at the
+    // Robot Manager. Once the registration message has been received, the robot is considered online again, and the
+    // command finishes successfully.
+    // If set and when the time has elapsed, the action executor sends the
+    // state finished and timeout. This does not mean that the wake up process is aborted. It is possible that
+    // the robot will be online some time later.
+    // If not set, the service will wait until the robot is registered at the Robot Manager.
+    google.protobuf.Duration timeout = 3;
+}

@@ -1,0 +1,29 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.agv.laser.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+import "kuka/core/geometry/v1/transform_2d.proto";
+
+option java_package = "com.kuka.mobilerobotics.agv.laser.v1alpha1";
+option java_outer_classname = "LaserCalibrationProgressDataProto";
+option java_multiple_files = true;
+
+
+// This message contains the laser offsets and progress information of the laser calibration.
+message LaserCalibrationProgessData {
+	
+  //A mapping from laser id to the offset of the laser
+  map<int32, kuka.core.geometry.v1.Transform2D> laser_offsets = 1;
+
+  // The progress of the laser calibration (between 0 and 1)
+  google.protobuf.DoubleValue progress = 2;
+
+}

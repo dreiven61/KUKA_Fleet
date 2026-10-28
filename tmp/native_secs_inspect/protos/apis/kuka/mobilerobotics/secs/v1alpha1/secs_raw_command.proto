@@ -1,0 +1,36 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.secs.v1alpha1;
+
+import "google/protobuf/any.proto";
+
+option java_package = "com.kuka.secs.v1alpha1";
+option java_outer_classname = "SecsRawCommandProto";
+option java_multiple_files = false;
+
+// The command that encapsulates a SECS command.
+message SecsRawCommand
+{
+	// the command name
+	string command = 1;
+
+	// the command parameter as SML
+	string data_sml = 2;
+
+	// the command parameter as byte array
+	bytes data_bytes = 3;
+
+	// The context of this command, can be used for arbitrary, project-specific data. 
+	// Typical contexts contain a timestamp, an origin or an identifier from an external system. 
+	// [optional]
+	google.protobuf.Any context = 4;
+
+}
+

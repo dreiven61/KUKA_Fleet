@@ -1,0 +1,41 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.common.battery.v1alpha1;
+
+import "google/protobuf/any.proto";
+
+option csharp_namespace = "Kuka.Common.Battery.V1Alpha1";
+option java_multiple_files = true;
+option java_outer_classname = "ChargingCommandProto";
+option java_package = "com.kuka.common.battery.v1alpha1";
+
+//Command to control charging.
+message ChargingCommand
+{
+  // Charging state enumeration.
+  enum Enum
+  {
+
+    // The state is unspecified. Commands that are unspecified result in an error.
+    UNSPECIFIED = 0;
+
+    // start charging
+    START = 1;
+
+    // stop charging
+    STOP = 2;
+  }
+
+  // The charging command.
+  ChargingCommand.Enum command = 1;
+
+  // Additional charging parameters.
+  repeated google.protobuf.Any params = 2;
+}

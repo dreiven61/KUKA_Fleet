@@ -1,0 +1,22 @@
+{
+  "stage": "prepared",
+  "created_at": "2026-10-23T07:10:33.413427+00:00",
+  "request": {
+    "orgId": "UNIVERSAL",
+    "requestId": "70df4e0369b44ec8b4e03948972d9305",
+    "missionCode": "SECS_API_ONCE_20261023_161033_edca7b",
+    "missionType": "RACK_MOVE",
+    "robotType": "LIFT",
+    "robotIds": [
+      "1"
+    ],
+    "robotModels": [
+      "KMP1500I"
+    ],
+    "containerModelCode": "SIM_TRAY_001",
+    "containerCode": "SIM_CARGO_001",
+    "templateCode": "W000000002",
+    "priority": 1,
+    "lockRobotAfterFinish": false
+  }
+}

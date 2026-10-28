@@ -1,0 +1,118 @@
+uuid: "00000000-0000-0000-0000-000000000000"
+name: ''
+compress: false
+# The host and port of the server's mqtt broker
+server:
+  host: "mqtt-broker"
+  port: 8883
+# The data of the following data providers is made available through the robot controller's data provider.
+# This list may be extended with custom data provider services.
+dataProviders:
+  - host: map
+    port: 50010
+    dataTypes:
+      - kuka.mobilerobotics.localizer.v1alpha1.MapData
+      - kuka.diagnostics.v1alpha1.ModuleData
+#  - host: krcs-basic-data
+#    port: 7999
+#    dataTypes:
+#      - kuka.mobilerobotics.graph.v1alpha1.GraphData
+  - host: station
+    port: 50110
+    dataTypes:
+      - kuka.mobilerobotics.station.v1alpha1.StationData
+      - kuka.diagnostics.v1alpha1.ModuleData
+  - host: payload
+    port: 50120
+    dataTypes:
+      - kuka.mobilerobotics.payload.v1alpha1.PayloadData
+      - kuka.mobilerobotics.payload.v1alpha1.PayloadTypesData
+      - kuka.diagnostics.v1alpha1.ModuleData
+  - host: location
+    port: 50100
+    dataTypes:
+      - kuka.mobilerobotics.finelocalization.v1alpha1.LocationData
+      - kuka.diagnostics.v1alpha1.ModuleData
+  - host: objectmodel
+    port: 50170
+    dataTypes:
+      - kuka.mobilerobotics.objects.v1alpha1.ObjectModelData
+      - kuka.diagnostics.v1alpha1.ModuleData
+#  - host: fleetmanager
+#    port: 50070
+#    dataTypes:
+#      - kuka.mobilerobotics.fleetmanager.v1alpha1.FleetData
+# Any action executable by one of the following action executors is commandable from the robot controller's action executor.
+# This list may be extended with custom action executor services.
+actionExecutors:
+  - host: map
+    port: 50010
+    actionTypes:
+        - kuka.mobilerobotics.localizer.v1alpha1.ManageMapDataCommand
+  - host: station
+    port: 50110
+    actionTypes:
+        - kuka.mobilerobotics.station.v1alpha1.ManageStationDataCommand
+  - host: payload
+    port: 50120
+    actionTypes:
+      - kuka.mobilerobotics.payload.v1alpha1.ManagePayloadDataCommand
+      - kuka.mobilerobotics.payload.v1alpha1.ManagePayloadTypeDataCommand        
+  - host: location
+    port: 50100
+    actionTypes:
+        - kuka.mobilerobotics.finelocalization.v1alpha1.ManageLocationDataCommand
+  - host: objectmodel
+    port: 50170
+    actionTypes:
+        - kuka.mobilerobotics.objects.v1alpha1.ManageObjectModelDataCommand
+#  - host: fleetmanager
+#    port: 50070
+#    actionTypes:
+#        - kuka.mobilerobotics.fleetmanager.v1alpha1.GraphMotionCommand
+#        - kuka.mobilerobotics.fleetmanager.v1alpha1.AssignToGraphCommand
+  - host: diagnostics
+    port: 50140
+    actionTypes:
+        - kuka.diagnostics.v1alpha1.CreateDiagnosticsPackageCommand
+  - host: orderengine
+    port: 50200
+    actionTypes:
+      - kuka.mobilerobotics.order.v1alpha1.OrderCommand
+  - host: wakeup
+    port: 50220
+    actionTypes:
+      - kuka.mobilerobotics.wakeup.v1alpha1.WakeUpCommand
+  - host: secs
+    port: 50230
+    actionTypes:
+      - kuka.mobilerobotics.secs.v1alpha1.SecsEventCommand
+healthCheck:
+  interval: 1   # in seconds
+  timeout: 250  # in milliseconds
+# apply rate limits to the gRPC server
+# see https://resilience4j.readme.io/docs/ratelimiter
+rateLimits:
+  # target "*" applies a global rate limit
+  - target: "*"
+    timeoutDurationInSeconds: 5
+    limitRefreshPeriodInSeconds: 5
+    limitForPeriod: 100
+    # targets without "/" apply a rate limit to whole services
+  - target: "kuka.actionexecutor.v1alpha1.ActionExecutorService"
+    timeoutDurationInSeconds: 5
+    limitRefreshPeriodInSeconds: 5
+    limitForPeriod: 100
+    # targets with "/" apply a rate limit to individual methods
+  - target: "kuka.dataprovider.v1alpha1.DataProviderService/SubscribeData"
+    timeoutDurationInSeconds: 5
+    limitRefreshPeriodInSeconds: 5
+    limitForPeriod: 100
+grpc:
+  # Deadlines that shall be used when calling gRPC service methods.
+  # If a RPC does not produce a response within this timeframe, the client will stop waiting and return an error.
+  # These deadline configurations are only used for RPCs, that will actually stop after some time.
+  # Subscribe-style RPCs do not finish by definition. For those, the deadlines are irrelevant.
+  deadlines:
+    # global deadline of 5s
+    deadlineInMilliSeconds: 5000

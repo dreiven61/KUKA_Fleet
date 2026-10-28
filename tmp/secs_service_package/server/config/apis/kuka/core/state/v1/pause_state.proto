@@ -1,0 +1,44 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.core.state.v1;
+
+option csharp_namespace = "Kuka.Core.State.V1";
+option java_package = "com.kuka.core.state.v1";
+option java_outer_classname = "PauseStateProto";
+option java_multiple_files = true;
+option go_package = "kuka.com/genproto/kuka/core/state/pausestate;pausestate";
+
+
+// The state of some entity that can be pauses and resumed.
+message PauseState
+{
+  // The enumeration of all pause states.
+  enum Enum
+	{
+    // The state is unknown.
+    UNKNOWN = 0;
+
+    // The entity is not paused.
+    UNPAUSED = 1;
+
+    // The entity as been paused, i.e. a pause signal
+    // has been triggered and the entity is currently
+    // trying to pause.
+    PAUSING = 2;
+
+    // The entity is paused.
+    PAUSED = 3;
+
+    // The entity has been resumed, i.e. a resume signal
+    // has been triggered and the entity is currently
+    // trying to resume.
+    RESUMING = 4;
+  }
+}

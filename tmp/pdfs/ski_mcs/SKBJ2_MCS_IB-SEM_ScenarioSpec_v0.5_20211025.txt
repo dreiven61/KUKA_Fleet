@@ -1,0 +1,1699 @@
+
+=== PDF PAGE 1 ===
+ 
+ Confidential 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+MCS Scenario Specification 
+(IB-SEM) 
+ 
+ 
+SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 
+ 
+문서번호: PS9902 
+ 
+ 
+Version 0.5 
+ 
+2021-07-22 
+ 
+ 
+ 
+ 
+
+=== PDF PAGE 2 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+2 
+ Confidential 
+사 용 권 한 
+ 
+본 문서에 대한 서명은 SK Innovation 내부에서 본 문서에 대하여 수행 및 
+유지관리의 책임이 있음을 인정하는 것임. 
+ 
+본 문서는 작성, 검토, 승인하여 승인된 원본을 보관한다. 
+작성자:  일자:  
+ 
+검토자:  일자:  
+ 
+ 
+본인은 서명으로써 본 문서가 SK Innovation 의 업무활동 범위 내에서 사용될 것을 
+인가함. 
+ 
+ 
+승인자:  일자:  
+ 
+ 
+제.개정 이력 
+ 
+버전 변경일자 제.개정 내용 작성자 
+0.1 2021-04-02 최초 등록 황인소 
+0.2 2021-06-11 
+-. 포맷 및 일부 이미지 변경 
+-. Page 10. Host Command(RCMD = BUZZER) 추가 
+-. Page 14. Port Event 추가 
+-. Page 15. Normal Transfer Scenario Comments 추가 
+황인소 
+0.3 2021-06-23 -. 1.5.10 DirectionChange Scenario Added 이재상 
+0.4 2021-07-08 -. Page 14. Port Event Comment 수정 
+-. Page 15, FoilBobin Direction Change 변경 
+이진철 
+0.5 2021-07-22 -. Page 15, FoilBobin Direction Change 삭제 이진철 
+    
+    
+    
+
+=== PDF PAGE 3 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+3 
+ Confidential 
+    
+    
+ 
+
+=== PDF PAGE 4 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+4 
+ Confidential 
+  
+Table of Contents 
+1. OPERATION SCENARIO ................................ ................................ ................................ . 6 
+1.1. Initialize ................................ ................................ ................................ ..........................  6 
+1.1.1. OFFLINE → ONLINE ................................ ................................ ...............................  6 
+1.1.2. ONLINE → OFFLINE ................................ ................................ ...............................  8 
+1.2. REMOTE COMMAND ................................ ................................ ................................ ... 9 
+1.2.1. PAUSE Command ................................ ................................ ................................ .... 9 
+1.2.2. RESUME Command ................................ ................................ ................................  9 
+1.2.3. CANCEL Command ................................ ................................ ................................ . 9 
+1.2.4. ABORT Command................................ ................................ ................................ .. 10 
+1.2.5. UPDATE Command ................................ ................................ ...............................  10 
+1.2.6. BUZZER Command ................................ ................................ ...............................  11 
+1.3. INFORMATION REQUEST ................................ ................................ ........................  12 
+1.3.1. Alarm List REQUEST ................................ ................................ .............................  12 
+1.4. Vehicle UNIT EVENT ................................ ................................ ................................ .. 13 
+1.4.1. VehicleInstalled ................................ ................................ ................................ ....... 13 
+1.4.2. VehicleRemoved................................ ................................ ................................ ..... 13 
+1.4.3. VehicleStatusChanged................................ ................................ ...........................  13 
+1.5. Port Transfer State EVENT................................ ................................ .......................  14 
+1.5.1. PortInService................................ ................................ ................................ ........... 14 
+1.5.2. PortOutOfService ................................ ................................ ................................ ... 14 
+1.5.3. PortTransferBlocked................................ ................................ ...............................  14 
+1.5.4. PortReadyToLoad ................................ ................................ ................................ .. 14 
+1.5.5. PortReadyToUnload ................................ ................................ ...............................  15 
+1.5.6. PortTypeChanged ................................ ................................ ................................ .. 15 
+1.5.7. PortModeChanged ................................ ................................ ................................ . 15 
+1.5.8. CarrierLoadRequest ................................ ................................ ...............................  15 
+1.5.9. CarrierUnLoadRequest ................................ ................................ ..........................  15 
+1.5.10 FoilBobbin Direction Change ................................ ................................ ................  16 
+1.6. TRANSFER COMMAND................................ ................................ .............................  17 
+1.6.1. Normal Scenario ................................ ................................ ................................ ..... 17 
+2. ABNORMAL SCENARIO ................................ ................................ ...............................  19 
+2.1 CANCEL ................................ ................................ ................................ ........................  19 
+2.1.1. Cancel (Normal) ................................ ................................ ................................ ...... 19 
+2.1.2. Cancel (Fail) ................................ ................................ ................................ ............ 20 
+2.2. ABORT ................................ ................................ ................................ .........................  21 
+2.2.1. Abort (Normal) ................................ ................................ ................................ ........ 21 
+2.2.2. Abort (Fail) ................................ ................................ ................................ ...............  22 
+2.3. TRANSPORT COMMAND DELETE (ON TSC) ................................ .......................  23 
+2.3.1. Transport Command Delete – without CST ................................ .........................  23 
+2.3.2. Transport Command Delete – with CST................................ ...............................  24 
+
+=== PDF PAGE 5 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+5 
+ Confidential 
+2.4. CARRIER REMOVED ................................ ................................ ................................ . 26 
+2.4.1. Carrier on VEHICLE Removed with Manual ................................ ........................  26 
+2.5. DESTINATION CHANGE ................................ ................................ ...........................  27 
+2.5.1. Destination change (Before Arrive at Source) ................................ .....................  27 
+2.5.2. Destination change (After Departure) ................................ ................................ ... 27 
+2.6. ALARM ................................ ................................ ................................ .........................  29 
+2.6.1. Alarm Set/Clear ................................ ................................ ................................ ...... 29 
+2.6.2. Alarm Set/Clear Moving VEHICLE ................................ ................................ ....... 30 
+2.7. ALTERNATE TRANSFERRING(211) ................................ ................................ ....... 31 
+2.7.1. CST Loading Port Interface Time Error at Source ................................ ..............  31 
+2.7.2. CST Unloading Port Interface Time Error at Dest ................................ ...............  32 
+2.7.3. Vehicle Down (before vehicle arrived at source) ................................ .................  33 
+2.7.4. Vehicle Down (after vehicle departed from source) ................................ ............ 35 
+2.8. TSC CONTROLLER DOWN  UP ................................ ................................ ........... 36 
+2.8.1. TSC Controller down  up ................................ ................................ ....................  36 
+2.9. COMMAND................................ ................................ ................................ ...................  39 
+2.9.1. Duplication Command ................................ ................................ ............................  39 
+2.9.2. No Command ................................ ................................ ................................ .......... 40 
+ 
+
+=== PDF PAGE 6 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+6 
+ Confidential 
+ 
+1. Operation Scenario 
+1.1. Initialize 
+1. a) Establish communication  isTSCStatePaused  reconcile  resume command 
+  b) Establish communication  isTSCStateNotPaused  pause command 
+c) TSCStatePaused  reconcile  resume command 
+d) EQP Online Changed by Only S1F17 Command 
+ 
+1.1.1. OFFLINE → ONLINE 
+HOST  TSC Controller  Comments 
+Connect on MCS 
+(toggle)    *Online Attempt 
+Establish 
+Communications 
+Request 
+S1F13     
+  S1F14 Establish 
+Communications ACK  <COMMACK=0,1> 
+COMMACK = 1     
+Establish 
+Communications 
+Request 
+S1F13     
+  S1F14 Establish 
+Communications ACK  Until COMMACK=0 
+COMMACK = 0     
+Request ON-LINE S1F17    *Mode Change by Host 
+  S1F18 ON-LINE 
+Acknowledge  <ONLACK=0,1,2> 
+ONLACK = 1     
+  S1F1 AreyouThere   
+IamHere S1F2     
+Request ON-LINE S1F17    *Mode Change by Host 
+  S1F18 ON-LINE 
+Acknowledge  <ONLACK=0 or 2> 
+ONLACK = 0 or 2     
+
+=== PDF PAGE 7 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+7 
+ Confidential 
+Data and Time Set 
+Request S2F31     
+  S2F32 Data and Time Set 
+Request ACK   
+     
+Selected Equipment 
+Status Request S1F3    TSCState 
+  S1F4 Selected Equipment 
+Status Data  <TSCState=2> 
+Pause on MCS 
+If TSCState is auto     
+Selected Equipment 
+Status Request S1F3    
+ControlState 
+EnhancedCarriers 
+EnhancedTransfers 
+EnhancedVehicles 
+UnitAlarmStatList 
+EnhancedPorts 
+  S1F4 Selected Equipment 
+Status Data   
+Resume on MCS 
+(toggle)     
+Host Command 
+(RESUME) S2F41     
+  S2F42 ACK  
+(HCACK=0x00,0x04)  *Paused → Auto change 
+Send 
+  S6F11 TSCAutoCompleted  *TSCState [Auto] 
+ACK S6F12     
+ 
+
+=== PDF PAGE 8 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+8 
+ Confidential 
+1.1.2. ONLINE → OFFLINE 
+ 
+HOST  TSC Controller  Comments 
+Disconnect on MCS 
+(toggle)     
+Request OFF-LINE S1F15    *OFF-LINE Change by 
+Host 
+  S1F16 OFF-LINE 
+Acknowledge   
+  S6F11 Offline  *OFF-LINE Change 
+Report 
+ACK S6F12     
+
+=== PDF PAGE 9 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+9 
+ Confidential 
+1.2. REMOTE COMMAND 
+ 
+1.2.1. PAUSE Command 
+ 
+HOST  TSC Controller  Comments 
+Host Command 
+(PAUSE) S2F41    *Host want to stocker state 
+change to PAUSE 
+  S2F42 ACK  
+(HCACK=0x00,0x04)   
+  S6F11 TSCPauseInitiated  *TSCState [Pausing] 
+ACK S6F12     
+  S6F11 TSCPauseCompleted  *TSCState [Paused] 
+ACK S6F12     
+ 
+ 
+1.2.2. RESUME Command 
+ 
+HOST  TSC Controller  Comments 
+Host Command 
+(RESUME) S2F41    *Host want to stocker state 
+change to AUTO 
+  S2F42 ACK  
+(HCACK=0x00,0x04)   
+  S6F11 TSCAutoCompleted  *TSC State [Auto] 
+ACK S6F12     
+ 
+ 
+1.2.3. CANCEL Command 
+ 
+HOST  TSC Controller  Comments 
+Host Command 
+(CANCEL) S2F41    
+*Host want to cancel 
+command transferred to 
+TSC Controller 
+  S2F42 ACK  
+(HCACK=0x00,0x04)   
+
+=== PDF PAGE 10 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+10 
+ Confidential 
+  S6F11 TransferCancelInitiated(206)   
+ACK S6F12     
+  S6F11 TransferCancel 
+Completed   
+ACK S6F12     
+ 
+ 
+1.2.4. ABORT Command 
+ 
+HOST  TSC Controller  Comments 
+Host Command 
+(ABORT) S2F41    
+*Host want to abort 
+command TSC 
+CONTROLLER acting 
+  S2F42 ACK  
+(HCACK=0x00,0x04)   
+  S6F11 TransferAbortInitiated(203)   
+ACK S6F12     
+  S6F11 TransferAbort 
+Completed  If Success to Abort 
+(HCACK=0,4) 
+Enhanced Remote 
+Command S2F49    
+If Carrier Location on 
+Vehicle 
+* send transfer command 
+to abort location(Trigger : 
+TransferAbortCompleted) 
+  S2F50 ACK 
+(HCACK=0x00,0x04)   
+  S6F11 TransferAbortFailed(202)  If Fail to Abort 
+ 
+ACK S6F12     
+ 
+1.2.5. UPDATE Command 
+ 
+HOST  TSC Controller  Comments 
+Host Command 
+(UPDATE) S2F41    
+*Host want update 
+command to CST being 
+transferred to TSC 
+Controller 
+
+=== PDF PAGE 11 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+11 
+ Confidential 
+  S2F42 
+ACK  
+(HCACK=0x00,0x04) 
+ 
+ ※ acknowledge for 
+UPDATE 
+  S6F11 TransferUpdate 
+Completed  *succeeded 
+Update Fail     
+Host Command 
+(UPDATE) S2F41     
+  S2F42 
+ACK  
+(HCACK=0x00,0x04 
+Others) 
+ 0,4 Others 
+ACK S6F12     
+  S6F11 TransferUpdateFailed  *failed 
+ACK S6F12     
+ 
+1.2.6. BUZZER Command 
+ 
+HOST  TSC Controller  Comments 
+Host Command 
+(BUZZER) S2F41     
+  S2F42 
+ACK  
+(HCACK=0x00,0x04) 
+ 
+  
+
+=== PDF PAGE 12 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+12 
+ Confidential 
+1.3. INFORMATION REQUEST 
+ 
+1.3.1. Alarm List REQUEST  
+ 
+Alarm List Request  TSC Controller  Comments 
+Alarm List Request S5F5    
+*Host request to Alarm List 
+involved TSC Controller or 
+Unit 
+  S5F6 Alarm List Data   
+ 
+ 
+
+=== PDF PAGE 13 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+13 
+ Confidential 
+1.4. Vehicle UNIT EVENT 
+ 
+1.4.1. VehicleInstalled 
+ 
+HOST  TSC Controller  Comments 
+  S6F11 VehicleInstalled  
+*TSC Controller report 
+information involved 
+vehicle used or unused 
+ACK S6F12     
+ 
+ 
+1.4.2. VehicleRemoved 
+ 
+HOST  TSC Controller  Comments 
+  S6F11 VehicleRemoved  
+*TSC Controller report 
+information involved 
+vehicle used or unused 
+ACK S6F12     
+ 
+1.4.3. VehicleStatusChanged 
+ 
+HOST  TSC Controller  Comments 
+  S6F11 VehicleStatusChanged  
+*TSC Controller report 
+about vehicleStatus is 
+changed 
+ACK S6F12     
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+=== PDF PAGE 14 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+14 
+ Confidential 
+1.5. Port Transfer State EVENT 
+ 
+1.5.1. PortInService 
+ 
+HOST  TSC Controller  Comments 
+  S6F11 PortInService  *Port Transfer State report 
+information  
+ACK S6F12     
+ 
+1.5.2. PortOutOfService 
+ 
+HOST  TSC Controller  Comments 
+  S6F11 PortOutOfService  *Port Transfer State report 
+information  
+ACK S6F12     
+ 
+1.5.3. PortTransferBlocked 
+ 
+HOST  TSC Controller  Comments 
+  S6F11 PortTransferBlocked  *Port Transfer State report 
+information  
+ACK S6F12     
+ 
+1.5.4. PortReadyToLoad 
+ 
+HOST  TSC Controller  Comments 
+  S6F11 PortReadyToLoad  *Port Transfer State report 
+information  
+ACK S6F12     
+ 
+ 
+ 
+ 
+
+=== PDF PAGE 15 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+15 
+ Confidential 
+1.5.5. PortReadyToUnload 
+ 
+HOST  TSC Controller  Comments 
+  S6F11 PortReadyToUnload  *Port Transfer State report 
+information  
+ACK S6F12     
+ 
+1.5.6. PortTypeChanged 
+ 
+HOST  TSC Controller  Comments 
+  S6F11 PortTypeChanged   
+ACK S6F12     
+ 
+1.5.7. PortModeChanged 
+ 
+HOST  TSC Controller  Comments 
+  S6F11 PortModeChanged   
+ACK S6F12     
+ 
+1.5.8. CarrierLoadRequest 
+ 
+HOST  TSC Controller  Comments 
+  S6F11 CarrierLoadRequest  작업자가 Carrier 요청 
+버튼을 눌렀을 경우 ACK S6F12    
+ 
+1.5.9. CarrierUnLoadRequest 
+ 
+HOST  TSC Controller  Comments 
+  S6F11 CarrierUnLoadRequest  작업자가 Carrier 제거 
+버튼을 눌렀을 경우 ACK S6F12    
+
+=== PDF PAGE 16 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+16 
+ Confidential 
+1.5.10 FoilBobbin Direction Change 
+ 
+HOST  TSC Controller  Comments 
+  S6F11 DirectionChangeReport  
+작업자가 방향전환 버튼을 
+눌렀을 경우 발생 
+ACK S6F12     
+  S6F11 CarrierInstalled  AGV Vehicle Carrier 이동 시 
+ACK S6F12     
+  S6F11 CarrierRemoved  EQP Port Carrier 이동 시 
+ACK S6F12     
+  S6F11 DirectionChangeStart  
+이재기에서 AGV Vehicle 호출 시 
+발생 
+ACK S6F12     
+  S6F11 DirectionChangeStart  방향 전환 완료 시 발생 
+ACK S6F12     
+     
+
+=== PDF PAGE 17 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+17 
+ Confidential 
+1.6. TRANSFER COMMAND 
+ 
+1.6.1. Normal Scenario 
+ 
+HOST  TSC Controller  Comments 
+Enhanced Remote 
+Command S2F49    If  
+From  
+: Empty Pallet Dispenser 
+ 
+Carrier ID  
+:EMPTY_YYYYMMDDHH
+SS_### 
+  S2F50 ACK  
+(HCACK=0x00,0x04)  
+  S6F11 TransferInitiated(208)  
+ACK S6F12    
+  S6F11 VehicleAssigned(604)  
+ACK S6F12    
+  S6F11 VehicleArrived(601) 
+(Source)  
+ACK S6F12     
+  S6F11 Transferring(211)   
+ACK S6F12     
+  S6F11 VehicleAcquireStarted
+(602)   
+ACK S6F12     
+  S6F11 CarrierInstalled(301)   
+ACK S6F12     
+  S6F11 VehicleAcquireCompl
+eted(603)  *Carrier loaded on 
+VEHICLE 
+ACK S6F12     
+  S6F11 VehicleDeparted(605)   
+ACK S6F12     
+  S6F11 VehicleArrived(601) 
+(Dest)   
+ACK S6F12     
+
+=== PDF PAGE 18 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+18 
+ Confidential 
+  S6F11 VehicleDepositStarted(
+606)   
+ACK S6F12     
+  S6F11 CarrierRemoved(302)   
+ACK S6F12     
+  S6F11 VehicleDepositComple
+ted(607)   
+ACK S6F12     
+  S6F11 VehicleUnassigned(61
+0)   
+ACK S6F12     
+  S6F11 TransferCompleted(20
+7)   
+ACK S6F12     
+ 
+ 
+
+=== PDF PAGE 19 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+19 
+ Confidential 
+2. ABNORMAL SCENARIO 
+ 
+2.1 CANCEL 
+ 
+2.1.1. Cancel (Normal) 
+ 
+HOST  TSC Controller  Comments 
+Enhanced Remote 
+Command S2F49     
+  S2F50 ACK  
+(HCACK=0x00,0x04)   
+  S6F11 TransferInitiated(208)   
+ACK S6F12     
+  S6F11 VehicleAssigned(604)   
+ACK S6F12     
+Host Command 
+(CANCEL) S2F41     
+  S2F42 
+ACK  
+(HCACK=0x00,0x04) 
+ 
+  
+  S6F11 TransferCancelInitiate
+d(206)   
+ACK S6F12     
+  S6F11 TransferCancelComple
+ted(204)   
+ACK S6F12     
+  S6F11 VehicleUnassigned(61
+0)   
+ACK S6F12     
+ 
+ 
+
+=== PDF PAGE 20 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+20 
+ Confidential 
+2.1.2. Cancel (Fail) 
+ 
+HOST  TSC Controller  Comments 
+Enhanced Remote 
+Command S2F49     
+  S2F50 ACK  
+(HCACK=0x00,0x04)   
+  S6F11 TransferInitiated(208)   
+ACK S6F12     
+ 
+. 
+. 
+. 
+   
+  S6F11 VehicleAcquireStarted
+(602)   
+ACK S6F12     
+Host Command 
+(CANCEL) S2F41     
+  S2F42 
+ACK  
+(HCACK=0x00,0x04 
+Others) 
+  
+  S6F11 TransferCancelInitiate
+d(206)   
+ACK S6F12     
+  S6F11 TransferCancelFailed(
+205)   
+ACK S6F12     
+Host Command 
+(ABORT) S2F41     
+  S2F42 ACK  
+(HCACK=0x00,0x04)   
+ 
+ 
+
+=== PDF PAGE 21 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+21 
+ Confidential 
+2.2. ABORT 
+ 
+2.2.1. Abort (Normal) 
+ 
+HOST  TSC Controller  Comments 
+Enhanced 
+Remote 
+Command 
+S2F49     
+  S2F50 ACK  
+(HCACK=0x00,0x04)   
+  S6F11 TransferInitiated(208)   
+ACK S6F12     
+ 
+. 
+. 
+. 
+   
+  S6F11 VehicleAcquireStarted(602)   
+ACK S6F12     
+Host Command 
+(ABORT) S2F41     
+  S2F42 ACK  
+(HCACK=0x00,0x04)   
+  S6F11 TransferAbortInitiated(203)   
+ACK S6F12     
+  S6F11 TransferAbortCompleted(201)   
+ACK S6F12     
+  S6F11 VehicleUnassigned(610)  
+* vehicle is waiting for 
+next transfer command 
+with carrier 
+ACK S6F12     
+Enhanced 
+Remote 
+Command 
+S2F49    
+* send transfer command 
+to abort location(Trigger : 
+TransferAbortCompleted) 
+  S2F50 ACK  
+(HCACK=0x00,0x04)   
+ 
+ 
+
+=== PDF PAGE 22 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+22 
+ Confidential 
+ 
+2.2.2. Abort (Fail) 
+ 
+HOST  TSC Controller  Comments 
+Enhanced Remote 
+Command S2F49     
+  S2F50 ACK  
+(HCACK=0x00,0x04)   
+ 
+. 
+. 
+. 
+   
+  S6F11 VehicleArrived(601) (Dest)   
+ACK S6F12     
+  S6F11 VehicleDepositStarted(606)   
+ACK S6F12     
+Host Command 
+(ABORT) S2F41     
+  S2F42 
+ACK  
+(HCACK=0x00,0x04 
+Others) 
+ 0,4 Others 
+  S6F11 TransferAbortInitiated(203)   
+ACK S6F12     
+  S6F11 TransferAbortFailed(202)  
+TSC Controller is going 
+to process, after this 
+event 
+ACK S6F12     
+    Normal Transfer 
+     
+ 
+. 
+. 
+. 
+   
+ 
+ 
+
+=== PDF PAGE 23 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+23 
+ Confidential 
+2.3. TRANSPORT COMMAND DELETE (ON TSC) 
+ 
+2.3.1. Transport Command Delete – without CST 
+ 
+HOST  TSC Controller  Comments 
+Enhanced Remote 
+Command S2F49     
+  S2F50 ACK  
+(HCACK=0x00,0x04)   
+ 
+. 
+. 
+. 
+   
+  S6F11 VehicleArrived(601) 
+(Source)   
+ACK S6F12     
+  
+Transfer Command 
+Delete 
+(toggle) 
+  
+  S6F11 OperatorInitiatedActio
+n(401)  CommadType 
+= ”CANCEL” 
+ACK S6F12     
+  S6F11 TransferCancelInitiate
+d(206)   
+ACK S6F12     
+  S6F11 TransferCancelComple
+ted(204)   
+ACK S6F12     
+  S6F11 VehicleUnassigned(61
+0)   
+ACK S6F12     
+ 
+ 
+
+=== PDF PAGE 24 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+24 
+ Confidential 
+2.3.2. Transport Command Delete – with CST 
+ 
+HOST  TSC Controller  Comments 
+Enhanced Remote 
+Command S2F49     
+  S2F50 ACK  
+(HCACK=0x00,0x04)   
+ 
+. 
+. 
+. 
+   
+  S6F11 CarrierInstalled(301)   
+ACK S6F12     
+  S6F11 VehicleAcquireCompl
+eted(603)   
+ACK S6F12     
+  
+Transfer Command 
+Delete 
+(toggle) 
+ " 
+  S6F11 OperatorInitiatedActio
+n(401)  *CommandType= 
+"ABORT”  
+ACK S6F12     
+  S6F11 TransferAbortInitiated(
+203)   
+ACK S6F12     
+  S6F11 TransferAbortComplet
+ed(201)  *CarrierLoc = "vehicle id" 
+ACK S6F12     
+  S6F11 VehicleUnassigned(61
+0)   
+ACK S6F12     
+  
+Manual Transport  
+(on TSC) 
+(toggle) 
+  
+  S6F11 OperatorInitiatedActio
+n(401)  *CommandType = 
+"TRNSFER" 
+ACK S6F12     
+  S6F11 TransferInitiated(208)   
+
+=== PDF PAGE 25 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+25 
+ Confidential 
+ACK S6F12     
+  S6F11 VehicleAssigned(604)   
+ACK S6F12     
+ 
+. 
+. 
+. 
+  Normal process after that 
+ 
+
+=== PDF PAGE 26 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+26 
+ Confidential 
+2.4. CARRIER REMOVED 
+ 
+2.4.1. Carrier on VEHICLE Removed with Manual 
+ 
+HOST  TSC Controller  Comments 
+  TSC CONTROLLER 
+Alarm   
+  Remove CST Manually   
+  Transfer Command Delete 
+(toggle)   
+  S6F11 OperatorInitiatedAction(401)  *CommandType = 
+"ABORT" 
+ACK S6F12     
+  S6F11 TransferAbortInitiated(203)   
+ACK S6F12     
+  S6F11 TransferAbortCompleted(201)  *CarrierLoc = "vehicle 
+id" 
+ACK S6F12     
+  
+CarrierRemoved(302) (on 
+TSC) 
+(toggle) 
+  
+  S6F11 CarrierRemoved(302)   
+ACK S6F12     
+ 
+ 
+
+=== PDF PAGE 27 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+27 
+ Confidential 
+2.5. DESTINATION CHANGE 
+ 
+2.5.1. Destination change (Before Arrive at Source) 
+ 
+HOST  TSC Controller  Comments 
+Enhanced Remote 
+Command S2F49     
+  S2F50 ACK  
+(HCACK=0x00,0x04)   
+  S6F11 TransferInitiated(208)   
+ACK S6F12     
+  S6F11 VehicleAssigned(604)   
+ACK S6F12     
+Host Command 
+(UPDATE) S2F41    * destination is updated 
+  S2F42 
+ACK  
+(HCACK=0x00,0x04) 
+ 
+  
+  S6F11 TransferUpdateComple
+ted(212)   
+ACK S6F12     
+  S6F11 VehicleArrived(601) 
+(Source)   
+ACK S6F12     
+ 
+. 
+. 
+. 
+  Transport to new 
+destination 
+ 
+2.5.2. Destination change (After Departure) 
+ 
+HOST  TSC Controller  Comments 
+Enhanced Remote 
+Command S2F49     
+  S2F50 ACK  
+(HCACK=0x00,0x04)   
+  S6F11 TransferInitiated(208)   
+
+=== PDF PAGE 28 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+28 
+ Confidential 
+ACK S6F12     
+  S6F11 VehicleAssigned(604)   
+ACK S6F12     
+  S6F11 VehicleArrived(601) 
+(Source)   
+ACK S6F12     
+     
+Host Command 
+(UPDATE) S2F41    * destination is updated 
+  S2F42 
+ACK  
+(HCACK=0x00,0x04) 
+ 
+  
+  S6F11 TransferUpdateComple
+ted(212)   
+ 
+. 
+. 
+. 
+  Transport to new 
+destination 
+ 
+
+=== PDF PAGE 29 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+29 
+ Confidential 
+2.6. ALARM 
+ 
+2.6.1. Alarm Set/Clear 
+ 
+ 
+HOST  TSC Controller  Comments 
+    Alarm 
+  S5F1 Alarm Report Send   
+Alarm Report ACK S5F2     
+  S6F11 AlarmSet(102)   
+ACK S6F12     
+  S6F11 UnitAlarmSet(702)   
+ACK S6F12     
+  Alarm Clear   
+ 
+. 
+. 
+. 
+   
+  S5F1 Alarm Report Send   
+Alarm Report ACK S5F2     
+  S6F11 AlarmCleared(101)   
+ACK S6F12     
+  S6F11 UnitAlarmCleared(701)   
+ACK S6F12     
+ 
+
+=== PDF PAGE 30 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+30 
+ Confidential 
+2.6.2. Alarm Set/Clear Moving VEHICLE 
+ 
+HOST  TSC Controller  Comments 
+  Alarm   
+  S5F1 Alarm Report Send   
+Alarm Report ACK S5F2     
+  S6F11 AlarmSet(102)   
+ACK S6F12     
+  S6F11 UnitAlarmSet(702)   
+ACK S6F12     
+  S6F11 TransferPaused(209)   
+ACK S6F12     
+ 
+. 
+. 
+. 
+Alarm Clear   
+  S5F1 Alarm Report Send   
+Alarm Report ACK S5F2     
+  S6F11 AlarmCleared(101)   
+ACK S6F12     
+  S6F11 UnitAlarmCleared(701)   
+ACK S6F12     
+     
+  S6F11 TransferResumed(210)   
+ACK S6F12     
+
+=== PDF PAGE 31 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+31 
+ Confidential 
+2.7. ALTERNATE TRANSFERRING(211) 
+ 
+2.7.1. CST Loading Port Interface Time Error at Source 
+ 
+HOST  TSC Controller  Comments 
+Enhanced Remote 
+Command S2F49     
+  S2F50 ACK  
+(HCACK=0x00,0x04)   
+  S6F11 TransferInitiated(208)   
+ACK S6F12     
+  S6F11 VehicleAssigned(604)   
+ACK S6F12     
+  S6F11 VehicleArrived(601) 
+(Source)   
+ACK S6F12     
+  S6F11 Transferring(211)   
+ACK S6F12     
+  S6F11 VehicleAcquireStarted(602)   
+ACK S6F12     
+  Interface Error   
+  S6F11 VehicleUnassigned(610)   
+ACK S6F12     
+  S6F11 TransferCompleted(207)  * ResultCode = 5 
+ACK S6F12     
+    *Transfer Manually 
+ 
+ 
+
+=== PDF PAGE 32 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+32 
+ Confidential 
+2.7.2. CST Unloading Port Interface Time Error at Dest  
+ 
+HOST  TSC Controller  Comments 
+ 
+. 
+. 
+. 
+   
+  S6F11 VehicleArrived(601) 
+(Dest)   
+ACK S6F12     
+  S6F11 VehicleDepositStarted(
+606)   
+ACK S6F12     
+  Interface Error   
+  S6F11 VehicleUnassigned(61
+0)   
+ACK S6F12     
+  S6F11 TransferCompleted(20
+7)  *ResultCode = 6 
+*CarrierLoc = "vehicle id" 
+ACK S6F12     
+Alternate Transfer     
+Enhanced Remote 
+Command S2F49     (Source="vehicle id" 
+Destination= Alternate ) 
+  S2F50 ACK  
+(HCACK=0x00,0x04)   
+ 
+ 
+
+=== PDF PAGE 33 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+33 
+ Confidential 
+2.7.3. Vehicle Down (before vehicle arrived at source) 
+HOST  TSC Controller  Comments 
+Enhanced Remote 
+Command S2F49     
+  S2F50 ACK  
+(HCACK=0x00,0x04)   
+  S6F11 TransferInitiated(208)   
+ACK S6F12     
+  S6F11 VehicleAssigned(604)   
+ACK S6F12     
+  Vehicle Down   
+  S5F1 Alarm Report Send   
+Alarm Report ACK S5F2     
+  S6F11 AlarmSet(102)   
+ACK S6F12     
+  S6F11 UnitAlarmSet(702)   
+ACK S6F12     
+  S6F11 VehicleUnassigned(61
+0)  If Critical Error 
+ACK S6F12     
+  Replace Other 
+Vehicle   
+  S6F11 VehicleAssigned(604)  New Vehicle 
+ACK S6F12     
+  S5F1 Alarm Report Send   
+Alarm Report ACK S5F2     
+  S6F11 AlarmCleared(101)   
+ACK S6F12     
+  S6F11 UnitAlarmCleared(701
+)   
+
+=== PDF PAGE 34 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+34 
+ Confidential 
+ACK S6F12     
+    Proceed Transfer 
+
+=== PDF PAGE 35 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+35 
+ Confidential 
+2.7.4. Vehicle Down (after vehicle departed from source) 
+ 
+HOST  TSC Controller  Comments 
+ 
+. 
+. 
+. 
+   
+  S6F11 VehicleDeparted(605)   
+ACK S6F12     
+  Vehicle Down   
+  S5F1 Alarm Report Send   
+Alarm Report ACK S5F2     
+  S6F11 AlarmSet(102)   
+ACK S6F12     
+  S6F11 UnitAlarmSet(702)   
+ACK S6F12     
+  S6F11 TransferPaused(209)   
+ACK S6F12     
+  Vehicle Up   
+  S5F1 Alarm Report Send   
+Alarm Report ACK S5F2     
+  S6F11 AlarmCleared(101)   
+ACK S6F12     
+  S6F11 UnitAlarmCleared(701
+)   
+ACK S6F12     
+  S6F11 TransferResumed(210)   
+ACK S6F12     
+    Proceed Transfer 
+
+=== PDF PAGE 36 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+36 
+ Confidential 
+2.8. TSC CONTROLLER DOWN  UP 
+ 
+2.8.1. TSC Controller down  up 
+ 
+HOST  TSC Controller  Comments 
+Enhanced Remote 
+Command S2F49    *① Command 
+  S2F50 ACK  
+(HCACK=0x00,0x04)   
+Enhanced Remote 
+Command S2F49    *② Command 
+  S2F50 ACK  
+(HCACK=0x00,0x04)   
+Enhanced Remote 
+Command S2F49    *③ Command 
+  S2F50 ACK  
+(HCACK=0x00,0x04)   
+  S6F11 TransferInitiated(208)   
+ACK S6F12     
+  S6F11 VehicleAssigned(604)   
+ACK S6F12     
+  S6F11 VehicleArrived(601) 
+(Source)   
+ACK S6F12     
+ 
+. 
+. 
+. 
+TSC Controller Down   
+  S6F11 Offline  If Possible Report 
+ACK S6F12     
+ 
+. 
+. 
+. 
+   
+Select.req    
+*TSC Controller Startup 
+① : while 
+Transferring(211),  
+②/③ : queued 
+  Select.rsp   
+
+=== PDF PAGE 37 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+37 
+ Confidential 
+Establish 
+Communications 
+Request 
+S1F13     
+  S1F14 Establish 
+Communications ACK  <COMMACK=0,1> 
+COMMACK = 1     
+Establish 
+Communications 
+Request 
+S1F13     
+  S1F14 Establish 
+Communications ACK  Until COMMACK=0 
+COMMACK = 0     
+Request ON-LINE S1F17    *Mode Change by Host 
+  S1F18 ON-LINE 
+Acknowledge  <ONLACK=0,1,2> 
+ONLACK = 1     
+  S1F1 AreyouThere   
+IamHere S1F2     
+Request ON-LINE S1F17    *Mode Change by Host 
+  S1F18 ON-LINE 
+Acknowledge  <ONLACK=0 or 2> 
+ONLACK = 0 or 2     
+Data and Time Set 
+Request S2F31     
+  S2F32 Data and Time Set 
+Request ACK   
+Data and Time Set 
+Request S2F31     
+  S2F32 Data and Time Set 
+Request ACK   
+     
+Selected Equipment 
+Status Request S1F3    TSCState 
+  S1F4 Selected Equipment 
+Status Data  <TSCState=2> 
+Pause on MCS 
+If TSCState is auto     
+
+=== PDF PAGE 38 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+38 
+ Confidential 
+Selected Equipment 
+Status Request S1F3    
+ControlState 
+EnhancedCarriers 
+EnhancedTransfers 
+EnhancedVehicles 
+UnitAlarmStatList 
+EnhancedPorts 
+  S1F4 Selected Equipment 
+Status Data  
+※ Controller should 
+report EnhancedCarriers 
+(①) 
+EnhancedTransfers(①,②
+,③) 
+Resume on MCS 
+(toggle)     
+Host Command 
+(RESUME) S2F41     
+  S2F42 ACK  
+(HCACK=0x00,0x04)  *Paused → Auto change 
+Send 
+  S6F11 TSCAutoCompleted  *TSCState [Auto] 
+ACK S6F12     
+  S6F11 Transferring(211)  * 
+ACK S6F12     
+  S6F11 VehicleAcquireStarted
+(602)  *① Command is being 
+processed 
+ACK S6F12     
+ 
+. 
+. 
+. 
+   
+ 
+ 
+
+=== PDF PAGE 39 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+39 
+ Confidential 
+2.9. COMMAND 
+ 
+2.9.1. Duplication Command 
+ 
+HOST  TSC Controller  Comments 
+Enhanced Remote 
+Command S2F49     
+  S2F50 ACK  
+(HCACK=0x00,0x04)   
+  S6F11 TransferInitiated(208)   
+ACK S6F12     
+  S6F11 VehicleAssigned(604)   
+ACK S6F12     
+  S6F11 VehicleArrived(601) 
+(Source)   
+ACK S6F12     
+  S6F11 Transferring(211)   
+ACK S6F12     
+Enhanced Remote 
+Command S2F49    *duplicated command 
+  S2F50 ACK (HCACK=0x05)  *0x05 : rejected, already 
+requested 
+  S6F11 VehicleAcquireStarted(602)   
+ACK S6F12     
+ 
+. 
+. 
+. 
+  * Command is being 
+processed 
+ 
+ 
+
+=== PDF PAGE 40 ===
+ 
+MCS Scenario Specification (IB-SEM)  
+ 
+프로젝트 SKI Battery MCS(SKBJ 2 동, SKBA 2 동) 구축 단계 분석 
+시스템 Material Control System 문서번호 PS9902 
+작성자 황인소 작성일자 2021-07-22 
+ 
+ 
+Copyright(c) 2021 SK Innovation Co.,Ltd.All rights reserved  
+40 
+ Confidential 
+2.9.2. No Command 
+ 
+HOST  TSC Controller  Comments 
+In Any Case    
+* CST is on the Vehicle, 
+if no command in 30 sec 
+(Alarm Text : All Port 
+Loading Fail - Manual 
+Handling) 
+  Alarm   
+  
+Manual Transport (on 
+TSC) 
+(toggle) 
+  
+  S6F11 OperatorInitiatedAction(501)  *CommandType= 
+"TRANSFER" 
+ACK S6F12     
+  S6F11 TransferInitiated(208)   
+ACK S6F12     
+  S6F11 VehicleAssigned(604)   
+ACK S6F12     
+ 
+. 
+. 
+. 
+  * Normal process after 
+that 
+ 
+ 

@@ -1,0 +1,161 @@
+Compiled from "SecsRawCommandForwardingHandler.java"
+public class com.kuka.mobilerobotics.secs.handlers.SecsRawCommandForwardingHandler extends com.kuka.mobilerobotics.secs.core.ComponentAccessor implements com.kuka.mobilerobotics.secs.interfaces.LibMessageHandler<com.kuka.mobilerobotics.secs.messages.LibSecsRawCommand> {
+  private static final org.slf4j.Logger LOG;
+
+  public com.kuka.mobilerobotics.secs.handlers.SecsRawCommandForwardingHandler(com.kuka.mobilerobotics.secs.interfaces.LibComponents);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #1                  // Method com/kuka/mobilerobotics/secs/core/ComponentAccessor."<init>":(Lcom/kuka/mobilerobotics/secs/interfaces/LibComponents;)V
+       5: return
+
+  public boolean handle(com.kuka.mobilerobotics.secs.messages.LibSecsRawCommand) throws java.lang.Exception;
+    Code:
+       0: aload_0
+       1: invokevirtual #7                  // Method getComponents:()Lcom/kuka/mobilerobotics/secs/interfaces/LibComponents;
+       4: invokeinterface #13,  1           // InterfaceMethod com/kuka/mobilerobotics/secs/interfaces/LibComponents.getCommandsActionExecutorClients:()Lcom/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient;
+       9: astore_2
+      10: invokestatic  #19                 // Method com/kuka/secs/v1alpha1/SecsRawCommandProto$SecsRawCommand.newBuilder:()Lcom/kuka/secs/v1alpha1/SecsRawCommandProto$SecsRawCommand$Builder;
+      13: aload_1
+      14: invokevirtual #25                 // Method com/kuka/mobilerobotics/secs/messages/LibSecsRawCommand.getName:()Ljava/lang/String;
+      17: invokevirtual #31                 // Method com/kuka/secs/v1alpha1/SecsRawCommandProto$SecsRawCommand$Builder.setCommand:(Ljava/lang/String;)Lcom/kuka/secs/v1alpha1/SecsRawCommandProto$SecsRawCommand$Builder;
+      20: aload_1
+      21: invokevirtual #37                 // Method com/kuka/mobilerobotics/secs/messages/LibSecsRawCommand.getParamData:()Lorg/ozsoft/secs4j/format/Data;
+      24: invokeinterface #41,  1           // InterfaceMethod org/ozsoft/secs4j/format/Data.toSml:()Ljava/lang/String;
+      29: invokevirtual #46                 // Method com/kuka/secs/v1alpha1/SecsRawCommandProto$SecsRawCommand$Builder.setDataSml:(Ljava/lang/String;)Lcom/kuka/secs/v1alpha1/SecsRawCommandProto$SecsRawCommand$Builder;
+      32: aload_1
+      33: invokevirtual #37                 // Method com/kuka/mobilerobotics/secs/messages/LibSecsRawCommand.getParamData:()Lorg/ozsoft/secs4j/format/Data;
+      36: invokeinterface #49,  1           // InterfaceMethod org/ozsoft/secs4j/format/Data.toByteArray:()[B
+      41: invokestatic  #53                 // Method com/google/protobuf/ByteString.copyFrom:([B)Lcom/google/protobuf/ByteString;
+      44: invokevirtual #59                 // Method com/kuka/secs/v1alpha1/SecsRawCommandProto$SecsRawCommand$Builder.setDataBytes:(Lcom/google/protobuf/ByteString;)Lcom/kuka/secs/v1alpha1/SecsRawCommandProto$SecsRawCommand$Builder;
+      47: invokevirtual #63                 // Method com/kuka/secs/v1alpha1/SecsRawCommandProto$SecsRawCommand$Builder.build:()Lcom/kuka/secs/v1alpha1/SecsRawCommandProto$SecsRawCommand;
+      50: astore_3
+      51: aload_0
+      52: invokevirtual #67                 // Method getNav2FunctionProvider:()Lcom/kuka/mobilerobotics/secs/nav2/Nav2FunctionProvider;
+      55: aload_1
+      56: invokevirtual #71                 // Method com/kuka/mobilerobotics/secs/nav2/Nav2FunctionProvider.createAndStoreUniqueActionUuid:(Ljava/lang/Object;)Ljava/lang/String;
+      59: astore        4
+      61: aload_2
+      62: aload_1
+      63: invokevirtual #25                 // Method com/kuka/mobilerobotics/secs/messages/LibSecsRawCommand.getName:()Ljava/lang/String;
+      66: aload         4
+      68: aload_3
+      69: new           #77                 // class com/kuka/mobilerobotics/secs/handlers/SecsRawCommandForwardingHandler$1
+      72: dup
+      73: aload_0
+      74: invokespecial #79                 // Method com/kuka/mobilerobotics/secs/handlers/SecsRawCommandForwardingHandler$1."<init>":(Lcom/kuka/mobilerobotics/secs/handlers/SecsRawCommandForwardingHandler;)V
+      77: invokevirtual #82                 // Method com/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient.submitCommand:(Ljava/lang/String;Ljava/lang/String;Lcom/google/protobuf/Message;Ljava/util/function/BiConsumer;)Lcom/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient$SubmitResult;
+      80: astore        5
+      82: aload         5
+      84: getfield      #88                 // Field com/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient$SubmitResult.exception:Ljava/lang/Exception;
+      87: ifnull        96
+      90: aload         5
+      92: getfield      #88                 // Field com/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient$SubmitResult.exception:Ljava/lang/Exception;
+      95: athrow
+      96: aload         5
+      98: getfield      #94                 // Field com/kuka/mobilerobotics/secs/handlers/MultiActionExecutorClient$SubmitResult.finished:Z
+     101: ireturn
+
+  private com.kuka.secs.v1alpha1.SecsRawCommandRuntimeInformationProto$SecsRawCommandRuntimeInformation submitNewEvents(com.kuka.actionexecutor.v1alpha1.Action, com.kuka.secs.v1alpha1.SecsRawCommandRuntimeInformationProto$SecsRawCommandRuntimeInformation) throws java.lang.Exception;
+    Code:
+       0: aload_1
+       1: invokevirtual #98                 // Method com/kuka/actionexecutor/v1alpha1/Action.hasRuntime:()Z
+       4: ifeq          17
+       7: aload_1
+       8: invokevirtual #104                // Method com/kuka/actionexecutor/v1alpha1/Action.getRuntime:()Lcom/kuka/actionexecutor/v1alpha1/ActionRuntime;
+      11: invokevirtual #108                // Method com/kuka/actionexecutor/v1alpha1/ActionRuntime.hasData:()Z
+      14: ifne          19
+      17: aload_2
+      18: areturn
+      19: aload_1
+      20: invokevirtual #113                // Method com/kuka/actionexecutor/v1alpha1/Action.getDescription:()Lcom/kuka/actionexecutor/v1alpha1/ActionDescription;
+      23: invokevirtual #117                // Method com/kuka/actionexecutor/v1alpha1/ActionDescription.getUuid:()Ljava/lang/String;
+      26: astore_3
+      27: aload_1
+      28: invokevirtual #104                // Method com/kuka/actionexecutor/v1alpha1/Action.getRuntime:()Lcom/kuka/actionexecutor/v1alpha1/ActionRuntime;
+      31: invokevirtual #122                // Method com/kuka/actionexecutor/v1alpha1/ActionRuntime.getData:()Lcom/google/protobuf/Any;
+      34: ldc           #126                // class com/kuka/secs/v1alpha1/SecsRawCommandRuntimeInformationProto$SecsRawCommandRuntimeInformation
+      36: invokevirtual #128                // Method com/google/protobuf/Any.unpack:(Ljava/lang/Class;)Lcom/google/protobuf/Message;
+      39: checkcast     #126                // class com/kuka/secs/v1alpha1/SecsRawCommandRuntimeInformationProto$SecsRawCommandRuntimeInformation
+      42: astore        4
+      44: iconst_0
+      45: istore        5
+      47: aload_2
+      48: ifnull        94
+      51: aload         4
+      53: invokevirtual #134                // Method com/kuka/secs/v1alpha1/SecsRawCommandRuntimeInformationProto$SecsRawCommandRuntimeInformation.getEventCount:()I
+      56: aload_2
+      57: invokevirtual #134                // Method com/kuka/secs/v1alpha1/SecsRawCommandRuntimeInformationProto$SecsRawCommandRuntimeInformation.getEventCount:()I
+      60: if_icmplt     94
+      63: aload_2
+      64: invokevirtual #138                // Method com/kuka/secs/v1alpha1/SecsRawCommandRuntimeInformationProto$SecsRawCommandRuntimeInformation.getEventList:()Ljava/util/List;
+      67: aload         4
+      69: invokevirtual #138                // Method com/kuka/secs/v1alpha1/SecsRawCommandRuntimeInformationProto$SecsRawCommandRuntimeInformation.getEventList:()Ljava/util/List;
+      72: iconst_0
+      73: aload_2
+      74: invokevirtual #134                // Method com/kuka/secs/v1alpha1/SecsRawCommandRuntimeInformationProto$SecsRawCommandRuntimeInformation.getEventCount:()I
+      77: invokeinterface #142,  3          // InterfaceMethod java/util/List.subList:(II)Ljava/util/List;
+      82: invokestatic  #148                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      85: ifeq          94
+      88: aload_2
+      89: invokevirtual #134                // Method com/kuka/secs/v1alpha1/SecsRawCommandRuntimeInformationProto$SecsRawCommandRuntimeInformation.getEventCount:()I
+      92: istore        5
+      94: aload         4
+      96: invokevirtual #138                // Method com/kuka/secs/v1alpha1/SecsRawCommandRuntimeInformationProto$SecsRawCommandRuntimeInformation.getEventList:()Ljava/util/List;
+      99: iload         5
+     101: aload         4
+     103: invokevirtual #134                // Method com/kuka/secs/v1alpha1/SecsRawCommandRuntimeInformationProto$SecsRawCommandRuntimeInformation.getEventCount:()I
+     106: invokeinterface #142,  3          // InterfaceMethod java/util/List.subList:(II)Ljava/util/List;
+     111: astore        6
+     113: aload         6
+     115: invokeinterface #154,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     120: aload_0
+     121: aload_3
+     122: invokedynamic #158,  0            // InvokeDynamic #0:apply:(Lcom/kuka/mobilerobotics/secs/handlers/SecsRawCommandForwardingHandler;Ljava/lang/String;)Ljava/util/function/Function;
+     127: invokeinterface #162,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+     132: invokestatic  #168                // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+     135: invokeinterface #174,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     140: checkcast     #143                // class java/util/List
+     143: astore        6
+     145: aload_0
+     146: invokevirtual #7                  // Method getComponents:()Lcom/kuka/mobilerobotics/secs/interfaces/LibComponents;
+     149: aload         6
+     151: invokeinterface #178,  2          // InterfaceMethod com/kuka/mobilerobotics/secs/interfaces/LibComponents.submitApisEvents:(Ljava/util/List;)Ljava/util/List;
+     156: pop
+     157: aload         4
+     159: areturn
+     160: astore        4
+     162: getstatic     #184                // Field LOG:Lorg/slf4j/Logger;
+     165: ldc           #188                // String Action Runtime did not contain ExecutionEvents!
+     167: aload         4
+     169: invokeinterface #190,  3          // InterfaceMethod org/slf4j/Logger.debug:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     174: aload_2
+     175: areturn
+    Exception table:
+       from    to  target type
+          27   159   160   Class com/google/protobuf/InvalidProtocolBufferException
+
+  public boolean handle(com.kuka.mobilerobotics.secs.messages.LibMessage) throws java.lang.Exception;
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #26                 // class com/kuka/mobilerobotics/secs/messages/LibSecsRawCommand
+       5: invokevirtual #196                // Method handle:(Lcom/kuka/mobilerobotics/secs/messages/LibSecsRawCommand;)Z
+       8: ireturn
+
+  private com.kuka.mobilerobotics.order.events.v1alpha1.Event lambda$submitNewEvents$0(java.lang.String, com.kuka.mobilerobotics.order.events.v1alpha1.Event);
+    Code:
+       0: aload_0
+       1: invokevirtual #67                 // Method getNav2FunctionProvider:()Lcom/kuka/mobilerobotics/secs/nav2/Nav2FunctionProvider;
+       4: aload_2
+       5: aload_1
+       6: invokevirtual #200                // Method com/kuka/mobilerobotics/secs/nav2/Nav2FunctionProvider.replaceCommandSpecificationIfNeeded:(Lcom/kuka/mobilerobotics/order/events/v1alpha1/Event;Ljava/lang/String;)Lcom/kuka/mobilerobotics/order/events/v1alpha1/Event;
+       9: areturn
+
+  static {};
+    Code:
+       0: ldc           #8                  // class com/kuka/mobilerobotics/secs/handlers/SecsRawCommandForwardingHandler
+       2: invokestatic  #204                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #184                // Field LOG:Lorg/slf4j/Logger;
+       8: return
+}

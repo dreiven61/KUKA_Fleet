@@ -1,0 +1,26 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motioncontrol.dataprovider.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.MotionControl.DataProvider.V1";
+option java_multiple_files = true;
+option java_outer_classname = "LatestMotionDataProto";
+option java_package = "com.kuka.mobilerobotics.motioncontrol.dataprovider.v1";
+
+// message to send data about the latest successful motion
+message LatestMotionData
+{
+  // Timestamp of the latest successful motion
+  google.protobuf.Timestamp timestamp = 1;
+  // UUID of the latest successful motion
+  string uuid = 2;
+}

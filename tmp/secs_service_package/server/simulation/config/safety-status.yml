@@ -1,0 +1,6 @@
+- automaticOperation: true
+  locked: false
+  platformBrakeOpen: true
+  motionEnabled: true
+  motionAutoRestart: true
+

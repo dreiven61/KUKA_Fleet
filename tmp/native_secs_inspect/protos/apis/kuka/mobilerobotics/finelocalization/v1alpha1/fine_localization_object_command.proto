@@ -1,0 +1,45 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.finelocalization.v1alpha1;
+
+import "kuka/mobilerobotics/objects/v1alpha1/shape_2d_layers.proto";
+import "kuka/mobilerobotics/finelocalization/v1alpha1/fine_localization_parameters.proto";
+import "kuka/core/geometry/v1/transform_2d.proto";
+
+option java_package = "com.kuka.mobilerobotics.finelocalization.v1alpha1";
+option java_outer_classname = "FineLocalizationObjectCommandProto";
+option java_multiple_files = true;
+
+
+// Contains information for the fine localization command which determines the pose of the robot
+// with respect to an object (whereby the object is described by a contour model).
+message FineLocalizationObjectCommand {
+	
+  // The initial offset.
+  kuka.core.geometry.v1.Transform2D offset = 1;
+	
+  // object shapes can be provided within this message or reference to a stored model in the service 
+  oneof object_shapes
+  {
+    // The definition of the object's shapes as a list of circles and polygons.
+    // each entry is a layer 
+    // "detectionModel" for the model definition that need to be detected
+    kuka.mobilerobotics.objects.v1alpha1.Shape2DLayers shapes = 2;
+    // The definition of the object's shapes as a list of circles and polygons stored in the objectmodel database.
+    string model_uuid = 3;
+  }
+	
+  // Optional set of parameters for fine localization fine tuning.
+  // If this field is not set, default parameters are used. Default parameters shall support the
+  // most common use-cases.
+  FineLocalizationParameters parameters = 4;
+
+}
+

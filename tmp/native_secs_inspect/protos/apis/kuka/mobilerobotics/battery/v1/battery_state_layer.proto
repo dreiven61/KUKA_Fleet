@@ -1,0 +1,25 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.battery.v1;
+
+import "kuka/mobilerobotics/battery/v1/battery_state.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.Battery.V1";
+option java_multiple_files = true;
+option java_outer_classname = "BatteryStateLayerProto";
+option java_package = "com.kuka.mobilerobotics.battery.v1";
+
+// A message represents a battery state layer.
+message BatteryStateLayer
+{
+  reserved 2;
+  // A field represents the node properties.
+  map<string, BatteryState> node_properties = 1;
+}

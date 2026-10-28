@@ -1,0 +1,445 @@
+Compiled from "LibSecsWrapper.java"
+public class com.kuka.mobilerobotics.secs.secs.LibSecsWrapper implements com.kuka.secs4kuka.appinterface.SecsCommandListener {
+  private final com.kuka.mobilerobotics.secs.interfaces.LibMessageProcessor _libMessageProcessor;
+
+  private com.kuka.secs4kuka.appinterface.SecsWrapper _secsWrapper;
+
+  private static final org.slf4j.Logger LOG;
+
+  private com.kuka.mobilerobotics.secs.secs.eventreporting.ApplicationEventHandlerImpl _applicationEventHandlerImpl;
+
+  private com.kuka.mobilerobotics.secs.secs.eventreporting.ApplicationEventDistributor _appEventDistributor;
+
+  private final com.kuka.mobilerobotics.secs.service.SecsServiceConfig$CommandExecutorConfig _commandExecutorConfig;
+
+  public com.kuka.mobilerobotics.secs.secs.LibSecsWrapper(com.kuka.mobilerobotics.secs.interfaces.LibMessageProcessor, com.kuka.mobilerobotics.secs.interfaces.AreaManager, com.kuka.mobilerobotics.secs.service.SecsServiceConfig$CommandExecutorConfig, java.io.File, java.io.File, boolean, com.kuka.secs4kuka.secs.reports.ITscStateAlarmProvider) throws java.io.IOException, org.ozsoft.secs4j.SecsException;
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload         7
+       6: invokestatic  #7                  // Method com/kuka/secs4kuka/secs/SecsLibConfig.setTscStateAlarmProvider:(Lcom/kuka/secs4kuka/secs/reports/ITscStateAlarmProvider;)V
+       9: aload         4
+      11: aload         5
+      13: invokestatic  #13                 // Method com/kuka/secs4kuka/secs/SecsLibConfig.configure:(Ljava/io/File;Ljava/io/File;)V
+      16: aload_0
+      17: new           #17                 // class com/kuka/secs4kuka/appinterface/SecsWrapper
+      20: dup
+      21: invokespecial #19                 // Method com/kuka/secs4kuka/appinterface/SecsWrapper."<init>":()V
+      24: putfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+      27: aload_0
+      28: getfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+      31: aload_0
+      32: invokevirtual #26                 // Method com/kuka/secs4kuka/appinterface/SecsWrapper.addListener:(Lcom/kuka/secs4kuka/appinterface/SecsCommandListener;)V
+      35: iload         6
+      37: ifne          70
+      40: aload_0
+      41: getfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+      44: ldc           #30                 // class com/kuka/mobilerobotics/secs/secs/customizedstreamfunctions/S2F33DisallowReportRedefinition
+      46: invokevirtual #32                 // Method com/kuka/secs4kuka/appinterface/SecsWrapper.addCustomSecsMessage:(Ljava/lang/Class;)Ljava/lang/Class;
+      49: pop
+      50: aload_0
+      51: getfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+      54: ldc           #36                 // class com/kuka/mobilerobotics/secs/secs/customizedstreamfunctions/S2F35DisallowReportRedefinition
+      56: invokevirtual #32                 // Method com/kuka/secs4kuka/appinterface/SecsWrapper.addCustomSecsMessage:(Ljava/lang/Class;)Ljava/lang/Class;
+      59: pop
+      60: aload_0
+      61: getfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+      64: ldc           #38                 // class com/kuka/mobilerobotics/secs/secs/customizedstreamfunctions/S2F37DisallowReportRedefinition
+      66: invokevirtual #32                 // Method com/kuka/secs4kuka/appinterface/SecsWrapper.addCustomSecsMessage:(Ljava/lang/Class;)Ljava/lang/Class;
+      69: pop
+      70: aload_0
+      71: aload_1
+      72: putfield      #40                 // Field _libMessageProcessor:Lcom/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor;
+      75: aload_0
+      76: aload_3
+      77: putfield      #44                 // Field _commandExecutorConfig:Lcom/kuka/mobilerobotics/secs/service/SecsServiceConfig$CommandExecutorConfig;
+      80: aload_0
+      81: new           #48                 // class com/kuka/mobilerobotics/secs/secs/eventreporting/ApplicationEventHandlerImpl
+      84: dup
+      85: aload_0
+      86: getfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+      89: invokevirtual #50                 // Method com/kuka/secs4kuka/appinterface/SecsWrapper.getApplicationContext:()Lcom/kuka/secs4kuka/appinterface/ApplicationContext;
+      92: aload_2
+      93: invokespecial #54                 // Method com/kuka/mobilerobotics/secs/secs/eventreporting/ApplicationEventHandlerImpl."<init>":(Lcom/kuka/secs4kuka/appinterface/ApplicationContext;Lcom/kuka/mobilerobotics/secs/interfaces/AreaManager;)V
+      96: putfield      #57                 // Field _applicationEventHandlerImpl:Lcom/kuka/mobilerobotics/secs/secs/eventreporting/ApplicationEventHandlerImpl;
+      99: aload_0
+     100: new           #61                 // class com/kuka/mobilerobotics/secs/secs/eventreporting/ApplicationEventDistributor
+     103: dup
+     104: invokespecial #63                 // Method com/kuka/mobilerobotics/secs/secs/eventreporting/ApplicationEventDistributor."<init>":()V
+     107: putfield      #64                 // Field _appEventDistributor:Lcom/kuka/mobilerobotics/secs/secs/eventreporting/ApplicationEventDistributor;
+     110: aload_0
+     111: getfield      #64                 // Field _appEventDistributor:Lcom/kuka/mobilerobotics/secs/secs/eventreporting/ApplicationEventDistributor;
+     114: aload_0
+     115: getfield      #57                 // Field _applicationEventHandlerImpl:Lcom/kuka/mobilerobotics/secs/secs/eventreporting/ApplicationEventHandlerImpl;
+     118: invokevirtual #68                 // Method com/kuka/mobilerobotics/secs/secs/eventreporting/ApplicationEventDistributor.registerHandler:(Lcom/kuka/mobilerobotics/secs/secs/eventreporting/ApplicationEventHandler;)V
+     121: return
+
+  public void setParameters(java.lang.String, int, boolean, boolean, int, int, int, int, int, int);
+    Code:
+       0: aload_0
+       1: getfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+       4: aload_1
+       5: iload_2
+       6: iload_3
+       7: iload         10
+       9: invokevirtual #72                 // Method com/kuka/secs4kuka/appinterface/SecsWrapper.setConnectionParameters:(Ljava/lang/String;IZI)V
+      12: aload_0
+      13: getfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+      16: iload         4
+      18: invokevirtual #76                 // Method com/kuka/secs4kuka/appinterface/SecsWrapper.setMiscParameters:(Z)V
+      21: aload_0
+      22: getfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+      25: iload         5
+      27: iload         6
+      29: iload         7
+      31: iload         8
+      33: iload         9
+      35: invokevirtual #80                 // Method com/kuka/secs4kuka/appinterface/SecsWrapper.setTimingParameters:(IIIII)V
+      38: return
+
+  public void connect(boolean) throws java.lang.InterruptedException, com.kuka.secs4kuka.appinterface.SecsWrapper$ConnectCancelledException;
+    Code:
+       0: getstatic     #84                 // Field LOG:Lorg/slf4j/Logger;
+       3: iload_1
+       4: ifeq          12
+       7: ldc           #88                 // String  (blocking)
+       9: goto          14
+      12: ldc           #90                 // String
+      14: invokedynamic #92,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      19: invokeinterface #96,  2           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;)V
+      24: aload_0
+      25: getfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+      28: iload_1
+      29: invokevirtual #102                // Method com/kuka/secs4kuka/appinterface/SecsWrapper.connect:(Z)V
+      32: iload_1
+      33: ifeq          46
+      36: getstatic     #84                 // Field LOG:Lorg/slf4j/Logger;
+      39: ldc           #105                // String SECS connection established
+      41: invokeinterface #96,  2           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;)V
+      46: return
+
+  public void close();
+    Code:
+       0: aload_0
+       1: getfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+       4: invokevirtual #107                // Method com/kuka/secs4kuka/appinterface/SecsWrapper.disconnect:()V
+       7: return
+
+  public boolean isOnline();
+    Code:
+       0: aload_0
+       1: getfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+       4: invokevirtual #110                // Method com/kuka/secs4kuka/appinterface/SecsWrapper.isOnline:()Z
+       7: ireturn
+
+  public void setOnline(boolean);
+    Code:
+       0: aload_0
+       1: getfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+       4: iload_1
+       5: invokevirtual #114                // Method com/kuka/secs4kuka/appinterface/SecsWrapper.setOnline:(Z)V
+       8: return
+
+  public boolean isConnected();
+    Code:
+       0: aload_0
+       1: getfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+       4: invokevirtual #117                // Method com/kuka/secs4kuka/appinterface/SecsWrapper.isConnected:()Z
+       7: ireturn
+
+  public void commandReceived(com.kuka.secs4kuka.app.msgs.SecsCommand) throws org.ozsoft.secs4j.SecsException;
+    Code:
+       0: new           #120                // class java/util/concurrent/atomic/AtomicReference
+       3: dup
+       4: invokespecial #122                // Method java/util/concurrent/atomic/AtomicReference."<init>":()V
+       7: astore_2
+       8: new           #120                // class java/util/concurrent/atomic/AtomicReference
+      11: dup
+      12: invokespecial #122                // Method java/util/concurrent/atomic/AtomicReference."<init>":()V
+      15: astore_3
+      16: aload_0
+      17: getfield      #44                 // Field _commandExecutorConfig:Lcom/kuka/mobilerobotics/secs/service/SecsServiceConfig$CommandExecutorConfig;
+      20: aload_1
+      21: invokevirtual #123                // Method com/kuka/secs4kuka/app/msgs/SecsCommand.getName:()Ljava/lang/String;
+      24: invokeinterface #129,  2          // InterfaceMethod com/kuka/mobilerobotics/secs/service/SecsServiceConfig$CommandExecutorConfig.getOrDefault:(Ljava/lang/String;)Ljava/lang/String;
+      29: ifnonnull     82
+      32: getstatic     #84                 // Field LOG:Lorg/slf4j/Logger;
+      35: ldc           #134                // String No action executor configuration entry found for incoming command {}
+      37: aload_1
+      38: invokevirtual #123                // Method com/kuka/secs4kuka/app/msgs/SecsCommand.getName:()Ljava/lang/String;
+      41: invokeinterface #136,  3          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;)V
+      46: new           #140                // class org/jdeferred/impl/DeferredObject
+      49: dup
+      50: invokespecial #142                // Method org/jdeferred/impl/DeferredObject."<init>":()V
+      53: astore        4
+      55: aload_2
+      56: aload         4
+      58: invokevirtual #143                // Method java/util/concurrent/atomic/AtomicReference.set:(Ljava/lang/Object;)V
+      61: aload         4
+      63: new           #147                // class com/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException
+      66: dup
+      67: getstatic     #149                // Field com/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException$HandlerExceptionCode.UNKNOWN_COMMAND:Lcom/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException$HandlerExceptionCode;
+      70: invokespecial #155                // Method com/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException."<init>":(Lcom/kuka/mobilerobotics/secs/handlers/LibMessageHandlerException$HandlerExceptionCode;)V
+      73: invokeinterface #158,  2          // InterfaceMethod org/jdeferred/Deferred.reject:(Ljava/lang/Object;)Lorg/jdeferred/Deferred;
+      78: pop
+      79: goto          352
+      82: aload_1
+      83: instanceof    #164                // class com/kuka/secs4kuka/app/msgs/SecsTransferCommand
+      86: ifeq          120
+      89: aload_1
+      90: checkcast     #164                // class com/kuka/secs4kuka/app/msgs/SecsTransferCommand
+      93: astore        4
+      95: aload_2
+      96: aload_0
+      97: getfield      #40                 // Field _libMessageProcessor:Lcom/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor;
+     100: new           #166                // class com/kuka/mobilerobotics/secs/messages/TransferGroupCommand
+     103: dup
+     104: aload         4
+     106: invokespecial #168                // Method com/kuka/mobilerobotics/secs/messages/TransferGroupCommand."<init>":(Lcom/kuka/secs4kuka/app/msgs/SecsTransferCommand;)V
+     109: invokeinterface #171,  2          // InterfaceMethod com/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor.submit:(Lcom/kuka/mobilerobotics/secs/messages/LibMessage;)Lorg/jdeferred/Promise;
+     114: invokevirtual #143                // Method java/util/concurrent/atomic/AtomicReference.set:(Ljava/lang/Object;)V
+     117: goto          352
+     120: aload_1
+     121: instanceof    #177                // class com/kuka/secs4kuka/app/msgs/SecsCancelCommand
+     124: ifeq          161
+     127: aload_1
+     128: checkcast     #177                // class com/kuka/secs4kuka/app/msgs/SecsCancelCommand
+     131: astore        4
+     133: aload_2
+     134: aload_0
+     135: getfield      #40                 // Field _libMessageProcessor:Lcom/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor;
+     138: new           #179                // class com/kuka/mobilerobotics/secs/messages/CancelCommand
+     141: dup
+     142: aload         4
+     144: invokevirtual #181                // Method com/kuka/secs4kuka/app/msgs/SecsCancelCommand.getCommandId:()Ljava/lang/String;
+     147: invokespecial #184                // Method com/kuka/mobilerobotics/secs/messages/CancelCommand."<init>":(Ljava/lang/String;)V
+     150: invokeinterface #171,  2          // InterfaceMethod com/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor.submit:(Lcom/kuka/mobilerobotics/secs/messages/LibMessage;)Lorg/jdeferred/Promise;
+     155: invokevirtual #143                // Method java/util/concurrent/atomic/AtomicReference.set:(Ljava/lang/Object;)V
+     158: goto          352
+     161: aload_1
+     162: instanceof    #186                // class com/kuka/secs4kuka/app/msgs/SecsAbortCommand
+     165: ifeq          203
+     168: aload_1
+     169: checkcast     #186                // class com/kuka/secs4kuka/app/msgs/SecsAbortCommand
+     172: astore        4
+     174: aload_2
+     175: aload_0
+     176: getfield      #40                 // Field _libMessageProcessor:Lcom/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor;
+     179: new           #188                // class com/kuka/mobilerobotics/secs/messages/AbortCommand
+     182: dup
+     183: aload         4
+     185: invokevirtual #190                // Method com/kuka/secs4kuka/app/msgs/SecsAbortCommand.getCommandId:()Ljava/lang/String;
+     188: iconst_1
+     189: invokespecial #191                // Method com/kuka/mobilerobotics/secs/messages/AbortCommand."<init>":(Ljava/lang/String;Z)V
+     192: invokeinterface #171,  2          // InterfaceMethod com/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor.submit:(Lcom/kuka/mobilerobotics/secs/messages/LibMessage;)Lorg/jdeferred/Promise;
+     197: invokevirtual #143                // Method java/util/concurrent/atomic/AtomicReference.set:(Ljava/lang/Object;)V
+     200: goto          352
+     203: aload_1
+     204: instanceof    #194                // class com/kuka/secs4kuka/app/msgs/SecsPauseCommand
+     207: ifeq          233
+     210: aload_2
+     211: aload_0
+     212: getfield      #40                 // Field _libMessageProcessor:Lcom/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor;
+     215: new           #196                // class com/kuka/mobilerobotics/secs/messages/TscPauseCommand
+     218: dup
+     219: invokespecial #198                // Method com/kuka/mobilerobotics/secs/messages/TscPauseCommand."<init>":()V
+     222: invokeinterface #171,  2          // InterfaceMethod com/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor.submit:(Lcom/kuka/mobilerobotics/secs/messages/LibMessage;)Lorg/jdeferred/Promise;
+     227: invokevirtual #143                // Method java/util/concurrent/atomic/AtomicReference.set:(Ljava/lang/Object;)V
+     230: goto          352
+     233: aload_1
+     234: instanceof    #199                // class com/kuka/secs4kuka/app/msgs/SecsResumeCommand
+     237: ifeq          263
+     240: aload_2
+     241: aload_0
+     242: getfield      #40                 // Field _libMessageProcessor:Lcom/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor;
+     245: new           #201                // class com/kuka/mobilerobotics/secs/messages/TscResumeCommand
+     248: dup
+     249: invokespecial #203                // Method com/kuka/mobilerobotics/secs/messages/TscResumeCommand."<init>":()V
+     252: invokeinterface #171,  2          // InterfaceMethod com/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor.submit:(Lcom/kuka/mobilerobotics/secs/messages/LibMessage;)Lorg/jdeferred/Promise;
+     257: invokevirtual #143                // Method java/util/concurrent/atomic/AtomicReference.set:(Ljava/lang/Object;)V
+     260: goto          352
+     263: aload_1
+     264: instanceof    #204                // class com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand
+     267: ifeq          311
+     270: aload_1
+     271: checkcast     #204                // class com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand
+     274: astore        4
+     276: aload_2
+     277: aload_0
+     278: getfield      #40                 // Field _libMessageProcessor:Lcom/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor;
+     281: new           #206                // class com/kuka/mobilerobotics/secs/messages/PriorityUpdateCommand
+     284: dup
+     285: aload         4
+     287: invokevirtual #208                // Method com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand.getCommandId:()Ljava/lang/String;
+     290: aload         4
+     292: invokevirtual #209                // Method com/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand.getPriority:()I
+     295: aload         4
+     297: invokespecial #213                // Method com/kuka/mobilerobotics/secs/messages/PriorityUpdateCommand."<init>":(Ljava/lang/String;ILcom/kuka/secs4kuka/app/msgs/SecsPriorityUpdateCommand;)V
+     300: invokeinterface #171,  2          // InterfaceMethod com/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor.submit:(Lcom/kuka/mobilerobotics/secs/messages/LibMessage;)Lorg/jdeferred/Promise;
+     305: invokevirtual #143                // Method java/util/concurrent/atomic/AtomicReference.set:(Ljava/lang/Object;)V
+     308: goto          352
+     311: aload_1
+     312: instanceof    #216                // class com/kuka/secs4kuka/app/msgs/SecsRawCommand
+     315: ifeq          352
+     318: aload_1
+     319: checkcast     #216                // class com/kuka/secs4kuka/app/msgs/SecsRawCommand
+     322: astore        4
+     324: aload_3
+     325: aload         4
+     327: invokevirtual #143                // Method java/util/concurrent/atomic/AtomicReference.set:(Ljava/lang/Object;)V
+     330: aload_2
+     331: aload_0
+     332: getfield      #40                 // Field _libMessageProcessor:Lcom/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor;
+     335: new           #218                // class com/kuka/mobilerobotics/secs/messages/LibSecsRawCommand
+     338: dup
+     339: aload         4
+     341: invokespecial #220                // Method com/kuka/mobilerobotics/secs/messages/LibSecsRawCommand."<init>":(Lcom/kuka/secs4kuka/app/msgs/SecsCommand;)V
+     344: invokeinterface #171,  2          // InterfaceMethod com/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor.submit:(Lcom/kuka/mobilerobotics/secs/messages/LibMessage;)Lorg/jdeferred/Promise;
+     349: invokevirtual #143                // Method java/util/concurrent/atomic/AtomicReference.set:(Ljava/lang/Object;)V
+     352: aload_2
+     353: invokevirtual #223                // Method java/util/concurrent/atomic/AtomicReference.get:()Ljava/lang/Object;
+     356: ifnull        403
+     359: aload_2
+     360: invokevirtual #223                // Method java/util/concurrent/atomic/AtomicReference.get:()Ljava/lang/Object;
+     363: checkcast     #227                // class org/jdeferred/Promise
+     366: invokeinterface #229,  1          // InterfaceMethod org/jdeferred/Promise.isRejected:()Z
+     371: ifeq          403
+     374: aload_1
+     375: instanceof    #216                // class com/kuka/secs4kuka/app/msgs/SecsRawCommand
+     378: ifne          403
+     381: aload_2
+     382: invokevirtual #223                // Method java/util/concurrent/atomic/AtomicReference.get:()Ljava/lang/Object;
+     385: checkcast     #227                // class org/jdeferred/Promise
+     388: aload_0
+     389: aload_1
+     390: aload_3
+     391: aload_2
+     392: invokedynamic #232,  0            // InvokeDynamic #1:onFail:(Lcom/kuka/mobilerobotics/secs/secs/LibSecsWrapper;Lcom/kuka/secs4kuka/app/msgs/SecsCommand;Ljava/util/concurrent/atomic/AtomicReference;Ljava/util/concurrent/atomic/AtomicReference;)Lorg/jdeferred/FailCallback;
+     397: invokeinterface #236,  2          // InterfaceMethod org/jdeferred/Promise.fail:(Lorg/jdeferred/FailCallback;)Lorg/jdeferred/Promise;
+     402: pop
+     403: aload_2
+     404: invokevirtual #223                // Method java/util/concurrent/atomic/AtomicReference.get:()Ljava/lang/Object;
+     407: ifnull        520
+     410: new           #240                // class java/util/concurrent/CountDownLatch
+     413: dup
+     414: aload_3
+     415: invokevirtual #223                // Method java/util/concurrent/atomic/AtomicReference.get:()Ljava/lang/Object;
+     418: ifnull        425
+     421: iconst_1
+     422: goto          426
+     425: iconst_0
+     426: invokespecial #242                // Method java/util/concurrent/CountDownLatch."<init>":(I)V
+     429: astore        4
+     431: new           #120                // class java/util/concurrent/atomic/AtomicReference
+     434: dup
+     435: invokespecial #122                // Method java/util/concurrent/atomic/AtomicReference."<init>":()V
+     438: astore        5
+     440: aload_2
+     441: invokevirtual #223                // Method java/util/concurrent/atomic/AtomicReference.get:()Ljava/lang/Object;
+     444: checkcast     #227                // class org/jdeferred/Promise
+     447: new           #245                // class com/kuka/mobilerobotics/secs/secs/LibSecsWrapper$2
+     450: dup
+     451: aload_0
+     452: aload         4
+     454: aload_1
+     455: invokespecial #247                // Method com/kuka/mobilerobotics/secs/secs/LibSecsWrapper$2."<init>":(Lcom/kuka/mobilerobotics/secs/secs/LibSecsWrapper;Ljava/util/concurrent/CountDownLatch;Lcom/kuka/secs4kuka/app/msgs/SecsCommand;)V
+     458: invokeinterface #250,  2          // InterfaceMethod org/jdeferred/Promise.done:(Lorg/jdeferred/DoneCallback;)Lorg/jdeferred/Promise;
+     463: new           #254                // class com/kuka/mobilerobotics/secs/secs/LibSecsWrapper$1
+     466: dup
+     467: aload_0
+     468: aload         4
+     470: aload         5
+     472: aload_1
+     473: invokespecial #256                // Method com/kuka/mobilerobotics/secs/secs/LibSecsWrapper$1."<init>":(Lcom/kuka/mobilerobotics/secs/secs/LibSecsWrapper;Ljava/util/concurrent/CountDownLatch;Ljava/util/concurrent/atomic/AtomicReference;Lcom/kuka/secs4kuka/app/msgs/SecsCommand;)V
+     476: invokeinterface #236,  2          // InterfaceMethod org/jdeferred/Promise.fail:(Lorg/jdeferred/FailCallback;)Lorg/jdeferred/Promise;
+     481: pop
+     482: aload         4
+     484: invokevirtual #259                // Method java/util/concurrent/CountDownLatch.await:()V
+     487: goto          503
+     490: astore        6
+     492: new           #264                // class org/ozsoft/secs4j/SecsTimeoutException
+     495: dup
+     496: ldc_w         #266                // String Interrupted while waiting for SecsRawCommand processing!
+     499: invokespecial #268                // Method org/ozsoft/secs4j/SecsTimeoutException."<init>":(Ljava/lang/String;)V
+     502: athrow
+     503: aload         5
+     505: invokevirtual #223                // Method java/util/concurrent/atomic/AtomicReference.get:()Ljava/lang/Object;
+     508: ifnull        520
+     511: aload         5
+     513: invokevirtual #223                // Method java/util/concurrent/atomic/AtomicReference.get:()Ljava/lang/Object;
+     516: checkcast     #269                // class org/ozsoft/secs4j/SecsException
+     519: athrow
+     520: return
+    Exception table:
+       from    to  target type
+         482   487   490   Class java/lang/InterruptedException
+
+  public java.lang.Class<? extends org.ozsoft.secs4j.SecsMessage> addCustomSecsMessage(java.lang.Class<? extends org.ozsoft.secs4j.SecsMessage>) throws org.ozsoft.secs4j.SecsException;
+    Code:
+       0: aload_0
+       1: getfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+       4: aload_1
+       5: invokevirtual #32                 // Method com/kuka/secs4kuka/appinterface/SecsWrapper.addCustomSecsMessage:(Ljava/lang/Class;)Ljava/lang/Class;
+       8: areturn
+
+  public com.kuka.secs4kuka.appinterface.SecsWrapper getSecsWrapper();
+    Code:
+       0: aload_0
+       1: getfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+       4: areturn
+
+  public com.kuka.secs4kuka.appinterface.ApplicationContext getApplicationContext();
+    Code:
+       0: aload_0
+       1: getfield      #20                 // Field _secsWrapper:Lcom/kuka/secs4kuka/appinterface/SecsWrapper;
+       4: invokevirtual #50                 // Method com/kuka/secs4kuka/appinterface/SecsWrapper.getApplicationContext:()Lcom/kuka/secs4kuka/appinterface/ApplicationContext;
+       7: areturn
+
+  public com.kuka.mobilerobotics.secs.secs.eventreporting.ApplicationEventDistributor getAppEventDistributor();
+    Code:
+       0: aload_0
+       1: getfield      #64                 // Field _appEventDistributor:Lcom/kuka/mobilerobotics/secs/secs/eventreporting/ApplicationEventDistributor;
+       4: areturn
+
+  private void lambda$commandReceived$0(com.kuka.secs4kuka.app.msgs.SecsCommand, java.util.concurrent.atomic.AtomicReference, java.util.concurrent.atomic.AtomicReference, java.lang.Exception);
+    Code:
+       0: aload         4
+       2: instanceof    #271                // class com/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor$UnsupportedMessageHandlerException
+       5: ifeq          71
+       8: aload_1
+       9: instanceof    #216                // class com/kuka/secs4kuka/app/msgs/SecsRawCommand
+      12: ifeq          22
+      15: aload_1
+      16: checkcast     #216                // class com/kuka/secs4kuka/app/msgs/SecsRawCommand
+      19: goto          41
+      22: new           #216                // class com/kuka/secs4kuka/app/msgs/SecsRawCommand
+      25: dup
+      26: aload_1
+      27: invokevirtual #123                // Method com/kuka/secs4kuka/app/msgs/SecsCommand.getName:()Ljava/lang/String;
+      30: aload_1
+      31: invokevirtual #273                // Method com/kuka/secs4kuka/app/msgs/SecsCommand.getParamData:()Lorg/ozsoft/secs4j/format/Data;
+      34: aload_1
+      35: invokevirtual #277                // Method com/kuka/secs4kuka/app/msgs/SecsCommand.getReplyInfo:()Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;
+      38: invokespecial #281                // Method com/kuka/secs4kuka/app/msgs/SecsRawCommand."<init>":(Ljava/lang/String;Lorg/ozsoft/secs4j/format/Data;Lcom/kuka/secs4kuka/app/msgs/ReplyInfo;)V
+      41: astore        5
+      43: aload_2
+      44: aload         5
+      46: invokevirtual #143                // Method java/util/concurrent/atomic/AtomicReference.set:(Ljava/lang/Object;)V
+      49: aload_3
+      50: aload_0
+      51: getfield      #40                 // Field _libMessageProcessor:Lcom/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor;
+      54: new           #218                // class com/kuka/mobilerobotics/secs/messages/LibSecsRawCommand
+      57: dup
+      58: aload         5
+      60: invokespecial #220                // Method com/kuka/mobilerobotics/secs/messages/LibSecsRawCommand."<init>":(Lcom/kuka/secs4kuka/app/msgs/SecsCommand;)V
+      63: invokeinterface #171,  2          // InterfaceMethod com/kuka/mobilerobotics/secs/interfaces/LibMessageProcessor.submit:(Lcom/kuka/mobilerobotics/secs/messages/LibMessage;)Lorg/jdeferred/Promise;
+      68: invokevirtual #143                // Method java/util/concurrent/atomic/AtomicReference.set:(Ljava/lang/Object;)V
+      71: return
+
+  static {};
+    Code:
+       0: ldc           #21                 // class com/kuka/mobilerobotics/secs/secs/LibSecsWrapper
+       2: invokestatic  #284                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #84                 // Field LOG:Lorg/slf4j/Logger;
+       8: return
+}

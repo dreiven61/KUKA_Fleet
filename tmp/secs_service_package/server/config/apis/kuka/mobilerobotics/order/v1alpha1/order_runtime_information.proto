@@ -1,0 +1,23 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.order.v1alpha1;
+
+import "kuka/mobilerobotics/order/v1alpha1/task.proto";
+
+option java_package = "com.kuka.mobilerobotics.order.v1alpha1";
+option java_outer_classname = "OrderRuntimeInformationProto";
+option java_multiple_files = true;
+
+// runtime information of the order processing
+message OrderRuntimeInformation
+{
+  // List of tasks that will be executed to complete the order.
+  repeated Task tasks = 1;
+}

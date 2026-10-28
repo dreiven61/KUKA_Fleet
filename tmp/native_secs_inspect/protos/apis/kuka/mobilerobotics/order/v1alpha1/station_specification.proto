@@ -1,0 +1,28 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.order.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+
+option java_package = "com.kuka.mobilerobotics.order.v1alpha1";
+option java_outer_classname = "StationSpecificationProto";
+option java_multiple_files = true;
+
+// Specifies station properties of an order.
+message StationSpecification
+{
+  // The uuid of the station where a payload must be picked or dropped.
+  string station_uuid = 1;
+
+  // The uuid of the station's compartment where a payload must be picked or dropped. 
+  // [optional] If not specified, the compartment weight determines where the payload is placed.
+  google.protobuf.StringValue compartment_uuid = 2;
+}
+

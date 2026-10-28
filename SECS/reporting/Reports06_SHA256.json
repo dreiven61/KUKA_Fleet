@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-28",
+  "pluginChecks": 282,
+  "pcLoopbackChecks": 133,
+  "actualEcsVehiclePayloads": 33,
+  "deployedToFleet": false,
+  "liveAutomaticDispatchTested": false,
+  "sha256": {
+    "SECS/fleet_transfer_plugin/build/servostar-mes-transfer-0.5.0.jar": "5e229840869af2c22a49b1b3fe81cb3c6f9651aa64ee0aecd8d5c20c959fe498",
+    "SECS/reporting/ecs_candidate/SecsTransferReports06_Auto_IMPORT_CANDIDATE.json": "7ffbd511ad9ad325f588e3e74e1845a43e2b34f11fab5754af06231f6163571d",
+    "SECS/reporting/ecs_candidate/SecsTransferReports06_Auto_Ready_LOCAL_WITH_TOKEN.json": "2b6eede10a47c5c9182b780e62b16648592760f982a993f0def8908cdecf8faa",
+    "VirtualMCS/KukaVirtualMCS-1.3.0-win-x64.zip": "285ccfc5a297232f164e657fd2a6872031779a09bbc18f4fdd539d58a4dc06b0"
+  }
+}

@@ -1,0 +1,24 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.secs.v1alpha1;
+
+import "kuka/mobilerobotics/order/events/v1alpha1/event.proto";
+
+option java_package = "com.kuka.secs.v1alpha1";
+option java_outer_classname = "SecsRawCommandRuntimeInformationProto";
+option java_multiple_files = false;
+
+// The command that encapsulates a SECS command.
+message SecsRawCommandRuntimeInformation
+{
+  // List of accumulated events which occurred so far regarding a raw command.
+  repeated kuka.mobilerobotics.order.events.v1alpha1.Event event = 1;
+}
+

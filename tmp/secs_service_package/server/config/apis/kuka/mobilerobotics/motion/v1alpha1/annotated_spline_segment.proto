@@ -1,0 +1,54 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motion.v1alpha1;
+
+import "kuka/mobilerobotics/motion/v1alpha1/drive_direction.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/quintic_bezier_curve_se2.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/tracking_accuracy.proto";
+import "kuka/mobilerobotics/motion/v1alpha1/velocity_constraints.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/any.proto";
+
+option java_package = "com.kuka.mobilerobotics.motion.v1alpha1";
+option java_outer_classname = "AnnotatedSplineSegmentProto";
+option java_multiple_files = true;
+
+// Defines an annotated spline segment within a spline. Some annotations (e.g. velocity constraints)
+// are duplicates of the motion's parameters. These are optional and would override the motion's global
+// parameters for this segment.
+//
+// The spline_segment parameter describes the actual path as a curve for each dimension: x, y, and 
+// theta. Either the theta curve must be empty or the DriveDirection parameter must be empty. There are 
+// three valid cases to consider:
+//   - x, y, theta are non-empty: This case is only valid for a holonomic platforms, that can control
+//     each dimension independently. DriveDirection must be empty in this case. For differential
+//     platforms this case will lead to a motion failure.
+//   - x, y are non-empty, theta is empty: This case is valid for holonmic and differential platforms 
+//     and describes a motion along the combined x, y curves with an orientation that is specified
+//     by the drive_direction parameter, which describes the platforms orientation relative to the 
+//     path tangent. This case is valid for holonomic and differential platforms.
+//   - x, y are empty, theta is non-empty: This describes a rotation on the spot. DriveDirection must
+//     be empty in this case. This is a valid case for holonomic and differential platforms.
+message AnnotatedSplineSegment
+{
+  // The actual geometrical description of this segment. Currently,
+  // only quintic Bezier curves are supported.
+  oneof spline_segment
+  {
+    // A quinitc bezier curve.
+    QuinticBezierCurveSE2 quintic_bezier_curve_se2 = 1;
+  }
+
+  // The list of annotations
+  map<string, string> annotations = 2;
+
+  // unique id of this segment
+  string uuid = 3;
+}

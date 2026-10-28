@@ -1,0 +1,30 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.obstacleavoidance.v1alpha1;
+
+import "kuka/core/geometry/v1/transform_2d.proto";
+import "kuka/core/geometry/v1/shape_2d.proto";
+
+option java_package = "com.kuka.mobilerobotics.obstacleavoidance.v1alpha1";
+option java_outer_classname = "ObstacleProto";
+option java_multiple_files = true;
+
+// Contains the description of an obstacle.
+message Obstacle
+{
+  // The obstacle's unique identifier.
+  string uuid = 1;
+
+  // Obstacle center relative to the robot center.
+  kuka.core.geometry.v1.Transform2D  pose = 2;
+
+  // The obstacle shape at the given pose
+  kuka.core.geometry.v1.Shape2D shape = 3;
+}

@@ -1,0 +1,200 @@
+# This is the system configuration for a simulated mobile robot.
+# All navigation services are started, as well as simrobot that simulates the platform.
+# The robotcontroller service connects to the MQTT Broker located on the SERVER_IP host as configured during the installation.
+version: "3.5"
+services:
+   motions:
+      image: "${REGISTRY_PATH}nav-motions:${TAG}"
+      container_name: sim-${ROBOT_UUID}-motions
+      restart: always
+      volumes:
+         - ${LOG_HOME}:/opt/nav/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/nav/config
+         - ${CONFIG_HOME}:/opt/robot/config
+      environment:
+         - LOCALIZER_SERVICE_HOST=simlocalizer
+         - LOCALIZER_SERVICE_PORT=50020
+         - MOTION_CONTROL_HOST=simrobot
+         - MOTION_CONTROL_PORT=50121
+         - ODOMETRY_SERVICE_HOST=simrobot
+         - ODOMETRY_SERVICE_PORT=50121
+         - ROBOT_CONTROLLER_HOST=robotcontroller
+         - ROBOT_CONTROLLER_PORT=50060
+         - SAFETY_STATE_SERVICE_HOST=simrobot
+         - SAFETY_STATE_SERVICE_PORT=50121
+         - PATH_PLANNER_HOST=
+      networks:
+         robotnetwork:
+            aliases:
+               - motions
+
+   configuration:
+      image: "${REGISTRY_PATH}mrob-static-dataprovider:${TAG}"
+      container_name: sim-${ROBOT_UUID}-configuration
+      restart: always
+      volumes:
+         - ${LOG_HOME}:/opt/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/nav/config
+         - ${APIS_HOME}:/apis
+      environment:
+         - MODULE=sim-${ROBOT_UUID}-configuration
+         - DATA_PROVIDER_PORT=50190
+         - FILEARGS=
+           --yaml /opt/nav/config/platform-config.yml:PlatformConfiguration
+           --yaml /opt/nav/config/serial-number.yml:kuka.mobilerobotics.lifetimedata.dataprovider.v1alpha1.SerialNumber
+           --yaml /opt/nav/config/safety-status.yml:kuka.mobilerobotics.safety.dataprovider.v1.SafetyStatus
+           --yaml /opt/nav/config/transport-capacity.yml:kuka.mobilerobotics.capacity.v1alpha1.TransportCapacity
+      networks:
+         robotnetwork:
+            aliases:
+               - configuration
+
+   simulateactionexecutor:
+      image: "${REGISTRY_PATH}nav-genericactionexecutor:${TAG}"
+      container_name: sim-${ROBOT_UUID}-simulateactionexecutor
+      restart: always
+      volumes:
+         - ${CONFIG_HOME}/scripts:/opt/robot/scripts
+      environment:
+         GRPC_SERVER_PORT: 50230
+      logging:
+         options:
+            max-size: "10m"
+            max-file: "10"
+      networks:
+         robotnetwork:
+            aliases:
+               - simulateactionexecutor
+
+   simrobot:
+      image: "${REGISTRY_PATH}nav-sim:${TAG}"
+      container_name: sim-${ROBOT_UUID}-simrobot
+      restart: always
+      volumes:
+         - ${LOG_HOME}:/opt/nav/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/nav/config
+         - ${CONFIG_HOME}:/opt/robot/config
+         - sim-persistence:/opt/robot/persistence
+      environment:
+         - MAPSERVICE_HOST=robotcontroller
+         - MAPSERVICE_PORT=50060
+         - ROBOT_UUID=${ROBOT_UUID}
+      networks:
+         robotnetwork:
+            aliases:
+               - simrobot
+
+   simlocalizer:
+      image: "${REGISTRY_PATH}nav-sim-localizer:${TAG}"
+      container_name: sim-${ROBOT_UUID}-simlocalizer
+      restart: always
+      volumes:
+         - ${LOG_HOME}:/opt/nav/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/nav/config
+         - ${CONFIG_HOME}:/opt/robot/config
+      environment:
+         - LOCALIZER_DATA_PROVIDER_PORT=50020
+         - SIMROBOT_HOST=simrobot
+         - SIMROBOT_PORT=50121
+         - ROBOT_UUID=${ROBOT_UUID}
+      networks:
+         robotnetwork:
+            aliases:
+               - simlocalizer
+
+   robotcontroller:
+      image: "${REGISTRY_PATH}nav-robotcontroller:${TAG}"
+      container_name: sim-${ROBOT_UUID}-robotcontroller
+      restart: always
+      volumes:
+         - ${LOG_HOME}:/opt/nav/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/nav/config
+         - ${APIS_HOME}:/apis
+      environment:
+         ROBOT_CONTROLLER_SERVICE_PORT: "50060"
+         MQTT_BROKER_SCHEME: "ssl"
+         GRPC_MAX_CONCURRENT_CALLS_PER_CONNECTION: "50"
+         GRPC_MAX_CONNECTION_IDLE: "120"  # seconds (2m)
+         GRPC_MAX_CONNECTION_AGE: "43200" # seconds (12h)
+         GRPC_MAX_CONNECTION_AGE_GRACE: "30" # seconds
+         GRPC_PERMIT_KEEP_ALIVE_WITHOUT_CALLS: "true"
+         GRPC_KEEP_ALIVE_TIME: "30" # seconds
+         GRPC_KEEP_ALIVE_TIMEOUT: "10" # seconds
+         JAVA_TOOL_OPTIONS: >-
+            -Xmx4096m
+      networks:
+         server:
+         robotnetwork:
+            aliases:
+               - robotcontroller
+
+   dockerproxy:
+      image: "${REGISTRY_PATH}docker-socket-proxy:${TAG}"
+      container_name: sim-${ROBOT_UUID}-dockerproxy
+      environment:
+         - CONTAINERS=1
+         - INFO=1
+         - SYSTEM=1
+      restart: always
+      volumes:
+         - /var/run/docker.sock:/var/run/docker.sock
+      networks:
+         robotnetwork:
+            aliases:
+               - dockerproxy
+
+   diagnostics:
+      image: "${REGISTRY_PATH}mrob-diagnostics:${TAG}"
+      container_name: sim-${ROBOT_UUID}-diagnostics
+      restart: always
+      extra_hosts:
+         # provide hosts for name resolution that point to the global host network
+         - "mqtt-broker:host-gateway"
+      environment:
+         LOG4J_CONFIGURATION_FILE: >
+            /opt/robot/config/logging/log4j2-defaults.xml,
+            /opt/robot/config/logging/log4j2-diagnostics.xml
+         LOCAL_ROBOT_DATA_HOST: "robotcontroller"
+      volumes:
+         - ${LOG_HOME}:/opt/nav/robot/bin/Log
+         - ${LOG_HOME}:/logs
+         - /opt/operationdata/nav:/operationdata
+         - persistence:/persistence
+         - ${CONFIG_HOME}:/opt/robot/config
+         - ${DIAGNOSTICS_OUTPUT}:/output
+      networks:
+         robotnetwork:
+            aliases:
+               - diagnostics
+
+   vda5050:
+      image: "${REGISTRY_PATH}mrob-vda:${TAG}"
+      container_name: sim-${ROBOT_UUID}-vda5050
+      restart: always
+      environment:
+         LOG4J_CONFIGURATION_FILE: >
+            /opt/robot/config/logging/log4j2-defaults.xml,
+            /opt/robot/config/logging/log4j2-vda5050.xml
+      volumes:
+         - ${LOG_HOME}:/opt/nav/robot/bin/Log
+         - ${CONFIG_HOME}:/opt/robot/config
+      profiles:
+         - vda5050
+      networks:
+         robotnetwork:
+            aliases:
+               - vda5050-sim
+
+networks:
+   server:
+      name: server
+      external: true
+   robotnetwork:
+      name: sim-${ROBOT_UUID}
+      driver: bridge
+
+volumes:
+   "persistence":
+      name: sim-${ROBOT_UUID}-persistence
+   "sim-persistence":
+      name: sim-${ROBOT_UUID}-sim-persistence

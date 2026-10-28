@@ -1,0 +1,82 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.core.state.v1;
+
+import "google/rpc/status.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Kuka.Core.State.V1";
+option java_package = "com.kuka.core.state.v1";
+option java_outer_classname = "ErrorStateProto";
+option java_multiple_files = true;
+option go_package = "kuka.com/genproto/kuka/core/state/errorstate;errorstate";
+
+
+// Represents the errors in the system.
+// Contains an error level which describes the general error level of the component it represents,
+// and a list of individual error instances which are the cause of the error level.
+message ErrorState
+{
+  // The common error state machine of entities like
+  // mission, tasks, actions, devices.
+  //
+  //       OK <------------+
+  //        |              |
+  //        v              |
+  //      HAS_ERROR <-----> RECOVERING
+  //        |
+  //        v
+  //      HAS_FATAL_ERROR
+  enum Enum
+    {
+    // The error state is unknown.
+    UNKNOWN = 0;
+
+    // No error is present.
+    // Transitions to HAS_ERROR if an error is encountered.
+    OK = 1;
+
+    // At least one error is present. The system will
+    // try to automatically recover all errors.
+    // Transitions:<br/>
+    // - RECOVERING: A suitable error handler is available and will be called.<br/>
+    // - HAS_FATAL_ERROR: No suitable error handler is available or all suitable ones failed.
+    HAS_ERROR = 2;
+
+    // The system tries to recover from errors.
+    // Transitions:<br/>
+    // - OK: Recovering succeeded and all errors are cleared.<br/>
+    // - HAS_ERROR: Recovering failed or there are still errors present.
+    RECOVERING = 3;
+
+    // Automatic recovering failed and an external recovery is necessary
+    // (e.g. manual user action or dedicated command).
+    // Transitions to RECOVERING if the caller tries to recover the error.
+    HAS_FATAL_ERROR = 4;
+  }
+  Enum level = 1;
+
+  // Contains the list of all errors in the ErrorState.
+  repeated Error errors = 2;
+}
+
+// Represents an error instance.
+// The error is cleared when its status code is 0.
+message Error
+{
+  // The uuid of this error instance.
+  string uuid = 1;
+
+  // The status of this error.
+  google.rpc.Status status = 2;
+  
+  // The timestamp corresponding to the time at which this error first occurred.
+  google.protobuf.Timestamp active_since = 3;
+}

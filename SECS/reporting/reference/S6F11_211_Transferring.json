@@ -1,0 +1,77 @@
+{
+  "referenceOnly": true,
+  "stream": 6,
+  "function": 11,
+  "wait": true,
+  "body": {
+    "type": "L",
+    "value": [
+      {
+        "type": "U4",
+        "value": 1
+      },
+      {
+        "type": "U2",
+        "value": 211
+      },
+      {
+        "type": "L",
+        "value": [
+          {
+            "type": "L",
+            "value": [
+              {
+                "type": "U2",
+                "value": 2
+              },
+              {
+                "type": "L",
+                "value": [
+                  {
+                    "type": "A",
+                    "value": "REFERENCE_ONLY_001"
+                  },
+                  {
+                    "type": "L",
+                    "value": [
+                      {
+                        "type": "L",
+                        "value": [
+                          {
+                            "type": "L",
+                            "value": [
+                              {
+                                "type": "A",
+                                "value": "SIM_CARGO_001"
+                              },
+                              {
+                                "type": "A",
+                                "value": "PORT_89"
+                              },
+                              {
+                                "type": "A",
+                                "value": "PORT_97"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "A",
+                            "value": "PORT_89"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "U2",
+                    "value": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

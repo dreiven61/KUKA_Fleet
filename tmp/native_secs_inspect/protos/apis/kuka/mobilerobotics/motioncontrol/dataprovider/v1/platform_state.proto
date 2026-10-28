@@ -1,0 +1,33 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motioncontrol.dataprovider.v1;
+
+option csharp_namespace = "Kuka.MobileRobotics.MotionControl.DataProvider.V1";
+option java_multiple_files = true;
+option java_outer_classname = "PlatformStateProto";
+option java_package = "com.kuka.mobilerobotics.motioncontrol.dataprovider.v1";
+
+// message to send the state of the platform
+message PlatformState
+{
+  // An enumeration contains the possible values of the platform state
+  enum PlatformStateType
+  {
+    // Normal state
+    // protolint:disable:next ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
+    NORMAL = 0;
+    // Warning a motion will be executed
+    WARNING_BEFORE_MOTION = 1;
+    // EVC limitation is active
+    EVC_LIMITATION_ACTIVE = 2;
+  }
+  // The state of the platform
+  PlatformStateType state= 1;
+}

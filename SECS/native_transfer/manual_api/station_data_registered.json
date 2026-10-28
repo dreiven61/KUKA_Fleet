@@ -1,0 +1,26 @@
+{
+  "stations": [
+    {
+      "uuid": "SECS_ST_89",
+      "name": "SECS test port at node 89",
+      "capacity": {
+        "compartments": [
+          {
+            "uuid": "PORT_89"
+          }
+        ]
+      }
+    },
+    {
+      "uuid": "SECS_ST_97",
+      "name": "SECS test port at node 97",
+      "capacity": {
+        "compartments": [
+          {
+            "uuid": "PORT_97"
+          }
+        ]
+      }
+    }
+  ]
+}

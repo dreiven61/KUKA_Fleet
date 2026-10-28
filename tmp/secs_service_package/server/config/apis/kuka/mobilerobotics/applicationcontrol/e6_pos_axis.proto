@@ -1,0 +1,37 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.applicationcontrol;
+
+import "kuka/mobilerobotics/applicationcontrol/e6_axis.proto";
+import "kuka/mobilerobotics/applicationcontrol/e6_pos.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.ApplicationControl";
+option java_multiple_files = true;
+option java_outer_classname = "E6PosAxisProto";
+option java_package = "com.kuka.mobilerobotics.applicationcontrol";
+
+// Message containing the robot arm's position and axes
+message E6PosAxis
+{
+  // Current Cartesian robot position
+  // The variable of structure type E6POS defines the setpoint position of the
+  // TCP in relation to the currently set BASE coordinate system.
+  // The variable is write-protected. In the robot program, the variable triggers
+  // an advance run stop.
+  kuka.mobilerobotics.applicationcontrol.E6Pos e6_pos = 1;
+
+  // Current axis-specific setpoint position of the robot
+  // The variable of structure type E6AXIS contains the current axis angles or
+  // axis positions.
+  // • A1 … A6: Setpoint position of the robot axes in [rad] or [m]
+  // • E1 … E6: Setpoint position of the external axes in [rad] or [m]
+  // In the robot program, the variable triggers an advance run stop.
+  kuka.mobilerobotics.applicationcontrol.E6Axis e6_axis = 2;
+}

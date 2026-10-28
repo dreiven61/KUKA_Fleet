@@ -1,0 +1,69 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.order.events.v1alpha1;
+
+option java_package = "com.kuka.mobilerobotics.order.events.v1alpha1";
+option java_outer_classname = "VehicleEventProto";
+option java_multiple_files = true;
+
+// Represents an vehicle event.
+message VehicleEvent {
+
+	enum VehicleEventType {
+	  UNSPECIFIED = 0;
+	
+	  // the vehicle state changed
+	  VEHICLE_STATE_CHANGED = 1;
+	
+	  // Vehicle is now in service.
+	  VEHICLE_INSTALLED = 2;
+	
+	  // Vehicle is now out of service.
+	  VEHICLE_REMOVED = 3;
+	}
+	
+	enum VehicleState {
+	  UNDEFINED = 0;
+	  // not available
+	  OFF = 1;
+	  // not available for production
+	  MAINTENANCE = 2;
+	  // preparing to switch to MAINTENANCE state
+	  MAINTENANCE_PENDING = 3;
+	  // not available for production due to some manual interaction needed
+	  DOWN = 4;
+	  // charging until manual release
+	  FORCE_CHARGE = 5;
+	  // preparing to switch to FORCE_CHARGE state
+	  FORCE_CHARGE_PENDING = 6;
+	  // charging (battery level low)
+	  CHARGE = 7;
+	  // charging but available for production (battery level high)
+	  CHARGE_IDLE = 8;
+	  // normal operation, executing mission
+	  RUN = 9;
+	  // normal operation, but free / no mission
+	  IDLE = 10;
+	  // paused all actions, ready to continue
+	  FROZEN = 11;
+	}
+
+  // the event type
+  VehicleEventType action = 1;
+
+  // the vehicle ID
+  string vehicle_id = 2;
+
+  // all the vehicle payload compartment IDs
+  repeated string vehicle_payload_compartment_id = 3;
+
+  // the new vehicle state
+  VehicleState vehicle_state = 4;
+}

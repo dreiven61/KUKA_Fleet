@@ -1,0 +1,3826 @@
+
+=== PDF PAGE 1 ===
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Autonomous Mobile Robots  
+KMP 1500I diffDrive 
+Assembly and Operating Instructions 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PDF PAGE 2 ===
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+© Copyright 2022 
+KUKA Robotics Guangdong Co., Ltd. No.3, 
+Liaoxin Road 
+Beijiao Town, Shunde District, Foshan City 
+Guangdong Province 
+China 
+ 
+ 
+This documentation or excerpts therefrom may not be reproduced or disclosed to third parties without 
+the express permission of KUKA Robotics Guangdong Co., Ltd. 
+Other functions not described in this documentation may be operable in the controller. The user has no 
+claims to these functions, however, in the case of a replacement or service work. 
+We have checked the content of this documentation for conformity with the hardware and soft-ware 
+described. Nevertheless, discrepancies cannot be precluded, for which reason we are not able to 
+guarantee total conformity. The information in this documentation is checked on a regu-lar basis, 
+however, and necessary corrections will be incorporated in the subsequent edition. 
+Subject to technical alterations without an effect on the function.  
+Original documentation 
+ 
+Publication: Pub MA KMP 1500I diffDrive (PDF) en 
+ 
+ 
+Book structure:MA KMP 1500I diffDrive 
+ 
+ 
+Version: V 2 
+2023-2-24
+
+=== PDF PAGE 3 ===
+ 
+3 
+ 
+Contents 
+1 Introduction ................................ ...................... 6 
+1.1 Target group .............................................................. 6 
+1.2 Vehicle documentation ..................................................... 6 
+1.3 Representation of warnings and notes ....................................... 6 
+1.4 Terms used ............................................................... 7 
+2 Product description ................................ ............... 8 
+2.1 Overview ................................................................. 8 
+2.2 Components .............................................................. 9 
+2.2.1 Vehicle ................................................................... 9 
+2.2.2 Driving system ........................................................... 10 
+2.2.3 Drive wheel .............................................................. 11 
+2.2.4 Vision system ............................................................ 11 
+2.2.5 Rotating system .......................................................... 12 
+2.2.6 Payload plate ............................................................ 12 
+2.2.7 Touch screen ............................................................ 14 
+2.2.8 Home page .............................................................. 14 
+2.2.9 Control screen ............................................................ 14 
+2.2.10 Equipment screen ........................................................ 15 
+2.2.11 State screen ............................................................. 16 
+2.2.12 Settings screen ........................................................... 17 
+2.2.13 Lidar .................................................................... 18 
+2.2.14 3D binocular camera ...................................................... 19 
+2.2.15 Single-point TOF sensor ................................................... 19 
+2.2.16 Bumper .................................................................. 19 
+2.2.17 Buzzer .................................................................. 20 
+2.2.18 LED ..................................................................... 20 
+2.3 Software ................................................................. 22 
+2.4 Options .................................................................. 22 
+2.5 Safety devices ............................................................ 22 
+2.5.1 EMERGENCY STOP devices .............................................. 22 
+3 Safety ................................ ...........................  24 
+3.1 General ................................................................. 24 
+3.1.1 Disclaimers .............................................................. 24 
+3.1.2 Terms used .............................................................. 24 
+3.2 Personnel ................................................................ 25 
+3.3 Workspace and danger zone ............................................... 26 
+3.4 Triggers for stop reactions ................................................. 27 
+3.5 Additional protective equipment on the vehicle ................................ 29 
+3.5.1 Optical and acoustic signals ................................................ 29 
+3.6 Safety measures .......................................................... 29 
+3.6.1 General safety measures .................................................. 29 
+3.6.2 Lidar .................................................................... 30 
+3.6.3 Start-up and recommissioning .............................................. 30 
+3.6.4 Driving and steering ....................................................... 31 
+3.6.5 Picking up and loading..................................................... 32 
+3.6.6 Vehicle maintenance and repair ............................................. 32 
+3.6.7 Decommissioning, storage and disposal ..................................... 34 
+
+=== PDF PAGE 4 ===
+ 
+4 
+ 
+4 Technical data ................................ ................... 35 
+4.1 Basic data ............................................................... 35 
+4.2 Plates and labels ......................................................... 37 
+5 Planning ................................ ........................  41 
+5.1 Site requirements ......................................................... 41 
+5.1.1 Road undulation .......................................................... 41 
+5.1.2 Road slope .............................................................. 41 
+5.1.3 Step height .............................................................. 41 
+5.1.4 Width range .............................................................. 41 
+5.1.5 Ground friction coefficient .................................................. 41 
+5.1.6 Ground bearing ........................................................... 41 
+5.1.7 Ground electrical characteristics ............................................ 42 
+5.2 Wireless AP layout ........................................................ 42 
+5.2.1 Key points of layout ....................................................... 42 
+5.2.2 Configuration requirements for wireless networks ............................. 44 
+5.2.3 Network signal intensity requirements........................................ 44 
+5.2.4 Network layout solutions ................................................... 45 
+5.2.5 Selection requirements for wireless network equipment ........................ 45 
+5.3 5G network performance requirements (option) ............................... 46 
+5.4 Obstacle avoidance ....................................................... 47 
+5.4.1 Lidar .................................................................... 48 
+5.4.2 3D binocular camera ...................................................... 48 
+5.4.3 Single-point TOF laser ..................................................... 49 
+5.5 Design of the transported goods ............................................ 50 
+5.5.1 Rack design .............................................................. 50 
+5.6 CoM specifications of the payload ........................................... 50 
+5.7 Ground code ............................................................. 57 
+5.8 Rack code ............................................................... 58 
+5.9 Generating the ground code ................................................ 59 
+5.10 Generating the rack code .................................................. 60 
+5.11 Printing the ground code ................................................... 61 
+5.11.1 Installing the label paper ................................................... 61 
+5.11.2 Installing the ribbon ....................................................... 62 
+5.12 Printing ground code ...................................................... 62 
+5.13 Laying the ground code .................................................... 63 
+5.13.1 Ground code layout ....................................................... 63 
+5.13.2 Measuring the site ........................................................ 64 
+5.13.3 Drawing the reference line ................................................. 65 
+5.13.4 Drawing the ink marker line ................................................ 65 
+5.13.5 Fixing the ground code .................................................... 66 
+5.14 Placing the rack code...................................................... 67 
+5.14.1 Confirming the rack number ................................................ 67 
+5.14.2 Fixing the rack code ....................................................... 67 
+6 Transportation ................................ ................... 68 
+6.1 Transporting the vehicle ................................................... 68 
+6.2 Concluding work .......................................................... 69 
+7 Start-up and recommissioning ................................ .... 70 
+8 Operation ................................ .......................  71 
+
+=== PDF PAGE 5 ===
+ 
+5 
+ 
+8.1 Control elements ......................................................... 71 
+8.2 Switching on the vehicle ................................................... 72 
+8.3 Operating modes ......................................................... 72 
+8.3.1 AUTO mode ............................................................. 72 
+8.3.2 Debug mode ............................................................. 72 
+8.3.3 Manual mode ............................................................ 73 
+8.3.4 Panel buttons ............................................................ 73 
+8.3.5 Operating via the manual controller .......................................... 73 
+8.4 Terminating the task....................................................... 75 
+8.5 Switching off the vehicle ................................................... 76 
+9 Maintenance ................................ ..................... 77 
+9.1 Maintenance overview ..................................................... 77 
+9.2 Cleaning the vehicle ....................................................... 78 
+9.2.1 Cleaning ................................................................. 79 
+9.2.2 Concluding work .......................................................... 79 
+10 Repair................................ ...........................  81 
+10.1 Maintenance and procurement of spare parts ................................. 81 
+10.2 Exchanging the preload rubbers ............................................ 81 
+10.2.1 Removing the preload rubber ............................................... 82 
+10.2.2 Installing the preload rubber ................................................ 82 
+10.3 Exchanging the caster wheels .............................................. 82 
+10.3.1 Removing the cover ....................................................... 82 
+10.3.2 Exchanging the caster wheels .............................................. 83 
+10.3.3 Installing the cover ........................................................ 85 
+10.3.4 Concluding work .......................................................... 85 
+10.4 Exchanging the drive wheels ............................................... 86 
+10.4.1 Removing the cover ....................................................... 88 
+10.4.2 Exchanging the drive wheels ............................................... 88 
+10.4.3 Installing the cover ........................................................ 90 
+10.4.4 Concluding work .......................................................... 90 
+10.5 Exchanging the drive battery ............................................... 90 
+10.5.1 Removing the cover ....................................................... 91 
+10.5.2 Exchanging the drive battery ............................................... 91 
+10.5.3 Installing the cover ........................................................ 92 
+11 Decommissioning, storage and disposal ...........................  93 
+11.1 Decommissioning ......................................................... 93 
+11.2 Storage .................................................................. 93 
+11.3 Disposal ................................................................. 94 
+12 Appendix ................................ ........................  95 
+12.1 Tightening torques ........................................................ 95 
+12.2 Spare parts list for maintenance/repair ...................................... 95 
+13 KUKA Service ................................ ................... 97 
+13.1 Requesting support ....................................................... 97 
+13.2 KUKA Customer Support .................................................. 97 
+ 
+
+=== PDF PAGE 6 ===
+ 
+6 
+ 
+1 Introduction 
+1.1 Target group 
+This document is aimed at users who have the following knowledge and skills:  
+▪ Advanced knowledge of mechanical engineering  
+▪ Advanced knowledge of electrical and electronic systems 
+1.2 Vehicle documentation 
+The documentation of the system consists of the KUKA operating 
+instructions for the vehicle with annexes and documentation from 
+suppliers: 
+Documentation from KUKA: 
+◼ KUKA operating instructions for the vehicle (this document) 
+◼ KUKA's documentation for the charging station 
+ 
+These operating instructions are valid only for the vehicle. The 
+manufacturers’ operating instructions are separate documents and 
+are also an integral part of the documentation of the vehicle. 
+ 
+ 
+1.3 Representation of warnings and notes 
+Safety 
+ 
+These warnings are relevant to safety and must be observed. 
+ 
+DANGER 
+These warnings mean that it is certain or highly probable that death or 
+severe injuries will occur, if no precautions are taken. 
+ 
+WARNING 
+These warnings mean that death or severe injuries may occur, if no 
+precautions are taken. 
+ 
+CAUTION 
+These warnings mean that minor injuries may occur, if no precautions 
+are taken. 
+ 
+NOTICE 
+These warnings mean that damage to property may occur, if no precau-
+tions are taken. 
+ 
+ 
+These warnings contain references to safety-relevant information or 
+general safety measures. 
+These warnings do not refer to individual hazards or individual 
+precautionary measures 
+ 
+Notices 
+ 
+These notices serve to make your work easier or contain 
+references to further information. 
+Tip to make your work easier or reference to further information. 
+ 
+
+=== PDF PAGE 7 ===
+ 
+7 
+ 
+1.4 Terms used 
+Terms Description 
+AMR Autonomous Mobile Robot  
+AGV is a transportable vehicle that can 
+navigate using ground codes and laser. 
+CAN Controller Area Network 
+As a reliable vehicle bus standard, CAN allows 
+mutual communication of applications between 
+microcontrollers and devices without a host 
+server. 
+KMP KUKA Mobile Platform  
+KUKA Mobile Platform 
+KUKA Studio As a dedicated deployment tool for KUKA, 
+KUKA Studio consists of on-site laser mapping, 
+parameter debugging and on-site configuration 
+and other functional modules. 
+K-MReS As the expert scheduling system of KUKA, the 
+K-MReS consists of K-RCS （Robot 
+Scheduling System）, K-WCS （Workflow 
+Control System） and K-ECS （Equipment 
+Control System）. 
+Slam Simultaneous localization and mapping 
+Slam is used to solve the positioning and 
+mapping problems of vehicles in unknown 
+environment. 
+ 
+  
+
+=== PDF PAGE 8 ===
+ 
+8 
+ 
+ 
+2 Product description 
+2.1 Overview 
+ 
+Fig. 2-1: KMP 1500I 
+Description 
+The vehicle is an automated guided vehicle (AGV), supported by QR code and 
+SLAM navigation. 
+The vehicle can transport goods and lift objects automatically, accurately and 
+quickly. 
+The vehicle can go straight, reverse, rotate, make U-turns, arc across, and lift or 
+lower rack. 
+The vehicle has the following three operating modes: 
+• AUTO 
+(>>>> AUTO "Auto" Page 65) 
+• Debug 
+(>>>>Debug "Debug" Page 65) 
+• Manual 
+(>>>>Manual "Manual" Page 65) 
+The vehicle is powered by electricity. 
+The vehicle has the following features: 
+1. Load capacity of up to 1500 kg. 
+2. Effective obstacle detection via lidar at the front, single-point TOF, and 3D 
+binocular camera at the front and rear of the vehicle. 
+3. Continuous working for 8 hours on full charge under standard conditions. 
+4. Optional for 5G. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PDF PAGE 9 ===
+ 
+9 
+ 
+ 
+ 
+2.2 Components 
+2.2.1 Vehicle 
+ 
+Fig. 2-2: Vehicle, front view 
+1 Payload plate 5      3D binocular camera 
+2 LED 6 Bumper 
+3 Control elements                          7   Lidar 
+4 Caster wheel  
+         
+  
+ 
+ 
+Fig. 2-3: Vehicle, rear view  
+ 
+1 Payload plate 5 Caster wheel 
+2 LED 6 3D binocular camera 
+3 Control elements 7 Charging port 
+4 Bumper 8 Touch screen 
+ 
+
+
+=== PDF PAGE 10 ===
+ 
+10 
+ 
+  
+Fig. 2-4: Vehicle, top view  
+1 Payload plate   
+ 
+  
+Fig. 2-5: Vehicle, right view  
+1 Payload plate 4 Caster wheel 
+2 Bumper 5 Control elements 
+3 Drive wheel 6 Lidar 
+ 
+ 
+2.2.2 Driving system 
+ 
+The driving system of the vehicle comprises: 
+◼ Drive unit 
+◼ Caster wheel 
+ 
+  
+ 
+Fig. 2-6: Vehicle, driving system 
+1 Caster wheel 
+2 Driving unit 
+3 Drive wheel 
+ 
+Each vehicle is equipped with 2 drive units to control the movement of the 
+vehicle. 
+
+
+=== PDF PAGE 11 ===
+ 
+11 
+ 
+ 
+ 
+Fig. 2-7: Drive unit  
+1 Drive motor 
+2 Gearbox 
+3 Drive wheel 
+2.2.3 Drive wheel 
+Description 
+Each drive unit has a drive wheel. 
+ 
+ 
+Fig. 2-8: Drive wheel 
+1 Gearbox 
+2 Drive wheel 
+3 M8× 20-8.8 hexagon screws 
+2.2.4 Vision system 
+Description 
+The vision system consists of 2 cameras: 
+◼ Upper-view camera 
+◼ Lower-view camera 
+The upper-view camera is used to identify rack codes. The lower-view 
+camera is used to scan ground codes which are fixed on the floor to position 
+and navigate the vehicle. 
+
+
+=== PDF PAGE 12 ===
+ 
+12 
+ 
+ 
+ 
+Fig. 2-9: Vision System  
+1 Payload plate 
+2 Upper-view camera 
+3 Lower-view camera 
+ 
+2.2.5 Rotating system 
+Description 
+ 
+The rotating system is independent of the lifting system. Therefore, the 
+vehicle can rotate independently with or without lifting. 
+ 
+ 
+  
+Fig. 2-10: Rotating system  
+ 
+ 
+2.2.6 Payload plate 
+Description 
+The payload plate is mounted above the vehicle, with a rubber layer on its 
+surface. 
+The rubber layer is featured by anti-slip, shock absorption and anti-static. 
+ 
+ 
+
+
+=== PDF PAGE 13 ===
+ 
+13 
+ 
+ 
+Fig. 2-11: Payload plate  
+1 Payload plate 
+
+
+=== PDF PAGE 14 ===
+ 
+14 
+ 
+ 
+ 
+2.2.7 Touch screen 
+ 
+Description 
+The screen shows the details of obstacle avoidance, battery capacity, WIFI 
+information, IP address, and rack infromation, as well as faults, and other 
+information in real time. 
+You can lift, lower, rotate the payload plate, charge the drive battery, and carry 
+out authorization, one-key recovery, set WIFI, and switch languages between 
+Chinese and English via the screen. 
+ 
+2.2.8 Home page 
+Description 
+The Home page consists of: 
+◼ Tasks in progress 
+◼ Location 
+◼ Warning  
+◼ Charging status 
+◼ ID 
+ 
+ 
+Fig. 2-12: Home 
+2.2.9 Control screen 
+Description 
+
+
+=== PDF PAGE 15 ===
+ 
+15 
+ 
+ 
+Fig. 2-13: Control screen 
+2.2.10 Equipment screen 
+Description 
+The Equipment screen includes basic information, software version, battery, and 
+positioning of the vehicle. 
+ 
+Fig. 2-14: Equipment screen 
+ 
+Fig. 2-15: Software version 
+
+
+=== PDF PAGE 16 ===
+ 
+16 
+ 
+ 
+Fig. 2-16: Dive battery information 
+ 
+Fig. 2-17: Positioning status 
+2.2.11 State screen 
+Description 
+The State screen shows the fault list, safety status and sensor status. 
+ 
+Fig. 2-18: Status 
+
+
+=== PDF PAGE 17 ===
+ 
+17 
+ 
+ 
+Fig. 2-19: Faults recorded 
+ 
+Fig. 2-20: Safety status 
+ 
+Fig.2-21: Sensor status 
+2.2.12 Settings screen 
+Description 
+The settings screen includes WIFI settings, QR code settings, 5G network 
+settings and system settings. 
+
+
+=== PDF PAGE 18 ===
+ 
+18 
+ 
+ 
+Fig. 2-22: Settings screen 
+2.2.13 Lidar 
+Description 
+The lidar is mounted at the front of the vehicle to detect obstacles within 240°， 
+which stops the vehicle as soon as an obstacle is detected on the motion path.  
+ 
+  
+Fig. 2-23: Lidar  
+1 Lidar 
+.  
+ 
+This monitored area is the protective field. If the protective field is violated, the 
+vehicle stops. 
+ 
+ 
+ 
+ 
+Hazard due to projecting add-on parts and transport loads on the 
+vehicle. 
+If the structure or load project beyond the vehicle contour, the personnel 
+detection system and velocity limitation may possibly have no effect. These 
+factors must both be adapted accordingly. Failure to observe this may result 
+in death, severe injuries or damage to property. 
+• Reduce maximum velocity. 
+• Increase size of protective fields in accordance with the structure or 
+load. 
+WARNING 
+Avoid highly reflective objects in the scan plane of the laser scanner. 
+Reflectors can influence the measurement results of the laser scanner. 
+Highly reflective objects in the protected area may conceal part of the 
+surface to be monitored. 
+
+=== PDF PAGE 19 ===
+ 
+19 
+ 
+2.2.14 3D binocular camera 
+ 
+ 
+Description 
+The 3D binocular camera is located at the front and rear of the vehicle, which 
+can detect obstacles within a height of 30mm~2100mm. The minimum size of 
+detected object is 7*7*7cm. 
+ 
+Fig. 2-24: 3D binocular camera 
+1 3D binocular camera 
+2.2.15 Single-point TOF sensor       
+Description 
+The single-point TOF sensor is equipped to compensate for the blind spot of the 
+3D binocular camera.It can detect obstacles within 70 mm. 
+ 
+Fig. 2-25: Front of a vehicle 
+1 Single-point TOF sensor 
+2.2.16 Bumper 
+Description 
+When the bumper detects a collision (over 30N), the vehicle will stop 
+immediately and report an error. Meanwhile, the LED strips turn red and the 
+touch screen displays the error information. 
+To resume operating, press the RESET button on the front of the vehicle. 
+ 
+Fig. 2-26: Vehicle, right view 
+1 Bumper 
+ 
+ 
+
+
+=== PDF PAGE 20 ===
+ 
+20 
+ 
+2.2.17 Buzzer 
+Description 
+The buzzer is located inside the vehicle. 
+It can produce a warning sound to indicate the state of moving vehicle. 
+ 
+Movement Sound 
+Turn left Turning left, please be careful 
+Turn right Turning right, please be careful 
+Lifting down the rack Lifting down the rack 
+Lifting up the rack Lifting up the rack 
+Detected front obstacles  Obstacles detected ahead，please be 
+careful  
+Detected obstacles on the left  Obstacles detected on the left，please be 
+careful  
+Detected obstacles on the right Obstacles detected on the right，please 
+be careful 
+Detected rear obstacles Obstacles detected behind，please be 
+careful 
+Charging  Start charging 
+Exit charging Exit charging 
+Charging abnormal Charging abnormal, please check 
+Reversing  Reversing！ Please be careful! 
+Debug mode Switched to debug mode 
+Maintenance mode Switched to maintenance mode 
+Auto mode(automatic mode) Returned to auto mode 
+Unenable the motor Motor unenabled  
+Enable the motor Motor enabled 
+CAN mode CAN mode 
+485 mode 485 mode 
+Emergency stop is pressed Emergency stop is pressed  
+Emergency stop is released Emergency stop is released  
+Alarm System error, please check 
+Sleep Sleep  
+Code lost Code lost, please check 
+Positioning lost  Positioning lost, please check 
+Upward-looking camera failed to 
+identify the rack 
+Fail to identify the rack 
+Online Online 
+Offline Offline 
+Lost connection with the RCS Lost connection with the RCS 
+Go straight  Go straight 
+ 
+ 
+2.2.18 LED 
+LED is located at the four corners of the vehicle, which indicates the operating 
+
+=== PDF PAGE 21 ===
+ 
+21 
+ 
+status of a vehicle. 
+ 
+Fig. 2-27: LED strips 
+1 LED strip A 
+2 LED strip B 
+3 LED strip C 
+4 LED strip D 
+Status Color Light Description 
+Stop Red The LED strips is constant 
+on. 
+The Emergency Stop is 
+pressed. 
+Warning Red The LED strips is constant 
+on. 
+The vehicle gives a 
+warning. 
+Error Yellow The LED strips is constant 
+on. 
+An error is reported. 
+Lidar failure or 
+abnormal 
+communication 
+Yellow The LED strips flashes at 
+2Hz. 
+The vehicle has a lidar 
+failure or abnormal 
+communication. 
+AGV self-test Green: pass The LED strips turn on 
+successively. 
+The vehicle is running a 
+self-test when starting. Yellow: fail 
+AGV self-test 
+results 
+Green: pass The LED strips is constant 
+on/flashes (Turn to normal 
+state, based on whether the 
+vehicle is positioned) 
+The vehicle shows the 
+self-test results. 
+Yellow: fail The LED strips is constant 
+on. 
+Idle state 
+ (not positioned) 
+Green  
+(RCS online) 
+The left front and right rear 
+LED strip flash at 1HZ. 
+The vehicle is not 
+positioned when it stands 
+idle. Blue  
+(RCS offline) 
+Idle state 
+(positioned) 
+Green  
+(RCS online) 
+The LED strips is constant 
+on. 
+The vehicle is positioned 
+when it stands idle 
+Blue  
+(RCS offline) 
+Normal 
+movement 
+Green The LED strips flashes. The vehicle operates in 
+normal. 
+Obstacle 
+obstructed 
+Purple The LED strips is on. The vehicle detected an 
+obstacle. 
+Obstacle cleared White The LED strips turn on 
+from the midlle to ends. 
+The obstacle is removed. 
+Task timeout From purple 
+to yellow 
+The LED strips turns on. The vehicle times out on 
+the task. 
+
+=== PDF PAGE 22 ===
+ 
+22 
+ 
+ 
+ 
+2.3 Software 
+Description 
+You can operate the vehicle by: 
+◼ K-MReS 
+KMeS is the expert scheduling system of KUKA AGV, the K-MReS consists of 
+K-RCS Robot Scheduling System, K-WCS Workflow Control System and K-ECS 
+Equipment Control System. 
+ 
+2.4 Options 
+The vehicle can be equipped with the following option: 
+• 5G 
+2.5 Safety devices 
+The following safety devices have been configured to ensure personnel safety ， 
+2.5.1 EMERGENCY STOP devices 
+ 
+An EMERGENCY STOP device must be pressed in the event of a hazardous 
+situation or emergency. The following EMERGENCY STOP devices are 
+available: 
+• 4x EMERGENCY STOP on the vehicle 
+If an EMERGENCY STOP device is pressed, all motions of the vehicle are 
+stopped. 
+Manual mode 
+ 
+Yellow The LED strips flashs at 
+2HZ. 
+The vehicle is in manual 
+mode. 
+Reset and 
+clearing 
+Yellow The LED strips flashs 1 
+time. 
+The vehicle returns to 
+normal by pressing reset. 
+CAN mode Green The LED strips flashs at 
+2HZ. 
+The vehicle is in CAN 
+mode. 
+Network interface 
+mode 
+Blue The LED strips flashs at 
+2HZ. 
+The vehicle is in debug 
+mode. 
+485 mode Purple The LED strips flashs at 
+2HZ. 
+The vehicle is in 485 
+mode. 
+Charging Green The LED strips is 
+breathing. 
+The vehicle is charging. 
+Left steering Green The LED strip light up from 
+the left front to right rear 
+end. 
+The vehicle is turning left. 
+Right steering Green The LED strip light up from 
+the left front and right rear 
+end. 
+The vehicle is turning 
+right. 
+Stop for safety 
+function  
+Red The LED strips flashs at 
+1Hz. 
+The vehicle stops for 
+triggering the safe stop 
+function. 
+Stop for safety 
+zone  
+Red The LED strips flashs at 
+2Hz. 
+The vehicle stops for the 
+lidar triggering the safety 
+zone during vehicle 
+movement. 
+ 
+
+=== PDF PAGE 23 ===
+ 
+23 
+ 
+If the EMERGENCY STOP is released again, it must be reset. This is done 
+by pressing the Lock/Unlock button on the vehicle. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+The EMERGENCY STOP device must be pressed as soon as persons or 
+equipment are endangered. 
+If there is a booster frame or transport load on the vehicle, there must be 
+unrestricted access to the EMERGENCY STOP devices. Alternatively, 
+additional EMERGENCY STOP devices must be added to ensure this 
+accessibility. 
+There is a risk of injury to persons in the motion and lifting range of 
+the transport system!  
+Before releasing the EMERGENCY STOP button and resuming motion, 
+check that there are no persons or equipment in the motion/lifting range of 
+the transport system. 
+WARNING 
+
+=== PDF PAGE 24 ===
+ 
+24 
+ 
+3 Safety 
+3.1 General 
+3.1.1 Disclaimers 
+The vehicle is built using state-of-the-art technology and in accordance with the 
+recognized safety rules. Nevertheless, impermissible misuse may constitute a 
+risk to life and limb or cause damage to the vehicle and to other material 
+property. 
+The vehicle may only be used in perfect technical condition in accordance with 
+its intended use and only by safety-conscious persons who are fully aware of 
+the risks involved in its operation. Use of the system is subject to compliance 
+with this document and with the declaration of incorporation supplied together 
+with the system. Any functional disorders affecting the safety must be rectified 
+immediately. 
+Safety information 
+Information about safety may not be construed against the manufacturer. Even if 
+all safety instructions are followed, this is not a guarantee that the vehicle will 
+not cause personal injuries or material damage. 
+No modifications may be carried out on the vehicle without the authorization of 
+the manufacturer. Additional components, not supplied by the manufacturer, 
+may be integrated into the vehicle. The user is liable for any damage these 
+components may cause to the vehicle. 
+ 
+The vehicle may only be put into operation if the following precondition are met: 
+◼ The KMP is integrated into a complete system. 
+Or: The KMP, together with other machinery, constitutes a complete 
+system. 
+ 
+The KMP must always be operated in accordance with the applicable national 
+laws, regulations and standards 
+3.1.2 Terms used 
+ 
+STOP 0, STOP 1 and STOP 2 are the stop definitions according to 
+GB5226.1:2016 
+ 
+Terms Description 
+Stopping distance Stopping distance = reaction distance + braking distance 
+The stopping distance is part of the danger zone. 
+Workspace Area within which the KMP may move. 
+User The user of the KMP can be the management, employer or 
+delegated person responsible for use of the KMP. 
+Danger zone The danger zone consists of the workspace and the stopping 
+distances of the KMP. 
+Service life The service life of a safety-relevant component begins at the 
+time of delivery of the vehicle to the customer. 
+The service life is not affected by whether the vehicle is used or 
+not, as safety-relevant components are also subject to aging 
+during storage 
+STOP 0 A stop that is triggered and executed by immediate removal of 
+the power generated from machinery braking system. 
+Note: This stop is called safety stop 0 in this document. 
+
+=== PDF PAGE 25 ===
+ 
+25 
+ 
+STOP 1 A stop that is triggered and monitored by applying power to 
+machinery braking system, then controllable stop of the power 
+is removed after stop. 
+Note: This stop is called safety stop 1 in this document. 
+System integrator 
+(plant integrator) 
+The system integrator is responsible for safely integrating the 
+KMP into a complete system and commissioning it. 
+ 
+3.2 Personnel 
+ 
+Before work is started, the personnel must be instructed at regular intervals 
+about the type and scope of the work and potential hazards. Instruction must be 
+provided again after particular incidents or technical modifications. 
+Personnel include the user and operator of the system. 
+ 
+System integrator 
+The vehicle must be safely integrated into a complete 
+system by the system integrator. The system integrator 
+is responsible for the following tasks: 
+◼ Installing the vehicle 
+◼ Connecting the vehicle 
+◼ Performing the risk assessment for the application (e.g. Transporting, lifting 
+and transferring the load, load lifting attachment) 
+◼ Performing the risk assessment 
+– Protecting the travel routes against unauthorized access 
+– Securing the transport load against toppling and falling given the 
+specified values for acceleration and deceleration 
+– Providing escape routes in the complete system for the 
+maintenance personnel (in accordance with the standard for 
+automated guided vehicle systems valid in the user's country)  
+– Labeling crush hazard points and warning of unintentional vehicle 
+motion in the loading and unloading station 
+◼ Implementing the required safety functions and safeguards 
+◼ Providing escape routes and labeling danger zones in accordance with the 
+applicable national standards for automated guided vehicle systems 
+◼ Issuing the declaration of conformity 
+◼ Creating the operating instructions for the complete system 
+◼ Ensuring that, despite the specified positional accuracy of the vehicle, the 
+load Lifting tackles always engage cleanly with the transport load and that 
+this never slips on the vehicle 
+◼ Ensuring that the center of gravity of the intended transport loads lies within 
+the payload diagram 
+ 
+User 
+All persons working on the vehicle must be qualified for this work and 
+have read and understood the vehicle documentation, including the safety 
+chapter. 
+Installation, exchange, adjustment, operation, maintenance and repair 
+must be performed only as specified in the documentation for the relevant 
+component of the system and only by personnel specially trained for this 
+purpose. 
+Work on the electrical and mechanical equipment of the vehicle may only 
+be carried out by specially trained personnel. 
+
+=== PDF PAGE 26 ===
+ 
+26 
+ 
+The user of the vehicle is responsible for its use. They must ensure faultless 
+operation in terms of safety and lay down all safety regulations for the 
+personnel. 
+If more than one person is working on the vehicle at any one time, the user must 
+appoint a supervisor. 
+The user should check at specific intervals selected at his own discretion that 
+the personnel attend to their work in a safety-conscious manner, are fully aware 
+of the risks involved during operation and observe the documentation for the 
+vehicle. 
+The user is responsible for complying with the national laws, regulations and 
+standards. 
+ 
+Operators 
+The responsibilities of the personnel for commissioning, operation, maintenance 
+and repair must be defined. The personnel must meet the following 
+requirements: 
+• They must have read and understood the complete transport system 
+documentation, including the safety chapter. 
+• They must have received the relevant training and practical instruction for 
+the work to be carried out. 
+• They must be informed about the risks involved in working with laser 
+radiation and familiar with the available safety equipment and 
+measures for protection against laser radiation.  Instruction in this 
+regard must be repeated as required, but at least once a year, and must 
+be documented. 
+• They must use personal protective equipment. 
+• They must be in possession of written instructions from the user to 
+operate the transport system (see B GG 939 (Trade Association Rule 
+939)) and have confirmed these with their signature. 
+• The vehicle may only be operated by persons who are at least 18 years of 
+age. 
+• Work on the vehicle must only be carried out by qualified personnel. 
+These are people who, due  to their specialist training, knowledge and 
+experience, and their familiarization with the relevant standards, are 
+able to assess the work to be carried out and detect any potential 
+hazards. 
+• They must undertake all risks that occur when the person detection system 
+is deactivated in manual mode. 
+These requirements must be adapted by the user in accordance with country-
+specific legislation, regulations and standards. 
+ 
+Instruction and training 
+The following points must be observed for instruction, training and other 
+qualification measures: 
+• Participants must confirm their participation in the qualification measure 
+with their signature. 
+• Instruction of the participant must be supervised by a qualified and 
+authorized operator. 
+ 
+3.3 Workspace and danger zone 
+ 
+Workspaces are to be restricted to the necessary minimum size. 
+The danger zone consists of the workspace and the stopping distance of the 
+KMP. It must be protected by means of safeguards to prevent danger to persons 
+or the risk of material damage. 
+• The vehicle has an integrated safeguard in the form of Lidars. 
+
+=== PDF PAGE 27 ===
+ 
+27 
+ 
+• The system integrator is responsible for adapting the size of the areas to 
+the specific application. 
+• The system integrator must check whether additional 
+safeguards are required for the specific application. The 
+safeguards must be located outside the danger zone. 
+ 
+3.4 Triggers for stop reactions 
+Stop reactions are triggered in response to operator actions or as a reaction to 
+monitoring functions and error messages. 
+Trigger stop 
+The velocity of the warning area is 
+exceeded. 
+Stop 1 
+The protected area is violated. Stop 1 
+E-STOP button is pressed. stop 1 
+Error in safety controller or periphery 
+of the safety controller 
+Stop 0 
+The remote control manual controller 
+is connected/disconnected. 
+Stop 1 
+The vehicle is locked. Stop 1 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+Hazard due to projecting add-on parts and transport loads on the vehicle 
+If the structure or load project beyond the vehicle contour, the personnel 
+detection system and velocity limitation may possibly have no effect. These 
+factors must both be adapted accordingly. Failure to observe this may result 
+in death, severe injuries or damage to property. 
+• Reduce maximum velocity. 
+• Increase size of protective fields in accordance with the structure or 
+load. 
+WARNING 
+Avoid highly reflective objects in the scan plane of the laser scanner. 
+Reflectors can influence the measurement results of the laser scanner. 
+Highly reflective objects in the protected area may conceal part of the 
+surface to be monitored. 
+Laser scanner monitoring ranges must be adapted 
+The laser scanners are supplied preconfigured. For the user's application, 
+the following measures must be implemented: 
+• The system integrator is responsible for adapting the size of the 
+monitoring ranges to the specific application. 
+• The scanners monitor the defined fields, i.e.  a plane. They do not, 
+however, monitor the space above and below this plane. The system 
+integrator must take this into consideration when planning the safety 
+functions and safeguards. 
+WARNING 
+
+
+=== PDF PAGE 28 ===
+ 
+28 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The laser scanners only cover an area at a height of 187 mm ±  10 mm 
+above the ground. All obstacles above or below this area are not detected. 
+Before operation, with the transport system loaded or unloaded, always 
+check this area for obstacles. Obstacles must be removed or identified by 
+means of a permanently installed object at the height of the laser 
+scanners. Collisions can lead to severe personal injury or material 
+damage. 
+WARNING 
+The monitoring range is only rated for stationary persons and the specified 
+floor surface conditions. Running or jumping into the monitoring range may 
+result in the vehicle not coming to a standstill in time. Collisions may cause 
+serious injuries. 
+WARNING 
+
+=== PDF PAGE 29 ===
+ 
+29 
+ 
+ 
+3.5 Additional protective equipment on the vehicle 
+3.5.1 Optical and acoustic signals 
+The following optical and acoustic signals are part of the protective equipment of 
+the vehicle: 
+◼ LED strip 
+An LED strip is fitted around the circumference of the vehicle. The light 
+signals indicate the operating state of the vehicle. 
+◼ Buzzer 
+(>>>> 2.2.7.2 "Buzzer" Page 24) 
+ 
+3.6 Safety measures 
+3.6.1 General safety measures 
+ 
+The vehicle may only be used in perfect technical condition in accordanc e with 
+its intended use and only by safety-conscious persons. Operator errors can 
+result in personal injury and damage to property. 
+If any defect or malfunction with regard to operational safety or reliability is 
+detected, the vehicle must be shut down immediately via the vehicle controller 
+or not put into operation. 
+Ventilation apertures on the vehicle must not be sealed or covered. 
+Electrical connections may only be opened or closed with the system switched 
+off. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+In the absence of operational safety functions and safeguards, the vehicle 
+can cause personal injury or material damage. If safeguards are 
+dismantled, the vehicle may not be operated. 
+DANGER 
+Before working on a vehicle component, the main switch must be set to 
+the OFF position and secured against being switched on again by 
+unauthorized personnel. After switching off the vehicle controller, it is 
+necessary to wait for 5 minutes and then check that the system is de-
+energized before the work may be carried out. Failure to observe this 
+precaution may result in death or severe injuries. 
+WARNING 
+The manual controller must be disconnected and removed after use to 
+prevent it from being used by unqualified personnel. 
+CAUTION 
+
+
+=== PDF PAGE 30 ===
+ 
+30 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+3.6.2 Lidar 
+The following safety measures must be observed: 
+• Protect the Lidar against dirt and damage. 
+• Avoid strong electrical fields. These can be caused, for example, by 
+welding cables or induction loops in the vicinity, but also by mobile 
+telephones operated nearby. 
+• Keep the area to be protected free from smoke, vapor, steam and other 
+air contamination. The functioning of the Lidar may otherwise be 
+adversely affected and malfunctions may occur. 
+• Avoid highly reflective objects in the scan plane of the Lidar. Examples: 
+Reflectors can influence the measurement results of the Lidar. 
+Reflective objects may cause an EMERGENCY STOP. 
+• Protect the Lidar from the glare of incident sunlight. Do not position 
+stroboscopic and fluorescent lamps or other strong sources of light 
+directly at the scan level since these can influence the Lidar under 
+certain circumstances. 
+ 
+3.6.3 Start-up and recommissioning 
+ 
+Before start-up and recommissioning, always ensure the following: 
+Collisions between the vehicle and the operator can cause serious injuries.  
+• Select the operator position in such a way that the vehicle moves 
+away from the operator. 
+• Keep escape routes for the operator clear. 
+WARNING 
+The vehicle can move in all directions and turn on the spot. This can surprise 
+people who are not familiar with the system. They can be hit and injured as 
+a result. Ensure that all persons maintain a safe distance. 
+WARNING 
+All persons working on the vehicle must be qualified for this work and 
+have read and understood the vehicle documentation, including the safety 
+chapter. 
+Work on the electrical and mechanical equipment of the vehicle may only 
+be carried out by specially trained personnel. 
+Short circuit due to connection between the positive pole and conductive 
+vehicle parts. 
+The negative pole of the application ports is connected to the body of the 
+vehicle. So, it will be short circuit if the positive pole connects to the 
+conductive vehicle parts. 
+CAUTION 
+Observe the manufacturer's documentation. 
+Safe use of the product requires knowledge of the handling of the 
+components from other manufacturers. Death, severe injuries or damage 
+to property may otherwise result. 
+• Observe manufacturer's documentation, particularly the safety 
+information. 
+
+
+=== PDF PAGE 31 ===
+ 
+31 
+ 
+• All safety devices and protective measures are complete and fully 
+functional. 
+• All components and the motion functions are fully functional. 
+• No persons or equipment are present within the motion range. 
+• There are no loose objects on the vehicle. 
+• The vehicle has no damage or leaks. 
+• All ventilation apertures are unobstructed. 
+• The floor is dry and free from dirt and meets the required floor conditions.  
+• The path is free of obstacle. 
+• There are no ramps on the path with an excessive incline. 
+ 
+3.6.4 Driving and steering 
+ 
+ 
+ 
+ 
+ 
+During stat-up of the vehicle, the system will perform initialization for 
+about 70 s. Do not operate the vehicle during initialization. 
+NOTICE 
+If the operator is not facing in the forward direction of the transport system, 
+the direction of travel may be misjudged when operating the joystick. Risk 
+of personal injury and damage to property. Ensure that all persons maintain 
+a safe distance. 
+WARNING 
+Collisions between the transport system and the operator can cause 
+serious injuries. Select the operator position in such a way that the vehicle 
+moves away from the operator. Keep escape routes for the operator clear.  
+WARNING 
+The transport system can move in all directions and turn on the spot. This 
+can surprise people who are not familiar with the system. They can be hit 
+and injured as a result. Ensure that all persons maintain a safe distance.  
+WARNING 
+The vehicle may only move up inclined surfaces in the longitudinal 
+direction. The drive gear could otherwise be damaged or the vehicle could 
+topple over. 
+WARNING 
+Driving over unsuitable heavy-duty grids can result in damage to the 
+transport system. Ensure that the grid profiles are rounded and that the 
+frame of the grid profiles is flush with the shop floor.  
+NOTICE 
+Unevenness in the floor of greater than 5 mm in height can damage the 
+vehicle as it passes over it. Do not drive over floor unevenness 
+exceeding 5 mm in height! 
+NOTICE 
+
+=== PDF PAGE 32 ===
+ 
+32 
+ 
+3.6.5 Picking up and loading 
+ 
+  
+ 
+3.6.6 Vehicle maintenance and repair 
+The user must calculate the stability of every transport load. The following 
+factors must be considered in the calculation: 
+• The position of the center of gravity of the unloaded vehicle as 
+specified in the technical data 
+• The values specified in the technical data for acceleration and 
+deceleration of the vehicle 
+If the maximum possible height of the center of gravity is exceeded during 
+loading, the transport load may tip over in the case of acceleration, 
+braking or a SAFETY STOP. Risk of personal injury and damage to 
+property. Only load the loads specified in accordance with the designated 
+use and ensure that they are adequately secured. 
+DANGER 
+The unsecured transport load can slip. This can lead to personal injury or 
+material damage. The transport load must be secured against slipping 
+using suitable fastening devices. 
+DANGER 
+The maximum payload of the vehicle must not be exceeded. Risk of 
+personal injury and damage to property. 
+DANGER 
+If a transport load that projects beyond the ends of the vehicle is being 
+transported, the standard monitoring range of the laser scanners may 
+possibly be too small. Risk of personal injury and damage to property. If 
+oversized transport loads are to be transported, the system integrator 
+must ensure that the monitoring range is adapted accordingly. 
+DANGER 
+On a sloping or uneven floor, a lateral inclination can cause the transport 
+system to tip, particularly in the case of a SAFETY STOP while carrying a 
+load with a high center of gravity. Risk of personal injury and damage  to 
+property. Use the transport system in such a way that it is only inclined 
+longitudinally. 
+DANGER 
+
+
+=== PDF PAGE 33 ===
+ 
+33 
+ 
+Carry out a function test once the maintenance and repair work has been 
+completed. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Lubricants, coolants and cleaning agents that are harmful to the environment 
+must not be allowed to enter the ground or drainage system. These substances 
+must be stored, transported and collected in suitable containers and disposed of 
+in accordance with the applicable national laws, regulations and standards. 
+Uneven floors or asymmetrical distribution of the load can lead to tilting of 
+the transport system. An unsecured load can slip and cause personal 
+injury or material damage. Secure the load. 
+WARNING 
+Short-circuiting the battery can result in explosions and burns caused by 
+hot metal parts. Do not short-circuit the battery. 
+DANGER 
+Danger to life and limb due to electric shocks during work while charging is 
+in progress 
+Work on the vehicle while the batteries are charging can result in 
+discharges or arcing, particularly if metallic objects are being handled. 
+Death, severe injuries or damage to property may result. 
+• Do not carry out work on the vehicle during the charging procedure. 
+DANGER 
+High voltage: The electrical system is energized even when the vehicle is 
+switched off. Maintenance and repair work on vehicle components that 
+carry live voltage or cannot be switched off may only be performed by 
+qualified personnel with corresponding protective equipment (e.g. 
+insulated gloves). Use of unqualified personnel and insufficient protective 
+equipment can cause death or severe injuries. 
+DANGER 
+High surface temperatures on motor and gear unit 
+The motor and gear unit, including supply lines, can have high surface 
+temperatures which may cause burns. 
+• Avoid touching hot surfaces. 
+• Wear protective gloves. 
+• Allow hot surfaces to cool. 
+WARNING 
+Carbon fiber dust is electrically conductive and can cause short-circuits. 
+Ensure that no carbon fiber dust penetrates into the interior of the vehicle. 
+NOTICE 
+Only lubricants approved by KUKA may be used. 
+All accident prevention regulations and the applicable national laws, 
+regulations and standards must be observed when handling lubricants. 
+NOTICE 
+Risk of injury due to heavy cover plate and enclosure elements 
+The cover plate and enclosures are, to a certain extent, heavy and bulky. 
+Failure to handle them properly could cause them to fall, resulting in injuries 
+and material damage. 
+• Wear personal protective equipment (safety shoes, etc.). 
+• Handle the cover plate and enclosures with care. 
+WARNING 
+
+
+=== PDF PAGE 34 ===
+ 
+34 
+ 
+ 
+3.6.7 Decommissioning, storage and disposal 
+The mobile transport system must be decommissioned, stored and disposed 
+of in accordance with the applicable national laws, regulations and 
+standards.  
+ 
+ 
+ 
+ 
+ 
+ 
+  
+The frequency and scope of recurring maintenance work and 
+inspections may also depend on national regulations. 
+Risk of exhaustive discharge 
+If the drive batteries are stored without recharging, exhaustive discharge 
+will occur. Exhaustive discharge may lead to irreversible damage and loss 
+of capacity. 
+• Recharge drive batteries regularly to compensate for self-discharge. 
+NOTICE 
+Danger when charging defective or exhaustively discharged batteries 
+If defective or exhaustively discharged drive batteries are charged, there is 
+a risk of explosion, fire and the escape of hazardous gases. 
+• Do not recharge defective or exhaustively discharged drive batteries. 
+• Dispose of defective or exhaustively discharged drive batteries. 
+DANGER 
+The climatic conditions specified for the vehicle and the drive battery in the 
+technical data must be adhered to during storage. There is otherwise a 
+risk of explosion, fire and the escape of hazardous gases. 
+DANGER 
+
+
+=== PDF PAGE 35 ===
+ 
+35 
+ 
+ 
+4 Technical data 
+4.1 Basic data 
+ 
+Fig. 4-1: Dimensions 
+ 
+Vehicle 
+Length 1180 ± 1 mm 
+Width 820 mm±1mm 
+Height 255 mm  
+Weight 230 kg 
+Rated payload 1500 kg 
+Noise level ≤75 dB 
+ 
+Vehicle movement 
+Max travel speed, without load 1800mm/s 
+Max travel speed, with load 1500 mm/s 
+Reversing speed 300 mm/s 
+Max acceleration, without load 1500 mm/s² 
+Max acceleration, with load 500 mm/s² 
+Max speed of rotation angle 60° /s     
+      Adjust actual operating speed according to actual working conditions  
+ Lifting system 
+ 
+ 
+ 
+ 
+Driving system 
+ 
+ 
+ 
+ 
+ 
+Rotation system 
+Full lift time  <3 s 
+Number of motors  1 
+Lifting height 60± 3 mm 
+ Number of motors   2 
+ Power of drive motor  1000W 
+Number of drive wheels 2 
+Number of caster wheels 4 
+
+=== PDF PAGE 36 ===
+ 
+36 
+ 
+Number of motors 1 
+Rotation angle 360° 
+Rotational diameter 1242 mm 
+ 
+ 
+Floor conditions 
+Slope ≤ 5% 
+Groove width ≤30mm 
+Ridge height ≤5 mm 
+ 
+Drive battery 
+Number of drive batteries 1 
+ 
+Battery voltage 48V 
+ 
+Battery capacity 42h 
+ 
+Full charge time 2 hours 
+Min. number of charge cycles ≥3000 
+ 
+Precision 
+Precision of QR code 5 mm, ±  0.5° 
+Precision of object recognition 10 mm, ±  1° 
+Precision of reflector plate 10 mm, ±  1° 
+Guidance precision 
+Slam ≤ ±30 mm, ± 3°  
+QR code ≤ ±10 mm, ± 1° 
+Precision of vehicle stop  
+Slam ≤ ±20 mm, ± 1° 
+QR code ≤ ±5 mm, ± 0.5° 
+Other 
+Recommended dimension of 
+standard rack 
+1200*1200 
+Vehicle ground clearance 20 mm 
+ 
+
+=== PDF PAGE 37 ===
+ 
+37 
+ 
+ 
+Fig. 4-2: Recommende rack dimensions 
+ 
+ 
+ 
+WLAN Requirements 
+ 
+ 
+4.2 Plates and labels 
+ 
+Fig. 4-2: Plates and labels 
+ 
+Item Description 
+For more information on WLAN requirements, see the manufacturer's 
+documentation for WI-FI receivers. 
+Risk of channel interference 
+If the WIFI channel is occupied by a WLAN other WLANs apart from the 
+one for AGVs, the channel interference may occur and lead to unstable 
+WIFI connection or WIFI disconnection between the AGV and the server. 
+• Assign an independent WIFI channel for the AGVs. 
+• You are recommended to make the adjacent channels independent. 
+NOTICE 
+
+=== PDF PAGE 38 ===
+ 
+38 
+ 
+1 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Warning: read and understand the Manual 
+Before operating the vehicle and carrying out work on the vehicle, 
+the user manual of the vehicle must be read and understood. 
+ 
+ 
+ 
+ 
+Risk of crushing 
+There may be a crushing hazard at the joints and bearings. You 
+are recommended to wear safety gloves. 
+ 
+Caution: No riding 
+The vehicle can be operated automatically. Do not sit on the 
+vehicle. 
+ 
+ 
+ 
+ 
+2 
+ 
+KUKA 
+Manufacturer: KUKA 
+ 
+ 
+ 
+3 
+ 
+ 
+Vehicle number 
+ 
+ 
+ 
+ 
+ 
+4  
+Identification plate 
+Identification of plate 
+
+
+=== PDF PAGE 39 ===
+ 
+39 
+ 
+ 
+ 
+ 
+  
+Fig. 4-3: Plates and labels, bottom view 
+ 
+ 
+Item Description 
+1  
+ 
+ 
+ 
+ 
+No stepping 
+2 
+ 
+ 
+Risk of crushing 
+Keep away from moving vehicles to avoid crush hazard. 
+Specific content and data can be seen in the actual object. 
+
+=== PDF PAGE 40 ===
+ 
+40 
+ 
+3 
+ 
+ 
+Risk of crushing  
+There may be crush hazard during vehicle operation. The vehicle 
+must be switched off and locked before any work on the vehicle.  
+ 
+ 
+ 
+  
+
+
+=== PDF PAGE 41 ===
+ 
+41 
+ 
+ 
+5 Planning 
+5.1 Site requirements 
+5.1.1 Road undulation 
+When the vehicle is moving on a path within the permissible undulation range, it 
+can be controlled in a nominal speed. The permissible undulation range is the 
+difference between the maximal and minimal height in reference range.  
+Within the area of 1 m² , the maximum undulation must be less than or 
+equal to 6 mm. 
+ 
+5.1.2 Road slope 
+Description 
+The road slope is the maximum ratio of horizontal difference to length for roads 
+over 100 mm. It can be controlled at rated speed when the vehicle is operated 
+within the maximum road slope. 
+At stations where precise positioning of vehicles is required, the maximum road 
+slope must be less than 1% (inclusive). 
+In addition, the maximum road slope must be no greater than 5%. 
+5.1.3 Step height 
+Description 
+The step height is the maximum height difference in a path over 100 mm. It can 
+be controlled at the rated speed when the vehicle is operated on the road within 
+the maximum step height. 
+Do not park the vehicle on the steps. The maximum step height must be less 
+than 5 mm (inclusive). 
+ 
+5.1.4 Width range 
+Description 
+It can be controlled at the rated speed when the vehicle is operated on a path 
+within the maximum width range. Do not park the vehicle on the groove.  
+The maximum width range must be less than 35 mm (inclusive). When the width 
+range exceeds the allowable value, it must conform to the requirements of step 
+height. 
+5.1.5 Ground friction coefficient 
+Description 
+The caster wheels are made of PU materials and the floor friction coefficient 
+must be greater than 0.5. 
+The floor friction coefficient has important influence on safe braking distance 
+and positioning accuracy. Dirty floors, standing water, and detergents can also 
+affect the operation of vehicles.  
+ 
+5.1.6 Ground bearing 
+
+=== PDF PAGE 42 ===
+ 
+42 
+ 
+ 
+Description 
+The ground bearing of each unit must be higher than the horizontal projected 
+area of the vehicle to prevent floor damage. Composite foundation is 
+recommended to transfer the pressure of the vehicle to the cement bearing 
+layer. Small area pressure from caster wheels must also be considered. 
+There must be no hidden depressions on the floor, which will seriously affect the 
+operation of the vehicle. Operators needs to inspect the work area for cracks. 
+Unqualified floor must be rebuilt until it passes. 
+ 
+5.1.7 Ground electrical characteristics 
+ 
+Description 
+The ground conductive resistance must be maintained between 106 and 109 to 
+avoid the accumulation of static electricity in the vehicle (according to German 
+DIN51953 standard). 
+ 
+5.2 Wireless AP layout 
+5.2.1 Key points of layout 
+1. The Access Point (AP) installation mode must comply with the current 
+environment. The AP must be deployed in cellular distribution mode, and 
+the transmitted power intensity can be adjusted according to the 
+environment. Installation can be top-mounted, suspended and wall-
+mounted. The recommended angle is 7~9 degrees for wall-mounted AP, 
+with a recommended height of 3~5 meters. 
+Wall mounting is recommended if the roof is too high. 
+It is recommended that the AP IS mounted on the top of the elevator car.  
+ 
+     Fig. 5-1 Correspondence between wall mounting angle and height 
+2. The number of AP must be reasonable, otherwise signal interference and 
+waste between APs may result. The evaluation method is as follows: 
+under the situation that AP transmitting power is 20 dbm, it is 
+recommended that the AP coverage is designed in accordance with a 
+radius of 15m. 
+3. Determine the coverage and installation mode according to different AP 
+models, with particular attention to the differences between omni-
+directional and directional APs. 
+4. The configurations of adjacent AP channels must be staggered, and the 
+channels must be fixed: 2.4G channels must be arranged in cellular 
+distribution mode using one of the three channel groups: channels 1, 6, 
+11, channels 2, 7, 12, or channels 3, 8, 13. For 5G, it is recommended to 
+
+
+=== PDF PAGE 43 ===
+ 
+43 
+ 
+use channels 36, 40, 44, 48, 149, 153, 161, and 165, which can be 
+deployed with reference to 2.4G. Rational planning and fixed channels are 
+needed to prevent interference. 
+ 
+           Fig. 5-2 AP channel and deployment diagram 
+5. Physical isolation, e.g. walls, should be fully considered in AP layout. If 
+there is a steel concrete wall structure, e.g. firewall, wireless signal 
+through the wall is very weak, and there will be a cliff type interruption of 
+signal intensity. Additional AP should be considered in these special 
+areas. For example, deploy an additional AP on the AGV path along the 
+firewall door to prevent cliff type interruption of signals. 
+6. It is necessary to determine the overlap range of adjacent AP signals, 
+which is the key to AP layout. It is determined by the STA roaming 
+switching strategy, AP and STA matching threshold, maximum speed of 
+STA movement, and switching time supported by AP/AC, and subject to 
+actual measurement. According to general experience, it is recommended 
+to ensure that each AP has an intensity overlap area of -65 dbm in both 
+AP and AP signal intensity overlap area. As shown below: 
+       
+
+
+=== PDF PAGE 44 ===
+ 
+44 
+ 
+ 
+            Fig. 5-3 AP signal overlap area map 
+ 
+7. In the elevator process, AP shall be installed in the environment before 
+entering the elevator and in the elevator. The AP power in the elevator and 
+in the environment before entering the elevator shall be properly adjusted. 
+It is recommended that the AP power in the elevator is higher than the AP 
+power connected to the vehicle before entering the elevator. Test is 
+needed in this process to ensure the effect of seamless roaming into the 
+elevator. 
+5.2.2 Configuration requirements for wireless networks 
+1. To ensure services, AGV requires exclusive use of 2.4GB, 5.2GB, or 
+5.8GB frequency bands. Besides, to ensure unique IP address 
+management, it is recommended to use MAC address binding to manage 
+the AGV. For example, the networks independently used by the AGV are 
+bound by MAC addresses to prevent unauthorized users from using AGV's 
+wireless network. 
+2. The functions are disabled, e.g. smart antenna, to ensure that the AP 
+transmitting power and channel are fixed, so as to provide a stable and 
+predictable spectrum distribution of wireless field intensity (automatic 
+channel distribution and power auto-adjustment must be disabled).  
+3. The 2.4G and 5G channels need to be configured with a bandwidth of 
+20Mhz to ensure stable communication. 
+4. It is recommended that the authentication and encryption mode for fixed 
+AGV network connections is set as wpa2-psk CCMP. 
+5.2.3 Network signal intensity requirements 
+The wireless network signal intensity for AGV operating environment shall meet 
+the following criteria: 
+1. In main active areas of AGV, such as stations, charging sites, and 
+connection locations, it is recommended that the signal intensity is greater 
+than -55 dbm and the delay of ping 1500Byte packet is less than 100 ms. 
+In non-core service areas, e.g. non-main roads for AGV operation, it is 
+recommended that the signal intensity is greater than -65 dbm and no less 
+than -68 dbm, and the delay of ping 1500Byte packets is less than 200 ms. 
+The signal intensity is subject to the actual test of the WIFI function 
+module carried by AGV itself. 
+2. Simple scheme for on-site wireless environment evaluation: test in the test 
+
+
+=== PDF PAGE 45 ===
+ 
+45 
+ 
+area as shown in the following figure. The AGV moves at a speed of 
+0.8m/s along its running route. Then, check the connection of AGV to AP, 
+and observe whether the delay of ping 1500Byte packet is less than 200 
+ms and the uplink/downlink rates are no less than 10 Mbps when the 
+signal value is about -65 dbm, as well as whether the delay of ping 
+1500Byte packet is less than 100 ms when the signal intensity is greater 
+than -55 dbm. 
+ 
+   Fig. 5-4 Test area map of wireless network environment 
+1 Test and evaluation area 
+When AGV roams between APs, the number of ping packets lost per roaming is 
+less than 2, and the switching time is controlled within 100 ms. To ensure a 
+stable wireless network environment, a dual AC backup deployment is 
+recommended. 
+5.2.4 Network layout solutions 
+ 
+Fig. 5-5 Network layout 
+5.2.5 Selection requirements for wireless network equipment  
+The wireless network equipment for AGV operation must meet the following 
+requirements: 
+
+
+=== PDF PAGE 46 ===
+ 
+46 
+ 
+1. Requirements for AP: 
+◼ For power supply, meet 802.3af/802.3at (poe). 
+◼ For supported band, support both 5G and 2.4G frequency bands. 
+◼ For transmitting power, no less than 20 dbm. 
+◼ For software performance: the recommended spatial stream for 802.11ac 
+is 2+2, which supports MU-MIMO and 80mhz 867Mbps; support 400Mbps 
+for 802.11n. 
+◼ For RF access number, the recommended theoretical value is 256. In 
+practice, each AP requires at least 25 terminals. 
+2. Requirements for AC: 
+◼ perform equipment selection according to capacity and access ratio. 
+◼ Support multiple authentication modes, such as dot1x, Portal, MAC, and 
+PSK. 
+◼ Support automatic channel assignment and manual setting. 
+◼ Support protocol, such as IEEE 802.11a/b/g/n/ac.. 
+◼ Support adjusting the AP power manually. 
+◼ Support roaming control related functions. 
+◼ Support access control policies and configuration. 
+◼ Support roaming between different APs within the same AC and between 
+ACs. 
+◼ Require AC dual-system hot backup. 
+◼ Bypass AC in the overall network architecture. 
+5.3 5G network performance requirements (option) 
+Bandwidth requirements of a single vehicle 
+◼ Upload rate: 5 Mbps  
+◼ Download rate: 20 Mbps  
+Signal requirements 
+1. RSRP is greater than -85dBm on 99% of the area. 
+2. SINR is greater than 25dB on 80% of vehicle motion routes. The average 
+SINR is greater than 20dB. 
+Latency requirements 
+The average latency is required to be less than 30 ms on the AMR robot data 
+stream to the server. 
+Operating network environment requirements 
+Plan no more than 3 sectors in a single cell to avoid Mod 3 interference in vehicle 
+operating site, preferably only a cell or a macro cell. 
+Plan the switching parameters (switching bias, switching hysteresis, switching 
+relationship), avoid pingpong switching, preferably no switching. 
+Plan the the number of cells appropriately for there is maybe interference between 
+neighboring cells. 
+You are recommended to turn off the userinactive function because of the vehicle 
+is required to be always online. 
+Other requirements 
+Server IP address needs to be fixed. The vehicle IP address can be unfixed. 
+
+=== PDF PAGE 47 ===
+ 
+47 
+ 
+It is recommended to use 5G private network SIM card for the vehcle, the card 
+which supports private network SIM card authentication access, so that the 
+generated interactive service data keeps in the cell.  
+Test recommendations 
+Test the 5G coverage effect of the vehicle motion route especially the station and 
+charging location, focusing on whether the RSRP, SINR and bandwidth meet the 
+requirements.  
+ 
+Fig. 5-6 Test 5G coverage effect  
+5.4 Obstacle avoidance          
+ 
+ 
+Fig.  5-7: Vehicle obstacle detection area 
+1 3D binocular camera detection area 
+2 Scanner detection area 
+3 TOF detection area 
+ 
+Controlled by laser data, the vehicle will slow down in segments for different 
+distances. 
+ 
+Type Emergency 
+Stop area 
+Parking area Slow area 
+Manufacturing 0.3m 1m 3m 
+
+
+=== PDF PAGE 48 ===
+ 
+48 
+ 
+ 
+ 
+Fig.  5-8: Area division 
+L1 Emergency stop area: AGV stops immediately when without load, and 
+stops at maximum deceleration speed with load. 
+L2 parking area: AGV stops once the parking area is reached. 
+L3 slow area: when the speed is reduced to 0.5m/s, a new path is planned with 
+navigation. 
+5.4.1 Lidar 
+Description  
+The scanner is placed in front of the vehicle to detect obstacles within 220°  
+directly. 
+ 
+   
+ 
+Fig. 5-4: Obstacle detection, Lidar 
+ 
+       
+ 
+5.4.2 3D binocular camera 
+The following distance must be greater than 0.3m, otherwise property loss 
+may occur. 
+ 
+NOTICE 
+
+=== PDF PAGE 49 ===
+ 
+49 
+ 
+Description 
+ The 3D binocular camera is Located at the front and rear (optional) of the 
+vehicle, which can detect obstacles within a height of 30mm~2100mm. The 
+minimum size of detected object is 7*7*7cm  
+3D binocular camera automatically adjusts the load and no-load obstacle 
+avoidance areas according to the actual situation 
+ 
+ 
+Fig. 5-4: Obstacle detection, 3D binocular camera 
+ 
+ 
+Fig. 5-4: Obstacle detection, 3D binocular camera 
+5.4.3 Single-point TOF laser 
+Description 
+The vehicle is equipped with a single-point TOF laser to compensate for the 
+blind spot of the 3D binocular camera. 
+     
+ 
+   
+Fig. 5-4: Obstacle detection, Single-point TOF laser 
+When reversing, the obstacle avoidance area refers to the rear area of the 
+vehicle where the 3D camera and TOF point laser are located. Areas such 
+as front scanner obstacle avoidance, 3D camera and TOF point laser are 
+invalid. 
+When charging, reversing obstacle avoidance does not work. 
+ 
+
+=== PDF PAGE 50 ===
+ 
+50 
+ 
+5.5 Design of the transported goods 
+Description 
+The upper-view camera of the vehicle is located in the middle of the payload 
+plate, and goods or other components installed should avoid blocking the 
+camera. 
+ 
+5.5.1 Rack design 
+  
+ 
+Fig. 5-9: Rack  
+1 Upper-view camera 
+2 Rack code 
+3 Vehicle 
+4 Rack 
+5.6 CoM specifications of the payload 
+You must make sure that the goods or any mechanical equipment will not 
+overturn or slide away from the payload plate during vehicle operation.  
+The following diagrams specifies where the CoM of the payload should locate 
+from 1000 kg to 1500 kg. 
+ 
+ 
+
+
+=== PDF PAGE 51 ===
+ 
+51 
+ 
+ 
+ 
+1000 kg 
+ 
+ 
+Fig. 5-4: CoM 1000 kg, lifting 
+Point X (mm) Y (mm) Z (mm) 
+P0 0 0 315 
+P1 -210 -123 315 
+P2 -210 123 315 
+P3 200 -123 315 
+P4 200 123 315 
+P5 200 -123 627 
+P6 200 123 627 
+P7 -210 -123 1284 
+P8 -210 123 1284 
+P9 -152 -123 1284 
+P10 -152 123 1284 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PDF PAGE 52 ===
+ 
+52 
+ 
+1100 kg 
+ 
+ 
+ 
+ 
+ 
+Fig. 5-4: CoM 1100 kg, lifting 
+Point X (mm) Y (mm) Z (mm) 
+P0 0 0 315 
+P1 -210 -122 315 
+P2 -210 122 315 
+P3 200 -122 315 
+P4 200 122 315 
+P5 200 -122 613 
+P6 200 122 613 
+P7 -210 -122 1280 
+P8 -210 122 1280 
+P9 -157 -122 1280 
+P10 -157 122 1280 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PDF PAGE 53 ===
+ 
+53 
+ 
+1200 kg 
+ 
+Fig. 5-4: CoM 1200kg, lifting 
+ 
+Point X (mm) Y (mm) Z (mm) 
+P0 0 0 315 
+P1 -200 -121 315 
+P2 -200 121 315 
+P3 200 -121 315 
+P4 200 121 315 
+P5 200 -121 601 
+P6 200 121 601 
+P7 -200 -121 1249 
+P8 -200 121 1249 
+P9 -147 -121 1249 
+P10 -147 121 1249 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PDF PAGE 54 ===
+ 
+54 
+ 
+1300 kg 
+ 
+Fig. 5-4: CoM 1300 kg, lifting 
+Point X (mm) Y (mm) Z (mm) 
+P0 0 0 315 
+P1 -200 -120 315 
+P2 -200 120 315 
+P3 190 -120 315 
+P4 190 120 315 
+P5 190 -120 609 
+P6 190 120 609 
+P7 -200 -120 1239 
+P8 -200 120 1239 
+P9 -147 -120 1239 
+P10 -147 120 1239 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PDF PAGE 55 ===
+ 
+55 
+ 
+1400 kg 
+ 
+ 
+Fig. 5-4: CoM 1400 kg, lifting 
+Point X (mm) Y (mm) Z (mm) 
+P0 0 0 315 
+P1 -200 -119 315 
+P2 -200 119 315 
+P3 190 -119 315 
+P4 190 119 315 
+P5 190 -119 601 
+P6 190 119 601 
+P7 -200 -119 1231 
+P8 -200 119 1231 
+P9 -146 -119 1231 
+P10 -146 119 1231 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PDF PAGE 56 ===
+ 
+56 
+ 
+1500 kg 
+ 
+Fig. 5-4: CoM 1500 kg, lifting 
+Point X (mm) Y (mm) Z (mm) 
+P0 0 0 315 
+P1 -180 -100 315 
+P2 -180 100 315 
+P3 180 -100 315 
+P4 180 100 315 
+P5 180 -100 612 
+P6 180 100 612 
+P7 -180 -100 1186 
+P8 -180 100 1186 
+P9 -127 -100 1186 
+P10 -127 100 1186 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PDF PAGE 57 ===
+ 
+57 
+ 
+ 
+5.7 Ground code 
+The ground code is fixed on the ground. A QR code map consists of multiple 
+ground codes. Each code is a coordinate, which is used to guide the movement 
+of vehicles. 
+ 
+Fig. 5-10: Ground code 
+1 Node description 
+2 Positioning pattern 
+3 Coding pattern 
+4 Calibration line 
+5 Node ID 
+ 
+The QR code consists of positioning pattern and coding pattern.  
+◼ The bar in the upper left corner of the code is the positioning pattern. The 
+rectangular pattern in the middle area is the coding pattern. 
+◼ The four short lines on the boder of the square are the positioning 
+calibration lines for fixing the code. 
+◼ Node ID: "KUKA ID X:10000 Y:10000", representing X axis as 10000, and 
+Y axis as 10000; 
+◼ The node secription is for the operator to remember and distinguish the QR 
+code node. 
+◼ Coordinate numbers are valid from 0 to 16000000. 
+ 
+ 
+Ground code layout 
+• Performing ground code layout based on physical coordinate system 
+• The actual physical map distance in relation to the digital model map 
+scale can be configured. 
+• When laying out, note that the 2D code coordinate system is saved in 
+the same direction as the map coordinate system 
+
+
+=== PDF PAGE 58 ===
+ 
+58 
+ 
+ 
+Fig. 5-11: Ground code layout 
+ 
+ 
+5.8 Rack code 
+The rack code is fixed at the bottom of the rack to identify the rack number and 
+locate the rack. 
+ 
+ 
+Fig. 5-12: Rack code 
+1 Positioning pattern 
+2 Coding pattern 
+3 Calibration line 
+4 Rack code ID 
+ 
+The rack code consists of positioning pattern and coding pattern.  
+◼ The bar in the upper left corner of the code is the positioning pattern, and 
+
+
+=== PDF PAGE 59 ===
+ 
+59 
+ 
+the rectangular pattern in the middle area is the coding area. 
+◼ The four short lines on the boder of the square are the positioning 
+calibration lines for fixing the code. 
+◼ Rack code ID: "KUKA Code ID: ABC100000", where the ID number 
+consists of three uppercase letters + numbers. 
+◼ Letters from A to Z. 
+◼ The numbers are valid from 0 to 16000000. 
+5.9 Generating the ground code 
+There are two ways to generate the ground code: 
+◼ Generate QR code in sequence （order to generate） 
+◼ Read info from the XML file 
+Generate QR code in sequence 
+1. Open the QR code generation software 
+ 
+Fig. 5-13: QR code generation software 
+ 
+Click Generate Bottom-View Code Panel
+ 
+Fig. 5-14: Ground code settings 
+◼ Set the start, count and step of X axis 
+◼ Set the start, count and step of Y axis 
+◼ Set the start and step of Node ID( step=X coordinate step*Y coordinate 
+step) 
+◼ Set the start and step of Node Description/description ID ( step=X 
+coordinate step*Y coordinate step) 
+◼ Click Generate button 
+◼ Find the QR code images in the "cores" folder in the current directory 
+Read info from the XML file 
+1. Check the second way: read info from the XML files 
+
+
+=== PDF PAGE 60 ===
+ 
+60 
+ 
+ 
+1. Click on  to open the map file 
+2. Click on generate  
+3. Find the QR code images in the "cores" folder in the current directory 
+ 
+ 
+5.10 Generating the rack code 
+Procedure 
+1. Open the QR code generation software 
+ 
+Fig. 5-15: QR code generation software 
+2. Click the Generate Upper-View Code Panel  
+ 
+Fig. 5-16: Rack code 
+3. Set 3-digit letters 
+4. Set the start, count and step  
+5. Click Generate 
+6. Find the QR code images in the "cores" folder in the current directory 
+
+
+=== PDF PAGE 61 ===
+ 
+61 
+ 
+5.11 Printing the ground code 
+5.11.1 Installing the label paper 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Procedure 
+1. Pull the button and lift the top cover 
+ 
+Fig. 5-17: Lifting the top cover 
+2. Pull out the label guide, then place the label, and release the guide. 
+ 
+Fig.5-18: Fix the label paper 
+3. Adjust the right knob of the label guide, so that the label paper is just stuck 
+in the media guide below 
+Designation Article number Quantity 
+Avery PET label paper 
+(excellent tear resistance, high 
+temperature resistance, dimensional 
+stability, opacity, chemical resistance, 
+good stain resistance, scratch resistance 
+and good natural biodegradability) 
+Recommended to use Avery white PET 
+60x60 mm. The size can be adjusted 
+according to the code size. 
+- - 
+Protective film: 100mmx100 mm with 
+0.08mm thickness.  
+Transparent adhesive film with frosted 
+matte  
+- - 
+
+=== PDF PAGE 62 ===
+ 
+62 
+ 
+ 
+Fig. 5-19: Adjusting the knob 
+ 
+ 
+5.11.2 Installing the ribbon 
+Procedure 
+1. Pass the ribbon through the ribbon holder, rotate the ribbon shaft, so that 
+the ribbon core notch is locked into the ribbon shaft 
+ 
+Fig. 5-20: Fixing the ribbon 
+2. Place the empty ribbon core on the ribbon shaft outside the printer and 
+ensure that the ribbon core notch is locked into the ribbon shaft 
+ 
+Fig. 5-21: Rack code for empty ribbon core 
+ 
+5.12 Printing ground code 
+Procedure 
+1. Go to Computer Control Panel > Devices and Printers, find the printer 
+
+
+=== PDF PAGE 63 ===
+ 
+63 
+ 
+2. Right-click on the printer and select Printer Preferences 
+ 
+3. Go to the Options window 
+4. In the Options window: select the maximum print density as 15, and the 
+label unit as cm; then enter the size based on the actual label paper, and 
+save. 
+5. Go to the Advanced Settings window 
+6. Set the media setting to thermal transfer when using ribbon; select Label 
+with gaps as the note paper type, and save the Settings 
+ 
+ 
+5.13 Laying the ground code 
+5.13.1 Ground code layout 
+• Laying the ground code based on physical coordinate system 
+• The proportion of actual physical map distance to the digital model map 
+is configurable. 
+• When laying out, ensure that the code coordinate system is in the same 
+direction as the map coordinate system 
+ 
+                  Fig. 5-22: Ground code layout 
+This is a ground code layout for reference, with (10000,10000) in the lower left 
+corner and (11450,12900) in the upper right corner, spaced 1450mm apart.  
+
+
+=== PDF PAGE 64 ===
+ 
+64 
+ 
+  
+              Fig. 5-23: Ground code layout, 2*3 
+5.13.2 Measuring the site 
+Precondition  
+The space between aisle and pillar should not be too small. In this case, if the 
+measurement is wrong, the total number of storage bins will be affected  
+Procedure 
+◼ Find the right origin 
+◼ Check the position of key points on site (such as columns and walls) 
+against the drawing 
+◼ If the deviation is too large, a new layout is needed 
+◼ Ensure that the space between each channel and column is sufficient 
+ 
+                        Fig. 5-24: Wrong origin 
+ 
+
+
+=== PDF PAGE 65 ===
+ 
+65 
+ 
+ 
+                          Fig. 5-25: Correct origin 
+1. Use a laser level to find two mutually perpendicular reference lines. 
+2. Draw the origin (the central point of the drawing storage). 
+3. Place the laser level, so that its plumb point coincides with the origin. 
+4. Adjust the foot screw, so that the upper bubble of the level is centered.  
+5. Switch on two mutually perpendicular laser lines. 
+6. Locate and mark the laser projection point at approximately 20 meters 
+from the origin. 
+ 
+5.13.3 Drawing the reference line 
+ 
+Fig. 5-26: Drawing the reference line 
+5.13.4 Drawing the ink marker line 
+Procedure 
+1. According to the marks of the laser level, the two mutually perpendicular 
+lines pop up with the ink marker.  
+2. Divide this area equally. 
+3. Connect the marker line with the cartridge. 
+4. Divide this area in a matrix. 
+5. Extend the line segment AB to point C. 
+6. Secure one end of the cartridge to point A. 
+7. Adjust the other end, so that the ink marker line coincides with point B 
+
+
+=== PDF PAGE 66 ===
+ 
+66 
+ 
+ 
+Fig. 5-27: Drawing the ink marker line 
+ 
+Fig. 5-28: Extending 
+ 
+5.13.5 Fixing the ground code 
+Material 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Procedure 
+1. Print the ground code. 
+2. Draw a cross where the ground code needs to be modified with ink. 
+3. Clean the fixed ground code area with cotton cloth. 
+4. If there are stains in the fixed area, clean with alcohol. When cleaning, 
+make sure that ink marks are not removed. 
+5. Fix the ground code after the ground dries. 
+6. When fixing the ground code, make sure that the cross mark on the 
+ground code overlaps with the fixed area within the deviation of ± 1 mm. 
+7. After fixing, clean the ground code with cotton cloth. 
+8. Remove bubbles to keep smooth and bubble-free ground codes in the 
+correct position. 
+9. Cover with protective film: 100mmx100 mm with 0.08mm thickness.  
+10. Transparent adhesive film with frosted matte 
+11. Wipe the protective film firmly and slowly with cotton cloth, so that it is fully 
+Designation Article number Quantity 
+Avery PET label paper 
+(excellent tear resistance, high 
+temperature resistance, dimensional 
+stability, opacity, chemical resistance, 
+good stain resistance, scratch resistance 
+and good natural biodegradability) 
+Recommended to use Avery white PET 
+60x60 mm. The size can be adjusted 
+according to the code size. 
+- - 
+Protective film: 100mmx100 mm with 
+0.08mm thickness.  
+Transparent adhesive film with frosted 
+matte  
+- - 
+
+=== PDF PAGE 67 ===
+ 
+67 
+ 
+and effectively covered. 
+12. Keep the ground code clean. 
+13. If black spots appear on the ground code due to humidity, the new ground 
+code can be fixed to the old one according to the work instructions above 
+5.14 Placing the rack code 
+5.14.1 Confirming the rack number 
+Determine the required rack number according to customer requirements. 
+5.14.2 Fixing the rack code 
+Procedure 
+1. Ensure that the rack code matches the rack. 
+2. Draw a cross where the code needs to be modified with ink. 
+3. Clean the fixed code area with cotton cloth. 
+4. If there are stains in the fixed area, clean with alcohol. When cleaning, 
+make sure that ink marks are not removed. 
+5. Fix the code after the ground dries. When fixing the code, make sure that 
+the cross mark on the code overlaps with the fixed area within the 
+deviation of ± 1 mm. 
+6. After fixing, clean the ground code with cotton cloth. 
+7. Remove bubbles, so that the ground code remains smooth and bubble-
+free in the correct position. 
+8. Cover with protective film 
+9. Wipe the protective film firmly and slowly with cotton cloth, so that it is fully 
+covered. 
+10. Keep the rack code surface clean and neat. 
+ 
+  
+
+=== PDF PAGE 68 ===
+ 
+68 
+ 
+6 Transportation 
+ 
+6.1 Transporting the vehicle 
+Precondition 
+◼ The vehicle is packed in a wooden case. 
+◼ The charging pile is packed in a carton. 
+◼ The vehicle is switched off and secured to prevent unauthorized persons 
+from switching it on again. 
+ 
+ 
+Work safety 
+ 
+Equipment 
+The following equipment is required: 
+Designation Article number 
+Wooden ramp - 
+Forklift - 
+Procedure 
+1. Use forklifts to transport wooden cases to the target area. 
+2. Put down the wooden case. 
+3. Open the wooden case. 
+4. Place a wooden ramp near the wooden case. 
+5. Push it along the wooden ramp to the ground. 
+If the vehicle does not start properly, it can be moved to the working area 
+through the lifting ring. 
+Risk of property damages due to improper transportation 
+If the vehicle is not transported properly, the vehicle may be damaged. 
+Keep top side up, and prevent water when transporting. Prevent collision 
+and scratches during lifting and unpackaging. 
+Forbid any collision, flipping, reversing or water immersing and etc. the 
+vehicle and charging pile. 
+Connect all lifting positions during transportation, assembly or 
+disassembly. Ensure that the lifting device has sufficient load-bearing 
+capacity. 
+NOTICE 
+For screwed connections, fastening bolts (standard, strength class 8.8) 
+are to be tightened with the tightening torque specified in the appendix 
+(>>>> 14 "Appendix" Page 131). Tightening torques deviating from these 
+values are specified directly. 
+The specified screw sizes and strength classes are those valid at the copy 
+deadline. The specifications contained in the Parts Catalog are, however, 
+always to be taken as the most up-to-date information. 
+Screws of strength class 10.9 and higher as well as screws with test 
+certification may only be tightened once with the rated tightening torque. 
+When the screws are first slackened they must be replaced with new 
+ones. 
+CAUTION 
+
+=== PDF PAGE 69 ===
+ 
+69 
+ 
+Work safety 
+ 
+ 
+ 
+6.2 Concluding work 
+The following concluding work must be done: 
+◼ Remove any used tools and equipment used. 
+◼ Check and make sure that the vehicle can be safely transported to the 
+target location. 
+  
+Risk of property damages due to improper transportation 
+If the vehicle is not transported properly, the vehicle may be damaged 
+• Keep top side up, prevent water when transporting. Prevent 
+collision and scratches during lifting and unpackaging. 
+• Forbid any collision, flipping, reversing or water immersing and etc. to 
+the vehicle. 
+NOTICE 
+Risk of personal injuries and property damage due to suspended position  
+If you stand under the vehicle when the vehicle is in the suspended 
+position, personal injuries and property damage may occur. 
+• Do not stand under the vehicle when the vehicle is suspended.  
+DANGER 
+ Risk of personal injuries and property damage due to improper lifting 
+manner.  
+ If the vehicle is not lifted properly, it may be damaged. 
+• Lift the vehicle vertical up and ensure that the vehicle will not rotate 
+during lifting. 
+• Do not lift the vehicle without the permission. 
+CAUTION 
+
+
+=== PDF PAGE 70 ===
+ 
+70 
+ 
+7 Start-up and recommissioning 
+Description 
+Wait for the vehicle to start self-test. 
+The vehicle is not ready for running until the light flashes green and self-test 
+passes. 
+ 
+  
+Do not run the vehicle if the self-test fails. 
+
+
+=== PDF PAGE 71 ===
+ 
+71 
+ 
+8 Operation 
+8.1 Control elements 
+ 
+ 
+Fig. 8-1: Control elements 
+Item Control components Function 
+1 Emergency Stop button When the emergency stop is pressed, 
+the vehicle will stop lifting and moving, 
+and hold still. 
+Press the emergency stop to enable the 
+vehicle. 
+2 Up-down button Press the up-down button to control the 
+lifting system and enable or de-enable 
+the driving motor. 
+ 
+3 Auto-manual knob Turn the knob to switch among the 
+following three modes: 
+▪ Auto mode 
+▪ Debug mode 
+▪ Manual mode 
+ 
+4 USB and 
+network/debug port 
+• USB port: for inserting a USB to 
+connect the manual controller 
+and the vehicle   
+• Network/debug port: Only KUKA 
+authorized personnel have 
+access to the debug port. 
+5 Reset button Press and hold for 2 seconds to reset the 
+vehicle. 
+6 Main switch  Switch on and off the vehicle. 
+7 Reset Press and hold for 2 seconds to reset the 
+vehicle. 
+ 
+
+
+=== PDF PAGE 72 ===
+ 
+72 
+ 
+8.2 Switching on the vehicle 
+Precondition 
+◼ The vehicle is subjected to a visual inspection to check for loose parts, 
+leaks and damage. 
+◼ The WLAN works properly. 
+◼ All persons and objects are at a safe distance from the vehicle. 
+◼ The battery is sufficiently charged for the selected tasks. 
+◼ There are no obstacles on the path. 
+◼ All the ground codes, rack codes, and bin codes are clear and intact 
+Procedure 
+ 
+1. Check whether the Emergency Stop button is released. 
+2. Press the power switch. 
+3. Wait the vehicle initialization for 10s. After the initialization finished, the 
+Status LED turns green. 
+8.3 Operating modes 
+Description 
+There are 3 operation modes: 
+◼ AUTO 
+◼ Debug  
+◼ Manual 
+  
+8.3.1 AUTO mode 
+Description 
+When the vehicle is operated in AUTO mode，the vehicle receives instructions 
+from K-MReS. 
+Procedure 
+1. Switch the Auto-Manual knob to Auto.The buzzer sound normal mode. 
+2.  The playload plate rotates for self-adjustment.        
+ 
+8.3.2 Debug mode 
+Description 
+When the vehicle is abnormal and cannot run automatically, it can be switched 
+to Debug mode. 
+In this mode, the vehicle receives instructions from KUKA Studio. 
+Procedure 
+▪ Switch the Auto-Manual knob to Debug, the sound indicates that the 
+debug mode has been switched，with the light flashes blue. 
+▪ Operate the vehicle via KUKA Studio. 
+ 
+After the payload plate rotates, and fails to do self-adjustment, the vehicle 
+will stop and report an error. At this point, press the reset button to resume 
+operation. 
+
+
+=== PDF PAGE 73 ===
+ 
+73 
+ 
+8.3.3 Manual mode  
+Description 
+At this point, the vehicle is offline and can receive the operations of control 
+elements, touch screen and remote control. 
+ 
+8.3.4 Panel buttons 
+Description 
+Through panel button operation, pallet lifting or lowering, motor enablement or 
+de-enablement, and error clearing can be controlled. 
+Procedure 
+1. Switch the Auto-Manual knob to Manual position. The sound indicates that 
+the vehicle has switched to maintenance mode. 
+2. Click the up-down button.  
+3. Click the up-down button again.  
+The lifting system is controlled via up-down buttons. 
+1. Long press the up and down buttons for 2 seconds to start lifting, then the 
+payload plate rises. 
+2. Release the button to stop lifting. 
+3. Long press the up-down buttons, then the payload plate drops. 
+4. Release the button and the payload plate stops lowering. 
+ 
+8.3.5 Operating via the manual controller 
+Precondition 
+◼ The vehicle has been switched to Manual mode. 
+◼ The USB of the handle is plugged into the front port of the vehicle.  
+◼ The power switch of the manual controller is switched to X. 
+◼ The emergency Stop button is released. 
+ 
+The panel buttons are not intended to control the forward or backward 
+movement of the vehicle, only to control the lifting or lowering of payload. 
+Use the remote control to control the forward and backward movement of 
+the vehicle. 
+ 
+The light color is restored to its original color after exiting the Debug and 
+Manual mode, and the sound indicates "normal mode restored". 
+ 
+ The vehicle can be operated through the panel buttons in both debug 
+mode and manual mode. The buttons on the vehicle get priority over 
+remote control and KUKA studio. When the control elements are 
+used, the remote control do not respond. 
+ 
+Before operating the vehicle with the manual controller, complete the 
+initialization operation of the vehicle: Press handle buttons 1 and 4 
+simultaneously, and then press 6 to initialize the vehicle. 
+ 
+NOTICE 
+
+=== PDF PAGE 74 ===
+ 
+74 
+ 
+ 
+Fig. 8-3: manual controller 
+Overview 
+Number Description 
+1  Enabling button 
+ Press button 1, with the combination of button 11, to lift the 
+payload plate; while with the combination of button 14, to 
+lower the payload plate. 
+2  Moving button 
+The manual controller has 2 buttons for moving the 
+vehicle. Press buttons 2 and 5 to move the vehicle in 
+manual mode. 
+ The vehicle has the following two states by combining 
+three buttons: 
+•    Slow: By pressing either 2 or 5, with the 
+combination of button 15 again, the vehicle w ill 
+move at the speed of 0.75 m/s. 
+• Full speed: By pressing both buttons 2 and 5, 
+with the combination of button 15 again, the 
+vehicle will move at the speed of 1.5 m/s. 
+3 Main switch 
+The manual controller may be in one of the following states: 
+▪ X  
+▪ D  
+ Switch to left X to activate the manual controller.  
+4 Initialization button 
+Press buttons 1 and 4 simultaneously, with the combination 
+
+
+=== PDF PAGE 75 ===
+ 
+75 
+ 
+of button 6, to initialize the vehicle. 
+5  Motion enablling button 
+The button can be combined with button 2. 
+6 Initialization button 
+Press buttons 1 and 4 simultaneously, with the combination 
+of button 6, to initialize the vehicle. 
+7 Mode switch 
+Press to switch among below three modes: 
+      • Remote control mode, with the mode switch light 
+always on 
+      • Lever mode: The levers are activated to move the 
+vehicle, with the mode switch light always off. 
+      • Panel button mode: The manual controller lost 
+connection with the vehicle, with the mode switch flashing, 
+while you can operate the vehicle via the panel buttons on 
+the vehicle. 
+Notice: switch to lever mode before moving or rotating the 
+vehicle with the lever. 
+8 Not applicable 
+9 Not applicable 
+10 Not applicable 
+11 Lift-up button 
+Press button 1 first, then button 11 to lift the payload plate. 
+12 Not applicable 
+13 Not applicable 
+14 Lift-down button 
+Buttons 1 and 14 must be pressed simultaneously to lower 
+the payload plate. 
+15 Lever 
+Combine with buttons 2 and 5 to control the vehicle to move 
+straight and move backwards. 
+16 Not applicable 
+17 Lever 
+Combine with buttons 2 and 5 to rotate the vehicle. 
+The vehicle can show the following two rotation states: 
+• Quick: By pressing buttons 2 and 5 simultaneously, 
+with the combination of 17, the vehicle will rotate in 
+place at the speed of 0.3 rad/s. 
+• Slow rotation: By pressing either button 2 or 5, 
+with the combination of 17, the vehicle will rotate in 
+place at the speed of 0.15 rad/s 
+ 
+ 
+8.4 Terminating the task 
+ 
+Precondition 
+◼ The vehicle is running. 
+
+=== PDF PAGE 76 ===
+ 
+76 
+ 
+ 
+Procedure 
+Cancel the task in K-MReS. 
+8.5 Switching off the vehicle 
+Description 
+When the vehicle is not working, it can be switched off. 
+ 
+Precondition 
+◼ The vehicle is not running. 
+◼ The vehicle is not loaded. 
+◼ The vehicle is not in the charging process. 
+ 
+Procedure 
+1. Press the power switch 
+ 
+ 
+Fig. 8-1: Power switch  
+ 
+1. Power switch 
+Additional measures in the case of faults or defects: 
+◼ Indicate the faults or defects by means of a label with a corresponding 
+warning (tagout). 
+◼ Keep a record of the faults or defects. 
+◼ Eliminate the faults or defects and carry out a function test. 
+  
+
+
+=== PDF PAGE 77 ===
+ 
+77 
+ 
+ 
+9 Maintenance 
+9.1 Maintenance overview 
+ 
+ 
+ 
+Interval Activity 
+Before start-
+up and 
+recommissioni
+ng 
+Check the vehicle for loose, defective and damaged 
+components. 
+Fasten loose components and contact KUKA Service to 
+exchange the defective and damaged components. 
+Check the SOC of the drive battery. 
+To avoid exhaustive discharge, recharge the battery before 
+the vehicle is switched on. 
+Before charging the drive battery, visually inspect the 
+charging cables, plugs for dirt and mechanical damage. 
+Test the functions of the Emergency Stop buttons. 
+Press each Emergency Stop button to check whether the 
+vehicle stops.  
+Contact KUKA if the EMERGENCY STOP buttons 
+malfunctions  
+Test the functions of the lidar. 
+ Check whether the vehicle stops when the obstacle is 
+detected. 
+Contact KUKA if the lidar malfunctions. 
+Three months During the storage, charge the battery through a charging 
+pile to compensate for self-discharge. 
+When the battery pack is not used for a long time, replenish 
+the battery every three months or so by using the charging 
+station for 4 to 5 hours. 
+Do not load or unload batteries in the battery pack during 
+maintenance. Otherwise, the degradation of the battery 
+performance may result. 
+Do not remove or replace any battery in the battery pack 
+without authorization, and do not dissect the battery. 
+ 
+1 year Visually inspect the top preload rubber for wear and 
+damage. Exchange the top preload rubber. 
+ 
+ 
+ 
+Visually inspect the drive wheels for wear and damage. 
+Exchange the worn and damaged drive wheels. 
+Note: Each drive wheel must have a diameter of at min. 197 
+mm, and both drive wheels need to be exchanged. 
+Visually inspect the rotary gear drive parts. 
+Add lubricating grease. 
+Grease model: GR 100-1 PD 
+Inspection and maintenance can only be done when the vehicle is without 
+load. 
+
+=== PDF PAGE 78 ===
+ 
+78 
+ 
+Check whether the cabling of the charging station and 
+charging component are damaged and fitted securely. 
+Check whether the cabling of the vehicle control cabinet is 
+damaged and fitted securely. 
+Check the function of emergency operation. 
+ 
+ 
+2 years   Check the connecting rod assembly and bearings for 
+wear. 
+Exchange the worn bearings 
+  Visually inspect PCB fans and check for fan noise. 
+Contact KUKA Service to exchange the fans on the PCB. 
+ 
+ 
+9.2 Cleaning the vehicle 
+Description 
+The vehicle must be cleaned at regular intervals. The vehicle must be cleaned in 
+accordance with the instructions given here in order to prevent damage. 
+ 
+Equipment 
+The following equipment is required: 
+Designation Article number 
+Permissible cleaning tools (e.g., cloths, 
+brushes) 
+- 
+Vacuum cleaner - 
+ 
+Material 
+The following material is required: 
+Designation Article number Quantity 
+Cleaning agent 
+Solvent-free, water-soluble, non-
+flammable, non-aggressive, no steam, 
+no refrigerants 
+- - 
+ 
+Precondition 
+1. The power switch is in the OFF position and secured to prevent 
+unauthorized persons from switching it on again. 
+2. At least one Emergency Stop button must be pressed. 
+3. The vehicle must carry no weight. 
+ 
+Work safety 
+ 
+Cleaning work may be performed only by authorized specialist personnel. 
+Carbon fiber dust is electrically conductive and can cause short-circuits. 
+Ensure that no carbon fiber dust penetrates into the interior of the vehicle. 
+NOTICE 
+
+=== PDF PAGE 79 ===
+ 
+79 
+ 
+ 
+ 
+ 
+ 
+9.2.1 Cleaning  
+Procedure   
+If required: stop adjacent system components and lock them. 
+1. Remove enclosures if this is necessary in order to carry out the cleaning 
+work. 
+2. Thoroughly clean the enclosure, seals and the vehicle interior with a 
+vacuum cleaner. 
+3. Clean the surfaces of the vehicle with a clean, dry dust cloth or a vacuum 
+cleaner. 
+4. Remove oil residues and lubricant deposits. 
+5. Remove heavier dirt deposits with a damp cloth. 
+6. If cleaning agents are used, test the compatibility with the paintwork and 
+plates beforehand. 
+7. Recommended cleaning agents: 
+8. Lidar: mild, solvent-free, non-corrosive, water-based cleaning agents. 
+9. Camera lenses: mild, solvent-free, non-corrosive, water-based cleaning 
+agents. 
+10. Vehicle enclosure: mild, solvent-free, non-corrosive water-based cleaning 
+agents or soapy water. 
+11. Fully remove all the cleaning agents from the vehicle. 
+12. Clean any areas of corrosion and reapply corrosion protection. 
+13. Put back in place any enclosures that have been removed. 
+9.2.2 Concluding work 
+The following concluding work must be carried out: 
+1. Remove cleaning agents and cleaning equipment from the workspace of 
+the vehicle. 
+2. Dispose of cleaning agents in accordance with the pertinent regulations.  
+3. Replace any damaged or illegible plates and enclosures. 
+4. Check any protective and safety equipment that had been removed for 
+correct operation 
+The following must be taken into consideration when carrying out cleaning 
+work. Material damage may otherwise result. 
+1. Cleaning must be in accordance with the corresponding cleaning 
+instructions. 
+2. Do not use high-pressure cleaners. 
+3. It must be ensured that no cleaning agent enters electrical or mechanical 
+system components. 
+NOTICE 
+Cleaning agents must not be allowed to come into contact with the electrical 
+system. Otherwise the electrical system could be damaged. 
+   
+ 
+NOTICE 
+Cleaning must not be carried out with a steam jet or high-pressure cleaner. 
+Otherwise, the electrical system may be damaged and the grease washed 
+out of the bearings of the motion drives. 
+ 
+NOTICE 
+
+=== PDF PAGE 80 ===
+ 
+80 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+
+=== PDF PAGE 81 ===
+ 
+81 
+ 
+10 Repair 
+ 
+ 
+10.1 Maintenance and procurement of spare parts 
+Repair 
+Only repair works that are included in the instructions are allowed to be done 
+by customers. 
+if there are any repairs to the vehicle control cabinet and other 
+components, consult KUKA Service for more information. 
+ 
+Procurement of spare parts 
+The article numbers of the spare parts are listed in the spare parts catalog.  
+(>>>>12.2 “ Spare parts list for maintenance/repair”  page 95) 
+ 
+10.2 Exchanging the preload rubbers 
+ 
+Fig.  10-1: Preload rubbers 
+1 Preload rubber 
+ 
+Numb
+er 
+Description ARTICLE number 
+1 Preload rubber 400294 
+For screwed connections, fastening bolts (standard, strength class 8.8) 
+are to be tightened with the tightening torque specified in the appendix 
+(>>>>12.1“Tightening torques”page 95). Tightening torques deviating 
+from these values are specified directly. 
+The specified screw sizes and strength classes are those valid at the copy 
+deadline. The specifications contained in the Parts Catalog are, however, 
+always to be taken as the most up-to-date information. 
+Screws of strength class 10.9 and higher as well as screws with test 
+certification may only be tightened once with the rated tightening torque. 
+When the screws are first slackened they must be replaced with new 
+ones. 
+CAUTION 
+
+=== PDF PAGE 82 ===
+ 
+82 
+ 
+ 
+Fig.  10-2: Preload rubber holes 
+1 Hole 
+10.2.1 Removing the preload rubber 
+Procedure 
+1. Pull down the preload rubber forcefully to separate it from the hole on the 
+payload plate 
+10.2.2 Installing the preload rubber 
+Procedure 
+1. Hold the preload rubber 
+2. Align the back side with the hole on the payload plate 
+3. Press to install the rubber pad 
+10.3 Exchanging the caster wheels 
+10.3.1 Removing the cover 
+ 
+ 
+Fig. 10-3: Upper cover 
+Numb
+er 
+Description Article number 
+
+
+=== PDF PAGE 83 ===
+ 
+83 
+ 
+1 Front upper cover 402753 
+2 Rear upper cover 402759 
+3 Front lower cover assembly 402757 
+4 Rear lower cover 
+assembly(left/right) 
+402760 
+The upper cover is screwed to the chassis and the column. 
+Description ARTICLE number 
+Allen screw M4x10 55350906 
+Allen screw M8x12 0055351416 
+ 
+The lower cover assembly is screwed to the chassis and the column. 
+Designation Article number 
+Hexagon socket head cap screw M5x16  55351086 
+Hexagon socket head cap screw M4x25 0055350966 
+Allen screw M4x12 55350911 
+Equipment 
+The following equipment is required:  
+Designation Article number 
+Set of Allen keys  
+1.5; 2; 2.5; 3; 4; 5; 6; 8; 10 mm 
+- 
+Torque wrench - 
+Procedure 
+1. Remove screws on both sides to separate the front/rear cover from the 
+vehicle. 
+10.3.2 Exchanging the caster wheels 
+Procedure 
+1. Lift up the vehicle until the drive wheels are suspended from the working 
+table for at least 0.5 m. 
+
+=== PDF PAGE 84 ===
+ 
+84 
+ 
+ 
+Fig. 10-4: Lifting the vehicle  
+1 Lifting tackle 
+2 Strap 
+3 Vehicle 
+ 
+2. Unscrew the 4 M8X20-8.8 hexagon screws. 
+3. Remove the damaged caster. 
+Risk of personal injuries and property damage due to suspended 
+position. 
+If you stand under the vehicle when the vehicle is in the suspended 
+position, personal injuries and property damage may occur. 
+- Do not stand under the vehicle when the vehicle is suspended. 
+DANGER 
+
+=== PDF PAGE 85 ===
+ 
+85 
+ 
+ 
+ 
+ 
+Fig. 10-5: Exchanging the caster wheels  
+1 M8X20-8.8 hexagon screws 
+2 Mounting surface, suspension 
+3 Caster wheel 
+ 
+4. Fasten the caster wheels with 4 M8X20-8.8 hexagon screws. 
+10.3.3 Installing the cover 
+Procedure 
+1. Screw on both sides to bind the enclosure to the vehicle. 
+10.3.4 Concluding work 
+ 
+The following concluding work must be done: 
+• Run the vehicle and note any abnormalities. 
+
+
+=== PDF PAGE 86 ===
+ 
+86 
+ 
+ 
+10.4 Exchanging the drive wheels 
+ 
+Description 
+The left and right covers must be removed to exchange the drive 
+wheels. The procedure for exchanging the drive wheels is described in 
+the following sections. You are recommended to exchange the 2 drive 
+wheels at the same time. 
+Equipment 
+The following equipment is required: 
+Designation Article number 
+Set of Allen keys  
+1.5; 2; 2.5; 3; 4; 5; 6; 8; 10 mm 
+- 
+Torque wrench 
+Min. 0.6 to 4.4 Nm 
+- 
+Material 
+The following material is required: 
+Designation Article number Quantity 
+Drive wheel 408460 1 
+ 
+Tightening torque 
+The tightening torques can be found under:  
+(>>>> 14.1 "Tightening torques" Page 131)  
+These are valid for screws and nuts where no other 
+specifications are given. 
+Screws of strength class 10.9 and higher as well as screws with test 
+certification may only be tightened once with the rated tightening torque. 
+When the screws are first slackened they must be replaced with new ones.  
+ 
+Overview 
+The instructions are subdivided into the following work steps: 
+Work step Activity 
+1 Removing the front/rear cover 
+(>>>> 10.3.1 "Removing the front/rear cover" Page 
+112) 
+2 Removing the left/right cover 
+(>>>> 10.3.2 "Removing the left/right cover" Page 
+113) 
+3 Exchanging the drive wheels 
+(>>>> 10.3.3 "Exchanging the drive wheels" Page 
+113) 
+4 Installing the left/right cover 
+(>>>> 10.3.5 "Installing the front/rear cover" Page 
+115) 
+5 Installing the front/rear cover 
+(>>>> 10.3.4 "Installing the left/right cover" Page 115) 
+
+=== PDF PAGE 87 ===
+ 
+87 
+ 
+6 Concluding work 
+(>>>> 10.3.6 "Concluding work" Page 116) 
+ 
+Precondition 
+• The vehicle is switched off to prevent unauthorized persons from 
+switching it on again. 
+• The vehicle is not loaded. 
+• The vehicle is transported to the worktable via a transport unit where the 
+drive wheel can be reached for servicing. 
+
+=== PDF PAGE 88 ===
+ 
+88 
+ 
+ 
+Work safety 
+ 
+ 
+ 
+ 
+ 
+ 
+10.4.1 Removing the cover 
+See procedures at (>>>>10.3.1 "Removing the cover "page 82) 
+10.4.2 Exchanging the drive wheels 
+1. Lift up the vehicle until the drive wheels are suspended from the working 
+table for at least 0.5 m. 
+Danger to life and limb due to electric shocks during work while 
+charging is in progress. 
+Work on the vehicle while the batteries are charging can result in 
+discharges or arcing, particularly if metallic objects are being handled. 
+Death, severe injuries or damage to property may result. 
+Do not carry out work on the vehicle during the charging procedure. 
+DANGER 
+Risk of fatal injury due to non-operational safety devices. 
+If the safety devices of the system are not operational, this may result in 
+death, severe injuries and damage to property. 
+• Do not remove or deactivate safety devices. 
+WARNING 
+Danger to life and limb due to live components. 
+Components may remain energized after the vehicle has been switched 
+off. Death, severe injuries or damage to property may result. 
+• Before work is commenced on components, switch off the vehicle 
+and secure it against being switched on again by unauthorized 
+personnel. 
+• After switching off, wait at least 5 minutes and then check to ensure 
+that the components are deenergized. 
+WARNING 
+The ESD guidelines must be observed. Failure to do so can result in 
+destruction of or partial damage to the component. 
+NOTICE 
+ 
+
+=== PDF PAGE 89 ===
+ 
+89 
+ 
+ 
+ 
+Fig. 10-6: Lifting the vehicle  
+1 Lifting tackle 
+2 Strap 
+3 Vehicle 
+ 
+2.     Unscrew the 6 M6X20-8.8 hexagon screws. 
+3. Remove the damaged drive wheel. 
+ 
+ 
+ 
+Fig. 10-7: Exchanging the drive wheels  
+1 Gearbox 
+ 
+Risk of personal injuries and property damage due to suspended 
+position. 
+If you stand under the vehicle when the vehicle is in the suspended 
+position, personal injuries and property damage may occur. 
+- Do not stand under the vehicle when the vehicle is suspended. 
+DANGER 
+
+=== PDF PAGE 90 ===
+ 
+90 
+ 
+2 Drive wheel 
+3 M6X20-8.8 hexagon screws 
+ 
+4. Fasten the new drive wheel with 6 M6X20-8 .8 hexagon screws. 
+ 
+10.4.3 Installing the cover 
+ 
+See procedures at (>>>>10.3.1) 
+ 
+10.4.4 Concluding work 
+ 
+The following concluding work must be done: 
+• Run the vehicle and note any abnormalities. 
+ 
+10.5 Exchanging the drive battery 
+ 
+Description 
+The procedure for exchanging the drive battery is described in the following 
+sections. 
+ 
+Material 
+The following material is required: 
+Designation Article number Quantity 
+Drive battery 400670 1 
+ 
+Overview 
+The instructions are subdivided into the following work steps: 
+ 
+Work step Activity 
+1 Removing the front/rear cover 
+（>>>>10.3.1 "Removing the cover "page 82） 
+2 Exchanging the drive wheels 
+(>>>>10.4.2 “Exchanging the drive wheels” page 88) 
+3 Installing the left/right cover 
+(>>>> 10.3.5 "10.3.3 Installing the cover Page 85) 
+4 Concluding work 
+(>>>> 10.3.6 "Concluding work" Page 116) 
+ 
+Precondition 
+• The vehicle is switched off to prevent unauthorized persons from 
+switching it on again. 
+• The vehicle is not loaded 
+Work Safety 
+
+=== PDF PAGE 91 ===
+ 
+91 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+10.5.1 Removing the cover 
+See procedures at (>>>>10.3.1 "Removing the cover "page 82) 
+ 
+10.5.2 Exchanging the drive battery 
+ 
+Procedure 
+1. Unscrew the 4 M8× 20-8.8 hexagon socket countersunk screws. 
+Danger to life and limb due to electric shocks during work while 
+charging is in progress. 
+Work on the vehicle while the batteries are charging can result in 
+discharges or arcing, particularly if metallic objects are being handled. 
+Death, severe injuries or damage to property may result. 
+• Do not carry out work on the vehicle during the charging procedure. 
+DANGER 
+Risk of fatal injury due to non-operational safety devices. 
+If the safety devices of the system are not operational, this may result in 
+death, severe injuries and damage to property. 
+• Do not remove or deactivate safety devices. 
+WARNING 
+Danger to life and limb due to live components. 
+Components may remain energized after the vehicle has been switched 
+off. Death, severe injuries or damage to property may result. 
+• Before work is commenced on components, switch off the vehicle 
+and secure it against being switched on again by unauthorized 
+personnel. 
+• After switching off, wait at least 5 minutes and then check to ensure 
+that the components are deenergized. 
+WARNING 
+The ESD guidelines must be observed. Failure to do so can result in 
+destruction of or partial damage to the component. 
+NOTICE 
+Risk of personal injuries and property damage due to improper lifting 
+manner. 
+If you are ignorant or use inappropriate tools, personal injuries and property 
+damage may occur. 
+• Lift up/down the drive battery by 2 people. 
+• The operators must be qualified for working on the vehicle. 
+WARNING 
+ 
+
+=== PDF PAGE 92 ===
+ 
+92 
+ 
+2. Lift up and exchange the drive battery carefully. 
+ 
+3. Put down the exchanged drive battery. 
+4. Fasten the 4 M8× 20-8.8 hexagon socket countersunk screws. 
+ 
+ 
+Fig. 10-8: Exchanging the drive battery  
+1 Drive battery 
+2 M8× 20-8.8 hexagon socket countersunk screws 
+10.5.3 Installing the cover 
+ 
+Procedure 
+See procedures at (>>>>10.3.3 “Installing the cover” page 85
+Risk of personal injuries and property damage due to improper 
+lifting manner. 
+The drive battery weighs about 14 kg. If you are ignorant or use 
+inappropriate tools, personal injuries and property damage may 
+occur. 
+ Lift up/down the drive battery by 2 people. 
+ The operators must be qualified for working on the vehicle. 
+WARNING 
+
+=== PDF PAGE 93 ===
+ 
+93 
+ 
+ 
+11 Decommissioning, storage and disposal 
+11.1 Decommissioning 
+ 
+◼ The power switch of the vehicle is in the OFF position and secured to 
+prevent unauthorized persons from switching it on again.  
+◼ The vehicle has been disconnected from the drive battery. 
+11.2 Storage 
+If the system is to be put into long-term storage, the following points must be 
+observed: 
+◼ The place of storage must be as dry and dust-free as possible.  
+◼ Avoid temperature fluctuations. 
+◼ Avoid wind and drafts. 
+◼ Avoid condensation. 
+◼ Use appropriate coverings that cannot detach themselves and which 
+can withstand the expected environmental conditions. 
+◼ Do not leave any loose parts on the vehicle, especially ones that might 
+knock against other parts. 
+◼ Do not leave the system exposed to direct sunlight while in storage.  
+◼ Observe and comply with the permissible temperature ranges for 
+storage. 
+◼ Select a storage location in which the packaging film cannot be 
+damaged. 
+ 
+ 
+ 
+ 
+ 
+ 
+Risk of fire due to exhaustive discharge.  
+If the drive batteries are stored without charging, exhaustive discharge will 
+occur. Exhaustive discharge may lead to a short circuit and cause the fire. 
+ • Recharge drive batteries every three months to compensate for self-
+discharge. 
+NOTICE 
+Instructions and information about storing the drive battery are contained in 
+the manufacturer documentation. 
+Risk of explosion, fire and escape of hazardous gases. 
+ If the defective or exhaustively discharged drive batteries are not correctly 
+disposed of, the explosion, fire and hazardous gases may occur. 
+ • Dispose of the defective drive batteries according to the related laws and 
+regulations  
+DANGER 
+
+
+=== PDF PAGE 94 ===
+ 
+94 
+ 
+Cleaning the vehicle 
+1. No dirt may remain on or in the vehicle. (>>>>9.2.1"Cleaning" Page 
+79) 
+2.  Inspect the vehicle, both internally and externally. 
+3.  Charge the drive battery every 3 months. 
+4.  Turn the main switch to OFF position and secure it with a padlock to 
+prevent unauthorized actuation.   
+5. Remove any foreign bodies. 
+6.  Remove any corrosion expertly. 
+7.  Attach all housing to the vehicle. 
+8.  Seal off electrical connections with suitable covers. 
+9.  Immobilize the vehicle with chocks 
+10. Cover the vehicle with weather- and tear-resistant plastic sheeting and 
+seal it at the base frame against dust. If necessary, add a desiccant 
+beneath the sheeting. 
+11. When putting back into operation: charge the drive battery. 
+11.3 Disposal 
+When the vehicle reaches the end of its useful life, it can be dismantled, and 
+the materials can be disposed of properly by type.  The following table 
+provides an overview of the materials used in the vehicle. Some of the plastic 
+components are marked with a material designation and must be disposed of 
+accordingly. 
+Material, designation Subassembly, 
+component 
+NOTICE 
+Metals 
+Copper  Electrical cables, 
+wires, washers 
+ 
+Steel  Chassis, gearbox, 
+screws and washers, 
+suspension, bracket, 
+payload plate, guide 
+column, caster wheels, 
+housing of electrical 
+equipment 
+ 
+Cast steel Housing of gearbox, 
+drive wheels 
+ 
+Electronic parts 
+ The drive battery is not 
+removed. 
+Dispose in 
+accordance with the 
+manufacturer's 
+documentation or 
+return to KUKA. 
+ Motors Dispose of motors 
+without dismantling. 
+Plastics  
+ABS  Seals, covers  
+NBR  O-rings, shaft seals  
+PTFE  Flexible tube, seal 
+rings 
+ 
+PUR  Cable sheaths, hoses  
+PU Bead of drive wheels  
+
+=== PDF PAGE 95 ===
+ 
+95 
+ 
+ 
+12 Appendix 
+12.1 Tightening torques 
+ 
+Tightening torques 
+ 
+The following tightening torques (Nm) are valid for screws and nuts 
+where no other specifications are given. 
+The specified values apply to lightly oiled black (e.g. 
+phosphated) and coated (e.g. mech. galv., zinc flake plating, 
+screw locking elements) screws and nuts. 
+ 
+ Strength class 
+Thread 8.8 10.9 12.9 
+M1.6 0.17 Nm 0.24 Nm 0.28 Nm 
+M2 0.35 Nm 0.48 Nm 0.56 Nm 
+M2.5 0.68 Nm 0.93 Nm 1.10 Nm 
+M3 1.2 Nm 1.6 Nm 2.0 Nm 
+M4 2.8 Nm 3.8 Nm 4.4 Nm 
+M5 5.6 Nm 7.5 Nm 9.0 Nm 
+M6 9.5 Nm 12.5 Nm 15.0 Nm 
+M8 23.0 Nm 31.0 Nm 36.0 Nm 
+M10 45.0 Nm 60.0 Nm 70.0 Nm 
+M12 78.0 Nm 104.0 Nm 125.0 Nm 
+M14 125.0 Nm 165.0 Nm 195.0 Nm 
+M16 195.0 Nm 250.0 Nm 305.0 Nm 
+M20 370.0 Nm 500.0 Nm 600.0 Nm 
+M24 640.0 Nm 860.0 Nm 1030.0 Nm 
+M30 1330.0 Nm 1700.0 Nm 2000.0 Nm 
+ 
+ Strength class 
+Thread 8.8 
+ISO7991 
+Allen screw 
+10.9 
+ISO7380, ISO07381 
+Fillister head 
+screw 
+M3 0.8 Nm 0.8 Nm 
+M4 1.9 Nm 1.9 Nm 
+M5 3.8 Nm 3.8 Nm 
+ 
+ Strength class 
+Thread 10.9 
+DIN7984 
+Pan head screws 
+M4 2.8 Nm 
+Tighten M5 domed cap nuts with a torque of 4.2 Nm. 
+ 
+12.2 Spare parts list for maintenance/repair 
+
+=== PDF PAGE 96 ===
+ 
+96 
+ 
+ 
+The table contains the KUKA article numbers for ordering 
+replacement parts used in maintenance/repair work. 
+ 
+Spare part Article number 
+Drive wheel 400298 
+Caster wheel 403423 
+Preload rubber 400294 
+Drive battery 400670 
+Cover, upper front 402753 
+Cover, lower front 402757 
+Cover, upper rear 402759 
+Cover, lower rear 402760 
+Cover, left/right 402760 
+Allen screw M4x10 55350906 
+Hexagon socket head cap screw M5x12 55351076 
+Conical spring washer 5,3x11x1,2 57750281 
+Hexagon socket head cap screw M5x16  55351086 
+Hexagon socket head cap screw M4x25 55350966 
+Allen screw M4x12 55350911 
+ 
+ 
+ 
+ 
+  
+
+=== PDF PAGE 97 ===
+ 
+97 
+ 
+ 
+13 KUKA Service 
+13.1 Requesting support 
+ 
+Introduction 
+ 
+This documentation provides information on operation and 
+operator control, and provides assistance with troubleshooting. 
+For further assistance, please contact your local KUKA subsidiary. 
+Faults leading to production downtime should be reported to 
+the local KUKA subsidiary within one hour of their occurrence. 
+ 
+Information 
+ 
+The following information is required for processing a support request: 
+ 
+• Model and serial number of the transport system 
+• Description of the problem, duration and frequency of the fault 
+ 
+ 
+13.2 KUKA Customer Support 
+ 
+The contact details of the local subsidiaries can be 
+found at: www.kuka.com/customer-service-contacts 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

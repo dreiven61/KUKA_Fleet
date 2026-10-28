@@ -1,0 +1,40 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.robotmanager.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+
+option java_package = "com.kuka.mobilerobotics.robotmanager.v1alpha1";
+option java_outer_classname = "RobotProto";
+option java_multiple_files = true;
+
+// Contains the information about a robot in the fleet.
+// In particular the robot's identification UUID and the lists of provided data types 
+// and supported action types can be used to determine its capabilities.
+message Robot
+{
+  // The robot controller UUID.
+  string uuid = 1;
+	
+  // Action types executable by this robot controller.
+  repeated string action_types = 2;
+	
+  // Data types supported by this robot controller.
+  repeated string data_types = 3;
+	
+  // The timestamp of the last received registration message.
+  // This field can be used to determine whether the robot's 
+  // connection to the server is healthy or not.
+  google.protobuf.Timestamp timestamp = 4;
+	
+  // The name of the robot.
+  string name = 5; 
+}
+

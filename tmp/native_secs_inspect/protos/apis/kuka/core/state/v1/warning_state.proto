@@ -1,0 +1,48 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.core.state.v1;
+
+import "google/rpc/status.proto";
+import "google/protobuf/timestamp.proto";
+
+option java_package = "com.kuka.core.state.v1";
+option java_outer_classname = "WarningStateProto";
+option java_multiple_files = true;
+option go_package = "kuka.com/genproto/kuka/core/state/warningstate;warningstate";
+
+
+// Contains a set of warnings.
+message WarningState
+{
+  // Contains information about present warnings.
+  // The list is empty if no warning is present.<br/><br/>
+  // Partial updates could be supported, i.e.
+  // not all warnings need to be sent on each change, but only new ones,
+  // or if a warnings is cleared (i.e. its status changes to "no warning").
+  // On full update cleared warnings will be removed from this list.
+  // The information whether this message contains a full or a patch update needs to be
+  // included in a message containing this one.
+  // If this message is sent without a wrapper a full update is assumed.
+  repeated Warning warnings = 1;
+}
+
+// Represents a warning instance.
+// The warning is cleared when its status code is 0.
+message Warning
+{
+  // The uuid of this warning instance.
+  string uuid = 1;
+
+  // The status of this warning.
+  google.rpc.Status status = 2;
+  
+  // The timestamp corresponding to the time at which this warning first occurred.
+  google.protobuf.Timestamp active_since = 3;
+}

@@ -1,0 +1,65 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.applicationcontrol;
+
+import "kuka/core/v1/message_header.proto";
+import "kuka/mobilerobotics/applicationcontrol/application_control_parameters.proto";
+
+option csharp_namespace = "Kuka.MobileRobotics.ApplicationControlDataService";
+option java_multiple_files = true;
+option java_outer_classname = "ApplicationControlDataServiceProto";
+option java_package = "com.kuka.mobilerobotics.applicationcontrol";
+
+// Service to get and set the runtime values of Arm Application Control.
+service ApplicationControlDataService
+{
+  // Gets application data
+  rpc GetData(GetDataRequest) returns (GetDataResponse);
+
+  // Sets application data
+  rpc SetData(SetDataRequest) returns (SetDataResponse);
+}
+
+// Request for GetData
+message GetDataRequest
+{
+  // header containing information about the origin of this message
+  kuka.core.v1.MessageHeader header = 1;
+}
+
+// Response for GetData
+message GetDataResponse
+{
+  // header containing information about the origin of this message
+  kuka.core.v1.MessageHeader header = 1;
+
+  // Whether the data is set or cleared
+  bool is_set = 2;
+
+  // Gets the data set in the application control
+  ApplicationControlParameters data = 3;
+}
+
+// Request for SetData
+message SetDataRequest
+{
+  // header containing information about the origin of this message
+  kuka.core.v1.MessageHeader header = 1;
+
+  // The values to set, they will overwrite the previous values
+  ApplicationControlParameters data = 2;
+}
+
+// Response for SetData
+message SetDataResponse
+{
+  // header containing information about the origin of this message
+  kuka.core.v1.MessageHeader header = 1;
+}

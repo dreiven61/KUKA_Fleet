@@ -1,0 +1,33 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.motion.v1alpha1;
+
+import "kuka/core/geometry/v1/acceleration_2d.proto";
+import "kuka/core/geometry/v1/velocity_2d.proto";
+
+option java_package = "com.kuka.mobilerobotics.motion.v1alpha1";
+option java_outer_classname = "VelocityConstraintsProto";
+option java_multiple_files = true;
+
+// The velocity constraints that need to be respected during a motion.
+message VelocityConstraints
+{
+  // The maximum allowed velocity for each dimension in [m/s, m/s, rad/s].
+  // All entries must be non-negative.
+  kuka.core.geometry.v1.Velocity2D max_velocity = 1;
+
+  // The maximum allowed acceleration for each dimension in [m/s^2, m/s^2, rad/s^2].
+  // All entries must be non-negative.
+  kuka.core.geometry.v1.Acceleration2D max_acceleration = 2;
+
+  // The maximum allowed deceleration for each dimension in [m/s^2, m/s^2, rad/s^2].
+  // All entries must be non-negative.
+  kuka.core.geometry.v1.Acceleration2D max_deceleration = 3;
+}

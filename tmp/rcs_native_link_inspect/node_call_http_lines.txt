@@ -1,0 +1,2307 @@
+Compiled from "NodeCallHttpHandler.java"
+public class org.thingsboard.rule.engine.grpc.NodeCallHttpHandler {
+  private static final org.slf4j.Logger log;
+
+  protected static final java.lang.String ERROR_CODE;
+
+  protected static final java.lang.String ERROR_REASON;
+
+  protected static final java.lang.String ERROR;
+
+  public org.thingsboard.rule.engine.grpc.NodeCallHttpHandler();
+    Code:
+       0: aload_0
+       1: invokespecial #2                  // Method java/lang/Object."<init>":()V
+       4: return
+    LineNumberTable:
+      line 56: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0       5     0  this   Lorg/thingsboard/rule/engine/grpc/NodeCallHttpHandler;
+
+  public static void triggerHttp(org.thingsboard.rule.engine.api.TbContext, org.thingsboard.server.common.msg.TbMsg, org.thingsboard.rule.engine.api.AbstractNodeConfiguration, java.lang.String);
+    Code:
+       0: aload_1
+       1: aload_3
+       2: invokestatic  #3                  // Method getTriggerRequest:(Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/String;)Lorg/thingsboard/rule/engine/api/TriggerEventReq;
+       5: astore        4
+       7: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+      10: ldc           #5                  // String deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], triggerEvent request [{}]
+      12: iconst_4
+      13: anewarray     #6                  // class java/lang/Object
+      16: dup
+      17: iconst_0
+      18: aload_1
+      19: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      22: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+      25: aastore
+      26: dup
+      27: iconst_1
+      28: aload_1
+      29: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      32: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+      35: aastore
+      36: dup
+      37: iconst_2
+      38: aload_1
+      39: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      42: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+      45: aastore
+      46: dup
+      47: iconst_3
+      48: aload         4
+      50: invokestatic  #11                 // Method org/thingsboard/common/util/JacksonUtil.toString:(Ljava/lang/Object;)Ljava/lang/String;
+      53: aastore
+      54: invokeinterface #12,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+      59: aload         4
+      61: invokestatic  #13                 // Method org/thingsboard/rule/engine/util/HttpUtil.trigger:(Lorg/thingsboard/rule/engine/api/TriggerEventReq;)Lorg/thingsboard/rule/engine/api/TriggerEventResp;
+      64: astore        5
+      66: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+      69: ldc           #14                 // String deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], triggerEvent response [{}]
+      71: iconst_4
+      72: anewarray     #6                  // class java/lang/Object
+      75: dup
+      76: iconst_0
+      77: aload_1
+      78: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      81: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+      84: aastore
+      85: dup
+      86: iconst_1
+      87: aload_1
+      88: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      91: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+      94: aastore
+      95: dup
+      96: iconst_2
+      97: aload_1
+      98: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     101: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+     104: aastore
+     105: dup
+     106: iconst_3
+     107: aload         5
+     109: invokestatic  #11                 // Method org/thingsboard/common/util/JacksonUtil.toString:(Ljava/lang/Object;)Ljava/lang/String;
+     112: aastore
+     113: invokeinterface #12,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+     118: aload_0
+     119: aload_1
+     120: aload_1
+     121: invokevirtual #15                 // Method org/thingsboard/server/common/msg/TbMsg.getType:()Ljava/lang/String;
+     124: aload_1
+     125: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     128: aload_1
+     129: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     132: aload         5
+     134: invokestatic  #11                 // Method org/thingsboard/common/util/JacksonUtil.toString:(Ljava/lang/Object;)Ljava/lang/String;
+     137: invokeinterface #17,  6           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.transformMsg:(Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/String;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/msg/TbMsgMetaData;Ljava/lang/String;)Lorg/thingsboard/server/common/msg/TbMsg;
+     142: astore        6
+     144: aconst_null
+     145: astore        7
+     147: aload         5
+     149: ifnull        188
+     152: aload         5
+     154: invokevirtual #18                 // Method org/thingsboard/rule/engine/api/TriggerEventResp.getSuccess:()Ljava/lang/Boolean;
+     157: invokevirtual #19                 // Method java/lang/Boolean.booleanValue:()Z
+     160: ifeq          188
+     163: aload         5
+     165: invokevirtual #20                 // Method org/thingsboard/rule/engine/api/TriggerEventResp.getCode:()Ljava/lang/Integer;
+     168: invokevirtual #21                 // Method java/lang/Integer.intValue:()I
+     171: sipush        200
+     174: if_icmpne     188
+     177: aload_0
+     178: aload         6
+     180: invokeinterface #22,  2           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.tellSuccess:(Lorg/thingsboard/server/common/msg/TbMsg;)V
+     185: goto          209
+     188: new           #23                 // class org/thingsboard/server/common/data/exception/KecsException
+     191: dup
+     192: getstatic     #24                 // Field org/thingsboard/server/common/data/exception/KecsErrorCodeEnum.FAILURE_RESULT:Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;
+     195: invokespecial #25                 // Method org/thingsboard/server/common/data/exception/KecsException."<init>":(Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;)V
+     198: astore        7
+     200: aload_0
+     201: aload         6
+     203: aload         7
+     205: aload_2
+     206: invokestatic  #26                 // Method org/thingsboard/rule/engine/api/NodeRetryHandler.retry:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/Throwable;Lorg/thingsboard/rule/engine/api/AbstractNodeConfiguration;)V
+     209: aload_0
+     210: aload_1
+     211: new           #27                 // class org/thingsboard/server/common/data/id/DeviceId
+     214: dup
+     215: aload_1
+     216: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     219: invokeinterface #28,  1           // InterfaceMethod org/thingsboard/server/common/data/id/EntityId.getId:()Ljava/util/UUID;
+     224: invokespecial #29                 // Method org/thingsboard/server/common/data/id/DeviceId."<init>":(Ljava/util/UUID;)V
+     227: getstatic     #30                 // Field org/thingsboard/server/common/data/audit/ActionType.TRIGGER:Lorg/thingsboard/server/common/data/audit/ActionType;
+     230: getstatic     #31                 // Field org/thingsboard/server/common/data/audit/ActionStatus.SUCCESS:Lorg/thingsboard/server/common/data/audit/ActionStatus;
+     233: aload         4
+     235: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     238: aload         5
+     240: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     243: aload         7
+     245: invokestatic  #33                 // Method logEvent:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/data/audit/ActionType;Lorg/thingsboard/server/common/data/audit/ActionStatus;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Throwable;)V
+     248: goto          355
+     251: astore        5
+     253: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+     256: ldc           #35                 // String deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], exception [{}]
+     258: iconst_4
+     259: anewarray     #6                  // class java/lang/Object
+     262: dup
+     263: iconst_0
+     264: aload_1
+     265: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     268: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+     271: aastore
+     272: dup
+     273: iconst_1
+     274: aload_1
+     275: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     278: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+     281: aastore
+     282: dup
+     283: iconst_2
+     284: aload_1
+     285: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     288: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+     291: aastore
+     292: dup
+     293: iconst_3
+     294: aload         5
+     296: aastore
+     297: invokeinterface #36,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;[Ljava/lang/Object;)V
+     302: aload_0
+     303: aload_1
+     304: aload         5
+     306: invokestatic  #37                 // Method processException:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/Throwable;)Lorg/thingsboard/server/common/msg/TbMsg;
+     309: astore        6
+     311: aload_0
+     312: aload_1
+     313: new           #27                 // class org/thingsboard/server/common/data/id/DeviceId
+     316: dup
+     317: aload_1
+     318: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     321: invokeinterface #28,  1           // InterfaceMethod org/thingsboard/server/common/data/id/EntityId.getId:()Ljava/util/UUID;
+     326: invokespecial #29                 // Method org/thingsboard/server/common/data/id/DeviceId."<init>":(Ljava/util/UUID;)V
+     329: getstatic     #30                 // Field org/thingsboard/server/common/data/audit/ActionType.TRIGGER:Lorg/thingsboard/server/common/data/audit/ActionType;
+     332: getstatic     #38                 // Field org/thingsboard/server/common/data/audit/ActionStatus.FAILURE:Lorg/thingsboard/server/common/data/audit/ActionStatus;
+     335: aload         4
+     337: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     340: aconst_null
+     341: aload         5
+     343: invokestatic  #33                 // Method logEvent:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/data/audit/ActionType;Lorg/thingsboard/server/common/data/audit/ActionStatus;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Throwable;)V
+     346: aload_0
+     347: aload         6
+     349: aload         5
+     351: aload_2
+     352: invokestatic  #26                 // Method org/thingsboard/rule/engine/api/NodeRetryHandler.retry:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/Throwable;Lorg/thingsboard/rule/engine/api/AbstractNodeConfiguration;)V
+     355: return
+    Exception table:
+       from    to  target type
+           7   248   251   Class java/lang/Exception
+    LineNumberTable:
+      line 71: 0
+      line 73: 7
+      line 74: 19
+      line 73: 54
+      line 76: 59
+      line 77: 66
+      line 78: 78
+      line 77: 113
+      line 79: 118
+      line 80: 144
+      line 81: 147
+      line 82: 177
+      line 84: 188
+      line 85: 200
+      line 88: 209
+      line 95: 248
+      line 89: 251
+      line 90: 253
+      line 91: 265
+      line 90: 297
+      line 92: 302
+      line 93: 311
+      line 94: 346
+      line 96: 355
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+         66     182     5 triggerEventResp   Lorg/thingsboard/rule/engine/api/TriggerEventResp;
+        144     104     6  next   Lorg/thingsboard/server/common/msg/TbMsg;
+        147     101     7 exception   Lorg/thingsboard/server/common/data/exception/KecsException;
+        311      44     6  next   Lorg/thingsboard/server/common/msg/TbMsg;
+        253     102     5     e   Ljava/lang/Exception;
+          0     356     0   ctx   Lorg/thingsboard/rule/engine/api/TbContext;
+          0     356     1   msg   Lorg/thingsboard/server/common/msg/TbMsg;
+          0     356     2 config   Lorg/thingsboard/rule/engine/api/AbstractNodeConfiguration;
+          0     356     3 grpcClientName   Ljava/lang/String;
+          7     349     4 request   Lorg/thingsboard/rule/engine/api/TriggerEventReq;
+
+  public static org.thingsboard.rule.engine.api.TriggerEventReq getTriggerRequest(org.thingsboard.server.common.msg.TbMsg, java.lang.String);
+    Code:
+       0: aload_1
+       1: ldc           #39                 // String FES
+       3: invokestatic  #40                 // Method org/apache/commons/lang3/StringUtils.equals:(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z
+       6: ifeq          14
+       9: aload_0
+      10: invokestatic  #41                 // Method getFesTriggerRequest:(Lorg/thingsboard/server/common/msg/TbMsg;)Lorg/thingsboard/rule/engine/api/TriggerEventReq;
+      13: areturn
+      14: aconst_null
+      15: areturn
+    LineNumberTable:
+      line 99: 0
+      line 100: 9
+      line 103: 14
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      16     0   msg   Lorg/thingsboard/server/common/msg/TbMsg;
+          0      16     1 clientName   Ljava/lang/String;
+
+  private static org.thingsboard.rule.engine.api.TriggerEventReq getFesTriggerRequest(org.thingsboard.server.common.msg.TbMsg);
+    Code:
+       0: new           #42                 // class org/thingsboard/rule/engine/api/TriggerEventReq
+       3: dup
+       4: invokespecial #43                 // Method org/thingsboard/rule/engine/api/TriggerEventReq."<init>":()V
+       7: astore_1
+       8: aload_1
+       9: aload_0
+      10: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      13: invokevirtual #44                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getWarehouseCode:()Ljava/lang/String;
+      16: invokevirtual #45                 // Method org/thingsboard/rule/engine/api/TriggerEventReq.setWarehouseCode:(Ljava/lang/String;)V
+      19: aload_1
+      20: aload_0
+      21: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      24: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+      27: invokevirtual #46                 // Method org/thingsboard/rule/engine/api/TriggerEventReq.setEcsTaskId:(Ljava/lang/String;)V
+      30: aload_1
+      31: aload_0
+      32: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      35: invokevirtual #47                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEventName:()Ljava/lang/String;
+      38: invokevirtual #48                 // Method org/thingsboard/rule/engine/api/TriggerEventReq.setEventName:(Ljava/lang/String;)V
+      41: aload_1
+      42: aload_0
+      43: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      46: invokevirtual #49                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getCellNode:()Ljava/lang/String;
+      49: invokevirtual #50                 // Method org/thingsboard/rule/engine/api/TriggerEventReq.setCellNode:(Ljava/lang/String;)V
+      52: aload_1
+      53: areturn
+    LineNumberTable:
+      line 107: 0
+      line 108: 8
+      line 109: 19
+      line 110: 30
+      line 111: 41
+      line 112: 52
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      54     0   msg   Lorg/thingsboard/server/common/msg/TbMsg;
+          8      46     1   req   Lorg/thingsboard/rule/engine/api/TriggerEventReq;
+
+  public static void triggerInterfaceHttp(org.thingsboard.rule.engine.api.TbContext, org.thingsboard.server.common.msg.TbMsg, org.thingsboard.rule.engine.event.TbTriggerEventNodeConfiguration);
+    Code:
+       0: invokestatic  #51                 // Method org/thingsboard/common/util/JacksonUtil.newObjectNode:()Lcom/fasterxml/jackson/databind/node/ObjectNode;
+       3: astore_3
+       4: aload_3
+       5: ldc           #52                 // String ecsTaskId
+       7: aload_1
+       8: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      11: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+      14: invokevirtual #53                 // Method com/fasterxml/jackson/databind/node/ObjectNode.put:(Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/node/ObjectNode;
+      17: pop
+      18: aload_3
+      19: ldc           #54                 // String cellNode
+      21: aload_1
+      22: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      25: invokevirtual #49                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getCellNode:()Ljava/lang/String;
+      28: invokevirtual #53                 // Method com/fasterxml/jackson/databind/node/ObjectNode.put:(Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/node/ObjectNode;
+      31: pop
+      32: aload_2
+      33: invokevirtual #55                 // Method org/thingsboard/rule/engine/event/TbTriggerEventNodeConfiguration.getTriggerEvent:()Lcom/fasterxml/jackson/databind/JsonNode;
+      36: invokevirtual #56                 // Method com/fasterxml/jackson/databind/JsonNode.toString:()Ljava/lang/String;
+      39: ldc           #57                 // class org/thingsboard/rule/engine/event/EventConfig
+      41: invokestatic  #58                 // Method org/thingsboard/common/util/JacksonUtil.fromString:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+      44: checkcast     #57                 // class org/thingsboard/rule/engine/event/EventConfig
+      47: astore        4
+      49: aload_0
+      50: aload_1
+      51: aload         4
+      53: invokevirtual #59                 // Method org/thingsboard/rule/engine/event/EventConfig.getParameters:()Ljava/util/List;
+      56: invokestatic  #60                 // Method org/thingsboard/rule/engine/util/DynamicParameterUtil.triggerEventDynamicParamDict:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Ljava/util/List;)Ljava/util/Map;
+      59: astore        5
+      61: aload         4
+      63: invokevirtual #59                 // Method org/thingsboard/rule/engine/event/EventConfig.getParameters:()Ljava/util/List;
+      66: astore        6
+      68: aload         6
+      70: invokestatic  #61                 // Method org/apache/commons/collections/CollectionUtils.isNotEmpty:(Ljava/util/Collection;)Z
+      73: ifeq          92
+      76: aload         6
+      78: aload_1
+      79: aload_3
+      80: aload         5
+      82: invokedynamic #62,  0             // InvokeDynamic #0:accept:(Lorg/thingsboard/server/common/msg/TbMsg;Lcom/fasterxml/jackson/databind/node/ObjectNode;Ljava/util/Map;)Ljava/util/function/Consumer;
+      87: invokeinterface #63,  2           // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      92: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+      95: ldc           #5                  // String deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], triggerEvent request [{}]
+      97: iconst_4
+      98: anewarray     #6                  // class java/lang/Object
+     101: dup
+     102: iconst_0
+     103: aload_1
+     104: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     107: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+     110: aastore
+     111: dup
+     112: iconst_1
+     113: aload_1
+     114: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     117: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+     120: aastore
+     121: dup
+     122: iconst_2
+     123: aload_1
+     124: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     127: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+     130: aastore
+     131: dup
+     132: iconst_3
+     133: aload_3
+     134: aastore
+     135: invokeinterface #12,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+     140: iconst_0
+     141: invokestatic  #64                 // Method org/thingsboard/rule/engine/util/RestTemplateUtil.getRestTemplate:(Z)Lorg/springframework/web/client/RestTemplate;
+     144: invokestatic  #65                 // Method org/thingsboard/rule/engine/event/HttpClientConfiguration.interfaceHttpCallbackUrl:()Ljava/lang/String;
+     147: aload_3
+     148: ldc           #66                 // class org/thingsboard/rule/engine/api/TriggerEventResp
+     150: iconst_0
+     151: anewarray     #6                  // class java/lang/Object
+     154: invokevirtual #67                 // Method org/springframework/web/client/RestTemplate.postForObject:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     157: checkcast     #66                 // class org/thingsboard/rule/engine/api/TriggerEventResp
+     160: astore        7
+     162: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+     165: ldc           #14                 // String deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], triggerEvent response [{}]
+     167: iconst_4
+     168: anewarray     #6                  // class java/lang/Object
+     171: dup
+     172: iconst_0
+     173: aload_1
+     174: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     177: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+     180: aastore
+     181: dup
+     182: iconst_1
+     183: aload_1
+     184: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     187: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+     190: aastore
+     191: dup
+     192: iconst_2
+     193: aload_1
+     194: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     197: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+     200: aastore
+     201: dup
+     202: iconst_3
+     203: aload         7
+     205: invokestatic  #11                 // Method org/thingsboard/common/util/JacksonUtil.toString:(Ljava/lang/Object;)Ljava/lang/String;
+     208: aastore
+     209: invokeinterface #12,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+     214: aload_0
+     215: aload_1
+     216: aload_1
+     217: invokevirtual #15                 // Method org/thingsboard/server/common/msg/TbMsg.getType:()Ljava/lang/String;
+     220: aload_1
+     221: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     224: aload_1
+     225: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     228: aload         7
+     230: invokestatic  #11                 // Method org/thingsboard/common/util/JacksonUtil.toString:(Ljava/lang/Object;)Ljava/lang/String;
+     233: invokeinterface #17,  6           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.transformMsg:(Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/String;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/msg/TbMsgMetaData;Ljava/lang/String;)Lorg/thingsboard/server/common/msg/TbMsg;
+     238: astore        8
+     240: aconst_null
+     241: astore        9
+     243: aload         7
+     245: ifnull        319
+     248: aload         7
+     250: invokevirtual #18                 // Method org/thingsboard/rule/engine/api/TriggerEventResp.getSuccess:()Ljava/lang/Boolean;
+     253: invokevirtual #19                 // Method java/lang/Boolean.booleanValue:()Z
+     256: ifeq          319
+     259: aload         7
+     261: invokevirtual #20                 // Method org/thingsboard/rule/engine/api/TriggerEventResp.getCode:()Ljava/lang/Integer;
+     264: invokevirtual #21                 // Method java/lang/Integer.intValue:()I
+     267: sipush        200
+     270: if_icmpne     319
+     273: aload_0
+     274: aload         8
+     276: invokeinterface #22,  2           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.tellSuccess:(Lorg/thingsboard/server/common/msg/TbMsg;)V
+     281: aload_0
+     282: aload_1
+     283: new           #27                 // class org/thingsboard/server/common/data/id/DeviceId
+     286: dup
+     287: aload_1
+     288: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     291: invokeinterface #28,  1           // InterfaceMethod org/thingsboard/server/common/data/id/EntityId.getId:()Ljava/util/UUID;
+     296: invokespecial #29                 // Method org/thingsboard/server/common/data/id/DeviceId."<init>":(Ljava/util/UUID;)V
+     299: getstatic     #30                 // Field org/thingsboard/server/common/data/audit/ActionType.TRIGGER:Lorg/thingsboard/server/common/data/audit/ActionType;
+     302: getstatic     #31                 // Field org/thingsboard/server/common/data/audit/ActionStatus.SUCCESS:Lorg/thingsboard/server/common/data/audit/ActionStatus;
+     305: aload_3
+     306: aload         7
+     308: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     311: aload         9
+     313: invokestatic  #33                 // Method logEvent:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/data/audit/ActionType;Lorg/thingsboard/server/common/data/audit/ActionStatus;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Throwable;)V
+     316: goto          375
+     319: new           #23                 // class org/thingsboard/server/common/data/exception/KecsException
+     322: dup
+     323: getstatic     #24                 // Field org/thingsboard/server/common/data/exception/KecsErrorCodeEnum.FAILURE_RESULT:Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;
+     326: invokespecial #25                 // Method org/thingsboard/server/common/data/exception/KecsException."<init>":(Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;)V
+     329: astore        9
+     331: aload_0
+     332: aload         8
+     334: aload         9
+     336: aload_2
+     337: invokestatic  #26                 // Method org/thingsboard/rule/engine/api/NodeRetryHandler.retry:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/Throwable;Lorg/thingsboard/rule/engine/api/AbstractNodeConfiguration;)V
+     340: aload_0
+     341: aload_1
+     342: new           #27                 // class org/thingsboard/server/common/data/id/DeviceId
+     345: dup
+     346: aload_1
+     347: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     350: invokeinterface #28,  1           // InterfaceMethod org/thingsboard/server/common/data/id/EntityId.getId:()Ljava/util/UUID;
+     355: invokespecial #29                 // Method org/thingsboard/server/common/data/id/DeviceId."<init>":(Ljava/util/UUID;)V
+     358: getstatic     #30                 // Field org/thingsboard/server/common/data/audit/ActionType.TRIGGER:Lorg/thingsboard/server/common/data/audit/ActionType;
+     361: getstatic     #38                 // Field org/thingsboard/server/common/data/audit/ActionStatus.FAILURE:Lorg/thingsboard/server/common/data/audit/ActionStatus;
+     364: aload_3
+     365: aload         7
+     367: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     370: aload         9
+     372: invokestatic  #33                 // Method logEvent:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/data/audit/ActionType;Lorg/thingsboard/server/common/data/audit/ActionStatus;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Throwable;)V
+     375: goto          478
+     378: astore        7
+     380: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+     383: ldc           #35                 // String deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], exception [{}]
+     385: iconst_4
+     386: anewarray     #6                  // class java/lang/Object
+     389: dup
+     390: iconst_0
+     391: aload_1
+     392: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     395: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+     398: aastore
+     399: dup
+     400: iconst_1
+     401: aload_1
+     402: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     405: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+     408: aastore
+     409: dup
+     410: iconst_2
+     411: aload_1
+     412: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     415: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+     418: aastore
+     419: dup
+     420: iconst_3
+     421: aload         7
+     423: aastore
+     424: invokeinterface #36,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;[Ljava/lang/Object;)V
+     429: aload_0
+     430: aload_1
+     431: aload         7
+     433: invokestatic  #37                 // Method processException:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/Throwable;)Lorg/thingsboard/server/common/msg/TbMsg;
+     436: astore        8
+     438: aload_0
+     439: aload_1
+     440: new           #27                 // class org/thingsboard/server/common/data/id/DeviceId
+     443: dup
+     444: aload_1
+     445: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     448: invokeinterface #28,  1           // InterfaceMethod org/thingsboard/server/common/data/id/EntityId.getId:()Ljava/util/UUID;
+     453: invokespecial #29                 // Method org/thingsboard/server/common/data/id/DeviceId."<init>":(Ljava/util/UUID;)V
+     456: getstatic     #30                 // Field org/thingsboard/server/common/data/audit/ActionType.TRIGGER:Lorg/thingsboard/server/common/data/audit/ActionType;
+     459: getstatic     #38                 // Field org/thingsboard/server/common/data/audit/ActionStatus.FAILURE:Lorg/thingsboard/server/common/data/audit/ActionStatus;
+     462: aload_3
+     463: aconst_null
+     464: aload         7
+     466: invokestatic  #33                 // Method logEvent:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/data/audit/ActionType;Lorg/thingsboard/server/common/data/audit/ActionStatus;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Throwable;)V
+     469: aload_0
+     470: aload         8
+     472: aload         7
+     474: aload_2
+     475: invokestatic  #26                 // Method org/thingsboard/rule/engine/api/NodeRetryHandler.retry:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/Throwable;Lorg/thingsboard/rule/engine/api/AbstractNodeConfiguration;)V
+     478: return
+    Exception table:
+       from    to  target type
+          92   375   378   Class java/lang/Exception
+    LineNumberTable:
+      line 123: 0
+      line 124: 4
+      line 125: 18
+      line 127: 32
+      line 128: 49
+      line 129: 61
+      line 130: 68
+      line 131: 76
+      line 150: 92
+      line 151: 104
+      line 150: 135
+      line 153: 140
+      line 154: 162
+      line 155: 174
+      line 154: 209
+      line 156: 214
+      line 157: 240
+      line 158: 243
+      line 159: 273
+      line 160: 281
+      line 162: 319
+      line 163: 331
+      line 164: 340
+      line 172: 375
+      line 166: 378
+      line 167: 380
+      line 168: 392
+      line 167: 424
+      line 169: 429
+      line 170: 438
+      line 171: 469
+      line 173: 478
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+        162     213     7 triggerEventResp   Lorg/thingsboard/rule/engine/api/TriggerEventResp;
+        240     135     8  next   Lorg/thingsboard/server/common/msg/TbMsg;
+        243     132     9 exception   Lorg/thingsboard/server/common/data/exception/KecsException;
+        438      40     8  next   Lorg/thingsboard/server/common/msg/TbMsg;
+        380      98     7     e   Ljava/lang/Exception;
+          0     479     0   ctx   Lorg/thingsboard/rule/engine/api/TbContext;
+          0     479     1   msg   Lorg/thingsboard/server/common/msg/TbMsg;
+          0     479     2 config   Lorg/thingsboard/rule/engine/event/TbTriggerEventNodeConfiguration;
+          4     475     3 requestJsonObject   Lcom/fasterxml/jackson/databind/node/ObjectNode;
+         49     430     4 eventConfig   Lorg/thingsboard/rule/engine/event/EventConfig;
+         61     418     5 dynamicParamsDict   Ljava/util/Map;
+         68     411     6 eventParameters   Ljava/util/List;
+
+  public static void callbackInterfaceHttp(org.thingsboard.rule.engine.api.TbContext, org.thingsboard.server.common.msg.TbMsg, org.thingsboard.rule.engine.grpc.TbGrpcApiCallNodeConfiguration);
+    Code:
+       0: invokestatic  #51                 // Method org/thingsboard/common/util/JacksonUtil.newObjectNode:()Lcom/fasterxml/jackson/databind/node/ObjectNode;
+       3: astore_3
+       4: aload_3
+       5: ldc           #52                 // String ecsTaskId
+       7: aload_1
+       8: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      11: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+      14: invokevirtual #53                 // Method com/fasterxml/jackson/databind/node/ObjectNode.put:(Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/node/ObjectNode;
+      17: pop
+      18: aload_3
+      19: ldc           #54                 // String cellNode
+      21: aload_1
+      22: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      25: invokevirtual #49                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getCellNode:()Ljava/lang/String;
+      28: invokevirtual #53                 // Method com/fasterxml/jackson/databind/node/ObjectNode.put:(Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/node/ObjectNode;
+      31: pop
+      32: aload_1
+      33: invokevirtual #68                 // Method org/thingsboard/server/common/msg/TbMsg.getData:()Ljava/lang/String;
+      36: invokestatic  #69                 // Method org/thingsboard/common/util/JacksonUtil.toJsonNode:(Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonNode;
+      39: astore        4
+      41: aload         4
+      43: ifnull        80
+      46: aload         4
+      48: ldc           #70                 // String additionalInfo
+      50: invokevirtual #71                 // Method com/fasterxml/jackson/databind/JsonNode.get:(Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonNode;
+      53: ldc           #72                 // class org/thingsboard/server/common/msg/rpc/ToDeviceRpcAdditional
+      55: invokestatic  #73                 // Method org/thingsboard/common/util/JacksonUtil.convertValue:(Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/Object;
+      58: checkcast     #72                 // class org/thingsboard/server/common/msg/rpc/ToDeviceRpcAdditional
+      61: astore        5
+      63: aload         5
+      65: ifnull        80
+      68: aload_3
+      69: ldc           #74                 // String robotId
+      71: aload         5
+      73: invokevirtual #75                 // Method org/thingsboard/server/common/msg/rpc/ToDeviceRpcAdditional.getRobotId:()Ljava/lang/String;
+      76: invokevirtual #53                 // Method com/fasterxml/jackson/databind/node/ObjectNode.put:(Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/node/ObjectNode;
+      79: pop
+      80: aload_1
+      81: invokestatic  #76                 // Method org/thingsboard/rule/engine/util/DynamicParameterUtil.receiveEventDynamicParamDict:(Lorg/thingsboard/server/common/msg/TbMsg;)Ljava/util/Map;
+      84: astore        5
+      86: aload_2
+      87: invokevirtual #77                 // Method org/thingsboard/rule/engine/grpc/TbGrpcApiCallNodeConfiguration.getParameters:()Ljava/util/List;
+      90: aload_1
+      91: aload_0
+      92: aload_3
+      93: aload         5
+      95: invokedynamic #78,  0             // InvokeDynamic #1:accept:(Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/rule/engine/api/TbContext;Lcom/fasterxml/jackson/databind/node/ObjectNode;Ljava/util/Map;)Ljava/util/function/Consumer;
+     100: invokeinterface #63,  2           // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+     105: aconst_null
+     106: astore        6
+     108: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+     111: ldc           #79                 // String deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], call interface request [{}]
+     113: iconst_4
+     114: anewarray     #6                  // class java/lang/Object
+     117: dup
+     118: iconst_0
+     119: aload_1
+     120: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     123: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+     126: aastore
+     127: dup
+     128: iconst_1
+     129: aload_1
+     130: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     133: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+     136: aastore
+     137: dup
+     138: iconst_2
+     139: aload_1
+     140: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     143: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+     146: aastore
+     147: dup
+     148: iconst_3
+     149: aload_3
+     150: aastore
+     151: invokeinterface #12,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+     156: iconst_0
+     157: invokestatic  #64                 // Method org/thingsboard/rule/engine/util/RestTemplateUtil.getRestTemplate:(Z)Lorg/springframework/web/client/RestTemplate;
+     160: invokestatic  #65                 // Method org/thingsboard/rule/engine/event/HttpClientConfiguration.interfaceHttpCallbackUrl:()Ljava/lang/String;
+     163: aload_3
+     164: ldc           #80                 // class org/thingsboard/rule/engine/api/CallbackEventResp
+     166: iconst_0
+     167: anewarray     #6                  // class java/lang/Object
+     170: invokevirtual #67                 // Method org/springframework/web/client/RestTemplate.postForObject:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+     173: checkcast     #80                 // class org/thingsboard/rule/engine/api/CallbackEventResp
+     176: astore        7
+     178: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+     181: ldc           #81                 // String deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], call interface response [{}]
+     183: iconst_4
+     184: anewarray     #6                  // class java/lang/Object
+     187: dup
+     188: iconst_0
+     189: aload_1
+     190: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     193: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+     196: aastore
+     197: dup
+     198: iconst_1
+     199: aload_1
+     200: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     203: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+     206: aastore
+     207: dup
+     208: iconst_2
+     209: aload_1
+     210: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     213: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+     216: aastore
+     217: dup
+     218: iconst_3
+     219: aload         7
+     221: ifnull        235
+     224: getstatic     #82                 // Field org/thingsboard/common/util/GsonUtil.SIMPLE_GSON:Lcom/google/gson/Gson;
+     227: aload         7
+     229: invokevirtual #83                 // Method com/google/gson/Gson.toJson:(Ljava/lang/Object;)Ljava/lang/String;
+     232: goto          236
+     235: aconst_null
+     236: aastore
+     237: invokeinterface #12,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+     242: aload         7
+     244: ifnull        318
+     247: aload         7
+     249: invokevirtual #84                 // Method org/thingsboard/rule/engine/api/CallbackEventResp.getSuccess:()Ljava/lang/Boolean;
+     252: invokevirtual #19                 // Method java/lang/Boolean.booleanValue:()Z
+     255: ifeq          318
+     258: aload         7
+     260: invokevirtual #85                 // Method org/thingsboard/rule/engine/api/CallbackEventResp.getCode:()Ljava/lang/Integer;
+     263: invokevirtual #21                 // Method java/lang/Integer.intValue:()I
+     266: sipush        200
+     269: if_icmpne     318
+     272: aload         7
+     274: invokevirtual #86                 // Method org/thingsboard/rule/engine/api/CallbackEventResp.getData:()Ljava/util/Map;
+     277: ifnull        308
+     280: aload         7
+     282: invokevirtual #86                 // Method org/thingsboard/rule/engine/api/CallbackEventResp.getData:()Ljava/util/Map;
+     285: invokestatic  #87                 // Method org/apache/commons/collections/CollectionUtils.sizeIsEmpty:(Ljava/lang/Object;)Z
+     288: ifne          308
+     291: aload_2
+     292: invokevirtual #88                 // Method org/thingsboard/rule/engine/grpc/TbGrpcApiCallNodeConfiguration.getResponseParameters:()Ljava/util/List;
+     295: aload_1
+     296: aload         7
+     298: invokedynamic #89,  0             // InvokeDynamic #2:accept:(Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/rule/engine/api/CallbackEventResp;)Ljava/util/function/Consumer;
+     303: invokeinterface #63,  2           // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+     308: aload_0
+     309: aload_1
+     310: invokeinterface #22,  2           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.tellSuccess:(Lorg/thingsboard/server/common/msg/TbMsg;)V
+     315: goto          347
+     318: new           #23                 // class org/thingsboard/server/common/data/exception/KecsException
+     321: dup
+     322: getstatic     #24                 // Field org/thingsboard/server/common/data/exception/KecsErrorCodeEnum.FAILURE_RESULT:Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;
+     325: invokespecial #25                 // Method org/thingsboard/server/common/data/exception/KecsException."<init>":(Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;)V
+     328: astore        6
+     330: aload_0
+     331: aload_1
+     332: new           #23                 // class org/thingsboard/server/common/data/exception/KecsException
+     335: dup
+     336: getstatic     #24                 // Field org/thingsboard/server/common/data/exception/KecsErrorCodeEnum.FAILURE_RESULT:Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;
+     339: invokespecial #25                 // Method org/thingsboard/server/common/data/exception/KecsException."<init>":(Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;)V
+     342: invokeinterface #90,  3           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.tellFailure:(Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/Throwable;)V
+     347: aload_0
+     348: aload_1
+     349: getstatic     #91                 // Field org/thingsboard/server/common/data/audit/ActionType.CALLBACK:Lorg/thingsboard/server/common/data/audit/ActionType;
+     352: aload         6
+     354: iconst_2
+     355: anewarray     #6                  // class java/lang/Object
+     358: dup
+     359: iconst_0
+     360: aload_3
+     361: aastore
+     362: dup
+     363: iconst_1
+     364: aload         7
+     366: ifnonnull     373
+     369: aconst_null
+     370: goto          378
+     373: aload         7
+     375: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     378: aastore
+     379: invokeinterface #92,  5           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.logAction:(Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/server/common/data/audit/ActionType;Ljava/lang/Exception;[Ljava/lang/Object;)V
+     384: goto          452
+     387: astore        7
+     389: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+     392: ldc           #93                 // String occurred exception
+     394: aload         7
+     396: invokeinterface #94,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     401: aload_0
+     402: aload_1
+     403: new           #23                 // class org/thingsboard/server/common/data/exception/KecsException
+     406: dup
+     407: getstatic     #95                 // Field org/thingsboard/server/common/data/exception/KecsErrorCodeEnum.HTTP_ERROR:Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;
+     410: invokespecial #25                 // Method org/thingsboard/server/common/data/exception/KecsException."<init>":(Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;)V
+     413: invokeinterface #90,  3           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.tellFailure:(Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/Throwable;)V
+     418: aload_0
+     419: aload_1
+     420: getstatic     #91                 // Field org/thingsboard/server/common/data/audit/ActionType.CALLBACK:Lorg/thingsboard/server/common/data/audit/ActionType;
+     423: aload         7
+     425: iconst_2
+     426: anewarray     #6                  // class java/lang/Object
+     429: dup
+     430: iconst_0
+     431: aload_3
+     432: aastore
+     433: dup
+     434: iconst_1
+     435: invokestatic  #65                 // Method org/thingsboard/rule/engine/event/HttpClientConfiguration.interfaceHttpCallbackUrl:()Ljava/lang/String;
+     438: aastore
+     439: invokeinterface #92,  5           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.logAction:(Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/server/common/data/audit/ActionType;Ljava/lang/Exception;[Ljava/lang/Object;)V
+     444: aload_0
+     445: aload_1
+     446: aload         7
+     448: aload_2
+     449: invokestatic  #26                 // Method org/thingsboard/rule/engine/api/NodeRetryHandler.retry:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/Throwable;Lorg/thingsboard/rule/engine/api/AbstractNodeConfiguration;)V
+     452: return
+    Exception table:
+       from    to  target type
+         108   384   387   Class java/lang/Exception
+    LineNumberTable:
+      line 176: 0
+      line 177: 4
+      line 178: 18
+      line 179: 32
+      line 180: 41
+      line 181: 46
+      line 182: 63
+      line 183: 68
+      line 186: 80
+      line 187: 86
+      line 231: 105
+      line 233: 108
+      line 234: 120
+      line 233: 151
+      line 235: 156
+      line 236: 178
+      line 237: 190
+      line 236: 237
+      line 238: 242
+      line 239: 272
+      line 240: 291
+      line 251: 308
+      line 253: 318
+      line 254: 330
+      line 256: 347
+      line 258: 375
+      line 256: 379
+      line 266: 384
+      line 259: 387
+      line 260: 389
+      line 261: 401
+      line 262: 418
+      line 264: 435
+      line 262: 439
+      line 265: 444
+      line 267: 452
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+         63      17     5 additional   Lorg/thingsboard/server/common/msg/rpc/ToDeviceRpcAdditional;
+        178     206     7 callbackResp   Lorg/thingsboard/rule/engine/api/CallbackEventResp;
+        389      63     7     e   Ljava/lang/Exception;
+          0     453     0   ctx   Lorg/thingsboard/rule/engine/api/TbContext;
+          0     453     1   msg   Lorg/thingsboard/server/common/msg/TbMsg;
+          0     453     2 config   Lorg/thingsboard/rule/engine/grpc/TbGrpcApiCallNodeConfiguration;
+          4     449     3 requestJsonObject   Lcom/fasterxml/jackson/databind/node/ObjectNode;
+         41     412     4 msgDataJson   Lcom/fasterxml/jackson/databind/JsonNode;
+         86     367     5 dynamicParamsDict   Ljava/util/Map;
+        108     345     6 logException   Ljava/lang/Exception;
+
+  public static void callbackHttp(org.thingsboard.rule.engine.api.TbContext, org.thingsboard.server.common.msg.TbMsg, org.thingsboard.rule.engine.api.AbstractNodeConfiguration, java.lang.String);
+    Code:
+       0: aload_1
+       1: aload_3
+       2: invokestatic  #96                 // Method getCallbackRequest:(Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/String;)Lorg/thingsboard/rule/engine/api/CallbackEventReq;
+       5: astore        4
+       7: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+      10: ldc           #97                 // String deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], callback request: [{}]
+      12: iconst_4
+      13: anewarray     #6                  // class java/lang/Object
+      16: dup
+      17: iconst_0
+      18: aload_1
+      19: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      22: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+      25: aastore
+      26: dup
+      27: iconst_1
+      28: aload_1
+      29: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      32: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+      35: aastore
+      36: dup
+      37: iconst_2
+      38: aload_1
+      39: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      42: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+      45: aastore
+      46: dup
+      47: iconst_3
+      48: aload         4
+      50: invokestatic  #11                 // Method org/thingsboard/common/util/JacksonUtil.toString:(Ljava/lang/Object;)Ljava/lang/String;
+      53: aastore
+      54: invokeinterface #12,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+      59: aload         4
+      61: invokestatic  #98                 // Method org/thingsboard/rule/engine/util/HttpUtil.callback:(Lorg/thingsboard/rule/engine/api/CallbackEventReq;)Lorg/thingsboard/rule/engine/api/CallbackEventResp;
+      64: astore        5
+      66: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+      69: ldc           #99                 // String deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], callback response: [{}]
+      71: iconst_4
+      72: anewarray     #6                  // class java/lang/Object
+      75: dup
+      76: iconst_0
+      77: aload_1
+      78: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      81: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+      84: aastore
+      85: dup
+      86: iconst_1
+      87: aload_1
+      88: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      91: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+      94: aastore
+      95: dup
+      96: iconst_2
+      97: aload_1
+      98: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     101: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+     104: aastore
+     105: dup
+     106: iconst_3
+     107: aload         5
+     109: invokestatic  #11                 // Method org/thingsboard/common/util/JacksonUtil.toString:(Ljava/lang/Object;)Ljava/lang/String;
+     112: aastore
+     113: invokeinterface #12,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+     118: aload_0
+     119: aload_1
+     120: aload_1
+     121: invokevirtual #15                 // Method org/thingsboard/server/common/msg/TbMsg.getType:()Ljava/lang/String;
+     124: aload_1
+     125: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     128: aload_1
+     129: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     132: aload         5
+     134: invokestatic  #11                 // Method org/thingsboard/common/util/JacksonUtil.toString:(Ljava/lang/Object;)Ljava/lang/String;
+     137: invokeinterface #17,  6           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.transformMsg:(Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/String;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/msg/TbMsgMetaData;Ljava/lang/String;)Lorg/thingsboard/server/common/msg/TbMsg;
+     142: astore        6
+     144: aconst_null
+     145: astore        7
+     147: aload         5
+     149: ifnull        227
+     152: aload         5
+     154: invokevirtual #84                 // Method org/thingsboard/rule/engine/api/CallbackEventResp.getSuccess:()Ljava/lang/Boolean;
+     157: invokevirtual #19                 // Method java/lang/Boolean.booleanValue:()Z
+     160: ifeq          227
+     163: aload         5
+     165: invokevirtual #85                 // Method org/thingsboard/rule/engine/api/CallbackEventResp.getCode:()Ljava/lang/Integer;
+     168: invokevirtual #21                 // Method java/lang/Integer.intValue:()I
+     171: sipush        200
+     174: if_icmpne     227
+     177: aload_0
+     178: aload         6
+     180: invokeinterface #22,  2           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.tellSuccess:(Lorg/thingsboard/server/common/msg/TbMsg;)V
+     185: aload_0
+     186: aload_1
+     187: new           #27                 // class org/thingsboard/server/common/data/id/DeviceId
+     190: dup
+     191: aload_1
+     192: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     195: invokeinterface #28,  1           // InterfaceMethod org/thingsboard/server/common/data/id/EntityId.getId:()Ljava/util/UUID;
+     200: invokespecial #29                 // Method org/thingsboard/server/common/data/id/DeviceId."<init>":(Ljava/util/UUID;)V
+     203: getstatic     #91                 // Field org/thingsboard/server/common/data/audit/ActionType.CALLBACK:Lorg/thingsboard/server/common/data/audit/ActionType;
+     206: getstatic     #31                 // Field org/thingsboard/server/common/data/audit/ActionStatus.SUCCESS:Lorg/thingsboard/server/common/data/audit/ActionStatus;
+     209: aload         4
+     211: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     214: aload         5
+     216: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     219: aload         7
+     221: invokestatic  #33                 // Method logEvent:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/data/audit/ActionType;Lorg/thingsboard/server/common/data/audit/ActionStatus;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Throwable;)V
+     224: goto          287
+     227: new           #23                 // class org/thingsboard/server/common/data/exception/KecsException
+     230: dup
+     231: getstatic     #24                 // Field org/thingsboard/server/common/data/exception/KecsErrorCodeEnum.FAILURE_RESULT:Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;
+     234: invokespecial #25                 // Method org/thingsboard/server/common/data/exception/KecsException."<init>":(Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;)V
+     237: astore        7
+     239: aload_0
+     240: aload         6
+     242: aload         7
+     244: aload_2
+     245: invokestatic  #26                 // Method org/thingsboard/rule/engine/api/NodeRetryHandler.retry:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/Throwable;Lorg/thingsboard/rule/engine/api/AbstractNodeConfiguration;)V
+     248: aload_0
+     249: aload_1
+     250: new           #27                 // class org/thingsboard/server/common/data/id/DeviceId
+     253: dup
+     254: aload_1
+     255: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     258: invokeinterface #28,  1           // InterfaceMethod org/thingsboard/server/common/data/id/EntityId.getId:()Ljava/util/UUID;
+     263: invokespecial #29                 // Method org/thingsboard/server/common/data/id/DeviceId."<init>":(Ljava/util/UUID;)V
+     266: getstatic     #91                 // Field org/thingsboard/server/common/data/audit/ActionType.CALLBACK:Lorg/thingsboard/server/common/data/audit/ActionType;
+     269: getstatic     #38                 // Field org/thingsboard/server/common/data/audit/ActionStatus.FAILURE:Lorg/thingsboard/server/common/data/audit/ActionStatus;
+     272: aload         4
+     274: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     277: aload         5
+     279: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     282: aload         7
+     284: invokestatic  #33                 // Method logEvent:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/data/audit/ActionType;Lorg/thingsboard/server/common/data/audit/ActionStatus;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Throwable;)V
+     287: goto          394
+     290: astore        5
+     292: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+     295: ldc           #35                 // String deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], exception [{}]
+     297: iconst_4
+     298: anewarray     #6                  // class java/lang/Object
+     301: dup
+     302: iconst_0
+     303: aload_1
+     304: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     307: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+     310: aastore
+     311: dup
+     312: iconst_1
+     313: aload_1
+     314: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     317: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+     320: aastore
+     321: dup
+     322: iconst_2
+     323: aload_1
+     324: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     327: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+     330: aastore
+     331: dup
+     332: iconst_3
+     333: aload         5
+     335: aastore
+     336: invokeinterface #36,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;[Ljava/lang/Object;)V
+     341: aload_0
+     342: aload_1
+     343: aload         5
+     345: invokestatic  #37                 // Method processException:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/Throwable;)Lorg/thingsboard/server/common/msg/TbMsg;
+     348: astore        6
+     350: aload_0
+     351: aload_1
+     352: new           #27                 // class org/thingsboard/server/common/data/id/DeviceId
+     355: dup
+     356: aload_1
+     357: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     360: invokeinterface #28,  1           // InterfaceMethod org/thingsboard/server/common/data/id/EntityId.getId:()Ljava/util/UUID;
+     365: invokespecial #29                 // Method org/thingsboard/server/common/data/id/DeviceId."<init>":(Ljava/util/UUID;)V
+     368: getstatic     #91                 // Field org/thingsboard/server/common/data/audit/ActionType.CALLBACK:Lorg/thingsboard/server/common/data/audit/ActionType;
+     371: getstatic     #38                 // Field org/thingsboard/server/common/data/audit/ActionStatus.FAILURE:Lorg/thingsboard/server/common/data/audit/ActionStatus;
+     374: aload         4
+     376: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     379: aconst_null
+     380: aload         5
+     382: invokestatic  #33                 // Method logEvent:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/data/audit/ActionType;Lorg/thingsboard/server/common/data/audit/ActionStatus;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Throwable;)V
+     385: aload_0
+     386: aload         6
+     388: aload         5
+     390: aload_2
+     391: invokestatic  #26                 // Method org/thingsboard/rule/engine/api/NodeRetryHandler.retry:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/Throwable;Lorg/thingsboard/rule/engine/api/AbstractNodeConfiguration;)V
+     394: return
+    Exception table:
+       from    to  target type
+           7   287   290   Class java/lang/Exception
+    LineNumberTable:
+      line 278: 0
+      line 280: 7
+      line 281: 59
+      line 282: 66
+      line 283: 118
+      line 284: 144
+      line 285: 147
+      line 286: 177
+      line 287: 185
+      line 289: 227
+      line 290: 239
+      line 291: 248
+      line 299: 287
+      line 293: 290
+      line 294: 292
+      line 295: 304
+      line 294: 336
+      line 296: 341
+      line 297: 350
+      line 298: 385
+      line 300: 394
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+         66     221     5 callbackEventResp   Lorg/thingsboard/rule/engine/api/CallbackEventResp;
+        144     143     6  next   Lorg/thingsboard/server/common/msg/TbMsg;
+        147     140     7 exception   Lorg/thingsboard/server/common/data/exception/KecsException;
+        350      44     6  next   Lorg/thingsboard/server/common/msg/TbMsg;
+        292     102     5     e   Ljava/lang/Exception;
+          0     395     0   ctx   Lorg/thingsboard/rule/engine/api/TbContext;
+          0     395     1   msg   Lorg/thingsboard/server/common/msg/TbMsg;
+          0     395     2 config   Lorg/thingsboard/rule/engine/api/AbstractNodeConfiguration;
+          0     395     3 httpClientName   Ljava/lang/String;
+          7     388     4 request   Lorg/thingsboard/rule/engine/api/CallbackEventReq;
+
+  public static org.thingsboard.rule.engine.api.CallbackEventReq getCallbackRequest(org.thingsboard.server.common.msg.TbMsg, java.lang.String);
+    Code:
+       0: aload_1
+       1: ldc           #39                 // String FES
+       3: invokestatic  #40                 // Method org/apache/commons/lang3/StringUtils.equals:(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z
+       6: ifeq          14
+       9: aload_0
+      10: invokestatic  #100                // Method getFesCallbackRequest:(Lorg/thingsboard/server/common/msg/TbMsg;)Lorg/thingsboard/rule/engine/api/CallbackEventReq;
+      13: areturn
+      14: aconst_null
+      15: areturn
+    LineNumberTable:
+      line 303: 0
+      line 304: 9
+      line 307: 14
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      16     0   msg   Lorg/thingsboard/server/common/msg/TbMsg;
+          0      16     1 clientName   Ljava/lang/String;
+
+  private static org.thingsboard.rule.engine.api.CallbackEventReq getFesCallbackRequest(org.thingsboard.server.common.msg.TbMsg);
+    Code:
+       0: new           #101                // class org/thingsboard/rule/engine/api/CallbackEventReq
+       3: dup
+       4: invokespecial #102                // Method org/thingsboard/rule/engine/api/CallbackEventReq."<init>":()V
+       7: astore_1
+       8: aload_1
+       9: aload_0
+      10: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      13: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+      16: invokevirtual #103                // Method org/thingsboard/rule/engine/api/CallbackEventReq.setRequestId:(Ljava/lang/String;)V
+      19: aload_1
+      20: aload_0
+      21: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      24: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+      27: invokevirtual #104                // Method org/thingsboard/rule/engine/api/CallbackEventReq.setEcsTaskId:(Ljava/lang/String;)V
+      30: aload_1
+      31: aload_0
+      32: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      35: invokevirtual #49                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getCellNode:()Ljava/lang/String;
+      38: invokevirtual #105                // Method org/thingsboard/rule/engine/api/CallbackEventReq.setCellNode:(Ljava/lang/String;)V
+      41: aload_1
+      42: aload_0
+      43: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      46: invokevirtual #47                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEventName:()Ljava/lang/String;
+      49: invokevirtual #106                // Method org/thingsboard/rule/engine/api/CallbackEventReq.setEventName:(Ljava/lang/String;)V
+      52: aload_1
+      53: iconst_1
+      54: invokestatic  #107                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      57: invokevirtual #108                // Method org/thingsboard/rule/engine/api/CallbackEventReq.setStatus:(Ljava/lang/Integer;)V
+      60: aload_1
+      61: areturn
+    LineNumberTable:
+      line 311: 0
+      line 312: 8
+      line 313: 19
+      line 314: 30
+      line 315: 41
+      line 316: 52
+      line 317: 60
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      62     0   msg   Lorg/thingsboard/server/common/msg/TbMsg;
+          8      54     1   req   Lorg/thingsboard/rule/engine/api/CallbackEventReq;
+
+  public static <T extends org.thingsboard.server.common.data.device.connector.BaseGroup> void callExternalSystem(org.thingsboard.rule.engine.api.TbContext, org.thingsboard.server.common.msg.TbMsg, org.thingsboard.rule.engine.grpc.TbGrpcApiCallNodeConfiguration);
+    Code:
+       0: aload_2
+       1: invokevirtual #109                // Method org/thingsboard/rule/engine/grpc/TbGrpcApiCallNodeConfiguration.getExternalSystemApi:()Lorg/thingsboard/rule/engine/grpc/ExternalSystemApi;
+       4: astore_3
+       5: aload_3
+       6: invokevirtual #110                // Method org/thingsboard/rule/engine/grpc/ExternalSystemApi.getApiUrl:()Ljava/lang/String;
+       9: astore        4
+      11: aload_3
+      12: invokevirtual #111                // Method org/thingsboard/rule/engine/grpc/ExternalSystemApi.getMethod:()Ljava/lang/String;
+      15: astore        5
+      17: aload_3
+      18: invokevirtual #112                // Method org/thingsboard/rule/engine/grpc/ExternalSystemApi.getReadTimeout:()Ljava/lang/Integer;
+      21: astore        6
+      23: aload_3
+      24: invokevirtual #113                // Method org/thingsboard/rule/engine/grpc/ExternalSystemApi.getHeader:()Ljava/util/List;
+      27: astore        7
+      29: aload_3
+      30: invokevirtual #114                // Method org/thingsboard/rule/engine/grpc/ExternalSystemApi.getParams:()Ljava/util/List;
+      33: astore        8
+      35: getstatic     #115                // Field org/thingsboard/common/util/JacksonUtil.OBJECT_MAPPER:Lcom/fasterxml/jackson/databind/ObjectMapper;
+      38: invokevirtual #116                // Method com/fasterxml/jackson/databind/ObjectMapper.createObjectNode:()Lcom/fasterxml/jackson/databind/node/ObjectNode;
+      41: astore        9
+      43: aload_2
+      44: invokevirtual #117                // Method org/thingsboard/rule/engine/grpc/TbGrpcApiCallNodeConfiguration.getRequestBody:()Lorg/thingsboard/server/common/data/rule/JsonAttribute;
+      47: invokevirtual #118                // Method org/thingsboard/server/common/data/rule/JsonAttribute.getChildren:()Ljava/util/List;
+      50: invokestatic  #61                 // Method org/apache/commons/collections/CollectionUtils.isNotEmpty:(Ljava/util/Collection;)Z
+      53: ifeq          72
+      56: aload_2
+      57: invokevirtual #117                // Method org/thingsboard/rule/engine/grpc/TbGrpcApiCallNodeConfiguration.getRequestBody:()Lorg/thingsboard/server/common/data/rule/JsonAttribute;
+      60: aload         9
+      62: aload_1
+      63: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      66: invokevirtual #119                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getData:()Ljava/util/Map;
+      69: invokestatic  #120                // Method org/thingsboard/rule/engine/util/HttpApiCallHelper.assembleJson:(Lorg/thingsboard/server/common/data/rule/JsonAttribute;Lcom/fasterxml/jackson/databind/node/ObjectNode;Ljava/util/Map;)V
+      72: aload         7
+      74: invokestatic  #121                // Method org/thingsboard/rule/engine/util/HttpUtil.prepareHttpRequestHeaders:(Ljava/util/List;)Lorg/springframework/http/HttpHeaders;
+      77: astore        10
+      79: aload         8
+      81: invokestatic  #122                // Method org/springframework/util/CollectionUtils.isEmpty:(Ljava/util/Collection;)Z
+      84: ifne          99
+      87: aload         8
+      89: invokedynamic #123,  0            // InvokeDynamic #3:accept:()Ljava/util/function/Consumer;
+      94: invokeinterface #63,  2           // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      99: aload_0
+     100: aload_1
+     101: aload         8
+     103: invokestatic  #124                // Method org/thingsboard/rule/engine/util/HttpUtil.prepareHttpRequestParams:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Ljava/util/List;)Ljava/util/Map;
+     106: astore        11
+     108: aload         4
+     110: aload         11
+     112: invokestatic  #125                // Method org/thingsboard/rule/engine/util/HttpUtil.prepareHttpRequestUrl:(Ljava/lang/String;Ljava/util/Map;)Ljava/lang/String;
+     115: astore        12
+     117: aload         11
+     119: aload_1
+     120: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     123: invokevirtual #119                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getData:()Ljava/util/Map;
+     126: invokeinterface #126,  2          // InterfaceMethod java/util/Map.putAll:(Ljava/util/Map;)V
+     131: aload         9
+     133: invokevirtual #127                // Method com/fasterxml/jackson/databind/node/ObjectNode.toString:()Ljava/lang/String;
+     136: aload         11
+     138: invokestatic  #128                // Method org/thingsboard/common/util/DynamicParamUtil.replaceDynamicParamsByStringValueMap:(Ljava/lang/String;Ljava/util/Map;)Ljava/lang/String;
+     141: astore        13
+     143: new           #129                // class org/springframework/http/HttpEntity
+     146: dup
+     147: getstatic     #82                 // Field org/thingsboard/common/util/GsonUtil.SIMPLE_GSON:Lcom/google/gson/Gson;
+     150: aload         13
+     152: new           #130                // class org/thingsboard/rule/engine/grpc/NodeCallHttpHandler$3
+     155: dup
+     156: invokespecial #131                // Method org/thingsboard/rule/engine/grpc/NodeCallHttpHandler$3."<init>":()V
+     159: invokevirtual #132                // Method org/thingsboard/rule/engine/grpc/NodeCallHttpHandler$3.getType:()Ljava/lang/reflect/Type;
+     162: invokevirtual #133                // Method com/google/gson/Gson.fromJson:(Ljava/lang/String;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+     165: aload         10
+     167: invokespecial #134                // Method org/springframework/http/HttpEntity."<init>":(Ljava/lang/Object;Lorg/springframework/util/MultiValueMap;)V
+     170: astore        14
+     172: aload_1
+     173: aload         12
+     175: invokestatic  #135                // Method org/thingsboard/rule/engine/util/DynamicParameterUtil.dynamicParamsValue:(Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/String;)Ljava/lang/String;
+     178: astore        12
+     180: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+     183: ldc           #136                // String deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], http request url: {}
+     185: iconst_4
+     186: anewarray     #6                  // class java/lang/Object
+     189: dup
+     190: iconst_0
+     191: aload_1
+     192: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     195: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+     198: aastore
+     199: dup
+     200: iconst_1
+     201: aload_1
+     202: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     205: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+     208: aastore
+     209: dup
+     210: iconst_2
+     211: aload_1
+     212: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     215: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+     218: aastore
+     219: dup
+     220: iconst_3
+     221: aload         12
+     223: aastore
+     224: invokeinterface #12,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+     229: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+     232: ldc           #137                // String deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], http request content: {}
+     234: iconst_4
+     235: anewarray     #6                  // class java/lang/Object
+     238: dup
+     239: iconst_0
+     240: aload_1
+     241: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     244: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+     247: aastore
+     248: dup
+     249: iconst_1
+     250: aload_1
+     251: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     254: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+     257: aastore
+     258: dup
+     259: iconst_2
+     260: aload_1
+     261: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     264: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+     267: aastore
+     268: dup
+     269: iconst_3
+     270: aload         14
+     272: aastore
+     273: invokeinterface #12,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+     278: iconst_1
+     279: invokestatic  #64                 // Method org/thingsboard/rule/engine/util/RestTemplateUtil.getRestTemplate:(Z)Lorg/springframework/web/client/RestTemplate;
+     282: astore        15
+     284: aload         15
+     286: aload         6
+     288: invokevirtual #21                 // Method java/lang/Integer.intValue:()I
+     291: invokestatic  #138                // Method org/thingsboard/rule/engine/util/HttpUtil.setHttpReadTimeout:(Lorg/springframework/web/client/RestTemplate;I)V
+     294: new           #139                // class org/thingsboard/rule/engine/grpc/NodeCallHttpHandler$4
+     297: dup
+     298: invokespecial #140                // Method org/thingsboard/rule/engine/grpc/NodeCallHttpHandler$4."<init>":()V
+     301: astore        17
+     303: getstatic     #141                // Field org/springframework/http/HttpMethod.POST:Lorg/springframework/http/HttpMethod;
+     306: invokevirtual #142                // Method org/springframework/http/HttpMethod.name:()Ljava/lang/String;
+     309: aload         5
+     311: invokevirtual #143                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     314: ifeq          338
+     317: aload         15
+     319: aload         12
+     321: getstatic     #141                // Field org/springframework/http/HttpMethod.POST:Lorg/springframework/http/HttpMethod;
+     324: aload         14
+     326: aload         17
+     328: aload         11
+     330: invokevirtual #144                // Method org/springframework/web/client/RestTemplate.exchange:(Ljava/lang/String;Lorg/springframework/http/HttpMethod;Lorg/springframework/http/HttpEntity;Lorg/springframework/core/ParameterizedTypeReference;Ljava/util/Map;)Lorg/springframework/http/ResponseEntity;
+     333: astore        16
+     335: goto          356
+     338: aload         15
+     340: aload         12
+     342: getstatic     #145                // Field org/springframework/http/HttpMethod.GET:Lorg/springframework/http/HttpMethod;
+     345: aload         14
+     347: aload         17
+     349: aload         11
+     351: invokevirtual #144                // Method org/springframework/web/client/RestTemplate.exchange:(Ljava/lang/String;Lorg/springframework/http/HttpMethod;Lorg/springframework/http/HttpEntity;Lorg/springframework/core/ParameterizedTypeReference;Ljava/util/Map;)Lorg/springframework/http/ResponseEntity;
+     354: astore        16
+     356: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+     359: ldc           #146                // String deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], http response content: {}
+     361: iconst_4
+     362: anewarray     #6                  // class java/lang/Object
+     365: dup
+     366: iconst_0
+     367: aload_1
+     368: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     371: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+     374: aastore
+     375: dup
+     376: iconst_1
+     377: aload_1
+     378: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     381: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+     384: aastore
+     385: dup
+     386: iconst_2
+     387: aload_1
+     388: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     391: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+     394: aastore
+     395: dup
+     396: iconst_3
+     397: aload         16
+     399: aastore
+     400: invokeinterface #12,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+     405: aload         16
+     407: invokevirtual #147                // Method org/springframework/http/ResponseEntity.getBody:()Ljava/lang/Object;
+     410: ifnull        747
+     413: aload         16
+     415: invokevirtual #148                // Method org/springframework/http/ResponseEntity.getStatusCode:()Lorg/springframework/http/HttpStatus;
+     418: getstatic     #149                // Field org/springframework/http/HttpStatus.OK:Lorg/springframework/http/HttpStatus;
+     421: if_acmpne     747
+     424: new           #150                // class java/util/HashMap
+     427: dup
+     428: invokespecial #151                // Method java/util/HashMap."<init>":()V
+     431: astore        18
+     433: aload_2
+     434: invokevirtual #152                // Method org/thingsboard/rule/engine/grpc/TbGrpcApiCallNodeConfiguration.getResponseBody:()Lorg/thingsboard/server/common/data/rule/JsonAttribute;
+     437: ldc           #153                // String $
+     439: aload         18
+     441: invokestatic  #154                // Method org/thingsboard/rule/engine/util/HttpApiCallHelper.generateJsonPathValueMap:(Lorg/thingsboard/server/common/data/rule/JsonAttribute;Ljava/lang/String;Ljava/util/Map;)V
+     444: aload         18
+     446: getstatic     #82                 // Field org/thingsboard/common/util/GsonUtil.SIMPLE_GSON:Lcom/google/gson/Gson;
+     449: aload         16
+     451: invokevirtual #147                // Method org/springframework/http/ResponseEntity.getBody:()Ljava/lang/Object;
+     454: invokevirtual #83                 // Method com/google/gson/Gson.toJson:(Ljava/lang/Object;)Ljava/lang/String;
+     457: invokestatic  #155                // Method org/thingsboard/rule/engine/util/HttpApiCallHelper.compare:(Ljava/util/Map;Ljava/lang/String;)I
+     460: istore        19
+     462: iload         19
+     464: ifle          578
+     467: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+     470: ldc           #156                // String unexpect response! deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], http response content: {}
+     472: iconst_4
+     473: anewarray     #6                  // class java/lang/Object
+     476: dup
+     477: iconst_0
+     478: aload_1
+     479: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     482: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+     485: aastore
+     486: dup
+     487: iconst_1
+     488: aload_1
+     489: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     492: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+     495: aastore
+     496: dup
+     497: iconst_2
+     498: aload_1
+     499: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     502: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+     505: aastore
+     506: dup
+     507: iconst_3
+     508: aload         16
+     510: aastore
+     511: invokeinterface #36,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;[Ljava/lang/Object;)V
+     516: aload_0
+     517: aload_1
+     518: aload_1
+     519: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     522: getstatic     #157                // Field org/thingsboard/server/common/data/audit/ActionType.CALL:Lorg/thingsboard/server/common/data/audit/ActionType;
+     525: getstatic     #38                 // Field org/thingsboard/server/common/data/audit/ActionStatus.FAILURE:Lorg/thingsboard/server/common/data/audit/ActionStatus;
+     528: aload         14
+     530: invokevirtual #158                // Method org/springframework/http/HttpEntity.getBody:()Ljava/lang/Object;
+     533: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     536: aload         16
+     538: invokevirtual #147                // Method org/springframework/http/ResponseEntity.getBody:()Ljava/lang/Object;
+     541: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     544: new           #23                 // class org/thingsboard/server/common/data/exception/KecsException
+     547: dup
+     548: getstatic     #24                 // Field org/thingsboard/server/common/data/exception/KecsErrorCodeEnum.FAILURE_RESULT:Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;
+     551: invokespecial #25                 // Method org/thingsboard/server/common/data/exception/KecsException."<init>":(Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;)V
+     554: invokestatic  #33                 // Method logEvent:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/data/audit/ActionType;Lorg/thingsboard/server/common/data/audit/ActionStatus;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Throwable;)V
+     557: aload_0
+     558: aload_1
+     559: new           #23                 // class org/thingsboard/server/common/data/exception/KecsException
+     562: dup
+     563: ldc           #159                // String http response is error
+     565: getstatic     #24                 // Field org/thingsboard/server/common/data/exception/KecsErrorCodeEnum.FAILURE_RESULT:Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;
+     568: invokespecial #160                // Method org/thingsboard/server/common/data/exception/KecsException."<init>":(Ljava/lang/String;Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;)V
+     571: aload_2
+     572: invokestatic  #26                 // Method org/thingsboard/rule/engine/api/NodeRetryHandler.retry:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/Throwable;Lorg/thingsboard/rule/engine/api/AbstractNodeConfiguration;)V
+     575: goto          747
+     578: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+     581: ldc           #146                // String deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], http response content: {}
+     583: iconst_4
+     584: anewarray     #6                  // class java/lang/Object
+     587: dup
+     588: iconst_0
+     589: aload_1
+     590: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     593: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+     596: aastore
+     597: dup
+     598: iconst_1
+     599: aload_1
+     600: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     603: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+     606: aastore
+     607: dup
+     608: iconst_2
+     609: aload_1
+     610: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     613: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+     616: aastore
+     617: dup
+     618: iconst_3
+     619: aload         16
+     621: aastore
+     622: invokeinterface #12,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+     627: aload_0
+     628: aload_1
+     629: aload_1
+     630: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     633: getstatic     #157                // Field org/thingsboard/server/common/data/audit/ActionType.CALL:Lorg/thingsboard/server/common/data/audit/ActionType;
+     636: getstatic     #31                 // Field org/thingsboard/server/common/data/audit/ActionStatus.SUCCESS:Lorg/thingsboard/server/common/data/audit/ActionStatus;
+     639: aload         14
+     641: invokevirtual #158                // Method org/springframework/http/HttpEntity.getBody:()Ljava/lang/Object;
+     644: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     647: aload         16
+     649: invokevirtual #147                // Method org/springframework/http/ResponseEntity.getBody:()Ljava/lang/Object;
+     652: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     655: aconst_null
+     656: invokestatic  #33                 // Method logEvent:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/data/audit/ActionType;Lorg/thingsboard/server/common/data/audit/ActionStatus;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Throwable;)V
+     659: aload_2
+     660: invokevirtual #152                // Method org/thingsboard/rule/engine/grpc/TbGrpcApiCallNodeConfiguration.getResponseBody:()Lorg/thingsboard/server/common/data/rule/JsonAttribute;
+     663: invokevirtual #118                // Method org/thingsboard/server/common/data/rule/JsonAttribute.getChildren:()Ljava/util/List;
+     666: invokeinterface #161,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     671: invokedynamic #162,  0            // InvokeDynamic #4:test:()Ljava/util/function/Predicate;
+     676: invokeinterface #163,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+     681: invokestatic  #164                // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+     684: invokeinterface #165,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     689: checkcast     #166                // class java/util/List
+     692: astore        20
+     694: aload         20
+     696: invokestatic  #61                 // Method org/apache/commons/collections/CollectionUtils.isNotEmpty:(Ljava/util/Collection;)Z
+     699: ifeq          740
+     702: aload         20
+     704: aload_1
+     705: aload         16
+     707: invokedynamic #167,  0            // InvokeDynamic #5:accept:(Lorg/thingsboard/server/common/msg/TbMsg;Lorg/springframework/http/ResponseEntity;)Ljava/util/function/Consumer;
+     712: invokeinterface #63,  2           // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+     717: aload_1
+     718: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     721: ldc           #168                // String triggerEvent
+     723: invokevirtual #169                // Method org/thingsboard/server/common/msg/TbMsgMetaData.hasValue:(Ljava/lang/String;)Z
+     726: ifeq          740
+     729: aload_1
+     730: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     733: ldc           #168                // String triggerEvent
+     735: ldc           #170                // String
+     737: invokevirtual #171                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     740: aload_0
+     741: aload_1
+     742: invokeinterface #22,  2           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.tellSuccess:(Lorg/thingsboard/server/common/msg/TbMsg;)V
+     747: goto          909
+     750: astore        15
+     752: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+     755: ldc           #178                // String processHttpRpc occurred exception:
+     757: aload         15
+     759: invokeinterface #94,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     764: aload_0
+     765: aload_1
+     766: aload_1
+     767: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     770: getstatic     #157                // Field org/thingsboard/server/common/data/audit/ActionType.CALL:Lorg/thingsboard/server/common/data/audit/ActionType;
+     773: getstatic     #38                 // Field org/thingsboard/server/common/data/audit/ActionStatus.FAILURE:Lorg/thingsboard/server/common/data/audit/ActionStatus;
+     776: aload         14
+     778: invokevirtual #158                // Method org/springframework/http/HttpEntity.getBody:()Ljava/lang/Object;
+     781: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     784: aconst_null
+     785: new           #23                 // class org/thingsboard/server/common/data/exception/KecsException
+     788: dup
+     789: getstatic     #24                 // Field org/thingsboard/server/common/data/exception/KecsErrorCodeEnum.FAILURE_RESULT:Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;
+     792: invokespecial #25                 // Method org/thingsboard/server/common/data/exception/KecsException."<init>":(Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;)V
+     795: invokestatic  #33                 // Method logEvent:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/data/audit/ActionType;Lorg/thingsboard/server/common/data/audit/ActionStatus;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Throwable;)V
+     798: aload_0
+     799: aload_1
+     800: aload         15
+     802: aload_2
+     803: invokestatic  #26                 // Method org/thingsboard/rule/engine/api/NodeRetryHandler.retry:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/Throwable;Lorg/thingsboard/rule/engine/api/AbstractNodeConfiguration;)V
+     806: goto          909
+     809: astore        15
+     811: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+     814: ldc           #179                // String occurred exception, deviceName [{}], ecsTaskId [{}], wcsTaskId [{}]
+     816: iconst_4
+     817: anewarray     #6                  // class java/lang/Object
+     820: dup
+     821: iconst_0
+     822: aload_1
+     823: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     826: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+     829: aastore
+     830: dup
+     831: iconst_1
+     832: aload_1
+     833: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     836: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+     839: aastore
+     840: dup
+     841: iconst_2
+     842: aload_1
+     843: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     846: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+     849: aastore
+     850: dup
+     851: iconst_3
+     852: aload         15
+     854: aastore
+     855: invokeinterface #36,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;[Ljava/lang/Object;)V
+     860: aload_0
+     861: aload_1
+     862: aload_1
+     863: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     866: getstatic     #157                // Field org/thingsboard/server/common/data/audit/ActionType.CALL:Lorg/thingsboard/server/common/data/audit/ActionType;
+     869: getstatic     #38                 // Field org/thingsboard/server/common/data/audit/ActionStatus.FAILURE:Lorg/thingsboard/server/common/data/audit/ActionStatus;
+     872: aload         14
+     874: invokevirtual #158                // Method org/springframework/http/HttpEntity.getBody:()Ljava/lang/Object;
+     877: invokestatic  #32                 // Method org/thingsboard/common/util/JacksonUtil.valueToTree:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonNode;
+     880: ldc           #170                // String
+     882: new           #23                 // class org/thingsboard/server/common/data/exception/KecsException
+     885: dup
+     886: getstatic     #180                // Field org/springframework/http/HttpStatus.INTERNAL_SERVER_ERROR:Lorg/springframework/http/HttpStatus;
+     889: invokevirtual #181                // Method org/springframework/http/HttpStatus.getReasonPhrase:()Ljava/lang/String;
+     892: getstatic     #95                 // Field org/thingsboard/server/common/data/exception/KecsErrorCodeEnum.HTTP_ERROR:Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;
+     895: invokespecial #160                // Method org/thingsboard/server/common/data/exception/KecsException."<init>":(Ljava/lang/String;Lorg/thingsboard/server/common/data/exception/KecsErrorCodeEnum;)V
+     898: invokestatic  #33                 // Method logEvent:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/data/audit/ActionType;Lorg/thingsboard/server/common/data/audit/ActionStatus;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Throwable;)V
+     901: aload_0
+     902: aload_1
+     903: aload         15
+     905: aload_2
+     906: invokestatic  #26                 // Method org/thingsboard/rule/engine/api/NodeRetryHandler.retry:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/Throwable;Lorg/thingsboard/rule/engine/api/AbstractNodeConfiguration;)V
+     909: return
+    Exception table:
+       from    to  target type
+         172   747   750   Class org/springframework/web/client/HttpClientErrorException$Forbidden
+         172   747   750   Class org/springframework/web/client/HttpServerErrorException$ServiceUnavailable
+         172   747   750   Class org/springframework/web/client/ResourceAccessException
+         172   747   750   Class org/springframework/web/client/HttpServerErrorException$GatewayTimeout
+         172   747   750   Class org/springframework/web/client/HttpServerErrorException$InternalServerError
+         172   747   750   Class org/springframework/web/client/HttpClientErrorException$NotFound
+         172   747   809   Class java/lang/Exception
+    LineNumberTable:
+      line 324: 0
+      line 325: 5
+      line 326: 11
+      line 327: 17
+      line 328: 23
+      line 329: 29
+      line 331: 35
+      line 332: 43
+      line 333: 56
+      line 336: 72
+      line 337: 79
+      line 338: 87
+      line 342: 99
+      line 343: 108
+      line 346: 117
+      line 347: 131
+      line 348: 143
+      line 351: 172
+      line 352: 180
+      line 353: 192
+      line 352: 224
+      line 354: 229
+      line 355: 241
+      line 354: 273
+      line 357: 278
+      line 358: 284
+      line 361: 294
+      line 362: 303
+      line 363: 317
+      line 365: 338
+      line 367: 356
+      line 368: 368
+      line 367: 400
+      line 370: 405
+      line 371: 424
+      line 372: 433
+      line 374: 444
+      line 375: 462
+      line 376: 467
+      line 377: 479
+      line 376: 511
+      line 378: 516
+      line 379: 557
+      line 381: 578
+      line 382: 590
+      line 381: 622
+      line 383: 627
+      line 384: 659
+      line 385: 694
+      line 386: 702
+      line 395: 717
+      line 396: 729
+      line 399: 740
+      line 413: 747
+      line 402: 750
+      line 405: 752
+      line 406: 764
+      line 407: 798
+      line 413: 806
+      line 408: 809
+      line 409: 811
+      line 410: 823
+      line 409: 855
+      line 411: 860
+      line 412: 901
+      line 414: 909
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+        335       3    16 responseEntity   Lorg/springframework/http/ResponseEntity;
+        694      53    20 objectJsonAttributeList   Ljava/util/List;
+        433     314    18 jsonPathValueMap   Ljava/util/Map;
+        462     285    19 errorCode   I
+        284     463    15 restTemplate   Lorg/springframework/web/client/RestTemplate;
+        356     391    16 responseEntity   Lorg/springframework/http/ResponseEntity;
+        303     444    17 typeRef   Lorg/springframework/core/ParameterizedTypeReference;
+        752      54    15     e   Lorg/springframework/web/client/RestClientException;
+        811      98    15     e   Ljava/lang/Exception;
+          0     910     0   ctx   Lorg/thingsboard/rule/engine/api/TbContext;
+          0     910     1   msg   Lorg/thingsboard/server/common/msg/TbMsg;
+          0     910     2 config   Lorg/thingsboard/rule/engine/grpc/TbGrpcApiCallNodeConfiguration;
+          5     905     3 externalSystemApi   Lorg/thingsboard/rule/engine/grpc/ExternalSystemApi;
+         11     899     4 baseUrl   Ljava/lang/String;
+         17     893     5 method   Ljava/lang/String;
+         23     887     6 readTimeout   Ljava/lang/Integer;
+         29     881     7 headerConfig   Ljava/util/List;
+         35     875     8 paramsConfig   Ljava/util/List;
+         43     867     9 paramsJson   Lcom/fasterxml/jackson/databind/node/ObjectNode;
+         79     831    10 headers   Lorg/springframework/http/HttpHeaders;
+        108     802    11 httpParams   Ljava/util/Map;
+        117     793    12 fullUrl   Ljava/lang/String;
+        143     767    13 nodeConfigurationsReplacedByHttpParams   Ljava/lang/String;
+        172     738    14 request   Lorg/springframework/http/HttpEntity;
+
+  public static org.thingsboard.server.common.msg.TbMsg processException(org.thingsboard.rule.engine.api.TbContext, org.thingsboard.server.common.msg.TbMsg, java.lang.Throwable);
+    Code:
+       0: aload_1
+       1: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+       4: astore_3
+       5: aload_3
+       6: ldc           #183                // String error
+       8: new           #184                // class java/lang/StringBuilder
+      11: dup
+      12: invokespecial #185                // Method java/lang/StringBuilder."<init>":()V
+      15: aload_2
+      16: invokevirtual #186                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      19: invokevirtual #187                // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+      22: ldc           #188                // String :
+      24: invokevirtual #189                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      27: aload_2
+      28: invokevirtual #190                // Method java/lang/Throwable.getMessage:()Ljava/lang/String;
+      31: invokevirtual #189                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      34: invokevirtual #191                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      37: invokevirtual #171                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+      40: aload_2
+      41: instanceof    #192                // class io/grpc/StatusRuntimeException
+      44: ifeq          193
+      47: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+      50: ldc           #193                // String deviceName [{}], ecsTaskId [{}], wcsTaskId [{}], process message failed [{}]
+      52: iconst_4
+      53: anewarray     #6                  // class java/lang/Object
+      56: dup
+      57: iconst_0
+      58: aload_1
+      59: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      62: invokevirtual #8                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getDeviceName:()Ljava/lang/String;
+      65: aastore
+      66: dup
+      67: iconst_1
+      68: aload_1
+      69: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      72: invokevirtual #9                  // Method org/thingsboard/server/common/msg/TbMsgMetaData.getEcsTaskId:()Ljava/lang/String;
+      75: aastore
+      76: dup
+      77: iconst_2
+      78: aload_1
+      79: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      82: invokevirtual #10                 // Method org/thingsboard/server/common/msg/TbMsgMetaData.getTaskId:()Ljava/lang/String;
+      85: aastore
+      86: dup
+      87: iconst_3
+      88: aload_2
+      89: checkcast     #192                // class io/grpc/StatusRuntimeException
+      92: invokevirtual #194                // Method io/grpc/StatusRuntimeException.getStatus:()Lio/grpc/Status;
+      95: aastore
+      96: invokeinterface #195,  3          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;[Ljava/lang/Object;)V
+     101: aload_2
+     102: checkcast     #192                // class io/grpc/StatusRuntimeException
+     105: astore        4
+     107: aload         4
+     109: invokevirtual #194                // Method io/grpc/StatusRuntimeException.getStatus:()Lio/grpc/Status;
+     112: ifnull        143
+     115: aload         4
+     117: invokevirtual #194                // Method io/grpc/StatusRuntimeException.getStatus:()Lio/grpc/Status;
+     120: invokevirtual #196                // Method io/grpc/Status.getCode:()Lio/grpc/Status$Code;
+     123: ifnull        143
+     126: aload_3
+     127: ldc           #197                // String statusCode
+     129: aload         4
+     131: invokevirtual #194                // Method io/grpc/StatusRuntimeException.getStatus:()Lio/grpc/Status;
+     134: invokevirtual #196                // Method io/grpc/Status.getCode:()Lio/grpc/Status$Code;
+     137: invokevirtual #198                // Method io/grpc/Status$Code.name:()Ljava/lang/String;
+     140: invokevirtual #171                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     143: aload         4
+     145: invokevirtual #194                // Method io/grpc/StatusRuntimeException.getStatus:()Lio/grpc/Status;
+     148: ifnull        179
+     151: aload         4
+     153: invokevirtual #194                // Method io/grpc/StatusRuntimeException.getStatus:()Lio/grpc/Status;
+     156: invokevirtual #199                // Method io/grpc/Status.getCause:()Ljava/lang/Throwable;
+     159: ifnull        179
+     162: aload_3
+     163: ldc           #200                // String statusReason
+     165: aload         4
+     167: invokevirtual #194                // Method io/grpc/StatusRuntimeException.getStatus:()Lio/grpc/Status;
+     170: invokevirtual #199                // Method io/grpc/Status.getCause:()Ljava/lang/Throwable;
+     173: invokevirtual #190                // Method java/lang/Throwable.getMessage:()Ljava/lang/String;
+     176: invokevirtual #171                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     179: aload_3
+     180: ldc           #183                // String error
+     182: aload         4
+     184: invokevirtual #194                // Method io/grpc/StatusRuntimeException.getStatus:()Lio/grpc/Status;
+     187: invokevirtual #201                // Method io/grpc/Status.getDescription:()Ljava/lang/String;
+     190: invokevirtual #171                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+     193: aload_0
+     194: aload_1
+     195: aload_1
+     196: invokevirtual #15                 // Method org/thingsboard/server/common/msg/TbMsg.getType:()Ljava/lang/String;
+     199: aload_1
+     200: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+     203: aload_3
+     204: aload_1
+     205: invokevirtual #68                 // Method org/thingsboard/server/common/msg/TbMsg.getData:()Ljava/lang/String;
+     208: invokeinterface #17,  6           // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.transformMsg:(Lorg/thingsboard/server/common/msg/TbMsg;Ljava/lang/String;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/msg/TbMsgMetaData;Ljava/lang/String;)Lorg/thingsboard/server/common/msg/TbMsg;
+     213: areturn
+    LineNumberTable:
+      line 417: 0
+      line 418: 5
+      line 419: 40
+      line 420: 47
+      line 421: 59
+      line 420: 96
+      line 422: 101
+      line 423: 107
+      line 424: 126
+      line 427: 143
+      line 428: 162
+      line 430: 179
+      line 432: 193
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+        107      86     4 statusRuntimeException   Lio/grpc/StatusRuntimeException;
+          0     214     0   ctx   Lorg/thingsboard/rule/engine/api/TbContext;
+          0     214     1 origMsg   Lorg/thingsboard/server/common/msg/TbMsg;
+          0     214     2     e   Ljava/lang/Throwable;
+          5     209     3 metaData   Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+
+  public static void logEvent(org.thingsboard.rule.engine.api.TbContext, org.thingsboard.server.common.msg.TbMsg, org.thingsboard.server.common.data.id.EntityId, org.thingsboard.server.common.data.audit.ActionType, org.thingsboard.server.common.data.audit.ActionStatus, java.lang.Object, java.lang.Object, java.lang.Throwable);
+    Code:
+       0: aload_0
+       1: invokeinterface #202,  1          // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.getAuditLogService:()Lorg/thingsboard/server/dao/audit/AuditLogService;
+       6: aload_1
+       7: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      10: ldc           #52                 // String ecsTaskId
+      12: invokevirtual #203                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getValue:(Ljava/lang/String;)Ljava/lang/String;
+      15: aload_1
+      16: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      19: ldc           #204                // String taskId
+      21: invokevirtual #203                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getValue:(Ljava/lang/String;)Ljava/lang/String;
+      24: aload_0
+      25: invokeinterface #205,  1          // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.getSelf:()Lorg/thingsboard/server/common/data/rule/RuleNode;
+      30: invokestatic  #206                // Method org/thingsboard/server/common/data/audit/AuditLogData.create:(Ljava/lang/String;Ljava/lang/String;Lorg/thingsboard/server/common/data/rule/RuleNode;)Lorg/thingsboard/server/common/data/audit/AuditLogData;
+      33: aload_2
+      34: aload_3
+      35: aload         4
+      37: aload         7
+      39: ifnull        54
+      42: new           #34                 // class java/lang/Exception
+      45: dup
+      46: aload         7
+      48: invokespecial #207                // Method java/lang/Exception."<init>":(Ljava/lang/Throwable;)V
+      51: goto          55
+      54: aconst_null
+      55: iconst_4
+      56: anewarray     #6                  // class java/lang/Object
+      59: dup
+      60: iconst_0
+      61: aload         5
+      63: aastore
+      64: dup
+      65: iconst_1
+      66: aload         6
+      68: aastore
+      69: dup
+      70: iconst_2
+      71: aload_0
+      72: aload_1
+      73: invokestatic  #208                // Method org/thingsboard/rule/engine/api/NodeRetryHandler.getRetryTimes:(Lorg/thingsboard/rule/engine/api/TbContext;Lorg/thingsboard/server/common/msg/TbMsg;)I
+      76: invokestatic  #107                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      79: aastore
+      80: dup
+      81: iconst_3
+      82: aload_1
+      83: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      86: ldc           #210                // String groupName
+      88: invokevirtual #203                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getValue:(Ljava/lang/String;)Ljava/lang/String;
+      91: aastore
+      92: invokeinterface #211,  7          // InterfaceMethod org/thingsboard/server/dao/audit/AuditLogService.logEntityAction:(Lorg/thingsboard/server/common/data/audit/AuditLogData;Lorg/thingsboard/server/common/data/id/EntityId;Lorg/thingsboard/server/common/data/audit/ActionType;Lorg/thingsboard/server/common/data/audit/ActionStatus;Ljava/lang/Exception;[Ljava/lang/Object;)Lcom/google/common/util/concurrent/ListenableFuture;
+      97: pop
+      98: return
+    LineNumberTable:
+      line 436: 0
+      line 437: 7
+      line 444: 73
+      line 445: 83
+      line 436: 92
+      line 446: 98
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      99     0   ctx   Lorg/thingsboard/rule/engine/api/TbContext;
+          0      99     1   msg   Lorg/thingsboard/server/common/msg/TbMsg;
+          0      99     2 entityId   Lorg/thingsboard/server/common/data/id/EntityId;
+          0      99     3 actionType   Lorg/thingsboard/server/common/data/audit/ActionType;
+          0      99     4 actionStatus   Lorg/thingsboard/server/common/data/audit/ActionStatus;
+          0      99     5 request   Ljava/lang/Object;
+          0      99     6 response   Ljava/lang/Object;
+          0      99     7     e   Ljava/lang/Throwable;
+
+  private static void lambda$callExternalSystem$8(org.thingsboard.server.common.msg.TbMsg, org.springframework.http.ResponseEntity, org.thingsboard.server.common.data.rule.JsonAttribute);
+    Code:
+       0: aload_2
+       1: invokevirtual #212                // Method org/thingsboard/server/common/data/rule/JsonAttribute.getExternalName:()Ljava/lang/String;
+       4: invokestatic  #213                // Method org/apache/commons/lang3/StringUtils.isNotBlank:(Ljava/lang/CharSequence;)Z
+       7: ifeq          46
+      10: aload_0
+      11: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      14: aload_2
+      15: invokevirtual #214                // Method org/thingsboard/server/common/data/rule/JsonAttribute.getName:()Ljava/lang/String;
+      18: getstatic     #82                 // Field org/thingsboard/common/util/GsonUtil.SIMPLE_GSON:Lcom/google/gson/Gson;
+      21: aload_1
+      22: invokevirtual #147                // Method org/springframework/http/ResponseEntity.getBody:()Ljava/lang/Object;
+      25: checkcast     #215                // class java/util/Map
+      28: aload_2
+      29: invokevirtual #212                // Method org/thingsboard/server/common/data/rule/JsonAttribute.getExternalName:()Ljava/lang/String;
+      32: invokeinterface #216,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      37: invokevirtual #83                 // Method com/google/gson/Gson.toJson:(Ljava/lang/Object;)Ljava/lang/String;
+      40: invokevirtual #171                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+      43: goto          79
+      46: aload_0
+      47: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      50: aload_2
+      51: invokevirtual #214                // Method org/thingsboard/server/common/data/rule/JsonAttribute.getName:()Ljava/lang/String;
+      54: getstatic     #82                 // Field org/thingsboard/common/util/GsonUtil.SIMPLE_GSON:Lcom/google/gson/Gson;
+      57: aload_1
+      58: invokevirtual #147                // Method org/springframework/http/ResponseEntity.getBody:()Ljava/lang/Object;
+      61: checkcast     #215                // class java/util/Map
+      64: aload_2
+      65: invokevirtual #214                // Method org/thingsboard/server/common/data/rule/JsonAttribute.getName:()Ljava/lang/String;
+      68: invokeinterface #216,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      73: invokevirtual #83                 // Method com/google/gson/Gson.toJson:(Ljava/lang/Object;)Ljava/lang/String;
+      76: invokevirtual #171                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+      79: return
+    LineNumberTable:
+      line 387: 0
+      line 388: 10
+      line 390: 46
+      line 392: 79
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      80     0   msg   Lorg/thingsboard/server/common/msg/TbMsg;
+          0      80     1 responseEntity   Lorg/springframework/http/ResponseEntity;
+          0      80     2 jsonAttribute   Lorg/thingsboard/server/common/data/rule/JsonAttribute;
+
+  private static boolean lambda$callExternalSystem$7(org.thingsboard.server.common.data.rule.JsonAttribute);
+    Code:
+       0: aload_0
+       1: invokevirtual #217                // Method org/thingsboard/server/common/data/rule/JsonAttribute.getValueType:()Lorg/thingsboard/server/common/data/rule/AttributeType;
+       4: ifnull        17
+       7: getstatic     #218                // Field org/thingsboard/server/common/data/rule/AttributeType.DYNAMIC:Lorg/thingsboard/server/common/data/rule/AttributeType;
+      10: aload_0
+      11: invokevirtual #217                // Method org/thingsboard/server/common/data/rule/JsonAttribute.getValueType:()Lorg/thingsboard/server/common/data/rule/AttributeType;
+      14: if_acmpne     21
+      17: iconst_1
+      18: goto          22
+      21: iconst_0
+      22: ireturn
+    LineNumberTable:
+      line 384: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      23     0 jsonAttribute   Lorg/thingsboard/server/common/data/rule/JsonAttribute;
+
+  private static void lambda$callExternalSystem$6(org.thingsboard.rule.engine.grpc.KeyValue);
+    Code:
+       0: return
+    LineNumberTable:
+      line 340: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0       1     0 param   Lorg/thingsboard/rule/engine/grpc/KeyValue;
+
+  private static void lambda$callbackInterfaceHttp$5(org.thingsboard.server.common.msg.TbMsg, org.thingsboard.rule.engine.api.CallbackEventResp, org.thingsboard.rule.engine.event.EventParameter);
+    Code:
+       0: aload_2
+       1: invokevirtual #219                // Method org/thingsboard/rule/engine/event/EventParameter.getName:()Ljava/lang/String;
+       4: ldc           #220                // String data
+       6: invokevirtual #221                // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+       9: ifeq          66
+      12: getstatic     #82                 // Field org/thingsboard/common/util/GsonUtil.SIMPLE_GSON:Lcom/google/gson/Gson;
+      15: aload_2
+      16: invokevirtual #222                // Method org/thingsboard/rule/engine/event/EventParameter.getValue:()Ljava/lang/String;
+      19: new           #223                // class org/thingsboard/rule/engine/grpc/NodeCallHttpHandler$2
+      22: dup
+      23: invokespecial #224                // Method org/thingsboard/rule/engine/grpc/NodeCallHttpHandler$2."<init>":()V
+      26: invokevirtual #225                // Method org/thingsboard/rule/engine/grpc/NodeCallHttpHandler$2.getType:()Ljava/lang/reflect/Type;
+      29: invokevirtual #133                // Method com/google/gson/Gson.fromJson:(Ljava/lang/String;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      32: checkcast     #215                // class java/util/Map
+      35: astore_3
+      36: aload_3
+      37: aload_0
+      38: aload_1
+      39: invokedynamic #226,  0            // InvokeDynamic #6:accept:(Lorg/thingsboard/server/common/msg/TbMsg;Lorg/thingsboard/rule/engine/api/CallbackEventResp;)Ljava/util/function/BiConsumer;
+      44: invokeinterface #227,  2          // InterfaceMethod java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+      49: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+      52: ldc           #228                // String query data: {}
+      54: aload_0
+      55: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      58: invokevirtual #119                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getData:()Ljava/util/Map;
+      61: invokeinterface #229,  3          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      66: return
+    LineNumberTable:
+      line 241: 0
+      line 243: 12
+      line 244: 36
+      line 247: 49
+      line 249: 66
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+         36      30     3 extAttrMap   Ljava/util/Map;
+          0      67     0   msg   Lorg/thingsboard/server/common/msg/TbMsg;
+          0      67     1 callbackResp   Lorg/thingsboard/rule/engine/api/CallbackEventResp;
+          0      67     2 param   Lorg/thingsboard/rule/engine/event/EventParameter;
+
+  private static void lambda$null$4(org.thingsboard.server.common.msg.TbMsg, org.thingsboard.rule.engine.api.CallbackEventResp, java.lang.String, java.lang.String);
+    Code:
+       0: aload_0
+       1: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+       4: aload_2
+       5: aload_3
+       6: aload_1
+       7: invokevirtual #86                 // Method org/thingsboard/rule/engine/api/CallbackEventResp.getData:()Ljava/util/Map;
+      10: invokestatic  #128                // Method org/thingsboard/common/util/DynamicParamUtil.replaceDynamicParamsByStringValueMap:(Ljava/lang/String;Ljava/util/Map;)Ljava/lang/String;
+      13: invokevirtual #171                // Method org/thingsboard/server/common/msg/TbMsgMetaData.putValue:(Ljava/lang/String;Ljava/lang/String;)V
+      16: return
+    LineNumberTable:
+      line 245: 0
+      line 246: 16
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      17     0   msg   Lorg/thingsboard/server/common/msg/TbMsg;
+          0      17     1 callbackResp   Lorg/thingsboard/rule/engine/api/CallbackEventResp;
+          0      17     2   key   Ljava/lang/String;
+          0      17     3 value   Ljava/lang/String;
+
+  private static void lambda$callbackInterfaceHttp$3(org.thingsboard.server.common.msg.TbMsg, org.thingsboard.rule.engine.api.TbContext, com.fasterxml.jackson.databind.node.ObjectNode, java.util.Map, org.thingsboard.rule.engine.event.EventParameter);
+    Code:
+       0: aload         4
+       2: invokevirtual #219                // Method org/thingsboard/rule/engine/event/EventParameter.getName:()Ljava/lang/String;
+       5: ldc           #230                // String extAttr
+       7: invokevirtual #221                // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+      10: ifeq          147
+      13: aload         4
+      15: invokevirtual #222                // Method org/thingsboard/rule/engine/event/EventParameter.getValue:()Ljava/lang/String;
+      18: invokestatic  #231                // Method org/thingsboard/common/util/GsonUtil.isJson:(Ljava/lang/String;)Z
+      21: ifeq          80
+      24: getstatic     #82                 // Field org/thingsboard/common/util/GsonUtil.SIMPLE_GSON:Lcom/google/gson/Gson;
+      27: aload         4
+      29: invokevirtual #222                // Method org/thingsboard/rule/engine/event/EventParameter.getValue:()Ljava/lang/String;
+      32: new           #232                // class org/thingsboard/rule/engine/grpc/NodeCallHttpHandler$1
+      35: dup
+      36: invokespecial #233                // Method org/thingsboard/rule/engine/grpc/NodeCallHttpHandler$1."<init>":()V
+      39: invokevirtual #234                // Method org/thingsboard/rule/engine/grpc/NodeCallHttpHandler$1.getType:()Ljava/lang/reflect/Type;
+      42: invokevirtual #133                // Method com/google/gson/Gson.fromJson:(Ljava/lang/String;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      45: checkcast     #215                // class java/util/Map
+      48: astore        5
+      50: aload         5
+      52: aload_0
+      53: aload         5
+      55: aload         4
+      57: aload_1
+      58: invokedynamic #235,  0            // InvokeDynamic #7:accept:(Lorg/thingsboard/server/common/msg/TbMsg;Ljava/util/Map;Lorg/thingsboard/rule/engine/event/EventParameter;Lorg/thingsboard/rule/engine/api/TbContext;)Ljava/util/function/BiConsumer;
+      63: invokeinterface #227,  2          // InterfaceMethod java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+      68: aload_2
+      69: ldc           #230                // String extAttr
+      71: aload         5
+      73: invokevirtual #236                // Method com/fasterxml/jackson/databind/node/ObjectNode.putPOJO:(Ljava/lang/String;Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/node/ObjectNode;
+      76: pop
+      77: goto          243
+      80: aload         4
+      82: invokevirtual #222                // Method org/thingsboard/rule/engine/event/EventParameter.getValue:()Ljava/lang/String;
+      85: aload_0
+      86: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      89: invokevirtual #119                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getData:()Ljava/util/Map;
+      92: invokestatic  #128                // Method org/thingsboard/common/util/DynamicParamUtil.replaceDynamicParamsByStringValueMap:(Ljava/lang/String;Ljava/util/Map;)Ljava/lang/String;
+      95: astore        5
+      97: aload         5
+      99: invokestatic  #231                // Method org/thingsboard/common/util/GsonUtil.isJson:(Ljava/lang/String;)Z
+     102: ifeq          132
+     105: getstatic     #82                 // Field org/thingsboard/common/util/GsonUtil.SIMPLE_GSON:Lcom/google/gson/Gson;
+     108: aload         5
+     110: ldc           #215                // class java/util/Map
+     112: invokevirtual #237                // Method com/google/gson/Gson.fromJson:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+     115: checkcast     #215                // class java/util/Map
+     118: astore        6
+     120: aload_2
+     121: ldc           #230                // String extAttr
+     123: aload         6
+     125: invokevirtual #236                // Method com/fasterxml/jackson/databind/node/ObjectNode.putPOJO:(Ljava/lang/String;Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/node/ObjectNode;
+     128: pop
+     129: goto          144
+     132: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+     135: ldc           #238                // String jsonString {} is not a json
+     137: aload         5
+     139: invokeinterface #239,  3          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;)V
+     144: goto          243
+     147: getstatic     #218                // Field org/thingsboard/server/common/data/rule/AttributeType.DYNAMIC:Lorg/thingsboard/server/common/data/rule/AttributeType;
+     150: aload         4
+     152: invokevirtual #240                // Method org/thingsboard/rule/engine/event/EventParameter.getType:()Lorg/thingsboard/server/common/data/rule/AttributeType;
+     155: if_acmpne     228
+     158: aload_3
+     159: ifnull        203
+     162: aload_3
+     163: aload         4
+     165: invokevirtual #219                // Method org/thingsboard/rule/engine/event/EventParameter.getName:()Ljava/lang/String;
+     168: invokeinterface #241,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     173: ifeq          203
+     176: aload_2
+     177: aload         4
+     179: invokevirtual #219                // Method org/thingsboard/rule/engine/event/EventParameter.getName:()Ljava/lang/String;
+     182: aload_3
+     183: aload         4
+     185: invokevirtual #219                // Method org/thingsboard/rule/engine/event/EventParameter.getName:()Ljava/lang/String;
+     188: invokeinterface #216,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     193: checkcast     #242                // class java/lang/String
+     196: invokevirtual #53                 // Method com/fasterxml/jackson/databind/node/ObjectNode.put:(Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/node/ObjectNode;
+     199: pop
+     200: goto          243
+     203: aload_2
+     204: aload         4
+     206: invokevirtual #219                // Method org/thingsboard/rule/engine/event/EventParameter.getName:()Ljava/lang/String;
+     209: aload_0
+     210: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+     213: aload         4
+     215: invokevirtual #219                // Method org/thingsboard/rule/engine/event/EventParameter.getName:()Ljava/lang/String;
+     218: invokevirtual #203                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getValue:(Ljava/lang/String;)Ljava/lang/String;
+     221: invokevirtual #53                 // Method com/fasterxml/jackson/databind/node/ObjectNode.put:(Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/node/ObjectNode;
+     224: pop
+     225: goto          243
+     228: aload_2
+     229: aload         4
+     231: invokevirtual #219                // Method org/thingsboard/rule/engine/event/EventParameter.getName:()Ljava/lang/String;
+     234: aload         4
+     236: invokevirtual #222                // Method org/thingsboard/rule/engine/event/EventParameter.getValue:()Ljava/lang/String;
+     239: invokevirtual #53                 // Method com/fasterxml/jackson/databind/node/ObjectNode.put:(Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/node/ObjectNode;
+     242: pop
+     243: return
+    LineNumberTable:
+      line 188: 0
+      line 190: 13
+      line 192: 24
+      line 193: 50
+      line 207: 68
+      line 208: 77
+      line 210: 80
+      line 211: 97
+      line 212: 105
+      line 213: 120
+      line 214: 129
+      line 215: 132
+      line 217: 144
+      line 219: 147
+      line 220: 158
+      line 221: 176
+      line 223: 203
+      line 226: 228
+      line 229: 243
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+         50      27     5 extAttrMap   Ljava/util/Map;
+        120       9     6 object   Ljava/util/Map;
+         97      47     5 jsonString   Ljava/lang/String;
+          0     244     0   msg   Lorg/thingsboard/server/common/msg/TbMsg;
+          0     244     1   ctx   Lorg/thingsboard/rule/engine/api/TbContext;
+          0     244     2 requestJsonObject   Lcom/fasterxml/jackson/databind/node/ObjectNode;
+          0     244     3 dynamicParamsDict   Ljava/util/Map;
+          0     244     4 param   Lorg/thingsboard/rule/engine/event/EventParameter;
+
+  private static void lambda$null$2(org.thingsboard.server.common.msg.TbMsg, java.util.Map, org.thingsboard.rule.engine.event.EventParameter, org.thingsboard.rule.engine.api.TbContext, java.lang.String, java.lang.String);
+    Code:
+       0: aload         5
+       2: ldc           #153                // String $
+       4: invokevirtual #243                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+       7: ifeq          136
+      10: aload_0
+      11: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      14: aload         4
+      16: invokevirtual #169                // Method org/thingsboard/server/common/msg/TbMsgMetaData.hasValue:(Ljava/lang/String;)Z
+      19: ifeq          45
+      22: aload_1
+      23: aload         4
+      25: aload_0
+      26: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      29: aload_2
+      30: invokevirtual #219                // Method org/thingsboard/rule/engine/event/EventParameter.getName:()Ljava/lang/String;
+      33: invokevirtual #203                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getValue:(Ljava/lang/String;)Ljava/lang/String;
+      36: invokeinterface #244,  3          // InterfaceMethod java/util/Map.replace:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      41: pop
+      42: goto          136
+      45: aload_3
+      46: invokeinterface #245,  1          // InterfaceMethod org/thingsboard/rule/engine/api/TbContext.getAttributesService:()Lorg/thingsboard/server/dao/attributes/AttributesService;
+      51: invokestatic  #246                // Method org/thingsboard/server/common/data/id/TenantId.defaultId:()Lorg/thingsboard/server/common/data/id/TenantId;
+      54: aload_0
+      55: invokevirtual #16                 // Method org/thingsboard/server/common/msg/TbMsg.getOriginator:()Lorg/thingsboard/server/common/data/id/EntityId;
+      58: ldc           #247                // String CLIENT_SCOPE
+      60: new           #184                // class java/lang/StringBuilder
+      63: dup
+      64: invokespecial #185                // Method java/lang/StringBuilder."<init>":()V
+      67: aload         5
+      69: invokestatic  #248                // Method org/thingsboard/common/util/FreemarkUtil.extractSingleVariable:(Ljava/lang/String;)Ljava/lang/String;
+      72: invokevirtual #189                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      75: aload_0
+      76: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      79: invokevirtual #249                // Method org/thingsboard/server/common/msg/TbMsgMetaData.groupIndex:()Ljava/lang/Integer;
+      82: invokevirtual #187                // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+      85: invokevirtual #191                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      88: invokeinterface #250,  5          // InterfaceMethod org/thingsboard/server/dao/attributes/AttributesService.find:(Lorg/thingsboard/server/common/data/id/TenantId;Lorg/thingsboard/server/common/data/id/EntityId;Ljava/lang/String;Ljava/lang/String;)Lcom/google/common/util/concurrent/ListenableFuture;
+      93: invokeinterface #251,  1          // InterfaceMethod com/google/common/util/concurrent/ListenableFuture.get:()Ljava/lang/Object;
+      98: checkcast     #252                // class java/util/Optional
+     101: astore        6
+     103: aload         6
+     105: aload_1
+     106: aload         4
+     108: invokedynamic #253,  0            // InvokeDynamic #8:accept:(Ljava/util/Map;Ljava/lang/String;)Ljava/util/function/Consumer;
+     113: invokevirtual #254                // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+     116: goto          136
+     119: astore        6
+     121: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+     124: ldc           #255                // String occurred exception:
+     126: aload         6
+     128: invokevirtual #256                // Method java/lang/Exception.getMessage:()Ljava/lang/String;
+     131: invokeinterface #239,  3          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;)V
+     136: return
+    Exception table:
+       from    to  target type
+          45   116   119   Class java/lang/Exception
+    LineNumberTable:
+      line 194: 0
+      line 195: 10
+      line 196: 22
+      line 199: 45
+      line 200: 103
+      line 203: 116
+      line 201: 119
+      line 202: 121
+      line 206: 136
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+        103      13     6 realtimeAttributeKvEntry   Ljava/util/Optional;
+        121      15     6     e   Ljava/lang/Exception;
+          0     137     0   msg   Lorg/thingsboard/server/common/msg/TbMsg;
+          0     137     1 extAttrMap   Ljava/util/Map;
+          0     137     2 param   Lorg/thingsboard/rule/engine/event/EventParameter;
+          0     137     3   ctx   Lorg/thingsboard/rule/engine/api/TbContext;
+          0     137     4   key   Ljava/lang/String;
+          0     137     5 value   Ljava/lang/String;
+
+  private static void lambda$null$1(java.util.Map, java.lang.String, org.thingsboard.server.common.data.kv.AttributeKvEntry);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokeinterface #257,  1          // InterfaceMethod org/thingsboard/server/common/data/kv/AttributeKvEntry.getValueAsString:()Ljava/lang/String;
+       8: invokeinterface #258,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      13: checkcast     #242                // class java/lang/String
+      16: pop
+      17: return
+    LineNumberTable:
+      line 200: 0
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+          0      18     0 extAttrMap   Ljava/util/Map;
+          0      18     1   key   Ljava/lang/String;
+          0      18     2 attributeKvEntry   Lorg/thingsboard/server/common/data/kv/AttributeKvEntry;
+
+  private static void lambda$triggerInterfaceHttp$0(org.thingsboard.server.common.msg.TbMsg, com.fasterxml.jackson.databind.node.ObjectNode, java.util.Map, org.thingsboard.rule.engine.event.EventParameter);
+    Code:
+       0: getstatic     #218                // Field org/thingsboard/server/common/data/rule/AttributeType.DYNAMIC:Lorg/thingsboard/server/common/data/rule/AttributeType;
+       3: aload_3
+       4: invokevirtual #240                // Method org/thingsboard/rule/engine/event/EventParameter.getType:()Lorg/thingsboard/server/common/data/rule/AttributeType;
+       7: if_acmpne     92
+      10: aload_3
+      11: invokevirtual #219                // Method org/thingsboard/rule/engine/event/EventParameter.getName:()Ljava/lang/String;
+      14: ldc_w         #259                // String externalDeviceId
+      17: invokevirtual #143                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      20: ifeq          55
+      23: aload_0
+      24: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      27: ldc           #210                // String groupName
+      29: invokevirtual #169                // Method org/thingsboard/server/common/msg/TbMsgMetaData.hasValue:(Ljava/lang/String;)Z
+      32: ifeq          55
+      35: aload_1
+      36: ldc_w         #259                // String externalDeviceId
+      39: aload_0
+      40: invokevirtual #7                  // Method org/thingsboard/server/common/msg/TbMsg.getMetaData:()Lorg/thingsboard/server/common/msg/TbMsgMetaData;
+      43: ldc           #210                // String groupName
+      45: invokevirtual #203                // Method org/thingsboard/server/common/msg/TbMsgMetaData.getValue:(Ljava/lang/String;)Ljava/lang/String;
+      48: invokevirtual #53                 // Method com/fasterxml/jackson/databind/node/ObjectNode.put:(Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/node/ObjectNode;
+      51: pop
+      52: goto          72
+      55: aload_1
+      56: aload_3
+      57: invokevirtual #219                // Method org/thingsboard/rule/engine/event/EventParameter.getName:()Ljava/lang/String;
+      60: aload_3
+      61: invokevirtual #222                // Method org/thingsboard/rule/engine/event/EventParameter.getValue:()Ljava/lang/String;
+      64: aload_2
+      65: invokestatic  #260                // Method org/thingsboard/common/util/PlaceholderUtil.replacePlaceholder:(Ljava/lang/String;Ljava/util/Map;)Ljava/lang/String;
+      68: invokevirtual #53                 // Method com/fasterxml/jackson/databind/node/ObjectNode.put:(Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/node/ObjectNode;
+      71: pop
+      72: goto          105
+      75: astore        4
+      77: getstatic     #4                  // Field log:Lorg/slf4j/Logger;
+      80: ldc           #170                // String
+      82: aload         4
+      84: invokeinterface #94,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+      89: goto          105
+      92: aload_1
+      93: aload_3
+      94: invokevirtual #219                // Method org/thingsboard/rule/engine/event/EventParameter.getName:()Ljava/lang/String;
+      97: aload_3
+      98: invokevirtual #222                // Method org/thingsboard/rule/engine/event/EventParameter.getValue:()Ljava/lang/String;
+     101: invokevirtual #53                 // Method com/fasterxml/jackson/databind/node/ObjectNode.put:(Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/node/ObjectNode;
+     104: pop
+     105: return
+    Exception table:
+       from    to  target type
+          10    72    75   Class java/lang/Exception
+    LineNumberTable:
+      line 132: 0
+      line 134: 10
+      line 135: 24
+      line 136: 35
+      line 138: 55
+      line 142: 72
+      line 140: 75
+      line 141: 77
+      line 142: 89
+      line 144: 92
+      line 146: 105
+    LocalVariableTable:
+      Start  Length  Slot  Name   Signature
+         77      12     4     e   Ljava/lang/Exception;
+          0     106     0   msg   Lorg/thingsboard/server/common/msg/TbMsg;
+          0     106     1 requestJsonObject   Lcom/fasterxml/jackson/databind/node/ObjectNode;
+          0     106     2 dynamicParamsDict   Ljava/util/Map;
+          0     106     3 param   Lorg/thingsboard/rule/engine/event/EventParameter;
+
+  static {};
+    Code:
+       0: ldc           #182                // class org/thingsboard/rule/engine/grpc/NodeCallHttpHandler
+       2: invokestatic  #261                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #4                  // Field log:Lorg/slf4j/Logger;
+       8: return
+    LineNumberTable:
+      line 55: 0
+}

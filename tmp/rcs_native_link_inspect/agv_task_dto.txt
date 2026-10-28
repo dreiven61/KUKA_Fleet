@@ -1,0 +1,2295 @@
+Classfile jar:file:///C:/work/KUKA/SW/KUKA.AMR_Fleet_2.15.1/STANDARD-API-2.15.5-jar-with-dependencies.jar!/com/kuka/interfaces/plugin/entity/AgvTaskDto.class
+  Last modified 2026. 7. 8.; size 12911 bytes
+  SHA-256 checksum 732cfcf8640feb256f6a3719b361d4fd81f3d4e738d87e9a95d8e5f46568b60e
+  Compiled from "AgvTaskDto.java"
+public class com.kuka.interfaces.plugin.entity.AgvTaskDto<T extends java.lang.Object> extends java.lang.Object
+  minor version: 0
+  major version: 52
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #21                         // com/kuka/interfaces/plugin/entity/AgvTaskDto
+  super_class: #65                        // java/lang/Object
+  interfaces: 0, fields: 17, methods: 39, attributes: 3
+Constant pool:
+    #1 = Methodref          #65.#277      // java/lang/Object."<init>":()V
+    #2 = Methodref          #278.#279     // java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+    #3 = Fieldref           #21.#280      // com/kuka/interfaces/plugin/entity/AgvTaskDto.priority:Ljava/lang/Integer;
+    #4 = Methodref          #281.#282     // java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+    #5 = Fieldref           #21.#283      // com/kuka/interfaces/plugin/entity/AgvTaskDto.lockRobotAfterFinish:Ljava/lang/Boolean;
+    #6 = Fieldref           #21.#284      // com/kuka/interfaces/plugin/entity/AgvTaskDto.orgId:Ljava/lang/String;
+    #7 = Fieldref           #21.#285      // com/kuka/interfaces/plugin/entity/AgvTaskDto.requestId:Ljava/lang/String;
+    #8 = Fieldref           #21.#286      // com/kuka/interfaces/plugin/entity/AgvTaskDto.missionCode:Ljava/lang/String;
+    #9 = Fieldref           #21.#287      // com/kuka/interfaces/plugin/entity/AgvTaskDto.missionType:Ljava/lang/String;
+   #10 = Fieldref           #21.#288      // com/kuka/interfaces/plugin/entity/AgvTaskDto.viewBoardType:Ljava/lang/String;
+   #11 = Fieldref           #21.#289      // com/kuka/interfaces/plugin/entity/AgvTaskDto.robotModels:Ljava/util/List;
+   #12 = Fieldref           #21.#290      // com/kuka/interfaces/plugin/entity/AgvTaskDto.robotIds:Ljava/util/List;
+   #13 = Fieldref           #21.#291      // com/kuka/interfaces/plugin/entity/AgvTaskDto.robotType:Ljava/lang/String;
+   #14 = Fieldref           #21.#292      // com/kuka/interfaces/plugin/entity/AgvTaskDto.containerModelCode:Ljava/lang/String;
+   #15 = Fieldref           #21.#293      // com/kuka/interfaces/plugin/entity/AgvTaskDto.containerCode:Ljava/lang/String;
+   #16 = Fieldref           #21.#294      // com/kuka/interfaces/plugin/entity/AgvTaskDto.templateCode:Ljava/lang/String;
+   #17 = Fieldref           #21.#295      // com/kuka/interfaces/plugin/entity/AgvTaskDto.unlockRobotId:Ljava/lang/String;
+   #18 = Fieldref           #21.#296      // com/kuka/interfaces/plugin/entity/AgvTaskDto.unlockMissionCode:Ljava/lang/String;
+   #19 = Fieldref           #21.#297      // com/kuka/interfaces/plugin/entity/AgvTaskDto.idleNode:Ljava/lang/String;
+   #20 = Fieldref           #21.#298      // com/kuka/interfaces/plugin/entity/AgvTaskDto.missionData:Ljava/util/List;
+   #21 = Class              #299          // com/kuka/interfaces/plugin/entity/AgvTaskDto
+   #22 = Methodref          #21.#300      // com/kuka/interfaces/plugin/entity/AgvTaskDto.canEqual:(Ljava/lang/Object;)Z
+   #23 = Methodref          #21.#301      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getOrgId:()Ljava/lang/String;
+   #24 = Methodref          #65.#302      // java/lang/Object.equals:(Ljava/lang/Object;)Z
+   #25 = Methodref          #21.#303      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getRequestId:()Ljava/lang/String;
+   #26 = Methodref          #21.#304      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getMissionCode:()Ljava/lang/String;
+   #27 = Methodref          #21.#305      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getMissionType:()Ljava/lang/String;
+   #28 = Methodref          #21.#306      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getViewBoardType:()Ljava/lang/String;
+   #29 = Methodref          #21.#307      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getRobotModels:()Ljava/util/List;
+   #30 = Methodref          #21.#308      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getRobotIds:()Ljava/util/List;
+   #31 = Methodref          #21.#309      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getRobotType:()Ljava/lang/String;
+   #32 = Methodref          #21.#310      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getPriority:()Ljava/lang/Integer;
+   #33 = Methodref          #21.#311      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getContainerModelCode:()Ljava/lang/String;
+   #34 = Methodref          #21.#312      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getContainerCode:()Ljava/lang/String;
+   #35 = Methodref          #21.#313      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getTemplateCode:()Ljava/lang/String;
+   #36 = Methodref          #21.#314      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getLockRobotAfterFinish:()Ljava/lang/Boolean;
+   #37 = Methodref          #21.#315      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getUnlockRobotId:()Ljava/lang/String;
+   #38 = Methodref          #21.#316      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getUnlockMissionCode:()Ljava/lang/String;
+   #39 = Methodref          #21.#317      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getIdleNode:()Ljava/lang/String;
+   #40 = Methodref          #21.#318      // com/kuka/interfaces/plugin/entity/AgvTaskDto.getMissionData:()Ljava/util/List;
+   #41 = Methodref          #65.#319      // java/lang/Object.hashCode:()I
+   #42 = Class              #320          // java/lang/StringBuilder
+   #43 = Methodref          #42.#277      // java/lang/StringBuilder."<init>":()V
+   #44 = String             #321          // AgvTaskDto(orgId=
+   #45 = Methodref          #42.#322      // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+   #46 = String             #323          // , requestId=
+   #47 = String             #324          // , missionCode=
+   #48 = String             #325          // , missionType=
+   #49 = String             #326          // , viewBoardType=
+   #50 = String             #327          // , robotModels=
+   #51 = Methodref          #42.#328      // java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+   #52 = String             #329          // , robotIds=
+   #53 = String             #330          // , robotType=
+   #54 = String             #331          // , priority=
+   #55 = String             #332          // , containerModelCode=
+   #56 = String             #333          // , containerCode=
+   #57 = String             #334          // , templateCode=
+   #58 = String             #335          // , lockRobotAfterFinish=
+   #59 = String             #336          // , unlockRobotId=
+   #60 = String             #337          // , unlockMissionCode=
+   #61 = String             #338          // , idleNode=
+   #62 = String             #339          // , missionData=
+   #63 = String             #340          // )
+   #64 = Methodref          #42.#341      // java/lang/StringBuilder.toString:()Ljava/lang/String;
+   #65 = Class              #342          // java/lang/Object
+   #66 = Utf8               orgId
+   #67 = Utf8               Ljava/lang/String;
+   #68 = Utf8               RuntimeVisibleAnnotations
+   #69 = Utf8               Lio/swagger/annotations/ApiModelProperty;
+   #70 = Utf8               value
+   #71 = Utf8               origin ID
+   #72 = Utf8               required
+   #73 = Integer            1
+   #74 = Utf8               Ljavax/validation/constraints/NotBlank;
+   #75 = Utf8               message
+   #76 = Utf8               orgId can not be blank
+   #77 = Utf8               RuntimeVisibleTypeAnnotations
+   #78 = Utf8               requestId
+   #79 = Utf8               task request ID
+   #80 = Utf8               position
+   #81 = Utf8               requestId can not be blank
+   #82 = Utf8               missionCode
+   #83 = Utf8               task code
+   #84 = Integer            2
+   #85 = Utf8               missionCode can not be blank
+   #86 = Utf8               missionType
+   #87 = Utf8               task type
+   #88 = Integer            3
+   #89 = Utf8               Ljavax/validation/constraints/Pattern;
+   #90 = Utf8               regexp
+   #91 = Utf8               RACK_MOVE|ROLLER_MOVE|PICKER_MOVE|FORKLIFT_MOVE|MOVE|ROBOTICS_MOVE|TUGGER_MOVE
+   #92 = Utf8               missionType can not be accept
+   #93 = Utf8               viewBoardType
+   #94 = Utf8               type shown in view board
+   #95 = Integer            4
+   #96 = Utf8               robotModels
+   #97 = Utf8               Ljava/util/List;
+   #98 = Utf8               Signature
+   #99 = Utf8               Ljava/util/List<Ljava/lang/String;>;
+  #100 = Utf8               robot models
+  #101 = Integer            5
+  #102 = Utf8               robotIds
+  #103 = Utf8               robot ids
+  #104 = Integer            6
+  #105 = Utf8               robotType
+  #106 = Utf8               robot type
+  #107 = Utf8               notes
+  #108 = Utf8               LIFT is default
+  #109 = Integer            7
+  #110 = Utf8               priority
+  #111 = Utf8               Ljava/lang/Integer;
+  #112 = Utf8               Priority (1-99)
+  #113 = Utf8               default is 1
+  #114 = Integer            8
+  #115 = Utf8               Lorg/hibernate/validator/constraints/Range;
+  #116 = Utf8               min
+  #117 = Long               1l
+  #119 = Utf8               max
+  #120 = Long               99l
+  #122 = Utf8               this priority can not be accept
+  #123 = Utf8               containerModelCode
+  #124 = Utf8               container model code
+  #125 = Integer            9
+  #126 = Utf8               containerCode
+  #127 = Utf8               container code, if it is empty, it will check if container on start node. If no, the mission will fail
+  #128 = Integer            10
+  #129 = Utf8               templateCode
+  #130 = Utf8               template code for execution
+  #131 = Integer            13
+  #132 = Utf8               lockRobotAfterFinish
+  #133 = Utf8               Ljava/lang/Boolean;
+  #134 = Utf8               lock robot after finish the workflow
+  #135 = Integer            14
+  #136 = Utf8               unlockRobotId
+  #137 = Utf8               robot should be unlocked.
+  #138 = Integer            15
+  #139 = Utf8               unlockMissionCode
+  #140 = Utf8               unlock by mission code
+  #141 = Integer            16
+  #142 = Utf8               idleNode
+  #143 = Utf8               the idle node/area for idle robot to par
+  #144 = Integer            17
+  #145 = Utf8               missionData
+  #146 = Utf8               Ljava/util/List<TT;>;
+  #147 = Utf8               mission data
+  #148 = Integer            18
+  #149 = Utf8               <init>
+  #150 = Utf8               ()V
+  #151 = Utf8               Code
+  #152 = Utf8               LineNumberTable
+  #153 = Utf8               LocalVariableTable
+  #154 = Utf8               this
+  #155 = Utf8               Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+  #156 = Utf8               LocalVariableTypeTable
+  #157 = Utf8               Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+  #158 = Utf8               getOrgId
+  #159 = Utf8               ()Ljava/lang/String;
+  #160 = Utf8               getRequestId
+  #161 = Utf8               getMissionCode
+  #162 = Utf8               getMissionType
+  #163 = Utf8               getViewBoardType
+  #164 = Utf8               getRobotModels
+  #165 = Utf8               ()Ljava/util/List;
+  #166 = Utf8               ()Ljava/util/List<Ljava/lang/String;>;
+  #167 = Utf8               getRobotIds
+  #168 = Utf8               getRobotType
+  #169 = Utf8               getPriority
+  #170 = Utf8               ()Ljava/lang/Integer;
+  #171 = Utf8               getContainerModelCode
+  #172 = Utf8               getContainerCode
+  #173 = Utf8               getTemplateCode
+  #174 = Utf8               getLockRobotAfterFinish
+  #175 = Utf8               ()Ljava/lang/Boolean;
+  #176 = Utf8               getUnlockRobotId
+  #177 = Utf8               getUnlockMissionCode
+  #178 = Utf8               getIdleNode
+  #179 = Utf8               getMissionData
+  #180 = Utf8               ()Ljava/util/List<TT;>;
+  #181 = Utf8               setOrgId
+  #182 = Utf8               (Ljava/lang/String;)V
+  #183 = Utf8               MethodParameters
+  #184 = Utf8               setRequestId
+  #185 = Utf8               setMissionCode
+  #186 = Utf8               setMissionType
+  #187 = Utf8               setViewBoardType
+  #188 = Utf8               setRobotModels
+  #189 = Utf8               (Ljava/util/List;)V
+  #190 = Utf8               (Ljava/util/List<Ljava/lang/String;>;)V
+  #191 = Utf8               setRobotIds
+  #192 = Utf8               setRobotType
+  #193 = Utf8               setPriority
+  #194 = Utf8               (Ljava/lang/Integer;)V
+  #195 = Utf8               setContainerModelCode
+  #196 = Utf8               setContainerCode
+  #197 = Utf8               setTemplateCode
+  #198 = Utf8               setLockRobotAfterFinish
+  #199 = Utf8               (Ljava/lang/Boolean;)V
+  #200 = Utf8               setUnlockRobotId
+  #201 = Utf8               setUnlockMissionCode
+  #202 = Utf8               setIdleNode
+  #203 = Utf8               setMissionData
+  #204 = Utf8               (Ljava/util/List<TT;>;)V
+  #205 = Utf8               equals
+  #206 = Utf8               (Ljava/lang/Object;)Z
+  #207 = Utf8               o
+  #208 = Utf8               Ljava/lang/Object;
+  #209 = Utf8               other
+  #210 = Utf8               this$orgId
+  #211 = Utf8               other$orgId
+  #212 = Utf8               this$requestId
+  #213 = Utf8               other$requestId
+  #214 = Utf8               this$missionCode
+  #215 = Utf8               other$missionCode
+  #216 = Utf8               this$missionType
+  #217 = Utf8               other$missionType
+  #218 = Utf8               this$viewBoardType
+  #219 = Utf8               other$viewBoardType
+  #220 = Utf8               this$robotModels
+  #221 = Utf8               other$robotModels
+  #222 = Utf8               this$robotIds
+  #223 = Utf8               other$robotIds
+  #224 = Utf8               this$robotType
+  #225 = Utf8               other$robotType
+  #226 = Utf8               this$priority
+  #227 = Utf8               other$priority
+  #228 = Utf8               this$containerModelCode
+  #229 = Utf8               other$containerModelCode
+  #230 = Utf8               this$containerCode
+  #231 = Utf8               other$containerCode
+  #232 = Utf8               this$templateCode
+  #233 = Utf8               other$templateCode
+  #234 = Utf8               this$lockRobotAfterFinish
+  #235 = Utf8               other$lockRobotAfterFinish
+  #236 = Utf8               this$unlockRobotId
+  #237 = Utf8               other$unlockRobotId
+  #238 = Utf8               this$unlockMissionCode
+  #239 = Utf8               other$unlockMissionCode
+  #240 = Utf8               this$idleNode
+  #241 = Utf8               other$idleNode
+  #242 = Utf8               this$missionData
+  #243 = Utf8               other$missionData
+  #244 = Utf8               Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<*>;
+  #245 = Utf8               StackMapTable
+  #246 = Class              #299          // com/kuka/interfaces/plugin/entity/AgvTaskDto
+  #247 = Class              #342          // java/lang/Object
+  #248 = Utf8               canEqual
+  #249 = Utf8               hashCode
+  #250 = Utf8               ()I
+  #251 = Utf8               PRIME
+  #252 = Utf8               I
+  #253 = Utf8               result
+  #254 = Utf8               $orgId
+  #255 = Utf8               $requestId
+  #256 = Utf8               $missionCode
+  #257 = Utf8               $missionType
+  #258 = Utf8               $viewBoardType
+  #259 = Utf8               $robotModels
+  #260 = Utf8               $robotIds
+  #261 = Utf8               $robotType
+  #262 = Utf8               $priority
+  #263 = Utf8               $containerModelCode
+  #264 = Utf8               $containerCode
+  #265 = Utf8               $templateCode
+  #266 = Utf8               $lockRobotAfterFinish
+  #267 = Utf8               $unlockRobotId
+  #268 = Utf8               $unlockMissionCode
+  #269 = Utf8               $idleNode
+  #270 = Utf8               $missionData
+  #271 = Utf8               toString
+  #272 = Utf8               <T:Ljava/lang/Object;>Ljava/lang/Object;
+  #273 = Utf8               SourceFile
+  #274 = Utf8               AgvTaskDto.java
+  #275 = Utf8               Lio/swagger/annotations/ApiModel;
+  #276 = Utf8               Task Instance Class
+  #277 = NameAndType        #149:#150     // "<init>":()V
+  #278 = Class              #343          // java/lang/Integer
+  #279 = NameAndType        #344:#345     // valueOf:(I)Ljava/lang/Integer;
+  #280 = NameAndType        #110:#111     // priority:Ljava/lang/Integer;
+  #281 = Class              #346          // java/lang/Boolean
+  #282 = NameAndType        #344:#347     // valueOf:(Z)Ljava/lang/Boolean;
+  #283 = NameAndType        #132:#133     // lockRobotAfterFinish:Ljava/lang/Boolean;
+  #284 = NameAndType        #66:#67       // orgId:Ljava/lang/String;
+  #285 = NameAndType        #78:#67       // requestId:Ljava/lang/String;
+  #286 = NameAndType        #82:#67       // missionCode:Ljava/lang/String;
+  #287 = NameAndType        #86:#67       // missionType:Ljava/lang/String;
+  #288 = NameAndType        #93:#67       // viewBoardType:Ljava/lang/String;
+  #289 = NameAndType        #96:#97       // robotModels:Ljava/util/List;
+  #290 = NameAndType        #102:#97      // robotIds:Ljava/util/List;
+  #291 = NameAndType        #105:#67      // robotType:Ljava/lang/String;
+  #292 = NameAndType        #123:#67      // containerModelCode:Ljava/lang/String;
+  #293 = NameAndType        #126:#67      // containerCode:Ljava/lang/String;
+  #294 = NameAndType        #129:#67      // templateCode:Ljava/lang/String;
+  #295 = NameAndType        #136:#67      // unlockRobotId:Ljava/lang/String;
+  #296 = NameAndType        #139:#67      // unlockMissionCode:Ljava/lang/String;
+  #297 = NameAndType        #142:#67      // idleNode:Ljava/lang/String;
+  #298 = NameAndType        #145:#97      // missionData:Ljava/util/List;
+  #299 = Utf8               com/kuka/interfaces/plugin/entity/AgvTaskDto
+  #300 = NameAndType        #248:#206     // canEqual:(Ljava/lang/Object;)Z
+  #301 = NameAndType        #158:#159     // getOrgId:()Ljava/lang/String;
+  #302 = NameAndType        #205:#206     // equals:(Ljava/lang/Object;)Z
+  #303 = NameAndType        #160:#159     // getRequestId:()Ljava/lang/String;
+  #304 = NameAndType        #161:#159     // getMissionCode:()Ljava/lang/String;
+  #305 = NameAndType        #162:#159     // getMissionType:()Ljava/lang/String;
+  #306 = NameAndType        #163:#159     // getViewBoardType:()Ljava/lang/String;
+  #307 = NameAndType        #164:#165     // getRobotModels:()Ljava/util/List;
+  #308 = NameAndType        #167:#165     // getRobotIds:()Ljava/util/List;
+  #309 = NameAndType        #168:#159     // getRobotType:()Ljava/lang/String;
+  #310 = NameAndType        #169:#170     // getPriority:()Ljava/lang/Integer;
+  #311 = NameAndType        #171:#159     // getContainerModelCode:()Ljava/lang/String;
+  #312 = NameAndType        #172:#159     // getContainerCode:()Ljava/lang/String;
+  #313 = NameAndType        #173:#159     // getTemplateCode:()Ljava/lang/String;
+  #314 = NameAndType        #174:#175     // getLockRobotAfterFinish:()Ljava/lang/Boolean;
+  #315 = NameAndType        #176:#159     // getUnlockRobotId:()Ljava/lang/String;
+  #316 = NameAndType        #177:#159     // getUnlockMissionCode:()Ljava/lang/String;
+  #317 = NameAndType        #178:#159     // getIdleNode:()Ljava/lang/String;
+  #318 = NameAndType        #179:#165     // getMissionData:()Ljava/util/List;
+  #319 = NameAndType        #249:#250     // hashCode:()I
+  #320 = Utf8               java/lang/StringBuilder
+  #321 = Utf8               AgvTaskDto(orgId=
+  #322 = NameAndType        #348:#349     // append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #323 = Utf8               , requestId=
+  #324 = Utf8               , missionCode=
+  #325 = Utf8               , missionType=
+  #326 = Utf8               , viewBoardType=
+  #327 = Utf8               , robotModels=
+  #328 = NameAndType        #348:#350     // append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+  #329 = Utf8               , robotIds=
+  #330 = Utf8               , robotType=
+  #331 = Utf8               , priority=
+  #332 = Utf8               , containerModelCode=
+  #333 = Utf8               , containerCode=
+  #334 = Utf8               , templateCode=
+  #335 = Utf8               , lockRobotAfterFinish=
+  #336 = Utf8               , unlockRobotId=
+  #337 = Utf8               , unlockMissionCode=
+  #338 = Utf8               , idleNode=
+  #339 = Utf8               , missionData=
+  #340 = Utf8               )
+  #341 = NameAndType        #271:#159     // toString:()Ljava/lang/String;
+  #342 = Utf8               java/lang/Object
+  #343 = Utf8               java/lang/Integer
+  #344 = Utf8               valueOf
+  #345 = Utf8               (I)Ljava/lang/Integer;
+  #346 = Utf8               java/lang/Boolean
+  #347 = Utf8               (Z)Ljava/lang/Boolean;
+  #348 = Utf8               append
+  #349 = Utf8               (Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #350 = Utf8               (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+{
+  private java.lang.String orgId;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#71,#72=Z#73)
+        io.swagger.annotations.ApiModelProperty(
+          value="origin ID"
+          required=true
+        )
+      1: #74(#75=s#76)
+        javax.validation.constraints.NotBlank(
+          message="orgId can not be blank"
+        )
+    RuntimeVisibleTypeAnnotations:
+      0: #74(#75=s#76): FIELD
+        javax.validation.constraints.NotBlank(
+          message="orgId can not be blank"
+        )
+
+  private java.lang.String requestId;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#79,#72=Z#73,#80=I#73)
+        io.swagger.annotations.ApiModelProperty(
+          value="task request ID"
+          required=true
+          position=1
+        )
+      1: #74(#75=s#81)
+        javax.validation.constraints.NotBlank(
+          message="requestId can not be blank"
+        )
+    RuntimeVisibleTypeAnnotations:
+      0: #74(#75=s#81): FIELD
+        javax.validation.constraints.NotBlank(
+          message="requestId can not be blank"
+        )
+
+  private java.lang.String missionCode;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#83,#72=Z#73,#80=I#84)
+        io.swagger.annotations.ApiModelProperty(
+          value="task code"
+          required=true
+          position=2
+        )
+      1: #74(#75=s#85)
+        javax.validation.constraints.NotBlank(
+          message="missionCode can not be blank"
+        )
+    RuntimeVisibleTypeAnnotations:
+      0: #74(#75=s#85): FIELD
+        javax.validation.constraints.NotBlank(
+          message="missionCode can not be blank"
+        )
+
+  private java.lang.String missionType;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#87,#72=Z#73,#80=I#88)
+        io.swagger.annotations.ApiModelProperty(
+          value="task type"
+          required=true
+          position=3
+        )
+      1: #89(#90=s#91,#75=s#92)
+        javax.validation.constraints.Pattern(
+          regexp="RACK_MOVE|ROLLER_MOVE|PICKER_MOVE|FORKLIFT_MOVE|MOVE|ROBOTICS_MOVE|TUGGER_MOVE"
+          message="missionType can not be accept"
+        )
+    RuntimeVisibleTypeAnnotations:
+      0: #89(#90=s#91,#75=s#92): FIELD
+        javax.validation.constraints.Pattern(
+          regexp="RACK_MOVE|ROLLER_MOVE|PICKER_MOVE|FORKLIFT_MOVE|MOVE|ROBOTICS_MOVE|TUGGER_MOVE"
+          message="missionType can not be accept"
+        )
+
+  private java.lang.String viewBoardType;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#94,#80=I#95)
+        io.swagger.annotations.ApiModelProperty(
+          value="type shown in view board"
+          position=4
+        )
+
+  private java.util.List<java.lang.String> robotModels;
+    descriptor: Ljava/util/List;
+    flags: (0x0002) ACC_PRIVATE
+    Signature: #99                          // Ljava/util/List<Ljava/lang/String;>;
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#100,#80=I#101)
+        io.swagger.annotations.ApiModelProperty(
+          value="robot models"
+          position=5
+        )
+
+  private java.util.List<java.lang.String> robotIds;
+    descriptor: Ljava/util/List;
+    flags: (0x0002) ACC_PRIVATE
+    Signature: #99                          // Ljava/util/List<Ljava/lang/String;>;
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#103,#80=I#104)
+        io.swagger.annotations.ApiModelProperty(
+          value="robot ids"
+          position=6
+        )
+
+  private java.lang.String robotType;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#106,#107=s#108,#80=I#109)
+        io.swagger.annotations.ApiModelProperty(
+          value="robot type"
+          notes="LIFT is default"
+          position=7
+        )
+
+  private java.lang.Integer priority;
+    descriptor: Ljava/lang/Integer;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#112,#107=s#113,#80=I#114)
+        io.swagger.annotations.ApiModelProperty(
+          value="Priority (1-99)"
+          notes="default is 1"
+          position=8
+        )
+      1: #115(#116=J#117,#119=J#120,#75=s#122)
+        org.hibernate.validator.constraints.Range(
+          min=1l
+          max=99l
+          message="this priority can not be accept"
+        )
+    RuntimeVisibleTypeAnnotations:
+      0: #115(#116=J#117,#119=J#120,#75=s#122): FIELD
+        org.hibernate.validator.constraints.Range(
+          min=1l
+          max=99l
+          message="this priority can not be accept"
+        )
+
+  private java.lang.String containerModelCode;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#124,#80=I#125)
+        io.swagger.annotations.ApiModelProperty(
+          value="container model code"
+          position=9
+        )
+
+  private java.lang.String containerCode;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#127,#80=I#128)
+        io.swagger.annotations.ApiModelProperty(
+          value="container code, if it is empty, it will check if container on start node. If no, the mission will fail"
+          position=10
+        )
+
+  private java.lang.String templateCode;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#130,#80=I#131)
+        io.swagger.annotations.ApiModelProperty(
+          value="template code for execution"
+          position=13
+        )
+
+  private java.lang.Boolean lockRobotAfterFinish;
+    descriptor: Ljava/lang/Boolean;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#134,#80=I#135)
+        io.swagger.annotations.ApiModelProperty(
+          value="lock robot after finish the workflow"
+          position=14
+        )
+
+  private java.lang.String unlockRobotId;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#137,#80=I#138)
+        io.swagger.annotations.ApiModelProperty(
+          value="robot should be unlocked."
+          position=15
+        )
+
+  private java.lang.String unlockMissionCode;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#140,#80=I#141)
+        io.swagger.annotations.ApiModelProperty(
+          value="unlock by mission code"
+          position=16
+        )
+
+  private java.lang.String idleNode;
+    descriptor: Ljava/lang/String;
+    flags: (0x0002) ACC_PRIVATE
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#143,#80=I#144)
+        io.swagger.annotations.ApiModelProperty(
+          value="the idle node/area for idle robot to par"
+          position=17
+        )
+
+  private java.util.List<T> missionData;
+    descriptor: Ljava/util/List;
+    flags: (0x0002) ACC_PRIVATE
+    Signature: #146                         // Ljava/util/List<TT;>;
+    RuntimeVisibleAnnotations:
+      0: #69(#70=s#147,#80=I#148)
+        io.swagger.annotations.ApiModelProperty(
+          value="mission data"
+          position=18
+        )
+
+  public com.kuka.interfaces.plugin.entity.AgvTaskDto();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: iconst_1
+         6: invokestatic  #2                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+         9: putfield      #3                  // Field priority:Ljava/lang/Integer;
+        12: aload_0
+        13: iconst_0
+        14: invokestatic  #4                  // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+        17: putfield      #5                  // Field lockRobotAfterFinish:Ljava/lang/Boolean;
+        20: return
+      LineNumberTable:
+        line 18: 0
+        line 52: 4
+        line 54: 6
+        line 65: 12
+        line 66: 14
+        line 65: 20
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      21     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0      21     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+
+  public java.lang.String getOrgId();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #6                  // Field orgId:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 25: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+
+  public java.lang.String getRequestId();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #7                  // Field requestId:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 29: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+
+  public java.lang.String getMissionCode();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #8                  // Field missionCode:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 33: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+
+  public java.lang.String getMissionType();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #9                  // Field missionType:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 37: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+
+  public java.lang.String getViewBoardType();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #10                 // Field viewBoardType:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 42: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+
+  public java.util.List<java.lang.String> getRobotModels();
+    descriptor: ()Ljava/util/List;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #11                 // Field robotModels:Ljava/util/List;
+         4: areturn
+      LineNumberTable:
+        line 45: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    Signature: #166                         // ()Ljava/util/List<Ljava/lang/String;>;
+
+  public java.util.List<java.lang.String> getRobotIds();
+    descriptor: ()Ljava/util/List;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #12                 // Field robotIds:Ljava/util/List;
+         4: areturn
+      LineNumberTable:
+        line 47: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    Signature: #166                         // ()Ljava/util/List<Ljava/lang/String;>;
+
+  public java.lang.String getRobotType();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #13                 // Field robotType:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 50: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+
+  public java.lang.Integer getPriority();
+    descriptor: ()Ljava/lang/Integer;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #3                  // Field priority:Ljava/lang/Integer;
+         4: areturn
+      LineNumberTable:
+        line 54: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+
+  public java.lang.String getContainerModelCode();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #14                 // Field containerModelCode:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 56: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+
+  public java.lang.String getContainerCode();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #15                 // Field containerCode:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 58: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+
+  public java.lang.String getTemplateCode();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #16                 // Field templateCode:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 64: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+
+  public java.lang.Boolean getLockRobotAfterFinish();
+    descriptor: ()Ljava/lang/Boolean;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #5                  // Field lockRobotAfterFinish:Ljava/lang/Boolean;
+         4: areturn
+      LineNumberTable:
+        line 66: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+
+  public java.lang.String getUnlockRobotId();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #17                 // Field unlockRobotId:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 68: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+
+  public java.lang.String getUnlockMissionCode();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #18                 // Field unlockMissionCode:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 70: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+
+  public java.lang.String getIdleNode();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #19                 // Field idleNode:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 72: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+
+  public java.util.List<T> getMissionData();
+    descriptor: ()Ljava/util/List;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #20                 // Field missionData:Ljava/util/List;
+         4: areturn
+      LineNumberTable:
+        line 74: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    Signature: #180                         // ()Ljava/util/List<TT;>;
+
+  public void setOrgId(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #6                  // Field orgId:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 orgId   Ljava/lang/String;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    MethodParameters:
+      Name                           Flags
+      orgId                          final
+
+  public void setRequestId(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #7                  // Field requestId:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 requestId   Ljava/lang/String;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    MethodParameters:
+      Name                           Flags
+      requestId                      final
+
+  public void setMissionCode(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #8                  // Field missionCode:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 missionCode   Ljava/lang/String;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    MethodParameters:
+      Name                           Flags
+      missionCode                    final
+
+  public void setMissionType(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #9                  // Field missionType:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 missionType   Ljava/lang/String;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    MethodParameters:
+      Name                           Flags
+      missionType                    final
+
+  public void setViewBoardType(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #10                 // Field viewBoardType:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 viewBoardType   Ljava/lang/String;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    MethodParameters:
+      Name                           Flags
+      viewBoardType                  final
+
+  public void setRobotModels(java.util.List<java.lang.String>);
+    descriptor: (Ljava/util/List;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #11                 // Field robotModels:Ljava/util/List;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 robotModels   Ljava/util/List;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+            0       6     1 robotModels   Ljava/util/List<Ljava/lang/String;>;
+    MethodParameters:
+      Name                           Flags
+      robotModels                    final
+    Signature: #190                         // (Ljava/util/List<Ljava/lang/String;>;)V
+
+  public void setRobotIds(java.util.List<java.lang.String>);
+    descriptor: (Ljava/util/List;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #12                 // Field robotIds:Ljava/util/List;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 robotIds   Ljava/util/List;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+            0       6     1 robotIds   Ljava/util/List<Ljava/lang/String;>;
+    MethodParameters:
+      Name                           Flags
+      robotIds                       final
+    Signature: #190                         // (Ljava/util/List<Ljava/lang/String;>;)V
+
+  public void setRobotType(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #13                 // Field robotType:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 robotType   Ljava/lang/String;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    MethodParameters:
+      Name                           Flags
+      robotType                      final
+
+  public void setPriority(java.lang.Integer);
+    descriptor: (Ljava/lang/Integer;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #3                  // Field priority:Ljava/lang/Integer;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 priority   Ljava/lang/Integer;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    MethodParameters:
+      Name                           Flags
+      priority                       final
+
+  public void setContainerModelCode(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #14                 // Field containerModelCode:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 containerModelCode   Ljava/lang/String;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    MethodParameters:
+      Name                           Flags
+      containerModelCode             final
+
+  public void setContainerCode(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #15                 // Field containerCode:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 containerCode   Ljava/lang/String;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    MethodParameters:
+      Name                           Flags
+      containerCode                  final
+
+  public void setTemplateCode(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #16                 // Field templateCode:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 templateCode   Ljava/lang/String;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    MethodParameters:
+      Name                           Flags
+      templateCode                   final
+
+  public void setLockRobotAfterFinish(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #5                  // Field lockRobotAfterFinish:Ljava/lang/Boolean;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 lockRobotAfterFinish   Ljava/lang/Boolean;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    MethodParameters:
+      Name                           Flags
+      lockRobotAfterFinish           final
+
+  public void setUnlockRobotId(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #17                 // Field unlockRobotId:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 unlockRobotId   Ljava/lang/String;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    MethodParameters:
+      Name                           Flags
+      unlockRobotId                  final
+
+  public void setUnlockMissionCode(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #18                 // Field unlockMissionCode:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 unlockMissionCode   Ljava/lang/String;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    MethodParameters:
+      Name                           Flags
+      unlockMissionCode              final
+
+  public void setIdleNode(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #19                 // Field idleNode:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 idleNode   Ljava/lang/String;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    MethodParameters:
+      Name                           Flags
+      idleNode                       final
+
+  public void setMissionData(java.util.List<T>);
+    descriptor: (Ljava/util/List;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #20                 // Field missionData:Ljava/util/List;
+         5: return
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       6     1 missionData   Ljava/util/List;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+            0       6     1 missionData   Ljava/util/List<TT;>;
+    MethodParameters:
+      Name                           Flags
+      missionData                    final
+    Signature: #204                         // (Ljava/util/List<TT;>;)V
+
+  public boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=37, args_size=2
+         0: aload_1
+         1: aload_0
+         2: if_acmpne     7
+         5: iconst_1
+         6: ireturn
+         7: aload_1
+         8: instanceof    #21                 // class com/kuka/interfaces/plugin/entity/AgvTaskDto
+        11: ifne          16
+        14: iconst_0
+        15: ireturn
+        16: aload_1
+        17: checkcast     #21                 // class com/kuka/interfaces/plugin/entity/AgvTaskDto
+        20: astore_2
+        21: aload_2
+        22: aload_0
+        23: invokevirtual #22                 // Method canEqual:(Ljava/lang/Object;)Z
+        26: ifne          31
+        29: iconst_0
+        30: ireturn
+        31: aload_0
+        32: invokevirtual #23                 // Method getOrgId:()Ljava/lang/String;
+        35: astore_3
+        36: aload_2
+        37: invokevirtual #23                 // Method getOrgId:()Ljava/lang/String;
+        40: astore        4
+        42: aload_3
+        43: ifnonnull     54
+        46: aload         4
+        48: ifnull        65
+        51: goto          63
+        54: aload_3
+        55: aload         4
+        57: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+        60: ifne          65
+        63: iconst_0
+        64: ireturn
+        65: aload_0
+        66: invokevirtual #25                 // Method getRequestId:()Ljava/lang/String;
+        69: astore        5
+        71: aload_2
+        72: invokevirtual #25                 // Method getRequestId:()Ljava/lang/String;
+        75: astore        6
+        77: aload         5
+        79: ifnonnull     90
+        82: aload         6
+        84: ifnull        102
+        87: goto          100
+        90: aload         5
+        92: aload         6
+        94: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+        97: ifne          102
+       100: iconst_0
+       101: ireturn
+       102: aload_0
+       103: invokevirtual #26                 // Method getMissionCode:()Ljava/lang/String;
+       106: astore        7
+       108: aload_2
+       109: invokevirtual #26                 // Method getMissionCode:()Ljava/lang/String;
+       112: astore        8
+       114: aload         7
+       116: ifnonnull     127
+       119: aload         8
+       121: ifnull        139
+       124: goto          137
+       127: aload         7
+       129: aload         8
+       131: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       134: ifne          139
+       137: iconst_0
+       138: ireturn
+       139: aload_0
+       140: invokevirtual #27                 // Method getMissionType:()Ljava/lang/String;
+       143: astore        9
+       145: aload_2
+       146: invokevirtual #27                 // Method getMissionType:()Ljava/lang/String;
+       149: astore        10
+       151: aload         9
+       153: ifnonnull     164
+       156: aload         10
+       158: ifnull        176
+       161: goto          174
+       164: aload         9
+       166: aload         10
+       168: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       171: ifne          176
+       174: iconst_0
+       175: ireturn
+       176: aload_0
+       177: invokevirtual #28                 // Method getViewBoardType:()Ljava/lang/String;
+       180: astore        11
+       182: aload_2
+       183: invokevirtual #28                 // Method getViewBoardType:()Ljava/lang/String;
+       186: astore        12
+       188: aload         11
+       190: ifnonnull     201
+       193: aload         12
+       195: ifnull        213
+       198: goto          211
+       201: aload         11
+       203: aload         12
+       205: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       208: ifne          213
+       211: iconst_0
+       212: ireturn
+       213: aload_0
+       214: invokevirtual #29                 // Method getRobotModels:()Ljava/util/List;
+       217: astore        13
+       219: aload_2
+       220: invokevirtual #29                 // Method getRobotModels:()Ljava/util/List;
+       223: astore        14
+       225: aload         13
+       227: ifnonnull     238
+       230: aload         14
+       232: ifnull        250
+       235: goto          248
+       238: aload         13
+       240: aload         14
+       242: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       245: ifne          250
+       248: iconst_0
+       249: ireturn
+       250: aload_0
+       251: invokevirtual #30                 // Method getRobotIds:()Ljava/util/List;
+       254: astore        15
+       256: aload_2
+       257: invokevirtual #30                 // Method getRobotIds:()Ljava/util/List;
+       260: astore        16
+       262: aload         15
+       264: ifnonnull     275
+       267: aload         16
+       269: ifnull        287
+       272: goto          285
+       275: aload         15
+       277: aload         16
+       279: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       282: ifne          287
+       285: iconst_0
+       286: ireturn
+       287: aload_0
+       288: invokevirtual #31                 // Method getRobotType:()Ljava/lang/String;
+       291: astore        17
+       293: aload_2
+       294: invokevirtual #31                 // Method getRobotType:()Ljava/lang/String;
+       297: astore        18
+       299: aload         17
+       301: ifnonnull     312
+       304: aload         18
+       306: ifnull        324
+       309: goto          322
+       312: aload         17
+       314: aload         18
+       316: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       319: ifne          324
+       322: iconst_0
+       323: ireturn
+       324: aload_0
+       325: invokevirtual #32                 // Method getPriority:()Ljava/lang/Integer;
+       328: astore        19
+       330: aload_2
+       331: invokevirtual #32                 // Method getPriority:()Ljava/lang/Integer;
+       334: astore        20
+       336: aload         19
+       338: ifnonnull     349
+       341: aload         20
+       343: ifnull        361
+       346: goto          359
+       349: aload         19
+       351: aload         20
+       353: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       356: ifne          361
+       359: iconst_0
+       360: ireturn
+       361: aload_0
+       362: invokevirtual #33                 // Method getContainerModelCode:()Ljava/lang/String;
+       365: astore        21
+       367: aload_2
+       368: invokevirtual #33                 // Method getContainerModelCode:()Ljava/lang/String;
+       371: astore        22
+       373: aload         21
+       375: ifnonnull     386
+       378: aload         22
+       380: ifnull        398
+       383: goto          396
+       386: aload         21
+       388: aload         22
+       390: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       393: ifne          398
+       396: iconst_0
+       397: ireturn
+       398: aload_0
+       399: invokevirtual #34                 // Method getContainerCode:()Ljava/lang/String;
+       402: astore        23
+       404: aload_2
+       405: invokevirtual #34                 // Method getContainerCode:()Ljava/lang/String;
+       408: astore        24
+       410: aload         23
+       412: ifnonnull     423
+       415: aload         24
+       417: ifnull        435
+       420: goto          433
+       423: aload         23
+       425: aload         24
+       427: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       430: ifne          435
+       433: iconst_0
+       434: ireturn
+       435: aload_0
+       436: invokevirtual #35                 // Method getTemplateCode:()Ljava/lang/String;
+       439: astore        25
+       441: aload_2
+       442: invokevirtual #35                 // Method getTemplateCode:()Ljava/lang/String;
+       445: astore        26
+       447: aload         25
+       449: ifnonnull     460
+       452: aload         26
+       454: ifnull        472
+       457: goto          470
+       460: aload         25
+       462: aload         26
+       464: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       467: ifne          472
+       470: iconst_0
+       471: ireturn
+       472: aload_0
+       473: invokevirtual #36                 // Method getLockRobotAfterFinish:()Ljava/lang/Boolean;
+       476: astore        27
+       478: aload_2
+       479: invokevirtual #36                 // Method getLockRobotAfterFinish:()Ljava/lang/Boolean;
+       482: astore        28
+       484: aload         27
+       486: ifnonnull     497
+       489: aload         28
+       491: ifnull        509
+       494: goto          507
+       497: aload         27
+       499: aload         28
+       501: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       504: ifne          509
+       507: iconst_0
+       508: ireturn
+       509: aload_0
+       510: invokevirtual #37                 // Method getUnlockRobotId:()Ljava/lang/String;
+       513: astore        29
+       515: aload_2
+       516: invokevirtual #37                 // Method getUnlockRobotId:()Ljava/lang/String;
+       519: astore        30
+       521: aload         29
+       523: ifnonnull     534
+       526: aload         30
+       528: ifnull        546
+       531: goto          544
+       534: aload         29
+       536: aload         30
+       538: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       541: ifne          546
+       544: iconst_0
+       545: ireturn
+       546: aload_0
+       547: invokevirtual #38                 // Method getUnlockMissionCode:()Ljava/lang/String;
+       550: astore        31
+       552: aload_2
+       553: invokevirtual #38                 // Method getUnlockMissionCode:()Ljava/lang/String;
+       556: astore        32
+       558: aload         31
+       560: ifnonnull     571
+       563: aload         32
+       565: ifnull        583
+       568: goto          581
+       571: aload         31
+       573: aload         32
+       575: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       578: ifne          583
+       581: iconst_0
+       582: ireturn
+       583: aload_0
+       584: invokevirtual #39                 // Method getIdleNode:()Ljava/lang/String;
+       587: astore        33
+       589: aload_2
+       590: invokevirtual #39                 // Method getIdleNode:()Ljava/lang/String;
+       593: astore        34
+       595: aload         33
+       597: ifnonnull     608
+       600: aload         34
+       602: ifnull        620
+       605: goto          618
+       608: aload         33
+       610: aload         34
+       612: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       615: ifne          620
+       618: iconst_0
+       619: ireturn
+       620: aload_0
+       621: invokevirtual #40                 // Method getMissionData:()Ljava/util/List;
+       624: astore        35
+       626: aload_2
+       627: invokevirtual #40                 // Method getMissionData:()Ljava/util/List;
+       630: astore        36
+       632: aload         35
+       634: ifnonnull     645
+       637: aload         36
+       639: ifnull        657
+       642: goto          655
+       645: aload         35
+       647: aload         36
+       649: invokevirtual #24                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+       652: ifne          657
+       655: iconst_0
+       656: ireturn
+       657: iconst_1
+       658: ireturn
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0     659     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0     659     1     o   Ljava/lang/Object;
+           21     638     2 other   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+           36     623     3 this$orgId   Ljava/lang/Object;
+           42     617     4 other$orgId   Ljava/lang/Object;
+           71     588     5 this$requestId   Ljava/lang/Object;
+           77     582     6 other$requestId   Ljava/lang/Object;
+          108     551     7 this$missionCode   Ljava/lang/Object;
+          114     545     8 other$missionCode   Ljava/lang/Object;
+          145     514     9 this$missionType   Ljava/lang/Object;
+          151     508    10 other$missionType   Ljava/lang/Object;
+          182     477    11 this$viewBoardType   Ljava/lang/Object;
+          188     471    12 other$viewBoardType   Ljava/lang/Object;
+          219     440    13 this$robotModels   Ljava/lang/Object;
+          225     434    14 other$robotModels   Ljava/lang/Object;
+          256     403    15 this$robotIds   Ljava/lang/Object;
+          262     397    16 other$robotIds   Ljava/lang/Object;
+          293     366    17 this$robotType   Ljava/lang/Object;
+          299     360    18 other$robotType   Ljava/lang/Object;
+          330     329    19 this$priority   Ljava/lang/Object;
+          336     323    20 other$priority   Ljava/lang/Object;
+          367     292    21 this$containerModelCode   Ljava/lang/Object;
+          373     286    22 other$containerModelCode   Ljava/lang/Object;
+          404     255    23 this$containerCode   Ljava/lang/Object;
+          410     249    24 other$containerCode   Ljava/lang/Object;
+          441     218    25 this$templateCode   Ljava/lang/Object;
+          447     212    26 other$templateCode   Ljava/lang/Object;
+          478     181    27 this$lockRobotAfterFinish   Ljava/lang/Object;
+          484     175    28 other$lockRobotAfterFinish   Ljava/lang/Object;
+          515     144    29 this$unlockRobotId   Ljava/lang/Object;
+          521     138    30 other$unlockRobotId   Ljava/lang/Object;
+          552     107    31 this$unlockMissionCode   Ljava/lang/Object;
+          558     101    32 other$unlockMissionCode   Ljava/lang/Object;
+          589      70    33 this$idleNode   Ljava/lang/Object;
+          595      64    34 other$idleNode   Ljava/lang/Object;
+          626      33    35 this$missionData   Ljava/lang/Object;
+          632      27    36 other$missionData   Ljava/lang/Object;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0     659     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+           21     638     2 other   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<*>;
+      StackMapTable: number_of_entries = 54
+        frame_type = 7 /* same */
+        frame_type = 8 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 14
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto ]
+        frame_type = 253 /* append */
+          offset_delta = 22
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 8 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object, class java/lang/Object ]
+        frame_type = 9 /* same */
+        frame_type = 1 /* same */
+    MethodParameters:
+      Name                           Flags
+      o                              final
+
+  protected boolean canEqual(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    flags: (0x0004) ACC_PROTECTED
+    Code:
+      stack=1, locals=2, args_size=2
+         0: aload_1
+         1: instanceof    #21                 // class com/kuka/interfaces/plugin/entity/AgvTaskDto
+         4: ireturn
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            0       5     1 other   Ljava/lang/Object;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+    MethodParameters:
+      Name                           Flags
+      other                          final
+
+  public int hashCode();
+    descriptor: ()I
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=20, args_size=1
+         0: bipush        59
+         2: istore_1
+         3: iconst_1
+         4: istore_2
+         5: aload_0
+         6: invokevirtual #23                 // Method getOrgId:()Ljava/lang/String;
+         9: astore_3
+        10: iload_2
+        11: bipush        59
+        13: imul
+        14: aload_3
+        15: ifnonnull     23
+        18: bipush        43
+        20: goto          27
+        23: aload_3
+        24: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+        27: iadd
+        28: istore_2
+        29: aload_0
+        30: invokevirtual #25                 // Method getRequestId:()Ljava/lang/String;
+        33: astore        4
+        35: iload_2
+        36: bipush        59
+        38: imul
+        39: aload         4
+        41: ifnonnull     49
+        44: bipush        43
+        46: goto          54
+        49: aload         4
+        51: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+        54: iadd
+        55: istore_2
+        56: aload_0
+        57: invokevirtual #26                 // Method getMissionCode:()Ljava/lang/String;
+        60: astore        5
+        62: iload_2
+        63: bipush        59
+        65: imul
+        66: aload         5
+        68: ifnonnull     76
+        71: bipush        43
+        73: goto          81
+        76: aload         5
+        78: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+        81: iadd
+        82: istore_2
+        83: aload_0
+        84: invokevirtual #27                 // Method getMissionType:()Ljava/lang/String;
+        87: astore        6
+        89: iload_2
+        90: bipush        59
+        92: imul
+        93: aload         6
+        95: ifnonnull     103
+        98: bipush        43
+       100: goto          108
+       103: aload         6
+       105: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+       108: iadd
+       109: istore_2
+       110: aload_0
+       111: invokevirtual #28                 // Method getViewBoardType:()Ljava/lang/String;
+       114: astore        7
+       116: iload_2
+       117: bipush        59
+       119: imul
+       120: aload         7
+       122: ifnonnull     130
+       125: bipush        43
+       127: goto          135
+       130: aload         7
+       132: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+       135: iadd
+       136: istore_2
+       137: aload_0
+       138: invokevirtual #29                 // Method getRobotModels:()Ljava/util/List;
+       141: astore        8
+       143: iload_2
+       144: bipush        59
+       146: imul
+       147: aload         8
+       149: ifnonnull     157
+       152: bipush        43
+       154: goto          162
+       157: aload         8
+       159: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+       162: iadd
+       163: istore_2
+       164: aload_0
+       165: invokevirtual #30                 // Method getRobotIds:()Ljava/util/List;
+       168: astore        9
+       170: iload_2
+       171: bipush        59
+       173: imul
+       174: aload         9
+       176: ifnonnull     184
+       179: bipush        43
+       181: goto          189
+       184: aload         9
+       186: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+       189: iadd
+       190: istore_2
+       191: aload_0
+       192: invokevirtual #31                 // Method getRobotType:()Ljava/lang/String;
+       195: astore        10
+       197: iload_2
+       198: bipush        59
+       200: imul
+       201: aload         10
+       203: ifnonnull     211
+       206: bipush        43
+       208: goto          216
+       211: aload         10
+       213: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+       216: iadd
+       217: istore_2
+       218: aload_0
+       219: invokevirtual #32                 // Method getPriority:()Ljava/lang/Integer;
+       222: astore        11
+       224: iload_2
+       225: bipush        59
+       227: imul
+       228: aload         11
+       230: ifnonnull     238
+       233: bipush        43
+       235: goto          243
+       238: aload         11
+       240: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+       243: iadd
+       244: istore_2
+       245: aload_0
+       246: invokevirtual #33                 // Method getContainerModelCode:()Ljava/lang/String;
+       249: astore        12
+       251: iload_2
+       252: bipush        59
+       254: imul
+       255: aload         12
+       257: ifnonnull     265
+       260: bipush        43
+       262: goto          270
+       265: aload         12
+       267: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+       270: iadd
+       271: istore_2
+       272: aload_0
+       273: invokevirtual #34                 // Method getContainerCode:()Ljava/lang/String;
+       276: astore        13
+       278: iload_2
+       279: bipush        59
+       281: imul
+       282: aload         13
+       284: ifnonnull     292
+       287: bipush        43
+       289: goto          297
+       292: aload         13
+       294: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+       297: iadd
+       298: istore_2
+       299: aload_0
+       300: invokevirtual #35                 // Method getTemplateCode:()Ljava/lang/String;
+       303: astore        14
+       305: iload_2
+       306: bipush        59
+       308: imul
+       309: aload         14
+       311: ifnonnull     319
+       314: bipush        43
+       316: goto          324
+       319: aload         14
+       321: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+       324: iadd
+       325: istore_2
+       326: aload_0
+       327: invokevirtual #36                 // Method getLockRobotAfterFinish:()Ljava/lang/Boolean;
+       330: astore        15
+       332: iload_2
+       333: bipush        59
+       335: imul
+       336: aload         15
+       338: ifnonnull     346
+       341: bipush        43
+       343: goto          351
+       346: aload         15
+       348: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+       351: iadd
+       352: istore_2
+       353: aload_0
+       354: invokevirtual #37                 // Method getUnlockRobotId:()Ljava/lang/String;
+       357: astore        16
+       359: iload_2
+       360: bipush        59
+       362: imul
+       363: aload         16
+       365: ifnonnull     373
+       368: bipush        43
+       370: goto          378
+       373: aload         16
+       375: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+       378: iadd
+       379: istore_2
+       380: aload_0
+       381: invokevirtual #38                 // Method getUnlockMissionCode:()Ljava/lang/String;
+       384: astore        17
+       386: iload_2
+       387: bipush        59
+       389: imul
+       390: aload         17
+       392: ifnonnull     400
+       395: bipush        43
+       397: goto          405
+       400: aload         17
+       402: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+       405: iadd
+       406: istore_2
+       407: aload_0
+       408: invokevirtual #39                 // Method getIdleNode:()Ljava/lang/String;
+       411: astore        18
+       413: iload_2
+       414: bipush        59
+       416: imul
+       417: aload         18
+       419: ifnonnull     427
+       422: bipush        43
+       424: goto          432
+       427: aload         18
+       429: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+       432: iadd
+       433: istore_2
+       434: aload_0
+       435: invokevirtual #40                 // Method getMissionData:()Ljava/util/List;
+       438: astore        19
+       440: iload_2
+       441: bipush        59
+       443: imul
+       444: aload         19
+       446: ifnonnull     454
+       449: bipush        43
+       451: goto          459
+       454: aload         19
+       456: invokevirtual #41                 // Method java/lang/Object.hashCode:()I
+       459: iadd
+       460: istore_2
+       461: iload_2
+       462: ireturn
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0     463     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+            3     460     1 PRIME   I
+            5     458     2 result   I
+           10     453     3 $orgId   Ljava/lang/Object;
+           35     428     4 $requestId   Ljava/lang/Object;
+           62     401     5 $missionCode   Ljava/lang/Object;
+           89     374     6 $missionType   Ljava/lang/Object;
+          116     347     7 $viewBoardType   Ljava/lang/Object;
+          143     320     8 $robotModels   Ljava/lang/Object;
+          170     293     9 $robotIds   Ljava/lang/Object;
+          197     266    10 $robotType   Ljava/lang/Object;
+          224     239    11 $priority   Ljava/lang/Object;
+          251     212    12 $containerModelCode   Ljava/lang/Object;
+          278     185    13 $containerCode   Ljava/lang/Object;
+          305     158    14 $templateCode   Ljava/lang/Object;
+          332     131    15 $lockRobotAfterFinish   Ljava/lang/Object;
+          359     104    16 $unlockRobotId   Ljava/lang/Object;
+          386      77    17 $unlockMissionCode   Ljava/lang/Object;
+          413      50    18 $idleNode   Ljava/lang/Object;
+          440      23    19 $missionData   Ljava/lang/Object;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0     463     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+      StackMapTable: number_of_entries = 34
+        frame_type = 255 /* full_frame */
+          offset_delta = 23
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 3
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class com/kuka/interfaces/plugin/entity/AgvTaskDto, int, int, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = [ int, int ]
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: new           #42                 // class java/lang/StringBuilder
+         3: dup
+         4: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
+         7: ldc           #44                 // String AgvTaskDto(orgId=
+         9: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        12: aload_0
+        13: invokevirtual #23                 // Method getOrgId:()Ljava/lang/String;
+        16: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        19: ldc           #46                 // String , requestId=
+        21: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        24: aload_0
+        25: invokevirtual #25                 // Method getRequestId:()Ljava/lang/String;
+        28: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        31: ldc           #47                 // String , missionCode=
+        33: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        36: aload_0
+        37: invokevirtual #26                 // Method getMissionCode:()Ljava/lang/String;
+        40: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        43: ldc           #48                 // String , missionType=
+        45: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        48: aload_0
+        49: invokevirtual #27                 // Method getMissionType:()Ljava/lang/String;
+        52: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        55: ldc           #49                 // String , viewBoardType=
+        57: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        60: aload_0
+        61: invokevirtual #28                 // Method getViewBoardType:()Ljava/lang/String;
+        64: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        67: ldc           #50                 // String , robotModels=
+        69: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        72: aload_0
+        73: invokevirtual #29                 // Method getRobotModels:()Ljava/util/List;
+        76: invokevirtual #51                 // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+        79: ldc           #52                 // String , robotIds=
+        81: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        84: aload_0
+        85: invokevirtual #30                 // Method getRobotIds:()Ljava/util/List;
+        88: invokevirtual #51                 // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+        91: ldc           #53                 // String , robotType=
+        93: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        96: aload_0
+        97: invokevirtual #31                 // Method getRobotType:()Ljava/lang/String;
+       100: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       103: ldc           #54                 // String , priority=
+       105: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       108: aload_0
+       109: invokevirtual #32                 // Method getPriority:()Ljava/lang/Integer;
+       112: invokevirtual #51                 // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+       115: ldc           #55                 // String , containerModelCode=
+       117: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       120: aload_0
+       121: invokevirtual #33                 // Method getContainerModelCode:()Ljava/lang/String;
+       124: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       127: ldc           #56                 // String , containerCode=
+       129: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       132: aload_0
+       133: invokevirtual #34                 // Method getContainerCode:()Ljava/lang/String;
+       136: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       139: ldc           #57                 // String , templateCode=
+       141: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       144: aload_0
+       145: invokevirtual #35                 // Method getTemplateCode:()Ljava/lang/String;
+       148: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       151: ldc           #58                 // String , lockRobotAfterFinish=
+       153: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       156: aload_0
+       157: invokevirtual #36                 // Method getLockRobotAfterFinish:()Ljava/lang/Boolean;
+       160: invokevirtual #51                 // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+       163: ldc           #59                 // String , unlockRobotId=
+       165: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       168: aload_0
+       169: invokevirtual #37                 // Method getUnlockRobotId:()Ljava/lang/String;
+       172: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       175: ldc           #60                 // String , unlockMissionCode=
+       177: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       180: aload_0
+       181: invokevirtual #38                 // Method getUnlockMissionCode:()Ljava/lang/String;
+       184: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       187: ldc           #61                 // String , idleNode=
+       189: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       192: aload_0
+       193: invokevirtual #39                 // Method getIdleNode:()Ljava/lang/String;
+       196: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       199: ldc           #62                 // String , missionData=
+       201: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       204: aload_0
+       205: invokevirtual #40                 // Method getMissionData:()Ljava/util/List;
+       208: invokevirtual #51                 // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+       211: ldc           #63                 // String )
+       213: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       216: invokevirtual #64                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       219: areturn
+      LineNumberTable:
+        line 18: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0     220     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0     220     0  this   Lcom/kuka/interfaces/plugin/entity/AgvTaskDto<TT;>;
+}
+Signature: #272                         // <T:Ljava/lang/Object;>Ljava/lang/Object;
+SourceFile: "AgvTaskDto.java"
+RuntimeVisibleAnnotations:
+  0: #275(#70=s#276)
+    io.swagger.annotations.ApiModel(
+      value="Task Instance Class"
+    )

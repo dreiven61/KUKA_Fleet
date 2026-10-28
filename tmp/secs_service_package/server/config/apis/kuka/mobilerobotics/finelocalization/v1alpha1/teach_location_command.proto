@@ -1,0 +1,31 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.finelocalization.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+
+option java_package = "com.kuka.mobilerobotics.finelocalization.v1alpha1";
+option java_outer_classname = "TeachLocationCommandProto";
+option java_multiple_files = true;
+
+// teaches a location, the robot's laser data is collected and together with its state a location data element is created in the location service.
+message TeachLocationCommand
+{
+  // The uuid of the robot that teaches this location.
+  string robot_uuid = 1;
+  // the minimum count of the laser scans provided by each laser
+  google.protobuf.Int32Value scan_count = 2;
+  // the uuid of an existing location in order to re-teach it. 
+  // If parameter is not present a uuid is generated and returned by the TeachLocationCommandResult.
+  google.protobuf.StringValue uuid = 3;
+  // The name of the resulting location 
+  google.protobuf.StringValue name = 4;
+}
+

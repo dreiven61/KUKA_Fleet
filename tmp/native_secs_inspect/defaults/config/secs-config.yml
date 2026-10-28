@@ -1,0 +1,80 @@
+# connection configuration
+secsConnection:
+
+  # The TCP host to connect to. Ignored when activeConnect == false.
+  # host: "secshost"
+  
+  # The TCP port to connect to (activeConnect == true) or the port to open as a TCP server (activeConnect == false).
+  # port: 5555
+
+  # The device id that is used in every exchanged message. Must be set according to host requirements.
+  # secsDeviceId: 3000
+
+  # Whether to act as a TCP client (true) or as a server (false).
+  # activeConnect: FALSE
+  
+  # Whether the control state machine shall be off-line after connection.
+  # initialOffline: FALSE
+  
+  # Reply Timeout [s]. The maximum amount of time the equipment will wait for a reply.
+  # (range: 1-120; default: 45)
+  t3: 120
+  
+  # Connection Separation Timeout [s]. The amount of time which must elapse between successive attempts to connect to the host.
+  # (range: 1-240; default: 10)
+  # t5: 10
+  
+  # Control Transaction Timeout [s]. The time which a control transaction may remain open before it is considered a communication failure.
+  # (range: 1-240; default: 5)
+  # t6: 5
+  
+  # NOT SELECTED Timeout [s]. Time which a connection can remain in NOT CONNECTED state before it is considered a communication failure.
+  # (range: 1-240; default: 10)
+  # t7: 10
+  
+  # Network Intercharacter Timeout [s]. Maximum time between successive bytes of a single HSMS message which may expire before it is considered a communication failure.
+  # (range: 1-120; default: 5)
+  # t8: 5
+  
+
+# The SECS lib configuration file used to initially read configuration from and to store configuration changes to.
+# secsConfigPersistencyFile: libsecs.conf
+
+# The robotmanager connection is needed to automatically register robots and their compartments as vehicles. No values are set by default! 
+# robotManagerHost: robotmanager
+# robotManagerPort: 50090
+
+# If a carrierCompartmentType is set (a string used in the transport-capacity definition of robots), only compartments of that type are used and reported as vehicles. 
+# carrierCompartmentType:
+
+# Whether the configured TRANSFER, CANCEL and ABORT ActionExecutors use expect OrderCommands.
+# convertTransfersToOrderCommands: true
+
+# Whether the secs service creates payloads in the payload data provider for the orders it receives
+# createPayloadsForOrders: true
+
+# Whether the secs service removes the payloads after a transfer order is finished
+# deletePayloadsOfFinishedOrders: true
+
+# The type_uuid used when creating payloads
+# payloadTypeId: SECS
+
+# If set, orders (only if convertTransfersToOrderCommands = true) will be created that have compartments set within the LocationSpecifications.
+# Therefore, the source and destination ports of transfers will be split at the last occurrence of this delimiter and 
+# the prefix part will be used as station UUID, and the suffix part as compartment UUID.
+# If not set (default), the ports are used as compartment UUID. In this case station compartments must have globally unique UUIDs.
+# stationCompartmentDelimiter: 
+
+
+# mapping command -> ActionExecutor
+commandActionExecutors:
+  PAUSE: orderengine:50200
+  RESUME: orderengine:50200
+  CANCEL: orderengine:50200
+  ABORT: orderengine:50200
+  TRANSFER: orderengine:50200
+  default: orderengine:50200
+
+# all listed sources are subscribed for ModuleData to distribute alarms
+moduleDataAlarmSources:
+  - robotmanager:50090

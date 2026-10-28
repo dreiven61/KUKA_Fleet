@@ -1,0 +1,12 @@
+- type_name: 'kmr-iisy'
+  drive_type: 'DIFFERENTIAL'
+  mass: 500                          # Mass of the vehicle. [kg]
+  max_translational_velocity: 1.5    # Translational velocity (meight be slower than the norm of x and y components). [m/s]
+  max_velocity: [1.5,0,0.225]        # Maximum velocity in x and y direction and around the theta axis. [m/s] [rad/s]
+  max_acceleration: [0.5,0,0.35]     # Maximum acceleration in x and y direction and around the theta axis. [m/s²] [rad/s²]
+  max_decelaration: [0.5,0,0.35]     # Maximum decelaration in x and y direction and around the theta axis. [m/s²] [rad/s²]
+  backward_motion_permitted: true
+  shape_reference: '0.775,0.425,0.775,-0.425,-0.775,-0.425,-0.775,0.425' # Corner points of the vehicle [m]
+  height: 0.35                       # Height of the vehicle. [m]
+  odometry_center_offset: [0,0]      # Odomoetry center offset in x and y direction. [m]
+  mass_center_offset: [0,0,0]        # Mass center offset in x, y and z direction. [m]

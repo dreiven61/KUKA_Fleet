@@ -1,0 +1,25 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.common.v1alpha1;
+
+option csharp_namespace = "Kuka.Common.V1alpha1";
+option java_package = "com.kuka.common.v1alpha1";
+option java_outer_classname = "HostPortProto";
+option java_multiple_files = true;
+
+// The combination of ip address and the port number.
+message HostPort
+{
+    // the ip address
+    string host = 1;
+
+    // the port
+    int32 port = 2;
+}

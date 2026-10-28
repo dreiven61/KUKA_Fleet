@@ -1,0 +1,217 @@
+# 		The following commands are supported in order to control the SECS host simulation, which in turn sends SECS commands to the SECS client service  
+# CMDs:
+#
+# ONLINE																																						// sends a online command
+# OFFLINE																																						// sends a offline command
+# PAUSE	[&]																																						// sends a pause command and, if '&' is not given, waits until the change is reported (TscPauseCompleted)
+# RESUME [&]																																					// sends a resume command and, if '&' is not given, waits until the change is reported (TscAutoCompleted)
+# SELECTED_EQUIPMENT_STATUS_REQUEST																																// sends a SELECTED_EQUIPMENT_STATUS_REQUEST command
+#
+# TRANSFER PRIO SRC DST [CARRIER_ID] [CANCEL/ABORT [TSTATE]]  [MULTI_TRANSFER_INFOS...]																			// sends a transfer command and sets the TransferCommand as $RESULT; the transfer id (TID) will be generated automatically; if carrier id is not given, it will be generated automatically; if keywords CANCEL or ABORT are given, the transfer will be automatically cancelled or aborted, optionally, the transfer state [TSTATE] can be given, after which the cancellation or abortion will be done. For multi transfers (containing multiple transfer infos), just append further transfer infos.
+# TRANSFER_ID TID PRIO SRC DST [CARRIER_ID] [CANCEL/ABORT [TSTATE]]	[MULTI_TRANSFER_INFOS...]																	// sends a transfer command with given id (TID) and sets the TransferCommand as $RESULT
+# TRANSFER_ID-STAGE STAGE_ID TID PRIO SRC DST [CARRIER_ID] [CANCEL/ABORT [TSTATE]] [MULTI_TRANSFER_INFOS...]													// sends a transfer command with given id (TID) and stage id and sets the TransferCommand as $RESULT
+# TRANSFER-STAGE STAGE_ID PRIO SRC DST [CARRIER_ID] [CANCEL/ABORT [TSTATE]] [MULTI_TRANSFER_INFOS...]															// sends a transfer command with stage id and sets the TransferCommand as $RESULT
+#
+# PRIORITY_UPDATE TID PRIORITY																																	// sends a priority update command
+# STAGE STAGE_ID PRIO SRC WAITTIME [CARRIER_ID]																													// sends a stage command, WAITTIME in seconds
+# CANCEL TRANSFER_ID																																			// sends a cancel request for the given transfer id
+# ABORT TRANSFER_ID																																				// sends a abort request for the given transfer id
+#
+# WAIT_TSC_STATE (TSC_STATE) [#STATE_COUNT]																														// waits for the #STATE_COUNT 'th (default = 1) time the given TSC_STATE was reported 
+# WAIT [#NO_REMAINING_TRANSFERS] 																																// default = 0; waits until all transfers but the given number are completed.
+# WAIT_TRANSFER_STATE TRANSFER_ID TSTATE [#STATE_COUNT]					// renamed WAIT_FOR_STATE																// waits until the transfer with given id reaches the given state for #STATE_COUNT 'th (default = 1) time. Will also end upon TransferCompleted, Transfer(Abort/Cancel)Completed or rejection
+# WAIT_TOUCH [FILENAME]																																			// waits until the current or given file is touched (last modified time changes)
+# WAIT_MR_STATE (MRS) (MR_STATES) [#STATE_COUNT]																												// waits for the #STATE_COUNT 'th (default = 1) time that a MobileRobot reaches the given state;  if MRS is empty '()', only those MobileRobot are taken into account, which do not have any transfers assigned
+# WAIT_VAR VAR_NAME [EXPRESSION] 																																// waits until the given variable switches it's value to be equal to the evaluated expression; will immediately exit if both values are already equal
+#
+# SLEEP [MIN] MAX (ms)																							$RESULT_CODE will contain the slept time		// sleeps given time MAX (ms) and then continues with the next line. If MIN is given, a random amount of time (MMIN <= time <= MAX) is used. Given parameters will be evaluated but must not contain spaces.
+#
+# [GOTO_MARKER]																																					// does nothing, just a jump marker
+# [MARKER {																																						// does nothing, just a jump marker, commands inside the brackets {} will not be executed in normal run, only when used by CALL.
+# 	CMD
+# }]
+# CALL [MARKER] [FILENAME]																																		// executes the commands inside the given marker defined in the given or current file, like a method call; if MARKER is not given, all commands of the given or current file will be inserted in place (of this CALL command)
+# GOTO COMMAND_NR/GOTO_MARKER [FILENAME]																														// continues execution in the given or current input file at the given command number or marker; reloads the current or given input file; first command corresponds to 0; multi line commands count as one command, so jumping into an IF, FORK or MARKER is not possible by using COMMAND_NR, only by GOTO_MARKER; program flow will be reset, so be careful using GOTO together with CALL because after GOTO, the program can't jump back to any previous CALL call
+# GOTO_RESET COMMAND_NR/GOTO_MARKER [FILENAME]																													// continues execution in the given or current input file at the given command number or marker AND RESETS all variables; reloads the current or given input file; first command corresponds to 0; multi line commands count as one command, so jumping into an IF, FORK or MARKER is not possible by using COMMAND_NR, only by GOTO_MARKER; program flow will be reset, so be careful using GOTO together with CALL because after GOTO, the program can't jump back to any previous CALL call
+#
+# WHILE (BOOL_EXPRESSION) {																																		// conditional repeated execution of commands; the BOOL_EXPRESSION must evaluate to an boolean; allowed operator: !, !=, ==, <, <=, >, >=, &&, ||, wihtout (== true)
+#   CMD
+# }
+#
+# SET [GLOBAL] VAR_NAME EXPRESSION																																// assignes the value of the evatualted expression to the given variable name; GLOBAL variables can be accessed by any fork; VAR_NAME will be evaluated too, so don't prefix it with a '$', or the value of the variable will be used as VAR_NAME
+#
+# IF (BOOL_EXPRESSION) {																																		// conditional execution of commands; the BOOL_EXPRESSION must evaluate to an boolean; allowed operator: !, !=, ==, <, <=, >, >=, &&, ||, wihtout (== true)
+#   CMD
+# [ELSE]
+#   CMD
+# ]}
+#
+# JOIN [FID] [FORCE]																																			// waits until all FORK-threads or the specified one will end. If FORCE is given, the thread(s) will be actively stopped.
+# FORK [DAEMON] [REPLACE] [FID] { [CMD] [																														// forkes a new thread with the an optionally given thread id to execute the given commands CMD.
+#   CMD																																							// if "DAEMON" is given, a JOIN without parameter will not wait for this fork to end.
+#   CMD																																							// if "REPLACE" is given, a previous fork with the same id will be forced to join. Otherwise, if a fork with the same id exists, an Exception will be thrown
+# ]}																																							// a replacement is done after the previous fork ended. 
+#
+# EVAL STATEMENT																																				// executes the given statement as a CMD used in this file, the statement must evaluate to String, a String[] or a List<String>. Prepend it to commands that do not support evaluation, like: EVAL ABORT $COMMAND_ID
+#
+# EXEC STATEMENT																																				// executes the given statement (not a CMD used in this file); 
+# LOG (new=FILENAME|[append=]FILENAME) LOG_STRING																												// writes out the LOG_STRING to the given FILENAME; see description of LOG_STRING
+# SET_SEED [SEED]																																				// sets a new seed to the Random function; can be used to reproduce the same behavior again
+#
+# IMPORT FULL_IMPORT_NAME [FULL_IMPORT_NAME...]																													// imports the Class with the given fully qualified class name (binary name), so its simple name can be used. Even if not used, a best efford is made to find a corresponding class for a simple name. Note that any usage of a class internally updates a lookup table, hence that class will also be returned when using its simple name.
+# EXIT																																							// exists the current running fork (if declared inside a FORK), or stops the AppCommandSendingServer application
+#
+#
+#
+###############################################################################################################################
+#
+# 	types:
+# 		CARRIER_ID			: String		carrier id
+#		TID					: String  		transfer id
+#		CMD_ID				: String  		command Id (transfer or stage id)
+#		STAGE_ID			: String		stage id
+#		TSC_STATE			: String		one of PAUSING, PAUSED, AUTO, TSC_INIT
+#		VID					: String  		vehicle id (name); to be evaluated (e.g. CHANGE_VEHICLE_MODE $LibComponents.getVehiclePool.getVehicleWithCommand("2").getName() DOWN )
+#		FID					: String  		fork id
+#		COMMAND_NR			: Integer 		the command number counted from the beginning of a input file, starting with 0 (which corresponds to the first found command); 
+#		GOTO_MARKER			: String starting with ':'  like ':jumpHere'; 			(case insensitive)
+#		MARKER				: String starting with ':'  like ':methodX { CMD 		(case insensitive)
+#																		 CMD 
+#																	   }'
+#		FILENAME			: String		the path to a file, can be enclosed by ""; to be evaluated
+#		DAEMON				: DAEMON		key word
+#		REPLACE				: REPLACE		key word
+#		VMODE				: VehicleMode (OFFLINE, MAINTENANCE, DOWN, FORCE_CHARGE, PRODUCTION)
+#		TSTATE				: CEID	  		one of VehicleAssigned, VehicleArrived, Transferring, VehicleAcquireStarted, CarrierInstalled, VehicleAcquireCompleted, VehicleDeparted, VehicleArrived, VehicleDepositStarted, CarrierRemoved, VehicleDepositCompleted, VehicleUnassigned, TransferCompleted
+# 		IMMEDIATE			: Boolean (true/false)
+#		FORCE				: FORCE			key word
+#		GLOBAL				: GLOBAL 		key word
+#		WAITTIME			: Integer 		seconds
+#		LOCATION			: String  		location name
+#		LOCATION_TYPE		: String  		type
+#		MR_ID				: Integer 		robot id
+#		AREA_NAME			: String  		name of an area, to match, the starting string part is enough: areaName=Area53 will match Area53*
+#		STATE_PATH			: String  		path of the state; either method or field names, sequentially invoked if concatenated with '.'; an EXPRESSION that evaluates to a value
+#		STATE_VALUE			: String  		value to compare with the toString value of the fetched state
+#		EDGE_ID				: String  		edge name like 87#5|87#15  always two edges must be given
+#		ELSE				: "ELSE"  		starts the else part of an if
+#		CMD					: any command listed at the beginning
+#		EXPRESSION			: String		to be evaluated, a variables' value can be accessed by an leading $; e.g. $RESULT_CODE (which sending commands will set); 	supports arithmetic [+|-|*|/|^|&|(|)] and bool [!|==|!=|<|<=|>|>=|&&|(||)] expressions, reflective method call, and variable access;   class names should be given with full path, e.g. com.kuka.tsmc.app.msgs.ChangeRobotMode, though a search will be made, see IMPORT
+#		BOOL_EXPRESSION		: String		to be evaluated to a boolean, a variables' value can be accessed by an leading $; 	class names should be given with full path, e.g. com.kuka.tsmc.app.msgs.ChangeRobotMode, though a search will be made, see IMPORT
+#		STATEMENT			: String		to be executed in the same manner as an EXPRESSION, but does not need to evaluate to a value; 	class names should be given with full path, e.g. com.kuka.tsmc.app.msgs.ChangeRobotMode, though a search will be made, see IMPORT
+#		VAR_NAME			: String  		a variable name; its value can be accessed by an leading $ like $VAR_NAME; case insensitive; if VAR_NAME is enclosed with (), the used variable name will be the evaluation of VAR_NAME;  if VAR_NAME was not SET, $VAR_NAME equals to 'null'
+#		LOG_STRING			: String		the string to log; any EXPRESSION prefixed by '$' will be replaced by its evaluation result; supported are: $VAR_NAME, $(VAR_NAME) and $[EXPRESSION]; if $[EXPRESSION] is evaluated to an Object, the string that will end up in the log line is the result of calling .toString() on that Object.  WARN: Using brackets after a variable will lead to a wrong log string: something like "test1: $test (a test)" does not work properly, in this version
+#		SEED				: Integer		the seed value to set to the Random
+#		FULL_IMPORT_NAME	: String		a fully qualified class name (binary name), like 'java.io.File', or a package like 'java.io.*'; can also be prepended with jar: or file: to install an UrlClassLoader for accessing further classes, like 'jar:/libs/some-service.jar!/com.kuka.mobilerobotics.someservice.AClass' or '/libs/AClass' to load the class file '/libs/AClass.class'
+#
+#
+#		MULTI_TRANSFER_INFOS:= SRC DST [CARRIER_ID]
+#		MRS:= *|[CMD_ID|mrid|mrname...]														// like (A B mrId=1 mrId=2 mrName=KMR_200_4)  or (*) which means any mobile robot
+#		MR_STATES:= [LOCATION|locationtype|areaname|statevalue|compstatevalue...]			// like (CUFLX202-1 CUFLX205-1 type=charger areaName="AREA 23" state=getGraphId=1 state=getMapInfo.getName="Map 24")
+#		BOOL_EXPRESSION:= EXPRESSION [!|==|!=|<|<=|>|>=|&&|'||'] EXPRESSION					// the common known comparators 
+#		ARITHMETIC_EXPRESSION:= EXPRESSION [+|-|*|/|^|&|'|'] EXPRESSION						// the common known comparators  ## * before + is not implemented, so use () brackets
+#		mrid:= mrId=MR_ID
+#		mrname:= mrName=VID
+#		locationtype:= type=LOCATION_TYPE
+#		areaname:= areaName=AREA_NAME														// agv entered area with given name
+#		statevalue:= state=(STATE_PATH=STATE_VALUE)											// agv mobile robot state changed
+#		compstatevalue:= compState=(STATE_PATH=STATE_VALUE)									// LibComponents relative check
+#
+###############################################################################################################################
+#
+#	default variables:
+#		$LibComponents		: the LibComponents
+#		$RESULT				: some commands set their result, e.g. a TRANSFER command sets the sent transfer command
+#		$RESULT_CODE		: set by each command sending CMD representing the SECS result code, OK == 4
+#		$UFP				: a UserFunctionProvider; feel free to adjust the UserFunctionProvider class in this package, but if so, beware of overwriting it when updating the project (same as AppCommandSendingServerConfig.class); even new commands could be implemented here ;)
+#		$FP					: a FunctionProvider; providing following functions
+#			-	Character nl()  											// returns the newline character '\n'
+#			-	int getRandom(int to)  										// same as getRandom(0, int to)
+#			-	int getRandom(int from, int to)								// returns a random number between from and to
+#			-	TransferCommand getTransferCommand(TID) 					// returns the TransferCommand instance of the given command id, use with care, only use getters
+#			-	Ceid getTransferState(TID) 									// returns the Ceid TransferState instance of the given command id
+#			-	boolean isTransferActive(TID)								// tests whether a transfer ist still running
+#			-	boolean isForkActive(FID)									// tests whether a fork ist still running
+#			-	String concat(String... concats) 							// return String.join("", concats);
+# 			-	T firstNonNull(Collection<T> values)						// returns the first non-null element
+#			-	T firstNonNull(T[] values)									// returns the first non-null element
+#			-	T[] toArray(Collection<T> values)							// converts a collection to an array 
+#			-	T[] newArray(T... values)									// returns an array containing the given elements
+#			-	T[] newTypedArray(Class<T> type, T... values)				// returns an array of the given type containing the given elements
+#			-	String prependIfMissing(String prefix, String prependTo)	// prepends the prefix to prependTo if needed
+#			-	String appendIfMissing(String suffix, String appendTo)		// appends the suffix to appendTo if needed
+#			-	String removePrefix(String prefix, String string)			// removes the prefix from string if possible
+#			-	String removeSuffix(String suffix, String string)			// removes the suffix from string if possible
+#			-	Class<?> findClass(String name)								// returns the class by the given name or null, if none found
+#			-	SecsEquipment getEquipment()								// returns the secs equipment
+#			-	SecsReplyMessage sendStreamFunction(SecsPrimaryMessage)		// returns the SecsReplyMessage, or null in case of an exception. The SecsReplyMessage or the exception is stored in $RESULT
+#
+#
+###############################################################################################################################
+#
+# Command examples:
+#
+#	EXEC $LibComponents.getCoordinator().submit(new com.kuka.tsmc.app.msgs.ChangeRobotMode(simulatedAgv_767, com.kuka.cc.secs.state.VehicleState.DOWN.getMode(), true))
+#	LOG (new=D:\test.log) log some message for agv $[$LibComponents.getVehiclePool.getVehicleWithCommand("2").getName()] doing transfer job 2: ...
+#	SLEEP 10000 20000
+#	LOG (D:\test.log) slept for $RESULT_CODE milliseconds
+#
+#
+# Loop example:		
+#
+#	:callTestMethod10Times {
+#		SET I 0
+#		WHILE $I < 10 {
+#			SET I $I+1
+#			CALL :testMethod
+#		}
+#	}
+#
+#
+#
+#
+###############################################################################################################################
+#
+#  example for fork: (testing transfer update after abort)
+#
+#	ONLINE
+#	RESUME
+#	TRANSFER_ID 2 50 CUFLX209-1 CUFLX214-1 2
+#	FORK 1 {
+#		# Waiting for pick start
+#		WAIT_FOR_STATE 2 VehicleAcquireStarted
+#		SLEEP 0 40000
+#		FORK 2 {
+#			# Waiting for abort accepted (or transfer 2 finishes when abort not accepted)
+#			WAIT_FOR_STATE 2 TransferAbortInitiated
+#			SLEEP 0 45000
+#			TRANSFER_ID 2-2 50 CUFLX209-1 CUFLX205-1 2
+#		}
+#		ABORT 2
+#
+#		# Waiting until transfer 2 finishes, either aborted or normal
+#		WAIT_FOR_STATE 2 TransferCompleted
+#		# if fork 2 is active, force stop it, it could be sleeping when abort was rejected
+#		IF $FP.isForkActive(2) { JOIN 2 FORCE }
+#		# Waiting until no transfer is active anymore (either transfer 2 finished normally (abort rejected), or when transfer 2 was aborted, transfer 2-2 could have been sent already, so waiting for transfer 2-2 to end)
+#		WAIT
+#	}
+#	JOIN
+#	SLEEP 10000
+#	GOTO 2
+#
+
+# @ignoreThisFile  # this will start the random long term test. (Comment out to ignore)
+
+# execute /sim/commands.txt as soon as it exists
+
+SET EXEC_FILE new java.io.File(/sim/commands.txt)
+
+:loopUntilFileExists
+
+IF $EXEC_FILE.exists {
+	GOTO 0 $EXEC_FILE.getAbsolutePath
+}
+
+SLEEP 1000
+GOTO :loopUntilFileExists

@@ -1,0 +1,142 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.core.v1;
+
+import "google/protobuf/wrappers.proto";
+import "kuka/core/v1/lock_result.proto";
+import "kuka/core/v1/message_header.proto";
+
+option csharp_namespace = "Kuka.Core.V1";
+option java_package = "com.kuka.core.v1";
+option java_outer_classname = "SpocServiceProto";
+option java_multiple_files = true;
+
+// Service to establish a single point of control concept (SPOC).
+service SpocService
+{
+  // Ask for access to a specific module and a lock for a group of relating modules
+  rpc GetLock(GetLockRequest) returns (GetLockResponse);
+	
+  // Keep your priorly requested lock alive
+  rpc KeepLock(KeepLockRequest) returns (KeepLockResponse);
+	
+  // Release the priorly received lock
+  rpc ReleaseLock(ReleaseLockRequest) returns (ReleaseLockResponse);
+	
+  // A channel to register a module at the SPOC and receive new control UUIDs
+  rpc RenewControlUuid(RenewControlUuidRequest) returns (stream RenewControlUuidResponse);
+	
+  // Get all locked modules
+  rpc GetLockedModules(GetLockedModulesRequest) returns (GetLockedModulesResponse);
+}
+
+//// Request and response of the GetLock method
+message GetLockRequest
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+	
+  // Defines the module which one wants to control
+  string module_name = 2;
+	
+  // Optional: The priority of the client, if left out, a default value will be assumed.
+  google.protobuf.Int32Value lock_priority = 3;
+	
+  // Defines which modules should be locked
+  repeated string locked_modules = 4;
+}
+
+message GetLockResponse
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+	
+  // A unique identifier designating the owner of the control instance.
+  // This id must be provided with the command to ensure the single point of control.
+  string control_uuid = 2;
+	
+  // Time interval in which client has to call again
+  double timeout = 3;
+	
+  // Result of the lock try
+  kuka.core.v1.LockResult lock_result = 4;
+}
+
+//// Request and Response of KeepLock method
+message KeepLockRequest
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+	
+  // A unique identifier designating the owner of the control instance.
+  // This id must be provided with the command to ensure the single point of control.
+  string control_uuid = 2;
+}
+
+message KeepLockResponse
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+	
+  // Result of the lock try
+  kuka.core.v1.LockResult lock_result = 2;
+}
+
+//// Request and response of the release method
+message ReleaseLockRequest
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+	
+  // A unique identifier designating the owner of the control instance.
+  // This id must be provided with the command to ensure the single point of control.
+  string control_uuid = 2;
+}
+
+message ReleaseLockResponse
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+}
+
+//// Request and response for the renewControlUuuid
+message RenewControlUuidRequest
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+	
+  // Registering at the SPOC with the given name
+  string module_name = 2;
+}
+
+message RenewControlUuidResponse
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+	
+  // The new control UUID for a module
+  string control_uuid = 2;
+}
+
+//// Request and response for getting all locked modules
+message GetLockedModulesRequest
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+}
+
+message GetLockedModulesResponse
+{
+  // Header containing information about the origin of this message.
+  kuka.core.v1.MessageHeader header = 1;
+	
+  // The locked modules
+  repeated string locked_modules = 2;
+}

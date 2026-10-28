@@ -1,0 +1,43 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.core.geometry.v1;
+
+option csharp_namespace = "Kuka.Core.Geometry.V1";
+option java_package = "com.kuka.core.geometry.v1";
+option java_outer_classname = "RectangleProto";
+option java_multiple_files = true;
+
+
+// Defines a rectangle in 2D space.
+// 
+// The rectangle is lying in the (+, +)-quadrant,
+// with two sides on the x and y coordinate axis and
+// one vertex (A) located at (0, 0), like depicted here:
+//
+//     y ^
+//       |
+//       D--C
+//       |  |
+//       |  |
+//       A--B-->
+//             x
+//
+// where A = (0, 0), B, C, D are the four vertices of
+// the rectangle.
+message Rectangle
+{
+  // The length in x direction, i.e.
+  // the distance between A and B.
+  double length_x = 1;
+    
+  // The length in y direction, i.e.
+  // the distance between A and D.
+  double length_y = 2;
+}

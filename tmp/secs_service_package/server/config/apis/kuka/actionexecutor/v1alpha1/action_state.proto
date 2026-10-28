@@ -1,0 +1,53 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.actionexecutor.v1alpha1;
+
+import "kuka/core/state/v1/error_state.proto";
+
+option csharp_namespace = "Kuka.ActionExecutor.V1alpha1";
+option java_package = "com.kuka.actionexecutor.v1alpha1";
+option java_outer_classname = "ActionStateProto";
+option java_multiple_files = true;
+
+// Contains the state of an action.
+message ActionState {
+
+  // action state types
+  enum State {
+    // The state is unspecified.
+    UNSPECIFIED = 0;
+
+    // The action has been created.
+    CREATED = 1;
+
+    // The action has been queued by the executor.
+    QUEUED = 2;
+
+    // The action is executing.
+    EXECUTING = 4;
+
+    // The action is paused.
+    PAUSED = 5;
+
+    // The action is finished.
+    FINISHED = 6;
+  }
+  State action_state = 1;
+
+  // The current state of the error state machine.
+  // The field is optional. If not set, defaults to OK.
+  kuka.core.state.v1.ErrorState error_state = 2;
+
+  // Flag indicating whether canceling the action was requested (either by the user or automatically (e.g. subsequent action in a queue)).
+  // If the flag is true, this does not necessarily indicate that the action has already been finished as 
+  // terminating the action after cancelation may take a certain amount of time depending on the type of action.
+  // The information on whether the action is finished is reflected by the action_state field.
+  bool canceled = 3;
+}

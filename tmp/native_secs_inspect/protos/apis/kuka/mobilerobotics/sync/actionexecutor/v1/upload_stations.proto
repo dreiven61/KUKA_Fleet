@@ -1,0 +1,20 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.sync.actionexecutor.v1;
+
+option csharp_namespace = "Kuka.MobileRobotics.Sync.ActionExecutor.V1";
+option java_multiple_files = true;
+option java_outer_classname = "UploadStationsActionProto";
+option java_package = "com.kuka.mobilerobotics.sync.actionexecutor.v1";
+
+// Synronizes the station data from the wordgraph to the Navigation server
+message UploadStations
+{
+}

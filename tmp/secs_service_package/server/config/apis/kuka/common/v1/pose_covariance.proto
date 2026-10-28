@@ -1,0 +1,33 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.common.v1;
+
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Kuka.Common.V1";
+option java_package = "com.kuka.common.v1";
+option java_outer_classname = "PoseCovarianceProto";
+option java_multiple_files = true;
+
+// The pose covariance e.g. for localization during a graph transition.
+message PoseCovariance
+{
+  // The maximum allowed translational difference (in meters) to a (node) position.
+  // If this value is not provided, then a platform-specific default parameter
+  // will be used.
+  // Optional.
+  google.protobuf.DoubleValue translational_pose_covariance_meters = 1;
+	
+  // The maximum allowed rotational difference (in radians) to a (node) position.
+  // If this value is not provided, then a platform-specific default parameter
+  // will be used.
+  // Optional.
+  google.protobuf.DoubleValue rotational_pose_covariance_radians = 2;
+}

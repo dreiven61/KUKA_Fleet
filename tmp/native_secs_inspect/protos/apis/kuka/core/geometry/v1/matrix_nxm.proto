@@ -1,0 +1,57 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.core.geometry.v1;
+
+option java_package = "com.kuka.core.geometry.v1";
+option java_outer_classname = "MatrixNxMProto";
+option java_multiple_files = true;
+
+
+// Represents a NxM matrix.
+// Supports lower triangular, upper triangular,
+// symmetric and diagonal matrices.
+message MatrixNxM
+{
+  int32 number_of_rows = 1;
+  int32 number_of_columns = 2;
+
+  enum Type
+    {
+    FULL = 0;
+        
+    // The rows contain only the entries from
+    // first element up to the diagonal one
+    // all other entries are 0
+    LOWER_TRIANGULAR = 1;
+        
+    // The rows contain only the entries from
+    // diagonal element up to the last one
+    // all other entries are 0
+    UPPER_TRIANGULAR = 2;
+        
+    // The rows contain only the entries from
+    // first element up to the diagonal one
+    // all other entries have the same value
+    // as their corresponding symmetric entry.
+    SYMMETRIC = 3;
+        
+    // Field rows only contains one entry which
+    // corresponds to the diagonal
+    DIAGONAL = 4;
+  }
+  Type type = 3;
+
+  // Represents one row of the matrix.
+  message Row
+    {
+    repeated double values = 1;
+  }
+  repeated Row rows = 4;
+}

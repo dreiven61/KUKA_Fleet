@@ -1,0 +1,24 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.common.v1alpha1;
+
+option java_package = "com.kuka.common.v1alpha1";
+option java_outer_classname = "SerializedAnyProto";
+option java_multiple_files = true;
+
+// An any conversion proto for serializing unknown any types as json.
+message SerializedAny
+{
+    // type url of the unknown Any type. 
+    string type_url = 1;
+
+    // Must be a valid serialized protocol buffer of the above specified type.
+    bytes value = 2;
+}

@@ -1,0 +1,44 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.localizer.v1alpha1;
+
+import "kuka/core/geometry/v1/transform_2d.proto";
+import "kuka/mobilerobotics/localizer/v1alpha1/map.proto";
+
+option java_package = "com.kuka.mobilerobotics.localizer.v1alpha1";
+option java_outer_classname = "MapperCommandProto";
+option java_multiple_files = true;
+
+// With this command a map can be created from the received laser data 
+message MapperCommand
+{   
+    message Parameter{
+        // Fields of the maps are used to create the and upload the map
+        // if no uuid is given the uuid is created
+        // cells and size must not be set.
+        kuka.mobilerobotics.localizer.v1alpha1.Map map=1;
+        // lasers that should be used - if tot given all available lasers are used.
+        map<int32, bool> laser_enabled = 2;
+    }
+    // if false the result only contains incremental laser_data 
+    // if true all laser data are send for each update
+    bool full_laser_data = 2;
+    // if true the result will include the created map
+    bool include_map = 3;
+    // if true then the command will create a map upload it and stop proccessing
+    bool upload_map = 4;
+    // offset and rotation in rad 
+    kuka.core.geometry.v1.Transform2D rotation = 5;
+    // Parameters for the algotithm
+    Parameter parameter = 6;
+    
+}
+
+

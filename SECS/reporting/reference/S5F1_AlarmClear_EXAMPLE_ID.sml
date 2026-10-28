@@ -1,0 +1,6 @@
+S5F1_AlarmClear_EXAMPLE_ID: S5F1 W
+<L [3]
+  <B [1] 6>
+  <U4 [1] 900001>
+  <A [25] "TEST_ONLY_VEHICLE_WARNING">
+>.

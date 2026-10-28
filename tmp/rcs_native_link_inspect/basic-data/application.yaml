@@ -1,0 +1,133 @@
+server:
+  port: 7888
+  servlet:
+    encoding:
+      force: true
+      charset: UTF-8
+netty:
+  port: 7996
+spring:
+  profiles:
+    include:
+      - basic-actuator
+      - basic
+      - local
+      - custom
+  application:
+    name: rcs-basic-data
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: ${TZ:Asia/Shanghai}
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/krcs_basic_data
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:kuka}
+    druid:
+      initial-size: 8
+      min-idle: 5
+      max-active: 20
+      query-timeout: 6000
+      transaction-query-timeout: 6000
+      remove-abandoned-timeout: 1800
+      validation-query: SELECT 1
+      filters: ${DRUID_MONITOR_FILTERS:stat,log4j2}
+      stat-view-servlet:
+        login-username: ${DB_USERNAME:postgres}
+        login-password: ${DB_PASSWORD:kuka}
+        enabled: ${DRUID_MONITOR_ENABLE:true}
+        allow:
+      web-stat-filter:
+        enabled: true
+        session-stat-enable: ${DRUID_MONITOR_ENABLE:true}
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+      filter:
+        config:
+          enable: ${DRUID_MONITOR_ENABLE:true}
+        stat:
+          log-slow-sql: ${DRUID_MONITOR_ENABLE:true}
+          slow-sql-millis: 2000
+        log4j2:
+          enabled: ${DRUID_MONITOR_ENABLE:true}
+          statement-log-enabled: false
+          result-set-log-enabled: ${DRUID_MONITOR_SQL_SHOW_RESULT:false}
+          connection-log-enabled: false
+
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+
+    initialization-mode: never
+  flyway:
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    enabled: true
+    out-of-order: true
+    placeholder-replacement: false
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*Mapper.xml
+  typeAliasesPackage: com.kuka.rcs.bd.**.domain
+
+
+logging:
+  config: classpath:log4j2.xml
+# default enable swagger
+springfox:
+  documentation:
+    enabled: true
+  securityDefinitions:
+    APIKey:
+      type: apiKey
+      name: Authorization
+      in: header
+  security:
+    - APIKey: [ ]
+
+grpc:
+  server:
+    port: 7999
+    health-service-enabled: true
+    reflection-service-enabled: true
+  request:
+    monitor:
+      enable: true
+      log-request: true
+# cache support use caffeine for first cache
+jetcache:
+  statIntervalMinutes: 15
+  areaInCacheName: false
+  local:
+    default:
+      type: caffeine
+      keyConvertor: fastjson
+      limit: 100
+
+validator:
+  fail_fast: false
+
+i18n:
+  enable-cache: false
+
+kmres:
+  authorization:
+    enable: true
+    server:
+      url: ${AUTHORIZATION_HOST:localhost}:${AUTHORIZATION_PORT:8999}
+    rule:
+      judge: false
+    db:
+      modify: true
+  license:
+    projectCode: ${PROJECT_CODE:PROJECT}
+  operation:
+    record:
+      enable: true
+      server:
+        url: ${RECORD_HOST:localhost}:${RECORD_PORT:8999}
+        moduleName: BASIC_DATA

@@ -1,0 +1,24 @@
+{
+  "nodeCount": 29,
+  "directedEdgeCount": 74,
+  "addedEdges": [
+    [
+      "69",
+      "89"
+    ],
+    [
+      "89",
+      "69"
+    ]
+  ],
+  "existingNodesUnchanged": true,
+  "existingEdgesUnchanged": true,
+  "geometry": "degree5 Bezier elevation of cubic quarter circle",
+  "nominalRadiusM": 2,
+  "maxRadialDeviationM": 0.0005313983155357249,
+  "sampledLengthM": 3.1420254316743055,
+  "exportedEdgeLengthM": 3.142,
+  "maxVelocityMps": 0.5,
+  "forwardReverseControlsMatch": true,
+  "motionTestPerformed": false
+}

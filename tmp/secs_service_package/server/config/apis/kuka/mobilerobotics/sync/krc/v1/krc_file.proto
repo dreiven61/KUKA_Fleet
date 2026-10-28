@@ -1,0 +1,32 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+// protolint:disable INDENT
+
+package kuka.mobilerobotics.sync.krc.v1;
+
+option csharp_namespace = "Kuka.MobileRobotics.Sync.KRC.V1";
+option java_multiple_files = true;
+option java_outer_classname = "EasyProgramProto";
+option java_package = "com.kuka.mobilerobotics.sync.krc.v1";
+
+// A message used to store an EP application.
+message KRCFile {
+   // The name of the .json file in the EP application stored (without the
+   // path).
+   string name = 1;
+   // The contents of the .json file.
+   bytes content = 2;
+}
+
+// A message used to store a collection of EP applications.
+message KRCFiles {
+   // A collection contains EP applications.
+   repeated KRCFile krc_files = 1;
+}

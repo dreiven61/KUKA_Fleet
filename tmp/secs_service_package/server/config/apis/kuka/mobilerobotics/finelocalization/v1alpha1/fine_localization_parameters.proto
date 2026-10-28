@@ -1,0 +1,60 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.finelocalization.v1alpha1;
+
+import "google/protobuf/wrappers.proto";
+
+option java_package = "com.kuka.mobilerobotics.finelocalization.v1alpha1";
+option java_outer_classname = "FineLocalizationParametersProto";
+option java_multiple_files = true;
+
+
+// Set of extended parameters that can be set for each fine localization command when fine tuning is necessary.
+// All fields are optional. If a field is not set, the algorithm uses a pre-tuned default value.
+message FineLocalizationParameters
+{
+	// Averaging distance around the median (in meters)
+	google.protobuf.DoubleValue averaging_distance_around_median = 1;
+	
+	// Minimum number of measurements in the averaging distance around the median
+	google.protobuf.Int32Value min_measurements_in_averaging_distance_around_median = 2;
+
+	// Minimum number of measurements in the scan
+	google.protobuf.Int32Value min_good_beams_in_scan = 3;
+
+	// Maximum number of outliers in a valid reference scan [0%-100%]
+	google.protobuf.DoubleValue max_outlier_percentage = 4;
+
+	// Maximum translation for an offset to be considered as valid (in meters)
+	google.protobuf.DoubleValue max_offset_translational = 5;
+
+	// Maximum rotation for an offset to be considered as valid (in radians)
+	google.protobuf.DoubleValue max_offset_rotational = 6;
+
+	// Percentage of the probability mass that should be within this radius for the worst translational axis (in meters)
+	google.protobuf.DoubleValue max_uncertainty_translational = 7;
+
+	// Percentage of the probability mass that should be within this radius for the worst orientation (in radians)
+	google.protobuf.DoubleValue max_uncertainty_rotational = 8;
+
+	// Determines what laser shall be used from the location. If the map is empty, all data is used
+	map<int32, bool> reference_laser_enabled = 9;
+
+	// Number of location scans to consider for fine localization.
+	// If this count is greater than the total count of locations scans, then all the location scans are used.
+	google.protobuf.Int32Value reference_scan_count = 10;
+
+	// Determines what laser scanners (on the current robot) shall be used for fine localization.
+	// If the map is empty, all data is used
+	map<int32, bool> live_laser_enabled = 11;
+
+	// Number of live scans to collect for the fine localization process.
+	google.protobuf.Int32Value live_scans_count = 12;
+}

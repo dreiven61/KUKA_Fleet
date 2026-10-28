@@ -1,0 +1,375 @@
+Compiled from "MapDataEdgeConverterUtil.java"
+public final class com.kuka.rcs.as.data.comm.grpc.codec.MapDataEdgeConverterUtil {
+  public static com.kuka.rcs.as.pathplanner.fleet.base.graph.TopologyEdge convertEdge(com.kuka.rcs.bd.grpc.map.EdgeGto, com.kuka.rcs.as.pathplanner.fleet.base.graph.TopologyGraph, com.kuka.rcs.as.pathplanner.fleet.base.graph.TopologyNode, com.kuka.rcs.as.pathplanner.fleet.base.graph.TopologyNode, java.util.function.BiFunction<java.lang.String, java.lang.String, com.kuka.rcs.as.pathplanner.fleet.plan.colli.SafeDistance>, java.util.function.Function<java.lang.String, com.kuka.rcs.as.data.model.CustomizedAction>);
+    Code:
+       0: aload_1
+       1: aload_2
+       2: invokevirtual #1                  // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyGraph.containsNode:(Ljava/lang/Object;)Z
+       5: ifeq          16
+       8: aload_1
+       9: aload_3
+      10: invokevirtual #1                  // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyGraph.containsNode:(Ljava/lang/Object;)Z
+      13: ifne          18
+      16: aconst_null
+      17: areturn
+      18: new           #2                  // class com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge
+      21: dup
+      22: aload_2
+      23: aload_3
+      24: invokespecial #3                  // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge."<init>":(Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyNode;Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyNode;)V
+      27: astore        6
+      29: aload         6
+      31: invokevirtual #4                  // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge.getTags:()Lcom/kuka/rcs/as/pathplanner/nav/provider/util/ObjectMap;
+      34: aload_0
+      35: invokevirtual #5                  // Method com/kuka/rcs/bd/grpc/map/EdgeGto.getId:()J
+      38: invokestatic  #6                  // Method java/lang/String.valueOf:(J)Ljava/lang/String;
+      41: invokestatic  #7                  // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyHelper.setUuid:(Lcom/kuka/rcs/as/pathplanner/nav/provider/util/ObjectMap;Ljava/lang/String;)V
+      44: aload         6
+      46: invokevirtual #8                  // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge.getProperties:()Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+      49: astore        7
+      51: aload_0
+      52: aload         7
+      54: dup
+      55: invokevirtual #9                  // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      58: pop
+      59: invokedynamic #10,  0             // InvokeDynamic #0:accept:(Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;)Ljava/util/function/Consumer;
+      64: invokestatic  #11                 // Method addAllEdgeProperties:(Lcom/kuka/rcs/bd/grpc/map/EdgeGto;Ljava/util/function/Consumer;)V
+      67: new           #12                 // class com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$MotionRestriction
+      70: dup
+      71: invokespecial #13                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$MotionRestriction."<init>":()V
+      74: astore        8
+      76: aload_0
+      77: invokevirtual #14                 // Method com/kuka/rcs/bd/grpc/map/EdgeGto.getConfigurationMap:()Ljava/util/Map;
+      80: aload         7
+      82: aload         5
+      84: aload         8
+      86: aload         4
+      88: invokedynamic #15,  0             // InvokeDynamic #1:accept:(Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;Ljava/util/function/Function;Lcom/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$MotionRestriction;Ljava/util/function/BiFunction;)Ljava/util/function/BiConsumer;
+      93: invokeinterface #16,  2           // InterfaceMethod java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+      98: aload_0
+      99: invokevirtual #17                 // Method com/kuka/rcs/bd/grpc/map/EdgeGto.getContainerConfigurationMap:()Ljava/util/Map;
+     102: invokeinterface #18,  1           // InterfaceMethod java/util/Map.isEmpty:()Z
+     107: ifne          129
+     110: aload_0
+     111: invokevirtual #17                 // Method com/kuka/rcs/bd/grpc/map/EdgeGto.getContainerConfigurationMap:()Ljava/util/Map;
+     114: aload         7
+     116: dup
+     117: invokevirtual #9                  // Method java/lang/Object.getClass:()Ljava/lang/Class;
+     120: pop
+     121: invokedynamic #10,  0             // InvokeDynamic #0:accept:(Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;)Ljava/util/function/Consumer;
+     126: invokestatic  #19                 // Method addEdgeContainerModelProperties:(Ljava/util/Map;Ljava/util/function/Consumer;)V
+     129: aload_1
+     130: aload         6
+     132: invokevirtual #20                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyGraph.addEdge:(Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/TopologyEdge;)Z
+     135: ifeq          143
+     138: aload         6
+     140: goto          144
+     143: aconst_null
+     144: areturn
+
+  private static void addAllEdgeProperties(com.kuka.rcs.bd.grpc.map.EdgeGto, java.util.function.Consumer<com.kuka.rcs.as.pathplanner.fleet.base.graph.properties.Property>);
+    Code:
+       0: aload_0
+       1: invokestatic  #21                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$ConvertUtils.getBezierCurve:(Lcom/kuka/rcs/bd/grpc/map/EdgeGto;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBezierCurveProperty;
+       4: astore_2
+       5: aload_2
+       6: ifnull        16
+       9: aload_1
+      10: aload_2
+      11: invokeinterface #22,  2           // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+      16: aload_0
+      17: invokevirtual #23                 // Method com/kuka/rcs/bd/grpc/map/EdgeGto.getCustomerAction:()Ljava/lang/String;
+      20: invokevirtual #24                 // Method java/lang/String.isEmpty:()Z
+      23: ifne          56
+      26: aload_0
+      27: invokevirtual #23                 // Method com/kuka/rcs/bd/grpc/map/EdgeGto.getCustomerAction:()Ljava/lang/String;
+      30: invokestatic  #25                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$ConvertUtils.parseCustomActionList:(Ljava/lang/String;)Ljava/util/List;
+      33: astore_3
+      34: new           #26                 // class com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/CustomEdgeActionCollectionProperty
+      37: dup
+      38: aload_3
+      39: aload_0
+      40: invokevirtual #27                 // Method com/kuka/rcs/bd/grpc/map/EdgeGto.getInteractionTime:()D
+      43: invokespecial #28                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/CustomEdgeActionCollectionProperty."<init>":(Ljava/util/Collection;D)V
+      46: astore        4
+      48: aload_1
+      49: aload         4
+      51: invokeinterface #22,  2           // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+      56: return
+
+  private static void addAllEdgeProperties(com.kuka.rcs.bd.grpc.map.ConfigurationGto, java.util.function.Consumer<com.kuka.rcs.as.pathplanner.fleet.base.graph.properties.Property>, java.util.function.Function<java.lang.String, com.kuka.rcs.as.pathplanner.fleet.plan.colli.SafeDistance>, java.util.function.Function<java.lang.String, com.kuka.rcs.as.data.model.CustomizedAction>);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: invokestatic  #29                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$ConvertUtils.getVelocity:(Lcom/kuka/rcs/bd/grpc/map/ConfigurationGto;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeMaxVelocityAbs;
+       5: invokeinterface #22,  2           // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+      10: aload_1
+      11: aload_0
+      12: invokestatic  #30                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$ConvertUtils.getAcceleration:(Lcom/kuka/rcs/bd/grpc/map/ConfigurationGto;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeMaxAccelerationAbs;
+      15: invokeinterface #22,  2           // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+      20: aload_1
+      21: aload_0
+      22: invokestatic  #31                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$ConvertUtils.getDeceleration:(Lcom/kuka/rcs/bd/grpc/map/ConfigurationGto;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeMaxDecelerationAbs;
+      25: invokeinterface #22,  2           // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+      30: aload_1
+      31: aload_0
+      32: invokestatic  #32                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$ConvertUtils.getBlendingCart:(Lcom/kuka/rcs/bd/grpc/map/ConfigurationGto;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeBlendingCart;
+      35: invokeinterface #22,  2           // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+      40: aload_1
+      41: aload_0
+      42: invokestatic  #33                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$ConvertUtils.getRecover:(Lcom/kuka/rcs/bd/grpc/map/ConfigurationGto;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgePathRecover;
+      45: invokeinterface #22,  2           // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+      50: aload_1
+      51: aload_0
+      52: invokestatic  #34                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$ConvertUtils.getWeight:(Lcom/kuka/rcs/bd/grpc/map/ConfigurationGto;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeWeight;
+      55: invokeinterface #22,  2           // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+      60: aload_0
+      61: invokevirtual #35                 // Method com/kuka/rcs/bd/grpc/map/ConfigurationGto.getCustomerAction:()Ljava/lang/String;
+      64: invokevirtual #24                 // Method java/lang/String.isEmpty:()Z
+      67: ifne          99
+      70: aload_0
+      71: invokevirtual #35                 // Method com/kuka/rcs/bd/grpc/map/ConfigurationGto.getCustomerAction:()Ljava/lang/String;
+      74: invokestatic  #25                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$ConvertUtils.parseCustomActionList:(Ljava/lang/String;)Ljava/util/List;
+      77: astore        4
+      79: new           #26                 // class com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/CustomEdgeActionCollectionProperty
+      82: dup
+      83: aload         4
+      85: dconst_0
+      86: invokespecial #28                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/CustomEdgeActionCollectionProperty."<init>":(Ljava/util/Collection;D)V
+      89: astore        5
+      91: aload_1
+      92: aload         5
+      94: invokeinterface #22,  2           // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+      99: aload_0
+     100: aload_2
+     101: invokestatic  #36                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$ConvertUtils.getSafeDistance:(Lcom/kuka/rcs/bd/grpc/map/ConfigurationGto;Ljava/util/function/Function;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/SafeDistanceProperty;
+     104: astore        4
+     106: aload         4
+     108: ifnull        119
+     111: aload_1
+     112: aload         4
+     114: invokeinterface #22,  2           // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+     119: aload_0
+     120: aload_3
+     121: invokestatic  #37                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$ConvertUtils.getCustomizedActionProperty:(Lcom/kuka/rcs/bd/grpc/map/ConfigurationGto;Ljava/util/function/Function;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/CustomizedActionProperty;
+     124: astore        5
+     126: aload         5
+     128: ifnull        139
+     131: aload_1
+     132: aload         5
+     134: invokeinterface #22,  2           // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+     139: return
+
+  private static void addEdgeContainerModelProperties(java.util.Map<java.lang.String, com.kuka.rcs.bd.grpc.map.ConfigurationGto>, java.util.function.Consumer<com.kuka.rcs.as.pathplanner.fleet.base.graph.properties.Property>);
+    Code:
+       0: new           #38                 // class java/util/ArrayList
+       3: dup
+       4: invokespecial #39                 // Method java/util/ArrayList."<init>":()V
+       7: astore_2
+       8: new           #38                 // class java/util/ArrayList
+      11: dup
+      12: invokespecial #39                 // Method java/util/ArrayList."<init>":()V
+      15: astore_3
+      16: aload_0
+      17: aload_2
+      18: aload_3
+      19: invokedynamic #40,  0             // InvokeDynamic #2:accept:(Ljava/util/List;Ljava/util/List;)Ljava/util/function/BiConsumer;
+      24: invokeinterface #16,  2           // InterfaceMethod java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+      29: aload_2
+      30: invokeinterface #41,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+      35: ifeq          47
+      38: aload_3
+      39: invokeinterface #41,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+      44: ifne          58
+      47: aload_1
+      48: aload_2
+      49: aload_3
+      50: invokestatic  #42                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$ConvertUtils.getEdgeContainerModelRestriction:(Ljava/util/List;Ljava/util/List;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeContainerModelRestriction;
+      53: invokeinterface #22,  2           // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+      58: return
+
+  private com.kuka.rcs.as.data.comm.grpc.codec.MapDataEdgeConverterUtil();
+    Code:
+       0: aload_0
+       1: invokespecial #43                 // Method java/lang/Object."<init>":()V
+       4: new           #44                 // class java/lang/UnsupportedOperationException
+       7: dup
+       8: ldc           #45                 // String This is a utility class and cannot be instantiated
+      10: invokespecial #46                 // Method java/lang/UnsupportedOperationException."<init>":(Ljava/lang/String;)V
+      13: athrow
+
+  private static void lambda$addEdgeContainerModelProperties$5(java.util.List, java.util.List, java.lang.String, com.kuka.rcs.bd.grpc.map.ConfigurationGto);
+    Code:
+       0: new           #47                 // class com/kuka/rcs/as/data/comm/grpc/codec/ConfigCondition
+       3: dup
+       4: aload_2
+       5: invokespecial #48                 // Method com/kuka/rcs/as/data/comm/grpc/codec/ConfigCondition."<init>":(Ljava/lang/String;)V
+       8: astore        4
+      10: aload_3
+      11: invokevirtual #49                 // Method com/kuka/rcs/bd/grpc/map/ConfigurationGto.hasUsable:()Z
+      14: ifeq          65
+      17: aload_3
+      18: invokevirtual #50                 // Method com/kuka/rcs/bd/grpc/map/ConfigurationGto.getUsable:()Lcom/google/protobuf/Int32Value;
+      21: invokevirtual #51                 // Method com/google/protobuf/Int32Value.getValue:()I
+      24: ifne          42
+      27: aload_0
+      28: aload         4
+      30: invokevirtual #52                 // Method com/kuka/rcs/as/data/comm/grpc/codec/ConfigCondition.getTypeCode:()Ljava/lang/String;
+      33: invokeinterface #53,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      38: pop
+      39: goto          65
+      42: aload_3
+      43: invokevirtual #50                 // Method com/kuka/rcs/bd/grpc/map/ConfigurationGto.getUsable:()Lcom/google/protobuf/Int32Value;
+      46: invokevirtual #51                 // Method com/google/protobuf/Int32Value.getValue:()I
+      49: iconst_1
+      50: if_icmpne     65
+      53: aload_1
+      54: aload         4
+      56: invokevirtual #52                 // Method com/kuka/rcs/as/data/comm/grpc/codec/ConfigCondition.getTypeCode:()Ljava/lang/String;
+      59: invokeinterface #53,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      64: pop
+      65: return
+
+  private static void lambda$convertEdge$4(com.kuka.rcs.as.pathplanner.fleet.base.graph.properties.PropertyHolder, java.util.function.Function, com.kuka.rcs.as.data.comm.grpc.codec.MapDataEdgeConverterUtil$MotionRestriction, java.util.function.BiFunction, java.lang.String, com.kuka.rcs.bd.grpc.map.ConfigurationGto);
+    Code:
+       0: new           #47                 // class com/kuka/rcs/as/data/comm/grpc/codec/ConfigCondition
+       3: dup
+       4: aload         4
+       6: invokespecial #48                 // Method com/kuka/rcs/as/data/comm/grpc/codec/ConfigCondition."<init>":(Ljava/lang/String;)V
+       9: astore        6
+      11: aload         6
+      13: invokevirtual #52                 // Method com/kuka/rcs/as/data/comm/grpc/codec/ConfigCondition.getTypeCode:()Ljava/lang/String;
+      16: astore        7
+      18: aload         7
+      20: ifnonnull     54
+      23: aload         5
+      25: aload_0
+      26: dup
+      27: invokevirtual #9                  // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      30: pop
+      31: invokedynamic #10,  0             // InvokeDynamic #0:accept:(Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;)Ljava/util/function/Consumer;
+      36: aconst_null
+      37: aload_1
+      38: invokestatic  #54                 // Method addAllEdgeProperties:(Lcom/kuka/rcs/bd/grpc/map/ConfigurationGto;Ljava/util/function/Consumer;Ljava/util/function/Function;Ljava/util/function/Function;)V
+      41: aload_0
+      42: aload         5
+      44: invokestatic  #55                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$ConvertUtils.getMotion:(Lcom/kuka/rcs/bd/grpc/map/ConfigurationGto;)Lcom/kuka/rcs/as/pathplanner/nav/line/VirtualLineMotionProperty;
+      47: invokeinterface #56,  2           // InterfaceMethod com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder.add:(Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/Property;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+      52: pop
+      53: return
+      54: aload         6
+      56: invokevirtual #57                 // Method com/kuka/rcs/as/data/comm/grpc/codec/ConfigCondition.getLoadState:()Ljava/lang/Boolean;
+      59: astore        8
+      61: aload_2
+      62: aload         5
+      64: aload         7
+      66: invokevirtual #58                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$MotionRestriction.checkUsable:(Lcom/kuka/rcs/bd/grpc/map/ConfigurationGto;Ljava/lang/String;)Z
+      69: ifne          91
+      72: aload_0
+      73: aload         7
+      75: aload         8
+      77: new           #59                 // class com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeMotionRestriction
+      80: dup
+      81: invokespecial #60                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeMotionRestriction."<init>":()V
+      84: invokeinterface #61,  4           // InterfaceMethod com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder.add:(Ljava/lang/String;Ljava/lang/Boolean;Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/Property;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+      89: pop
+      90: return
+      91: aload         8
+      93: ifnonnull     191
+      96: aload         5
+      98: aload_0
+      99: aload         7
+     101: invokedynamic #62,  0             // InvokeDynamic #3:accept:(Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;Ljava/lang/String;)Ljava/util/function/Consumer;
+     106: aload_3
+     107: aload         7
+     109: invokedynamic #63,  0             // InvokeDynamic #4:apply:(Ljava/util/function/BiFunction;Ljava/lang/String;)Ljava/util/function/Function;
+     114: aload_1
+     115: invokestatic  #54                 // Method addAllEdgeProperties:(Lcom/kuka/rcs/bd/grpc/map/ConfigurationGto;Ljava/util/function/Consumer;Ljava/util/function/Function;Ljava/util/function/Function;)V
+     118: aload_0
+     119: aload         7
+     121: aload         5
+     123: invokestatic  #55                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$ConvertUtils.getMotion:(Lcom/kuka/rcs/bd/grpc/map/ConfigurationGto;)Lcom/kuka/rcs/as/pathplanner/nav/line/VirtualLineMotionProperty;
+     126: invokeinterface #64,  3           // InterfaceMethod com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder.add:(Ljava/lang/String;Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/Property;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+     131: pop
+     132: aload         5
+     134: invokevirtual #65                 // Method com/kuka/rcs/bd/grpc/map/ConfigurationGto.hasMovementRestrictions:()Z
+     137: ifeq          231
+     140: aload         5
+     142: invokevirtual #66                 // Method com/kuka/rcs/bd/grpc/map/ConfigurationGto.getMovementRestrictions:()Lcom/google/protobuf/Int32Value;
+     145: invokevirtual #51                 // Method com/google/protobuf/Int32Value.getValue:()I
+     148: iconst_2
+     149: if_icmpne     156
+     152: iconst_1
+     153: goto          157
+     156: iconst_0
+     157: istore        9
+     159: aload_0
+     160: aload         7
+     162: iload         9
+     164: ifne          171
+     167: iconst_1
+     168: goto          172
+     171: iconst_0
+     172: invokestatic  #67                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     175: new           #59                 // class com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeMotionRestriction
+     178: dup
+     179: invokespecial #60                 // Method com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/EdgeMotionRestriction."<init>":()V
+     182: invokeinterface #61,  4           // InterfaceMethod com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder.add:(Ljava/lang/String;Ljava/lang/Boolean;Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/Property;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+     187: pop
+     188: goto          231
+     191: aload         5
+     193: aload_0
+     194: aload         7
+     196: aload         8
+     198: invokedynamic #68,  0             // InvokeDynamic #5:accept:(Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;Ljava/lang/String;Ljava/lang/Boolean;)Ljava/util/function/Consumer;
+     203: aload_3
+     204: aload         7
+     206: invokedynamic #69,  0             // InvokeDynamic #6:apply:(Ljava/util/function/BiFunction;Ljava/lang/String;)Ljava/util/function/Function;
+     211: aload_1
+     212: invokestatic  #54                 // Method addAllEdgeProperties:(Lcom/kuka/rcs/bd/grpc/map/ConfigurationGto;Ljava/util/function/Consumer;Ljava/util/function/Function;Ljava/util/function/Function;)V
+     215: aload_0
+     216: aload         7
+     218: aload         8
+     220: aload         5
+     222: invokestatic  #55                 // Method com/kuka/rcs/as/data/comm/grpc/codec/MapDataEdgeConverterUtil$ConvertUtils.getMotion:(Lcom/kuka/rcs/bd/grpc/map/ConfigurationGto;)Lcom/kuka/rcs/as/pathplanner/nav/line/VirtualLineMotionProperty;
+     225: invokeinterface #61,  4           // InterfaceMethod com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder.add:(Ljava/lang/String;Ljava/lang/Boolean;Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/Property;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+     230: pop
+     231: return
+
+  private static com.kuka.rcs.as.pathplanner.fleet.plan.colli.SafeDistance lambda$null$3(java.util.function.BiFunction, java.lang.String, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokeinterface #70,  3           // InterfaceMethod java/util/function/BiFunction.apply:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       8: checkcast     #71                 // class com/kuka/rcs/as/pathplanner/fleet/plan/colli/SafeDistance
+      11: areturn
+
+  private static void lambda$null$2(com.kuka.rcs.as.pathplanner.fleet.base.graph.properties.PropertyHolder, java.lang.String, java.lang.Boolean, com.kuka.rcs.as.pathplanner.fleet.base.graph.properties.Property);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: invokeinterface #61,  4           // InterfaceMethod com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder.add:(Ljava/lang/String;Ljava/lang/Boolean;Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/Property;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+       9: pop
+      10: return
+
+  private static com.kuka.rcs.as.pathplanner.fleet.plan.colli.SafeDistance lambda$null$1(java.util.function.BiFunction, java.lang.String, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokeinterface #70,  3           // InterfaceMethod java/util/function/BiFunction.apply:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       8: checkcast     #71                 // class com/kuka/rcs/as/pathplanner/fleet/plan/colli/SafeDistance
+      11: areturn
+
+  private static void lambda$null$0(com.kuka.rcs.as.pathplanner.fleet.base.graph.properties.PropertyHolder, java.lang.String, com.kuka.rcs.as.pathplanner.fleet.base.graph.properties.Property);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokeinterface #64,  3           // InterfaceMethod com/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder.add:(Ljava/lang/String;Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/Property;)Lcom/kuka/rcs/as/pathplanner/fleet/base/graph/properties/PropertyHolder;
+       8: pop
+       9: return
+}

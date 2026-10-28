@@ -1,0 +1,9 @@
+%YAML:1.0
+image: /opt/robot/map/251216hhj_kuka_floor_2.pgm
+resolution: 0.050000
+origin: [0.0, 0.0, 0.0]
+negate: 0
+occupied_thresh: 0.5
+free_thresh: 0.1
+graph_view_rotation(rad): 0.0
+offset: [0.0, 0.0]

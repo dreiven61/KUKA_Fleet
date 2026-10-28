@@ -1,0 +1,53 @@
+// This material is the exclusive property of KUKA.
+// Except as expressly permitted by separate agreement, this material
+// may only be used by members of the development department of KUKA
+// for internal development purposes of KUKA.
+//
+// Copyright (C) KUKA. All Rights Reserved.
+
+syntax = "proto3";
+
+package kuka.mobilerobotics.order.v1alpha1;
+
+import "kuka/mobilerobotics/graph/v1alpha1/topology_node_reference.proto";
+import "kuka/mobilerobotics/order/v1alpha1/task_state.proto";
+import "kuka/mobilerobotics/order/v1alpha1/task_type.proto";
+
+option java_package = "com.kuka.mobilerobotics.order.v1alpha1";
+option java_outer_classname = "TaskProto";
+option java_multiple_files = true;
+
+// A task consists of a trip to a station and an action that is executed there.
+message Task
+{
+  // The task's UUID.
+  string uuid = 1;
+
+  // The type of this task, either pick or drop.
+  TaskType task_type = 2;
+
+  // The UUID of the payload moved by this task.
+  string payload_uuid = 3;
+
+  // TBD: The following could probably be better expressed with two
+  // payload_location messages, but that should be part of the payload API.
+
+  // The UUID of the robot that executes this task.
+  string robot_uuid = 4;
+
+  // The UUID of the robot compartment, where the payload is picked or dropped.
+  string robot_compartment_uuid = 5;
+
+  // The UUID of the station, where the payload is picked or dropped.
+  string station_uuid = 6;
+
+  // The UUID of the station compartment, where the payload is picked or dropped.
+  string station_compartment_uuid = 7;
+
+  // The destination of the robot's trip, where the task action is executed.
+  kuka.mobilerobotics.graph.v1alpha1.TopologyNodeReference node = 8;
+
+  // The state of this task.
+  TaskState state = 9;
+
+}

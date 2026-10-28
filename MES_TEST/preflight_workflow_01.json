@@ -1,0 +1,126 @@
+{
+  "robot": {
+    "http_status": 200,
+    "response": {
+      "data": [
+        {
+          "robotId": "1",
+          "robotType": "KMP1500I",
+          "mapCode": "lay01",
+          "floorNumber": "dist1",
+          "buildingCode": "SIM01",
+          "containerCode": "",
+          "status": 3,
+          "occupyStatus": 0,
+          "batteryLevel": 97.0,
+          "batteryVoltage": 0.0,
+          "nodeCode": "lay01-dist1-63",
+          "nodeLabel": "63",
+          "nodeNumber": 63,
+          "x": "14000.0",
+          "y": "17000.0",
+          "robotOrientation": "180.0",
+          "liftStatus": 0,
+          "reliability": 1,
+          "runTime": "1813",
+          "karOsVersion": "",
+          "mileage": "0.0",
+          "leftMotorTemperature": "0.0",
+          "rightMotorTemperature": "0.0",
+          "rotateMotorTemperature": "0.0",
+          "liftMtrTemp": "0.0",
+          "leftFrtMovMtrTemp": "0.0",
+          "rightFrtMovMtrTemp": "0.0",
+          "leftReMovMtrTemp": "0.0",
+          "rightReMovMtrTemp": "0.0",
+          "rotateTimes": 0,
+          "liftTimes": 0,
+          "nodeForeignCode": "",
+          "errorMessage": " noError-idle"
+        }
+      ],
+      "code": "0",
+      "message": null,
+      "success": true
+    }
+  },
+  "cargo": {
+    "http_status": 200,
+    "response": {
+      "data": [
+        {
+          "containerCode": "SIM_CARGO_001",
+          "nodeCode": "lay01-dist1-89",
+          "orientation": "0.0",
+          "containerModelCode": "SIM_TRAY_001",
+          "emptyFullStatus": 1,
+          "inMapStatus": 1,
+          "isCarry": 0,
+          "containerCheckCode": "",
+          "mapCode": "lay01",
+          "districtCode": "dist1",
+          "customStatus": ""
+        }
+      ],
+      "code": "0",
+      "message": null,
+      "success": true
+    }
+  },
+  "activeJobs": {
+    "10": {
+      "http_status": 200,
+      "response": {
+        "data": [],
+        "code": null,
+        "message": null,
+        "success": true
+      }
+    },
+    "20": {
+      "http_status": 200,
+      "response": {
+        "data": [],
+        "code": null,
+        "message": null,
+        "success": true
+      }
+    },
+    "25": {
+      "http_status": 200,
+      "response": {
+        "data": [],
+        "code": null,
+        "message": null,
+        "success": true
+      }
+    },
+    "28": {
+      "http_status": 200,
+      "response": {
+        "data": [],
+        "code": null,
+        "message": null,
+        "success": true
+      }
+    },
+    "50": {
+      "http_status": 200,
+      "response": {
+        "data": [],
+        "code": null,
+        "message": null,
+        "success": true
+      }
+    },
+    "60": {
+      "http_status": 200,
+      "response": {
+        "data": [],
+        "code": null,
+        "message": null,
+        "success": true
+      }
+    }
+  }
+}
