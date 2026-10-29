@@ -30,6 +30,7 @@ public final class NativeHostTest {
         final TransferService.FleetClient client=this::post;
         final List<Map<String,Object>> trace;
         volatile int submits,controls;volatile boolean carried,negative,lost,controlNegative,controlLost;
+        volatile Integer rcsState;volatile boolean activeControlJob;
         volatile String cargoNode="SECS_ST_89",lastMode="";
         Harness(Path root,Path disk)throws Exception {
             journal.streamReady();state=new HostState(disk);service=new TransferService(client,journal);
@@ -38,10 +39,11 @@ public final class NativeHostTest {
         }
         Map<String,Object> post(String path,String token,Map<String,Object> body)throws Exception {
             if(!TOKEN.equals(token))throw new SecurityException();
-            if(path.equals("robotQuery"))return TransferService.map("success",true,"code","0","data",Arrays.asList(TransferService.map("robotId","1","status",3,"occupyStatus",0,"containerCode",carried?"SIM_CARGO_001":"","nodeCode","lay01-dist1-97")));
+            if(path.equals("robotQuery"))return TransferService.map("success",true,"code","0","data",Arrays.asList(TransferService.map("robotId","1","status",3,"occupyStatus",0,"containerCode",carried?"SIM_CARGO_001":"","nodeCode","lay01-dist1-97",
+                "missionCode","TR_TEST_001","rcsMissionCode","W-TEST-6837-1","rcsMissionStatus",rcsState)));
             if(path.equals("submitMission")){submits++;if(lost)throw new java.io.IOException("response lost");return TransferService.map("success",!negative,"code",negative?"FAIL":"0");}
             if(path.equals("containerQuery") || path.equals("containerQueryAll"))return TransferService.map("success",true,"code","0","data",Arrays.asList(TransferService.map("containerCode","SIM_CARGO_001","nodeCode",cargoNode,"isCarry",carried?1:0,"inMapStatus",1,"containerModelCode","SIM_TRAY_001")));
-            if(path.equals("jobQuery"))return TransferService.map("success",true,"data",Arrays.asList(TransferService.map("jobCode","TR_TEST_001","workflowId",6837,"robotId","1","containerCode","SIM_CARGO_001","status",30,"completeTime","observed-time","finalNodeCode","lay01-dist1-97","targetCellCode","lay01-dist1-97")));
+            if(path.equals("jobQuery"))return TransferService.map("success",true,"data",Arrays.asList(TransferService.map("jobCode","TR_TEST_001","workflowId",6837,"robotId","1","containerCode","SIM_CARGO_001","status",activeControlJob?20:30,"warnFlag",0,"completeTime","observed-time","finalNodeCode","lay01-dist1-97","targetCellCode","lay01-dist1-97")));
             if(Arrays.asList("missionCancel","pauseMission","recoverMission").contains(path)){controls++;lastMode=String.valueOf(body.get("cancelMode"));if(controlLost)throw new java.io.IOException("Control response lost");return TransferService.map("success",!controlNegative,"code",controlNegative?"FAIL":"0");}
             throw new AssertionError("Unexpected API "+path);
         }
@@ -78,7 +80,7 @@ public final class NativeHostTest {
             Harness h=new Harness(root,null);h.engine.transfer(request);
             if(cmd.equals("ABORT")){check(ack(h.engine.control(cmd,"TR_TEST_001"))==2 && h.controls==0,"ABORT cannot target waiting command");h.loaded();}
             check(ack(h.engine.control(cmd,"TR_TEST_001"))==4,"Control API accepted "+cmd);
-            check(h.lastMode.equals(cmd.equals("CANCEL")?"NORMAL":"FORCE"),"Different Fleet cancel modes "+cmd);
+            check(h.lastMode.equals("FORCE"),"Interrupt current Fleet move without reaching target "+cmd);
             check(ack(h.engine.control(cmd,"TR_TEST_001"))==5 && h.controls==1,"No repeated control "+cmd);
             h.engine.tick();check(h.count(cmd.equals("CANCEL")?204:201)==0,"No result before callback "+cmd);
             h.observe(h.event("CANCEL_COMPLETED",true));h.engine.tick();
@@ -86,6 +88,9 @@ public final class NativeHostTest {
             check(h.count(207)==0,"Cancel/abort is not successful207 "+cmd);
             if(cmd.equals("ABORT"))check(h.state.data.reports.get(h.state.data.reports.size()-1).location.equals("1"),"Carried cargo stays on actual vehicle");
         }
+        Harness afterPickup=new Harness(root,null);afterPickup.engine.transfer(request);afterPickup.loaded();
+        check(ack(afterPickup.engine.control("CANCEL","TR_TEST_001"))==2 && afterPickup.controls==0,
+            "FORCE mode does not allow CANCEL after pickup has started");
         Harness cancelFail=new Harness(root,null);cancelFail.engine.transfer(request);cancelFail.engine.control("CANCEL","TR_TEST_001");cancelFail.observe(cancelFail.event("CANCEL_COMPLETED",false));cancelFail.engine.tick();
         check(cancelFail.count(205)==1 && cancelFail.state.data.jobs.get("TR_TEST_001").phase.equals("ACTIVE"),"Cancel failure leaves transport active");
         Harness controlRejected=new Harness(root,null);controlRejected.engine.transfer(request);controlRejected.controlNegative=true;
@@ -97,9 +102,11 @@ public final class NativeHostTest {
         Harness pause=new Harness(root,null);pause.engine.transfer(request);pause.loaded();pause.engine.control("PAUSE","");
         check(pause.count(107)==1 && pause.count(105)==0,"PAUSE acceptance only starts pausing");
         Map<String,Object> another=new LinkedHashMap<>(request);another.put("COMMANDID","ANOTHER");check(ack(pause.engine.transfer(another))==2,"Pause gates new dispatch");
-        pause.observe(pause.event("TASK_SUSPENDED",true));pause.engine.tick();check(pause.count(209)==1 && pause.count(105)==1,"Observed suspension ->209 and105");
+        pause.observe(pause.event("TASK_SUSPENDED",true));pause.engine.tick();check(pause.count(209)==0,"Suspension callback alone does not prove PAUSED");
+        pause.activeControlJob=true;pause.rcsState=12;pause.engine.tick();check(pause.count(209)==1 && pause.count(105)==1,"Confirmed RCS PAUSED ->209 and105");
         pause.engine.control("RESUME","");pause.engine.tick();check(pause.count(210)==0,"No fake resume before execution");
-        pause.observe(pause.event("MOVE_BEGIN",true));pause.engine.tick();check(pause.count(210)==1 && pause.count(103)==1,"Observed execution ->210 and103");
+        pause.observe(pause.event("MOVE_BEGIN",true));pause.engine.tick();check(pause.count(210)==0,"Stale execution callback alone does not prove resume");
+        pause.rcsState=9;pause.engine.tick();check(pause.count(210)==1 && pause.count(103)==1,"Confirmed RCS execution ->210 and103");
         Harness alarm=new Harness(root,null);alarm.engine.transfer(request);
         Map<String,Object> warning=alarm.event("WARNING",false);warning.put("warnCode","PP_NoPath");alarm.observe(warning);alarm.observe(warning);
         check(alarm.count(702)==1 && alarm.count(207)==0,"Duplicate warning coalesced; no fake terminal failure");

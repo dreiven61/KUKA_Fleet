@@ -91,8 +91,8 @@ public final class NativeHostService implements AutoCloseable {
             if(m.sessionId()!=equipment.sessionId())return;
             if(m.getStream()==2 && (m.getFunction()==41 || m.getFunction()==49) && !m.wbit())return;
             int s=m.getStream(),f=m.getFunction();Secs2 reply=null;int replyFunction=f+1;
-            if(s==1 && f==13){HostProtocol.listOf(m.secs2(),0,"BODY");reply=list(binary((byte)0),list(ascii("FLEET"),ascii("1.1.1")));}
-            else if(s==1 && f==1)reply=list(ascii("FLEET"),ascii("1.1.1"));
+            if(s==1 && f==13){HostProtocol.listOf(m.secs2(),0,"BODY");reply=list(binary((byte)0),list(ascii("FLEET"),ascii("1.1.3")));}
+            else if(s==1 && f==1)reply=list(ascii("FLEET"),ascii("1.1.3"));
             else if(s==1 && f==17)reply=binary((byte)0);
             else if(s==2 && f==49){
                 if(!communicating)reply=HostProtocol.ack(2);

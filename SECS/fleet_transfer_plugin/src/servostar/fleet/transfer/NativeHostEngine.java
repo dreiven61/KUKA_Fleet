@@ -134,8 +134,10 @@ public final class NativeHostEngine {
             // Obtain and persist actual cargo location BEFORE accepting a control request.
             job.location=location(job);job.control=command;job.controlState="SENDING";state.save();
             Map<String,Object> reply;
+            // Both commands interrupt the current Fleet move instead of finishing
+            // its target. CANCEL still has the pre-pickup gate and CANCEL reports.
             try {reply=client.post("missionCancel",token,TransferService.map("requestId",UUID.randomUUID().toString(),"missionCode",id,
-                "cancelMode","CANCEL".equals(command)?"NORMAL":"FORCE","reason","SECS "+command));}
+                "cancelMode","FORCE","reason","SECS "+command));}
             catch(Exception ex){job.controlState="UNCERTAIN";state.save();throw new UncertainCommand();}
             if(!ok(reply)){job.control="";job.controlState="";state.save();return HostProtocol.ack(2);}
             job.controlState="ACCEPTED";queue(job,"TRANSFER","CANCEL".equals(command)?206:203,job.location,0,"control-start:"+job.responses.size());state.save();
@@ -152,7 +154,7 @@ public final class NativeHostEngine {
                 jobs.add(j);
             }
             state.data.tsc=pause?"PAUSING":"RESUMING";
-            for(HostState.Job j:jobs){j.control=command;j.controlState="SENDING";}
+            for(HostState.Job j:jobs){j.control=command;j.controlState="SENDING";j.controlGeneration++;}
             state.save();
             int accepted=0;
             for(HostState.Job j:jobs){
@@ -190,10 +192,8 @@ public final class NativeHostEngine {
                 // Preserve a terminal fact even if the callback races the REST response.
                 j.request.put("_controlObserved",Boolean.TRUE.equals(event.get("success")) && "0".equals(text(event,"resultCode"))?"SUCCESS":"FAILURE");
             }
-            if(Boolean.TRUE.equals(event.get("success")) && "0".equals(text(event,"resultCode"))){
-                if("PAUSE".equals(j.control) && "TASK_SUSPENDED".equals(status))j.request.put("_pauseObserved","true");
-                if("RESUME".equals(j.control) && ("MOVE_BEGIN".equals(status) || "ACTION_BEGIN".equals(status)))j.request.put("_resumeObserved","true");
-            }
+            // TASK_SUSPENDED is an exception callback, not the RCS PAUSED state.
+            // PAUSE/RESUME completion is confirmed against the current job and AMR.
             if("TASK_COMPLETED".equals(status) && (!Boolean.TRUE.equals(event.get("success")) || !"0".equals(text(event,"resultCode"))))
                 j.request.put("_terminalFailure",text(event,"resultCode"));
             state.save();
@@ -243,8 +243,11 @@ public final class NativeHostEngine {
             j.request.remove("_controlObserved");j.control="";j.controlState="";state.save();
         }else {
             boolean pause="PAUSE".equals(control);String key=pause?"_pauseObserved":"_resumeObserved";
-            if(!j.request.containsKey(key))return;
-            String loc=location(j);queue(j,"TRANSFER",pause?209:210,loc,0,"pause:"+j.responses.size());
+            if(j.instance.isEmpty() || j.vehicle.isEmpty())return;
+            Map<String,Object> jobs=client.post("jobQuery",token,TransferService.map("jobCode",j.request.get("COMMANDID"),"limit",2));
+            Map<String,Object> robots=client.post("robotQuery",token,TransferService.map("robotId",j.vehicle));
+            if(!ControlStateVerifier.confirmed(pause,j,jobs,robots))return;
+            String loc=location(j);queue(j,"TRANSFER",pause?209:210,loc,0,"system-control:"+j.controlGeneration+":"+control);
             j.paused=pause;j.request.remove(key);j.control="";j.controlState="";state.save();
         }
     }

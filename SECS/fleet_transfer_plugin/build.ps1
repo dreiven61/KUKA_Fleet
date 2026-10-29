@@ -15,7 +15,7 @@ New-Item -ItemType Directory -Force -Path $classes,$testClasses | Out-Null
 $sources = @(Get-ChildItem -LiteralPath (Join-Path $PSScriptRoot 'src') -Recurse -Filter '*.java' | ForEach-Object FullName)
 & "$JavaHome\bin\javac.exe" --release 8 -Xlint:-options -encoding UTF-8 -proc:none -cp "$SdkJar;$SecsJar" -d $classes @sources
 if ($LASTEXITCODE -ne 0) { throw 'Compile failed' }
-$jarPath = Join-Path $output 'servostar-mes-transfer-1.1.1.jar'
+$jarPath = Join-Path $output 'servostar-mes-transfer-1.1.3.jar'
 & "$JavaHome\bin\jar.exe" cfm $jarPath (Join-Path $PSScriptRoot 'MANIFEST.MF') -C $classes .
 if ($LASTEXITCODE -ne 0) { throw 'Packaging failed' }
 python (Join-Path $PSScriptRoot 'package_runtime.py') $SdkJar $jarPath $SecsJar
@@ -37,6 +37,8 @@ if ($LASTEXITCODE -ne 0) { throw 'Work port tests failed' }
 if ($LASTEXITCODE -ne 0) { throw 'Status monitor tests failed' }
 & "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.NativeHostTest $PSScriptRoot
 if ($LASTEXITCODE -ne 0) { throw 'Native HSMS/control tests failed' }
+& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.PauseResumeTest $PSScriptRoot
+if ($LASTEXITCODE -ne 0) { throw 'Pause/resume state confirmation tests failed' }
 & "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.CargoTest $PSScriptRoot
 if ($LASTEXITCODE -ne 0) { throw 'Inventory/scan tests failed' }
 & "$JavaHome\bin\java.exe" '-Dlog4j2.disable.jmx=true' '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' '-Dservostar.transfer.offlineTest=true' -cp "$SdkJar;$testClasses" servostar.fleet.transfer.PluginLoadTest $jarPath $SdkJar

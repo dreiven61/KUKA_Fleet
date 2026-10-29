@@ -14,6 +14,7 @@ public final class HostState {
         public Map<String,Object> request=new LinkedHashMap<>();
         public String phase="SUBMITTING", vehicle="", instance="", control="", controlState="", location="";
         public int next;
+        public long controlGeneration;
         public boolean paused;
         public Set<String> responses=new LinkedHashSet<>();
     }
