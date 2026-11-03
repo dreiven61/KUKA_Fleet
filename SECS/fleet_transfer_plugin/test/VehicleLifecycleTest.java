@@ -66,13 +66,23 @@ public final class VehicleLifecycleTest {
             mutations.incrementAndGet();throw new AssertionError("Lifecycle gates cannot mutate Fleet");
         },journal);
         check(Boolean.TRUE.equals(service.stage(req,"test-token","unassigned").get("success")),"610 requires completed job, unloaded destination cargo and actual free vehicle");
-        for(Object[] change:new Object[][]{{"status",4},{"occupyStatus",1},{"containerCode","SIM_CARGO_001"},{"nodeCode","lay01-dist1-89"},{"robotId","2"}}) {
+        for(Object[] change:new Object[][]{{"status",4},{"occupyStatus",1},{"containerCode","SIM_CARGO_001"},{"robotId","2"}}) {
             Object original=robot.put((String)change[0],change[1]);
             check(!Boolean.TRUE.equals(service.stage(req,"test-token","unassigned").get("success")),"610 blocks vehicle "+change[0]);
             robot.put((String)change[0],original);
         }
         rows.add(new LinkedHashMap<>(robot));
         check(!Boolean.TRUE.equals(service.stage(req,"test-token","unassigned").get("success")),"Duplicate robot rows block release");rows.remove(1);
+        robot.put("nodeCode","lay01-dist1-105");
+        check(Boolean.TRUE.equals(service.stage(req,"test-token","unassigned").get("success")),"Standard API omitted null mission fields: completed idle parked AMR is released");
+        robot.put("missionCode","");robot.put("rcsMissionCode","");
+        check(Boolean.TRUE.equals(service.stage(req,"test-token","unassigned").get("success")),"Completed cargo plus idle unbound parked vehicle proves release");
+        for(String key:Arrays.asList("missionCode","rcsMissionCode")){
+            robot.put(key,"ANOTHER_JOB");
+            check(!Boolean.TRUE.equals(service.stage(req,"test-token","unassigned").get("success")),"Parking still bound to a mission blocks release "+key);
+            robot.put(key,"");
+        }
+        robot.put("nodeCode","lay01-dist1-97");
         Map<String,Object> job=(Map<String,Object>)((List<?>)jobs.get("data")).get(0);
         job.put("status",20);check(!Boolean.TRUE.equals(service.stage(req,"test-token","unassigned").get("success")),"Idle vehicle alone cannot release incomplete command");job.put("status",30);
         Map<String,Object> c=(Map<String,Object>)((List<?>)cargo.get("data")).get(0);

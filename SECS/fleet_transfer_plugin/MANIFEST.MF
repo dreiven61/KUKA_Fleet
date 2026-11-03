@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Plugin-Id: SERVOSTAR-MES-TRANSFER
-Plugin-Version: 1.1.3
+Plugin-Version: 1.5.2
 Plugin-Dependencies: STANDARD-API@2.15.5
 Plugin-Class: servostar.fleet.transfer.TransferPlugin
 Plugin-Provider: ServoStar (custom test plugin)
-Plugin-Description: From/To RACK_MOVE with observed vehicle and cargo lifecycle gates
+Plugin-Description: Unified SECS PortID and VehicleID from dynamic Fleet catalog
 

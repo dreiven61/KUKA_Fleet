@@ -1,0 +1,25 @@
+<Window x:Class="KukaMcs.App.JobHistoryWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="MCS 작업 이력 · 실시간 연동" Width="1550" Height="850" MinWidth="1050" MinHeight="600" WindowStartupLocation="CenterOwner">
+  <Border Padding="14" Background="#F2F4F7"><Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="3*"/><RowDefinition Height="6"/><RowDefinition Height="3*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <DockPanel Margin="0,0,0,12">
+      <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center"><TextBlock x:Name="PendingText" VerticalAlignment="Center" Margin="0,0,15,0" Foreground="#536174"/><Button Content="COMMANDID 복사" Click="CopyCommand_Click"/><Button Content="선택 작업 로그 보기" Click="Logs_Click" ToolTip="로그 창을 열고 선택한 작업의 COMMANDID로 연동합니다."/></StackPanel>
+      <StackPanel><TextBlock Text="MCS / 작업 이력" Foreground="#F56600" FontSize="21" FontWeight="Bold"/><TextBlock Text="메인 화면과 목록·선택·상세 이력 실시간 연동" Foreground="#536174" Margin="0,4,0,0"/></StackPanel>
+    </DockPanel>
+    <DataGrid Grid.Row="1" x:Name="HistoryGrid" IsSynchronizedWithCurrentItem="False" AutomationProperties.Name="별도 창 작업 이력"><DataGrid.Columns>
+      <DataGridTextColumn Header="생성 시각" Binding="{Binding Time}" Width="100"/><DataGridTextColumn Header="상태" Binding="{Binding State}" Width="180"/>
+      <DataGridTextColumn Header="AGV" Binding="{Binding VehicleId}" Width="100"/><DataGridTextColumn Header="화물 ID" Binding="{Binding CarrierId}" Width="170"/>
+      <DataGridTextColumn Header="FROM → TO" Binding="{Binding Route}" Width="170"/><DataGridTextColumn Header="CEID" Binding="{Binding Ceid}" Width="60"/>
+      <DataGridTextColumn Header="결과" Binding="{Binding Result}" Width="60"/><DataGridTextColumn Header="COMMANDID" Binding="{Binding CommandId}" Width="280"/>
+      <DataGridTextColumn Header="상세" Binding="{Binding Detail}" Width="*" MinWidth="230"/>
+    </DataGrid.Columns><DataGrid.RowStyle><Style TargetType="DataGridRow"><Style.Triggers><Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="#DCEBFF"/><Setter Property="Foreground" Value="#173B64"/><Setter Property="FontWeight" Value="SemiBold"/></Trigger></Style.Triggers></Style></DataGrid.RowStyle></DataGrid>
+    <GridSplitter Grid.Row="2" Height="6" HorizontalAlignment="Stretch" Background="#CBD2DC"/>
+    <Grid Grid.Row="3"><Grid.ColumnDefinitions><ColumnDefinition Width="2*"/><ColumnDefinition Width="6"/><ColumnDefinition Width="3*"/></Grid.ColumnDefinitions>
+      <TextBox x:Name="DetailsText" IsReadOnly="True" AcceptsReturn="True" VerticalContentAlignment="Top" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="White" AutomationProperties.Name="별도 창 선택 작업 상세"/>
+      <GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#CBD2DC"/>
+      <DataGrid Grid.Column="2" x:Name="HistoryTimelineGrid" MouseUp="Timeline_MouseUp" ToolTip="행을 클릭하면 해당 SECS 원문을 로그 창에서 표시합니다." AutomationProperties.Name="별도 창 작업 타임라인"><DataGrid.Columns>
+        <DataGridTextColumn Header="수신/기록 시각" Binding="{Binding Time}" Width="120"/><DataGridTextColumn Header="상태" Binding="{Binding State}" Width="175"/>
+        <DataGridTextColumn Header="CEID" Binding="{Binding Ceid}" Width="55"/><DataGridTextColumn Header="상세" Binding="{Binding Detail}" Width="*" MinWidth="230"/>
+      </DataGrid.Columns></DataGrid>
+    </Grid>
+    <TextBlock Grid.Row="4" Margin="0,8,0,0" Foreground="#536174" TextWrapping="Wrap" Text="타임라인 행 클릭 → 해당 SECS 원문으로 이동 · 메인과 동일한 최근 200건 · 선택 작업 로그 보기를 누르면 로그 창도 작업 선택을 따라갑니다. 이 창은 조회 전용입니다."/>
+  </Grid></Border>
+</Window>

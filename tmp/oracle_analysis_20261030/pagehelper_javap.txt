@@ -1,0 +1,59 @@
+Compiled from "PageHelperConfig.java"
+public class com.kuka.wcs.config.PageHelperConfig {
+  public com.kuka.wcs.config.PageHelperConfig();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public org.mybatis.spring.SqlSessionFactoryBean sqlSessionFactoryBean(javax.sql.DataSource);
+    Code:
+       0: new           #2                  // class org/mybatis/spring/SqlSessionFactoryBean
+       3: dup
+       4: invokespecial #3                  // Method org/mybatis/spring/SqlSessionFactoryBean."<init>":()V
+       7: astore_2
+       8: aload_2
+       9: aload_1
+      10: invokevirtual #4                  // Method org/mybatis/spring/SqlSessionFactoryBean.setDataSource:(Ljavax/sql/DataSource;)V
+      13: new           #5                  // class com/github/pagehelper/PageInterceptor
+      16: dup
+      17: invokespecial #6                  // Method com/github/pagehelper/PageInterceptor."<init>":()V
+      20: astore_3
+      21: new           #7                  // class java/util/Properties
+      24: dup
+      25: invokespecial #8                  // Method java/util/Properties."<init>":()V
+      28: astore        4
+      30: aload         4
+      32: ldc           #9                  // String offsetAsPageNum
+      34: ldc           #10                 // String true
+      36: invokevirtual #11                 // Method java/util/Properties.setProperty:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;
+      39: pop
+      40: aload         4
+      42: ldc           #12                 // String helperDialect
+      44: ldc           #13                 // String postgresql
+      46: invokevirtual #11                 // Method java/util/Properties.setProperty:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;
+      49: pop
+      50: aload         4
+      52: ldc           #14                 // String rowBoundsWithCount
+      54: ldc           #10                 // String true
+      56: invokevirtual #11                 // Method java/util/Properties.setProperty:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;
+      59: pop
+      60: aload         4
+      62: ldc           #15                 // String reasonable
+      64: ldc           #10                 // String true
+      66: invokevirtual #11                 // Method java/util/Properties.setProperty:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;
+      69: pop
+      70: aload_3
+      71: aload         4
+      73: invokevirtual #16                 // Method com/github/pagehelper/PageInterceptor.setProperties:(Ljava/util/Properties;)V
+      76: aload_2
+      77: iconst_1
+      78: anewarray     #17                 // class org/apache/ibatis/plugin/Interceptor
+      81: dup
+      82: iconst_0
+      83: aload_3
+      84: aastore
+      85: invokevirtual #18                 // Method org/mybatis/spring/SqlSessionFactoryBean.setPlugins:([Lorg/apache/ibatis/plugin/Interceptor;)V
+      88: aload_2
+      89: areturn
+}

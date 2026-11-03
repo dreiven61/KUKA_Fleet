@@ -1,0 +1,16 @@
+PASS: 34 PC cargo/scan/history checks; no Fleet connection.
+PASS: 37 HCACK/CPACK and rejection diagnostic checks.
+PASS: 26 loaded recovery request, ownership and event checks; local only.
+PASS: 423 checks; loopback HSMS only. No actual Fleet connection or transport.
+Test data: C:\Users\dreiv\AppData\Local\Temp\KukaMcsTests_ce6cbdd8f3b942ca88ccadea56247264
+  복원할 프로젝트를 확인하는 중...
+  C:\work\KUKA\KUKA_Fleet\VirtualMCS\App\KukaMcs.App.csproj을(를) 362밀리초 동안 복원했습니다.
+  C:\work\KUKA\KUKA_Fleet\VirtualMCS\Core\KukaMcs.Core.csproj을(를) 362밀리초 동안 복원했습니다.
+  KukaMcs.Core -> C:\work\KUKA\KUKA_Fleet\VirtualMCS\Core\bin\Release\net10.0\KukaMcs.Core.dll
+  KukaMcs.App -> C:\work\KUKA\KUKA_Fleet\VirtualMCS\App\bin\Release\net10.0-windows\win-x64\KukaVirtualMCS.dll
+  KukaMcs.App -> C:\work\KUKA\KUKA_Fleet\VirtualMCS\dist-2.3.8\
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          8B295F236F136CA1F6A1D5B5D7DF6D953B0628AF66B82CA7C75CF94A8711B80A       C:\work\KUKA\KUKA_Fleet\VirtualM…
+

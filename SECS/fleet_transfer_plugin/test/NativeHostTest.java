@@ -19,8 +19,12 @@ public final class NativeHostTest {
     interface Condition{boolean ready()throws Exception;}
     static void waitFor(Condition c,String label)throws Exception{long end=System.currentTimeMillis()+18000;while(!c.ready() && System.currentTimeMillis()<end)Thread.sleep(50);check(c.ready(),label);}
     static int ack(Secs2 body)throws Exception{return body.get(0).getByte(0)&255;}
-    static Secs2 transferBody(String id){return list(uint4(0),ascii(""),ascii("TRANSFER"),list(
-        list(ascii("COMMANDINFO"),list(list(ascii("COMMANDID"),ascii(id)),list(ascii("PRIORITY"),uint2(1)),list(ascii("REPLACE"),uint2(0)))),
+    static Secs2 transferBody(String id){return transferBody(id,false);}
+    static Secs2 transferBody(String id,boolean legacy){
+        List<Secs2> command=new ArrayList<>(Arrays.asList(list(ascii("COMMANDID"),ascii(id)),list(ascii("PRIORITY"),uint2(1))));
+        if(legacy)command.add(list(ascii("REPLACE"),uint2(0)));
+        return list(uint4(0),ascii(""),ascii("TRANSFER"),list(
+        list(ascii("COMMANDINFO"),list(command)),
         list(ascii("TRANSFERINFO"),list(list(ascii("CARRIERID"),ascii("SIM_CARGO_001")),list(ascii("SOURCEPORT"),ascii("PORT_89")),list(ascii("DESTPORT"),ascii("PORT_97"))))));}
     static class Harness {
         final TransferJournal journal=new TransferJournal(null);
@@ -32,6 +36,7 @@ public final class NativeHostTest {
         volatile int submits,controls;volatile boolean carried,negative,lost,controlNegative,controlLost;
         volatile Integer rcsState;volatile boolean activeControlJob;
         volatile String cargoNode="SECS_ST_89",lastMode="";
+        volatile String robotNode="lay01-dist1-97",missionCode="TR_TEST_001",rcsCode="W-TEST-6837-1";
         Harness(Path root,Path disk)throws Exception {
             journal.streamReady();state=new HostState(disk);service=new TransferService(client,journal);
             engine=new NativeHostEngine(service,client,state,TOKEN,Collections.singletonMap("PP_NoPath",TransferService.map("alid",900001,"category",6,"text","FLEET_PATH_NOT_FOUND")),Collections.singletonMap("MOCK_SOURCE_INTERLOCK",5),9000);
@@ -39,8 +44,8 @@ public final class NativeHostTest {
         }
         Map<String,Object> post(String path,String token,Map<String,Object> body)throws Exception {
             if(!TOKEN.equals(token))throw new SecurityException();
-            if(path.equals("robotQuery"))return TransferService.map("success",true,"code","0","data",Arrays.asList(TransferService.map("robotId","1","status",3,"occupyStatus",0,"containerCode",carried?"SIM_CARGO_001":"","nodeCode","lay01-dist1-97",
-                "missionCode","TR_TEST_001","rcsMissionCode","W-TEST-6837-1","rcsMissionStatus",rcsState)));
+            if(path.equals("robotQuery"))return TransferService.map("success",true,"code","0","data",Arrays.asList(TransferService.map("robotId","1","status",3,"occupyStatus",0,"containerCode",carried?"SIM_CARGO_001":"","nodeCode",robotNode,
+                "missionCode",missionCode,"rcsMissionCode",rcsCode,"rcsMissionStatus",rcsState,"liftStatus",carried?1:0)));
             if(path.equals("submitMission")){submits++;if(lost)throw new java.io.IOException("response lost");return TransferService.map("success",!negative,"code",negative?"FAIL":"0");}
             if(path.equals("containerQuery") || path.equals("containerQueryAll"))return TransferService.map("success",true,"code","0","data",Arrays.asList(TransferService.map("containerCode","SIM_CARGO_001","nodeCode",cargoNode,"isCarry",carried?1:0,"inMapStatus",1,"containerModelCode","SIM_TRAY_001")));
             if(path.equals("jobQuery"))return TransferService.map("success",true,"data",Arrays.asList(TransferService.map("jobCode","TR_TEST_001","workflowId",6837,"robotId","1","containerCode","SIM_CARGO_001","status",activeControlJob?20:30,"warnFlag",0,"completeTime","observed-time","finalNodeCode","lay01-dist1-97","targetCellCode","lay01-dist1-97")));
@@ -61,16 +66,18 @@ public final class NativeHostTest {
         check(NativeHostService.DEFAULT_PORT==5556,"Existing Fleet endpoint default5556");
         Path root=Paths.get(args[0]);ObjectMapper json=new ObjectMapper();
         Map<String,Object> request=HostProtocol.transfer(transferBody("TR_TEST_001"));
+        check(Integer.valueOf(0).equals(request.get("REPLACE")),"Spec COMMANDID/PRIORITY without REPLACE is accepted with safe internal default");
+        check(HostProtocol.transfer(transferBody("TR_TEST_001",true)).equals(request),"Legacy Virtual MCS REPLACE=0 remains compatible with same durable request identity");
         Harness normal=new Harness(root,null);
         check(ack(normal.engine.transfer(request))==4,"Actual API acceptance -> HCACK4");
         check(ack(normal.engine.transfer(request))==5 && normal.submits==1,"Duplicate -> HCACK5, one submit");
         check(normal.count(207)==0,"No early completion");
         for(Map<String,Object> e:normal.trace)normal.observe(e);normal.cargoNode="SECS_ST_97";
         for(int i=0;i<14;i++)normal.engine.tick();
-        check(normal.state.data.reports.size()==14,"All fourteen normal reports");
+        check(normal.state.data.reports.stream().filter(d->d.ceid!=9003).count()==14,"All fourteen normal reports");
         check("COMPLETED".equals(normal.state.data.jobs.get("TR_TEST_001").phase),"Normal completion verified");
-        check(normal.state.data.reports.get(13).ceid==207 && normal.state.data.reports.get(13).location.equals("PORT_97"),"207 uses confirmed cargo port");
-        Harness rejected=new Harness(root,null);rejected.negative=true;check(ack(rejected.engine.transfer(request))==2 && rejected.state.data.reports.isEmpty(),"API rejection produces HCACK2 and no fake start");
+        check(normal.state.data.reports.get(normal.state.data.reports.size()-1).ceid==207 && normal.state.data.reports.get(normal.state.data.reports.size()-1).location.equals("PORT_97"),"207 uses confirmed cargo port");
+        Harness rejected=new Harness(root,null);rejected.negative=true;check(ack(rejected.engine.transfer(request))==2 && rejected.count(208)==0 && rejected.count(9003)==1,"API rejection produces HCACK2 and no fake start");
         Harness uncertain=new Harness(root,null);uncertain.lost=true;
         try{uncertain.engine.transfer(request);throw new AssertionError("Lost submit misreported as rejection");}catch(NativeHostEngine.UncertainCommand expected){checks++;}
         check(ack(uncertain.engine.transfer(request))==5 && uncertain.submits==1,"Response loss never replays command");
@@ -163,6 +170,7 @@ public final class NativeHostTest {
             live.observe(warning);waitFor(()->counts.getOrDefault(702,new AtomicInteger()).get()==1,"Wire S5F1/S5F2 set followed by unit702");
             warning=h.event("WARN_CLEAR",true);warning.put("warnCode","PP_NoPath");live.observe(warning);
             waitFor(()->counts.getOrDefault(701,new AtomicInteger()).get()==1,"Wire S5F1/S5F2 clear followed by unit701");
+            waitFor(()->counts.getOrDefault(9003,new AtomicInteger()).get()>=1,"Wire9003 rejection diagnostic and S6F12 ACK");
             check(counts.getOrDefault(5001,new AtomicInteger()).get()==2,"Two real S5F1 reports with U4 ALID900001");
         }finally{if(host!=null)host.close();server.close();if(previous==null)System.clearProperty("servostar.secs.config");else System.setProperty("servostar.secs.config",previous);}
     }

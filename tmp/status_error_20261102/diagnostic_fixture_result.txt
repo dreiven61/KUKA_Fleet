@@ -1,0 +1,18 @@
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+stable-unloaded SV25 OK entries=3 APIreads=8
+stable-unloaded SV58 OK entries=10 APIreads=8
+stable-unloaded SV23 OK entries=0 APIreads=8
+stable-unloaded SV21 OK entries=1 APIreads=8
+cargo-newer-than-robot SV25 FAIL IllegalStateException: Carrier snapshots disagree; requery before dispatch APIreads=8
+cargo-newer-than-robot SV58 FAIL IllegalStateException: Carrier snapshots disagree; requery before dispatch APIreads=8
+cargo-newer-than-robot SV23 FAIL IllegalStateException: Carrier snapshots disagree; requery before dispatch APIreads=8
+cargo-newer-than-robot SV21 FAIL IllegalStateException: Carrier snapshots disagree; requery before dispatch APIreads=8
+owner-before-lift SV25 FAIL IllegalStateException: Conflicting carrier ownership APIreads=8
+owner-before-lift SV58 FAIL IllegalStateException: Conflicting carrier ownership APIreads=8
+owner-before-lift SV23 FAIL IllegalStateException: Conflicting carrier ownership APIreads=8
+owner-before-lift SV21 FAIL IllegalStateException: Conflicting carrier ownership APIreads=8
+stable-loaded SV25 OK entries=3 APIreads=8
+stable-loaded SV58 OK entries=10 APIreads=8
+stable-loaded SV23 OK entries=0 APIreads=8
+stable-loaded SV21 OK entries=1 APIreads=8
+PASS 16 diagnostic scenarios; fixtures only, no Fleet operations.

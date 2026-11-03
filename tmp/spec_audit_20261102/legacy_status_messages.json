@@ -1,0 +1,66 @@
+[
+  {
+    "source": "C:\\SECOMTEST\\HOST01\\SECS-II\\2024-04-25\\2024-04-25(14o'clock).log",
+    "time": "2024-04-25 14:11:16.669",
+    "direction": "RECV",
+    "sf": "S1F3",
+    "header": "S1F3:S1F3 W SystemBytes=1:",
+    "body": "\r\n                               <L,1 [SVCOUNT]\r\n                                   <U2,1 '0' [SVID]>\r\n                               >.\r\n"
+  },
+  {
+    "source": "C:\\SECOMTEST\\HOST01\\SECS-II\\2024-04-25\\2024-04-25(14o'clock).log",
+    "time": "2024-04-25 14:11:36.042",
+    "direction": "RECV",
+    "sf": "S1F3",
+    "header": "S1F3:S1F3 W SystemBytes=2:",
+    "body": "\r\n                               <L,6 [SVCOUNT]\r\n                                   <U2,1 '17' [SVID]>\r\n                                   <U2,1 '21' [SVID]>\r\n                                   <U2,1 '23' [SVID]>\r\n                                   <U2,1 '25' [SVID]>\r\n                                   <U2,1 '3' [SVID]>\r\n                                   <U2,1 '58' [SVID]>\r\n                               >.\r\n"
+  },
+  {
+    "source": "C:\\SECOMTEST\\HOST01\\SECS-II\\2024-04-25\\2024-04-25(14o'clock).log",
+    "time": "2024-04-25 14:11:36.106",
+    "direction": "SEND",
+    "sf": "S1F4",
+    "header": "S1F4 SystemBytes=2:",
+    "body": "\r\n                               <L,6\r\n                                   <U2,1 '3' [ControlState]>\r\n                                   <L,0 [EnhancedCarriers]>\r\n                                   <L,0 [EnhancedTransfers]>\r\n                                   <L,6 [EnhancedVehicles]\r\n                                       <L,3 [EnhancedVehicleInfoi1]\r\n                                           <A,13 'C0VGVA01_VC05' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                       <L,3 [EnhancedVehicleInfoi2]\r\n                                           <A,16 'C0VGVA01_VC05_UP' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                       <L,3 [EnhancedVehicleInfoi3]\r\n                                           <A,16 'C0VGVA01_VC05_DW' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                       <L,3 [EnhancedVehicleInfoi4]\r\n                                           <A,13 'C0VGVA01_VC02' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                       <L,3 [EnhancedVehicleInfoi5]\r\n                                           <A,16 'C0VGVA01_VC02_UP' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                       <L,3 [EnhancedVehicleInfoi6]\r\n                                           <A,16 'C0VGVA01_VC02_DW' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                   >\r\n                                   <L,0 [UnitAlarmStatList]>\r\n                                   <L,0 [EnhancedPorts]>\r\n                               >.\r\n"
+  },
+  {
+    "source": "C:\\SECOMTEST\\HOST01\\SECS-II\\2024-04-25\\2024-04-25(14o'clock).log",
+    "time": "2024-04-25 14:12:03.831",
+    "direction": "RECV",
+    "sf": "S1F3",
+    "header": "S1F3:S1F3 W SystemBytes=4:",
+    "body": "\r\n                               <L,1 [SVCOUNT]\r\n                                   <U2,1 '0' [SVID]>\r\n                               >.\r\n"
+  },
+  {
+    "source": "C:\\SECOMTEST\\HOST01\\SECS-II\\2024-04-25\\2024-04-25(14o'clock).log",
+    "time": "2024-04-25 14:12:05.092",
+    "direction": "RECV",
+    "sf": "S1F3",
+    "header": "S1F3:S1F3 W SystemBytes=5:",
+    "body": "\r\n                               <L,6 [SVCOUNT]\r\n                                   <U2,1 '17' [SVID]>\r\n                                   <U2,1 '21' [SVID]>\r\n                                   <U2,1 '23' [SVID]>\r\n                                   <U2,1 '25' [SVID]>\r\n                                   <U2,1 '3' [SVID]>\r\n                                   <U2,1 '58' [SVID]>\r\n                               >.\r\n"
+  },
+  {
+    "source": "C:\\SECOMTEST\\HOST01\\SECS-II\\2024-04-25\\2024-04-25(14o'clock).log",
+    "time": "2024-04-25 14:12:05.131",
+    "direction": "SEND",
+    "sf": "S1F4",
+    "header": "S1F4 SystemBytes=5:",
+    "body": "\r\n                               <L,6\r\n                                   <U2,1 '3' [ControlState]>\r\n                                   <L,0 [EnhancedCarriers]>\r\n                                   <L,0 [EnhancedTransfers]>\r\n                                   <L,6 [EnhancedVehicles]\r\n                                       <L,3 [EnhancedVehicleInfoi1]\r\n                                           <A,13 'C0VGVA01_VC05' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                       <L,3 [EnhancedVehicleInfoi2]\r\n                                           <A,16 'C0VGVA01_VC05_UP' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                       <L,3 [EnhancedVehicleInfoi3]\r\n                                           <A,16 'C0VGVA01_VC05_DW' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                       <L,3 [EnhancedVehicleInfoi4]\r\n                                           <A,13 'C0VGVA01_VC02' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                       <L,3 [EnhancedVehicleInfoi5]\r\n                                           <A,16 'C0VGVA01_VC02_UP' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                       <L,3 [EnhancedVehicleInfoi6]\r\n                                           <A,16 'C0VGVA01_VC02_DW' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                   >\r\n                                   <L,0 [UnitAlarmStatList]>\r\n                                   <L,0 [EnhancedPorts]>\r\n                               >.\r\n"
+  },
+  {
+    "source": "C:\\SECOMTEST\\HOST01\\SECS-II\\2024-04-25\\2024-04-25(14o'clock).log",
+    "time": "2024-04-25 14:14:10.013",
+    "direction": "RECV",
+    "sf": "S1F3",
+    "header": "S1F3:S1F3 W SystemBytes=1:",
+    "body": "\r\n                               <L,6 [SVCOUNT]\r\n                                   <U2,1 '17' [SVID]>\r\n                                   <U2,1 '21' [SVID]>\r\n                                   <U2,1 '23' [SVID]>\r\n                                   <U2,1 '25' [SVID]>\r\n                                   <U2,1 '3' [SVID]>\r\n                                   <U2,1 '58' [SVID]>\r\n                               >.\r\n"
+  },
+  {
+    "source": "C:\\SECOMTEST\\HOST01\\SECS-II\\2024-04-25\\2024-04-25(14o'clock).log",
+    "time": "2024-04-25 14:14:10.078",
+    "direction": "SEND",
+    "sf": "S1F4",
+    "header": "S1F4 SystemBytes=1:",
+    "body": "\r\n                               <L,6\r\n                                   <U2,1 '3' [ControlState]>\r\n                                   <L,0 [EnhancedCarriers]>\r\n                                   <L,0 [EnhancedTransfers]>\r\n                                   <L,6 [EnhancedVehicles]\r\n                                       <L,3 [EnhancedVehicleInfoi1]\r\n                                           <A,13 'C0VGVA01_VC05' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                       <L,3 [EnhancedVehicleInfoi2]\r\n                                           <A,16 'C0VGVA01_VC05_UP' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                       <L,3 [EnhancedVehicleInfoi3]\r\n                                           <A,16 'C0VGVA01_VC05_DW' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                       <L,3 [EnhancedVehicleInfoi4]\r\n                                           <A,13 'C0VGVA01_VC02' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                       <L,3 [EnhancedVehicleInfoi5]\r\n                                           <A,16 'C0VGVA01_VC02_UP' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                       <L,3 [EnhancedVehicleInfoi6]\r\n                                           <A,16 'C0VGVA01_VC02_DW' [VehicleID]>\r\n                                           <U2,1 '2' [VehicleState]>\r\n                                           <U2,1 '1' [VehicleStatus]>\r\n                                       >\r\n                                   >\r\n                                   <L,0 [UnitAlarmStatList]>\r\n                                   <L,0 [EnhancedPorts]>\r\n                               >.\r\n"
+  }
+]

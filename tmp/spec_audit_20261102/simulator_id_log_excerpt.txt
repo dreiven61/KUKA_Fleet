@@ -1,0 +1,500 @@
+2026-10-24 08:01:32,292 INFO  [main] robotlife.RobotHouseCommittee (RobotHouseCommittee.java:167) - add robot 2 finished
+2026-10-24 08:01:32,306 INFO  [main] robotlife.RobotHouseCommittee (RobotHouseCommittee.java:167) - add robot 3 finished
+2026-10-24 08:01:36,030 INFO  [grpc-default-executor-0] service.DataService (DataService.java:379) - Subscribing Basic Data Service every 5s until success... rcsIp:krcs-robot-control
+2026-10-24 08:01:36,031 ERROR [grpc-default-executor-1] service.DataService$4 (DataService.java:411) - Subscribe Basic Data error: UNAVAILABLE: io exception
+2026-10-24 08:01:41,026 INFO  [net6-thread-1] controller.DbController (DbController.java:91) -  update robot extra info: RobotExtraInfo(extraKey=udp_port, first=50083, doubled=1792796501, triple=null, quadruple=null, penta=null)
+2026-10-24 08:01:41,033 INFO  [grpc-default-executor-1] service.DataService (DataService.java:379) - Subscribing Basic Data Service every 5s until success... rcsIp:krcs-robot-control
+2026-10-24 08:01:41,040 ERROR [grpc-default-executor-0] service.DataService$4 (DataService.java:411) - Subscribe Basic Data error: UNAVAILABLE: io exception
+2026-10-24 08:01:46,042 INFO  [grpc-default-executor-0] service.DataService (DataService.java:379) - Subscribing Basic Data Service every 5s until success... rcsIp:krcs-robot-control
+2026-10-24 08:02:27,324 ERROR [monitor1-thread-1] monitor.Monitor (Monitor.java:88) - committee timer not work
+2026-10-24 09:15:31,865 INFO  [grpc-default-executor-2] service.VdaMapControlPointService (VdaMapControlPointService.java:72) - refresh vda map bezier pairs, mapCode:lay01, floorNumber:dist1, edgeCount:64
+2026-10-24 09:15:31,866 INFO  [grpc-default-executor-2] service.DataService$4 (DataService.java:396) - Update map[lay01-dist1] completed|new node:[NodeBo(nodeLabel=56, posX=12000, posY=13000, types=null), NodeBo(nodeLabel=57, posX=14000, posY=13000, types=null), NodeBo(nodeLabel=58, posX=16000, posY=13000, types=null), NodeBo(nodeLabel=59, posX=12000, posY=15000, types=null), NodeBo(nodeLabel=60, posX=14000, posY=15000, types=null), NodeBo(nodeLabel=61, posX=16000, posY=15000, types=null), NodeBo(nodeLabel=62, posX=12000, posY=17000, types=null), NodeBo(nodeLabel=63, posX=14000, posY=17000, types=null), NodeBo(nodeLabel=64, posX=16000, posY=17000, types=null), NodeBo(nodeLabel=65, posX=12000, posY=19000, types=null), NodeBo(nodeLabel=66, posX=14000, posY=19000, types=null), NodeBo(nodeLabel=67, posX=16000, posY=19000, types=null), NodeBo(nodeLabel=68, posX=12000, posY=21000, types=null), NodeBo(nodeLabel=69, posX=14000, posY=21000, types=null), NodeBo(nodeLabel=70, posX=16000, posY=21000, types=null), NodeBo(nodeLabel=84, posX=14000, posY=23000, types=[1]), NodeBo(nodeLabel=86, posX=14000, posY=11000, types=[1]), NodeBo(nodeLabel=87, posX=18000, posY=17000, types=[10]), NodeBo(nodeLabel=88, posX=10000, posY=17000, types=[10]), NodeBo(nodeLabel=89, posX=12000, posY=23000, types=[1]), NodeBo(nodeLabel=90, posX=16000, posY=23000, types=[1]), NodeBo(nodeLabel=93, posX=10000, posY=19000, types=[1]), NodeBo(nodeLabel=94, posX=18000, posY=19000, types=[1]), NodeBo(nodeLabel=95, posX=10000, posY=15000, types=[1]), NodeBo(nodeLabel=96, posX=18000, posY=15000, types=[1]), NodeBo(nodeLabel=97, posX=12000, posY=11000, types=[1]), NodeBo(nodeLabel=98, posX=16000, posY=11000, types=[1]), NodeBo(nodeLabel=99, posX=11000, posY=17000, types=[4]), NodeBo(nodeLabel=100, posX=17000, posY=17000, types=[4]), NodeBo(nodeLabel=101, posX=18000, posY=21000, types=[3]), NodeBo(nodeLabel=102, posX=18000, posY=13000, types=[3]), NodeBo(nodeLabel=103, posX=10000, posY=21000, types=[3]), NodeBo(nodeLabel=105, posX=10000, posY=13000, types=[3])]
+2026-10-24 09:54:45,056 INFO  [main] boot.StartupInfoLogger (StartupInfoLogger.java:55) - Starting SimulationApplication v2.13.0-SNAPSHOT using Java 1.8.0_212 on efdcf6338795 with PID 8 (/workspace/libs/simulation-application.jar started by root in /workspace)
+2026-10-24 09:54:45,201 INFO  [main] boot.SpringApplication (SpringApplication.java:663) - The following profiles are active: sim-actuator
+2026-10-24 09:55:00,946 INFO  [main] log.LogAccessor (LogAccessor.java:292) - No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2026-10-24 09:55:01,137 INFO  [main] log.LogAccessor (LogAccessor.java:292) - No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2026-10-24 09:55:03,009 INFO  [main] support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker (PostProcessorRegistrationDelegate.java:376) - Bean 'org.springframework.integration.config.IntegrationManagementConfiguration' of type [org.springframework.integration.config.IntegrationManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-10-24 09:55:03,162 INFO  [main] support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker (PostProcessorRegistrationDelegate.java:376) - Bean 'integrationChannelResolver' of type [org.springframework.integration.support.channel.BeanFactoryChannelResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-10-24 09:55:03,175 INFO  [main] support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker (PostProcessorRegistrationDelegate.java:376) - Bean 'integrationDisposableAutoCreatedBeans' of type [org.springframework.integration.config.annotation.Disposables] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-10-24 09:55:10,544 INFO  [main] slf4j.Slf4jLog (Slf4jLog.java:49) - Flyway Community Edition 7.7.3 by Redgate
+2026-10-24 09:55:10,744 INFO  [main] pool.DruidDataSource (DruidDataSource.java:985) - {dataSource-1} inited
+2026-10-24 09:55:11,332 INFO  [main] slf4j.Slf4jLog (Slf4jLog.java:49) - Database: jdbc:postgresql://krcs-basic-data-db:5432/krcs_simulator (PostgreSQL 15.18)
+2026-10-24 09:55:11,413 WARN  [main] slf4j.Slf4jLog (Slf4jLog.java:53) - Flyway upgrade recommended: org.flywaydb.core.internal.database.postgresql.PostgreSQLDatabaseType@41dc0598 15.18 is newer than this version of Flyway and support has not been tested. The latest supported version of org.flywaydb.core.internal.database.postgresql.PostgreSQLDatabaseType@41dc0598 is 13.
+2026-10-24 09:55:11,783 INFO  [main] slf4j.Slf4jLog (Slf4jLog.java:49) - Current version of schema "public": 0.0.1.202503131532
+2026-10-24 09:55:11,790 WARN  [main] slf4j.Slf4jLog (Slf4jLog.java:53) - outOfOrder mode is active. Migration of schema "public" may not be reproducible.
+2026-10-24 09:55:11,805 INFO  [main] slf4j.Slf4jLog (Slf4jLog.java:49) - Schema "public" is up to date. No migration necessary.
+2026-10-24 09:55:12,258 INFO  [main] autoconfigure.GrpcClientAutoConfiguration (GrpcClientAutoConfiguration.java:152) - Detected grpc-netty-shaded: Creating ShadedNettyChannelFactory + InProcessChannelFactory
+2026-10-24 09:55:16,009 INFO  [main] log.LogAccessor (LogAccessor.java:174) - Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2026-10-24 09:55:16,018 INFO  [main] log.LogAccessor (LogAccessor.java:174) - Channel 'rcs-simulator.errorChannel' has 1 subscriber(s).
+2026-10-24 09:55:16,027 INFO  [main] log.LogAccessor (LogAccessor.java:292) - started bean '_org.springframework.integration.errorLogger'
+2026-10-24 09:55:16,152 INFO  [main] boot.StartupInfoLogger (StartupInfoLogger.java:61) - Started SimulationApplication in 43.473 seconds (JVM running for 55.864)
+2026-10-24 09:55:16,215 INFO  [main] log.LogAccessor (LogAccessor.java:174) - Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2026-10-24 09:55:16,216 INFO  [main] log.LogAccessor (LogAccessor.java:174) - Channel 'rcs-simulator.errorChannel' has 0 subscriber(s).
+2026-10-24 09:55:16,224 INFO  [main] log.LogAccessor (LogAccessor.java:292) - stopped bean '_org.springframework.integration.errorLogger'
+2026-10-24 09:55:16,239 INFO  [main] pool.DruidDataSource (DruidDataSource.java:2032) - {dataSource-1} closing ...
+2026-10-24 09:55:16,290 INFO  [main] pool.DruidDataSource (DruidDataSource.java:2104) - {dataSource-1} closed
+2026-10-24 09:55:17,022 INFO  [main] boot.StartupInfoLogger (StartupInfoLogger.java:55) - Starting SimulationApplication v2.13.0-SNAPSHOT using Java 1.8.0_212 on efdcf6338795 with PID 8 (/workspace/libs/simulation-application.jar started by root in /workspace)
+2026-10-24 09:55:17,034 INFO  [main] boot.SpringApplication (SpringApplication.java:663) - The following profiles are active: sim-actuator
+2026-10-24 09:55:28,481 INFO  [main] log.LogAccessor (LogAccessor.java:292) - No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2026-10-24 09:55:28,482 INFO  [main] log.LogAccessor (LogAccessor.java:292) - No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2026-10-24 09:55:28,799 INFO  [main] support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker (PostProcessorRegistrationDelegate.java:376) - Bean 'org.springframework.integration.config.IntegrationManagementConfiguration' of type [org.springframework.integration.config.IntegrationManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-10-24 09:55:28,818 INFO  [main] support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker (PostProcessorRegistrationDelegate.java:376) - Bean 'integrationChannelResolver' of type [org.springframework.integration.support.channel.BeanFactoryChannelResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-10-24 09:55:28,837 INFO  [main] support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker (PostProcessorRegistrationDelegate.java:376) - Bean 'integrationDisposableAutoCreatedBeans' of type [org.springframework.integration.config.annotation.Disposables] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-10-24 09:55:31,616 INFO  [main] tomcat.TomcatWebServer (TomcatWebServer.java:108) - Tomcat initialized with port(s): 5555 (http)
+2026-10-24 09:55:31,756 INFO  [main] logging.DirectJDKLog (DirectJDKLog.java:173) - Initializing ProtocolHandler ["http-nio-5555"]
+2026-10-24 09:55:31,772 INFO  [main] logging.DirectJDKLog (DirectJDKLog.java:173) - Starting service [Tomcat]
+2026-10-24 09:55:31,788 INFO  [main] logging.DirectJDKLog (DirectJDKLog.java:173) - Starting Servlet engine: [Apache Tomcat/9.0.52]
+2026-10-24 09:55:32,603 INFO  [main] logging.DirectJDKLog (DirectJDKLog.java:173) - Initializing Spring embedded WebApplicationContext
+2026-10-24 09:55:32,616 INFO  [main] context.ServletWebServerApplicationContext (ServletWebServerApplicationContext.java:290) - Root WebApplicationContext: initialization completed in 15472 ms
+2026-10-24 09:55:36,710 INFO  [main] filter.OperationRecordFilter (OperationRecordFilter.java:21) - ---------------OperationRecordFilter init---------------
+2026-10-24 09:55:37,974 INFO  [main] autoconfigure.DruidDataSourceAutoConfigure (DruidDataSourceAutoConfigure.java:56) - Init DruidDataSource
+2026-10-24 09:55:39,535 INFO  [main] pool.DruidDataSource (DruidDataSource.java:985) - {dataSource-2} inited
+2026-10-24 09:55:44,125 INFO  [main] builder.ResourceLoader (ResourceLoader.java:100) - Searched file path:/workspace/libs/libs/config/simulator.properties
+2026-10-24 09:55:44,130 INFO  [main] builder.ResourceLoader (ResourceLoader.java:100) - Searched file path:/workspace/libs/libs/../config/simulator.properties
+2026-10-24 09:55:44,133 INFO  [main] builder.ResourceLoader (ResourceLoader.java:100) - Searched file path:/workspace/libs/libs/../../config/simulator.properties
+2026-10-24 09:55:44,763 INFO  [main] autoconfigure.GrpcClientAutoConfiguration (GrpcClientAutoConfiguration.java:152) - Detected grpc-netty-shaded: Creating ShadedNettyChannelFactory + InProcessChannelFactory
+2026-10-24 09:55:55,765 INFO  [main] slf4j.Slf4jLog (Slf4jLog.java:49) - Flyway Community Edition 7.7.3 by Redgate
+2026-10-24 09:55:55,788 INFO  [main] slf4j.Slf4jLog (Slf4jLog.java:49) - Database: jdbc:postgresql://krcs-basic-data-db:5432/krcs_simulator (PostgreSQL 15.18)
+2026-10-24 09:55:55,816 WARN  [main] slf4j.Slf4jLog (Slf4jLog.java:53) - Flyway upgrade recommended: org.flywaydb.core.internal.database.postgresql.PostgreSQLDatabaseType@41dc0598 15.18 is newer than this version of Flyway and support has not been tested. The latest supported version of org.flywaydb.core.internal.database.postgresql.PostgreSQLDatabaseType@41dc0598 is 13.
+2026-10-24 09:55:55,863 INFO  [main] slf4j.Slf4jLog (Slf4jLog.java:49) - Current version of schema "public": 0.0.1.202503131532
+2026-10-24 09:55:55,870 WARN  [main] slf4j.Slf4jLog (Slf4jLog.java:53) - outOfOrder mode is active. Migration of schema "public" may not be reproducible.
+2026-10-24 09:55:55,880 INFO  [main] slf4j.Slf4jLog (Slf4jLog.java:49) - Schema "public" is up to date. No migration necessary.
+2026-10-24 09:55:57,860 INFO  [main] log.LogAccessor (LogAccessor.java:174) - Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2026-10-24 09:55:57,874 INFO  [main] log.LogAccessor (LogAccessor.java:174) - Channel 'rcs-simulator.errorChannel' has 1 subscriber(s).
+2026-10-24 09:55:57,874 INFO  [main] log.LogAccessor (LogAccessor.java:292) - started bean '_org.springframework.integration.errorLogger'
+2026-10-24 09:55:57,881 INFO  [main] logging.DirectJDKLog (DirectJDKLog.java:173) - Starting ProtocolHandler ["http-nio-5555"]
+2026-10-24 09:55:58,067 INFO  [main] tomcat.TomcatWebServer (TomcatWebServer.java:220) - Tomcat started on port(s): 5555 (http) with context path ''
+2026-10-24 09:55:58,719 INFO  [main] tomcat.TomcatWebServer (TomcatWebServer.java:108) - Tomcat initialized with port(s): 8283 (http)
+2026-10-24 09:55:58,724 INFO  [main] logging.DirectJDKLog (DirectJDKLog.java:173) - Initializing ProtocolHandler ["http-nio-8283"]
+2026-10-24 09:55:58,734 INFO  [main] logging.DirectJDKLog (DirectJDKLog.java:173) - Starting service [Tomcat]
+2026-10-24 09:55:58,738 INFO  [main] logging.DirectJDKLog (DirectJDKLog.java:173) - Starting Servlet engine: [Apache Tomcat/9.0.52]
+2026-10-24 09:55:58,758 INFO  [main] logging.DirectJDKLog (DirectJDKLog.java:173) - Initializing Spring embedded WebApplicationContext
+2026-10-24 09:55:58,764 INFO  [main] context.ServletWebServerApplicationContext (ServletWebServerApplicationContext.java:290) - Root WebApplicationContext: initialization completed in 675 ms
+2026-10-24 09:55:58,893 INFO  [main] web.EndpointLinksResolver (EndpointLinksResolver.java:58) - Exposing 11 endpoint(s) beneath base path '/sim-actuator'
+2026-10-24 09:55:59,354 INFO  [main] logging.DirectJDKLog (DirectJDKLog.java:173) - Starting ProtocolHandler ["http-nio-8283"]
+2026-10-24 09:55:59,375 INFO  [main] tomcat.TomcatWebServer (TomcatWebServer.java:220) - Tomcat started on port(s): 8283 (http) with context path ''
+2026-10-24 09:56:03,108 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Double, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,147 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Integer, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,162 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Integer, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,171 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,224 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,225 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Integer, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,299 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,307 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,317 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Double, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,321 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Double, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,333 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Double, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,396 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,396 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,409 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,416 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,420 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,700 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,723 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,759 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Double, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,844 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,851 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Integer, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,858 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Integer, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,871 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Integer, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,884 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Integer, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,945 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,954 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,963 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Integer, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,970 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Integer, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:03,980 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Integer, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:04,255 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:04,366 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Double, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:04,379 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Integer, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:04,380 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: Integer, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:04,432 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:04,518 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:04,566 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:05,375 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:05,576 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:05,601 WARN  [main] operation.OperationImplicitParameterReader (OperationImplicitParameterReader.java:170) - Unable to interpret the implicit parameter configuration with dataType: String, dataTypeClass: class java.lang.Void
+2026-10-24 09:56:08,250 INFO  [main] boot.StartupInfoLogger (StartupInfoLogger.java:61) - Started SimulationApplication in 51.929 seconds (JVM running for 107.962)
+2026-10-24 09:56:08,626 INFO  [main] service.ConfigService (ConfigService.java:151) - simulator config properties:{start_point_max_deviation=1000, robotic.arm.elapse.time=3000, kafka.bootstrap.security.sasl.mechanism=PLAIN, lift_height=60, kafka.bootstrap.security.password=, elevator_elapse_time=3000, kafka.topic.response=ss, shake_range=0, robotic_arm_elapse_time=3000, kmr_general_time=1000, idle_battery_lose_speed=10, redis.port=6379, vda_mqtt_pub_topic=state, embodied.robot.elapse.time=3000, charge_speed=1, kmr_grpc_server_port=50090, kafka.topic.request=ll, kafka.group.id=group-1, map_change_cost_time=1000, redis.host=127.0.0.1, turn_table_elapse_time=1000, put_down_elapse_time=1000, vda_mqtt_sub_topics=order,instantActions, kafka.bootstrap.security.protocol=SASL_PLAINTEXT, vda_mqtt_server_url=tcp://mqtt-broker:1883, kafka.bootstrap.security.username=, redis.password=, kafka.bootstrap.server=127.0.0.1:9092, fork_elapse_time=1000, vda_mqtt_topic_prefix=uagv/v1/Kollmorgen/,udp/v2/KC/,uagv/v2/kuka/,vda/v2.0.0/mr/, lift_elapse_time=1000, redis.db=0, working_battery_lose_speed=1}
+2026-10-24 09:56:08,654 INFO  [main] builder.ResourceLoader (ResourceLoader.java:100) - Searched file path:/workspace/libs/libs/config/config.xml
+2026-10-24 09:56:08,654 INFO  [main] builder.ResourceLoader (ResourceLoader.java:100) - Searched file path:/workspace/libs/libs/../config/config.xml
+2026-10-24 09:56:08,666 INFO  [main] builder.ResourceLoader (ResourceLoader.java:100) - Searched file path:/workspace/libs/libs/../../config/config.xml
+2026-10-24 09:56:08,645 INFO  [http-nio-5555-exec-1] logging.DirectJDKLog (DirectJDKLog.java:173) - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-24 09:56:08,691 INFO  [http-nio-5555-exec-1] servlet.FrameworkServlet (FrameworkServlet.java:525) - Initializing Servlet 'dispatcherServlet'
+2026-10-24 09:56:08,744 INFO  [http-nio-5555-exec-1] servlet.FrameworkServlet (FrameworkServlet.java:547) - Completed initialization in 53 ms
+2026-10-24 09:56:09,072 INFO  [main] service.DataService (DataService.java:237) - deviceDataList:[DeviceData(port=502, addressWrite=0, addressRead=1, writeData=0, readData=0)]
+2026-10-24 09:56:10,621 INFO  [main] service.DataService (DataService.java:244) - robotInfoList from db:[RobotInitInfoDo{robotId='1', robotType='KMP1500I', posX='0.868', posY='7.376', posTheta='0.0', battery='100', mapCode='lay01', floor=dist1}, RobotInitInfoDo{robotId='2', robotType='KMP1500I', posX='12.0', posY='21.0', posTheta='0.0', battery='100', mapCode='lay01', floor=dist1}, RobotInitInfoDo{robotId='3', robotType='KMP1500I', posX='14.0', posY='15.0', posTheta='0.0', battery='100', mapCode='lay01', floor=dist1}]
+2026-10-24 09:56:10,851 INFO  [main] service.DataService (DataService.java:250) - Extra Infos: [ExtraInfoDo(extraKey=udp_port, first=50083, doubled=1792796501, triple=, quadruple=, penta=)]
+2026-10-24 09:56:10,857 INFO  [main] service.DataService (DataService.java:263) - update init udp port:50183
+2026-10-24 09:56:10,867 INFO  [main] service.DataService (DataService.java:128) - ------------------------------------------------------- start load data from bd -------------------------------------------------------
+2026-10-24 09:56:10,867 INFO  [main] service.DataService (DataService.java:134) - >>> 1. load active mapCode and floorNumbers <<<
+2026-10-24 09:56:12,017 ERROR [main] service.DataService (DataService.java:168) - request bd fail , url:http://krcs-basic-data:7888/api/v1/data/map-building/select/all/simulator  ...........ready to retry in 10s
+2026-10-24 09:56:22,017 INFO  [main] service.DataService (DataService.java:128) - ------------------------------------------------------- start load data from bd -------------------------------------------------------
+2026-10-24 09:56:22,018 INFO  [main] service.DataService (DataService.java:134) - >>> 1. load active mapCode and floorNumbers <<<
+2026-10-24 09:56:22,024 ERROR [main] service.DataService (DataService.java:168) - request bd fail , url:http://krcs-basic-data:7888/api/v1/data/map-building/select/all/simulator  ...........ready to retry in 10s
+2026-10-24 09:56:32,024 INFO  [main] service.DataService (DataService.java:128) - ------------------------------------------------------- start load data from bd -------------------------------------------------------
+2026-10-24 09:56:32,025 INFO  [main] service.DataService (DataService.java:134) - >>> 1. load active mapCode and floorNumbers <<<
+2026-10-24 09:56:32,026 ERROR [main] service.DataService (DataService.java:168) - request bd fail , url:http://krcs-basic-data:7888/api/v1/data/map-building/select/all/simulator  ...........ready to retry in 10s
+2026-10-24 09:56:42,032 INFO  [main] service.DataService (DataService.java:128) - ------------------------------------------------------- start load data from bd -------------------------------------------------------
+2026-10-24 09:56:42,033 INFO  [main] service.DataService (DataService.java:134) - >>> 1. load active mapCode and floorNumbers <<<
+2026-10-24 09:56:42,033 ERROR [main] service.DataService (DataService.java:168) - request bd fail , url:http://krcs-basic-data:7888/api/v1/data/map-building/select/all/simulator  ...........ready to retry in 10s
+2026-10-24 09:56:52,034 INFO  [main] service.DataService (DataService.java:128) - ------------------------------------------------------- start load data from bd -------------------------------------------------------
+2026-10-24 09:56:52,034 INFO  [main] service.DataService (DataService.java:134) - >>> 1. load active mapCode and floorNumbers <<<
+2026-10-24 09:56:52,038 ERROR [main] service.DataService (DataService.java:168) - request bd fail , url:http://krcs-basic-data:7888/api/v1/data/map-building/select/all/simulator  ...........ready to retry in 10s
+2026-10-24 09:57:02,039 INFO  [main] service.DataService (DataService.java:128) - ------------------------------------------------------- start load data from bd -------------------------------------------------------
+2026-10-24 09:57:02,040 INFO  [main] service.DataService (DataService.java:134) - >>> 1. load active mapCode and floorNumbers <<<
+2026-10-24 09:57:02,041 ERROR [main] service.DataService (DataService.java:168) - request bd fail , url:http://krcs-basic-data:7888/api/v1/data/map-building/select/all/simulator  ...........ready to retry in 10s
+2026-10-24 09:57:12,042 INFO  [main] service.DataService (DataService.java:128) - ------------------------------------------------------- start load data from bd -------------------------------------------------------
+2026-10-24 09:57:12,042 INFO  [main] service.DataService (DataService.java:134) - >>> 1. load active mapCode and floorNumbers <<<
+2026-10-24 09:57:13,446 INFO  [main] service.DataService (DataService.java:154) - load active map data finish: {lay01=[dist1]}
+2026-10-24 09:57:13,447 INFO  [main] service.DataService (DataService.java:297) - >>> 2. load topological nodes<<<
+2026-10-24 09:57:13,456 INFO  [main] service.DataService (DataService.java:321) - start to request topological point data|mapCode:lay01|floor:dist1
+2026-10-24 09:57:14,692 INFO  [main] service.DataService (DataService.java:325) - get topological point:[NodeVo{nodeLabel='56'nodeNumber='56', xCoordinate=12.0, yCoordinate=13.0, types = []}, NodeVo{nodeLabel='57'nodeNumber='57', xCoordinate=14.0, yCoordinate=13.0, types = []}, NodeVo{nodeLabel='58'nodeNumber='58', xCoordinate=16.0, yCoordinate=13.0, types = []}, NodeVo{nodeLabel='59'nodeNumber='59', xCoordinate=12.0, yCoordinate=15.0, types = []}, NodeVo{nodeLabel='60'nodeNumber='60', xCoordinate=14.0, yCoordinate=15.0, types = []}, NodeVo{nodeLabel='61'nodeNumber='61', xCoordinate=16.0, yCoordinate=15.0, types = []}, NodeVo{nodeLabel='62'nodeNumber='62', xCoordinate=12.0, yCoordinate=17.0, types = []}, NodeVo{nodeLabel='63'nodeNumber='63', xCoordinate=14.0, yCoordinate=17.0, types = []}, NodeVo{nodeLabel='64'nodeNumber='64', xCoordinate=16.0, yCoordinate=17.0, types = []}, NodeVo{nodeLabel='65'nodeNumber='65', xCoordinate=12.0, yCoordinate=19.0, types = []}, NodeVo{nodeLabel='66'nodeNumber='66', xCoordinate=14.0, yCoordinate=19.0, types = []}, NodeVo{nodeLabel='67'nodeNumber='67', xCoordinate=16.0, yCoordinate=19.0, types = []}, NodeVo{nodeLabel='68'nodeNumber='68', xCoordinate=12.0, yCoordinate=21.0, types = []}, NodeVo{nodeLabel='69'nodeNumber='69', xCoordinate=14.0, yCoordinate=21.0, types = []}, NodeVo{nodeLabel='70'nodeNumber='70', xCoordinate=16.0, yCoordinate=21.0, types = []}, NodeVo{nodeLabel='84'nodeNumber='84', xCoordinate=14.0, yCoordinate=23.0, types = [1]}, NodeVo{nodeLabel='86'nodeNumber='86', xCoordinate=14.0, yCoordinate=11.0, types = [1]}, NodeVo{nodeLabel='87'nodeNumber='87', xCoordinate=18.0, yCoordinate=17.0, types = [10]}, NodeVo{nodeLabel='88'nodeNumber='88', xCoordinate=10.0, yCoordinate=17.0, types = [10]}, NodeVo{nodeLabel='89'nodeNumber='89', xCoordinate=12.0, yCoordinate=23.0, types = [1]}, NodeVo{nodeLabel='90'nodeNumber='90', xCoordinate=16.0, yCoordinate=23.0, types = [1]}, NodeVo{nodeLabel='93'nodeNumber='93', xCoordinate=10.0, yCoordinate=19.0, types = [1]}, NodeVo{nodeLabel='94'nodeNumber='94', xCoordinate=18.0, yCoordinate=19.0, types = [1]}, NodeVo{nodeLabel='95'nodeNumber='95', xCoordinate=10.0, yCoordinate=15.0, types = [1]}, NodeVo{nodeLabel='96'nodeNumber='96', xCoordinate=18.0, yCoordinate=15.0, types = [1]}, NodeVo{nodeLabel='97'nodeNumber='97', xCoordinate=12.0, yCoordinate=11.0, types = [1]}, NodeVo{nodeLabel='98'nodeNumber='98', xCoordinate=16.0, yCoordinate=11.0, types = [1]}, NodeVo{nodeLabel='99'nodeNumber='99', xCoordinate=11.0, yCoordinate=17.0, types = [4]}, NodeVo{nodeLabel='100'nodeNumber='100', xCoordinate=17.0, yCoordinate=17.0, types = [4]}, NodeVo{nodeLabel='101'nodeNumber='101', xCoordinate=18.0, yCoordinate=21.0, types = [3]}, NodeVo{nodeLabel='102'nodeNumber='102', xCoordinate=18.0, yCoordinate=13.0, types = [3]}, NodeVo{nodeLabel='103'nodeNumber='103', xCoordinate=10.0, yCoordinate=21.0, types = [3]}, NodeVo{nodeLabel='105'nodeNumber='105', xCoordinate=10.0, yCoordinate=13.0, types = [3]}]
+2026-10-24 09:57:16,095 WARN  [main] service.VdaMapControlPointService (VdaMapControlPointService.java:120) - query BasicData mapFloor failed, mapCode:lay01, floorNumber:dist1
+io.grpc.StatusRuntimeException: UNAVAILABLE: io exception
+	at io.grpc.stub.ClientCalls.toStatusRuntimeException(ClientCalls.java:262) ~[grpc-stub-1.31.1.jar:1.31.1]
+	at io.grpc.stub.ClientCalls.getUnchecked(ClientCalls.java:243) ~[grpc-stub-1.31.1.jar:1.31.1]
+	at io.grpc.stub.ClientCalls.blockingUnaryCall(ClientCalls.java:156) ~[grpc-stub-1.31.1.jar:1.31.1]
+	at com.kuka.rcs.bd.grpc.map.MapServiceGrpc$MapServiceBlockingStub.getMapFloor(MapServiceGrpc.java:1524) ~[krcs_basic-data-common-api-2.14.3-SNAPSHOT.jar:?]
+	at com.kuka.simulation.application.service.VdaMapControlPointService.queryMapFloor(VdaMapControlPointService.java:113) ~[simulation-application.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.application.service.VdaMapControlPointService.loadMapFloor(VdaMapControlPointService.java:97) ~[simulation-application.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.application.service.VdaMapControlPointService.preloadMapFloor(VdaMapControlPointService.java:83) ~[simulation-application.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.application.service.DataService.lambda$null$5(DataService.java:333) ~[simulation-application.jar:2.13.0-SNAPSHOT]
+	at java.util.ArrayList.forEach(ArrayList.java:1257) ~[?:1.8.0_212]
+	at com.kuka.simulation.application.service.DataService.lambda$loadNodesFromBasicServer$6(DataService.java:316) ~[simulation-application.jar:2.13.0-SNAPSHOT]
+	at java.util.HashMap$KeySet.forEach(HashMap.java:933) [?:1.8.0_212]
+	at com.kuka.simulation.application.service.DataService.loadNodesFromBasicServer(DataService.java:315) [simulation-application.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.application.service.DataService.start(DataService.java:115) [simulation-application.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.application.SimulationExecutorRunner.run(SimulationExecutorRunner.java:60) [simulation-application.jar:2.13.0-SNAPSHOT]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:782) [spring-boot-2.5.4.jar:2.5.4]
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772) [spring-boot-2.5.4.jar:2.5.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:345) [spring-boot-2.5.4.jar:2.5.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343) [spring-boot-2.5.4.jar:2.5.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332) [spring-boot-2.5.4.jar:2.5.4]
+	at com.kuka.simulation.application.SimulationApplication.main(SimulationApplication.java:23) [simulation-application.jar:2.13.0-SNAPSHOT]
+Caused by: io.grpc.netty.shaded.io.netty.channel.AbstractChannel$AnnotatedConnectException: finishConnect(..) failed: Connection refused: krcs-basic-data/10.89.0.137:7999
+Caused by: java.net.ConnectException: finishConnect(..) failed: Connection refused
+	at io.grpc.netty.shaded.io.netty.channel.unix.Errors.throwConnectException(Errors.java:124) ~[grpc-netty-shaded-1.31.1.jar:1.31.1]
+	at io.grpc.netty.shaded.io.netty.channel.unix.Socket.finishConnect(Socket.java:243) ~[grpc-netty-shaded-1.31.1.jar:1.31.1]
+	at io.grpc.netty.shaded.io.netty.channel.epoll.AbstractEpollChannel$AbstractEpollUnsafe.doFinishConnect(AbstractEpollChannel.java:672) ~[grpc-netty-shaded-1.31.1.jar:1.31.1]
+	at io.grpc.netty.shaded.io.netty.channel.epoll.AbstractEpollChannel$AbstractEpollUnsafe.finishConnect(AbstractEpollChannel.java:649) ~[grpc-netty-shaded-1.31.1.jar:1.31.1]
+	at io.grpc.netty.shaded.io.netty.channel.epoll.AbstractEpollChannel$AbstractEpollUnsafe.epollOutReady(AbstractEpollChannel.java:529) ~[grpc-netty-shaded-1.31.1.jar:1.31.1]
+	at io.grpc.netty.shaded.io.netty.channel.epoll.EpollEventLoop.processReady(EpollEventLoop.java:465) ~[grpc-netty-shaded-1.31.1.jar:1.31.1]
+	at io.grpc.netty.shaded.io.netty.channel.epoll.EpollEventLoop.run(EpollEventLoop.java:378) ~[grpc-netty-shaded-1.31.1.jar:1.31.1]
+	at io.grpc.netty.shaded.io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) ~[grpc-netty-shaded-1.31.1.jar:1.31.1]
+	at io.grpc.netty.shaded.io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[grpc-netty-shaded-1.31.1.jar:1.31.1]
+	at io.grpc.netty.shaded.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[grpc-netty-shaded-1.31.1.jar:1.31.1]
+	at java.lang.Thread.run(Thread.java:748) ~[?:1.8.0_212]
+2026-10-24 09:57:16,209 INFO  [main] service.DataService (DataService.java:336) - finish initQuadTree,spend:34 ms
+2026-10-24 09:57:16,220 INFO  [main] service.DataService (DataService.java:183) - >>> 3. load bd robot data<<<
+2026-10-24 09:57:17,385 INFO  [main] service.DataService (DataService.java:204) - load remote robot data:[MobileRobotRealtimeDto{robotId='3', xCoordinate=18.0, yCoordinate=13.0, robotOrientation=0.0, batteryLevel=89.0, robotTypeCode='KMP1500I', robotStatus=3, mapCode='lay01', floorNumber='dist1'}, MobileRobotRealtimeDto{robotId='1', xCoordinate=10.0, yCoordinate=21.0, robotOrientation=0.0, batteryLevel=89.0, robotTypeCode='KMP1500I', robotStatus=3, mapCode='lay01', floorNumber='dist1'}, MobileRobotRealtimeDto{robotId='2', xCoordinate=10.0, yCoordinate=13.0, robotOrientation=0.0, batteryLevel=93.0, robotTypeCode='KMP1500I', robotStatus=3, mapCode='lay01', floorNumber='dist1'}]
+2026-10-24 09:57:17,385 INFO  [main] service.DataService (DataService.java:210) - ------------------------------------------------------- finish load data from bd -------------------------------------------------------
+2026-10-24 09:57:17,386 INFO  [main] service.DataService (DataService.java:229) - RobotInitPosInfo:[RobotInfo(robotId=1, robotType=KMP1500I, status=, robotLen=null, robotWidth=null, mapCode=lay01, floorNumber=dist1, initInfo=RobotInitInfo(posX=10.0, posY=21.0, theta=0.0, batteryLevel=100)), RobotInfo(robotId=2, robotType=KMP1500I, status=, robotLen=null, robotWidth=null, mapCode=lay01, floorNumber=dist1, initInfo=RobotInitInfo(posX=10.0, posY=13.0, theta=0.0, batteryLevel=100)), RobotInfo(robotId=3, robotType=KMP1500I, status=, robotLen=null, robotWidth=null, mapCode=lay01, floorNumber=dist1, initInfo=RobotInitInfo(posX=18.0, posY=13.0, theta=0.0, batteryLevel=100))]
+2026-10-24 09:57:17,386 INFO  [main] service.DataService (DataService.java:379) - Subscribing Basic Data Service every 5s until success... rcsIp:krcs-robot-control
+2026-10-24 09:57:17,419 ERROR [grpc-default-executor-0] service.DataService$4 (DataService.java:411) - Subscribe Basic Data error: UNAVAILABLE: io exception
+2026-10-24 09:57:18,164 INFO  [nioEventLoopGroup-3-1] netty.NormalUdpHandler (NormalUdpHandler.java:34) - CHANNEL_ACTIVE|robotId=[2]|chnnlId=[511457ba]|remoteAddr=[krcs-robot-control/10.89.0.100:8988]|localAddr=[/0:0:0:0:0:0:0:0:50184]
+2026-10-24 09:57:18,165 INFO  [nioEventLoopGroup-4-1] netty.NormalUdpHandler (NormalUdpHandler.java:34) - CHANNEL_ACTIVE|robotId=[3]|chnnlId=[1637109f]|remoteAddr=[krcs-robot-control/10.89.0.100:8988]|localAddr=[/0:0:0:0:0:0:0:0:50185]
+2026-10-24 09:57:18,167 INFO  [nioEventLoopGroup-2-1] netty.NormalUdpHandler (NormalUdpHandler.java:34) - CHANNEL_ACTIVE|robotId=[1]|chnnlId=[e59a538f]|remoteAddr=[krcs-robot-control/10.89.0.100:8988]|localAddr=[/0:0:0:0:0:0:0:0:50183]
+2026-10-24 09:57:18,742 INFO  [main] robotlife.RobotHouseCommittee (RobotHouseCommittee.java:167) - add robot 1 finished
+2026-10-24 09:57:18,788 INFO  [main] robotlife.RobotHouseCommittee (RobotHouseCommittee.java:167) - add robot 2 finished
+2026-10-24 09:57:18,820 INFO  [main] robotlife.RobotHouseCommittee (RobotHouseCommittee.java:167) - add robot 3 finished
+2026-10-24 09:57:22,420 INFO  [grpc-default-executor-0] service.DataService (DataService.java:379) - Subscribing Basic Data Service every 5s until success... rcsIp:krcs-robot-control
+2026-10-24 09:57:22,421 ERROR [grpc-default-executor-1] service.DataService$4 (DataService.java:411) - Subscribe Basic Data error: UNAVAILABLE: io exception
+2026-10-24 09:57:27,422 INFO  [net6-thread-1] controller.DbController (DbController.java:91) -  update robot extra info: RobotExtraInfo(extraKey=udp_port, first=50186, doubled=1792803447, triple=null, quadruple=null, penta=null)
+2026-10-24 09:57:27,422 INFO  [grpc-default-executor-1] service.DataService (DataService.java:379) - Subscribing Basic Data Service every 5s until success... rcsIp:krcs-robot-control
+2026-10-24 09:58:13,822 ERROR [monitor1-thread-1] monitor.Monitor (Monitor.java:88) - committee timer not work
+2026-10-27 13:38:22,741 INFO  [http-nio-5555-exec-7] controller.RobotController (RobotController.java:74) -  add new agv:RobotInfo(robotId=AMR_001, robotType=KMP1500I, status=null, robotLen=1180, robotWidth=820, mapCode=lay01, floorNumber=dist1, initInfo=RobotInitInfo(posX=14.0, posY=19.0, theta=0.0, batteryLevel=100))
+2026-10-27 13:38:28,166 INFO  [http-nio-5555-exec-9] controller.RobotController (RobotController.java:74) -  add new agv:RobotInfo(robotId=AMR_001, robotType=KMP1500I, status=null, robotLen=1180, robotWidth=820, mapCode=lay01, floorNumber=dist1, initInfo=RobotInitInfo(posX=14.0, posY=19.0, theta=0.0, batteryLevel=100))
+2026-10-27 13:39:25,889 INFO  [http-nio-5555-exec-7] controller.RobotController (RobotController.java:74) -  add new agv:RobotInfo(robotId=AMR_001, robotType=KMP1500I, status=null, robotLen=1180, robotWidth=820, mapCode=lay01, floorNumber=dist1, initInfo=RobotInitInfo(posX=14.0, posY=19.0, theta=0.0, batteryLevel=100))
+2026-10-27 13:39:30,934 INFO  [http-nio-5555-exec-9] controller.RobotController (RobotController.java:74) -  add new agv:RobotInfo(robotId=AMR_001, robotType=KMP1500I, status=null, robotLen=1180, robotWidth=820, mapCode=lay01, floorNumber=dist1, initInfo=RobotInitInfo(posX=14.0, posY=19.0, theta=0.0, batteryLevel=100))
+2026-10-27 13:40:16,286 INFO  [http-nio-5555-exec-5] controller.RobotController (RobotController.java:332) -  modify robot info:RobotStatusVO(robotId=1, posX=10.0, posY=21.0, posTheta=null, batteryLevel=null, batteryCurrent=null, liftingStatus=null, actuatorIdx=null, rackId=null, nodeLabel=null, robotStatus=null, taskId=null, cameraInfo=null, messageVersion=null, mapCode=null, floorNumber=null, collisionType=null, obstacleX=null, obstacleY=null, totalMileage=null, reliability=null, karosVersion=null, leftMotorTemperature=null, rightMotorTemperature=null, liftMotorTemperature=null, rotateMotorTemperature=null, rotateTimes=null, liftTimes=null, ip=null, trayAngle=null)
+2026-10-27 13:54:04,491 INFO  [http-nio-5555-exec-10] controller.RobotController (RobotController.java:74) -  add new agv:RobotInfo(robotId=AMR_001, robotType=KMP1500I, status=null, robotLen=1180, robotWidth=820, mapCode=lay01, floorNumber=dist1, initInfo=RobotInitInfo(posX=14.0, posY=21.0, theta=0.0, batteryLevel=100))
+2026-10-27 13:54:08,855 INFO  [http-nio-5555-exec-3] controller.RobotController (RobotController.java:74) -  add new agv:RobotInfo(robotId=001, robotType=KMP1500I, status=null, robotLen=1180, robotWidth=820, mapCode=lay01, floorNumber=dist1, initInfo=RobotInitInfo(posX=14.0, posY=21.0, theta=0.0, batteryLevel=100))
+2026-10-27 13:54:09,076 ERROR [http-nio-5555-exec-3] logging.DirectJDKLog (DirectJDKLog.java:175) - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.DuplicateKeyException: 
+### Error updating database.  Cause: org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "robot_init_info_unique_code"
+  Detail: Key (robot_id)=(1) already exists.
+### The error may exist in com/kuka/simulation/persistence/dal/RobotInitInfoMapper.java (best guess)
+### The error may involve com.kuka.simulation.persistence.dal.RobotInitInfoMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO public.robot_init_info  ( robot_id, robot_type,  robot_length, robot_width, pos_x, pos_y, pos_theta, battery, map_code, floor_number, create_time, create_app, last_update_time, last_update_app )  VALUES  ( ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+### Cause: org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "robot_init_info_unique_code"
+  Detail: Key (robot_id)=(1) already exists.
+; ERROR: duplicate key value violates unique constraint "robot_init_info_unique_code"
+  Detail: Key (robot_id)=(1) already exists.; nested exception is org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "robot_init_info_unique_code"
+  Detail: Key (robot_id)=(1) already exists.] with root cause
+org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "robot_init_info_unique_code"
+  Detail: Key (robot_id)=(1) already exists.
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2552) ~[postgresql-42.2.23.jar:42.2.23]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2284) ~[postgresql-42.2.23.jar:42.2.23]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:322) ~[postgresql-42.2.23.jar:42.2.23]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:481) ~[postgresql-42.2.23.jar:42.2.23]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:401) ~[postgresql-42.2.23.jar:42.2.23]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:164) ~[postgresql-42.2.23.jar:42.2.23]
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:153) ~[postgresql-42.2.23.jar:42.2.23]
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:497) ~[druid-1.2.3.jar:1.2.3]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47) ~[mybatis-3.5.6.jar:3.5.6]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74) ~[mybatis-3.5.6.jar:3.5.6]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_212]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_212]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_212]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_212]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:63) ~[mybatis-3.5.6.jar:3.5.6]
+	at com.sun.proxy.$Proxy171.update(Unknown Source) ~[?:?]
+	at com.baomidou.mybatisplus.core.executor.MybatisSimpleExecutor.doUpdate(MybatisSimpleExecutor.java:56) ~[mybatis-plus-core-3.4.1.jar:3.4.1]
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117) ~[mybatis-3.5.6.jar:3.5.6]
+	at com.baomidou.mybatisplus.core.executor.MybatisCachingExecutor.update(MybatisCachingExecutor.java:85) ~[mybatis-plus-core-3.4.1.jar:3.4.1]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_212]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_212]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_212]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_212]
+	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49) ~[mybatis-3.5.6.jar:3.5.6]
+	at com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor.intercept(MybatisPlusInterceptor.java:83) ~[mybatis-plus-extension-3.4.1.jar:3.4.1]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:61) ~[mybatis-3.5.6.jar:3.5.6]
+	at com.sun.proxy.$Proxy170.update(Unknown Source) ~[?:?]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197) ~[mybatis-3.5.6.jar:3.5.6]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184) ~[mybatis-3.5.6.jar:3.5.6]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_212]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_212]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_212]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_212]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:426) ~[mybatis-spring-2.0.5.jar:2.0.5]
+	at com.sun.proxy.$Proxy139.insert(Unknown Source) ~[?:?]
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:271) ~[mybatis-spring-2.0.5.jar:2.0.5]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:60) ~[mybatis-plus-core-3.4.1.jar:3.4.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:148) ~[mybatis-plus-core-3.4.1.jar:3.4.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89) ~[mybatis-plus-core-3.4.1.jar:3.4.1]
+	at com.sun.proxy.$Proxy140.insert(Unknown Source) ~[?:?]
+	at com.kuka.simulation.persistence.manager.BaseManager.lambda$null$0(BaseManager.java:54) ~[simulation-persistence-2.13.0-SNAPSHOT.jar:2.13.0-SNAPSHOT]
+	at java.util.stream.ReferencePipeline$4$1.accept(ReferencePipeline.java:210) ~[?:1.8.0_212]
+	at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948) ~[?:1.8.0_212]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482) ~[?:1.8.0_212]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472) ~[?:1.8.0_212]
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708) ~[?:1.8.0_212]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:1.8.0_212]
+	at java.util.stream.IntPipeline.reduce(IntPipeline.java:457) ~[?:1.8.0_212]
+	at java.util.stream.IntPipeline.sum(IntPipeline.java:415) ~[?:1.8.0_212]
+	at com.kuka.simulation.persistence.manager.BaseManager.lambda$batchSave$1(BaseManager.java:54) ~[simulation-persistence-2.13.0-SNAPSHOT.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.util.OptionalCollection.ifNotEmptyOrElse(OptionalCollection.java:312) ~[simulation-common-2.13.0-SNAPSHOT.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.persistence.manager.BaseManager.batchSave(BaseManager.java:54) ~[simulation-persistence-2.13.0-SNAPSHOT.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.persistence.manager.BaseManager.save(BaseManager.java:43) ~[simulation-persistence-2.13.0-SNAPSHOT.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.persistence.manager.BaseManager$$FastClassBySpringCGLIB$$4fd6e506.invoke(<generated>) ~[simulation-persistence-2.13.0-SNAPSHOT.jar:2.13.0-SNAPSHOT]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:779) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123) ~[spring-tx-5.3.9.jar:5.3.9]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388) ~[spring-tx-5.3.9.jar:5.3.9]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:692) ~[spring-aop-5.3.9.jar:5.3.9]
+	at com.kuka.simulation.persistence.manager.RobotInitInfoManager$$EnhancerBySpringCGLIB$$c6b717f9.save(<generated>) ~[simulation-persistence-2.13.0-SNAPSHOT.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.persistence.service.impl.RobotInitInfoServiceImpl.insertOne(RobotInitInfoServiceImpl.java:32) ~[simulation-persistence-2.13.0-SNAPSHOT.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.application.controller.DbController.insertNewRobot(DbController.java:45) ~[simulation-application.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.application.controller.RobotController.insertNewRobot(RobotController.java:105) ~[simulation-application.jar:2.13.0-SNAPSHOT]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_212]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_212]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_212]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_212]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681) ~[tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764) ~[tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at com.kuka.rcs.record.filter.AbstractRecordFilter.filter(AbstractRecordFilter.java:58) ~[krcs_basic-data-record-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+	at com.kuka.rcs.record.filter.OperationRecordFilter.doFilter(OperationRecordFilter.java:32) ~[krcs_basic-data-record-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96) ~[spring-boot-actuator-2.5.4.jar:2.5.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_212]
+2026-10-27 13:54:19,786 INFO  [http-nio-5555-exec-5] controller.RobotController (RobotController.java:74) -  add new agv:RobotInfo(robotId=00001, robotType=KMP1500I, status=null, robotLen=1180, robotWidth=820, mapCode=lay01, floorNumber=dist1, initInfo=RobotInitInfo(posX=14.0, posY=21.0, theta=0.0, batteryLevel=100))
+2026-10-27 13:54:19,791 ERROR [http-nio-5555-exec-5] logging.DirectJDKLog (DirectJDKLog.java:175) - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.DuplicateKeyException: 
+### Error updating database.  Cause: org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "robot_init_info_unique_code"
+  Detail: Key (robot_id)=(1) already exists.
+### The error may exist in com/kuka/simulation/persistence/dal/RobotInitInfoMapper.java (best guess)
+### The error may involve com.kuka.simulation.persistence.dal.RobotInitInfoMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO public.robot_init_info  ( robot_id, robot_type,  robot_length, robot_width, pos_x, pos_y, pos_theta, battery, map_code, floor_number, create_time, create_app, last_update_time, last_update_app )  VALUES  ( ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+### Cause: org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "robot_init_info_unique_code"
+  Detail: Key (robot_id)=(1) already exists.
+; ERROR: duplicate key value violates unique constraint "robot_init_info_unique_code"
+  Detail: Key (robot_id)=(1) already exists.; nested exception is org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "robot_init_info_unique_code"
+  Detail: Key (robot_id)=(1) already exists.] with root cause
+org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "robot_init_info_unique_code"
+  Detail: Key (robot_id)=(1) already exists.
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2552) ~[postgresql-42.2.23.jar:42.2.23]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2284) ~[postgresql-42.2.23.jar:42.2.23]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:322) ~[postgresql-42.2.23.jar:42.2.23]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:481) ~[postgresql-42.2.23.jar:42.2.23]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:401) ~[postgresql-42.2.23.jar:42.2.23]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:164) ~[postgresql-42.2.23.jar:42.2.23]
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:153) ~[postgresql-42.2.23.jar:42.2.23]
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:497) ~[druid-1.2.3.jar:1.2.3]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47) ~[mybatis-3.5.6.jar:3.5.6]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74) ~[mybatis-3.5.6.jar:3.5.6]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_212]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_212]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_212]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_212]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:63) ~[mybatis-3.5.6.jar:3.5.6]
+	at com.sun.proxy.$Proxy171.update(Unknown Source) ~[?:?]
+	at com.baomidou.mybatisplus.core.executor.MybatisSimpleExecutor.doUpdate(MybatisSimpleExecutor.java:56) ~[mybatis-plus-core-3.4.1.jar:3.4.1]
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117) ~[mybatis-3.5.6.jar:3.5.6]
+	at com.baomidou.mybatisplus.core.executor.MybatisCachingExecutor.update(MybatisCachingExecutor.java:85) ~[mybatis-plus-core-3.4.1.jar:3.4.1]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_212]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_212]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_212]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_212]
+	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49) ~[mybatis-3.5.6.jar:3.5.6]
+	at com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor.intercept(MybatisPlusInterceptor.java:83) ~[mybatis-plus-extension-3.4.1.jar:3.4.1]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:61) ~[mybatis-3.5.6.jar:3.5.6]
+	at com.sun.proxy.$Proxy170.update(Unknown Source) ~[?:?]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197) ~[mybatis-3.5.6.jar:3.5.6]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184) ~[mybatis-3.5.6.jar:3.5.6]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_212]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_212]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_212]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_212]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:426) ~[mybatis-spring-2.0.5.jar:2.0.5]
+	at com.sun.proxy.$Proxy139.insert(Unknown Source) ~[?:?]
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:271) ~[mybatis-spring-2.0.5.jar:2.0.5]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:60) ~[mybatis-plus-core-3.4.1.jar:3.4.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:148) ~[mybatis-plus-core-3.4.1.jar:3.4.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89) ~[mybatis-plus-core-3.4.1.jar:3.4.1]
+	at com.sun.proxy.$Proxy140.insert(Unknown Source) ~[?:?]
+	at com.kuka.simulation.persistence.manager.BaseManager.lambda$null$0(BaseManager.java:54) ~[simulation-persistence-2.13.0-SNAPSHOT.jar:2.13.0-SNAPSHOT]
+	at java.util.stream.ReferencePipeline$4$1.accept(ReferencePipeline.java:210) ~[?:1.8.0_212]
+	at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948) ~[?:1.8.0_212]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482) ~[?:1.8.0_212]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472) ~[?:1.8.0_212]
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708) ~[?:1.8.0_212]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:1.8.0_212]
+	at java.util.stream.IntPipeline.reduce(IntPipeline.java:457) ~[?:1.8.0_212]
+	at java.util.stream.IntPipeline.sum(IntPipeline.java:415) ~[?:1.8.0_212]
+	at com.kuka.simulation.persistence.manager.BaseManager.lambda$batchSave$1(BaseManager.java:54) ~[simulation-persistence-2.13.0-SNAPSHOT.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.util.OptionalCollection.ifNotEmptyOrElse(OptionalCollection.java:312) ~[simulation-common-2.13.0-SNAPSHOT.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.persistence.manager.BaseManager.batchSave(BaseManager.java:54) ~[simulation-persistence-2.13.0-SNAPSHOT.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.persistence.manager.BaseManager.save(BaseManager.java:43) ~[simulation-persistence-2.13.0-SNAPSHOT.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.persistence.manager.BaseManager$$FastClassBySpringCGLIB$$4fd6e506.invoke(<generated>) ~[simulation-persistence-2.13.0-SNAPSHOT.jar:2.13.0-SNAPSHOT]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:779) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123) ~[spring-tx-5.3.9.jar:5.3.9]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388) ~[spring-tx-5.3.9.jar:5.3.9]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:692) ~[spring-aop-5.3.9.jar:5.3.9]
+	at com.kuka.simulation.persistence.manager.RobotInitInfoManager$$EnhancerBySpringCGLIB$$c6b717f9.save(<generated>) ~[simulation-persistence-2.13.0-SNAPSHOT.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.persistence.service.impl.RobotInitInfoServiceImpl.insertOne(RobotInitInfoServiceImpl.java:32) ~[simulation-persistence-2.13.0-SNAPSHOT.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.application.controller.DbController.insertNewRobot(DbController.java:45) ~[simulation-application.jar:2.13.0-SNAPSHOT]
+	at com.kuka.simulation.application.controller.RobotController.insertNewRobot(RobotController.java:105) ~[simulation-application.jar:2.13.0-SNAPSHOT]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_212]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_212]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_212]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_212]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681) ~[tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764) ~[tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at com.kuka.rcs.record.filter.AbstractRecordFilter.filter(AbstractRecordFilter.java:58) ~[krcs_basic-data-record-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+	at com.kuka.rcs.record.filter.OperationRecordFilter.doFilter(OperationRecordFilter.java:32) ~[krcs_basic-data-record-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96) ~[spring-boot-actuator-2.5.4.jar:2.5.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_212]
+2026-10-27 13:54:28,948 INFO  [http-nio-5555-exec-9] controller.RobotController (RobotController.java:74) -  add new agv:RobotInfo(robotId=100001, robotType=KMP1500I, status=null, robotLen=1180, robotWidth=820, mapCode=lay01, floorNumber=dist1, initInfo=RobotInitInfo(posX=14.0, posY=21.0, theta=0.0, batteryLevel=100))
+2026-10-27 13:54:28,957 INFO  [http-nio-5555-exec-9] controller.DbController (DbController.java:46) - insert new initial robot RobotInfo(robotId=100001, robotType=KMP1500I, status=null, robotLen=1180, robotWidth=820, mapCode=lay01, floorNumber=dist1, initInfo=RobotInitInfo(posX=14.0, posY=21.0, theta=0.0, batteryLevel=100)) finish
+2026-10-27 13:54:28,962 INFO  [nioEventLoopGroup-5-1] netty.NormalUdpHandler (NormalUdpHandler.java:34) - CHANNEL_ACTIVE|robotId=[100001]|chnnlId=[02b4a12e]|remoteAddr=[krcs-robot-control/10.89.0.100:8988]|localAddr=[/0:0:0:0:0:0:0:0:50186]
+2026-10-27 13:54:28,977 INFO  [http-nio-5555-exec-9] robotlife.RobotHouseCommittee (RobotHouseCommittee.java:167) - add robot 100001 finished
+2026-10-27 13:54:29,114 INFO  [http-nio-5555-exec-10] controller.RobotController (RobotController.java:332) -  modify robot info:RobotStatusVO(robotId=100001, posX=14.0, posY=21.0, posTheta=null, batteryLevel=null, batteryCurrent=null, liftingStatus=null, actuatorIdx=null, rackId=null, nodeLabel=null, robotStatus=null, taskId=null, cameraInfo=null, messageVersion=null, mapCode=null, floorNumber=null, collisionType=null, obstacleX=null, obstacleY=null, totalMileage=null, reliability=null, karosVersion=null, leftMotorTemperature=null, rightMotorTemperature=null, liftMotorTemperature=null, rotateMotorTemperature=null, rotateTimes=null, liftTimes=null, ip=null, trayAngle=null)
+2026-10-27 13:54:37,421 INFO  [net6-thread-1] controller.DbController (DbController.java:91) -  update robot extra info: RobotExtraInfo(extraKey=udp_port, first=50187, doubled=1793076877, triple=null, quadruple=null, penta=null)
+2026-10-27 13:54:43,762 INFO  [http-nio-5555-exec-3] robotlife.RobotHouseCommittee (RobotHouseCommittee.java:224) - start logOut robot:100001
+2026-10-27 13:54:43,776 INFO  [http-nio-5555-exec-3] robotlife.RobotHouseCommittee (RobotHouseCommittee.java:228) - finish logOut robot:100001
+2026-10-27 13:54:43,809 INFO  [http-nio-5555-exec-3] controller.RobotController (RobotController.java:166) - delete robot :100001 finish

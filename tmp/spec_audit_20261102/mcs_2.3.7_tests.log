@@ -1,0 +1,5 @@
+PASS: 34 PC cargo/scan/history checks; no Fleet connection.
+PASS: 37 HCACK/CPACK and rejection diagnostic checks.
+PASS: 26 loaded recovery request, ownership and event checks; local only.
+PASS: 419 checks; loopback HSMS only. No actual Fleet connection or transport.
+Test data: C:\Users\dreiv\AppData\Local\Temp\KukaMcsTests_fb24a47af60144649df63e3556d04782

@@ -24,6 +24,9 @@ final class HostProtocol {
         return result;
     }
     static Map<String,Object> transfer(Secs2 root)throws Exception {
+        return transfer(root,VehicleNames.identity());
+    }
+    static Map<String,Object> transfer(Secs2 root,VehicleNames names)throws Exception {
         listOf(root,4,"BODY");
         if(root.get(0).secs2Item()!=Secs2Item.UINT4 || root.get(0).size()!=1)throw new ParameterError("DATAID",3);
         if(!asciiField(root.get(1),"OBJSPEC").isEmpty())throw new ParameterError("OBJSPEC",2);
@@ -31,16 +34,27 @@ final class HostProtocol {
         Map<String,Secs2> groups=pairs(root.get(3),"GROUPS");
         if(!groups.keySet().equals(new HashSet<>(Arrays.asList("COMMANDINFO","TRANSFERINFO"))))throw new ParameterError("GROUPS",1);
         Map<String,Secs2> cmd=pairs(groups.get("COMMANDINFO"),"COMMANDINFO"), cargo=pairs(groups.get("TRANSFERINFO"),"TRANSFERINFO");
-        if(!cmd.keySet().equals(new HashSet<>(Arrays.asList("COMMANDID","PRIORITY","REPLACE"))))throw new ParameterError("COMMANDINFO",1);
+        Set<String> core=new HashSet<>(Arrays.asList("COMMANDID","PRIORITY"));
+        Set<String> legacy=new HashSet<>(Arrays.asList("COMMANDID","PRIORITY","REPLACE"));
+        if(!cmd.keySet().equals(core) && !cmd.keySet().equals(legacy))throw new ParameterError("COMMANDINFO",1);
         if(!cargo.keySet().equals(new HashSet<>(Arrays.asList("CARRIERID","SOURCEPORT","DESTPORT"))))throw new ParameterError("TRANSFERINFO",1);
         Map<String,Object> r=new LinkedHashMap<>();
         for(String k:Arrays.asList("COMMANDID","CARRIERID","SOURCEPORT","DESTPORT"))r.put(k,asciiField((cmd.containsKey(k)?cmd:cargo).get(k),k));
         if(!((String)r.get("COMMANDID")).matches("[A-Za-z0-9_-]{1,32}"))throw new ParameterError("COMMANDID",2);
         for(String k:Arrays.asList("PRIORITY","REPLACE")){
+            // REPLACE was a project extension emitted by older Virtual MCS.
+            // SKI v0.4 COMMANDINFO needs only COMMANDID and PRIORITY.
+            if(k.equals("REPLACE") && !cmd.containsKey(k)){r.put(k,0);continue;}
             Secs2 x=cmd.get(k);if(x.secs2Item()!=Secs2Item.UINT2 || x.size()!=1)throw new ParameterError(k,3);r.put(k,x.getInt(0));
         }
         try{CargoService.identifier((String)r.get("CARRIERID"),"CARRIERID");}catch(IllegalArgumentException ex){throw new ParameterError("CARRIERID",2);}
-        for(String k:Arrays.asList("SOURCEPORT","DESTPORT"))if(!WorkPorts.ALL.contains(r.get(k)))throw new ParameterError(k,2);
+        try{r.put("SOURCEPORT",names.sourceFromSecs((String)r.get("SOURCEPORT")));}catch(IllegalArgumentException ex){throw new ParameterError("SOURCEPORT",2);}
+        if(!WorkPorts.source((String)r.get("SOURCEPORT")))throw new ParameterError("SOURCEPORT",2);
+        if(!WorkPorts.contains((String)r.get("DESTPORT")))throw new ParameterError("DESTPORT",2);
+        // The same canonical PortID is used for admission, durable intent,
+        // SV58/SV23 and all transfer/vehicle/carrier reports.
+        if(WorkPorts.contains((String)r.get("SOURCEPORT")))r.put("SOURCEPORT",WorkPorts.canonical((String)r.get("SOURCEPORT")));
+        r.put("DESTPORT",WorkPorts.canonical((String)r.get("DESTPORT")));
         if(r.get("SOURCEPORT").equals(r.get("DESTPORT")))throw new ParameterError("DESTPORT",2);
         if((int)r.get("PRIORITY")<1 || (int)r.get("PRIORITY")>99)throw new ParameterError("PRIORITY",2);
         if((int)r.get("REPLACE")!=0)throw new ParameterError("REPLACE",2);
@@ -68,12 +82,17 @@ final class HostProtocol {
             if(("REQUESTID".equals(key) || "TARGETID".equals(key)) && !v.matches("[A-Za-z0-9_-]{1,32}"))throw new ParameterError(key,2);
             if(Arrays.asList("CARRIERID","MODEL").contains(key))try{CargoService.identifier(v,key);}catch(IllegalArgumentException ex){throw new ParameterError(key,2);}
             if("SCANNEDID".equals(key) && !v.isEmpty())try{CargoService.identifier(v,key);}catch(IllegalArgumentException ex){throw new ParameterError(key,2);}
-            if("PORT".equals(key) && !WorkPorts.ALL.contains(v))throw new ParameterError(key,2);
+            if("PORT".equals(key) && !WorkPorts.contains(v))throw new ParameterError(key,2);
+            if("PORT".equals(key))v=WorkPorts.canonical(v);
             p.put(key,v);
         }
         return p;
     }
     static Secs2 body(HostState.Delivery d,HostState.Job j){
+        return body(d,j,VehicleNames.identity());
+    }
+    static Secs2 body(HostState.Delivery d,HostState.Job j,VehicleNames names){
+        if("RECOVERY".equals(d.kind))return event(d.id,9004,93,list(ascii(d.command),ascii(d.carrier),ascii(names.vehicle(d.vehicle)),ascii(d.port),ascii(d.outcome),ascii(d.detail)));
         if("INVENTORY".equals(d.kind)){
             List<Secs2> rows=new ArrayList<>();
             for(Map<String,Object> c:d.inventory)rows.add(list(ascii(CargoService.str(c,"containerCode")),ascii(CargoService.port(c)),
@@ -81,14 +100,16 @@ final class HostProtocol {
                 uint2(Integer.parseInt(CargoService.str(c,"inMapStatus"))),uint2(Integer.parseInt(CargoService.str(c,"isCarry")))));
             return event(d.id,9001,90,list(ascii(d.command),list(rows)));
         }
-        if("CARGO_RESULT".equals(d.kind))return event(d.id,9002,91,list(ascii(d.command),ascii(d.operation),ascii(d.outcome),ascii(d.carrier),ascii(d.port),ascii(d.detail)));
-        if("ID_READ_TEST".equals(d.kind))return event(d.id,406,14,list(ascii(d.carrier),ascii(d.location),uint2(d.result)));
+        if("COMMAND_REJECT".equals(d.kind))return event(d.id,9003,92,list(ascii(d.command),ascii(d.operation),binary((byte)d.result),ascii(d.detail),ascii(d.outcome),ascii(d.port)));
+        if("CARGO_RESULT".equals(d.kind))return event(d.id,9002,91,list(ascii(d.command),ascii(d.operation),ascii(d.outcome),ascii(d.carrier),ascii(names.location(d.port)),ascii(d.detail)));
+        if("ID_READ_TEST".equals(d.kind))return event(d.id,406,14,list(ascii(d.carrier),ascii(names.location(d.location)),uint2(d.result)));
         if("ALARM".equals(d.kind))return list(binary((byte)(d.category|(d.set?128:0))),uint4(d.alarmId),ascii(d.text));
-        if("UNIT".equals(d.kind))return event(d.id,d.ceid,6,list(ascii(d.vehicle),uint4(d.alarmId),ascii(d.text)));
+        if("UNIT".equals(d.kind))return event(d.id,d.ceid,6,list(ascii(names.vehicle(d.vehicle)),uint4(d.alarmId),ascii(d.text)));
         if("TSC".equals(d.kind))return event(d.id,d.ceid,0,list());
         Map<String,Object> r=j.request;
-        if("VEHICLE".equals(d.kind))return event(d.id,d.ceid,5,list(ascii(d.vehicle),ascii(d.command),list(ascii(d.port)),list(ascii((String)r.get("CARRIERID")))));
-        if("CARRIER".equals(d.kind))return event(d.id,d.ceid,3,list(ascii(d.vehicle),ascii((String)r.get("CARRIERID")),ascii(d.location),ascii(d.command)));
-        return event(d.id,d.ceid,2,list(ascii(d.command),list(list(list(ascii((String)r.get("CARRIERID")),ascii((String)r.get("SOURCEPORT")),ascii((String)r.get("DESTPORT"))),ascii(d.location))),uint2(d.result)));
+        if("VEHICLE".equals(d.kind))return event(d.id,d.ceid,5,list(ascii(names.vehicle(d.vehicle)),ascii(d.command),list(ascii(names.location(d.port))),list(ascii((String)r.get("CARRIERID")))));
+        if("CARRIER".equals(d.kind))return event(d.id,d.ceid,3,list(ascii(names.vehicle(d.vehicle)),ascii((String)r.get("CARRIERID")),ascii(reportLocation(d,names)),ascii(d.command)));
+        return event(d.id,d.ceid,2,list(ascii(d.command),list(list(list(ascii((String)r.get("CARRIERID")),ascii(names.location((String)r.get("SOURCEPORT"))),ascii(names.location((String)r.get("DESTPORT")))),ascii(reportLocation(d,names)))),uint2(d.result)));
     }
+    private static String reportLocation(HostState.Delivery d,VehicleNames names){return !d.vehicle.isEmpty() && d.vehicle.equals(d.location)?names.vehicle(d.vehicle):names.location(d.location);}
 }

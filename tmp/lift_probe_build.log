@@ -1,0 +1,11 @@
+  복원할 프로젝트를 확인하는 중...
+  C:\work\KUKA\KUKA_Fleet\VirtualMCS\Tools\LiftAbortProbe\LiftAbortProbe.csproj을(를) 350밀리초 동안 복원했습니다.
+  C:\work\KUKA\KUKA_Fleet\VirtualMCS\Core\KukaMcs.Core.csproj을(를) 350밀리초 동안 복원했습니다.
+  KukaMcs.Core -> C:\work\KUKA\KUKA_Fleet\VirtualMCS\Core\bin\Release\net10.0\KukaMcs.Core.dll
+  LiftAbortProbe -> C:\work\KUKA\KUKA_Fleet\VirtualMCS\Tools\LiftAbortProbe\bin\Release\net10.0\LiftAbortProbe.dll
+
+빌드했습니다.
+    경고 0개
+    오류 0개
+
+경과 시간: 00:00:05.58

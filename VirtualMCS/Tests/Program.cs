@@ -5,11 +5,18 @@ using Microsoft.Extensions.Options;
 using Secs4Net;
 using static Secs4Net.Item;
 
+WireCatalogTests.Fixture();
 if(args.Length==2 && args[0]=="--native-interop"){await NativeInteropTests.Run(int.Parse(args[1]));return;}
 CargoTests.Run();
+AcknowledgementTests.Run();
+LoadedRecoveryTests.Run();
 
 int checks = 0;
 void Check(bool valid, string name) { if (!valid) throw new Exception("FAIL: " + name); checks++; }
+SelectedStatusTests.ParseTests(Check);
+SmlDictionaryTests.Run(Check);
+WireCatalogTests.Run(Check);
+TimelineLogsTests.Run(Check);
 void Reject(Action action, string name) { try { action(); } catch (InvalidOperationException) { checks++; return; } throw new Exception("FAIL: " + name); }
 async Task Wait(Func<bool> condition, string name)
 {
@@ -67,9 +74,9 @@ using (var msg = Protocol.Transfer(Req(ids[0])))
     Check(b.Count == 4 && b[0].Format == SecsFormat.U4 && b[0].FirstValue<uint>() == 0, "DATAID U4=0 and L4 envelope");
     Check(b[1].GetString() == "" && b[2].GetString() == "TRANSFER", "OBJSPEC and RCMD");
     Check(b[3].Count == 2 && b[3][0][0].GetString() == "COMMANDINFO" && b[3][1][0].GetString() == "TRANSFERINFO", "Named groups");
-    Check(b[3][0][1].Count == 3 && b[3][1][1].Count == 3, "Each group has three name/value pairs");
+    Check(b[3][0][1].Count == 2 && b[3][1][1].Count == 3, "SKI core COMMANDINFO has two pairs and TRANSFERINFO has three");
     Check(b[3][0][1][0][1].GetString() == ids[0] && b[3][0][1][1][1].Format == SecsFormat.U2, "COMMANDID and U2 PRIORITY");
-    Check(b[3][0][1][2][1].FirstValue<ushort>() == 0, "REPLACE=0");
+    Check(b[3][0][1].Items.All(p => p[0].GetString() != "REPLACE"), "No mandatory project REPLACE field in standard S2F49");
     Check(b[3][1][1][1][1].GetString() == "PORT_97" && b[3][1][1][2][1].GetString() == "PORT_89", "Correct From/To values");
 }
 using (var ack = new SecsMessage(2, 50, false) { SecsItem = B(0) }) Check(Protocol.Ack(ack, 2, 50) == 0, "Current Fleet single-B ACK");
@@ -118,6 +125,7 @@ var serverLoop = Task.Run(async () =>
             using var primary = incoming.PrimaryMessage;
             using var reply = primary.S == 1 && primary.F == 13 ? new SecsMessage(1, 14, false) { SecsItem = L(B(0), L(A("MOCK_FLEET"), A("1"))) }
                 : primary.S == 1 && primary.F == 17 ? new SecsMessage(1, 18, false) { SecsItem = B(0) }
+                : primary.S == 1 && primary.F == 3 ? SelectedStatusTests.Reply(primary)
                 : primary.S == 2 && primary.F == 41 ? new SecsMessage(2, 42, false) { SecsItem = L(B(4), L()) }
                 : new SecsMessage(2, 50, false) { SecsItem = B(0) };
             if (primary.S == 2 && primary.F == 49)
@@ -135,8 +143,15 @@ equipment.Start(cts.Token);
 var wireStore = new JobStore(Path.Combine(root, "wire.jsonl"));
 await using var client = new McsClient(wireStore);
 var logs = new System.Collections.Concurrent.ConcurrentQueue<LogEntry>(); client.Logged += logs.Enqueue;
+client.AutoStatusOnConnect = true;
 await client.ConnectAsync(new("127.0.0.1", port, 3000, true, 1));
 await Wait(() => client.Communicating, "HSMS select plus automatic S1F13/S1F14 handshake");
+await Wait(() => client.RecentStatusResults.Count >= 3, "Automatic startup status requests complete after COMMACK0");
+Check(logs.Count(l => l.Direction == "TX" && l.Stream == 1 && l.Function == 3) == 3, "Automatic startup sends AGV/port/work exactly once");
+Check(!received.Task.IsCompleted && wireStore.Snapshot().Count == 0, "Status startup never submits a transport");
+await SelectedStatusTests.WireTests(client, Check);
+Check(logs.Where(l=>l.Direction=="RX" && l.Stream==1 && l.Function==4).Any(l=>l.Text.Contains("[EnhancedVehicles]") && l.Text.Contains("[VehicleID]")), "Wire logger correlates S1F4 to its S1F3 VehicleID schema by SystemBytes");
+Check(logs.Where(l=>l.Direction=="RX" && l.Stream==1 && l.Function==4).Any(l=>l.Text.Contains("[EnhancedTransfers]") && l.Text.Contains("[CommandID]")), "Wire logger labels current-work CommandID without changing its value");
 await client.OnlineAsync(); Check(logs.Any(l => l.Text.Contains("ONLACK=0")), "Manual S1F17 round trip");
 var wireRequest = Req(TransferRequest.NewCommandId()); await client.SendTransferAsync(wireRequest);
 Check(await received.Task.WaitAsync(TimeSpan.FromSeconds(3)) == wireRequest, "Real HSMS wire delivers exact transfer parameters");
@@ -159,7 +174,7 @@ foreach (uint ceid in new uint[] {601,602,603,604,605,606,607,610})
     Check(logs.Any(l => l.Ceid == ceid && l.CommandId == wireRequest.CommandId && l.Summary!.Contains("보고")), $"Vehicle {ceid} message has readable summary and correlation");
 var vehicleRequest = Req("VEHICLE_VALIDATION");
 wireStore.Reserve(vehicleRequest);
-using (var wrong = Vehicle(603, vehicleRequest, robot: "0")) Check(!wireStore.ReportVehicle(Protocol.ParseVehicleReport(wrong)!), "Wrong vehicle blocked");
+using (var wrong = Vehicle(603, vehicleRequest, robot: "bad name")) Check(!wireStore.ReportVehicle(Protocol.ParseVehicleReport(wrong)!), "Invalid vehicle identifier blocked");
 using (var wrong = Vehicle(606, vehicleRequest, port: vehicleRequest.SourcePort)) Check(!wireStore.ReportVehicle(Protocol.ParseVehicleReport(wrong)!), "Wrong event port blocked");
 using (var wrong = Vehicle(603, vehicleRequest with { CarrierId="OTHER" })) Check(!wireStore.ReportVehicle(Protocol.ParseVehicleReport(wrong)!), "Wrong event cargo blocked");
 foreach(uint ceid in new uint[]{601,604,605,610})
@@ -179,7 +194,7 @@ Check(wireStore.History(wireRequest.CommandId).First(j=>j.LastCeid==610).IsPendi
 foreach (uint ceid in new uint[] {301,302})
     Check(logs.Any(l=>l.Ceid==ceid && l.CommandId==wireRequest.CommandId && l.Summary!.Contains(ceid==301?"화물 적재":"화물 하차")), $"Carrier {ceid} has readable summary and command correlation");
 var carrierRequest=Req("CARRIER_VALIDATION");wireStore.Reserve(carrierRequest);
-using(var wrong=Carrier(301,carrierRequest,robot:"0"))Check(!wireStore.ReportCarrier(Protocol.ParseCarrierReport(wrong)!),"Wrong carrier vehicle blocked");
+using(var wrong=Carrier(301,carrierRequest,robot:"bad name"))Check(!wireStore.ReportCarrier(Protocol.ParseCarrierReport(wrong)!),"Invalid carrier vehicle identifier blocked");
 using(var wrong=Carrier(301,carrierRequest,location:carrierRequest.SourcePort))Check(!wireStore.ReportCarrier(Protocol.ParseCarrierReport(wrong)!),"301 must locate cargo on vehicle");
 using(var wrong=Carrier(302,carrierRequest,location:carrierRequest.SourcePort))Check(!wireStore.ReportCarrier(Protocol.ParseCarrierReport(wrong)!),"302 wrong final location blocked");
 using(var wrong=Carrier(301,carrierRequest with {CarrierId="OTHER"}))Check(!wireStore.ReportCarrier(Protocol.ParseCarrierReport(wrong)!),"Wrong carrier ID blocked");
@@ -194,7 +209,7 @@ using(var late=Carrier(301,wireRequest))wireStore.ReportCarrier(Protocol.ParseCa
 Check(wireStore.Snapshot().Single(j=>j.Request.CommandId==wireRequest.CommandId).Phase==JobPhase.Completed,"Late carrier report cannot regress completed job");
 Check(new JobStore(Path.Combine(root,"wire.jsonl")).History(wireRequest.CommandId).Count(j=>j.LastCeid is 301 or 302)==2,"Carrier receipt timeline persists across restart");
 // Each command can be assigned a different real robot. Persist identity and reject mixing.
-foreach (string robot in new[] { "2", "3" })
+foreach (string robot in new[] { "2", "3", "AGV001", "001" })
 {
     var r = Req("AUTO_" + robot); wireStore.Reserve(r);
     using(var first=Vehicle(604,r,robot)) Check(wireStore.ReportVehicle(Protocol.ParseVehicleReport(first)!), "Bind assigned robot " + robot);
@@ -214,6 +229,11 @@ using (var alarm = new SecsMessage(5, 1, true) { SecsItem = L(B(0x86), U4(900001
 using (var reply = await eqGem.SendAsync(alarm, cts.Token)) Check(Protocol.Ack(reply, 5, 2) == 0, "Automatic S5F2 alarm ACK");
 Check(logs.Any(l => l.Direction == "ALARM" && l.Text.Contains("MOCK_ALARM")), "Alarm is logged separately");
 await ControlTests.Run(client, eqGem, wireStore, cts.Token, Check);
+var rejectedRequest = Req("DIAGNOSTIC_WIRE"); wireStore.Reserve(rejectedRequest);
+using (var diagnostic = AcknowledgementTests.Message(rejectedRequest.CommandId))
+using (var ack = await eqGem.SendAsync(diagnostic, cts.Token)) Check(Protocol.Ack(ack,6,12)==0,"Rejection9003 acknowledged over HSMS");
+await Wait(() => logs.Any(l => l.Ceid==9003 && l.CommandId==rejectedRequest.CommandId && l.Summary!.Contains("PAUSING")),"Rejection log has exact state and command");
+Check(wireStore.Snapshot().Single(j=>j.Request.CommandId==rejectedRequest.CommandId).Detail.Contains("OLD_JOB"),"Rejection history shows blocking ID");
 dropReply = true;
 var uncertain = Req(TransferRequest.NewCommandId());
 try { await client.SendTransferAsync(uncertain); throw new Exception("T3 timeout expected"); } catch (SecsException) { checks++; }

@@ -1,0 +1,519 @@
+[
+  {
+    "id": 72190,
+    "path": "robotQuery",
+    "request": {},
+    "response": {
+      "code": "0",
+      "data": [
+        {
+          "batteryLevel": 84.0,
+          "batteryVoltage": 0.0,
+          "buildingCode": "SIM01",
+          "containerCode": "",
+          "errorMessage": " noError-finished",
+          "floorNumber": "dist1",
+          "karOsVersion": "",
+          "leftFrtMovMtrTemp": "0.0",
+          "leftMotorTemperature": "0.0",
+          "leftReMovMtrTemp": "0.0",
+          "liftMtrTemp": "0.0",
+          "liftStatus": 1,
+          "liftTimes": 0,
+          "mapCode": "lay01",
+          "mileage": "0.0",
+          "missionCode": "795B502514064D0B8B3DA58B4BE201B9",
+          "nodeCode": "lay01-dist1-90",
+          "nodeForeignCode": "",
+          "nodeLabel": "90",
+          "nodeNumber": 90,
+          "occupyStatus": 1,
+          "rcsMissionCode": "C-179306373110649-6905-27421",
+          "rcsMissionStatus": 9,
+          "reliability": 1,
+          "rightFrtMovMtrTemp": "0.0",
+          "rightMotorTemperature": "0.0",
+          "rightReMovMtrTemp": "0.0",
+          "robotId": "2",
+          "robotOrientation": "-90.0",
+          "robotType": "KMP1500I",
+          "rotateMotorTemperature": "0.0",
+          "rotateTimes": 0,
+          "runTime": "4338",
+          "status": 4,
+          "x": "16000.0",
+          "y": "23000.0"
+        },
+        {
+          "batteryLevel": 90.0,
+          "batteryVoltage": 0.0,
+          "buildingCode": "SIM01",
+          "containerCode": "",
+          "errorMessage": " noError-idle",
+          "floorNumber": "dist1",
+          "karOsVersion": "",
+          "leftFrtMovMtrTemp": "0.0",
+          "leftMotorTemperature": "0.0",
+          "leftReMovMtrTemp": "0.0",
+          "liftMtrTemp": "0.0",
+          "liftStatus": 0,
+          "liftTimes": 0,
+          "mapCode": "lay01",
+          "mileage": "0.0",
+          "nodeCode": "lay01-dist1-103",
+          "nodeForeignCode": "",
+          "nodeLabel": "103",
+          "nodeNumber": 103,
+          "occupyStatus": 0,
+          "reliability": 1,
+          "rightFrtMovMtrTemp": "0.0",
+          "rightMotorTemperature": "0.0",
+          "rightReMovMtrTemp": "0.0",
+          "robotId": "1",
+          "robotOrientation": "180.0",
+          "robotType": "KMP1500I",
+          "rotateMotorTemperature": "0.0",
+          "rotateTimes": 0,
+          "runTime": "4235",
+          "status": 3,
+          "x": "10000.0",
+          "y": "21000.0"
+        },
+        {
+          "batteryLevel": 92.0,
+          "batteryVoltage": 0.0,
+          "buildingCode": "SIM01",
+          "containerCode": "",
+          "errorMessage": " noError-idle",
+          "floorNumber": "dist1",
+          "karOsVersion": "",
+          "leftFrtMovMtrTemp": "0.0",
+          "leftMotorTemperature": "0.0",
+          "leftReMovMtrTemp": "0.0",
+          "liftMtrTemp": "0.0",
+          "liftStatus": 0,
+          "liftTimes": 0,
+          "mapCode": "lay01",
+          "mileage": "0.0",
+          "nodeCode": "lay01-dist1-102",
+          "nodeForeignCode": "",
+          "nodeLabel": "102",
+          "nodeNumber": 102,
+          "occupyStatus": 0,
+          "reliability": 1,
+          "rightFrtMovMtrTemp": "0.0",
+          "rightMotorTemperature": "0.0",
+          "rightReMovMtrTemp": "0.0",
+          "robotId": "3",
+          "robotOrientation": "0.0",
+          "robotType": "KMP1500I",
+          "rotateMotorTemperature": "0.0",
+          "rotateTimes": 0,
+          "runTime": "4256",
+          "status": 3,
+          "x": "18000.0",
+          "y": "13000.0"
+        }
+      ],
+      "success": true
+    }
+  },
+  {
+    "id": 72191,
+    "path": "containerQueryAll",
+    "request": {},
+    "response": {
+      "code": "0",
+      "data": [
+        {
+          "containerCheckCode": "",
+          "containerCode": "SIM_CARGO_002",
+          "containerModelCode": "SIM_TRAY_001",
+          "customStatus": "",
+          "districtCode": "dist1",
+          "emptyFullStatus": 1,
+          "inMapStatus": 1,
+          "isCarry": 0,
+          "mapCode": "lay01",
+          "nodeCode": "lay01-dist1-98",
+          "orientation": "-90.0"
+        },
+        {
+          "containerCheckCode": "",
+          "containerCode": "SIM_CARGO_001",
+          "containerModelCode": "SIM_TRAY_001",
+          "customStatus": "",
+          "districtCode": "dist1",
+          "emptyFullStatus": 1,
+          "inMapStatus": 1,
+          "isCarry": 1,
+          "mapCode": "lay01",
+          "nodeCode": "lay01-dist1-90",
+          "orientation": "180.0"
+        },
+        {
+          "containerCheckCode": "",
+          "containerCode": "SIM_CARGO_003",
+          "containerModelCode": "SIM_TRAY_001",
+          "customStatus": "",
+          "districtCode": "dist1",
+          "emptyFullStatus": 1,
+          "inMapStatus": 1,
+          "isCarry": 0,
+          "mapCode": "lay01",
+          "nodeCode": "lay01-dist1-84",
+          "orientation": "0.0"
+        }
+      ],
+      "success": true
+    }
+  },
+  {
+    "id": 72192,
+    "path": "jobQuery",
+    "request": {
+      "limit": 1000,
+      "status": 25
+    },
+    "response": {
+      "data": [],
+      "success": true
+    }
+  },
+  {
+    "id": 72193,
+    "path": "jobQuery",
+    "request": {
+      "limit": 1000,
+      "status": 28
+    },
+    "response": {
+      "data": [],
+      "success": true
+    }
+  },
+  {
+    "id": 72194,
+    "path": "jobQuery",
+    "request": {
+      "limit": 1000,
+      "status": 60
+    },
+    "response": {
+      "data": [],
+      "success": true
+    }
+  },
+  {
+    "id": 72195,
+    "path": "jobQuery",
+    "request": {
+      "limit": 1000,
+      "status": 50
+    },
+    "response": {
+      "data": [],
+      "success": true
+    }
+  },
+  {
+    "id": 72196,
+    "path": "jobQuery",
+    "request": {
+      "limit": 1000,
+      "status": 20
+    },
+    "response": {
+      "data": [
+        {
+          "beginCellCode": "lay01-dist1-90",
+          "containerCode": "SIM_CARGO_001",
+          "createTime": "2026-10-27 10:15:20",
+          "finalNodeCode": "lay01-dist1-89",
+          "jobCode": "795B502514064D0B8B3DA58B4BE201B9",
+          "mapCode": "lay01",
+          "materialsInfo": "-",
+          "robotId": "2",
+          "source": "UNIVERSAL",
+          "status": 20,
+          "targetCellCode": "lay01-dist1-90",
+          "warnFlag": 0,
+          "workflowId": 6905,
+          "workflowPriority": 1
+        }
+      ],
+      "success": true
+    }
+  },
+  {
+    "id": 72197,
+    "path": "jobQuery",
+    "request": {
+      "limit": 1000,
+      "status": 10
+    },
+    "response": {
+      "data": [],
+      "success": true
+    }
+  },
+  {
+    "id": 72198,
+    "path": "robotQuery",
+    "request": {},
+    "response": {
+      "code": "0",
+      "data": [
+        {
+          "batteryLevel": 84.0,
+          "batteryVoltage": 0.0,
+          "buildingCode": "SIM01",
+          "containerCode": "SIM_CARGO_001",
+          "errorMessage": " noError-finished",
+          "floorNumber": "dist1",
+          "karOsVersion": "",
+          "leftFrtMovMtrTemp": "0.0",
+          "leftMotorTemperature": "0.0",
+          "leftReMovMtrTemp": "0.0",
+          "liftMtrTemp": "0.0",
+          "liftStatus": 1,
+          "liftTimes": 0,
+          "mapCode": "lay01",
+          "mileage": "0.0",
+          "missionCode": "795B502514064D0B8B3DA58B4BE201B9",
+          "nodeCode": "lay01-dist1-90",
+          "nodeForeignCode": "",
+          "nodeLabel": "90",
+          "nodeNumber": 90,
+          "occupyStatus": 1,
+          "rcsMissionCode": "C-179306373110649-6905-27421",
+          "rcsMissionStatus": 10,
+          "reliability": 1,
+          "rightFrtMovMtrTemp": "0.0",
+          "rightMotorTemperature": "0.0",
+          "rightReMovMtrTemp": "0.0",
+          "robotId": "2",
+          "robotOrientation": "-90.0",
+          "robotType": "KMP1500I",
+          "rotateMotorTemperature": "0.0",
+          "rotateTimes": 0,
+          "runTime": "4338",
+          "status": 4,
+          "x": "16000.0",
+          "y": "23000.0"
+        },
+        {
+          "batteryLevel": 90.0,
+          "batteryVoltage": 0.0,
+          "buildingCode": "SIM01",
+          "containerCode": "",
+          "errorMessage": " noError-idle",
+          "floorNumber": "dist1",
+          "karOsVersion": "",
+          "leftFrtMovMtrTemp": "0.0",
+          "leftMotorTemperature": "0.0",
+          "leftReMovMtrTemp": "0.0",
+          "liftMtrTemp": "0.0",
+          "liftStatus": 0,
+          "liftTimes": 0,
+          "mapCode": "lay01",
+          "mileage": "0.0",
+          "nodeCode": "lay01-dist1-103",
+          "nodeForeignCode": "",
+          "nodeLabel": "103",
+          "nodeNumber": 103,
+          "occupyStatus": 0,
+          "reliability": 1,
+          "rightFrtMovMtrTemp": "0.0",
+          "rightMotorTemperature": "0.0",
+          "rightReMovMtrTemp": "0.0",
+          "robotId": "1",
+          "robotOrientation": "180.0",
+          "robotType": "KMP1500I",
+          "rotateMotorTemperature": "0.0",
+          "rotateTimes": 0,
+          "runTime": "4235",
+          "status": 3,
+          "x": "10000.0",
+          "y": "21000.0"
+        },
+        {
+          "batteryLevel": 92.0,
+          "batteryVoltage": 0.0,
+          "buildingCode": "SIM01",
+          "containerCode": "",
+          "errorMessage": " noError-idle",
+          "floorNumber": "dist1",
+          "karOsVersion": "",
+          "leftFrtMovMtrTemp": "0.0",
+          "leftMotorTemperature": "0.0",
+          "leftReMovMtrTemp": "0.0",
+          "liftMtrTemp": "0.0",
+          "liftStatus": 0,
+          "liftTimes": 0,
+          "mapCode": "lay01",
+          "mileage": "0.0",
+          "nodeCode": "lay01-dist1-102",
+          "nodeForeignCode": "",
+          "nodeLabel": "102",
+          "nodeNumber": 102,
+          "occupyStatus": 0,
+          "reliability": 1,
+          "rightFrtMovMtrTemp": "0.0",
+          "rightMotorTemperature": "0.0",
+          "rightReMovMtrTemp": "0.0",
+          "robotId": "3",
+          "robotOrientation": "0.0",
+          "robotType": "KMP1500I",
+          "rotateMotorTemperature": "0.0",
+          "rotateTimes": 0,
+          "runTime": "4256",
+          "status": 3,
+          "x": "18000.0",
+          "y": "13000.0"
+        }
+      ],
+      "success": true
+    }
+  },
+  {
+    "id": 72199,
+    "path": "containerQueryAll",
+    "request": {},
+    "response": {
+      "code": "0",
+      "data": [
+        {
+          "containerCheckCode": "",
+          "containerCode": "SIM_CARGO_002",
+          "containerModelCode": "SIM_TRAY_001",
+          "customStatus": "",
+          "districtCode": "dist1",
+          "emptyFullStatus": 1,
+          "inMapStatus": 1,
+          "isCarry": 0,
+          "mapCode": "lay01",
+          "nodeCode": "lay01-dist1-98",
+          "orientation": "-90.0"
+        },
+        {
+          "containerCheckCode": "",
+          "containerCode": "SIM_CARGO_001",
+          "containerModelCode": "SIM_TRAY_001",
+          "customStatus": "",
+          "districtCode": "dist1",
+          "emptyFullStatus": 1,
+          "inMapStatus": 1,
+          "isCarry": 1,
+          "mapCode": "lay01",
+          "nodeCode": "lay01-dist1-90",
+          "orientation": "180.0"
+        },
+        {
+          "containerCheckCode": "",
+          "containerCode": "SIM_CARGO_003",
+          "containerModelCode": "SIM_TRAY_001",
+          "customStatus": "",
+          "districtCode": "dist1",
+          "emptyFullStatus": 1,
+          "inMapStatus": 1,
+          "isCarry": 0,
+          "mapCode": "lay01",
+          "nodeCode": "lay01-dist1-84",
+          "orientation": "0.0"
+        }
+      ],
+      "success": true
+    }
+  },
+  {
+    "id": 72200,
+    "path": "jobQuery",
+    "request": {
+      "limit": 1000,
+      "status": 25
+    },
+    "response": {
+      "data": [],
+      "success": true
+    }
+  },
+  {
+    "id": 72201,
+    "path": "jobQuery",
+    "request": {
+      "limit": 1000,
+      "status": 28
+    },
+    "response": {
+      "data": [],
+      "success": true
+    }
+  },
+  {
+    "id": 72202,
+    "path": "jobQuery",
+    "request": {
+      "limit": 1000,
+      "status": 60
+    },
+    "response": {
+      "data": [],
+      "success": true
+    }
+  },
+  {
+    "id": 72203,
+    "path": "jobQuery",
+    "request": {
+      "limit": 1000,
+      "status": 50
+    },
+    "response": {
+      "data": [],
+      "success": true
+    }
+  },
+  {
+    "id": 72204,
+    "path": "jobQuery",
+    "request": {
+      "limit": 1000,
+      "status": 20
+    },
+    "response": {
+      "data": [
+        {
+          "beginCellCode": "lay01-dist1-90",
+          "containerCode": "SIM_CARGO_001",
+          "createTime": "2026-10-27 10:15:20",
+          "finalNodeCode": "lay01-dist1-89",
+          "jobCode": "795B502514064D0B8B3DA58B4BE201B9",
+          "mapCode": "lay01",
+          "materialsInfo": "-",
+          "robotId": "2",
+          "source": "UNIVERSAL",
+          "status": 20,
+          "targetCellCode": "lay01-dist1-89",
+          "targetCellCodeForeign": "SECS_ST_89",
+          "warnFlag": 0,
+          "workflowId": 6905,
+          "workflowPriority": 1
+        }
+      ],
+      "success": true
+    }
+  },
+  {
+    "id": 72205,
+    "path": "jobQuery",
+    "request": {
+      "limit": 1000,
+      "status": 10
+    },
+    "response": {
+      "data": [],
+      "success": true
+    }
+  }
+]

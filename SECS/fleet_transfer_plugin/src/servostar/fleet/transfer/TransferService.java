@@ -10,6 +10,9 @@ public final class TransferService {
     }
     public interface FleetClient {
         Map<String,Object> post(String path, String authorization, Map<String,Object> body) throws Exception;
+        default Map<String,Object> readStatus(String path,String authorization,Map<String,Object> body)throws Exception{return post(path,authorization,body);}
+        /** Production adapters scan Fleet; test adapters inject an explicit catalog. */
+        default Map<String,Object> facilitySnapshot(String authorization)throws Exception{return null;}
     }
     private final FleetClient client;
     private final TransferJournal journal;
@@ -18,24 +21,36 @@ public final class TransferService {
     public TransferService(FleetClient client, TransferJournal journal) { this.client=client; this.journal=journal; }
 
     public Map<String,Object> preview(Map<String,Object> request, String token) throws Exception {
-        Map<String,Object> mission = buildMission(request);
         authenticate(token);
-        mission.put("containerModelCode",new CargoService(client).transferModel(request,token));
+        WorkPorts.refresh(client,token);
+        return WorkPorts.withCurrent(()->previewScanned(request,token));
+    }
+    private Map<String,Object> previewScanned(Map<String,Object> request,String token)throws Exception{
+        Map<String,Object> mission = buildMission(request);
+        prepareMission(request,mission,token);
         return map("success", true, "code", "0", "submitted", false,
             "statusMonitorReady", journal!=null && journal.available(), "data", mission);
     }
 
     public Map<String,Object> submit(Map<String,Object> request, String token) throws Exception {
+        try{authenticate(token);}catch(SecurityException ex){throw ex;}catch(Exception ex){throw new PreSubmissionException(ex);}
+        try{WorkPorts.refresh(client,token);}catch(Exception ex){throw new PreSubmissionException(ex);}
+        return WorkPorts.withCurrent(()->submitScanned(request,token));
+    }
+    private Map<String,Object> submitScanned(Map<String,Object> request,String token)throws Exception{
         Map<String,Object> mission = buildMission(request);
-        authenticate(token);
         String commandId = (String) mission.get("missionCode");
         // Queries fail before any mission POST. Never invent a container from
         // an upstream expectation, or use a stale hardcoded model for new IDs.
-        try {mission.put("containerModelCode",new CargoService(client).transferModel(request,token));}
+        try {prepareMission(request,mission,token);}
         catch(CargoService.Rejected ex){throw ex;}
         catch(Exception ex){throw new PreSubmissionException(ex);}
         if(journal!=null) {
-            try { journal.reserve(normalize(request)); }
+            try {
+                String vehicle=WorkPorts.vehicle((String)request.get("SOURCEPORT"));
+                String source=vehicle.isEmpty()?"":String.valueOf(((Map<?,?>)((List<?>)mission.get("missionData")).get(0)).get("position"));
+                journal.reserve(normalize(request),source,vehicle);
+            }
             catch(java.io.IOException | IllegalStateException blocked) { throw new PreSubmissionException(blocked); }
         }
         if (!submitted.add(commandId)) {
@@ -56,11 +71,24 @@ public final class TransferService {
 
     /** Read-only gates. Never resubmit a transport and never infer pickup from job status. */
     public Map<String,Object> gate(Map<String,Object> request,String token,boolean completion) throws Exception {
-        return stage(request,token,completion?"completed":"pickup-started");
+        return stage(request,token,completion?"completed":"transfer-started");
     }
     public Map<String,Object> stage(Map<String,Object> request,String token,String stage) throws Exception {
+        return stage(request,token,stage,true);
+    }
+    /** The host has already authenticated admission. Intermediate stages read
+     * our correlated journal; final gates still query authenticated Fleet state.
+     * Avoid a redundant robotQuery for every buffered report while holding the
+     * serialized command lock. Public HTTP gates always keep their preflight. */
+    Map<String,Object> stageForHost(Map<String,Object> request,String token,String stage)throws Exception {
+        return stage(request,token,stage,false);
+    }
+    private Map<String,Object> stage(Map<String,Object> request,String token,String stage,boolean preflight)throws Exception {
+        return WorkPorts.withCurrent(()->stageSnapshot(request,token,stage,preflight));
+    }
+    private Map<String,Object> stageSnapshot(Map<String,Object> request,String token,String stage,boolean preflight)throws Exception{
         buildMission(request);
-        authenticate(token);
+        if(preflight)authenticate(token);
         if(journal==null) return map("success",false,"code","MONITOR_NOT_CONFIGURED");
         Map<String,Object> normalized=normalize(request);
         Map<String,Object> state=journal.stage(normalized,stage);
@@ -68,6 +96,18 @@ public final class TransferService {
         String command=(String)normalized.get("COMMANDID");
         Map<String,Object> jobs=client.post("jobQuery",token,map("jobCode",command,"limit",2));
         Map<String,Object> cargo=client.post("containerQuery",token,map("containerCode",normalized.get("CARRIERID")));
+        if(ControlStateVerifier.missingJob(jobs)){
+            // Fleet's normal job table can stop returning an already completed
+            // record. The durable, gap-free WCS terminal lifecycle above still
+            // binds the exact command/carrier/instance/vehicle. Empty REST rows
+            // alone are NEVER completion proof: verify the delivered cargo,
+            // released AMR and absence of active Fleet work as well.
+            Map<String,Object> robots=client.post("robotQuery",token,map("robotId",state.get("robotId")));
+            if(!confirmedDelivered(cargo,normalized)
+                || !confirmedUnassigned(robots,normalized,state.get("robotId")) || !unbound(robots)
+                || !noActiveWork(token,state.get("robotId")))return map("success",false,"code","RETAINED_COMPLETION_NOT_CONFIRMED");
+            state.put("completionEvidence","RETAINED_WCS_TERMINAL_AND_CURRENT_RELEASE");return state;
+        }
         if(!confirmedComplete(jobs,cargo,normalized,state.get("instanceId"),state.get("robotId")))
             return map("success",false,"code","FINAL_STATE_NOT_CONFIRMED");
         if("unassigned".equals(stage)) {
@@ -76,8 +116,26 @@ public final class TransferService {
         }
         return state;
     }
+    private boolean noActiveWork(String token,Object vehicle)throws Exception {
+        // Status-filtered existence queries do not hide active rows behind a
+        // page of unrelated terminal jobs. No mutation or resubmission.
+        for(int status:new int[]{10,20,25,28,50,60}){
+            Map<String,Object> response=client.post("jobQuery",token,map("robotId",vehicle,"status",status,"limit",1));
+            if(!ControlStateVerifier.missingJob(response))return false;
+        }
+        return true;
+    }
+    private static boolean emptyField(Map<?,?> row,String key){Object value=row.get(key);return value==null || "".equals(value);}
+    private static boolean unbound(Map<String,Object> robots){
+        if(!NativeHostEngine.ok(robots) || !(robots.get("data") instanceof List))return false;
+        List<?> rows=(List<?>)robots.get("data");
+        if(rows.size()!=1 || !(rows.get(0) instanceof Map))return false;
+        Map<?,?> row=(Map<?,?>)rows.get(0);
+        // Standard API serializes unassigned nullable fields by omitting them.
+        return emptyField(row,"missionCode") && emptyField(row,"rcsMissionCode");
+    }
     private static boolean confirmedUnassigned(Map<String,Object> robots,Map<String,Object> req,Object vehicle) {
-        if(robots==null || !Boolean.TRUE.equals(robots.get("success")))return false;
+        if(!NativeHostEngine.ok(robots))return false;
         Object data=robots.get("data");
         if(!(data instanceof List))return false;
         int count=0;
@@ -87,15 +145,19 @@ public final class TransferService {
             count++;
             // Verified against SDK MobileRobotStatus.IDLE=3 and RobotOccupyStatus.UNOCCUPIED_ROBOT=0.
             if(!"3".equals(String.valueOf(robot.get("status"))) || !"0".equals(String.valueOf(robot.get("occupyStatus")))
-                || !"".equals(robot.get("containerCode"))
-                || !TransferJournal.node((String)req.get("DESTPORT")).equals(robot.get("nodeCode")))return false;
+                || !"".equals(robot.get("containerCode")))return false;
+            // Completion and actual cargo placement were verified above. An
+            // idle released AMR may already have returned to its parking node.
+            // Away from the destination, require explicit absence of any job.
+            if(!TransferJournal.node((String)req.get("DESTPORT")).equals(robot.get("nodeCode"))
+                && (!emptyField(robot,"missionCode") || !emptyField(robot,"rcsMissionCode")))return false;
         }
         return count==1;
     }
     @SuppressWarnings("unchecked")
     private static boolean confirmedComplete(Map<String,Object> jobs,Map<String,Object> cargo,
             Map<String,Object> req,Object instance,Object vehicle) {
-        if(jobs==null || cargo==null || !Boolean.TRUE.equals(jobs.get("success")) || !Boolean.TRUE.equals(cargo.get("success"))) return false;
+        if(!NativeHostEngine.ok(jobs) || !NativeHostEngine.ok(cargo)) return false;
         Object list=jobs.get("data"), containers=cargo.get("data");
         if(!(list instanceof List) || !(containers instanceof List))return false;
         List<Map<String,Object>> matching=new ArrayList<>();
@@ -108,8 +170,12 @@ public final class TransferService {
                 || !String.valueOf(instance).equals(String.valueOf(job.get("workflowId")))
                 || job.get("completeTime")==null || job.get("completeTime").toString().trim().isEmpty()
                 || !destination.equals(job.get("finalNodeCode")) || !destination.equals(job.get("targetCellCode")))return false;
+        return confirmedDelivered(cargo,req);
+    }
+    private static boolean confirmedDelivered(Map<String,Object> cargo,Map<String,Object> req){
+        if(!NativeHostEngine.ok(cargo) || !(cargo.get("data") instanceof List))return false;
         int count=0;
-        for(Object row:(List<?>)containers) if(row instanceof Map) {
+        for(Object row:(List<?>)cargo.get("data")) if(row instanceof Map) {
             Map<?,?> c=(Map<?,?>)row;
             if(req.get("CARRIERID").equals(c.get("containerCode"))) {
                 count++;
@@ -136,6 +202,22 @@ public final class TransferService {
             throw new SecurityException("Fleet rejected Authorization or robotQuery preflight.");
         }
     }
+    private void prepareMission(Map<String,Object> request,Map<String,Object> mission,String token)throws Exception {
+        CargoService cargo=new CargoService(client);
+        String vehicle=WorkPorts.vehicle((String)request.get("SOURCEPORT"));
+        if(vehicle.isEmpty()){
+            String model=cargo.transferModel(request,token);mission.put("containerModelCode",model);
+            mission.put("robotIds",WorkPorts.eligibleRobots((String)request.get("SOURCEPORT"),(String)request.get("DESTPORT"),model));return;
+        }
+        Map<String,Object> robot=LoadedRecovery.carriedRobot(client,token,vehicle,(String)request.get("CARRIERID"));
+        cargo.assertVehicleFree(vehicle,(String)request.get("CARRIERID"),token);
+        Map<String,Object> row=CargoService.find(cargo.query(token),(String)request.get("CARRIERID"));
+        if(row==null || !"1".equals(CargoService.str(row,"inMapStatus")) || !"1".equals(CargoService.str(row,"isCarry")))throw new CargoService.Rejected("CARRIER_NOT_ON_SOURCE_AMR");
+        for(Map<String,Object> other:cargo.query(token))if(WorkPorts.samePort((String)request.get("DESTPORT"),CargoService.port(other)))throw new CargoService.Rejected("DESTINATION_OCCUPIED");
+        mission.put("containerModelCode",CargoService.identifier(CargoService.str(row,"containerModelCode"),"MODEL"));
+        mission.put("robotIds",WorkPorts.eligibleRobots((String)request.get("SOURCEPORT"),(String)request.get("DESTPORT"),(String)mission.get("containerModelCode")));
+        mission.put("missionData",Arrays.asList(step(1,CargoService.str(robot,"nodeCode"),"UP_CONTAINER"),step(2,node((String)request.get("DESTPORT")),"DOWN_CONTAINER")));
+    }
 
     public static Map<String,Object> buildMission(Map<String,Object> request) {
         if (request == null) throw new IllegalArgumentException("Request body is required.");
@@ -145,16 +227,18 @@ public final class TransferService {
         if (!command.matches("[A-Za-z0-9_-]{1,64}")) throw new IllegalArgumentException("COMMANDID: use 1-64 ASCII letters, numbers, _ or -.");
         String carrier = text(request, "CARRIERID");
         CargoService.identifier(carrier,"CARRIERID");
-        String from = node(text(request, "SOURCEPORT"));
+        String source=text(request,"SOURCEPORT"),vehicle=WorkPorts.vehicle(source);
+        if(!WorkPorts.source(source))throw new IllegalArgumentException("Invalid SOURCEPORT");
+        String from = vehicle.isEmpty()?node(source):source;
         String to = node(text(request, "DESTPORT"));
         if (from.equals(to)) throw new IllegalArgumentException("SOURCEPORT and DESTPORT must differ.");
         int priority = number(request, "PRIORITY");
         if (priority < 1 || priority > 99) throw new IllegalArgumentException("PRIORITY must be 1-99.");
         if (number(request, "REPLACE") != 0) throw new IllegalArgumentException("REPLACE=0 only; replacement is not implemented.");
         return map("orgId", "UNIVERSAL", "requestId", command, "missionCode", command,
-            "missionType", "RACK_MOVE", "robotType", "LIFT", "robotIds", Arrays.asList("1","2","3"),
-            "robotModels", Arrays.asList("KMP1500I"), "priority", priority, "containerCode", carrier,
-            "containerModelCode", "SIM_TRAY_001", "lockRobotAfterFinish", false,
+            "missionType", "RACK_MOVE", "robotType", "LIFT", "robotIds", vehicle.isEmpty()?WorkPorts.robotIds():Collections.singletonList(vehicle),
+            "robotModels", WorkPorts.robotModels(), "priority", priority, "containerCode", carrier,
+            "lockRobotAfterFinish", false,
             "missionData", Arrays.asList(step(1, from, "UP_CONTAINER"), step(2, to, "DOWN_CONTAINER")));
     }
     private static Map<String,Object> step(int sequence, String position, String action) {

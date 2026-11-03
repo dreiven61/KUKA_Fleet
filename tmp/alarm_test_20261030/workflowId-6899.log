@@ -1,0 +1,1839 @@
+{"time":"2026-10-24 13:32:37:968", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"StartWorkflowFactory", "line":"138", "content":start workflow, task code: 509C5F51DD1D4D0EBC48DA0DAA007703 , execute command: WorkflowStartValidateCommand , cost time: 5, "exp":
+}{"time":"2026-10-24 13:32:37:975", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"WorkflowStartExecuteCommand", "line":"92", "content":WorkflowStartExecuteCommandexecute,contextInfo:{"jobRecord":{"id":6899,"workflowId":6899,"source":"UNIVERSAL","jobType":"-","containerCode":"SIM_CARGO_001","materialsInfo":"-","jobCode":"509C5F51DD1D4D0EBC48DA0DAA007703","jobContext":"{\"commandType\":\"DEFAULT\",\"requestBody\":{\"workflowConfigId\":-1,\"triggerType\":6,\"triggerInfo\":\"PLATFORM\",\"taskCode\":\"509C5F51DD1D4D0EBC48DA0DAA007703\",\"originalRequest\":{\"requestId\":\"509C5F51DD1D4D0EBC48DA0DAA007703\",\"taskSource\":\"UNIVERSAL\",\"taskCode\":\"509C5F51DD1D4D0EBC48DA0DAA007703\",\"taskType\":\"LOAD\",\"robotFunctionType\":\"LIFT\",\"grpcRobotFunctionType\":1,\"robotModels\":[\"KMP1500I\"],\"robotIds\":[\"1\",\"2\",\"3\"],\"priority\":1,\"containerCode\":\"SIM_CARGO_001\",\"containerModelCode\":\"SIM_TRAY_001\",\"nodes\":[{\"sequence\":1,\"code\":\"lay01-dist1-90\",\"type\":\"NODE_POINT\",\"grpcType\":1,\"lockRobot\":true,\"passStrategy\":\"AUTO\",\"grpcPassStrategy\":1,\"delayMillisecondsForAutoPass\":0,\"actionsOnArrived\":[{\"sequence\":1,\"actionId\":\"Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1\",\"type\":\"UP_CONTAINER\",\"grpcType\":1}],\"containerOrientation\":\"\",\"robotGoalOrientation\":\"\",\"isPlayBlueToothVoice\":false,\"blueToothSpeakerMacAddress\":\"\"},{\"sequence\":2,\"code\":\"lay01-dist1-97\",\"type\":\"NODE_POINT\",\"grpcType\":1,\"lockRobot\":true,\"passStrategy\":\"AUTO\",\"grpcPassStrategy\":1,\"delayMillisecondsForAutoPass\":0,\"actionsOnArrived\":[{\"sequence\":1,\"actionId\":\"Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1\",\"type\":\"DOWN_CONTAINER\",\"grpcType\":2}],\"containerOrientation\":\"\",\"robotGoalOrientation\":\"\",\"isPlayBlueToothVoice\":false,\"blueToothSpeakerMacAddress\":\"\"}],\"lockRobotAfterFinish\":false},\"templateNodeEntityList\":[{\"sequence\":1,\"sort\":1.0,\"nodeType\":1,\"nodeCode\":\"lay01-dist1-90\",\"triggerHandler\":1,\"waitTime\":0,\"nodeName\":\"lay01-dist1-90\",\"commandsOnArrived\":[{\"sort\":1,\"commandType\":3,\"commandCode\":\"LIFT\",\"commandParam1\":\"\",\"commandParam2\":\"\",\"commandParam3\":\"\",\"commandParam4\":\"\",\"commandParam5\":\"\",\"commandParam7\":\"\",\"commandName\":\"举升\",\"apiActionId\":\"Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1\"}],\"commandsOnLeaving\":[]},{\"sequence\":2,\"sort\":2.0,\"nodeType\":1,\"nodeCode\":\"lay01-dist1-97\",\"triggerHandler\":1,\"waitTime\":0,\"nodeName\":\"lay01-dist1-97\",\"commandsOnArrived\":[{\"sort\":1,\"commandType\":3,\"commandCode\":\"DOWN\",\"commandParam1\":\"\",\"commandParam2\":\"\",\"commandParam3\":\"\",\"commandParam4\":\"\",\"commandParam5\":\"\",\"commandParam7\":\"\",\"commandName\":\"放下\",\"apiActionId\":\"Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1\"}],\"commandsOnLeaving\":[]}],\"containerCode\":\"SIM_CARGO_001\",\"containerType\":\"SIM_TRAY_001\",\"workflowPriority\":1},\"workflowConfig\":{\"id\":-1,\"workflowCode\":\"DEFAULT\",\"workflowOuterCode\":\"DEFAULT\",\"workflowName\":\"DEFAULT\",\"workflowModel\":1,\"robotTypeClass\":1,\"nodeConfigList\":[{\"id\":1,\"workflowConfigId\":-1,\"workflowNodeName\":\"lay01-dist1-90\",\"nodeBusiness\":0,\"nodeType\":1,\"nodeCode\":\"lay01-dist1-90\",\"nodeDesc\":\"lay01-dist1-90\",\"nodeActionId\":2,\"triggerHandler\":1,\"waitTime\":0,\"nodeAction\":{\"id\":2,\"actionName\":\"lang.wcs.workflow.node.nodeInteraction.DEFAULT\",\"robotWaitFlag\":1,\"exceptionHandler\":0,\"canAddContainerFlag\":0,\"canDeleteContainerFlag\":0,\"robotTypeClass\":1,\"cacheAreaId\":1,\"nodeStatus\":1,\"isDefault\":1,\"nodeActionCode\":\"DEFAULT\",\"isSystem\":1,\"isPreLock\":1},\"commandList\":[{\"id\":1,\"commandName\":\"lang.wcs.workflow.command.componentCommandType.LIFT\",\"commandCode\":\"LIFT\",\"nodeActionId\":2,\"commandExecutePhase\":0,\"commandType\":3,\"sort\":1,\"callbackStrategy\":0,\"componentCommandType\":1,\"componentCommandParam1\":\"\",\"componentCommandParam2\":\"\",\"componentCommandParam3\":\"\",\"componentCommandParam4\":\"\",\"componentCommandParam5\":\"\",\"componentCommandParam7\":\"\",\"apiActionId\":\"Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1\"}],\"nodeSequence\":1},{\"id\":2,\"workflowConfigId\":-1,\"workflowNodeName\":\"lay01-dist1-97\",\"nodeBusiness\":0,\"nodeType\":1,\"nodeCode\":\"lay01-dist1-97\",\"nodeDesc\":\"lay01-dist1-97\",\"nodeActionId\":2,\"triggerHandler\":1,\"waitTime\":0,\"nodeAction\":{\"id\":2,\"actionName\":\"lang.wcs.workflow.node.nodeInteraction.DEFAULT\",\"robotWaitFlag\":1,\"exceptionHandler\":0,\"canAddContainerFlag\":0,\"canDeleteContainerFlag\":0,\"robotTypeClass\":1,\"cacheAreaId\":1,\"nodeStatus\":1,\"isDefault\":1,\"nodeActionCode\":\"DEFAULT\",\"isSystem\":1,\"isPreLock\":1},\"commandList\":[{\"id\":2,\"commandName\":\"lang.wcs.workflow.command.componentCommandType.DOWN\",\"commandCode\":\"DOWN\",\"nodeActionId\":2,\"commandExecutePhase\":0,\"commandType\":3,\"sort\":1,\"callbackStrategy\":0,\"componentCommandType\":2,\"componentCommandParam1\":\"\",\"componentCommandParam2\":\"\",\"componentCommandParam3\":\"\",\"componentCommandParam4\":\"\",\"componentCommandParam5\":\"\",\"componentCommandParam7\":\"\",\"apiActionId\":\"Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1\"}],\"nodeSequence\":2}],\"segmentConfigList\":[{\"id\":1,\"workflowConfigId\":-1,\"segmentName\":\"DEFAULT\",\"segmentType\":1,\"beginNodeId\":-1,\"endNodeId\":1,\"priority\":0,\"workflowRuleId\":0,\"code\":\"DEFAULT\"},{\"id\":2,\"workflowConfigId\":-1,\"segmentName\":\"DEFAULT\",\"segmentType\":1,\"beginNodeId\":1,\"endNodeId\":2,\"priority\":0,\"workflowRuleId\":0,\"code\":\"DEFAULT\"},{\"id\":3,\"workflowConfigId\":-1,\"segmentName\":\"DEFAULT\",\"segmentType\":1,\"beginNodeId\":2,\"endNodeId\":0,\"priority\":0,\"workflowRuleId\":0,\"code\":\"DEFAULT\"}],\"robots\":[{\"id\":0,\"workflowConfigId\":-1,\"robotId\":\"1\",\"robotName\":\"1\"},{\"id\":0,\"workflowConfigId\":-1,\"robotId\":\"2\",\"robotName\":\"2\"},{\"id\":0,\"workflowConfigId\":-1,\"robotId\":\"3\",\"robotName\":\"3\"}],\"robotTypes\":[{\"id\":0,\"workflowConfigId\":-1,\"robotTypeCode\":\"KMP1500I\",\"robotTypeName\":\"KMP1500I\"}],\"autoCreateCommand\":1,\"workflowPriority\":1},\"autoCreate\":1,\"skipJob\":false,\"immediateFail\":false,\"needSelectContainer\":0,\"needReleaseContainer\":0,\"beginNodeReleaseContainer\":0,\"getRobotLocalRealtime\":false,\"chooseBegin\":false,\"dispatchingTask\":false}","finalNodeCode":"lay01-dist1-97","finalNodeType":1,"batchNo":"","physicalProject":"","partName":"","workflowStartNode":"lay01-dist1-90","workflowEndNode":"lay01-dist1-97","workflowCurrentNode":"-","workflowNextNode":"lay01-dist1-90","mapCode":"lay01","mapFloor":",lay01-dist1,","businessTaskType":"","manualCompleteStrategy":"DEFAULT","workflowBeginCellCode":"lay01-dist1-90"},"commandType":"DEFAULT","requestBody":{"workflowConfigId":-1,"triggerType":6,"triggerInfo":"PLATFORM","triggerStationId":-1,"triggerCellCode":"-1","taskCode":"509C5F51DD1D4D0EBC48DA0DAA007703","originalRequest":{"requestId":"509C5F51DD1D4D0EBC48DA0DAA007703","taskSource":"UNIVERSAL","taskCode":"509C5F51DD1D4D0EBC48DA0DAA007703","taskType":"LOAD","robotFunctionType":"LIFT","grpcRobotFunctionType":1,"robotModels":["KMP1500I"],"robotIds":["1","2","3"],"priority":1,"containerCode":"SIM_CARGO_001","containerModelCode":"SIM_TRAY_001","nodes":[{"sequence":1,"code":"lay01-dist1-90","type":"NODE_POINT","grpcType":1,"lockRobot":true,"passStrategy":"AUTO","grpcPassStrategy":1,"delayMillisecondsForAutoPass":0,"actionsOnArrived":[{"sequence":1,"actionId":"Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1","type":"UP_CONTAINER","grpcType":1}],"containerOrientation":"","robotGoalOrientation":"","isPlayBlueToothVoice":false,"blueToothSpeakerMacAddress":""},{"sequence":2,"code":"lay01-dist1-97","type":"NODE_POINT","grpcType":1,"lockRobot":true,"passStrategy":"AUTO","grpcPassStrategy":1,"delayMillisecondsForAutoPass":0,"actionsOnArrived":[{"sequence":1,"actionId":"Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1","type":"DOWN_CONTAINER","grpcType":2}],"containerOrientation":"","robotGoalOrientation":"","isPlayBlueToothVoice":false,"blueToothSpeakerMacAddress":""}],"lockRobotAfterFinish":false},"templateNodeEntityList":[{"sequence":1,"sort":1.0,"nodeType":1,"nodeCode":"lay01-dist1-90","triggerHandler":1,"waitTime":0,"nodeName":"lay01-dist1-90","commandsOnArrived":[{"sort":1,"commandType":3,"commandCode":"LIFT","commandParam1":"","commandParam2":"","commandParam3":"","commandParam4":"","commandParam5":"","commandParam7":"","commandName":"举升","apiActionId":"Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1"}],"commandsOnLeaving":[]},{"sequence":2,"sort":2.0,"nodeType":1,"nodeCode":"lay01-dist1-97","triggerHandler":1,"waitTime":0,"nodeName":"lay01-dist1-97","commandsOnArrived":[{"sort":1,"commandType":3,"commandCode":"DOWN","commandParam1":"","commandParam2":"","commandParam3":"","commandParam4":"","commandParam5":"","commandParam7":"","commandName":"放下","apiActionId":"Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1"}],"commandsOnLeaving":[]}],"containerCode":"SIM_CARGO_001","containerType":"SIM_TRAY_001","workflowPriority":1},"workflowConfig":{"id":-1,"workflowCode":"DEFAULT","workflowOuterCode":"DEFAULT","workflowName":"DEFAULT","workflowModel":1,"robotTypeClass":1,"nodeConfigList":[{"id":1,"workflowConfigId":-1,"workflowNodeName":"lay01-dist1-90","nodeBusiness":0,"nodeType":1,"nodeCode":"lay01-dist1-90","nodeDesc":"lay01-dist1-90","nodeActionId":2,"triggerHandler":1,"waitTime":0,"nodeAction":{"id":2,"actionName":"lang.wcs.workflow.node.nodeInteraction.DEFAULT","robotWaitFlag":1,"exceptionHandler":0,"canAddContainerFlag":0,"canDeleteContainerFlag":0,"robotTypeClass":1,"cacheAreaId":1,"nodeStatus":1,"isDefault":1,"nodeActionCode":"DEFAULT","isSystem":1,"isPreLock":1},"commandList":[{"id":1,"commandName":"lang.wcs.workflow.command.componentCommandType.LIFT","commandCode":"LIFT","nodeActionId":2,"commandExecutePhase":0,"commandType":3,"sort":1,"callbackStrategy":0,"componentCommandType":1,"componentCommandParam1":"","componentCommandParam2":"","componentCommandParam3":"","componentCommandParam4":"","componentCommandParam5":"","componentCommandParam7":"","apiActionId":"Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1"}],"nodeSequence":1},{"id":2,"workflowConfigId":-1,"workflowNodeName":"lay01-dist1-97","nodeBusiness":0,"nodeType":1,"nodeCode":"lay01-dist1-97","nodeDesc":"lay01-dist1-97","nodeActionId":2,"triggerHandler":1,"waitTime":0,"nodeAction":{"id":2,"actionName":"lang.wcs.workflow.node.nodeInteraction.DEFAULT","robotWaitFlag":1,"exceptionHandler":0,"canAddContainerFlag":0,"canDeleteContainerFlag":0,"robotTypeClass":1,"cacheAreaId":1,"nodeStatus":1,"isDefault":1,"nodeActionCode":"DEFAULT","isSystem":1,"isPreLock":1},"commandList":[{"id":2,"commandName":"lang.wcs.workflow.command.componentCommandType.DOWN","commandCode":"DOWN","nodeActionId":2,"commandExecutePhase":0,"commandType":3,"sort":1,"callbackStrategy":0,"componentCommandType":2,"componentCommandParam1":"","componentCommandParam2":"","componentCommandParam3":"","componentCommandParam4":"","componentCommandParam5":"","componentCommandParam7":"","apiActionId":"Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1"}],"nodeSequence":2}],"segmentConfigList":[{"id":1,"workflowConfigId":-1,"segmentName":"DEFAULT","segmentType":1,"beginNodeId":-1,"endNodeId":1,"priority":0,"workflowRuleId":0,"code":"DEFAULT"},{"id":2,"workflowConfigId":-1,"segmentName":"DEFAULT","segmentType":1,"beginNodeId":1,"endNodeId":2,"priority":0,"workflowRuleId":0,"code":"DEFAULT"},{"id":3,"workflowConfigId":-1,"segmentName":"DEFAULT","segmentType":1,"beginNodeId":2,"endNodeId":0,"priority":0,"workflowRuleId":0,"code":"DEFAULT"}],"robots":[{"id":0,"workflowConfigId":-1,"robotId":"1","robotName":"1"},{"id":0,"workflowConfigId":-1,"robotId":"2","robotName":"2"},{"id":0,"workflowConfigId":-1,"robotId":"3","robotName":"3"}],"robotTypes":[{"id":0,"workflowConfigId":-1,"robotTypeCode":"KMP1500I","robotTypeName":"KMP1500I"}],"autoCreateCommand":1,"workflowPriority":1},"workflowId":6899,"autoCreate":1,"skipJob":false,"immediateFail":false,"needSelectContainer":1,"needReleaseContainer":0,"beginNodeReleaseContainer":0,"robotLocalMap":{"lay01-dist1-103":"1","lay01-dist1-102":"3","lay01-dist1-101":"2"},"getRobotLocalRealtime":false,"chooseBegin":false,"isCallRobotTask":true,"dispatchingTask":false}, "exp":
+}{"time":"2026-10-24 13:32:37:975", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"WorkflowChooseNodeComponent", "line":"113", "content":chooseWorkflowStartNodeConfig begin:context:-1, "exp":
+}{"time":"2026-10-24 13:32:37:976", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"WorkflowChooseNodeComponent", "line":"1271", "content":[resolveNodeTransferModelForContainerSelect] node lay01-dist1-90 has containers[ContainerEntity(containerCode=SIM_CARGO_001, modelId=1, containerStatus=null, containerInMapStatus=1, containerLocationCode=lay01-dist1-90, sort=null, lastUpdateTime=Sat Oct 24 12:56:10 KST 2026, isCarry=0, containerModelCode=SIM_TRAY_001, orientation=180.0, containerOuterLocationCode=null, emptyFullStatus=1, checkCode=, idleMobileRobot=null, existIdleMobileRobot=0, status=null, lastOccupyCellCode=null, lastOccupyTimestamp=0, shelfSlotS=[], layer=null, containerX=null, containerY=null, mapCode=lay01, floorNumber=dist1, customStatus=null)], "exp":
+}{"time":"2026-10-24 13:32:37:977", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"WorkflowChooseNodeComponent", "line":"875", "content":Get specified container from request body, container code:SIM_CARGO_001, "exp":
+}{"time":"2026-10-24 13:32:37:977", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"WorkflowContainerChooseComponent", "line":"29", "content":checkAndOccupyContainer begin, workflowId:6899,containerCode:SIM_CARGO_001, "exp":
+}{"time":"2026-10-24 13:32:37:978", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"WorkflowContainerChooseComponent", "line":"35", "content":checkAndOccupyContainer checkContainerIsFree workflowId:6899,containerCode:SIM_CARGO_001,result:true, "exp":
+}{"time":"2026-10-24 13:32:37:978", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"WorkflowContainerChooseComponent", "line":"39", "content":checkAndOccupyContainer addContainerTaskOccupyInfo, workflowId:6899,containerCode:SIM_CARGO_001, "exp":
+}{"time":"2026-10-24 13:32:37:983", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"WorkflowManageComponent", "line":"261", "content":addNewWorkflowTask start...,workflowId:6899, "exp":
+}{"time":"2026-10-24 13:32:37:985", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"WorkflowManageComponent", "line":"499", "content":addNewWorkflowTaskDetail start,workflowTaskId:27409, "exp":
+}{"time":"2026-10-24 13:32:37:986", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.robot.RobotService/GetMobileRobotTypeByContainerModelCode, arguments:{
+  "code": "SIM_TRAY_001"
+}, "exp":
+}{"time":"2026-10-24 13:32:37:994", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.robot.RobotService/GetMobileRobot, arguments:{
+  "robotId": "2"
+}, "exp":
+}{"time":"2026-10-24 13:32:38:002", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"WorkflowManageComponent", "line":"746", "content":Set target robots for the workflow according to the container model, target robots: [WorkflowRobotConfig(id=0, workflowConfigId=-1, robotId=1, robotName=1, status=1), WorkflowRobotConfig(id=0, workflowConfigId=-1, robotId=2, robotName=2, status=1), WorkflowRobotConfig(id=0, workflowConfigId=-1, robotId=3, robotName=3, status=1)], "exp":
+}{"time":"2026-10-24 13:32:38:002", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"WorkflowServiceImpl", "line":"179", "content":update t_workflow, "exp":
+}{"time":"2026-10-24 13:32:38:007", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"LifecycleCache", "line":"38", "content":[Lifecycle Cache] add cache, cache:TaskDetailDispatchingCache, key:27409, "exp":
+}{"time":"2026-10-24 13:32:38:010", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"LifecycleCache", "line":"38", "content":[Lifecycle Cache] add cache, cache:WorkflowRunningCache, key:6899, "exp":
+}{"time":"2026-10-24 13:32:38:010", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"StartWorkflowFactory", "line":"138", "content":start workflow, task code: 509C5F51DD1D4D0EBC48DA0DAA007703 , execute command: WorkflowStartExecuteCommand$$EnhancerBySpringCGLIB$$20d3eb5c , cost time: 42, "exp":
+}{"time":"2026-10-24 13:32:38:010", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"StartWorkflowFactory", "line":"138", "content":start workflow, task code: 509C5F51DD1D4D0EBC48DA0DAA007703 , execute command: WorkflowStartResultHandlerCommand , cost time: 0, "exp":
+}{"time":"2026-10-24 13:32:38:012", "level":"INFO", "thread":"grpc-default-executor-26", "context":"{StartWorkflow=7, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":StartWorkflow method end, "exp":
+}{"time":"2026-10-24 13:32:38:012", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:32:38:013", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=14, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":DispatchTask method start, "exp":
+}{"time":"2026-10-24 13:32:38:014", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=14, workflowId=6899}", "class":"WorkflowManageComponent", "line":"928", "content":[CheckNodeIsFree] workflowId:6899, cellCode:lay01-dist1-90, currentTaskDetailId:27409, "exp":
+}{"time":"2026-10-24 13:32:38:014", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=14, workflowId=6899}", "class":"WorkflowManageComponent", "line":"1323", "content":checkNodeIsUnSuppress false,cellCode:lay01-dist1-90, "exp":
+}{"time":"2026-10-24 13:32:38:014", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=14, workflowId=6899}", "class":"CheckExclusiveAreaPollingHandleTask", "line":"122", "content":workflowTask,taskId:27409,detailId:27409,targetNode:lay01-dist1-90, targetNodeFreeStatus:false，add to polling queue for scheduler handling, "exp":
+}{"time":"2026-10-24 13:32:38:020", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=14, workflowId=6899}", "class":"JobRecordServiceImpl", "line":"1003", "content":execute refresh error message,workflowId:6899,isWarning:true,taskCode:W-179281635800624-6899-27409,errorMessage:lang.wcs.workflow.running.cellSuppress, "exp":
+}{"time":"2026-10-24 13:32:38:023", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=14, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":DispatchTask method end, "exp":
+}{"time":"2026-10-24 13:33:39:764", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:39:764", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=15, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":DispatchTask method start, "exp":
+}{"time":"2026-10-24 13:33:39:764", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=15, workflowId=6899}", "class":"WorkflowManageComponent", "line":"928", "content":[CheckNodeIsFree] workflowId:6899, cellCode:lay01-dist1-90, currentTaskDetailId:27409, "exp":
+}{"time":"2026-10-24 13:33:39:768", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=15, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.mm.grpc.MissionManagerService/dispatch, arguments:{
+  "code": "W-179281635800624-6899-27409",
+  "priority": 1,
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "templateCode": "T4",
+  "robotId": "1,2,3",
+  "robotTypeCode": "KMP1500I",
+  "targetNodes": [{
+    "targetNodeLabel": "90"
+  }],
+  "completedLock": 1,
+  "robotTypeClass": "LIFT_ROTATE",
+  "jobCode": "509C5F51DD1D4D0EBC48DA0DAA007703"
+}, "exp":
+}{"time":"2026-10-24 13:33:39:814", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=15, workflowId=6899}", "class":"WorkflowServiceImpl", "line":"105", "content":updateWorkflowStatus,workflowId:6899,targetWorkflowStatus:20,sourceWorkflowStatus:10, "exp":
+}{"time":"2026-10-24 13:33:39:817", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=15, workflowId=6899}", "class":"DispatcherTaskPollingHandleTask", "line":"118", "content":dispatch task - update job record, status of begin cell code:lay01-dist1-90 to be EXECUTING, value:20, "exp":
+}{"time":"2026-10-24 13:33:39:820", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=15, workflowId=6899}", "class":"DispatcherTaskPollingHandleTask", "line":"123", "content":dispatch task - update job record, update target cell code:lay01-dist1-90 and container code:SIM_CARGO_001 of workflow:6899, "exp":
+}{"time":"2026-10-24 13:33:39:823", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=15, workflowId=6899}", "class":"DispatcherTaskPollingHandleTask", "line":"145", "content":Update workflow task status to be EXECUTING when the status is CREATE or WAIT_SEND, "exp":
+}{"time":"2026-10-24 13:33:39:823", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=15, workflowId=6899}", "class":"WorkflowTaskServiceImpl", "line":"167", "content":updateWorkflowTaskStatus,workflowTaskId:27409,targetTaskStatus:20,sourceTaskStatus:10, "exp":
+}{"time":"2026-10-24 13:33:39:827", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=15, workflowId=6899}", "class":"WorkflowLockComponent", "line":"46", "content":[Workflow Lock Code] lock workflow,workflowId:6899,new lock code:W-179281635800624-6899-27409, "exp":
+}{"time":"2026-10-24 13:33:39:827", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=15, workflowId=6899}", "class":"WorkflowServiceImpl", "line":"179", "content":update t_workflow, "exp":
+}{"time":"2026-10-24 13:33:39:830", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=15, workflowId=6899}", "class":"WorkflowTaskDetailServiceImpl", "line":"85", "content":updateWorkflowTaskDetailTaskStatus,taskId:27409,targetTaskStatus:16,sourceTaskStatus:10, "exp":
+}{"time":"2026-10-24 13:33:39:832", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=15, workflowId=6899}", "class":"DispatcherTaskPollingHandleTask", "line":"208", "content":[CheckRobotIdle] add cache, workflowId:6899, robotTypeClass:1,robotTypeCode:KMP1500I, "exp":
+}{"time":"2026-10-24 13:33:39:836", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=15, workflowId=6899}", "class":"LifecycleCache", "line":"72", "content":[Lifecycle Cache] remove cache, cache:TaskDetailDispatchingCache, key:27409, "exp":
+}{"time":"2026-10-24 13:33:39:840", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=15, workflowId=6899}", "class":"JobRecordServiceImpl", "line":"1003", "content":execute refresh error message,workflowId:6899,isWarning:false,taskCode:W-179281635800624-6899-27409,errorMessage:null, "exp":
+}{"time":"2026-10-24 13:33:39:844", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=15, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":DispatchTask method end, "exp":
+}{"time":"2026-10-24 13:33:39:974", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:W-179281635800624-6899-27409,missionState:MISSION_START,actionState:, "exp":
+}{"time":"2026-10-24 13:33:39:975", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=100, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:33:39:975", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=100, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"WORKFLOW","supposeWorkflowId":"6899","taskCode":"W-179281635800624-6899-27409","missionState":"MISSION_START","robotId":"2","actionType":"","actionSequence":0,"actionState":"","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"","actionErrorMessage":"","manualHandleStatus":0,"otherInfo":{"changeRobot":"2"},"lockStatus":1,"beginRobotMileage":0.0,"commandExecuting":false,"mmMissionType":0}, "exp":
+}{"time":"2026-10-24 13:33:39:975", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=100, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:39:979", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=100, workflowId=6899}", "class":"WorkflowLockComponent", "line":"58", "content":[Workflow Lock Code] update robotId, workflowId:6899, lockCode:W-179281635800624-6899-27409, robotId:2, "exp":
+}{"time":"2026-10-24 13:33:39:980", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=100, workflowId=6899}", "class":"WorkflowTaskServiceImpl", "line":"310", "content":switch robot, taskId:27409, robotId:2, "exp":
+}{"time":"2026-10-24 13:33:39:988", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=100, workflowId=6899}", "class":"WorkflowServiceImpl", "line":"179", "content":update t_workflow, "exp":
+}{"time":"2026-10-24 13:33:39:991", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=100, workflowId=6899}", "class":"WorkflowRobotTaskCallBackHandle", "line":"533", "content":[Use Robot] change robot:2, workflowId:6899, "exp":
+}{"time":"2026-10-24 13:33:39:992", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=100, workflowId=6899}", "class":"WorkflowTaskDetailServiceImpl", "line":"115", "content":updateWorkflowTaskDetailTaskStatusAndRobotInfo,taskId:27409,robotId:2,targetTaskStatus:20,sourceTaskStatus:16, beginRobotMileage:0.0, "exp":
+}{"time":"2026-10-24 13:33:40:001", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=100, workflowId=6899}", "class":"WorkflowServiceImpl", "line":"179", "content":update t_workflow, "exp":
+}{"time":"2026-10-24 13:33:40:007", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=100, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.ContainerService/GetContainerByCode, arguments:{
+  "code": "SIM_CARGO_001"
+}, "exp":
+}{"time":"2026-10-24 13:33:40:032", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=100, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.ContainerModelService/SelectContainerModelByIds, arguments:{
+  "id": ["1"]
+}, "exp":
+}{"time":"2026-10-24 13:33:40:038", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=100, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.ContainerService/GetContainerByCode, arguments:{
+  "code": "SIM_CARGO_001"
+}, "exp":
+}{"time":"2026-10-24 13:33:40:050", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=100, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.robot.RobotService/GetMobileRobot, arguments:{
+  "robotId": "2"
+}, "exp":
+}{"time":"2026-10-24 13:33:40:062", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=100, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.robot.RobotService/GetRealtimeDataByRobotId, arguments:{
+  "robotId": "2"
+}, "exp":
+}{"time":"2026-10-24 13:33:40:065", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=100, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:40:065", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=100, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:33:40:065", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:W-179281635800624-6899-27409,missionState:MISSION_EXECUTING,actionState:ACTION_EXECUTING, "exp":
+}{"time":"2026-10-24 13:33:40:065", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=101, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:33:40:066", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=101, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"WORKFLOW","supposeWorkflowId":"6899","taskCode":"W-179281635800624-6899-27409","missionState":"MISSION_EXECUTING","robotId":"2","actionType":"move","actionSequence":1,"actionState":"ACTION_EXECUTING","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"NO_ERROR","actionErrorMessage":"","manualHandleStatus":0,"otherInfo":{},"lockStatus":1,"beginRobotMileage":0.0,"commandExecuting":false,"mmMissionType":0}, "exp":
+}{"time":"2026-10-24 13:33:40:066", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=101, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:40:068", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=101, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:40:068", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=101, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:33:40:222", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b53b82f7-4e6a-48e4-98f6-808d3b4f6cc4 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "f3fd5c8d-e543-4a84-abc5-5487aa80076c",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "-1",
+  "missionType": "MOVE",
+  "missionStatus": "MOVE_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:33:40",
+  "robotModel": "KMP1500I",
+  "nextNodeCode": "lay01-dist1-90",
+  "robotX": "18.0",
+  "robotY": "21.0",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "nodeSequence": 1,
+  "instanceId": "6899"
+},pushTime:1792816420065,peekTime:1792816420221,pollTime:1792816420221,onNextTime:1792816420221,onNextExecuteTime:0,currentTime:1792816420222, "exp":
+}{"time":"2026-10-24 13:33:40:223", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:65d5e882-5f60-4cab-8a13-5bd705a5b6ad 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "f3fd5c8d-e543-4a84-abc5-5487aa80076c",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "-1",
+  "missionType": "MOVE",
+  "missionStatus": "MOVE_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:33:40",
+  "robotModel": "KMP1500I",
+  "nextNodeCode": "lay01-dist1-90",
+  "robotX": "18.0",
+  "robotY": "21.0",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "nodeSequence": 1,
+  "instanceId": "6899"
+},pushTime:1792816420065,peekTime:1792816420221,pollTime:1792816420221,onNextTime:1792816420222,onNextExecuteTime:0,currentTime:1792816420223, "exp":
+}{"time":"2026-10-24 13:33:40:224", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b9a4e6c6-ea1e-430c-9960-456aa944e68a 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "f3fd5c8d-e543-4a84-abc5-5487aa80076c",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "-1",
+  "missionType": "MOVE",
+  "missionStatus": "MOVE_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:33:40",
+  "robotModel": "KMP1500I",
+  "nextNodeCode": "lay01-dist1-90",
+  "robotX": "18.0",
+  "robotY": "21.0",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "nodeSequence": 1,
+  "instanceId": "6899"
+},pushTime:1792816420065,peekTime:1792816420221,pollTime:1792816420221,onNextTime:1792816420223,onNextExecuteTime:0,currentTime:1792816420224, "exp":
+}{"time":"2026-10-24 13:33:40:225", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:4f5235e6-65ce-4b96-9395-42461ba9a775 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "f3fd5c8d-e543-4a84-abc5-5487aa80076c",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "-1",
+  "missionType": "MOVE",
+  "missionStatus": "MOVE_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:33:40",
+  "robotModel": "KMP1500I",
+  "nextNodeCode": "lay01-dist1-90",
+  "robotX": "18.0",
+  "robotY": "21.0",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "nodeSequence": 1,
+  "instanceId": "6899"
+},pushTime:1792816420065,peekTime:1792816420221,pollTime:1792816420221,onNextTime:1792816420224,onNextExecuteTime:0,currentTime:1792816420224, "exp":
+}{"time":"2026-10-24 13:33:40:271", "level":"INFO", "thread":"task-call-back-consumer-pool-4", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:W-179281635800624-6899-27409,missionState:MISSION_EXECUTING,actionState:ACTION_EXECUTING, "exp":
+}{"time":"2026-10-24 13:33:40:271", "level":"INFO", "thread":"task-call-back-consumer-pool-4", "context":"{RCSMissionCallback=102, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:33:40:271", "level":"INFO", "thread":"task-call-back-consumer-pool-4", "context":"{RCSMissionCallback=102, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"WORKFLOW","supposeWorkflowId":"6899","taskCode":"W-179281635800624-6899-27409","missionState":"MISSION_EXECUTING","robotId":"2","actionType":"move","actionSequence":1,"actionState":"ACTION_EXECUTING","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"NO_ERROR","actionErrorMessage":"","manualHandleStatus":0,"otherInfo":{},"lockStatus":1,"beginRobotMileage":0.0,"commandExecuting":true,"mmMissionType":0}, "exp":
+}{"time":"2026-10-24 13:33:40:271", "level":"INFO", "thread":"task-call-back-consumer-pool-4", "context":"{RCSMissionCallback=102, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:40:273", "level":"INFO", "thread":"task-call-back-consumer-pool-4", "context":"{RCSMissionCallback=102, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:40:273", "level":"INFO", "thread":"task-call-back-consumer-pool-4", "context":"{RCSMissionCallback=102, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:33:50:222", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:W-179281635800624-6899-27409,missionState:MISSION_EXECUTING,actionState:ACTION_FINISH, "exp":
+}{"time":"2026-10-24 13:33:50:223", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=103, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:33:50:223", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=103, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"WORKFLOW","supposeWorkflowId":"6899","taskCode":"W-179281635800624-6899-27409","missionState":"MISSION_EXECUTING","robotId":"2","actionType":"move","actionSequence":1,"actionState":"ACTION_FINISH","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"NO_ERROR","actionErrorMessage":"","manualHandleStatus":0,"otherInfo":{},"lockStatus":1,"beginRobotMileage":0.0,"commandExecuting":true,"mmMissionType":0}, "exp":
+}{"time":"2026-10-24 13:33:50:224", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=103, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:50:226", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=103, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:50:226", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=103, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:33:50:248", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:W-179281635800624-6899-27409,missionState:MISSION_FINISH,actionState:, "exp":
+}{"time":"2026-10-24 13:33:50:248", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:33:50:248", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"WORKFLOW","supposeWorkflowId":"6899","taskCode":"W-179281635800624-6899-27409","missionState":"MISSION_FINISH","robotId":"2","actionType":"","actionSequence":0,"actionState":"","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"","actionErrorMessage":"","manualHandleStatus":0,"otherInfo":{},"lockStatus":1,"beginRobotMileage":0.0,"endRobotMileage":0.0,"commandExecuting":true,"mmMissionType":0}, "exp":
+}{"time":"2026-10-24 13:33:50:248", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:50:254", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.ContainerService/GetContainerByCode, arguments:{
+  "code": "SIM_CARGO_001"
+}, "exp":
+}{"time":"2026-10-24 13:33:50:262", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.ContainerModelService/SelectContainerModelByIds, arguments:{
+  "id": ["1"]
+}, "exp":
+}{"time":"2026-10-24 13:33:50:269", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.ContainerService/GetContainerByCode, arguments:{
+  "code": "SIM_CARGO_001"
+}, "exp":
+}{"time":"2026-10-24 13:33:50:277", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.robot.RobotService/GetMobileRobot, arguments:{
+  "robotId": "2"
+}, "exp":
+}{"time":"2026-10-24 13:33:50:285", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.robot.RobotService/GetRealtimeDataByRobotId, arguments:{
+  "robotId": "2"
+}, "exp":
+}{"time":"2026-10-24 13:33:50:289", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.MissionService/GetMissionAndSubmissionByCode, arguments:{
+  "code": "W-179281635800624-6899-27409"
+}, "exp":
+}{"time":"2026-10-24 13:33:50:297", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"NodeHandleComponent", "line":"196", "content":taskExecutedCallBack,context info:{"taskDetailEntity":{"createTime":"2026-10-24 13:32:37","updateTime":"2026-10-24 13:33:39","id":27409,"workflowId":6899,"workflowTaskId":27409,"beginCellCode":"-1","endCellCode":"lay01-dist1-90","robotTaskCode":"W-179281635800624-6899-27409","completeLock":1,"targetRobots":"1,2,3","targetRobotType":"KMP1500I","robotId":"2","taskStatus":20,"taskType":0,"copyFlag":0,"robotStrategy":1,"manualHandleStatus":0,"waitPreBufferTaskFlag":0,"beginRobotMileage":0.0,"endRobotMileage":0.0,"manualCompleteFlag":0,"isPreLock":1},"isExecuteCommand":false}, "exp":
+}{"time":"2026-10-24 13:33:50:298", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"WorkflowGlobalLock", "line":"38", "content":[taskExecutedCallBack] [Workflow global lock] lock true, workflowId:6899, "exp":
+}{"time":"2026-10-24 13:33:50:300", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"WorkflowTaskServiceImpl", "line":"167", "content":updateWorkflowTaskStatus,workflowTaskId:27409,targetTaskStatus:25,sourceTaskStatus:20, "exp":
+}{"time":"2026-10-24 13:33:50:301", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"WorkflowTaskDetailServiceImpl", "line":"101", "content":finishWorkflowTaskDetailTaskStatus,taskId:27409,targetTaskStatus:30,sourceTaskStatus:20, beginRobotMileage:0.0, endRobotMileage:0.0, manualCompleteFlag:0, "exp":
+}{"time":"2026-10-24 13:33:50:305", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"WorkflowTaskServiceImpl", "line":"167", "content":updateWorkflowTaskStatus,workflowTaskId:27409,targetTaskStatus:22,sourceTaskStatus:25, "exp":
+}{"time":"2026-10-24 13:33:50:308", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"WorkflowGlobalLock", "line":"50", "content":[taskExecutedCallBack] [Workflow global lock] unlock(after transaction), workflowId:6899, "exp":
+}{"time":"2026-10-24 13:33:50:309", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{workflowId=6899}", "class":"CommandDispatcher", "line":"72", "content":[Dispatch Command] workflow locked, wait for lock release, workflowId:6899, "exp":
+}{"time":"2026-10-24 13:33:50:309", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:50:309", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:50:310", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=104, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:33:50:315", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{DispatchCommand=10, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":DispatchCommand method start, "exp":
+}{"time":"2026-10-24 13:33:50:315", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{DispatchCommand=10, workflowId=6899}", "class":"LiftRobotTaskSendHandle", "line":"326", "content":[Generate command] lift, "exp":
+}{"time":"2026-10-24 13:33:50:315", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{DispatchCommand=10, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.mm.grpc.MissionManagerService/dispatch, arguments:{
+  "code": "C-179281643030325-6899-27409",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "templateCode": "T5",
+  "robotId": "2",
+  "rackCodes": ["SIM_CARGO_001"],
+  "unlockCode": "W-179281635800624-6899-27409",
+  "completedLock": 1,
+  "jobCode": "509C5F51DD1D4D0EBC48DA0DAA007703"
+}, "exp":
+}{"time":"2026-10-24 13:33:50:355", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{DispatchCommand=10, workflowId=6899}", "class":"WorkflowCommandExecuteServiceImpl", "line":"151", "content":updateCommandStatus,commandExecutedId:27389,targetStatus:20,sourceStatus:15, "exp":
+}{"time":"2026-10-24 13:33:50:356", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{DispatchCommand=10, workflowId=6899}", "class":"WorkflowLockComponent", "line":"46", "content":[Workflow Lock Code] lock workflow,workflowId:6899,new lock code:C-179281643030325-6899-27409, "exp":
+}{"time":"2026-10-24 13:33:50:356", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{DispatchCommand=10, workflowId=6899}", "class":"WorkflowServiceImpl", "line":"179", "content":update t_workflow, "exp":
+}{"time":"2026-10-24 13:33:50:357", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{DispatchCommand=10, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":DispatchCommand method end, "exp":
+}{"time":"2026-10-24 13:33:50:474", "level":"INFO", "thread":"task-call-back-consumer-pool-7", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:C-179281643030325-6899-27409,missionState:MISSION_START,actionState:, "exp":
+}{"time":"2026-10-24 13:33:50:474", "level":"INFO", "thread":"task-call-back-consumer-pool-7", "context":"{RCSMissionCallback=105, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:33:50:474", "level":"INFO", "thread":"task-call-back-consumer-pool-7", "context":"{RCSMissionCallback=105, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"COMMAND","supposeWorkflowId":"6899","taskCode":"C-179281643030325-6899-27409","missionState":"MISSION_START","robotId":"2","actionType":"","actionSequence":0,"actionState":"","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"","actionErrorMessage":"","manualHandleStatus":0,"targetContainerCode":"SIM_CARGO_001","otherInfo":{"changeRobot":"2"},"lockStatus":1,"beginRobotMileage":0.0,"commandExecuting":false,"mmMissionType":1}, "exp":
+}{"time":"2026-10-24 13:33:50:475", "level":"INFO", "thread":"task-call-back-consumer-pool-7", "context":"{RCSMissionCallback=105, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:50:476", "level":"INFO", "thread":"task-call-back-consumer-pool-7", "context":"{RCSMissionCallback=105, workflowId=6899}", "class":"WorkflowTaskServiceImpl", "line":"310", "content":switch robot, taskId:27409, robotId:2, "exp":
+}{"time":"2026-10-24 13:33:50:482", "level":"INFO", "thread":"task-call-back-consumer-pool-7", "context":"{RCSMissionCallback=105, workflowId=6899}", "class":"WorkflowLockComponent", "line":"58", "content":[Workflow Lock Code] update robotId, workflowId:6899, lockCode:C-179281643030325-6899-27409, robotId:2, "exp":
+}{"time":"2026-10-24 13:33:50:482", "level":"INFO", "thread":"task-call-back-consumer-pool-7", "context":"{RCSMissionCallback=105, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:50:482", "level":"INFO", "thread":"task-call-back-consumer-pool-7", "context":"{RCSMissionCallback=105, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:33:50:486", "level":"INFO", "thread":"task-call-back-consumer-pool-8", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:C-179281643030325-6899-27409,missionState:MISSION_EXECUTING,actionState:ACTION_EXECUTING, "exp":
+}{"time":"2026-10-24 13:33:50:486", "level":"INFO", "thread":"task-call-back-consumer-pool-8", "context":"{RCSMissionCallback=106, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:33:50:486", "level":"INFO", "thread":"task-call-back-consumer-pool-8", "context":"{RCSMissionCallback=106, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"COMMAND","supposeWorkflowId":"6899","taskCode":"C-179281643030325-6899-27409","missionState":"MISSION_EXECUTING","robotId":"2","actionType":"liftUp","actionSequence":1,"actionState":"ACTION_EXECUTING","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"NO_ERROR","actionErrorMessage":"","manualHandleStatus":0,"targetContainerCode":"SIM_CARGO_001","otherInfo":{},"lockStatus":1,"beginRobotMileage":0.0,"commandExecuting":false,"mmMissionType":1}, "exp":
+}{"time":"2026-10-24 13:33:50:487", "level":"INFO", "thread":"task-call-back-consumer-pool-8", "context":"{RCSMissionCallback=106, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:50:488", "level":"INFO", "thread":"task-call-back-consumer-pool-8", "context":"{RCSMissionCallback=106, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:50:488", "level":"INFO", "thread":"task-call-back-consumer-pool-8", "context":"{RCSMissionCallback=106, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:33:50:729", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b53b82f7-4e6a-48e4-98f6-808d3b4f6cc4 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "57bec298-99db-488e-9c65-203b8f5cf91b",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "MOVE",
+  "missionStatus": "MOVE_END",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:33:50",
+  "robotModel": "KMP1500I",
+  "startTime": "2026-10-24 13:33:39",
+  "endTime": "2026-10-24 13:33:50",
+  "beginRobotMileage": "0.0",
+  "endRobotMileage": "0.0",
+  "robotX": "16.0",
+  "robotY": "23.0",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 1,
+  "instanceId": "6899"
+},pushTime:1792816430296,peekTime:1792816430729,pollTime:1792816430729,onNextTime:1792816430729,onNextExecuteTime:0,currentTime:1792816430729, "exp":
+}{"time":"2026-10-24 13:33:50:730", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:65d5e882-5f60-4cab-8a13-5bd705a5b6ad 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "57bec298-99db-488e-9c65-203b8f5cf91b",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "MOVE",
+  "missionStatus": "MOVE_END",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:33:50",
+  "robotModel": "KMP1500I",
+  "startTime": "2026-10-24 13:33:39",
+  "endTime": "2026-10-24 13:33:50",
+  "beginRobotMileage": "0.0",
+  "endRobotMileage": "0.0",
+  "robotX": "16.0",
+  "robotY": "23.0",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 1,
+  "instanceId": "6899"
+},pushTime:1792816430296,peekTime:1792816430729,pollTime:1792816430729,onNextTime:1792816430730,onNextExecuteTime:0,currentTime:1792816430730, "exp":
+}{"time":"2026-10-24 13:33:50:731", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b9a4e6c6-ea1e-430c-9960-456aa944e68a 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "57bec298-99db-488e-9c65-203b8f5cf91b",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "MOVE",
+  "missionStatus": "MOVE_END",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:33:50",
+  "robotModel": "KMP1500I",
+  "startTime": "2026-10-24 13:33:39",
+  "endTime": "2026-10-24 13:33:50",
+  "beginRobotMileage": "0.0",
+  "endRobotMileage": "0.0",
+  "robotX": "16.0",
+  "robotY": "23.0",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 1,
+  "instanceId": "6899"
+},pushTime:1792816430296,peekTime:1792816430729,pollTime:1792816430729,onNextTime:1792816430730,onNextExecuteTime:0,currentTime:1792816430731, "exp":
+}{"time":"2026-10-24 13:33:50:732", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:4f5235e6-65ce-4b96-9395-42461ba9a775 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "57bec298-99db-488e-9c65-203b8f5cf91b",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "MOVE",
+  "missionStatus": "MOVE_END",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:33:50",
+  "robotModel": "KMP1500I",
+  "startTime": "2026-10-24 13:33:39",
+  "endTime": "2026-10-24 13:33:50",
+  "beginRobotMileage": "0.0",
+  "endRobotMileage": "0.0",
+  "robotX": "16.0",
+  "robotY": "23.0",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 1,
+  "instanceId": "6899"
+},pushTime:1792816430296,peekTime:1792816430729,pollTime:1792816430729,onNextTime:1792816430731,onNextExecuteTime:0,currentTime:1792816430731, "exp":
+}{"time":"2026-10-24 13:33:50:732", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b53b82f7-4e6a-48e4-98f6-808d3b4f6cc4 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "14c6d818-47bf-4fc5-b2d4-49f298493fdc",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1",
+  "missionStatus": "ACTION_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:33:50",
+  "actionType": "UP_CONTAINER",
+  "actionCode": "LIFT",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 1,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816430488,peekTime:1792816430732,pollTime:1792816430732,onNextTime:1792816430732,onNextExecuteTime:0,currentTime:1792816430732, "exp":
+}{"time":"2026-10-24 13:33:50:733", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:65d5e882-5f60-4cab-8a13-5bd705a5b6ad 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "14c6d818-47bf-4fc5-b2d4-49f298493fdc",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1",
+  "missionStatus": "ACTION_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:33:50",
+  "actionType": "UP_CONTAINER",
+  "actionCode": "LIFT",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 1,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816430488,peekTime:1792816430732,pollTime:1792816430732,onNextTime:1792816430732,onNextExecuteTime:0,currentTime:1792816430733, "exp":
+}{"time":"2026-10-24 13:33:50:733", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b9a4e6c6-ea1e-430c-9960-456aa944e68a 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "14c6d818-47bf-4fc5-b2d4-49f298493fdc",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1",
+  "missionStatus": "ACTION_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:33:50",
+  "actionType": "UP_CONTAINER",
+  "actionCode": "LIFT",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 1,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816430488,peekTime:1792816430732,pollTime:1792816430732,onNextTime:1792816430733,onNextExecuteTime:0,currentTime:1792816430733, "exp":
+}{"time":"2026-10-24 13:33:50:733", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:4f5235e6-65ce-4b96-9395-42461ba9a775 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "14c6d818-47bf-4fc5-b2d4-49f298493fdc",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1",
+  "missionStatus": "ACTION_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:33:50",
+  "actionType": "UP_CONTAINER",
+  "actionCode": "LIFT",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 1,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816430488,peekTime:1792816430732,pollTime:1792816430732,onNextTime:1792816430733,onNextExecuteTime:0,currentTime:1792816430733, "exp":
+}{"time":"2026-10-24 13:33:50:768", "level":"INFO", "thread":"task-call-back-consumer-pool-9", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:C-179281643030325-6899-27409,missionState:MISSION_EXECUTING,actionState:ACTION_EXECUTING, "exp":
+}{"time":"2026-10-24 13:33:50:768", "level":"INFO", "thread":"task-call-back-consumer-pool-9", "context":"{RCSMissionCallback=107, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:33:50:768", "level":"INFO", "thread":"task-call-back-consumer-pool-9", "context":"{RCSMissionCallback=107, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"COMMAND","supposeWorkflowId":"6899","taskCode":"C-179281643030325-6899-27409","missionState":"MISSION_EXECUTING","robotId":"2","actionType":"liftUp","actionSequence":1,"actionState":"ACTION_EXECUTING","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"NO_ERROR","actionErrorMessage":"","manualHandleStatus":0,"targetContainerCode":"SIM_CARGO_001","otherInfo":{},"lockStatus":1,"beginRobotMileage":0.0,"commandExecuting":true,"mmMissionType":1}, "exp":
+}{"time":"2026-10-24 13:33:50:769", "level":"INFO", "thread":"task-call-back-consumer-pool-9", "context":"{RCSMissionCallback=107, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:50:770", "level":"INFO", "thread":"task-call-back-consumer-pool-9", "context":"{RCSMissionCallback=107, workflowId=6899}", "class":"CommandRobotTaskCallBackHandle", "line":"265", "content":Command starts executing., "exp":
+}{"time":"2026-10-24 13:33:50:771", "level":"INFO", "thread":"task-call-back-consumer-pool-9", "context":"{RCSMissionCallback=107, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:50:771", "level":"INFO", "thread":"task-call-back-consumer-pool-9", "context":"{RCSMissionCallback=107, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:33:51:236", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b53b82f7-4e6a-48e4-98f6-808d3b4f6cc4 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "9ae465ae-0324-4804-9e32-3785b1740f5b",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1",
+  "missionStatus": "ACTION_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:33:50",
+  "actionType": "UP_CONTAINER",
+  "actionCode": "LIFT",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 1,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816430771,peekTime:1792816431235,pollTime:1792816431235,onNextTime:1792816431235,onNextExecuteTime:0,currentTime:1792816431235, "exp":
+}{"time":"2026-10-24 13:33:51:236", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:65d5e882-5f60-4cab-8a13-5bd705a5b6ad 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "9ae465ae-0324-4804-9e32-3785b1740f5b",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1",
+  "missionStatus": "ACTION_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:33:50",
+  "actionType": "UP_CONTAINER",
+  "actionCode": "LIFT",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 1,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816430771,peekTime:1792816431235,pollTime:1792816431235,onNextTime:1792816431236,onNextExecuteTime:0,currentTime:1792816431236, "exp":
+}{"time":"2026-10-24 13:33:51:237", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b9a4e6c6-ea1e-430c-9960-456aa944e68a 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "9ae465ae-0324-4804-9e32-3785b1740f5b",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1",
+  "missionStatus": "ACTION_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:33:50",
+  "actionType": "UP_CONTAINER",
+  "actionCode": "LIFT",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 1,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816430771,peekTime:1792816431235,pollTime:1792816431235,onNextTime:1792816431236,onNextExecuteTime:0,currentTime:1792816431237, "exp":
+}{"time":"2026-10-24 13:33:51:238", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:4f5235e6-65ce-4b96-9395-42461ba9a775 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "9ae465ae-0324-4804-9e32-3785b1740f5b",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1",
+  "missionStatus": "ACTION_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:33:50",
+  "actionType": "UP_CONTAINER",
+  "actionCode": "LIFT",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 1,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816430771,peekTime:1792816431235,pollTime:1792816431235,onNextTime:1792816431237,onNextExecuteTime:0,currentTime:1792816431238, "exp":
+}{"time":"2026-10-24 13:33:51:524", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:C-179281643030325-6899-27409,missionState:MISSION_EXECUTING,actionState:ACTION_FINISH, "exp":
+}{"time":"2026-10-24 13:33:51:524", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=108, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:33:51:525", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=108, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"COMMAND","supposeWorkflowId":"6899","taskCode":"C-179281643030325-6899-27409","missionState":"MISSION_EXECUTING","robotId":"2","actionType":"liftUp","actionSequence":1,"actionState":"ACTION_FINISH","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"NO_ERROR","actionErrorMessage":"","manualHandleStatus":0,"targetContainerCode":"SIM_CARGO_001","otherInfo":{},"lockStatus":1,"beginRobotMileage":0.0,"commandExecuting":true,"mmMissionType":1}, "exp":
+}{"time":"2026-10-24 13:33:51:527", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=108, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:51:528", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=108, workflowId=6899}", "class":"CommandRobotTaskCallBackHandle", "line":"265", "content":Command starts executing., "exp":
+}{"time":"2026-10-24 13:33:51:529", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=108, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:51:529", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=108, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:33:51:548", "level":"INFO", "thread":"task-call-back-consumer-pool-1", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:C-179281643030325-6899-27409,missionState:MISSION_FINISH,actionState:, "exp":
+}{"time":"2026-10-24 13:33:51:548", "level":"INFO", "thread":"task-call-back-consumer-pool-1", "context":"{RCSMissionCallback=109, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:33:51:548", "level":"INFO", "thread":"task-call-back-consumer-pool-1", "context":"{RCSMissionCallback=109, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"COMMAND","supposeWorkflowId":"6899","taskCode":"C-179281643030325-6899-27409","missionState":"MISSION_FINISH","robotId":"2","actionType":"","actionSequence":0,"actionState":"","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"","actionErrorMessage":"","manualHandleStatus":0,"targetContainerCode":"SIM_CARGO_001","otherInfo":{},"lockStatus":1,"beginRobotMileage":0.0,"endRobotMileage":0.0,"commandExecuting":true,"mmMissionType":1}, "exp":
+}{"time":"2026-10-24 13:33:51:550", "level":"INFO", "thread":"task-call-back-consumer-pool-1", "context":"{RCSMissionCallback=109, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:51:554", "level":"INFO", "thread":"task-call-back-consumer-pool-1", "context":"{RCSMissionCallback=109, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.MissionService/GetMissionAndSubmissionByCode, arguments:{
+  "code": "C-179281643030325-6899-27409"
+}, "exp":
+}{"time":"2026-10-24 13:33:51:575", "level":"INFO", "thread":"task-call-back-consumer-pool-1", "context":"{RCSMissionCallback=109, workflowId=6899}", "class":"ComponentCommandHandleComponent", "line":"92", "content":componentCommandExecutedCallBack,context info:{"commandExecuteEntity":{"createUsername":"system","createTime":"2026-10-24 13:33:50","updateUsername":"system","updateTime":"2026-10-24 13:33:50","id":27389,"workflowId":6899,"workflowTaskId":27409,"workflowNodeId":1,"executePhase":0,"commandId":1,"commandType":3,"commandInfo":"","executeOrder":1,"callbackStrategy":0,"commandStatus":20,"targetCellCode":"lay01-dist1-90","sourceType":1,"taskCode":"C-179281643030325-6899-27409","triggerCellCode":"lay01-dist1-90","robotId":"2","robotTypeClass":1,"componentCommandType":1,"componentCommandParam1":"","componentCommandParam2":"","containerCode":"SIM_CARGO_001","completeLock":1,"componentCommandParam3":"","componentCommandParam4":"","componentCommandParam5":"","componentCommandParam7":"","apiActionId":"Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1","manualHandleStatus":0,"manualCompleteFlag":0}}, "exp":
+}{"time":"2026-10-24 13:33:51:575", "level":"INFO", "thread":"task-call-back-consumer-pool-1", "context":"{RCSMissionCallback=109, workflowId=6899}", "class":"WorkflowGlobalLock", "line":"38", "content":[componentCommandExecutedCallBack] [Workflow global lock] lock true, workflowId:6899, "exp":
+}{"time":"2026-10-24 13:33:51:575", "level":"INFO", "thread":"task-call-back-consumer-pool-1", "context":"{RCSMissionCallback=109, workflowId=6899}", "class":"WorkflowCommandExecuteServiceImpl", "line":"163", "content":updateCommandStatus,taskId:27389,targetStatus:30,sourceStatus:20, "exp":
+}{"time":"2026-10-24 13:33:51:581", "level":"INFO", "thread":"task-call-back-consumer-pool-1", "context":"{RCSMissionCallback=109, workflowId=6899}", "class":"NodeHandleComponent", "line":"196", "content":taskExecutedCallBack,context info:{"taskDetailEntity":{"createTime":"2026-10-24 13:32:37","updateTime":"2026-10-24 13:33:50","id":27409,"workflowId":6899,"workflowTaskId":27409,"beginCellCode":"-1","endCellCode":"lay01-dist1-90","robotTaskCode":"W-179281635800624-6899-27409","completeLock":1,"targetRobots":"1,2,3","targetRobotType":"KMP1500I","robotId":"2","taskStatus":30,"taskType":0,"copyFlag":0,"robotStrategy":1,"completeTime":1792816430299,"manualHandleStatus":0,"waitPreBufferTaskFlag":0,"beginRobotMileage":0.0,"endRobotMileage":0.0,"manualCompleteFlag":0,"isPreLock":1},"isExecuteCommand":true}, "exp":
+}{"time":"2026-10-24 13:33:51:582", "level":"INFO", "thread":"task-call-back-consumer-pool-1", "context":"{RCSMissionCallback=109, workflowId=6899}", "class":"WorkflowGlobalLock", "line":"38", "content":[taskExecutedCallBack] [Workflow global lock] lock true, workflowId:6899, "exp":
+}{"time":"2026-10-24 13:33:51:583", "level":"INFO", "thread":"task-call-back-consumer-pool-1", "context":"{RCSMissionCallback=109, workflowId=6899}", "class":"WorkflowTaskServiceImpl", "line":"167", "content":updateWorkflowTaskStatus,workflowTaskId:27409,targetTaskStatus:25,sourceTaskStatus:22, "exp":
+}{"time":"2026-10-24 13:33:51:588", "level":"INFO", "thread":"task-call-back-consumer-pool-1", "context":"{RCSMissionCallback=109, workflowId=6899}", "class":"WorkflowGlobalLock", "line":"50", "content":[taskExecutedCallBack] [Workflow global lock] unlock(after transaction), workflowId:6899, "exp":
+}{"time":"2026-10-24 13:33:51:588", "level":"INFO", "thread":"pool-22-thread-5", "context":"{NodeHandle=12, workflowId=6899}", "class":"NodeHandleComponent", "line":"492", "content":nodeHandle workflowTask:27409，configId:-1, "exp":
+}{"time":"2026-10-24 13:33:51:589", "level":"INFO", "thread":"task-call-back-consumer-pool-1", "context":"{RCSMissionCallback=109, workflowId=6899}", "class":"WorkflowGlobalLock", "line":"50", "content":[componentCommandExecutedCallBack] [Workflow global lock] unlock(after transaction), workflowId:6899, "exp":
+}{"time":"2026-10-24 13:33:51:589", "level":"INFO", "thread":"task-call-back-consumer-pool-1", "context":"{RCSMissionCallback=109, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:51:589", "level":"INFO", "thread":"task-call-back-consumer-pool-1", "context":"{RCSMissionCallback=109, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:33:51:593", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=12, NodeHandle=12, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":ContinueWorkflow method start, "exp":
+}{"time":"2026-10-24 13:33:51:596", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=12, NodeHandle=12, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:51:596", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=12, NodeHandle=12, workflowId=6899}", "class":"WorkflowGlobalLock", "line":"38", "content":[NextWorkflowFactory] [Workflow global lock] lock true, workflowId:6899, "exp":
+}{"time":"2026-10-24 13:33:51:599", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=12, NodeHandle=12, workflowId=6899}", "class":"AreaServiceImpl", "line":"530", "content":[CheckNodeAreaExitNode] ignore, current node is not in one area, currentNode:lay01-dist1-90, "exp":
+}{"time":"2026-10-24 13:33:51:599", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=12, NodeHandle=12, workflowId=6899}", "class":"AreaServiceImpl", "line":"614", "content":[CheckNodeAreaEntryNode] ignore, target node is not in one area, currentNode:lay01-dist1-90, targetNode:lay01-dist1-97, "exp":
+}{"time":"2026-10-24 13:33:51:599", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=12, NodeHandle=12, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.ContainerService/GetContainersInEnabledMaps, arguments:{
+  "needMilliSecond": true
+}, "exp":
+}{"time":"2026-10-24 13:33:51:611", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=12, NodeHandle=12, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.robot.RobotService/GetAllMobileRobot, arguments:{
+}, "exp":
+}{"time":"2026-10-24 13:33:51:628", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=12, NodeHandle=12, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.ContainerService/GetContainerByCode, arguments:{
+  "code": "SIM_CARGO_001"
+}, "exp":
+}{"time":"2026-10-24 13:33:51:633", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=12, NodeHandle=12, workflowId=6899}", "class":"WorkflowNextExecuteCommand", "line":"82", "content":WorkflowNextExecuteCommand execute, "exp":
+}{"time":"2026-10-24 13:33:51:634", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=12, NodeHandle=12, workflowId=6899}", "class":"WorkflowManageComponent", "line":"928", "content":[CheckNodeIsFree] workflowId:null, cellCode:lay01-dist1-97, currentTaskDetailId:null, "exp":
+}{"time":"2026-10-24 13:33:51:636", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=12, NodeHandle=12, workflowId=6899}", "class":"WorkflowTaskServiceImpl", "line":"179", "content":finishWorkflowTaskStatus,workflowTaskId:27409,targetTaskStatus:30,sourceTaskStatus:25, "exp":
+}{"time":"2026-10-24 13:33:51:637", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=12, NodeHandle=12, workflowId=6899}", "class":"WorkflowManageComponent", "line":"261", "content":addNewWorkflowTask start...,workflowId:6899, "exp":
+}{"time":"2026-10-24 13:33:51:639", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=12, NodeHandle=12, workflowId=6899}", "class":"WorkflowManageComponent", "line":"499", "content":addNewWorkflowTaskDetail start,workflowTaskId:27410, "exp":
+}{"time":"2026-10-24 13:33:51:644", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=12, NodeHandle=12, workflowId=6899}", "class":"LifecycleCache", "line":"38", "content":[Lifecycle Cache] add cache, cache:TaskDetailDispatchingCache, key:27410, "exp":
+}{"time":"2026-10-24 13:33:51:646", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=12, NodeHandle=12, workflowId=6899}", "class":"CacheMapCollection", "line":"421", "content":[MapCellTask UNLOCK] cellCode:lay01-dist1-90,taskId:27409, "exp":
+}{"time":"2026-10-24 13:33:51:646", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=12, NodeHandle=12, workflowId=6899}", "class":"CacheMapCollection", "line":"401", "content":[MapCellTask LOCK] cellCode:lay01-dist1-90,taskId:27410, containerCode:SIM_CARGO_001, "exp":
+}{"time":"2026-10-24 13:33:51:650", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:51:650", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=16, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":DispatchTask method start, "exp":
+}{"time":"2026-10-24 13:33:51:650", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=16, workflowId=6899}", "class":"WorkflowManageComponent", "line":"928", "content":[CheckNodeIsFree] workflowId:6899, cellCode:lay01-dist1-97, currentTaskDetailId:27410, "exp":
+}{"time":"2026-10-24 13:33:51:650", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=16, workflowId=6899}", "class":"CacheMapCollection", "line":"401", "content":[MapCellTask LOCK] cellCode:lay01-dist1-97,taskId:27410, containerCode:SIM_CARGO_001, "exp":
+}{"time":"2026-10-24 13:33:51:651", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=16, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.mm.grpc.MissionManagerService/dispatch, arguments:{
+  "code": "W-179281643164326-6899-27410",
+  "priority": 1,
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "templateCode": "T4",
+  "robotId": "2",
+  "robotTypeCode": "KMP1500I",
+  "targetNodes": [{
+    "targetNodeLabel": "97"
+  }],
+  "unlockCode": "C-179281643030325-6899-27409",
+  "completedLock": 1,
+  "robotTypeClass": "LIFT_ROTATE",
+  "jobCode": "509C5F51DD1D4D0EBC48DA0DAA007703"
+}, "exp":
+}{"time":"2026-10-24 13:33:51:683", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=16, workflowId=6899}", "class":"DispatcherTaskPollingHandleTask", "line":"123", "content":dispatch task - update job record, update target cell code:lay01-dist1-97 and container code:SIM_CARGO_001 of workflow:6899, "exp":
+}{"time":"2026-10-24 13:33:51:689", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=16, workflowId=6899}", "class":"DispatcherTaskPollingHandleTask", "line":"145", "content":Update workflow task status to be EXECUTING when the status is CREATE or WAIT_SEND, "exp":
+}{"time":"2026-10-24 13:33:51:691", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=16, workflowId=6899}", "class":"WorkflowTaskServiceImpl", "line":"167", "content":updateWorkflowTaskStatus,workflowTaskId:27410,targetTaskStatus:20,sourceTaskStatus:10, "exp":
+}{"time":"2026-10-24 13:33:51:692", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=16, workflowId=6899}", "class":"WorkflowLockComponent", "line":"46", "content":[Workflow Lock Code] lock workflow,workflowId:6899,new lock code:W-179281643164326-6899-27410, "exp":
+}{"time":"2026-10-24 13:33:51:693", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=16, workflowId=6899}", "class":"WorkflowServiceImpl", "line":"179", "content":update t_workflow, "exp":
+}{"time":"2026-10-24 13:33:51:696", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=16, workflowId=6899}", "class":"WorkflowTaskDetailServiceImpl", "line":"85", "content":updateWorkflowTaskDetailTaskStatus,taskId:27410,targetTaskStatus:16,sourceTaskStatus:10, "exp":
+}{"time":"2026-10-24 13:33:51:701", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=16, workflowId=6899}", "class":"LifecycleCache", "line":"72", "content":[Lifecycle Cache] remove cache, cache:TaskDetailDispatchingCache, key:27410, "exp":
+}{"time":"2026-10-24 13:33:51:703", "level":"INFO", "thread":"task-dispatch-pool-1", "context":"{DispatchTask=16, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":DispatchTask method end, "exp":
+}{"time":"2026-10-24 13:33:51:739", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b53b82f7-4e6a-48e4-98f6-808d3b4f6cc4 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "c7c8906f-8c2a-44b9-979b-e3350a429145",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1",
+  "missionStatus": "ACTION_END",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:33:51",
+  "actionType": "UP_CONTAINER",
+  "actionCode": "LIFT",
+  "startTime": "2026-10-24 13:33:50",
+  "endTime": "2026-10-24 13:33:51",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 1,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816431575,peekTime:1792816431738,pollTime:1792816431738,onNextTime:1792816431738,onNextExecuteTime:0,currentTime:1792816431739, "exp":
+}{"time":"2026-10-24 13:33:51:739", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:65d5e882-5f60-4cab-8a13-5bd705a5b6ad 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "c7c8906f-8c2a-44b9-979b-e3350a429145",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1",
+  "missionStatus": "ACTION_END",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:33:51",
+  "actionType": "UP_CONTAINER",
+  "actionCode": "LIFT",
+  "startTime": "2026-10-24 13:33:50",
+  "endTime": "2026-10-24 13:33:51",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 1,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816431575,peekTime:1792816431738,pollTime:1792816431738,onNextTime:1792816431739,onNextExecuteTime:0,currentTime:1792816431739, "exp":
+}{"time":"2026-10-24 13:33:51:740", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b9a4e6c6-ea1e-430c-9960-456aa944e68a 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "c7c8906f-8c2a-44b9-979b-e3350a429145",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1",
+  "missionStatus": "ACTION_END",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:33:51",
+  "actionType": "UP_CONTAINER",
+  "actionCode": "LIFT",
+  "startTime": "2026-10-24 13:33:50",
+  "endTime": "2026-10-24 13:33:51",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 1,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816431575,peekTime:1792816431738,pollTime:1792816431738,onNextTime:1792816431739,onNextExecuteTime:0,currentTime:1792816431740, "exp":
+}{"time":"2026-10-24 13:33:51:740", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:4f5235e6-65ce-4b96-9395-42461ba9a775 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "c7c8906f-8c2a-44b9-979b-e3350a429145",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-1-1",
+  "missionStatus": "ACTION_END",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:33:51",
+  "actionType": "UP_CONTAINER",
+  "actionCode": "LIFT",
+  "startTime": "2026-10-24 13:33:50",
+  "endTime": "2026-10-24 13:33:51",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 1,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816431575,peekTime:1792816431738,pollTime:1792816431738,onNextTime:1792816431740,onNextExecuteTime:0,currentTime:1792816431740, "exp":
+}{"time":"2026-10-24 13:33:51:742", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b53b82f7-4e6a-48e4-98f6-808d3b4f6cc4 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "28ad2805-7a4d-4233-aada-d7ce8a8c3108",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "NODE",
+  "missionStatus": "NODE_COMPLETE",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 1,
+  "passStrategy": "AUTO",
+  "instanceId": "6899"
+},pushTime:1792816431601,peekTime:1792816431741,pollTime:1792816431741,onNextTime:1792816431741,onNextExecuteTime:0,currentTime:1792816431742, "exp":
+}{"time":"2026-10-24 13:33:51:742", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:65d5e882-5f60-4cab-8a13-5bd705a5b6ad 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "28ad2805-7a4d-4233-aada-d7ce8a8c3108",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "NODE",
+  "missionStatus": "NODE_COMPLETE",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 1,
+  "passStrategy": "AUTO",
+  "instanceId": "6899"
+},pushTime:1792816431601,peekTime:1792816431741,pollTime:1792816431741,onNextTime:1792816431742,onNextExecuteTime:0,currentTime:1792816431742, "exp":
+}{"time":"2026-10-24 13:33:51:743", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b9a4e6c6-ea1e-430c-9960-456aa944e68a 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "28ad2805-7a4d-4233-aada-d7ce8a8c3108",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "NODE",
+  "missionStatus": "NODE_COMPLETE",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 1,
+  "passStrategy": "AUTO",
+  "instanceId": "6899"
+},pushTime:1792816431601,peekTime:1792816431741,pollTime:1792816431741,onNextTime:1792816431743,onNextExecuteTime:0,currentTime:1792816431743, "exp":
+}{"time":"2026-10-24 13:33:51:745", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:4f5235e6-65ce-4b96-9395-42461ba9a775 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "28ad2805-7a4d-4233-aada-d7ce8a8c3108",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "NODE",
+  "missionStatus": "NODE_COMPLETE",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 1,
+  "passStrategy": "AUTO",
+  "instanceId": "6899"
+},pushTime:1792816431601,peekTime:1792816431741,pollTime:1792816431741,onNextTime:1792816431744,onNextExecuteTime:0,currentTime:1792816431745, "exp":
+}{"time":"2026-10-24 13:33:51:829", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:W-179281643164326-6899-27410,missionState:MISSION_START,actionState:, "exp":
+}{"time":"2026-10-24 13:33:51:829", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=110, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:33:51:829", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=110, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"WORKFLOW","supposeWorkflowId":"6899","taskCode":"W-179281643164326-6899-27410","missionState":"MISSION_START","robotId":"2","actionType":"","actionSequence":0,"actionState":"","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"","actionErrorMessage":"","manualHandleStatus":0,"targetContainerCode":"SIM_CARGO_001","otherInfo":{"changeRobot":"2"},"lockStatus":1,"beginRobotMileage":0.0,"commandExecuting":false,"mmMissionType":0}, "exp":
+}{"time":"2026-10-24 13:33:51:830", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=110, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:51:838", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=110, workflowId=6899}", "class":"WorkflowLockComponent", "line":"58", "content":[Workflow Lock Code] update robotId, workflowId:6899, lockCode:W-179281643164326-6899-27410, robotId:2, "exp":
+}{"time":"2026-10-24 13:33:51:838", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=110, workflowId=6899}", "class":"WorkflowTaskServiceImpl", "line":"310", "content":switch robot, taskId:27410, robotId:2, "exp":
+}{"time":"2026-10-24 13:33:51:845", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=110, workflowId=6899}", "class":"WorkflowServiceImpl", "line":"179", "content":update t_workflow, "exp":
+}{"time":"2026-10-24 13:33:51:849", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=110, workflowId=6899}", "class":"WorkflowTaskDetailServiceImpl", "line":"115", "content":updateWorkflowTaskDetailTaskStatusAndRobotInfo,taskId:27410,robotId:2,targetTaskStatus:20,sourceTaskStatus:16, beginRobotMileage:0.0, "exp":
+}{"time":"2026-10-24 13:33:51:855", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=110, workflowId=6899}", "class":"CacheMapCollection", "line":"421", "content":[MapCellTask UNLOCK] cellCode:lay01-dist1-90,taskId:27410, "exp":
+}{"time":"2026-10-24 13:33:51:855", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=110, workflowId=6899}", "class":"WorkflowRobotTaskCallBackHandle", "line":"638", "content":Container(SIM_CARGO_001) begin moving when mission start,cellCode is lay01-dist1-90, update location to -lay01-dist1-90, "exp":
+}{"time":"2026-10-24 13:33:51:858", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=110, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.ContainerService/GetContainerByCode, arguments:{
+  "code": "SIM_CARGO_001"
+}, "exp":
+}{"time":"2026-10-24 13:33:51:869", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=110, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.ContainerModelService/SelectContainerModelByIds, arguments:{
+  "id": ["1"]
+}, "exp":
+}{"time":"2026-10-24 13:33:51:875", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=110, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.ContainerService/GetContainerByCode, arguments:{
+  "code": "SIM_CARGO_001"
+}, "exp":
+}{"time":"2026-10-24 13:33:51:884", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=110, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.robot.RobotService/GetMobileRobot, arguments:{
+  "robotId": "2"
+}, "exp":
+}{"time":"2026-10-24 13:33:51:897", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=110, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.robot.RobotService/GetRealtimeDataByRobotId, arguments:{
+  "robotId": "2"
+}, "exp":
+}{"time":"2026-10-24 13:33:51:900", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=110, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:51:900", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=110, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:33:51:900", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:W-179281643164326-6899-27410,missionState:MISSION_EXECUTING,actionState:ACTION_EXECUTING, "exp":
+}{"time":"2026-10-24 13:33:51:900", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=111, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:33:51:901", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=111, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"WORKFLOW","supposeWorkflowId":"6899","taskCode":"W-179281643164326-6899-27410","missionState":"MISSION_EXECUTING","robotId":"2","actionType":"move","actionSequence":1,"actionState":"ACTION_EXECUTING","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"NO_ERROR","actionErrorMessage":"","manualHandleStatus":0,"targetContainerCode":"SIM_CARGO_001","otherInfo":{},"lockStatus":1,"beginRobotMileage":0.0,"commandExecuting":false,"mmMissionType":0}, "exp":
+}{"time":"2026-10-24 13:33:51:901", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=111, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:51:904", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=111, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:51:904", "level":"INFO", "thread":"task-call-back-consumer-pool-2", "context":"{RCSMissionCallback=111, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:33:52:246", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b53b82f7-4e6a-48e4-98f6-808d3b4f6cc4 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "42b3174c-c819-423e-830b-93d4f96823f7",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "MOVE",
+  "missionStatus": "MOVE_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:33:51",
+  "robotModel": "KMP1500I",
+  "nextNodeCode": "lay01-dist1-97",
+  "nextNodeOuterCode": "SECS_ST_97",
+  "robotX": "16.0",
+  "robotY": "23.0",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 2,
+  "instanceId": "6899"
+},pushTime:1792816431900,peekTime:1792816432246,pollTime:1792816432246,onNextTime:1792816432246,onNextExecuteTime:0,currentTime:1792816432246, "exp":
+}{"time":"2026-10-24 13:33:52:247", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:65d5e882-5f60-4cab-8a13-5bd705a5b6ad 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "42b3174c-c819-423e-830b-93d4f96823f7",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "MOVE",
+  "missionStatus": "MOVE_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:33:51",
+  "robotModel": "KMP1500I",
+  "nextNodeCode": "lay01-dist1-97",
+  "nextNodeOuterCode": "SECS_ST_97",
+  "robotX": "16.0",
+  "robotY": "23.0",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 2,
+  "instanceId": "6899"
+},pushTime:1792816431900,peekTime:1792816432246,pollTime:1792816432246,onNextTime:1792816432246,onNextExecuteTime:0,currentTime:1792816432247, "exp":
+}{"time":"2026-10-24 13:33:52:248", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b9a4e6c6-ea1e-430c-9960-456aa944e68a 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "42b3174c-c819-423e-830b-93d4f96823f7",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "MOVE",
+  "missionStatus": "MOVE_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:33:51",
+  "robotModel": "KMP1500I",
+  "nextNodeCode": "lay01-dist1-97",
+  "nextNodeOuterCode": "SECS_ST_97",
+  "robotX": "16.0",
+  "robotY": "23.0",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 2,
+  "instanceId": "6899"
+},pushTime:1792816431900,peekTime:1792816432246,pollTime:1792816432246,onNextTime:1792816432248,onNextExecuteTime:0,currentTime:1792816432248, "exp":
+}{"time":"2026-10-24 13:33:52:248", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:4f5235e6-65ce-4b96-9395-42461ba9a775 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "42b3174c-c819-423e-830b-93d4f96823f7",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-90",
+  "missionType": "MOVE",
+  "missionStatus": "MOVE_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:33:51",
+  "robotModel": "KMP1500I",
+  "nextNodeCode": "lay01-dist1-97",
+  "nextNodeOuterCode": "SECS_ST_97",
+  "robotX": "16.0",
+  "robotY": "23.0",
+  "containerLocationCode": "lay01-dist1-90",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 2,
+  "instanceId": "6899"
+},pushTime:1792816431900,peekTime:1792816432246,pollTime:1792816432246,onNextTime:1792816432248,onNextExecuteTime:0,currentTime:1792816432248, "exp":
+}{"time":"2026-10-24 13:33:52:272", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:W-179281643164326-6899-27410,missionState:MISSION_EXECUTING,actionState:ACTION_EXECUTING, "exp":
+}{"time":"2026-10-24 13:33:52:272", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=112, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:33:52:273", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=112, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"WORKFLOW","supposeWorkflowId":"6899","taskCode":"W-179281643164326-6899-27410","missionState":"MISSION_EXECUTING","robotId":"2","actionType":"move","actionSequence":1,"actionState":"ACTION_EXECUTING","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"NO_ERROR","actionErrorMessage":"","manualHandleStatus":0,"targetContainerCode":"SIM_CARGO_001","otherInfo":{},"lockStatus":1,"beginRobotMileage":0.0,"commandExecuting":true,"mmMissionType":0}, "exp":
+}{"time":"2026-10-24 13:33:52:273", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=112, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:52:275", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=112, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:33:52:276", "level":"INFO", "thread":"task-call-back-consumer-pool-3", "context":"{RCSMissionCallback=112, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:34:03:534", "level":"INFO", "thread":"task-call-back-consumer-pool-4", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:W-179281643164326-6899-27410,missionState:MISSION_EXECUTING,actionState:ACTION_FINISH, "exp":
+}{"time":"2026-10-24 13:34:03:535", "level":"INFO", "thread":"task-call-back-consumer-pool-4", "context":"{RCSMissionCallback=113, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:34:03:535", "level":"INFO", "thread":"task-call-back-consumer-pool-4", "context":"{RCSMissionCallback=113, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"WORKFLOW","supposeWorkflowId":"6899","taskCode":"W-179281643164326-6899-27410","missionState":"MISSION_EXECUTING","robotId":"2","actionType":"move","actionSequence":1,"actionState":"ACTION_FINISH","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"NO_ERROR","actionErrorMessage":"","manualHandleStatus":0,"targetContainerCode":"SIM_CARGO_001","otherInfo":{},"lockStatus":1,"beginRobotMileage":0.0,"commandExecuting":true,"mmMissionType":0}, "exp":
+}{"time":"2026-10-24 13:34:03:535", "level":"INFO", "thread":"task-call-back-consumer-pool-4", "context":"{RCSMissionCallback=113, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:34:03:538", "level":"INFO", "thread":"task-call-back-consumer-pool-4", "context":"{RCSMissionCallback=113, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:34:03:539", "level":"INFO", "thread":"task-call-back-consumer-pool-4", "context":"{RCSMissionCallback=113, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:34:03:576", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:W-179281643164326-6899-27410,missionState:MISSION_FINISH,actionState:, "exp":
+}{"time":"2026-10-24 13:34:03:576", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:34:03:577", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"WORKFLOW","supposeWorkflowId":"6899","taskCode":"W-179281643164326-6899-27410","missionState":"MISSION_FINISH","robotId":"2","actionType":"","actionSequence":0,"actionState":"","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"","actionErrorMessage":"","manualHandleStatus":0,"targetContainerCode":"SIM_CARGO_001","otherInfo":{},"lockStatus":1,"beginRobotMileage":0.0,"endRobotMileage":0.0,"commandExecuting":true,"mmMissionType":0}, "exp":
+}{"time":"2026-10-24 13:34:03:577", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:34:03:580", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.ContainerService/GetContainerByCode, arguments:{
+  "code": "SIM_CARGO_001"
+}, "exp":
+}{"time":"2026-10-24 13:34:03:587", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.ContainerModelService/SelectContainerModelByIds, arguments:{
+  "id": ["1"]
+}, "exp":
+}{"time":"2026-10-24 13:34:03:591", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.ContainerService/GetContainerByCode, arguments:{
+  "code": "SIM_CARGO_001"
+}, "exp":
+}{"time":"2026-10-24 13:34:03:596", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.robot.RobotService/GetMobileRobot, arguments:{
+  "robotId": "2"
+}, "exp":
+}{"time":"2026-10-24 13:34:03:602", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.robot.RobotService/GetRealtimeDataByRobotId, arguments:{
+  "robotId": "2"
+}, "exp":
+}{"time":"2026-10-24 13:34:03:604", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.MissionService/GetMissionAndSubmissionByCode, arguments:{
+  "code": "W-179281643164326-6899-27410"
+}, "exp":
+}{"time":"2026-10-24 13:34:03:609", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"NodeHandleComponent", "line":"196", "content":taskExecutedCallBack,context info:{"taskDetailEntity":{"createTime":"2026-10-24 13:33:51","updateTime":"2026-10-24 13:33:51","id":27410,"workflowId":6899,"workflowTaskId":27410,"beginCellCode":"lay01-dist1-90","endCellCode":"lay01-dist1-97","robotTaskCode":"W-179281643164326-6899-27410","completeLock":1,"unlock":1,"targetRobots":"2","targetRobotType":"KMP1500I","robotId":"2","taskStatus":20,"taskType":0,"copyFlag":0,"robotStrategy":1,"manualHandleStatus":0,"waitPreBufferTaskFlag":0,"beginRobotMileage":0.0,"endRobotMileage":0.0,"manualCompleteFlag":0,"isPreLock":1},"isExecuteCommand":false}, "exp":
+}{"time":"2026-10-24 13:34:03:609", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"WorkflowGlobalLock", "line":"38", "content":[taskExecutedCallBack] [Workflow global lock] lock true, workflowId:6899, "exp":
+}{"time":"2026-10-24 13:34:03:611", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"WorkflowTaskServiceImpl", "line":"167", "content":updateWorkflowTaskStatus,workflowTaskId:27410,targetTaskStatus:25,sourceTaskStatus:20, "exp":
+}{"time":"2026-10-24 13:34:03:611", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"WorkflowTaskDetailServiceImpl", "line":"101", "content":finishWorkflowTaskDetailTaskStatus,taskId:27410,targetTaskStatus:30,sourceTaskStatus:20, beginRobotMileage:0.0, endRobotMileage:0.0, manualCompleteFlag:0, "exp":
+}{"time":"2026-10-24 13:34:03:614", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"WorkflowTaskServiceImpl", "line":"167", "content":updateWorkflowTaskStatus,workflowTaskId:27410,targetTaskStatus:22,sourceTaskStatus:25, "exp":
+}{"time":"2026-10-24 13:34:03:616", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{workflowId=6899}", "class":"CommandDispatcher", "line":"72", "content":[Dispatch Command] workflow locked, wait for lock release, workflowId:6899, "exp":
+}{"time":"2026-10-24 13:34:03:616", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"WorkflowGlobalLock", "line":"50", "content":[taskExecutedCallBack] [Workflow global lock] unlock(after transaction), workflowId:6899, "exp":
+}{"time":"2026-10-24 13:34:03:616", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:34:03:616", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:34:03:616", "level":"INFO", "thread":"task-call-back-consumer-pool-5", "context":"{RCSMissionCallback=114, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:34:03:618", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{DispatchCommand=11, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":DispatchCommand method start, "exp":
+}{"time":"2026-10-24 13:34:03:618", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{DispatchCommand=11, workflowId=6899}", "class":"LiftRobotTaskSendHandle", "line":"344", "content":[Generate command] putDown, "exp":
+}{"time":"2026-10-24 13:34:03:618", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{DispatchCommand=11, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.mm.grpc.MissionManagerService/dispatch, arguments:{
+  "code": "C-179281644361327-6899-27410",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "templateCode": "T6",
+  "robotId": "2",
+  "rackCodes": ["SIM_CARGO_001"],
+  "unlockCode": "W-179281643164326-6899-27410",
+  "completedLock": 1,
+  "jobCode": "509C5F51DD1D4D0EBC48DA0DAA007703"
+}, "exp":
+}{"time":"2026-10-24 13:34:03:647", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{DispatchCommand=11, workflowId=6899}", "class":"WorkflowCommandExecuteServiceImpl", "line":"151", "content":updateCommandStatus,commandExecutedId:27390,targetStatus:20,sourceStatus:15, "exp":
+}{"time":"2026-10-24 13:34:03:650", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{DispatchCommand=11, workflowId=6899}", "class":"WorkflowLockComponent", "line":"46", "content":[Workflow Lock Code] lock workflow,workflowId:6899,new lock code:C-179281644361327-6899-27410, "exp":
+}{"time":"2026-10-24 13:34:03:650", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{DispatchCommand=11, workflowId=6899}", "class":"WorkflowServiceImpl", "line":"179", "content":update t_workflow, "exp":
+}{"time":"2026-10-24 13:34:03:651", "level":"INFO", "thread":"command-dispatch-pool-1", "context":"{DispatchCommand=11, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":DispatchCommand method end, "exp":
+}{"time":"2026-10-24 13:34:03:754", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b53b82f7-4e6a-48e4-98f6-808d3b4f6cc4 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "03a07a17-c8e9-47c2-9c9e-a737a22ea59d",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "MOVE",
+  "missionStatus": "MOVE_END",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:34:03",
+  "robotModel": "KMP1500I",
+  "startTime": "2026-10-24 13:33:51",
+  "endTime": "2026-10-24 13:34:03",
+  "beginRobotMileage": "0.0",
+  "endRobotMileage": "0.0",
+  "robotX": "12.0",
+  "robotY": "11.0",
+  "containerLocationCode": "lay01-dist1-97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 2,
+  "instanceId": "6899"
+},pushTime:1792816443609,peekTime:1792816443753,pollTime:1792816443753,onNextTime:1792816443753,onNextExecuteTime:0,currentTime:1792816443753, "exp":
+}{"time":"2026-10-24 13:34:03:754", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:65d5e882-5f60-4cab-8a13-5bd705a5b6ad 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "03a07a17-c8e9-47c2-9c9e-a737a22ea59d",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "MOVE",
+  "missionStatus": "MOVE_END",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:34:03",
+  "robotModel": "KMP1500I",
+  "startTime": "2026-10-24 13:33:51",
+  "endTime": "2026-10-24 13:34:03",
+  "beginRobotMileage": "0.0",
+  "endRobotMileage": "0.0",
+  "robotX": "12.0",
+  "robotY": "11.0",
+  "containerLocationCode": "lay01-dist1-97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 2,
+  "instanceId": "6899"
+},pushTime:1792816443609,peekTime:1792816443753,pollTime:1792816443753,onNextTime:1792816443754,onNextExecuteTime:0,currentTime:1792816443754, "exp":
+}{"time":"2026-10-24 13:34:03:758", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b9a4e6c6-ea1e-430c-9960-456aa944e68a 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "03a07a17-c8e9-47c2-9c9e-a737a22ea59d",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "MOVE",
+  "missionStatus": "MOVE_END",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:34:03",
+  "robotModel": "KMP1500I",
+  "startTime": "2026-10-24 13:33:51",
+  "endTime": "2026-10-24 13:34:03",
+  "beginRobotMileage": "0.0",
+  "endRobotMileage": "0.0",
+  "robotX": "12.0",
+  "robotY": "11.0",
+  "containerLocationCode": "lay01-dist1-97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 2,
+  "instanceId": "6899"
+},pushTime:1792816443609,peekTime:1792816443753,pollTime:1792816443753,onNextTime:1792816443755,onNextExecuteTime:0,currentTime:1792816443758, "exp":
+}{"time":"2026-10-24 13:34:03:759", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:4f5235e6-65ce-4b96-9395-42461ba9a775 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "03a07a17-c8e9-47c2-9c9e-a737a22ea59d",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "MOVE",
+  "missionStatus": "MOVE_END",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:34:03",
+  "robotModel": "KMP1500I",
+  "startTime": "2026-10-24 13:33:51",
+  "endTime": "2026-10-24 13:34:03",
+  "beginRobotMileage": "0.0",
+  "endRobotMileage": "0.0",
+  "robotX": "12.0",
+  "robotY": "11.0",
+  "containerLocationCode": "lay01-dist1-97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 2,
+  "instanceId": "6899"
+},pushTime:1792816443609,peekTime:1792816443753,pollTime:1792816443753,onNextTime:1792816443758,onNextExecuteTime:0,currentTime:1792816443758, "exp":
+}{"time":"2026-10-24 13:34:03:763", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:C-179281644361327-6899-27410,missionState:MISSION_START,actionState:, "exp":
+}{"time":"2026-10-24 13:34:03:763", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=115, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:34:03:764", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=115, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"COMMAND","supposeWorkflowId":"6899","taskCode":"C-179281644361327-6899-27410","missionState":"MISSION_START","robotId":"2","actionType":"","actionSequence":0,"actionState":"","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"","actionErrorMessage":"","manualHandleStatus":0,"targetContainerCode":"SIM_CARGO_001","otherInfo":{"changeRobot":"2"},"lockStatus":1,"beginRobotMileage":0.0,"commandExecuting":false,"mmMissionType":1}, "exp":
+}{"time":"2026-10-24 13:34:03:766", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=115, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:34:03:767", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=115, workflowId=6899}", "class":"WorkflowTaskServiceImpl", "line":"310", "content":switch robot, taskId:27410, robotId:2, "exp":
+}{"time":"2026-10-24 13:34:03:777", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=115, workflowId=6899}", "class":"WorkflowLockComponent", "line":"58", "content":[Workflow Lock Code] update robotId, workflowId:6899, lockCode:C-179281644361327-6899-27410, robotId:2, "exp":
+}{"time":"2026-10-24 13:34:03:777", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=115, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:34:03:778", "level":"INFO", "thread":"task-call-back-consumer-pool-6", "context":"{RCSMissionCallback=115, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:34:03:781", "level":"INFO", "thread":"task-call-back-consumer-pool-7", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:C-179281644361327-6899-27410,missionState:MISSION_EXECUTING,actionState:ACTION_EXECUTING, "exp":
+}{"time":"2026-10-24 13:34:03:781", "level":"INFO", "thread":"task-call-back-consumer-pool-7", "context":"{RCSMissionCallback=116, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:34:03:781", "level":"INFO", "thread":"task-call-back-consumer-pool-7", "context":"{RCSMissionCallback=116, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"COMMAND","supposeWorkflowId":"6899","taskCode":"C-179281644361327-6899-27410","missionState":"MISSION_EXECUTING","robotId":"2","actionType":"liftDown","actionSequence":1,"actionState":"ACTION_EXECUTING","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"NO_ERROR","actionErrorMessage":"","manualHandleStatus":0,"targetContainerCode":"SIM_CARGO_001","otherInfo":{},"lockStatus":1,"beginRobotMileage":0.0,"commandExecuting":false,"mmMissionType":1}, "exp":
+}{"time":"2026-10-24 13:34:03:783", "level":"INFO", "thread":"task-call-back-consumer-pool-7", "context":"{RCSMissionCallback=116, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:34:03:785", "level":"INFO", "thread":"task-call-back-consumer-pool-7", "context":"{RCSMissionCallback=116, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:34:03:785", "level":"INFO", "thread":"task-call-back-consumer-pool-7", "context":"{RCSMissionCallback=116, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:34:04:016", "level":"INFO", "thread":"task-call-back-consumer-pool-8", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:C-179281644361327-6899-27410,missionState:MISSION_EXECUTING,actionState:ACTION_EXECUTING, "exp":
+}{"time":"2026-10-24 13:34:04:016", "level":"INFO", "thread":"task-call-back-consumer-pool-8", "context":"{RCSMissionCallback=117, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:34:04:016", "level":"INFO", "thread":"task-call-back-consumer-pool-8", "context":"{RCSMissionCallback=117, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"COMMAND","supposeWorkflowId":"6899","taskCode":"C-179281644361327-6899-27410","missionState":"MISSION_EXECUTING","robotId":"2","actionType":"liftDown","actionSequence":1,"actionState":"ACTION_EXECUTING","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"NO_ERROR","actionErrorMessage":"","manualHandleStatus":0,"targetContainerCode":"SIM_CARGO_001","otherInfo":{},"lockStatus":1,"beginRobotMileage":0.0,"commandExecuting":true,"mmMissionType":1}, "exp":
+}{"time":"2026-10-24 13:34:04:018", "level":"INFO", "thread":"task-call-back-consumer-pool-8", "context":"{RCSMissionCallback=117, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:34:04:019", "level":"INFO", "thread":"task-call-back-consumer-pool-8", "context":"{RCSMissionCallback=117, workflowId=6899}", "class":"CommandRobotTaskCallBackHandle", "line":"265", "content":Command starts executing., "exp":
+}{"time":"2026-10-24 13:34:04:020", "level":"INFO", "thread":"task-call-back-consumer-pool-8", "context":"{RCSMissionCallback=117, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:34:04:020", "level":"INFO", "thread":"task-call-back-consumer-pool-8", "context":"{RCSMissionCallback=117, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:34:04:260", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b53b82f7-4e6a-48e4-98f6-808d3b4f6cc4 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "79409595-d4f6-4aa2-bd8e-66bade25505e",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1",
+  "missionStatus": "ACTION_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:34:03",
+  "actionType": "DOWN_CONTAINER",
+  "actionCode": "DOWN",
+  "containerLocationCode": "SECS_ST_97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 2,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816443785,peekTime:1792816444260,pollTime:1792816444260,onNextTime:1792816444260,onNextExecuteTime:0,currentTime:1792816444260, "exp":
+}{"time":"2026-10-24 13:34:04:261", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:65d5e882-5f60-4cab-8a13-5bd705a5b6ad 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "79409595-d4f6-4aa2-bd8e-66bade25505e",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1",
+  "missionStatus": "ACTION_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:34:03",
+  "actionType": "DOWN_CONTAINER",
+  "actionCode": "DOWN",
+  "containerLocationCode": "SECS_ST_97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 2,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816443785,peekTime:1792816444260,pollTime:1792816444260,onNextTime:1792816444261,onNextExecuteTime:0,currentTime:1792816444261, "exp":
+}{"time":"2026-10-24 13:34:04:261", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b9a4e6c6-ea1e-430c-9960-456aa944e68a 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "79409595-d4f6-4aa2-bd8e-66bade25505e",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1",
+  "missionStatus": "ACTION_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:34:03",
+  "actionType": "DOWN_CONTAINER",
+  "actionCode": "DOWN",
+  "containerLocationCode": "SECS_ST_97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 2,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816443785,peekTime:1792816444260,pollTime:1792816444260,onNextTime:1792816444261,onNextExecuteTime:0,currentTime:1792816444261, "exp":
+}{"time":"2026-10-24 13:34:04:262", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:4f5235e6-65ce-4b96-9395-42461ba9a775 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "79409595-d4f6-4aa2-bd8e-66bade25505e",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1",
+  "missionStatus": "ACTION_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:34:03",
+  "actionType": "DOWN_CONTAINER",
+  "actionCode": "DOWN",
+  "containerLocationCode": "SECS_ST_97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 2,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816443785,peekTime:1792816444260,pollTime:1792816444260,onNextTime:1792816444262,onNextExecuteTime:0,currentTime:1792816444262, "exp":
+}{"time":"2026-10-24 13:34:04:263", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b53b82f7-4e6a-48e4-98f6-808d3b4f6cc4 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "e8051bc4-e655-4a69-ae3e-81367fb525ba",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1",
+  "missionStatus": "ACTION_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:34:04",
+  "actionType": "DOWN_CONTAINER",
+  "actionCode": "DOWN",
+  "containerLocationCode": "SECS_ST_97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 2,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816444020,peekTime:1792816444262,pollTime:1792816444262,onNextTime:1792816444263,onNextExecuteTime:0,currentTime:1792816444263, "exp":
+}{"time":"2026-10-24 13:34:04:263", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:65d5e882-5f60-4cab-8a13-5bd705a5b6ad 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "e8051bc4-e655-4a69-ae3e-81367fb525ba",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1",
+  "missionStatus": "ACTION_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:34:04",
+  "actionType": "DOWN_CONTAINER",
+  "actionCode": "DOWN",
+  "containerLocationCode": "SECS_ST_97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 2,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816444020,peekTime:1792816444262,pollTime:1792816444262,onNextTime:1792816444263,onNextExecuteTime:0,currentTime:1792816444263, "exp":
+}{"time":"2026-10-24 13:34:04:263", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b9a4e6c6-ea1e-430c-9960-456aa944e68a 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "e8051bc4-e655-4a69-ae3e-81367fb525ba",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1",
+  "missionStatus": "ACTION_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:34:04",
+  "actionType": "DOWN_CONTAINER",
+  "actionCode": "DOWN",
+  "containerLocationCode": "SECS_ST_97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 2,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816444020,peekTime:1792816444262,pollTime:1792816444262,onNextTime:1792816444263,onNextExecuteTime:0,currentTime:1792816444263, "exp":
+}{"time":"2026-10-24 13:34:04:264", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:4f5235e6-65ce-4b96-9395-42461ba9a775 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "e8051bc4-e655-4a69-ae3e-81367fb525ba",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1",
+  "missionStatus": "ACTION_BEGIN",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:34:04",
+  "actionType": "DOWN_CONTAINER",
+  "actionCode": "DOWN",
+  "containerLocationCode": "SECS_ST_97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 2,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816444020,peekTime:1792816444262,pollTime:1792816444262,onNextTime:1792816444264,onNextExecuteTime:0,currentTime:1792816444264, "exp":
+}{"time":"2026-10-24 13:34:04:772", "level":"INFO", "thread":"task-call-back-consumer-pool-9", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:C-179281644361327-6899-27410,missionState:MISSION_EXECUTING,actionState:ACTION_FINISH, "exp":
+}{"time":"2026-10-24 13:34:04:773", "level":"INFO", "thread":"task-call-back-consumer-pool-9", "context":"{RCSMissionCallback=118, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:34:04:773", "level":"INFO", "thread":"task-call-back-consumer-pool-9", "context":"{RCSMissionCallback=118, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"COMMAND","supposeWorkflowId":"6899","taskCode":"C-179281644361327-6899-27410","missionState":"MISSION_EXECUTING","robotId":"2","actionType":"liftDown","actionSequence":1,"actionState":"ACTION_FINISH","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"NO_ERROR","actionErrorMessage":"","manualHandleStatus":0,"targetContainerCode":"SIM_CARGO_001","otherInfo":{},"lockStatus":1,"beginRobotMileage":0.0,"commandExecuting":true,"mmMissionType":1}, "exp":
+}{"time":"2026-10-24 13:34:04:775", "level":"INFO", "thread":"task-call-back-consumer-pool-9", "context":"{RCSMissionCallback=118, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:34:04:776", "level":"INFO", "thread":"task-call-back-consumer-pool-9", "context":"{RCSMissionCallback=118, workflowId=6899}", "class":"CommandRobotTaskCallBackHandle", "line":"265", "content":Command starts executing., "exp":
+}{"time":"2026-10-24 13:34:04:777", "level":"INFO", "thread":"task-call-back-consumer-pool-9", "context":"{RCSMissionCallback=118, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:34:04:777", "level":"INFO", "thread":"task-call-back-consumer-pool-9", "context":"{RCSMissionCallback=118, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:34:04:798", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{workflowId=6899}", "class":"CallBackTaskConsumer", "line":"46", "content":consume mission status:missionCode:C-179281644361327-6899-27410,missionState:MISSION_FINISH,actionState:, "exp":
+}{"time":"2026-10-24 13:34:04:799", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=119, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":RCSMissionCallback method start, "exp":
+}{"time":"2026-10-24 13:34:04:801", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=119, workflowId=6899}", "class":"RobotTaskCallbackHandleAdapter", "line":"58", "content":RobotTaskCallBackAdapter execute,callInfo:{"missionTaskTypeEnum":"COMMAND","supposeWorkflowId":"6899","taskCode":"C-179281644361327-6899-27410","missionState":"MISSION_FINISH","robotId":"2","actionType":"","actionSequence":0,"actionState":"","missionErrorCode":"NO_ERROR","missionErrorMessage":"","actionErrorCode":"","actionErrorMessage":"","manualHandleStatus":0,"targetContainerCode":"SIM_CARGO_001","otherInfo":{},"lockStatus":1,"beginRobotMileage":0.0,"endRobotMileage":0.0,"commandExecuting":true,"mmMissionType":1}, "exp":
+}{"time":"2026-10-24 13:34:04:805", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=119, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:34:04:810", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=119, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.MissionService/GetMissionAndSubmissionByCode, arguments:{
+  "code": "C-179281644361327-6899-27410"
+}, "exp":
+}{"time":"2026-10-24 13:34:04:819", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=119, workflowId=6899}", "class":"ComponentCommandHandleComponent", "line":"92", "content":componentCommandExecutedCallBack,context info:{"commandExecuteEntity":{"createUsername":"system","createTime":"2026-10-24 13:34:03","updateUsername":"system","updateTime":"2026-10-24 13:34:03","id":27390,"workflowId":6899,"workflowTaskId":27410,"workflowNodeId":2,"executePhase":0,"commandId":2,"commandType":3,"commandInfo":"","executeOrder":1,"callbackStrategy":0,"commandStatus":20,"targetCellCode":"lay01-dist1-97","sourceType":1,"taskCode":"C-179281644361327-6899-27410","triggerCellCode":"lay01-dist1-97","robotId":"2","robotTypeClass":1,"componentCommandType":2,"componentCommandParam1":"","componentCommandParam2":"","containerCode":"SIM_CARGO_001","completeLock":1,"componentCommandParam3":"","componentCommandParam4":"","componentCommandParam5":"","componentCommandParam7":"","apiActionId":"Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1","manualHandleStatus":0,"manualCompleteFlag":0}}, "exp":
+}{"time":"2026-10-24 13:34:04:820", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=119, workflowId=6899}", "class":"WorkflowGlobalLock", "line":"38", "content":[componentCommandExecutedCallBack] [Workflow global lock] lock true, workflowId:6899, "exp":
+}{"time":"2026-10-24 13:34:04:821", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=119, workflowId=6899}", "class":"WorkflowCommandExecuteServiceImpl", "line":"163", "content":updateCommandStatus,taskId:27390,targetStatus:30,sourceStatus:20, "exp":
+}{"time":"2026-10-24 13:34:04:825", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=119, workflowId=6899}", "class":"NodeHandleComponent", "line":"196", "content":taskExecutedCallBack,context info:{"taskDetailEntity":{"createTime":"2026-10-24 13:33:51","updateTime":"2026-10-24 13:34:03","id":27410,"workflowId":6899,"workflowTaskId":27410,"beginCellCode":"lay01-dist1-90","endCellCode":"lay01-dist1-97","robotTaskCode":"W-179281643164326-6899-27410","completeLock":1,"unlock":1,"targetRobots":"2","targetRobotType":"KMP1500I","robotId":"2","taskStatus":30,"taskType":0,"copyFlag":0,"robotStrategy":1,"completeTime":1792816443610,"manualHandleStatus":0,"waitPreBufferTaskFlag":0,"beginRobotMileage":0.0,"endRobotMileage":0.0,"manualCompleteFlag":0,"isPreLock":1},"isExecuteCommand":true}, "exp":
+}{"time":"2026-10-24 13:34:04:825", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=119, workflowId=6899}", "class":"WorkflowGlobalLock", "line":"38", "content":[taskExecutedCallBack] [Workflow global lock] lock true, workflowId:6899, "exp":
+}{"time":"2026-10-24 13:34:04:827", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=119, workflowId=6899}", "class":"WorkflowTaskServiceImpl", "line":"167", "content":updateWorkflowTaskStatus,workflowTaskId:27410,targetTaskStatus:25,sourceTaskStatus:22, "exp":
+}{"time":"2026-10-24 13:34:04:830", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=119, workflowId=6899}", "class":"WorkflowGlobalLock", "line":"50", "content":[taskExecutedCallBack] [Workflow global lock] unlock(after transaction), workflowId:6899, "exp":
+}{"time":"2026-10-24 13:34:04:830", "level":"INFO", "thread":"pool-22-thread-5", "context":"{NodeHandle=13, workflowId=6899}", "class":"NodeHandleComponent", "line":"492", "content":nodeHandle workflowTask:27410，configId:-1, "exp":
+}{"time":"2026-10-24 13:34:04:830", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=119, workflowId=6899}", "class":"WorkflowGlobalLock", "line":"50", "content":[componentCommandExecutedCallBack] [Workflow global lock] unlock(after transaction), workflowId:6899, "exp":
+}{"time":"2026-10-24 13:34:04:830", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=119, workflowId=6899}", "class":"SegmentLock", "line":"98", "content":do segment unlock, key:6899, "exp":
+}{"time":"2026-10-24 13:34:04:830", "level":"INFO", "thread":"task-call-back-consumer-pool-10", "context":"{RCSMissionCallback=119, workflowId=6899}", "class":"TraceInterceptor", "line":"36", "content":RCSMissionCallback method end, "exp":
+}{"time":"2026-10-24 13:34:04:833", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"TraceInterceptor", "line":"34", "content":ContinueWorkflow method start, "exp":
+}{"time":"2026-10-24 13:34:04:834", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"SegmentLock", "line":"23", "content":do segment lock, key:6899, "exp":
+}{"time":"2026-10-24 13:34:04:834", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"WorkflowGlobalLock", "line":"38", "content":[NextWorkflowFactory] [Workflow global lock] lock true, workflowId:6899, "exp":
+}{"time":"2026-10-24 13:34:04:836", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"AreaServiceImpl", "line":"530", "content":[CheckNodeAreaExitNode] ignore, current node is not in one area, currentNode:lay01-dist1-97, "exp":
+}{"time":"2026-10-24 13:34:04:836", "level":"ERROR", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"WorkflowNodeOperateComponent", "line":"80", "content":checkTargetNodeNeedSelectContainer error,can not find childNode,currentNodeId:2, "exp":
+}{"time":"2026-10-24 13:34:04:837", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.ContainerService/GetContainersInEnabledMaps, arguments:{
+  "needMilliSecond": true
+}, "exp":
+}{"time":"2026-10-24 13:34:04:847", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.bd.grpc.robot.RobotService/GetAllMobileRobot, arguments:{
+}, "exp":
+}{"time":"2026-10-24 13:34:04:853", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"WorkflowNextExecuteCommand", "line":"82", "content":WorkflowNextExecuteCommand execute, "exp":
+}{"time":"2026-10-24 13:34:04:853", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"WorkflowManageComponent", "line":"1538", "content":completeWorkflow ,taskId:27410, "exp":
+}{"time":"2026-10-24 13:34:04:855", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"WorkflowTaskServiceImpl", "line":"179", "content":finishWorkflowTaskStatus,workflowTaskId:27410,targetTaskStatus:30,sourceTaskStatus:25, "exp":
+}{"time":"2026-10-24 13:34:04:855", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"WorkflowServiceImpl", "line":"118", "content":updateWorkflowStatusAndMileage,workflowId:6899,targetWorkflowStatus:30,sourceWorkflowStatus:20, endRobotMileage:0.0, "exp":
+}{"time":"2026-10-24 13:34:04:857", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"ReleaseTaskCancelComponent", "line":"108", "content":WCS Release Workflow Resource,taskId:27410, "exp":
+}{"time":"2026-10-24 13:34:04:857", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"CacheMapCollection", "line":"421", "content":[MapCellTask UNLOCK] cellCode:lay01-dist1-97,taskId:27410, "exp":
+}{"time":"2026-10-24 13:34:04:857", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"ReleaseTaskCancelComponent", "line":"174", "content":[CheckRobotIdle] remove cache, workflowId:6899,robotTypeClass:1,robotTypeCode:KMP1500I, "exp":
+}{"time":"2026-10-24 13:34:04:858", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"ReleaseWorkflowCancelComponent", "line":"107", "content":releaseWorkflowResource,taskId:27410, workflowId:6899, "exp":
+}{"time":"2026-10-24 13:34:04:858", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"WorkflowContainerChooseComponent", "line":"89", "content":[Release Container] release container workflow occupy info, container:SIM_CARGO_001, workflowId:6899, "exp":
+}{"time":"2026-10-24 13:34:04:858", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"IRobotServiceAdapterImpl", "line":"145", "content":unlockRobot,robotId:2,type:NORMAL, "exp":
+}{"time":"2026-10-24 13:34:04:858", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"GrpcClientCall", "line":"39", "content":call grpc, method:kuka.rcs.mm.grpc.MissionManagerService/unlockRobot, arguments:{
+  "robotId": "2",
+  "type": "NORMAL"
+}, "exp":
+}{"time":"2026-10-24 13:34:04:864", "level":"INFO", "thread":"pool-22-thread-5", "context":"{ContinueWorkflow=13, NodeHandle=13, workflowId=6899}", "class":"LifecycleCache", "line":"72", "content":[Lifecycle Cache] remove cache, cache:WorkflowRunningCache, key:6899, "exp":
+}{"time":"2026-10-24 13:34:05:264", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b53b82f7-4e6a-48e4-98f6-808d3b4f6cc4 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "6a3bcdf4-9221-4895-8ae0-c3fde7978f77",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1",
+  "missionStatus": "ACTION_END",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:34:04",
+  "actionType": "DOWN_CONTAINER",
+  "actionCode": "DOWN",
+  "startTime": "2026-10-24 13:34:03",
+  "endTime": "2026-10-24 13:34:04",
+  "containerLocationCode": "SECS_ST_97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 2,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816444819,peekTime:1792816445264,pollTime:1792816445264,onNextTime:1792816445264,onNextExecuteTime:0,currentTime:1792816445264, "exp":
+}{"time":"2026-10-24 13:34:05:265", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:65d5e882-5f60-4cab-8a13-5bd705a5b6ad 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "6a3bcdf4-9221-4895-8ae0-c3fde7978f77",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1",
+  "missionStatus": "ACTION_END",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:34:04",
+  "actionType": "DOWN_CONTAINER",
+  "actionCode": "DOWN",
+  "startTime": "2026-10-24 13:34:03",
+  "endTime": "2026-10-24 13:34:04",
+  "containerLocationCode": "SECS_ST_97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 2,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816444819,peekTime:1792816445264,pollTime:1792816445264,onNextTime:1792816445264,onNextExecuteTime:0,currentTime:1792816445265, "exp":
+}{"time":"2026-10-24 13:34:05:265", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b9a4e6c6-ea1e-430c-9960-456aa944e68a 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "6a3bcdf4-9221-4895-8ae0-c3fde7978f77",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1",
+  "missionStatus": "ACTION_END",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:34:04",
+  "actionType": "DOWN_CONTAINER",
+  "actionCode": "DOWN",
+  "startTime": "2026-10-24 13:34:03",
+  "endTime": "2026-10-24 13:34:04",
+  "containerLocationCode": "SECS_ST_97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 2,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816444819,peekTime:1792816445264,pollTime:1792816445264,onNextTime:1792816445265,onNextExecuteTime:0,currentTime:1792816445265, "exp":
+}{"time":"2026-10-24 13:34:05:265", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:4f5235e6-65ce-4b96-9395-42461ba9a775 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "6a3bcdf4-9221-4895-8ae0-c3fde7978f77",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "ACTION",
+  "actionId": "Action-509C5F51DD1D4D0EBC48DA0DAA007703-2-1",
+  "missionStatus": "ACTION_END",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "actionTime": "2026-10-24 13:34:04",
+  "actionType": "DOWN_CONTAINER",
+  "actionCode": "DOWN",
+  "startTime": "2026-10-24 13:34:03",
+  "endTime": "2026-10-24 13:34:04",
+  "containerLocationCode": "SECS_ST_97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "actionExecutePhase": 0,
+  "nodeSequence": 2,
+  "mmMissionType": 1,
+  "instanceId": "6899"
+},pushTime:1792816444819,peekTime:1792816445264,pollTime:1792816445264,onNextTime:1792816445265,onNextExecuteTime:0,currentTime:1792816445265, "exp":
+}{"time":"2026-10-24 13:34:05:267", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b53b82f7-4e6a-48e4-98f6-808d3b4f6cc4 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "ba740510-5c64-4b34-906c-238d39da7713",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "NODE",
+  "missionStatus": "NODE_COMPLETE",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 2,
+  "passStrategy": "AUTO",
+  "instanceId": "6899",
+  "isEndNode": true
+},pushTime:1792816444842,peekTime:1792816445266,pollTime:1792816445266,onNextTime:1792816445266,onNextExecuteTime:0,currentTime:1792816445267, "exp":
+}{"time":"2026-10-24 13:34:05:268", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:65d5e882-5f60-4cab-8a13-5bd705a5b6ad 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "ba740510-5c64-4b34-906c-238d39da7713",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "NODE",
+  "missionStatus": "NODE_COMPLETE",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 2,
+  "passStrategy": "AUTO",
+  "instanceId": "6899",
+  "isEndNode": true
+},pushTime:1792816444842,peekTime:1792816445266,pollTime:1792816445266,onNextTime:1792816445267,onNextExecuteTime:0,currentTime:1792816445267, "exp":
+}{"time":"2026-10-24 13:34:05:268", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b9a4e6c6-ea1e-430c-9960-456aa944e68a 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "ba740510-5c64-4b34-906c-238d39da7713",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "NODE",
+  "missionStatus": "NODE_COMPLETE",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 2,
+  "passStrategy": "AUTO",
+  "instanceId": "6899",
+  "isEndNode": true
+},pushTime:1792816444842,peekTime:1792816445266,pollTime:1792816445266,onNextTime:1792816445268,onNextExecuteTime:0,currentTime:1792816445268, "exp":
+}{"time":"2026-10-24 13:34:05:269", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:4f5235e6-65ce-4b96-9395-42461ba9a775 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "ba740510-5c64-4b34-906c-238d39da7713",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "NODE",
+  "missionStatus": "NODE_COMPLETE",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 2,
+  "passStrategy": "AUTO",
+  "instanceId": "6899",
+  "isEndNode": true
+},pushTime:1792816444842,peekTime:1792816445266,pollTime:1792816445266,onNextTime:1792816445268,onNextExecuteTime:0,currentTime:1792816445269, "exp":
+}{"time":"2026-10-24 13:34:05:270", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b53b82f7-4e6a-48e4-98f6-808d3b4f6cc4 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "5211b3c2-b1e9-4478-b1d9-d32d28e37889",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "TASK",
+  "missionStatus": "TASK_COMPLETED",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:34:04",
+  "robotModel": "KMP1500I",
+  "startTime": "2026-10-24 13:32:37",
+  "endTime": "2026-10-24 13:34:04",
+  "beginRobotMileage": "0.0",
+  "endRobotMileage": "0.0",
+  "robotX": "12.0",
+  "robotY": "11.0",
+  "containerLocationCode": "lay01-dist1-97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 2,
+  "instanceId": "6899"
+},pushTime:1792816444897,peekTime:1792816445269,pollTime:1792816445269,onNextTime:1792816445269,onNextExecuteTime:0,currentTime:1792816445270, "exp":
+}{"time":"2026-10-24 13:34:05:270", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:65d5e882-5f60-4cab-8a13-5bd705a5b6ad 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "5211b3c2-b1e9-4478-b1d9-d32d28e37889",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "TASK",
+  "missionStatus": "TASK_COMPLETED",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:34:04",
+  "robotModel": "KMP1500I",
+  "startTime": "2026-10-24 13:32:37",
+  "endTime": "2026-10-24 13:34:04",
+  "beginRobotMileage": "0.0",
+  "endRobotMileage": "0.0",
+  "robotX": "12.0",
+  "robotY": "11.0",
+  "containerLocationCode": "lay01-dist1-97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 2,
+  "instanceId": "6899"
+},pushTime:1792816444897,peekTime:1792816445269,pollTime:1792816445269,onNextTime:1792816445270,onNextExecuteTime:0,currentTime:1792816445270, "exp":
+}{"time":"2026-10-24 13:34:05:271", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:b9a4e6c6-ea1e-430c-9960-456aa944e68a 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "5211b3c2-b1e9-4478-b1d9-d32d28e37889",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "TASK",
+  "missionStatus": "TASK_COMPLETED",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:34:04",
+  "robotModel": "KMP1500I",
+  "startTime": "2026-10-24 13:32:37",
+  "endTime": "2026-10-24 13:34:04",
+  "beginRobotMileage": "0.0",
+  "endRobotMileage": "0.0",
+  "robotX": "12.0",
+  "robotY": "11.0",
+  "containerLocationCode": "lay01-dist1-97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 2,
+  "instanceId": "6899"
+},pushTime:1792816444897,peekTime:1792816445269,pollTime:1792816445269,onNextTime:1792816445270,onNextExecuteTime:0,currentTime:1792816445270, "exp":
+}{"time":"2026-10-24 13:34:05:271", "level":"INFO", "thread":"grpc-mission-handler-thread-pool-1", "context":"{jobCode=509C5F51DD1D4D0EBC48DA0DAA007703, workflowId=6899}", "class":"MissionStatusResponseHandler", "line":"193", "content":Send to subscriber,uuid:4f5235e6-65ce-4b96-9395-42461ba9a775 
+ mission context:{
+  "success": true,
+  "resultCode": "0",
+  "message": "lang.wcs.common.ok",
+  "responseId": "5211b3c2-b1e9-4478-b1d9-d32d28e37889",
+  "taskCode": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "taskType": "LOAD",
+  "containerCode": "SIM_CARGO_001",
+  "currentNodeCode": "lay01-dist1-97",
+  "currentNodeOuterCode": "SECS_ST_97",
+  "missionType": "TASK",
+  "missionStatus": "TASK_COMPLETED",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotId": "2",
+  "outerRobotId": "2",
+  "actionTime": "2026-10-24 13:34:04",
+  "robotModel": "KMP1500I",
+  "startTime": "2026-10-24 13:32:37",
+  "endTime": "2026-10-24 13:34:04",
+  "beginRobotMileage": "0.0",
+  "endRobotMileage": "0.0",
+  "robotX": "12.0",
+  "robotY": "11.0",
+  "containerLocationCode": "lay01-dist1-97",
+  "containerOrientation": "180.0",
+  "mapCode": "lay01",
+  "floorNumber": "dist1",
+  "nodeSequence": 2,
+  "instanceId": "6899"
+},pushTime:1792816444897,peekTime:1792816445269,pollTime:1792816445269,onNextTime:1792816445271,onNextExecuteTime:0,currentTime:1792816445271, "exp":
+}

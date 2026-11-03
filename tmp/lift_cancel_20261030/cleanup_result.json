@@ -1,0 +1,121 @@
+{
+  "cargo": {
+    "data": [
+      {
+        "containerCode": "SIM_CARGO_002",
+        "nodeCode": "lay01-dist1-98",
+        "orientation": "-90.0",
+        "containerModelCode": "SIM_TRAY_001",
+        "emptyFullStatus": 1,
+        "inMapStatus": 1,
+        "isCarry": 0,
+        "containerCheckCode": "",
+        "mapCode": "lay01",
+        "districtCode": "dist1",
+        "customStatus": ""
+      },
+      {
+        "containerCode": "SIM_CARGO_001",
+        "nodeCode": "lay01-dist1-97",
+        "orientation": "180.0",
+        "containerModelCode": "SIM_TRAY_001",
+        "emptyFullStatus": 1,
+        "inMapStatus": 1,
+        "isCarry": 0,
+        "containerCheckCode": "",
+        "mapCode": "lay01",
+        "districtCode": "dist1",
+        "customStatus": ""
+      },
+      {
+        "containerCode": "SIM_CARGO_003",
+        "nodeCode": "lay01-dist1-84",
+        "orientation": "0.0",
+        "containerModelCode": "SIM_TRAY_001",
+        "emptyFullStatus": 1,
+        "inMapStatus": 1,
+        "isCarry": 0,
+        "containerCheckCode": "",
+        "mapCode": "lay01",
+        "districtCode": "dist1",
+        "customStatus": ""
+      }
+    ],
+    "code": "0",
+    "message": null,
+    "success": true
+  },
+  "robot": {
+    "data": [
+      {
+        "robotId": "2",
+        "robotType": "KMP1500I",
+        "mapCode": "lay01",
+        "floorNumber": "dist1",
+        "buildingCode": "SIM01",
+        "containerCode": "",
+        "status": 3,
+        "occupyStatus": 0,
+        "batteryLevel": 96.0,
+        "batteryVoltage": 0.0,
+        "nodeCode": "lay01-dist1-105",
+        "nodeLabel": "105",
+        "nodeNumber": 105,
+        "x": "10000.0",
+        "y": "13000.0",
+        "robotOrientation": "180.0",
+        "liftStatus": 0,
+        "reliability": 1,
+        "runTime": "74",
+        "karOsVersion": "",
+        "mileage": "0.0",
+        "leftMotorTemperature": "0.0",
+        "rightMotorTemperature": "0.0",
+        "rotateMotorTemperature": "0.0",
+        "liftMtrTemp": "0.0",
+        "leftFrtMovMtrTemp": "0.0",
+        "rightFrtMovMtrTemp": "0.0",
+        "leftReMovMtrTemp": "0.0",
+        "rightReMovMtrTemp": "0.0",
+        "rotateTimes": 0,
+        "liftTimes": 0,
+        "nodeForeignCode": "",
+        "errorMessage": " noError-idle"
+      }
+    ],
+    "code": "0",
+    "message": null,
+    "success": true
+  },
+  "job": {
+    "data": [
+      {
+        "jobCode": "LIFT_RECOVER_093501",
+        "workflowId": 6891,
+        "containerCode": "SIM_CARGO_001",
+        "robotId": "2",
+        "status": 30,
+        "workflowName": null,
+        "workflowCode": null,
+        "workflowPriority": 1,
+        "mapCode": "lay01",
+        "targetCellCode": "lay01-dist1-97",
+        "beginCellCode": "lay01-dist1-97",
+        "targetCellCodeForeign": "SECS_ST_97",
+        "beginCellCodeForeign": "SECS_ST_97",
+        "finalNodeCode": "lay01-dist1-97",
+        "warnFlag": 0,
+        "warnCode": null,
+        "completeTime": "2026-10-24 09:15:27",
+        "spendTime": 2,
+        "createUsername": null,
+        "createTime": "2026-10-24 09:15:25",
+        "source": "UNIVERSAL",
+        "materialsInfo": "-"
+      }
+    ],
+    "code": null,
+    "message": null,
+    "success": true
+  }
+}

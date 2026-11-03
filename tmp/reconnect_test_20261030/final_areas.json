@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "forbiddenAreaId": 1,
+      "forbiddenAreaCode": "CODEX_ALARM_TEST_261030",
+      "forbiddenAreaName": "CODEX_ALARM_TEST_261030",
+      "mapCode": "lay01",
+      "floorNumber": "dist1",
+      "description": "",
+      "forbiddenAreaStrategy": 0,
+      "status": 0,
+      "enableType": 0
+    }
+  ],
+  "code": "0",
+  "message": null,
+  "success": true
+}

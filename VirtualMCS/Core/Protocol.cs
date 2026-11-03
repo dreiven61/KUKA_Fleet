@@ -10,12 +10,13 @@ public sealed record TransferRequest(string CommandId, string CarrierId, string 
     public static string NewCommandId() => Guid.NewGuid().ToString("N").ToUpperInvariant();
     public void Validate()
     {
+        WorkPorts.RequireReady();
         // Fleet's WCS accepts longer IDs, but its downstream RCS mission job_code
         // is varchar(50). Use a 32-character profile, including validation of
         // externally constructed requests, rather than relying on the WCS ACK.
         if (!System.Text.RegularExpressions.Regex.IsMatch(CommandId, "^[A-Za-z0-9_-]{1,32}$")) throw new ArgumentException("COMMANDID는 1~32자의 영문·숫자·_·-만 사용할 수 있습니다.");
         CargoRequest.Identifier(CarrierId, "CARRIERID");
-        if (!WorkPorts.Contains(SourcePort) || !WorkPorts.Contains(DestPort) || SourcePort == DestPort) throw new ArgumentException("출발/도착은 작업존의 서로 다른 작업 포트를 선택해야 합니다. 허용 포트: " + string.Join(", ", WorkPorts.All));
+        if (!WorkPorts.IsSource(SourcePort) || !WorkPorts.Contains(DestPort) || SourcePort == DestPort) throw new ArgumentException("출발지는 작업 포트 또는 적재 AMR, 도착지는 작업 포트여야 합니다.");
         if (Priority is < 1 or > 99) throw new ArgumentException("우선순위는 1~99입니다.");
     }
 }
@@ -38,7 +39,7 @@ public static class Protocol
     {
         r.Validate();
         return new(2, 49, true) { Name = "TRANSFER", SecsItem = L(U4(0), A(""), A("TRANSFER"),
-            L(L(A("COMMANDINFO"), L(L(A("COMMANDID"), A(r.CommandId)), L(A("PRIORITY"), U2(r.Priority)), L(A("REPLACE"), U2(0)))),
+            L(L(A("COMMANDINFO"), L(L(A("COMMANDID"), A(r.CommandId)), L(A("PRIORITY"), U2(r.Priority)))),
               L(A("TRANSFERINFO"), L(L(A("CARRIERID"), A(r.CarrierId)), L(A("SOURCEPORT"), A(r.SourcePort)), L(A("DESTPORT"), A(r.DestPort)))))) };
     }
     public static SecsMessage Establish() => new(1, 13, true) { Name = "EstablishCommunications", SecsItem = L() };
@@ -134,18 +135,20 @@ public static class Protocol
         }
         return null;
     }
-    public static string Sml(SecsMessage message)
+    public static string Sml(SecsMessage message, IReadOnlyList<ushort>? statusIds = null)
     {
         var text = new StringBuilder($"S{message.S}F{message.F}{(message.ReplyExpected ? " W" : "")} {message.Name}\n");
-        if (message.SecsItem is not null) Append(text, message.SecsItem, 0);
+        if (message.SecsItem is not null) Append(text, message.SecsItem, 0, SkiSmlNames.Schema(message, statusIds));
         return text.Append('.').ToString();
     }
-    private static void Append(StringBuilder b, Item i, int depth)
+    private static void Append(StringBuilder b, Item i, int depth, SmlField? field)
     {
         b.Append(' ', depth * 2);
         if (i.Format == SecsFormat.List)
         {
-            b.AppendLine($"<L [{i.Count}]"); foreach (Item child in i.Items) Append(b, child, depth + 1); b.Append(' ', depth * 2).AppendLine(">"); return;
+            b.Append($"<L [{i.Count}]"); if (field is not null) b.Append($" [{field.Name}]"); b.AppendLine();
+            for (int n = 0; n < i.Count; n++) Append(b, i[n], depth + 1, field?.Child?.Invoke(i, n));
+            b.Append(' ', depth * 2).AppendLine(">"); return;
         }
         string content = i.Format switch
         {
@@ -159,6 +162,6 @@ public static class Protocol
             SecsFormat.F8 => string.Join(" ", i.GetMemory<double>().ToArray().Select(v => v.ToString(CultureInfo.InvariantCulture))), _ => "?"
         };
         string type = i.Format == SecsFormat.ASCII ? "A" : i.Format == SecsFormat.Binary ? "B" : i.Format.ToString();
-        b.AppendLine($"<{type} [{i.Count}] {content}>");
+        b.Append($"<{type} [{i.Count}] {content}"); if (field is not null) b.Append($" [{field.Name}]"); b.AppendLine(">");
     }
 }

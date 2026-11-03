@@ -1,0 +1,16 @@
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+PASS: isolated gRPC runtime, transport provider and WCS stub loaded; no RPC sent.
+PASS: packaged vehicle snapshot executes with private RCS protobuf classes unavailable.
+Exception in thread "main" java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:74)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at servostar.fleet.transfer.PluginLoadTest.main(PluginLoadTest.java:83)
+Caused by: java.lang.IllegalStateException: FLEET_CATALOG_UNAVAILABLE: Fleet facility scan has not completed
+	at servostar.fleet.transfer.WorkPorts.require(WorkPorts.java:35)
+	at servostar.fleet.transfer.WorkPorts.node(WorkPorts.java:86)
+	at servostar.fleet.transfer.TransferJournal.node(TransferJournal.java:200)
+	at servostar.fleet.transfer.TransferJournal.apply(TransferJournal.java:158)
+	at servostar.fleet.transfer.TransferJournal.<init>(TransferJournal.java:35)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	... 3 more

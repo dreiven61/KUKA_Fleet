@@ -1,0 +1,22 @@
+{
+  "disconnectAndReject": {
+    "commandId": "B07DCDED36CF4B3BAC744A938E668D65",
+    "workflowId": 6903,
+    "reportDataId": 390,
+    "originalHcack": 5,
+    "newIdHcack": 2
+  },
+  "restartRecovered": true,
+  "lostAck": {
+    "dataId": 404,
+    "deliveries": 2,
+    "workflowId": 6904
+  },
+  "queryLatency": {
+    "count": 1617,
+    "p50Ms": 78.0,
+    "p95Ms": 109.0,
+    "maxMs": 266.0
+  },
+  "pass": true
+}

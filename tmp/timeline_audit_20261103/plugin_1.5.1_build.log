@@ -1,0 +1,449 @@
+Note: C:\work\KUKA\KUKA_Fleet\SECS\fleet_transfer_plugin\src\servostar\fleet\transfer\NativeHostService.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: C:\work\KUKA\KUKA_Fleet\SECS\fleet_transfer_plugin\src\servostar\fleet\transfer\TransferJournal.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+Bundled 7327 gRPC runtime files from the supplied SDK.
+Bundled 393 SECS transport files from the installed Fleet library. No vendor server patches.
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+PASS: 13 fresh-loader journal-before-catalog startup, deferred replay, captured completion and duplicate checks; no Fleet calls.
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+PASS: 25 dynamic Fleet catalog, multi-map gRPC/HTTP, numeric/string IDs, changed roster, model selection, outage and no-mutation checks; loopback only.
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11�� 03, 2026 9:15:22 ���� servostar.fleet.transfer.NativeHostService start
+INFO: Native SECS passive listener started on 14093, session 3000. Loaded ABORT wait policy configured for vehicles [].
+11�� 03, 2026 9:15:23 ���� servostar.fleet.transfer.NativeHostService receiveStatus
+WARNING: S1F3 snapshot unavailable; SVID=[25]; IllegalStateException; reason=VEHICLE_NAMES_UNAVAILABLE: Name changes await MCS disconnect, settled jobs, alarms and report ACKs; no empty success response
+PASS: 59 XML RobotID/VehicleID, leading zeros, bidirectional fields, Fleet payload IDs, durable ACK/alarm/work guards, malformed XML and real HSMS checks; fixtures/loopback only.
+PASS: 37 validation, wire-format, auth, preview, deduplication and uncertain-outcome checks; loopback mock only.
+11�� 03, 2026 9:15:25 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 84 reporting checks; captured WCS replay, final-state fixtures, duplicates, gaps, cancellation and restart. No live calls.
+11�� 03, 2026 9:15:25 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 101 vehicle lifecycle checks; actual callback replay and mock queries only.
+11�� 03, 2026 9:15:26 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 47 automatic dispatch checks; robots 1/2/3, correlation, release and restart. No live calls.
+11�� 03, 2026 9:15:27 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 1172 work-port checks across 90 routes; callback replay and mock final-state checks, no live actions.
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11�� 03, 2026 9:15:28 ���� servostar.fleet.transfer.WcsStatusMonitor watchTransport
+INFO: WCS status transport ready; progress/completion still require observed events
+11�� 03, 2026 9:15:28 ���� servostar.fleet.transfer.WcsStatusMonitor lost
+WARNING: WCS status subscription lost (UNAVAILABLE); incomplete commands blocked; reconnect in 5 seconds
+11�� 03, 2026 9:15:33 ���� servostar.fleet.transfer.WcsStatusMonitor watchTransport
+INFO: WCS status transport ready; progress/completion still require observed events
+11�� 03, 2026 9:15:33 ���� servostar.fleet.transfer.WcsStatusMonitor lost
+WARNING: WCS status subscription lost (UNAVAILABLE); incomplete commands blocked; reconnect in 5 seconds
+PASS: 16 status monitor checks. Loopback RPC and mock transport only; no Fleet calls.
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11�� 03, 2026 9:15:35 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:35 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=5 REASON=DUPLICATE_COMMAND_ID TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:35 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:35 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=2 REASON=FLEET_SUBMIT_REJECTED:FAIL TSC=AUTO BLOCKING=
+11�� 03, 2026 9:15:35 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:35 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=5 REASON=DUPLICATE_COMMAND_ID TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:35 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:35 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=CANCEL COMMANDID=TR_TEST_001 HCACK=5 REASON=CONTROL_ALREADY_PENDING TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:35 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:35 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=ABORT COMMANDID=TR_TEST_001 HCACK=2 REASON=ABORT_BEFORE_PICKUP_USE_CANCEL TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:35 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=ABORT COMMANDID=TR_TEST_001 HCACK=5 REASON=CONTROL_ALREADY_PENDING TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:35 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:35 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=CANCEL COMMANDID=TR_TEST_001 HCACK=2 REASON=CANCEL_AFTER_PICKUP_USE_ABORT TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:35 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:35 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:35 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=CANCEL COMMANDID=TR_TEST_001 HCACK=2 REASON=FLEET_CONTROL_REJECTED:FAIL TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:35 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=PAUSE COMMANDID= HCACK=2 REASON=FLEET_CONTROL_REJECTED:FAIL TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:35 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:35 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=CANCEL COMMANDID=TR_TEST_001 HCACK=5 REASON=CONTROL_ALREADY_PENDING TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:35 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:35 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=ANOTHER HCACK=2 REASON=TSC_NOT_AUTO TSC=PAUSING BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:35 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:35 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:35 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:35 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:35 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:35 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=5 REASON=DUPLICATE_COMMAND_ID TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:35 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:35 ���� servostar.fleet.transfer.NativeHostService start
+INFO: Native SECS passive listener started on 14102, session 3000. Loaded ABORT wait policy configured for vehicles [].
+11�� 03, 2026 9:15:36 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=5 REASON=DUPLICATE_COMMAND_ID TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:36 ���� servostar.fleet.transfer.NativeHostService deliver
+WARNING: Report DATAID 1 blocked by host ACK; explicit report retry required
+11�� 03, 2026 9:15:43 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=UNKNOWN COMMANDID= HCACK=1 REASON=UNKNOWN_COMMAND TSC=AUTO BLOCKING=
+11�� 03, 2026 9:15:43 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=CANCEL COMMANDID=NOT_FOUND HCACK=6 REASON=COMMAND_NOT_FOUND TSC=AUTO BLOCKING=NOT_FOUND
+11�� 03, 2026 9:15:43 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=CANCEL COMMANDID=TR_TEST_001 HCACK=5 REASON=CONTROL_ALREADY_PENDING TSC=AUTO BLOCKING=TR_TEST_001
+PASS: 71 native SECS acceptance/control/alarm/restart/ACK checks; local fixtures and loopback sockets only.
+11�� 03, 2026 9:15:46 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11�� 03, 2026 9:15:46 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:47 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:47 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:47 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:47 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:47 ���� servostar.fleet.transfer.NativeHostEngine advanceControl
+INFO: SECS RESUME confirmed by completed lifecycle COMMANDID=TR_TEST_001 INSTANCE=6837
+11�� 03, 2026 9:15:47 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:47 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:47 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:47 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:47 ���� servostar.fleet.transfer.NativeHostService start
+INFO: Native SECS passive listener started on 14106, session 3000. Loaded ABORT wait policy configured for vehicles [].
+PASS: 78 pause/resume identity, actual-state, restart and HSMS checks; no live Fleet calls.
+11�� 03, 2026 9:15:49 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11�� 03, 2026 9:15:50 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:50 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:50 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:50 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:50 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:50 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:50 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 29 carried pause/resume query-failure, repeat-cycle and persisted recovery checks; no live Fleet commands.
+11�� 03, 2026 9:15:50 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11�� 03, 2026 9:15:50 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=CANCEL COMMANDID=TR_TEST_001 HCACK=2 REASON=LIFT_OPERATION_ACTIVE:UP_CONTAINER TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:50 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:50 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=PAUSE COMMANDID= HCACK=2 REASON=LIFT_OPERATION_ACTIVE:UP_CONTAINER TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:50 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:50 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=CANCEL COMMANDID=TR_TEST_001 HCACK=2 REASON=LIFT_OPERATION_ACTIVE:DOWN_CONTAINER TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:50 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:50 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=PAUSE COMMANDID= HCACK=2 REASON=LIFT_OPERATION_ACTIVE:DOWN_CONTAINER TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:50 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:50 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:50 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=PAUSE COMMANDID= HCACK=2 REASON=LIFT_OPERATION_ACTIVE:UP_CONTAINER TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:50 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:50 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=PAUSE COMMANDID= HCACK=2 REASON=HANDLING_STATE_UNCONFIRMED TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:50 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=CANCEL COMMANDID=TR_TEST_001 HCACK=2 REASON=HANDLING_STATE_UNCONFIRMED TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:50 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:50 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=PAUSE COMMANDID= HCACK=2 REASON=HANDLING_STATE_UNCONFIRMED TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:51 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:51 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:51 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:51 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:51 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:51 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:51 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:51 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=PAUSE COMMANDID= HCACK=2 REASON=LIFT_OPERATION_ACTIVE:UP_CONTAINER TSC=AUTO BLOCKING=SECOND
+PASS: 62 lift admission, loaded travel and confirmed abort/report/release/restart checks; local fixtures only.
+11�� 03, 2026 9:15:51 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:52 ���� servostar.fleet.transfer.NativeHostService start
+INFO: Native SECS passive listener started on 14109, session 3000. Loaded ABORT wait policy configured for vehicles [].
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11�� 03, 2026 9:15:52 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=PAUSE COMMANDID= HCACK=2 REASON=LIFT_OPERATION_ACTIVE:UP_CONTAINER TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:15:52 ���� servostar.fleet.transfer.NativeHostService deliver
+WARNING: Report DATAID 4 blocked by host ACK; explicit report retry required
+PASS: 8 HSMS lift rejection, abort alarm ACK/retry, report ordering and release checks; loopback only.
+11�� 03, 2026 9:15:56 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11�� 03, 2026 9:15:56 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=RETURN_001 HCACK=5 REASON=DUPLICATE_COMMAND_ID TSC=AUTO BLOCKING=RETURN_001
+11�� 03, 2026 9:15:56 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 45 loaded ABORT standby, return ownership, durability and lifecycle checks; fixtures only.
+PASS: 77 explicit historical ABORT recovery, auth, preview, ownership and no-replay checks; fixtures only.
+PASS: 52 real carried-return callback, completion catch-up, identity and no-replay checks; captured replay and fixtures only.
+11�� 03, 2026 9:15:58 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11�� 03, 2026 9:15:58 ���� servostar.fleet.transfer.NativeHostEngine advanceControl
+INFO: SECS RESUME confirmed by completed lifecycle COMMANDID=TR_TEST_001 INSTANCE=6837
+11�� 03, 2026 9:15:58 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:58 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:58 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:58 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:58 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:58 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:58 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:58 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:58 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:58 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:58 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:58 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:58 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 22 retained completion, omitted-null API, active-work, context and no-replay checks; no live Fleet calls.
+11�� 03, 2026 9:15:59 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:59 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:59 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:59 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:59 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11�� 03, 2026 9:15:59 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:15:59 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=OTHER_CARGO HCACK=6 REASON=CARRIER_NOT_REGISTERED TSC=AUTO BLOCKING=
+11�� 03, 2026 9:15:59 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=WRONG_PORT HCACK=3 REASON=CARRIER_NOT_AT_PORT_OR_CARRIED TSC=AUTO BLOCKING=
+PASS: 58 inventory/scan/multi-carrier/no-replay checks; mock Fleet only.
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11�� 03, 2026 9:16:00 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:16:00 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=2 REASON=TSC_NOT_AUTO TSC=PAUSING BLOCKING=OLD_JOB
+11�� 03, 2026 9:16:00 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:16:00 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=2 REASON=TSC_NOT_AUTO TSC=PAUSED BLOCKING=OLD_JOB
+11�� 03, 2026 9:16:00 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:16:00 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=2 REASON=TSC_NOT_AUTO TSC=RESUMING BLOCKING=OLD_JOB
+11�� 03, 2026 9:16:00 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:16:00 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=2 REASON=TSC_NOT_AUTO TSC=UNCERTAIN BLOCKING=OLD_JOB
+11�� 03, 2026 9:16:00 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:16:00 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=6 REASON=CARRIER_NOT_REGISTERED TSC=AUTO BLOCKING=
+11�� 03, 2026 9:16:00 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:16:00 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=3 REASON=CARRIER_NOT_AT_PORT_OR_CARRIED TSC=AUTO BLOCKING=
+11�� 03, 2026 9:16:00 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:16:00 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=2 REASON=DESTINATION_OCCUPIED TSC=AUTO BLOCKING=
+11�� 03, 2026 9:16:00 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:16:00 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=5 REASON=DUPLICATE_COMMAND_ID TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:16:00 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=ABORT COMMANDID=TR_TEST_001 HCACK=2 REASON=ABORT_BEFORE_PICKUP_USE_CANCEL TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:16:00 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=CANCEL COMMANDID=TR_TEST_001 HCACK=2 REASON=CANCEL_AFTER_PICKUP_USE_ABORT TSC=AUTO BLOCKING=TR_TEST_001
+11�� 03, 2026 9:16:00 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=CANCEL COMMANDID=MISSING HCACK=6 REASON=COMMAND_NOT_FOUND TSC=AUTO BLOCKING=MISSING
+11�� 03, 2026 9:16:00 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=RESUME COMMANDID= HCACK=2 REASON=RESUME_REQUIRES_PAUSED TSC=PAUSING BLOCKING=
+11�� 03, 2026 9:16:00 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 36 HCACK/rejection reason, no-mutation and durable report checks.
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11�� 03, 2026 9:16:00 ���� servostar.fleet.transfer.WorkflowAlarmMonitor poll
+WARNING: Workflow alarm query unconfirmed for 509C5F51DD1D4D0EBC48DA0DAA007703: IOException
+11�� 03, 2026 9:16:00 ���� servostar.fleet.transfer.WorkflowAlarmMonitor poll
+WARNING: Workflow alarm query unconfirmed for A2C35A4C7C6B49D1B31D15EE27A52A45: IOException
+11�� 03, 2026 9:16:01 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:16:01 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:16:01 ���� servostar.fleet.transfer.NativeHostService start
+INFO: Native SECS passive listener started on 14113, session 3000. Loaded ABORT wait policy configured for vehicles [].
+PASS: 57 captured workflow warning set/hold/clear, identity, aggregation, persistence and real loopback HSMS ACK checks; no live Fleet calls.
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11�� 03, 2026 9:16:08 ���� com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11�� 03, 2026 9:16:08 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=NEW_ID HCACK=2 REASON=CARRIER_HAS_PENDING_TRANSFER TSC=AUTO BLOCKING=OLD
+11�� 03, 2026 9:16:08 ���� servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=OLD HCACK=5 REASON=DUPLICATE_COMMAND_ID TSC=AUTO BLOCKING=OLD
+11�� 03, 2026 9:16:08 ���� servostar.fleet.transfer.NativeHostService start
+INFO: Native SECS passive listener started on 14116, session 3000. Loaded ABORT wait policy configured for vehicles [].
+11�� 03, 2026 9:16:09 ���� servostar.fleet.transfer.NativeHostService deliver
+WARNING: Report DATAID 1 blocked by host ACK; explicit report retry required
+11�� 03, 2026 9:16:09 ���� servostar.fleet.transfer.NativeHostService receiveStatus
+WARNING: S1F3 snapshot unavailable; SVID=[23]; IllegalStateException; reason=Status query unavailable: jobQuery; no empty success response
+PASS: 107 S1F3/4 snapshot, current-work union, pending-ACK duplicate guards and independent HSMS query checks; fixtures/loopback only.
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+PASS: 13 canonical PortID/VehicleID admission, status and report checks.
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+PASS: isolated gRPC runtime, transport provider and WCS stub loaded; no RPC sent.
+PASS: packaged vehicle snapshot executes with private RCS protobuf classes unavailable.
+PASS: actual packaged historical journal constructs before Fleet catalog without changing history or allowing transport.
+PASS: isolated catalog initialization, metadata protobuf decoding and unavailable-map RPC execute without linkage errors.
+PASS: actual packaged XML VehicleID parser executes in isolated plugin loader; no Fleet connection.
+PASS: SBP/PF4J loaded packaged JAR, started child context, registered eleven transfer and four native administrative routes. WCS connection disabled in test.
+PASS: plugin stop removed its routes.
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          08FF88B5241B16A0AA8DD8C6D3344AF323C084CCF2C07AA67023688D6FF10007       C:\work\KUKA\KUKA_Fleet\SECS\fle…
+

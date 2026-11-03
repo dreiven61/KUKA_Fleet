@@ -1,0 +1,1 @@
+import{B as a}from"./entry/index-Xvmg3aKi-1782811034723.js";function b(r,s){let e="";switch(r){case"bd":e=a.BD;break;case"aibd":e=a.AIBD;break;case"mm":e=a.MM;break;case"wcs":e=a.WCS;break;case"ecs":e=a.ECS;break;case"sim":e=a.SIM;break;case"itf":e=a.ITF;break}return`${e}${s}`}export{b as e};

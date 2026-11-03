@@ -1,0 +1,10 @@
+{
+  "clientTime": "2026-10-30T13:53:16.3427826+09:00",
+  "operation": "disable exact test area 1",
+  "response": {
+    "data": null,
+    "code": "0",
+    "message": null,
+    "success": true
+  }
+}

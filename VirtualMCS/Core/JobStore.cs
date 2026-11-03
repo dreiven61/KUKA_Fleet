@@ -4,7 +4,7 @@ using System.Text.Json;
 namespace KukaMcs.Core;
 
 public enum JobPhase { Sending, Acknowledged, Initiated, Transferring, Completed, AbnormalEnded, Rejected, Uncertain, ManuallyReleased, Canceling, Aborting, Paused, Canceled, Aborted }
-public sealed record TransferJob(TransferRequest Request, DateTimeOffset CreatedAt, JobPhase Phase, string Detail, uint? LastCeid = null, uint? ResultCode = null, DateTimeOffset? UpdatedAt = null, string? VehiclePort = null, string? VehicleId = null, string PendingControl = "", JobPhase? BeforeControl = null)
+public sealed record TransferJob(TransferRequest Request, DateTimeOffset CreatedAt, JobPhase Phase, string Detail, uint? LastCeid = null, uint? ResultCode = null, DateTimeOffset? UpdatedAt = null, string? VehiclePort = null, string? VehicleId = null, string PendingControl = "", JobPhase? BeforeControl = null, string SourceVehicleId = "")
 {
     public bool IsPending => Phase is JobPhase.Sending or JobPhase.Acknowledged or JobPhase.Initiated or JobPhase.Transferring or JobPhase.Uncertain or JobPhase.Canceling or JobPhase.Aborting or JobPhase.Paused;
     public string PhaseText => Phase switch
@@ -41,23 +41,37 @@ public sealed class JobStore
         {
             if (_jobs.ContainsKey(request.CommandId)) throw new InvalidOperationException("이미 사용한 COMMANDID입니다.");
             if (_jobs.Values.Any(j => j.Request.CarrierId == request.CarrierId && j.IsPending)) throw new InvalidOperationException("이 화물의 기존 작업이 미확인 상태입니다. 완료 보고를 기다리거나 Fleet에서 확인한 뒤 대기를 해제하세요.");
-            job = SaveLocked(new(request, DateTimeOffset.Now, JobPhase.Sending, "S2F49 전송 시도. 자동 재전송 없음."));
+            job = SaveLocked(new(request, DateTimeOffset.Now, JobPhase.Sending, "S2F49 전송 시도. 자동 재전송 없음.", SourceVehicleId: WorkPorts.Vehicles.Contains(request.SourcePort) ? request.SourcePort : ""));
         }
         Changed?.Invoke(job); return job;
     }
-    public void Acknowledge(string id, uint ack) => Update(id, job => job.Phase == JobPhase.Sending
-        ? job with { Phase = ack is 0 or 4 ? JobPhase.Acknowledged : ack == 5 ? JobPhase.Uncertain : JobPhase.Rejected, Detail = ack == 0 ? "S2F50=0 (기존 ECS의 선행 응답). 실제 운송 접수/완료는 별도 확인." : $"S2F50 HCACK={ack}" + (ack == 5 ? " · 기존 명령 상태 확인 필요. 새 ID로 재전송하지 마세요." : "") } : job);
+    public void Acknowledge(string id, uint ack, string? detail = null) => Update(id, job => job.Phase == JobPhase.Sending
+        ? job with { Phase = ack is 0 or 4 ? JobPhase.Acknowledged : ack == 5 || ack > 6 ? JobPhase.Uncertain : JobPhase.Rejected,
+            Detail = "S2F50 " + (detail ?? new CommandAcknowledgement(ack).Summary) + (ack == 5 ? " · 새 ID로 재전송하지 말고 기존 작업부터 확인하세요." : "") } : job);
+    public bool Rejection(CommandRejection report)
+    {
+        bool matched = false;
+        Update(report.CommandId, job =>
+        {
+            // Diagnostic events never overwrite accepted work or manufacture a
+            // completion. A rejected retry can refer to an existing active ID.
+            if (report.Command != "TRANSFER" || job.Phase is not (JobPhase.Sending or JobPhase.Rejected or JobPhase.Uncertain)) return job;
+            matched = true;
+            return job with { Phase = report.Hcack == 5 ? JobPhase.Uncertain : JobPhase.Rejected, Detail = report.Summary };
+        });
+        return matched;
+    }
     public void BeginControl(string id, string command) => Update(id, j =>
     {
         if (!j.IsPending || j.Phase == JobPhase.Uncertain || !string.IsNullOrEmpty(j.PendingControl)) throw new InvalidOperationException("이 작업에는 제어 명령을 추가할 수 없습니다. 기존 결과부터 확인하세요.");
         return j with { PendingControl = command, BeforeControl = j.Phase, Detail = $"{command} 전송 시도 · 자동 재전송 없음" };
     });
-    public void ControlAcknowledge(string id, string command, uint ack) => Update(id, j =>
+    public void ControlAcknowledge(string id, string command, uint ack, string? detail = null) => Update(id, j =>
     {
         if (!j.IsPending || j.PendingControl != command) return j;
-        if (ack == 5) return j with { Phase = JobPhase.Uncertain, Detail = $"{command} HCACK=5 · 기존 제어 요청의 결과 확인 필요. 자동 재전송 없음." };
+        if (ack == 5 || ack > 6) return j with { Phase = JobPhase.Uncertain, Detail = $"{command} " + (detail ?? new CommandAcknowledgement(ack).Summary) + " · 자동 재전송 없음." };
         return j with { PendingControl = ack == 4 ? command : "", Phase = ack == 4 ? command == "CANCEL" ? JobPhase.Canceling : command == "ABORT" ? JobPhase.Aborting : j.Phase : j.BeforeControl ?? j.Phase,
-            Detail = $"{command} 응답 HCACK={ack} · 실제 결과 보고 별도 확인" };
+            Detail = command + " · " + (detail ?? new CommandAcknowledgement(ack).Summary) };
     });
     public bool Report(TransferReport report)
     {
@@ -70,7 +84,7 @@ public sealed class JobStore
             if (report.Ceid == 207 && report.ResultCode == 0 && report.CarrierLocation != job.Request.DestPort) return job;
             JobPhase phase = report.Ceid switch { 201 => JobPhase.Aborted, 204 => JobPhase.Canceled, 203 => JobPhase.Aborting, 206 => JobPhase.Canceling, 202 or 205 => job.BeforeControl ?? JobPhase.Transferring,
                 209 => JobPhase.Paused, 210 => JobPhase.Transferring, 208 when job.Phase != JobPhase.Transferring => JobPhase.Initiated, 211 => JobPhase.Transferring, 207 when report.ResultCode == 0 => JobPhase.Completed, 207 => JobPhase.AbnormalEnded, _ => job.Phase };
-            bool controlEnd = report.Ceid is 201 or 202 or 204 or 205 or 209 or 210;
+            bool controlEnd = report.Ceid is 201 or 202 or 204 or 205 or 207 or 209 or 210;
             if (!controlEnd && report.Ceid != 207 && (job.PendingControl.Length != 0 || job.Phase == JobPhase.Paused)) phase = job.Phase;
             return job with { Phase = phase, LastCeid = report.Ceid, ResultCode = report.ResultCode, PendingControl = controlEnd ? "" : job.PendingControl,
                 Detail = $"{Protocol.EventText(report.Ceid)} · CEID {report.Ceid}, Result {report.ResultCode}, CarrierLoc {report.CarrierLocation}" };
@@ -83,7 +97,8 @@ public sealed class JobStore
         Update(report.CommandId, job =>
         {
             string port = report.Ceid is 602 or 603 or 604 or 605 ? job.Request.SourcePort : job.Request.DestPort;
-            bool validPort = report.Ceid == 601 ? report.TransferPort == job.Request.SourcePort || report.TransferPort == job.Request.DestPort : report.TransferPort == port;
+            bool interruptedRelease = report.Ceid == 610 && (job.Phase is JobPhase.Canceled or JobPhase.Aborted || job.PendingControl is "CANCEL" or "ABORT");
+            bool validPort = report.Ceid == 601 || interruptedRelease ? report.TransferPort == job.Request.SourcePort || report.TransferPort == job.Request.DestPort : report.TransferPort == port;
             if (report.Ceid is not (601 or 602 or 603 or 604 or 605 or 606 or 607 or 610) || !ValidVehicle(job, report.VehicleId)
                 || report.CarrierId != job.Request.CarrierId || !validPort) return job;
             matched = true;
@@ -115,7 +130,8 @@ public sealed class JobStore
     }
     // Bind the first correlated vehicle report, including legacy profiles without 604.
     private static bool ValidVehicle(TransferJob job, string vehicle) =>
-        System.Text.RegularExpressions.Regex.IsMatch(vehicle, "^[1-9][0-9]{0,9}$")
+        System.Text.RegularExpressions.Regex.IsMatch(vehicle, "^[A-Za-z0-9_.:-]{1,32}$")
+        && ((job.SourceVehicleId.Length > 0 ? job.SourceVehicleId : WorkPorts.SourceVehicle(job.Request.SourcePort)) is var sourceVehicle && (sourceVehicle.Length == 0 || sourceVehicle == vehicle))
         && (job.VehicleId is null || job.VehicleId == vehicle);
     public void Uncertain(string id, string reason) => Update(id, j => j.IsPending ? j with { Phase = JobPhase.Uncertain, Detail = reason } : j);
     public void Disconnected() { foreach (TransferJob job in Snapshot().Where(j => j.IsPending)) Uncertain(job.Request.CommandId, "연결 단절: 결과 미확인. 자동 재전송하지 않습니다."); }

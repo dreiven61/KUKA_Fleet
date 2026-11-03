@@ -1,0 +1,48 @@
+[
+  {
+    "commandId": "C3E5B29C7CD441E2A51835BA93038D95",
+    "workflowId": 6901,
+    "setCount": 1,
+    "clearCount": 1,
+    "alids": [
+      1200103
+    ],
+    "alarmTimes": [
+      "14:25:37.080",
+      "14:26:08.603"
+    ],
+    "alarmAcksZero": true,
+    "unitAndCompletionAcksZero": true,
+    "unitEventCounts": {
+      "702": 0,
+      "701": 0
+    },
+    "normalCompletionCount": 1,
+    "normalCompletionResultZero": true,
+    "transferRequestCount": 1,
+    "passed": true
+  },
+  {
+    "commandId": "E4AD2CC08E3A42D4BD941F8F447F433A",
+    "workflowId": 6902,
+    "setCount": 1,
+    "clearCount": 1,
+    "alids": [
+      1200103
+    ],
+    "alarmTimes": [
+      "14:27:33.982",
+      "14:27:53.555"
+    ],
+    "alarmAcksZero": true,
+    "unitAndCompletionAcksZero": true,
+    "unitEventCounts": {
+      "702": 1,
+      "701": 1
+    },
+    "normalCompletionCount": 1,
+    "normalCompletionResultZero": true,
+    "transferRequestCount": 1,
+    "passed": true
+  }
+]

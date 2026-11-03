@@ -1,0 +1,117 @@
+{
+  "data": [
+    {
+      "nodeCode": "lay01-dist1-84",
+      "externalCode": "",
+      "functionType": 1,
+      "containerModelCode": [
+        "SIM_TRAY_001"
+      ],
+      "robotTypeCode": [
+        "KMP1500I"
+      ]
+    },
+    {
+      "nodeCode": "lay01-dist1-86",
+      "externalCode": "",
+      "functionType": 1,
+      "containerModelCode": [
+        "SIM_TRAY_001"
+      ],
+      "robotTypeCode": [
+        "KMP1500I"
+      ]
+    },
+    {
+      "nodeCode": "lay01-dist1-89",
+      "externalCode": "SECS_ST_89",
+      "functionType": 1,
+      "containerModelCode": [
+        "SIM_TRAY_001"
+      ],
+      "robotTypeCode": [
+        "KMP1500I"
+      ]
+    },
+    {
+      "nodeCode": "lay01-dist1-90",
+      "externalCode": "",
+      "functionType": 1,
+      "containerModelCode": [
+        "SIM_TRAY_001"
+      ],
+      "robotTypeCode": [
+        "KMP1500I"
+      ]
+    },
+    {
+      "nodeCode": "lay01-dist1-93",
+      "externalCode": "",
+      "functionType": 1,
+      "containerModelCode": [
+        "SIM_TRAY_001"
+      ],
+      "robotTypeCode": [
+        "KMP1500I"
+      ]
+    },
+    {
+      "nodeCode": "lay01-dist1-94",
+      "externalCode": "",
+      "functionType": 1,
+      "containerModelCode": [
+        "SIM_TRAY_001"
+      ],
+      "robotTypeCode": [
+        "KMP1500I"
+      ]
+    },
+    {
+      "nodeCode": "lay01-dist1-95",
+      "externalCode": "",
+      "functionType": 1,
+      "containerModelCode": [
+        "SIM_TRAY_001"
+      ],
+      "robotTypeCode": [
+        "KMP1500I"
+      ]
+    },
+    {
+      "nodeCode": "lay01-dist1-96",
+      "externalCode": "",
+      "functionType": 1,
+      "containerModelCode": [
+        "SIM_TRAY_001"
+      ],
+      "robotTypeCode": [
+        "KMP1500I"
+      ]
+    },
+    {
+      "nodeCode": "lay01-dist1-97",
+      "externalCode": "SECS_ST_97",
+      "functionType": 1,
+      "containerModelCode": [
+        "SIM_TRAY_001"
+      ],
+      "robotTypeCode": [
+        "KMP1500I"
+      ]
+    },
+    {
+      "nodeCode": "lay01-dist1-98",
+      "externalCode": "",
+      "functionType": 1,
+      "containerModelCode": [
+        "SIM_TRAY_001"
+      ],
+      "robotTypeCode": [
+        "KMP1500I"
+      ]
+    }
+  ],
+  "code": "0",
+  "message": "lang.wcs.common.ok",
+  "success": true
+}

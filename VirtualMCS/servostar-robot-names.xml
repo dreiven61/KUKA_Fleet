@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Must match the Fleet plugin XML. Current site bindings verified on 2026-11-02. -->
+<RobotNames version="1">
+  <Robot fleetId="1" vehicleId="AGV001" />
+  <Robot fleetId="2" vehicleId="AGV002" />
+  <Robot fleetId="3" vehicleId="AGV003" />
+</RobotNames>

@@ -1,0 +1,14 @@
+{"clientTime": "2026-10-30T14:49:50.298921+09:00", "kind": "TX", "value": {"stream": 0, "function": 0, "wait": false, "system": 1895825409, "stype": 1, "body": null}}
+{"clientTime": "2026-10-30T14:49:50.299923+09:00", "kind": "RX", "value": {"session": 65535, "stream": 0, "function": 0, "wait": false, "ptype": 0, "stype": 2, "system": 1895825409, "body": null}}
+{"clientTime": "2026-10-30T14:49:50.299923+09:00", "kind": "TX", "value": {"stream": 1, "function": 13, "wait": true, "system": 1895825410, "stype": 0, "body": ["L", []]}}
+{"clientTime": "2026-10-30T14:49:50.301920+09:00", "kind": "RX", "value": {"session": 3000, "stream": 1, "function": 14, "wait": false, "ptype": 0, "stype": 0, "system": 1895825410, "body": ["L", [["B", [0]], ["L", [["A", "FLEET"], ["A", "1.2.3"]]]]]}}
+{"clientTime": "2026-10-30T14:49:50.302920+09:00", "kind": "TX", "value": {"stream": 1, "function": 3, "wait": true, "system": 1895825411, "stype": 0, "body": ["L", [["U2", [23]], ["U2", [25]], ["U2", [58]], ["U2", [21]]]]}}
+{"clientTime": "2026-10-30T14:49:50.303921+09:00", "kind": "RX", "value": {"session": 3000, "stream": 1, "function": 0, "wait": false, "ptype": 0, "stype": 0, "system": 1895825411, "body": null}}
+{"clientTime": "2026-10-30T14:49:50.303921+09:00", "kind": "QUERY_RESULT", "value": {"session": 3000, "stream": 1, "function": 0, "wait": false, "ptype": 0, "stype": 0, "system": 1895825411, "body": null, "latencyMs": 0.0}}
+{"clientTime": "2026-10-30T14:49:50.303921+09:00", "kind": "TX", "value": {"stream": 1, "function": 3, "wait": true, "system": 1895825412, "stype": 0, "body": ["L", [["U2", [23]], ["U2", [25]], ["U2", [58]], ["U2", [21]]]]}}
+{"clientTime": "2026-10-30T14:49:50.306437+09:00", "kind": "RX", "value": {"session": 3000, "stream": 1, "function": 0, "wait": false, "ptype": 0, "stype": 0, "system": 1895825412, "body": null}}
+{"clientTime": "2026-10-30T14:49:50.307433+09:00", "kind": "QUERY_RESULT", "value": {"session": 3000, "stream": 1, "function": 0, "wait": false, "ptype": 0, "stype": 0, "system": 1895825412, "body": null, "latencyMs": 0.0}}
+{"clientTime": "2026-10-30T14:49:50.307433+09:00", "kind": "TX", "value": {"stream": 1, "function": 3, "wait": true, "system": 1895825413, "stype": 0, "body": ["L", [["U2", [23]], ["U2", [25]], ["U2", [58]], ["U2", [21]]]]}}
+{"clientTime": "2026-10-30T14:49:50.309445+09:00", "kind": "RX", "value": {"session": 3000, "stream": 1, "function": 0, "wait": false, "ptype": 0, "stype": 0, "system": 1895825413, "body": null}}
+{"clientTime": "2026-10-30T14:49:50.310442+09:00", "kind": "QUERY_RESULT", "value": {"session": 3000, "stream": 1, "function": 0, "wait": false, "ptype": 0, "stype": 0, "system": 1895825413, "body": null, "latencyMs": 0.0}}
+{"clientTime": "2026-10-30T14:49:50.310442+09:00", "kind": "DISCONNECTED", "value": {}}

@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "handshake": [
+    0,
+    [
+      "FLEET",
+      "1.4.1"
+    ]
+  ],
+  "svids": [
+    25,
+    58,
+    23,
+    21
+  ],
+  "counts": [
+    3,
+    10,
+    0,
+    3
+  ],
+  "vehicleIDs": [
+    "1",
+    "2",
+    "3"
+  ],
+  "latencyMs": 93.0
+}

@@ -41,15 +41,15 @@ final class CargoService {
     static String str(Map<String,Object> row,String key){Object v=row.get(key);return v==null?"":v.toString();}
     static void at(Map<String,Object> row,String p) {
         if(row==null)throw new Rejected("CARRIER_NOT_REGISTERED");
-        if(!p.equals(port(row)))throw new Rejected("CARRIER_NOT_AT_PORT_OR_CARRIED");
+        if(!WorkPorts.samePort(p,port(row)))throw new Rejected("CARRIER_NOT_AT_PORT_OR_CARRIED");
     }
     String transferModel(Map<String,Object> request,String token)throws Exception {
         List<Map<String,Object>> rows=query(token);
         Map<String,Object> row=find(rows,(String)request.get("CARRIERID"));
         at(row,(String)request.get("SOURCEPORT"));
         for(Map<String,Object> other:rows){
-            if(request.get("DESTPORT").equals(port(other)))throw new Rejected("DESTINATION_OCCUPIED");
-            if(request.get("SOURCEPORT").equals(port(other)) && !request.get("CARRIERID").equals(other.get("containerCode")))throw new Rejected("SOURCE_INVENTORY_CONFLICT");
+            if(WorkPorts.samePort((String)request.get("DESTPORT"),port(other)))throw new Rejected("DESTINATION_OCCUPIED");
+            if(WorkPorts.samePort((String)request.get("SOURCEPORT"),port(other)) && !request.get("CARRIERID").equals(other.get("containerCode")))throw new Rejected("SOURCE_INVENTORY_CONFLICT");
         }
         return identifier(str(row,"containerModelCode"),"MODEL");
     }
@@ -62,7 +62,7 @@ final class CargoService {
             if(!"1".equals(p.get("SCANOK")) || !id.equals(p.get("SCANNEDID")))throw new Rejected("SCAN_FAILED_OR_MISMATCH");
             if(row!=null && !"0".equals(str(row,"inMapStatus")))throw new Rejected("CARRIER_ALREADY_IN_MAP");
             if(row!=null && !"0".equals(str(row,"isCarry")))throw new Rejected("CARRIER_IS_CARRIED");
-            for(Map<String,Object> other:rows)if(place.equals(port(other)))throw new Rejected("PORT_OCCUPIED");
+            for(Map<String,Object> other:rows)if(WorkPorts.samePort(place,port(other)))throw new Rejected("PORT_OCCUPIED");
             String model=identifier(p.get("MODEL"),"MODEL");
             if(row!=null && !model.equals(str(row,"containerModelCode")))throw new Rejected("MODEL_MISMATCH");
             // Use full node UUID, not the SECS port name. Validation barcode can
@@ -89,9 +89,21 @@ final class CargoService {
             }
         }
     }
+    void assertVehicleFree(String vehicle,String carrier,String token)throws Exception {
+        for(int status:new int[]{10,20,25,28,50,60}){
+            Map<String,Object> r=client.post("jobQuery",token,TransferService.map("status",status,"limit",1000));
+            if(!NativeHostEngine.ok(r) || !(r.get("data") instanceof List) || ((List<?>)r.get("data")).size()>=1000)throw new IllegalStateException("Active job query unavailable or truncated");
+            for(Object o:(List<?>)r.get("data")){
+                if(!(o instanceof Map))throw new IllegalStateException("Invalid active job");
+                Map<?,?> j=(Map<?,?>)o;
+                if(Arrays.asList("30","31","35").contains(String.valueOf(j.get("status"))))continue;
+                if(vehicle.equals(String.valueOf(j.get("robotId"))) || carrier.equals(j.get("containerCode")))throw new Rejected("SOURCE_AMR_HAS_FLEET_WORK");
+            }
+        }
+    }
     boolean confirmed(String command,Map<String,String> p,String token)throws Exception {
         Map<String,Object> row=find(query(token),p.get("CARRIERID"));
-        if("CARRIER_IN".equals(command))return row!=null && p.get("PORT").equals(port(row)) && p.get("MODEL").equals(str(row,"containerModelCode"));
+        if("CARRIER_IN".equals(command))return row!=null && WorkPorts.samePort(p.get("PORT"),port(row)) && p.get("MODEL").equals(str(row,"containerModelCode"));
         if("1".equals(p.get("DELETE")))return row==null;
         return row!=null && "0".equals(str(row,"inMapStatus")) && "0".equals(str(row,"isCarry"));
     }

@@ -1,0 +1,47 @@
+{
+  "success": true,
+  "code": "0",
+  "submitted": false,
+  "statusMonitorReady": true,
+  "data": {
+    "orgId": "UNIVERSAL",
+    "requestId": "READONLY_PREVIEW_141",
+    "missionCode": "READONLY_PREVIEW_141",
+    "missionType": "RACK_MOVE",
+    "robotType": "LIFT",
+    "robotIds": [
+      "1",
+      "2",
+      "3"
+    ],
+    "robotModels": [
+      "KMP1500I"
+    ],
+    "priority": 1,
+    "containerCode": "SIM_CARGO_001",
+    "lockRobotAfterFinish": false,
+    "missionData": [
+      {
+        "sequence": 1,
+        "position": "lay01-dist1-89",
+        "type": "NODE_POINT",
+        "passStrategy": "AUTO",
+        "actionType": "UP_CONTAINER",
+        "waitingMillis": 0,
+        "actionConfirm": false,
+        "actionInform": false
+      },
+      {
+        "sequence": 2,
+        "position": "lay01-dist1-97",
+        "type": "NODE_POINT",
+        "passStrategy": "AUTO",
+        "actionType": "DOWN_CONTAINER",
+        "waitingMillis": 0,
+        "actionConfirm": false,
+        "actionInform": false
+      }
+    ],
+    "containerModelCode": "SIM_TRAY_001"
+  }
+}

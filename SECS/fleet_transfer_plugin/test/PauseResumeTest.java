@@ -86,8 +86,73 @@ public final class PauseResumeTest {
         after.state.data.tsc="PAUSING";after.state.save();
         NativeHostTest.Harness legacy=fixture(root,disk);legacy.rcsState=12;legacy.engine.tick();
         check(legacy.state.data.tsc.equals("PAUSED") && legacy.controls==0,"Existing1.1.2 accepted control recovers without reset");
+        completedDuringResume(root);
+        Map<String,Object> carry=robot();carry.put("rcsMissionCode","C-TEST-6837-1");
+        check(ControlStateVerifier.confirmed(true,expected,reply(job()),reply(carry)),"Correlated lift/drop step may also pause");
+        carry.put("rcsMissionCode","C-TEST-68370-1");
+        check(!ControlStateVerifier.confirmed(true,expected,reply(job()),reply(carry)),"Carry step still requires exact instance");
         wire(root);
         System.out.println("PASS: "+checks+" pause/resume identity, actual-state, restart and HSMS checks; no live Fleet calls.");
+    }
+    static void completedDuringResume(Path root)throws Exception {
+        // Reproduce 6875: repeated PAUSE/RESUME, second EXECUTING snapshot
+        // missed, WCS delivered successfully, vehicle already parked at105.
+        Path disk=Files.createTempDirectory("resume-terminal-").resolve("state.json");
+        NativeHostTest.Harness h=fixture(root,disk);assign(h);
+        for(int cycle=0;cycle<2;cycle++){
+            h.engine.control("PAUSE","");h.rcsState=12;h.engine.tick();
+            check(h.state.data.tsc.equals("PAUSED"),"Pause cycle "+cycle);
+            h.engine.control("RESUME","");h.rcsState=13;h.engine.tick();
+            check(h.count(210)==cycle,"Transition is not resume proof "+cycle);
+            if(cycle==0){h.rcsState=9;h.engine.tick();}
+        }
+        h.activeControlJob=false;h.rcsState=null;h.robotNode="lay01-dist1-105";h.missionCode="";h.rcsCode="";
+        h.engine.tick();
+        check(h.count(210)==1 && h.count(207)==0 && h.state.data.tsc.equals("RESUMING"),"REST completed alone never resolves pending RESUME");
+        for(Map<String,Object> e:h.trace)h.observe(e);
+        h.engine.tick();
+        check(h.count(210)==1 && h.count(207)==0,"Wrong actual cargo position blocks terminal recovery");
+        // Restore an accepted control from the older journal; no control POST.
+        NativeHostTest.Harness restored=fixture(root,disk);restored.activeControlJob=false;restored.rcsState=null;
+        restored.robotNode=h.robotNode;restored.missionCode="";restored.rcsCode="";restored.cargoNode="SECS_ST_97";
+        restored.journal.reserve(TransferService.normalize(HostProtocol.transfer(NativeHostTest.transferBody("TR_TEST_001"))));
+        restored.journal.accepted("TR_TEST_001");for(Map<String,Object> e:restored.trace)restored.journal.observe(e);
+        restored.engine.tick();
+        HostState.Job done=restored.state.data.jobs.get("TR_TEST_001");
+        check(done.phase.equals("COMPLETED") && done.control.isEmpty() && !done.paused,"Completed trace resolves accepted RESUME after restart");
+        check(restored.state.data.tsc.equals("AUTO") && restored.count(210)==2 && restored.count(103)==2,"Second resume and AUTO each reported once");
+        check(restored.count(610)==1 && restored.count(207)==1,"Parking105 does not block release and final207");
+        int resume=-1,automatic=-1,completed=-1;
+        for(int i=0;i<restored.state.data.reports.size();i++){
+            int ceid=restored.state.data.reports.get(i).ceid;
+            if(ceid==210)resume=i;if(ceid==103)automatic=i;if(ceid==207)completed=i;
+        }
+        check(resume<automatic && automatic<completed,"Resume210 and AUTO103 precede recovered completion207");
+        check(done.controlEvidence.equals("COMPLETED_LIFECYCLE") && restored.controls==0 && restored.submits==0,"Recovery evidence recorded; no replay or new transport");
+        for(int i=0;i<5;i++)restored.engine.tick();
+        check(restored.count(210)==2 && restored.count(207)==1,"Repeated polls cannot duplicate recovered reports");
+        NativeHostTest.Harness race=fixture(root,null);assign(race);race.engine.control("PAUSE","");
+        for(Map<String,Object> e:race.trace)race.observe(e);race.activeControlJob=false;race.cargoNode="SECS_ST_97";
+        race.engine.tick();
+        check(race.count(209)==0 && race.count(207)==1 && race.count(105)==1,"Completed before pause confirmation: no invented209, global PAUSED and real207");
+        check(race.state.data.tsc.equals("PAUSED") && !race.state.data.jobs.get("TR_TEST_001").paused,"Terminal job cannot remain locally paused");
+        race.engine.control("RESUME","");
+        check(race.state.data.tsc.equals("AUTO") && race.controls==1,"Resume empty paused system needs no robot mutation");
+        Map<String,Object> complete=job();complete.put("status",30);
+        check(ControlStateVerifier.completedCandidate(done,reply(complete)),"Exact completed snapshot candidate");
+        for(String key:Arrays.asList("jobCode","workflowId","robotId","containerCode","status","warnFlag")){
+            Map<String,Object> bad=new LinkedHashMap<>(complete);bad.put(key,"WRONG");
+            check(!ControlStateVerifier.completedCandidate(done,reply(bad)),"Terminal candidate rejects mixed "+key);
+        }
+        // A stream gap is not repaired by a final REST snapshot.
+        NativeHostTest.Harness gap=fixture(root,null);assign(gap);gap.engine.control("PAUSE","");gap.rcsState=12;gap.engine.tick();gap.engine.control("RESUME","");
+        gap.journal.streamLost();gap.journal.streamReady();for(Map<String,Object> e:gap.trace)gap.observe(e);
+        gap.activeControlJob=false;gap.rcsState=null;gap.cargoNode="SECS_ST_97";gap.engine.tick();
+        check(gap.count(210)==0 && gap.count(207)==0 && gap.state.data.tsc.equals("RESUMING"),"Incomplete observation history stays uncertain, never fake resume/completion");
+        NativeHostTest.Harness failed=fixture(root,null);assign(failed);failed.engine.control("PAUSE","");failed.rcsState=12;failed.engine.tick();failed.engine.control("RESUME","");
+        failed.observe(failed.event("TASK_COMPLETED",false));failed.engine.tick();
+        check(failed.count(210)==0 && failed.count(207)==1 && failed.state.data.tsc.equals("AUTO"),"Abnormal terminal ends pending control without inventing resume success");
+        check(failed.state.data.jobs.get("TR_TEST_001").control.isEmpty() && !failed.state.data.jobs.get("TR_TEST_001").paused,"Abnormal terminal clears control and paused flag");
     }
     @SuppressWarnings("unchecked")
     static void wire(Path root)throws Exception {
@@ -101,7 +166,7 @@ public final class PauseResumeTest {
         ConcurrentMap<Integer,AtomicInteger> counts=new ConcurrentHashMap<>();
         try {
             server.start();peer=NativeHostTest.peer(port,counts,ConcurrentHashMap.newKeySet(),new AtomicBoolean(false),new AtomicBoolean(false));
-            check(peer.send(1,13,true,list()).get().secs2().get(1).get(1).getAscii().equals("1.1.3"),"Wire reports new version");
+            check(peer.send(1,13,true,list()).get().secs2().get(1).get(1).getAscii().equals("1.5.2"),"Wire reports new version");
             check(NativeHostTest.ack(peer.send(2,49,true,NativeHostTest.transferBody("TR_TEST_001")).get().secs2())==4,"Wire transfer accepted");
             java.lang.reflect.Field f=NativeHostService.class.getDeclaredField("engine");f.setAccessible(true);
             NativeHostEngine live=(NativeHostEngine)f.get(server);h.journal.observe(h.trace.get(0));live.observe(h.trace.get(0));

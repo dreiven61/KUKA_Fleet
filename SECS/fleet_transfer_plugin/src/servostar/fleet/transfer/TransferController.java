@@ -27,7 +27,7 @@ public final class TransferController {
     public ResponseEntity<Map<String,Object>> completed(@RequestHeader(value="Authorization", required=false) String token,
             @RequestBody Map<String,Object> request) { return gate(request,token,true); }
     private ResponseEntity<Map<String,Object>> gate(Map<String,Object> request,String token,boolean completed) {
-        return stage(request,token,completed?"completed":"pickup-started");
+        return stage(request,token,completed?"completed":"transfer-started");
     }
     @PostMapping(value="/pickup-completed", consumes="application/json", produces="application/json")
     public ResponseEntity<Map<String,Object>> pickupCompleted(@RequestHeader(value="Authorization", required=false) String token,

@@ -11,14 +11,14 @@ public sealed record ConnectionSettings(string IpAddress = "192.168.0.45", int P
     public ConnectionSettings UseCurrentFleetEndpoint() => IpAddress == "192.168.0.45" && Port == 5557 ? this with { Port = 5556 } : this;
 }
 public sealed record LogEntry(DateTimeOffset Time, string Direction, string Text, byte? Stream = null, byte? Function = null,
-    int? SystemBytes = null, string? CommandId = null, uint? Ceid = null, string? Summary = null)
+    int? SystemBytes = null, string? CommandId = null, uint? Ceid = null, string? Summary = null, string? SourceFile = null)
 {
     public bool IsMessage => Stream.HasValue;
     public string MessageType => IsMessage ? $"S{Stream}F{Function}" : Direction;
     public bool IsWorkMessage => Stream is 2 or 5 or 6 or 9;
 }
 
-public sealed class McsClient : IAsyncDisposable
+public sealed partial class McsClient : IAsyncDisposable
 {
     private HsmsConnection? _connection;
     private SecsGem? _gem;
@@ -29,6 +29,7 @@ public sealed class McsClient : IAsyncDisposable
     public JobStore Jobs { get; }
     public CargoStore? Cargo { get; }
     public event Action<CargoSnapshot>? InventoryReceived;
+    public event Action<RecoveryReport>? RecoveryReceived;
     public bool Selected => _connection?.State == ConnectionState.Selected;
     public bool Communicating { get; private set; }
     public event Action<LogEntry>? Logged;
@@ -57,6 +58,8 @@ public sealed class McsClient : IAsyncDisposable
                 Communicating = false;
                 if (state != ConnectionState.Selected)
                 {
+                    _statusEstablished = null;
+                    lock (_statusLock) _statusResults.Clear();
                     try { Jobs.Disconnected(); Cargo?.Disconnected(); } catch (Exception ex) { Log("ERROR", "작업 기록 실패: " + ex.Message); }
                 }
                 StateChanged?.Invoke(state.ToString());
@@ -87,6 +90,7 @@ public sealed class McsClient : IAsyncDisposable
         if (ReferenceEquals(gem, _gem) && Selected) Communicating = ack == 0;
         Log(ack == 0 ? "INFO" : "ERROR", $"S1F14 COMMACK={ack}");
         StateChanged?.Invoke(Communicating ? "COMMUNICATING" : "Selected · 통신 확립 실패");
+        if (Communicating && ReferenceEquals(gem, _gem)) await QueryStatusOnConnectAsync(gem, token).ConfigureAwait(false);
     }
     public async Task OnlineAsync()
     {
@@ -107,7 +111,8 @@ public sealed class McsClient : IAsyncDisposable
             try
             {
                 using var reply = await gem.SendAsync(message, token).ConfigureAwait(false);
-                Jobs.Acknowledge(request.CommandId, Protocol.Ack(reply, 2, 50));
+                var ack = CommandAcknowledgement.Parse(reply, 50);
+                Jobs.Acknowledge(request.CommandId, ack.Code, ack.Summary);
             }
             catch (Exception ex)
             {
@@ -131,7 +136,8 @@ public sealed class McsClient : IAsyncDisposable
             try
             {
                 using var reply = await gem.SendAsync(message, token).ConfigureAwait(false);
-                store.Ack(request.RequestId, Protocol.Ack(reply, 2, 42));
+                var ack = CommandAcknowledgement.Parse(reply, 42);
+                store.Ack(request.RequestId, ack.Code, ack.Summary);
             }
             catch { store.Uncertain(request.RequestId); throw; }
         }
@@ -151,9 +157,9 @@ public sealed class McsClient : IAsyncDisposable
             try
             {
                 using var reply = await gem.SendAsync(message, token).ConfigureAwait(false);
-                uint ack = Protocol.Ack(reply, 2, 42);
-                foreach (var job in targets) Jobs.ControlAcknowledge(job.Request.CommandId, command, ack);
-                Log("INFO", $"{command} HCACK={ack}. 결과는 별도 이벤트 보고로 확인합니다.");
+                var ack = CommandAcknowledgement.Parse(reply, 42);
+                foreach (var job in targets) Jobs.ControlAcknowledge(job.Request.CommandId, command, ack.Code, ack.Summary);
+                Log(ack.Accepted ? "INFO" : "ERROR", command + " · " + ack.Summary);
             }
             catch (Exception ex)
             {
@@ -192,6 +198,16 @@ public sealed class McsClient : IAsyncDisposable
                             {
                                 bool matched = Jobs.ReportCarrier(carrier);
                                 Log("EVENT", $"{carrier.EventText}, CEID={carrier.Ceid}, COMMANDID={carrier.CommandId}, AMR={carrier.VehicleId}, Location={carrier.CarrierLocation}" + (matched ? "" : " (로컬 작업과 불일치/미등록)"));
+                            }
+                            else if (CargoProtocol.Recovery(message) is { } recovery)
+                            {
+                                RecoveryReceived?.Invoke(recovery);
+                                Log("RECOVERY", recovery.Summary + " · COMMANDID " + recovery.CommandId);
+                            }
+                            else if (CommandRejection.Parse(message) is { } rejection)
+                            {
+                                Jobs.Rejection(rejection);
+                                Log("REJECT", rejection.Summary);
                             }
                             else if (CargoProtocol.Result(message) is { } result)
                             {
@@ -262,19 +278,37 @@ public sealed class McsClient : IAsyncDisposable
     {
         private readonly System.Collections.Concurrent.ConcurrentDictionary<int, string> _outgoing = new();
         private readonly System.Collections.Concurrent.ConcurrentDictionary<int, string> _incoming = new();
+        private readonly System.Collections.Concurrent.ConcurrentDictionary<int, ushort[]> _statusRequests = new();
         public void MessageIn(SecsMessage message, int id) => Message(message, id, true);
         public void MessageOut(SecsMessage message, int id) => Message(message, id, false);
         private void Message(SecsMessage message, int id, bool received)
         {
             string? command = null; uint? ceid = null;
+            ushort[]? statusIds = null;
             string summary = $"S{message.S}F{message.F}";
+            if (!received && message.S == 1 && message.F == 3)
+            {
+                statusIds = SelectedStatusProtocol.RequestedIds(message);
+                if (statusIds is not null)
+                {
+                    if (_statusRequests.Count > 1024) _statusRequests.Clear();
+                    _statusRequests[id] = statusIds;
+                    summary += " · " + string.Join(" / ", (statusIds.Length == 0 ? SelectedStatusProtocol.All : statusIds).Select(SelectedStatusProtocol.VariableName));
+                }
+            }
+            else if (received && (message.S == 1 && message.F is 0 or 4 || message.S == 9))
+            {
+                _statusRequests.TryRemove(id, out statusIds);
+                if (message.S == 1 && message.F == 4 && statusIds is not null)
+                    summary += " · " + string.Join(" / ", (statusIds.Length == 0 ? SelectedStatusProtocol.All : statusIds).Select(SelectedStatusProtocol.VariableName));
+            }
             try
             {
                 if (message.S == 2 && message.F == 49)
                 {
                     command = message.SecsItem![3][0][1][0][1].GetString(); summary = "운송 요청";
                 }
-                else if (message.S == 2 && message.F == 50) summary = $"운송 응답 · HCACK {Protocol.Ack(message, 2, 50)} (완료 아님)";
+                else if (message.S == 2 && message.F == 50) summary = "운송 응답 · " + CommandAcknowledgement.Parse(message, 50).Summary;
                 else if (message.S == 6 && message.F == 11)
                 {
                     var report = Protocol.ParseReport(message);
@@ -294,6 +328,8 @@ public sealed class McsClient : IAsyncDisposable
                         command = carrier.CommandId; ceid = carrier.Ceid;
                         summary = $"{carrier.EventText} 보고 · {carrier.CarrierId} · CarrierLoc {carrier.CarrierLocation}";
                     }
+                    else if (CargoProtocol.Recovery(message) is { } recovery) { command = recovery.CommandId; ceid = 9004; summary = recovery.Summary; }
+                    else if (CommandRejection.Parse(message) is { } rejection) { command = rejection.CommandId; ceid = 9003; summary = rejection.Summary; }
                     else if (CargoProtocol.Result(message) is { } result) { command = result.RequestId; ceid = 9002; summary = $"화물 {result.Command} · {result.Outcome} · {result.CarrierId} · {result.Detail}"; }
                     else if (CargoProtocol.Snapshot(message) is { } inventory) { command = inventory.RequestId; ceid = 9001; summary = $"Fleet 화물 조회 · {inventory.Items.Count}건"; }
                     else if (CargoProtocol.IdRead(message) is { } scan) { ceid = 406; summary = $"ID 판독 · {scan.ResultText} · {scan.CarrierId} · {scan.Location}"; }
@@ -301,7 +337,7 @@ public sealed class McsClient : IAsyncDisposable
                     else { ceid = Protocol.Number(message.SecsItem![1]); summary = Protocol.EventText(ceid.Value) + " 보고"; }
                 }
                 else if (message.S == 2 && message.F == 41) {summary = message.SecsItem![0].GetString() + " 요청"; foreach (var pair in message.SecsItem[1].Items) if (pair[0].GetString() is "COMMANDID" or "REQUESTID") command = pair[1].GetString();}
-                else if (message.S == 2 && message.F == 42) summary = $"제어 응답 · HCACK {Protocol.Ack(message, 2, 42)}";
+                else if (message.S == 2 && message.F == 42) summary = "제어 응답 · " + CommandAcknowledgement.Parse(message, 42).Summary;
                 else if (message.S == 6 && message.F == 12) summary = $"이벤트 ACK · ACKC6 {Protocol.Number(message.SecsItem!)}";
                 else if (message.S == 5 && message.F == 1) summary = "알람 보고";
                 else if (message.S == 5 && message.F == 2) summary = "알람 ACK";
@@ -316,7 +352,7 @@ public sealed class McsClient : IAsyncDisposable
                 if (requests.Count > 1024) requests.Clear();
                 requests[id] = command;
             }
-            owner.Logged?.Invoke(new(DateTimeOffset.Now, received ? "RX" : "TX", $"SB=0x{id:X8}\n{Protocol.Sml(message)}",
+            owner.Logged?.Invoke(new(DateTimeOffset.Now, received ? "RX" : "TX", $"SB=0x{id:X8}\n{Protocol.Sml(message, statusIds)}",
                 message.S, message.F, id, command, ceid, summary));
         }
         public void Debug(string message) { }

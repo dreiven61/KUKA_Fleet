@@ -8,7 +8,10 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
-        bool preview = e.Args.Length == 2 && e.Args[0] == "--render-preview";
+        bool logPreview = e.Args.Length == 2 && e.Args[0] == "--render-logs-preview";
+        bool historyPreview = e.Args.Length == 2 && e.Args[0] == "--render-jobs-preview";
+        bool timelinePreview = e.Args.Length == 2 && e.Args[0] == "--render-timeline-preview";
+        bool preview = e.Args.Length == 2 && (e.Args[0] == "--render-preview" || logPreview || historyPreview || timelinePreview);
         if (!preview)
         {
             _instance = new Mutex(true, @"Local\ServoStar_KukaVirtualMCS", out bool created);
@@ -30,13 +33,20 @@ public partial class App : Application
                         // Let hidden-tab DataGrid bindings/column widths settle
                         // after the cargo tab becomes visible in preview mode.
                         await Task.Delay(150);
-                        if (window.SourceCombo.Items.Count != 10 || window.DestCombo.Items.Count != 10)
-                            throw new InvalidOperationException("Work-port selectors must contain all ten ports");
+                        window.VerifyCatalogPreview();
                         if (window.TransferButton.IsEnabled || window.ForwardButton.IsEnabled || window.ReverseButton.IsEnabled) throw new InvalidOperationException("Disconnected UI permits transfer");
                         if (window.CancelButton.IsEnabled || window.AbortButton.IsEnabled || window.PauseButton.IsEnabled || window.ResumeButton.IsEnabled) throw new InvalidOperationException("Disconnected UI permits control");
                         if (window.CarrierText.IsReadOnly) throw new InvalidOperationException("Carrier ID is still fixed");
                         if (window.CargoQueryButton.IsEnabled || window.CargoInButton.IsEnabled || window.CargoOutButton.IsEnabled || window.CargoScanButton.IsEnabled || window.CargoVerifyButton.IsEnabled) throw new InvalidOperationException("Disconnected UI permits inventory command");
-                        var content = (System.Windows.FrameworkElement)window.Content;
+                        var logs = window.VerifyLogWindowPreview();
+                        var history = window.VerifyJobHistoryPreview();
+                        await Task.Delay(100);
+                        if (history.HistoryGrid.SelectedItem is not MainWindow.JobRow selected || !history.DetailsText.Text.Contains(selected.CommandId)
+                            || !ReferenceEquals(history.HistoryGrid.SelectedItem, window.JobsGrid.SelectedItem) || history.HistoryTimelineGrid.Items.Count == 0)
+                            throw new InvalidOperationException("History binding lost selection/details after dispatcher updates");
+                        var timelineLogs = await window.VerifyTimelineLogsPreviewAsync();
+                        await Task.Delay(100);
+                        var content = (System.Windows.FrameworkElement)(timelinePreview ? timelineLogs.Content : historyPreview ? history.Content : logPreview ? logs.Content : window.Content);
                         content.UpdateLayout();
                         var bitmap = new System.Windows.Media.Imaging.RenderTargetBitmap((int)content.ActualWidth, (int)content.ActualHeight, 96, 96, System.Windows.Media.PixelFormats.Pbgra32);
                         bitmap.Render(content);

@@ -11,9 +11,12 @@ public final class NativeInteropFixture {
     public static void main(String[] args)throws Exception {
         Path root=Paths.get(args[0]),ready=Paths.get(args[1]);
         int port;try(ServerSocket socket=new ServerSocket(0,1,InetAddress.getLoopbackAddress())){port=socket.getLocalPort();}
+        CanonicalIdentityTest.installCatalog();
         CargoTest.Harness h=new CargoTest.Harness(root);
+        for(Map<String,Object> container:h.containers.values())container.put("emptyFullStatus",1);
         Path folder=Files.createTempDirectory("native-interop-"),config=folder.resolve("config.json");
-        new ObjectMapper().writeValue(config.toFile(),TransferService.map("enabled",true,"bind","127.0.0.1","port",port,"sessionId",3000,"t3Seconds",3,"authorization",NativeHostTest.TOKEN,"journal",folder.resolve("state.json").toString()));
+        Path names=folder.resolve("robots.xml");Files.write(names,VehicleNamesTest.xml("AGV001").getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        new ObjectMapper().writeValue(config.toFile(),TransferService.map("enabled",true,"bind","127.0.0.1","port",port,"sessionId",3000,"t3Seconds",3,"authorization",NativeHostTest.TOKEN,"robotNamesFile",names.toString(),"journal",folder.resolve("state.json").toString()));
         System.setProperty("servostar.secs.config",config.toString());
         NativeHostService server=new NativeHostService(h.service,h.client,new WcsStatusMonitor(h.journal));
         try{

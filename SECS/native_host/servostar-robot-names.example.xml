@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Example only. Replace vehicleId with the actual name agreed with MCS.
+     fleetId is the unchanged Robot ID returned by Fleet.
+     vehicleId is the SECS ASCII VehicleID; leading zeros are preserved.
+     Every registered Fleet robot needs one unique entry when enabled. -->
+<RobotNames version="1">
+  <Robot fleetId="1" vehicleId="AGV001" />
+  <Robot fleetId="2" vehicleId="AGV002" />
+  <Robot fleetId="3" vehicleId="AGV003" />
+</RobotNames>

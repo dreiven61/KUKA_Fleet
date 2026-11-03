@@ -18,7 +18,8 @@ public sealed record CargoRequest(string RequestId, string Command, string Carri
         if (Command == "CARRIER_QUERY") return;
         if (Command == "CARRIER_VERIFY") { if (!Regex.IsMatch(TargetRequestId, @"\A[A-Za-z0-9_-]{1,32}\z")) throw new ArgumentException("재확인 대상 REQUESTID 필요"); return; }
         Identifier(CarrierId, "CARRIERID");
-        if (!WorkPorts.Contains(Port)) throw new ArgumentException("작업 포트를 선택하세요.");
+        WorkPorts.RequireReady();
+        if (!WorkPorts.Contains(Port)) throw new ArgumentException("SV58에서 받은 PortID를 선택하세요.");
         if (Command == "CARRIER_IN") Identifier(Model, "MODEL");
         if (Command is "CARRIER_IN" or "CARRIER_SCAN_TEST") { if (ScannedId.Length > 0) Identifier(ScannedId, "SCANNEDID"); }
     }
@@ -34,6 +35,11 @@ public sealed record IdReadReport(string CarrierId, string Location, ushort Stat
     public string ResultText => Status switch { 0 => "일치", 1 => "판독 실패", 2 => "중복", 3 => "불일치", _ => "알 수 없음" };
 }
 public sealed record CargoOperation(CargoRequest Request, string Outcome, string Detail, DateTimeOffset Updated);
+public sealed record RecoveryReport(string CommandId, string CarrierId, string VehicleId, string WaitNode, string State, string Detail)
+{
+    public string StateText => State switch { "MOVING" => "적재 대기 이동 중", "READY" => "대기 도착 · 회수 가능", "BLOCKED" => "회수 대기 차단", "UNCERTAIN" => "이동 결과 확인 필요", "RETURNED" => "회수반송 완료", _ => State };
+    public string Summary => $"{StateText} · AMR {VehicleId} · {WaitNode} · {Detail}";
+}
 
 public static class CargoProtocol
 {
@@ -83,6 +89,13 @@ public static class CargoProtocol
         var v = Values(m, 406, 14); if (v is null) return null; Count(v, 3);
         return new(Text(v[0]), Text(v[1]), Flag(v[2], 3));
     }
+    public static RecoveryReport? Recovery(SecsMessage m)
+    {
+        var v = Values(m, 9004, 93); if (v is null) return null; Count(v, 6);
+        string state = Text(v[4]);
+        if (state is not ("MOVING" or "READY" or "BLOCKED" or "UNCERTAIN" or "RETURNED")) throw new FormatException("잘못된 회수 대기 상태");
+        return new(Text(v[0]), Text(v[1]), Text(v[2]), Text(v[3]), state, Text(v[5]));
+    }
 }
 
 /** PC intent/outcome history. No automatic command replay on reconnect/restart. */
@@ -111,7 +124,7 @@ public sealed class CargoStore
             Save(new(request, "SENDING", "전송 의도 저장 · 자동 재전송 없음", DateTimeOffset.Now));
         }
     }
-    public void Ack(string id, uint ack) { lock (_sync) if (_ops.TryGetValue(id, out var old) && old.Outcome == "SENDING") Save(old with { Outcome = ack is 0 or 4 ? "ACKNOWLEDGED" : ack == 5 ? "UNCERTAIN" : "REJECTED", Detail = $"HCACK={ack} · 9001/9002 결과 별도 확인" }); }
+    public void Ack(string id, uint ack, string? detail = null) { lock (_sync) if (_ops.TryGetValue(id, out var old) && old.Outcome == "SENDING") Save(old with { Outcome = ack is 0 or 4 ? "ACKNOWLEDGED" : ack == 5 || ack > 6 ? "UNCERTAIN" : "REJECTED", Detail = (detail ?? new CommandAcknowledgement(ack).Summary) + (ack is 0 or 4 ? " · 9001/9002 결과 별도 확인" : "") }); }
     public bool Result(CargoResult r)
     {
         lock (_sync)

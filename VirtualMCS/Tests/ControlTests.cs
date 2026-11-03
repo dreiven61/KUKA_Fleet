@@ -21,6 +21,8 @@ static class ControlTests
             check(jobs.Snapshot().Single(j=>j.Request.CommandId==r.CommandId).IsPending,"S2F42 not terminal "+cmd);
             foreach(uint ceid in new[]{start,end}){using var m=Event(ceid,r);using var ack=await equipment.SendAsync(m,token);check(Protocol.Ack(ack,6,12)==0,"Control event ACK "+ceid);}
             check(jobs.Snapshot().Single(j=>j.Request.CommandId==r.CommandId).Phase==phase,"Observed terminal "+cmd);
+            check(jobs.ReportVehicle(new(610,"1",r.CommandId,r.SourcePort,r.CarrierId)),"Control release can occur at source "+cmd);
+            check(!jobs.ReportVehicle(new(610,"1",r.CommandId,"PORT_999",r.CarrierId)),"Control release rejects unrelated station "+cmd);
             using var late=Event(207,r);jobs.Report(Protocol.ParseReport(late)!);
             check(jobs.Snapshot().Single(j=>j.Request.CommandId==r.CommandId).Phase==phase,"Late207 cannot overwrite "+cmd);
         }
@@ -38,6 +40,15 @@ static class ControlTests
             check(jobs.Snapshot().Single(j=>j.Request.CommandId==paused.CommandId).Phase==JobPhase.Transferring,"Failed control preserves job "+ceid);
         }
         jobs.Release(paused.CommandId);
+        foreach(string cmd in new[]{"PAUSE","RESUME"}){
+            var r=Request("COMPLETED_DURING_"+cmd);jobs.Reserve(r);jobs.Acknowledge(r.CommandId,4);
+            jobs.BeginControl(r.CommandId,cmd);jobs.ControlAcknowledge(r.CommandId,cmd,4);
+            check(jobs.Report(new(207,r.CommandId,r.CarrierId,r.SourcePort,r.DestPort,r.DestPort,0)),"Correlated207 during "+cmd);
+            var ended=jobs.Snapshot().Single(j=>j.Request.CommandId==r.CommandId);
+            check(ended.Phase==JobPhase.Completed && ended.PendingControl.Length==0,"Terminal207 clears pending "+cmd);
+            jobs.Report(new(cmd=="PAUSE"?209u:210u,r.CommandId,r.CarrierId,r.SourcePort,r.DestPort,r.DestPort,0));
+            check(jobs.Snapshot().Single(j=>j.Request.CommandId==r.CommandId).Phase==JobPhase.Completed,"Late control cannot reopen completed job "+cmd);
+        }
         foreach(uint ceid in new[]{701u,702u}){
             using var m=new SecsMessage(6,11,true){SecsItem=L(U4(0),U2((ushort)ceid),L(L(U2(6),L(A("3"),U4(900001),A("FLEET_PATH_NOT_FOUND")))))};
             using var ack=await equipment.SendAsync(m,token);check(Protocol.Ack(ack,6,12)==0,"Unit alarm ACK "+ceid);

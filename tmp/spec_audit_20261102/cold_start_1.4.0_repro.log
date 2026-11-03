@@ -1,0 +1,7 @@
+Exception in thread "main" java.lang.IllegalStateException: FLEET_CATALOG_UNAVAILABLE: Fleet facility scan has not completed
+	at servostar.fleet.transfer.WorkPorts.require(WorkPorts.java:35)
+	at servostar.fleet.transfer.WorkPorts.node(WorkPorts.java:86)
+	at servostar.fleet.transfer.TransferJournal.node(TransferJournal.java:200)
+	at servostar.fleet.transfer.TransferJournal.apply(TransferJournal.java:158)
+	at servostar.fleet.transfer.TransferJournal.<init>(TransferJournal.java:35)
+	at servostar.fleet.transfer.ColdStartCatalogTest.main(ColdStartCatalogTest.java:20)

@@ -1,0 +1,1236 @@
+﻿[08:46:10.706] TX  운송 요청
+S2F49 W TRANSFER
+<L [4] [EnhancedRemoteCommand]
+  <U4 [1] 0 [DATAID]>
+  <A [0] "" [OBJSPEC]>
+  <A [8] "TRANSFER" [RCMD]>
+  <L [2] [CommandGroups]
+    <L [2] [CommandGroup1]
+      <A [11] "COMMANDINFO" [CPNAME]>
+      <L [2] [CommandParameters]
+        <L [2] [CommandParameter1]
+          <A [9] "COMMANDID" [CPNAME]>
+          <A [24] "PREVIEW_a0ba97602e934a58" [CommandID]>
+        >
+        <L [2] [CommandParameter2]
+          <A [8] "PRIORITY" [CPNAME]>
+          <U2 [1] 1 [Priority]>
+        >
+      >
+    >
+    <L [2] [CommandGroup2]
+      <A [12] "TRANSFERINFO" [CPNAME]>
+      <L [3] [CommandParameters]
+        <L [2] [CommandParameter1]
+          <A [9] "CARRIERID" [CPNAME]>
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+        <L [2] [CommandParameter2]
+          <A [10] "SOURCEPORT" [CPNAME]>
+          <A [7] "PORT_97" [SourcePort]>
+        >
+        <L [2] [CommandParameter3]
+          <A [8] "DESTPORT" [CPNAME]>
+          <A [7] "PORT_89" [DestPort]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:10.722] RX  작업 시작 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 1 [DATAID]>
+  <U2 [1] 208 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 2 [RPTID]>
+      <L [3] [ReportData]
+        <A [24] "PREVIEW_a0ba97602e934a58" [CommandID]>
+        <L [1] [TransferCompleteInfo]
+          <L [2] [TransferCompleteInfoi1]
+            <L [3] [TransferInfo]
+              <A [13] "SIM_CARGO_001" [CarrierID]>
+              <A [7] "PORT_97" [SourcePort]>
+              <A [7] "PORT_89" [DestPort]>
+            >
+            <A [7] "PORT_97" [CarrierLoc]>
+          >
+        >
+        <U2 [1] 0 [ResultCode]>
+      >
+    >
+  >
+>
+.
+[08:46:10.728] RX  차량 할당 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 604 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_a0ba97602e934a58" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_97" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:10.731] RX  차량 도착 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 601 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_a0ba97602e934a58" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_97" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:10.733] RX  운송 진행 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 1 [DATAID]>
+  <U2 [1] 211 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 2 [RPTID]>
+      <L [3] [ReportData]
+        <A [24] "PREVIEW_a0ba97602e934a58" [CommandID]>
+        <L [1] [TransferCompleteInfo]
+          <L [2] [TransferCompleteInfoi1]
+            <L [3] [TransferInfo]
+              <A [13] "SIM_CARGO_001" [CarrierID]>
+              <A [7] "PORT_97" [SourcePort]>
+              <A [7] "PORT_89" [DestPort]>
+            >
+            <A [7] "PORT_97" [CarrierLoc]>
+          >
+        >
+        <U2 [1] 0 [ResultCode]>
+      >
+    >
+  >
+>
+.
+[08:46:10.736] RX  픽업 시작 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 602 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_a0ba97602e934a58" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_97" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:10.740] RX  화물 적재 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 301 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 3 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [13] "SIM_CARGO_001" [CarrierID]>
+        <A [1] "2" [CarrierLoc]>
+        <A [24] "PREVIEW_a0ba97602e934a58" [CommandID]>
+      >
+    >
+  >
+>
+.
+[08:46:10.743] RX  픽업 완료 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 603 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_a0ba97602e934a58" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_97" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:10.746] RX  차량 출발 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 605 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_a0ba97602e934a58" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_97" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:10.749] RX  차량 도착 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 601 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_a0ba97602e934a58" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_89" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:10.751] RX  드롭 시작 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 606 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_a0ba97602e934a58" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_89" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:10.754] RX  화물 하차 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 302 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 3 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [13] "SIM_CARGO_001" [CarrierID]>
+        <A [7] "PORT_89" [CarrierLoc]>
+        <A [24] "PREVIEW_a0ba97602e934a58" [CommandID]>
+      >
+    >
+  >
+>
+.
+[08:46:10.757] RX  드롭 완료 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 607 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_a0ba97602e934a58" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_89" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:10.760] RX  차량 해제 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 610 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_a0ba97602e934a58" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_89" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:10.764] RX  정상 완료 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 1 [DATAID]>
+  <U2 [1] 207 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 2 [RPTID]>
+      <L [3] [ReportData]
+        <A [24] "PREVIEW_a0ba97602e934a58" [CommandID]>
+        <L [1] [TransferCompleteInfo]
+          <L [2] [TransferCompleteInfoi1]
+            <L [3] [TransferInfo]
+              <A [13] "SIM_CARGO_001" [CarrierID]>
+              <A [7] "PORT_97" [SourcePort]>
+              <A [7] "PORT_89" [DestPort]>
+            >
+            <A [7] "PORT_89" [CarrierLoc]>
+          >
+        >
+        <U2 [1] 0 [ResultCode]>
+      >
+    >
+  >
+>
+.
+[08:46:11.071] RX  오프라인 검증 · 실시간 메시지 추가
+S6F11 W
+<L [3] ...>
+.
+(오프라인 창 검증)
+[08:46:11.071] RX  오프라인 검증 · 실시간 메시지 추가
+S6F11 W
+<L [3] ...>
+.
+(오프라인 창 검증)
+[08:46:12.185] TX  운송 요청 · 오프라인 클릭 검증
+SB=0x00001234
+S2F49 W TRANSFER
+<L [4] [EnhancedRemoteCommand]
+  <U4 [1] 0 [DATAID]>
+  <A [0] "" [OBJSPEC]>
+  <A [8] "TRANSFER" [RCMD]>
+  <L [2] [CommandGroups]
+    <L [2] [CommandGroup1]
+      <A [11] "COMMANDINFO" [CPNAME]>
+      <L [2] [CommandParameters]
+        <L [2] [CommandParameter1]
+          <A [9] "COMMANDID" [CPNAME]>
+          <A [25] "TIMELINE_078d95d1f9f0440d" [CommandID]>
+        >
+        <L [2] [CommandParameter2]
+          <A [8] "PRIORITY" [CPNAME]>
+          <U2 [1] 1 [Priority]>
+        >
+      >
+    >
+    <L [2] [CommandGroup2]
+      <A [12] "TRANSFERINFO" [CPNAME]>
+      <L [3] [CommandParameters]
+        <L [2] [CommandParameter1]
+          <A [9] "CARRIERID" [CPNAME]>
+          <A [13] "SIM_CARGO_003" [CarrierID]>
+        >
+        <L [2] [CommandParameter2]
+          <A [10] "SOURCEPORT" [CPNAME]>
+          <A [7] "PORT_89" [SourcePort]>
+        >
+        <L [2] [CommandParameter3]
+          <A [8] "DESTPORT" [CPNAME]>
+          <A [7] "PORT_97" [DestPort]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:12.357] RX  운송 응답 · 오프라인 클릭 검증
+SB=0x00001234
+S2F50 
+<L [2] [CommandAck]
+  <B [1] 4 [HCACK]>
+  <L [0] [ParameterAcks]
+  >
+>
+.
+[08:46:55.601] TX  운송 요청
+S2F49 W TRANSFER
+<L [4] [EnhancedRemoteCommand]
+  <U4 [1] 0 [DATAID]>
+  <A [0] "" [OBJSPEC]>
+  <A [8] "TRANSFER" [RCMD]>
+  <L [2] [CommandGroups]
+    <L [2] [CommandGroup1]
+      <A [11] "COMMANDINFO" [CPNAME]>
+      <L [2] [CommandParameters]
+        <L [2] [CommandParameter1]
+          <A [9] "COMMANDID" [CPNAME]>
+          <A [24] "PREVIEW_0a98a22fa65342c5" [CommandID]>
+        >
+        <L [2] [CommandParameter2]
+          <A [8] "PRIORITY" [CPNAME]>
+          <U2 [1] 1 [Priority]>
+        >
+      >
+    >
+    <L [2] [CommandGroup2]
+      <A [12] "TRANSFERINFO" [CPNAME]>
+      <L [3] [CommandParameters]
+        <L [2] [CommandParameter1]
+          <A [9] "CARRIERID" [CPNAME]>
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+        <L [2] [CommandParameter2]
+          <A [10] "SOURCEPORT" [CPNAME]>
+          <A [7] "PORT_97" [SourcePort]>
+        >
+        <L [2] [CommandParameter3]
+          <A [8] "DESTPORT" [CPNAME]>
+          <A [7] "PORT_89" [DestPort]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:55.613] RX  작업 시작 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 1 [DATAID]>
+  <U2 [1] 208 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 2 [RPTID]>
+      <L [3] [ReportData]
+        <A [24] "PREVIEW_0a98a22fa65342c5" [CommandID]>
+        <L [1] [TransferCompleteInfo]
+          <L [2] [TransferCompleteInfoi1]
+            <L [3] [TransferInfo]
+              <A [13] "SIM_CARGO_001" [CarrierID]>
+              <A [7] "PORT_97" [SourcePort]>
+              <A [7] "PORT_89" [DestPort]>
+            >
+            <A [7] "PORT_97" [CarrierLoc]>
+          >
+        >
+        <U2 [1] 0 [ResultCode]>
+      >
+    >
+  >
+>
+.
+[08:46:55.619] RX  차량 할당 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 604 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_0a98a22fa65342c5" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_97" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:55.622] RX  차량 도착 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 601 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_0a98a22fa65342c5" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_97" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:55.626] RX  운송 진행 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 1 [DATAID]>
+  <U2 [1] 211 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 2 [RPTID]>
+      <L [3] [ReportData]
+        <A [24] "PREVIEW_0a98a22fa65342c5" [CommandID]>
+        <L [1] [TransferCompleteInfo]
+          <L [2] [TransferCompleteInfoi1]
+            <L [3] [TransferInfo]
+              <A [13] "SIM_CARGO_001" [CarrierID]>
+              <A [7] "PORT_97" [SourcePort]>
+              <A [7] "PORT_89" [DestPort]>
+            >
+            <A [7] "PORT_97" [CarrierLoc]>
+          >
+        >
+        <U2 [1] 0 [ResultCode]>
+      >
+    >
+  >
+>
+.
+[08:46:55.629] RX  픽업 시작 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 602 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_0a98a22fa65342c5" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_97" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:55.632] RX  화물 적재 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 301 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 3 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [13] "SIM_CARGO_001" [CarrierID]>
+        <A [1] "2" [CarrierLoc]>
+        <A [24] "PREVIEW_0a98a22fa65342c5" [CommandID]>
+      >
+    >
+  >
+>
+.
+[08:46:55.635] RX  픽업 완료 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 603 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_0a98a22fa65342c5" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_97" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:55.638] RX  차량 출발 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 605 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_0a98a22fa65342c5" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_97" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:55.642] RX  차량 도착 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 601 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_0a98a22fa65342c5" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_89" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:55.646] RX  드롭 시작 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 606 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_0a98a22fa65342c5" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_89" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:55.650] RX  화물 하차 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 302 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 3 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [13] "SIM_CARGO_001" [CarrierID]>
+        <A [7] "PORT_89" [CarrierLoc]>
+        <A [24] "PREVIEW_0a98a22fa65342c5" [CommandID]>
+      >
+    >
+  >
+>
+.
+[08:46:55.653] RX  드롭 완료 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 607 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_0a98a22fa65342c5" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_89" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:55.656] RX  차량 해제 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 610 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_0a98a22fa65342c5" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_89" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:55.660] RX  정상 완료 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 1 [DATAID]>
+  <U2 [1] 207 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 2 [RPTID]>
+      <L [3] [ReportData]
+        <A [24] "PREVIEW_0a98a22fa65342c5" [CommandID]>
+        <L [1] [TransferCompleteInfo]
+          <L [2] [TransferCompleteInfoi1]
+            <L [3] [TransferInfo]
+              <A [13] "SIM_CARGO_001" [CarrierID]>
+              <A [7] "PORT_97" [SourcePort]>
+              <A [7] "PORT_89" [DestPort]>
+            >
+            <A [7] "PORT_89" [CarrierLoc]>
+          >
+        >
+        <U2 [1] 0 [ResultCode]>
+      >
+    >
+  >
+>
+.
+[08:46:55.969] RX  오프라인 검증 · 실시간 메시지 추가
+S6F11 W
+<L [3] ...>
+.
+(오프라인 창 검증)
+[08:46:55.969] RX  오프라인 검증 · 실시간 메시지 추가
+S6F11 W
+<L [3] ...>
+.
+(오프라인 창 검증)
+[08:46:57.088] TX  운송 요청 · 오프라인 클릭 검증
+SB=0x00001234
+S2F49 W TRANSFER
+<L [4] [EnhancedRemoteCommand]
+  <U4 [1] 0 [DATAID]>
+  <A [0] "" [OBJSPEC]>
+  <A [8] "TRANSFER" [RCMD]>
+  <L [2] [CommandGroups]
+    <L [2] [CommandGroup1]
+      <A [11] "COMMANDINFO" [CPNAME]>
+      <L [2] [CommandParameters]
+        <L [2] [CommandParameter1]
+          <A [9] "COMMANDID" [CPNAME]>
+          <A [25] "TIMELINE_869eaed688a741bd" [CommandID]>
+        >
+        <L [2] [CommandParameter2]
+          <A [8] "PRIORITY" [CPNAME]>
+          <U2 [1] 1 [Priority]>
+        >
+      >
+    >
+    <L [2] [CommandGroup2]
+      <A [12] "TRANSFERINFO" [CPNAME]>
+      <L [3] [CommandParameters]
+        <L [2] [CommandParameter1]
+          <A [9] "CARRIERID" [CPNAME]>
+          <A [13] "SIM_CARGO_003" [CarrierID]>
+        >
+        <L [2] [CommandParameter2]
+          <A [10] "SOURCEPORT" [CPNAME]>
+          <A [7] "PORT_89" [SourcePort]>
+        >
+        <L [2] [CommandParameter3]
+          <A [8] "DESTPORT" [CPNAME]>
+          <A [7] "PORT_97" [DestPort]>
+        >
+      >
+    >
+  >
+>
+.
+[08:46:57.288] RX  운송 응답 · 오프라인 클릭 검증
+SB=0x00001234
+S2F50 
+<L [2] [CommandAck]
+  <B [1] 4 [HCACK]>
+  <L [0] [ParameterAcks]
+  >
+>
+.
+[08:48:13.151] TX  운송 요청
+S2F49 W TRANSFER
+<L [4] [EnhancedRemoteCommand]
+  <U4 [1] 0 [DATAID]>
+  <A [0] "" [OBJSPEC]>
+  <A [8] "TRANSFER" [RCMD]>
+  <L [2] [CommandGroups]
+    <L [2] [CommandGroup1]
+      <A [11] "COMMANDINFO" [CPNAME]>
+      <L [2] [CommandParameters]
+        <L [2] [CommandParameter1]
+          <A [9] "COMMANDID" [CPNAME]>
+          <A [24] "PREVIEW_d89056d9df17478d" [CommandID]>
+        >
+        <L [2] [CommandParameter2]
+          <A [8] "PRIORITY" [CPNAME]>
+          <U2 [1] 1 [Priority]>
+        >
+      >
+    >
+    <L [2] [CommandGroup2]
+      <A [12] "TRANSFERINFO" [CPNAME]>
+      <L [3] [CommandParameters]
+        <L [2] [CommandParameter1]
+          <A [9] "CARRIERID" [CPNAME]>
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+        <L [2] [CommandParameter2]
+          <A [10] "SOURCEPORT" [CPNAME]>
+          <A [7] "PORT_97" [SourcePort]>
+        >
+        <L [2] [CommandParameter3]
+          <A [8] "DESTPORT" [CPNAME]>
+          <A [7] "PORT_89" [DestPort]>
+        >
+      >
+    >
+  >
+>
+.
+[08:48:13.168] RX  작업 시작 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 1 [DATAID]>
+  <U2 [1] 208 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 2 [RPTID]>
+      <L [3] [ReportData]
+        <A [24] "PREVIEW_d89056d9df17478d" [CommandID]>
+        <L [1] [TransferCompleteInfo]
+          <L [2] [TransferCompleteInfoi1]
+            <L [3] [TransferInfo]
+              <A [13] "SIM_CARGO_001" [CarrierID]>
+              <A [7] "PORT_97" [SourcePort]>
+              <A [7] "PORT_89" [DestPort]>
+            >
+            <A [7] "PORT_97" [CarrierLoc]>
+          >
+        >
+        <U2 [1] 0 [ResultCode]>
+      >
+    >
+  >
+>
+.
+[08:48:13.175] RX  차량 할당 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 604 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_d89056d9df17478d" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_97" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:48:13.180] RX  차량 도착 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 601 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_d89056d9df17478d" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_97" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:48:13.184] RX  운송 진행 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 1 [DATAID]>
+  <U2 [1] 211 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 2 [RPTID]>
+      <L [3] [ReportData]
+        <A [24] "PREVIEW_d89056d9df17478d" [CommandID]>
+        <L [1] [TransferCompleteInfo]
+          <L [2] [TransferCompleteInfoi1]
+            <L [3] [TransferInfo]
+              <A [13] "SIM_CARGO_001" [CarrierID]>
+              <A [7] "PORT_97" [SourcePort]>
+              <A [7] "PORT_89" [DestPort]>
+            >
+            <A [7] "PORT_97" [CarrierLoc]>
+          >
+        >
+        <U2 [1] 0 [ResultCode]>
+      >
+    >
+  >
+>
+.
+[08:48:13.187] RX  픽업 시작 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 602 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_d89056d9df17478d" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_97" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:48:13.193] RX  화물 적재 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 301 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 3 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [13] "SIM_CARGO_001" [CarrierID]>
+        <A [1] "2" [CarrierLoc]>
+        <A [24] "PREVIEW_d89056d9df17478d" [CommandID]>
+      >
+    >
+  >
+>
+.
+[08:48:13.197] RX  픽업 완료 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 603 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_d89056d9df17478d" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_97" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:48:13.201] RX  차량 출발 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 605 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_d89056d9df17478d" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_97" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:48:13.205] RX  차량 도착 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 601 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_d89056d9df17478d" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_89" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:48:13.209] RX  드롭 시작 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 606 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_d89056d9df17478d" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_89" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:48:13.214] RX  화물 하차 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 302 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 3 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [13] "SIM_CARGO_001" [CarrierID]>
+        <A [7] "PORT_89" [CarrierLoc]>
+        <A [24] "PREVIEW_d89056d9df17478d" [CommandID]>
+      >
+    >
+  >
+>
+.
+[08:48:13.217] RX  드롭 완료 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 607 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_d89056d9df17478d" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_89" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:48:13.221] RX  차량 해제 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 0 [DATAID]>
+  <U2 [1] 610 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 5 [RPTID]>
+      <L [4] [ReportData]
+        <A [1] "2" [VehicleID]>
+        <A [24] "PREVIEW_d89056d9df17478d" [CommandID]>
+        <L [1] [TransferPortList]
+          <A [7] "PORT_89" [TransferPort]>
+        >
+        <L [1] [CarrierIDList]
+          <A [13] "SIM_CARGO_001" [CarrierID]>
+        >
+      >
+    >
+  >
+>
+.
+[08:48:13.227] RX  정상 완료 보고
+S6F11 W 
+<L [3] [EventReport]
+  <U4 [1] 1 [DATAID]>
+  <U2 [1] 207 [CEID]>
+  <L [1] [Reports]
+    <L [2] [Report1]
+      <U2 [1] 2 [RPTID]>
+      <L [3] [ReportData]
+        <A [24] "PREVIEW_d89056d9df17478d" [CommandID]>
+        <L [1] [TransferCompleteInfo]
+          <L [2] [TransferCompleteInfoi1]
+            <L [3] [TransferInfo]
+              <A [13] "SIM_CARGO_001" [CarrierID]>
+              <A [7] "PORT_97" [SourcePort]>
+              <A [7] "PORT_89" [DestPort]>
+            >
+            <A [7] "PORT_89" [CarrierLoc]>
+          >
+        >
+        <U2 [1] 0 [ResultCode]>
+      >
+    >
+  >
+>
+.
+[08:48:13.595] RX  오프라인 검증 · 실시간 메시지 추가
+S6F11 W
+<L [3] ...>
+.
+(오프라인 창 검증)
+[08:48:13.595] RX  오프라인 검증 · 실시간 메시지 추가
+S6F11 W
+<L [3] ...>
+.
+(오프라인 창 검증)
+[08:48:14.835] TX  운송 요청 · 오프라인 클릭 검증
+SB=0x00001234
+S2F49 W TRANSFER
+<L [4] [EnhancedRemoteCommand]
+  <U4 [1] 0 [DATAID]>
+  <A [0] "" [OBJSPEC]>
+  <A [8] "TRANSFER" [RCMD]>
+  <L [2] [CommandGroups]
+    <L [2] [CommandGroup1]
+      <A [11] "COMMANDINFO" [CPNAME]>
+      <L [2] [CommandParameters]
+        <L [2] [CommandParameter1]
+          <A [9] "COMMANDID" [CPNAME]>
+          <A [25] "TIMELINE_5610ad4658dc4a10" [CommandID]>
+        >
+        <L [2] [CommandParameter2]
+          <A [8] "PRIORITY" [CPNAME]>
+          <U2 [1] 1 [Priority]>
+        >
+      >
+    >
+    <L [2] [CommandGroup2]
+      <A [12] "TRANSFERINFO" [CPNAME]>
+      <L [3] [CommandParameters]
+        <L [2] [CommandParameter1]
+          <A [9] "CARRIERID" [CPNAME]>
+          <A [13] "SIM_CARGO_003" [CarrierID]>
+        >
+        <L [2] [CommandParameter2]
+          <A [10] "SOURCEPORT" [CPNAME]>
+          <A [7] "PORT_89" [SourcePort]>
+        >
+        <L [2] [CommandParameter3]
+          <A [8] "DESTPORT" [CPNAME]>
+          <A [7] "PORT_97" [DestPort]>
+        >
+      >
+    >
+  >
+>
+.
+[08:48:15.067] RX  운송 응답 · 오프라인 클릭 검증
+SB=0x00001234
+S2F50 
+<L [2] [CommandAck]
+  <B [1] 4 [HCACK]>
+  <L [0] [ParameterAcks]
+  >
+>
+.

@@ -1,0 +1,12 @@
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+CAPTURE 72190..72197 SV25 FAIL Carrier snapshots disagree; requery before dispatch reads=8
+java.lang.IllegalStateException: Carrier snapshots disagree; requery before dispatch
+	at servostar.fleet.transfer.SelectedStatusService.carrierValues(SelectedStatusService.java:146)
+	at servostar.fleet.transfer.SelectedStatusService.read(SelectedStatusService.java:57)
+	at servostar.fleet.transfer.CapturedStatusReplay.main(CapturedStatusReplay.java:38)
+CAPTURE 72190..72197 SV58 FAIL Carrier snapshots disagree; requery before dispatch reads=8
+CAPTURE 72190..72197 SV23 FAIL Carrier snapshots disagree; requery before dispatch reads=8
+CAPTURE 72198..72205 SV25 OK entries=3 reads=8
+CAPTURE 72198..72205 SV58 OK entries=10 reads=8
+CAPTURE 72198..72205 SV23 OK entries=1 reads=8
+PASS: 6 captured-response replay checks against deployed JAR; no live Fleet calls; retained ledger not reconstructed.

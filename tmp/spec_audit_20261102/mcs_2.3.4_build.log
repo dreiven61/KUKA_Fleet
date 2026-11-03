@@ -1,0 +1,11 @@
+  복원할 프로젝트를 확인하는 중...
+  C:\work\KUKA\KUKA_Fleet\VirtualMCS\App\KukaMcs.App.csproj을(를) 499밀리초 동안 복원했습니다.
+  C:\work\KUKA\KUKA_Fleet\VirtualMCS\Core\KukaMcs.Core.csproj을(를) 499밀리초 동안 복원했습니다.
+  KukaMcs.Core -> C:\work\KUKA\KUKA_Fleet\VirtualMCS\Core\bin\Release\net10.0\KukaMcs.Core.dll
+  KukaMcs.App -> C:\work\KUKA\KUKA_Fleet\VirtualMCS\App\bin\Release\net10.0-windows\win-x64\KukaVirtualMCS.dll
+  KukaMcs.App -> C:\work\KUKA\KUKA_Fleet\VirtualMCS\dist-2.3.4\
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          955ABC3FD3CE8BEC2BE122388CE9C72550EFDC5DAD05045324346BEA7D678A18       C:\work\KUKA\KUKA_Fleet\VirtualM…
+

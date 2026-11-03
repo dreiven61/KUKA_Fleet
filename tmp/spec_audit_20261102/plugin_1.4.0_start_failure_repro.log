@@ -1,0 +1,6 @@
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+PASS: isolated gRPC runtime, transport provider and WCS stub loaded; no RPC sent.
+PASS: packaged vehicle snapshot executes with private RCS protobuf classes unavailable.
+PASS: isolated catalog initialization, metadata protobuf decoding and unavailable-map RPC execute without linkage errors.
+PASS: SBP/PF4J loaded packaged JAR, started child context, registered eleven transfer and four native administrative routes. WCS connection disabled in test.
+PASS: plugin stop removed its routes.

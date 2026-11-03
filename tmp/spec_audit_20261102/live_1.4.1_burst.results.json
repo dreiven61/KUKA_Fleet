@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "pattern": [
+    25,
+    58,
+    23
+  ],
+  "rounds": 100,
+  "replies": 300,
+  "p50Ms": 78.0,
+  "p95Ms": 125.0,
+  "maxMs": 266.0
+}

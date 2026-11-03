@@ -1,0 +1,24 @@
+[
+  {
+    "version": "1.5.0",
+    "bytes": 13175186,
+    "entries": 7765,
+    "classes": 7754,
+    "grpc": 3238,
+    "protobuf": 714,
+    "secs": 393,
+    "custom": 41,
+    "sha256": "dc1d587970f10312984f97f12dc54156c762405b99510fb078e06f646eeb3262"
+  },
+  {
+    "version": "1.5.1",
+    "bytes": 125251,
+    "entries": 45,
+    "classes": 40,
+    "grpc": 0,
+    "protobuf": 0,
+    "secs": 0,
+    "custom": 41,
+    "sha256": "a63cc82ec0979b81c28d46b825d7585a4dc58de46d02173fe9c48d75dadc75f6"
+  }
+]

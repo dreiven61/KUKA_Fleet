@@ -97,8 +97,8 @@ public final class CargoTest {
         check(transfer.state.data.jobs.get("OTHER_CARGO").phase.equals("COMPLETED") && transfer.count(207)==1,"Second carrier observed lifecycle reaches verified completion");
         HostState.Delivery finished=transfer.state.data.reports.stream().filter(x->x.ceid==207).findFirst().get();
         check(transfer.engine.reportBody(finished).toString().contains("SIM_CARGO_002"),"Final SECS report uses actual second carrier");
-        Harness bad=new Harness(root);check(NativeHostTest.ack(bad.engine.transfer(req))==2 && bad.submits==0,"Unregistered transfer does not create cargo");
-        bad.containers.put("SIM_CARGO_002",Harness.row("SIM_CARGO_002","PORT_94",1));req.put("COMMANDID","WRONG_PORT");check(NativeHostTest.ack(bad.engine.transfer(req))==2 && bad.submits==0,"Wrong source never submits");
+        Harness bad=new Harness(root);check(NativeHostTest.ack(bad.engine.transfer(req))==6 && bad.submits==0,"Unregistered transfer does not create cargo");
+        bad.containers.put("SIM_CARGO_002",Harness.row("SIM_CARGO_002","PORT_94",1));req.put("COMMANDID","WRONG_PORT");check(NativeHostTest.ack(bad.engine.transfer(req))==3 && bad.submits==0,"Wrong source never submits");
         for(int expected=0;expected<4;expected++) {
             Map<String,String> scan=p("SCAN_"+expected,"SIM_CARGO_001",expected==2?"PORT_97":"PORT_89");
             if(expected==1)scan.put("SCANOK","0");if(expected==3)scan.put("SCANNEDID","OTHER");h.run("CARRIER_SCAN_TEST",scan);

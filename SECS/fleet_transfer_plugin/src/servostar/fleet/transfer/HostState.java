@@ -15,7 +15,11 @@ public final class HostState {
         public String phase="SUBMITTING", vehicle="", instance="", control="", controlState="", location="";
         public int next;
         public long controlGeneration;
+        public String controlEvidence="";
         public boolean paused;
+        public boolean recoveryArmed;
+        public String recoveryReviewSource="", recoveryReviewNode="";
+        public String recoveryState="", recoveryMission="", recoveryNode="", recoveryInstance="", recoveryCommand="", recoveryDetail="", recoveryModel="";
         public Set<String> responses=new LinkedHashSet<>();
     }
     public static final class Delivery {
@@ -32,6 +36,7 @@ public final class HostState {
         public Map<String,String> request=new LinkedHashMap<>();
     }
     public static final class Data {
+        public Map<String,String> vehicleNames=new LinkedHashMap<>();
         public Map<String,Job> jobs=new LinkedHashMap<>();
         public List<Delivery> reports=new ArrayList<>();
         public Set<String> reportKeys=new LinkedHashSet<>();
@@ -57,6 +62,7 @@ public final class HostState {
             d.detail="RESTART_REVIEW_NO_REPLAY";add(d);
         }
         for(Job j:data.jobs.values()){
+            if("SENDING".equals(j.recoveryState))j.recoveryState="UNCERTAIN";
             if("SUBMITTING".equals(j.phase))j.phase="UNCERTAIN";
             if("SENDING".equals(j.controlState)){j.controlState="UNCERTAIN";if("PAUSE".equals(j.control)||"RESUME".equals(j.control))data.tsc="UNCERTAIN";}
         }
@@ -84,14 +90,26 @@ public final class HostState {
         data.reportKeys.add(d.key);data.reports.add(d);
     }
     synchronized Delivery pending(){requireHealthy();for(Delivery d:data.reports)if(!"ACKED".equals(d.state))return d;return null;}
+    synchronized boolean unsettled(Job job){
+        if(!NativeHostEngine.terminal(job.phase))return true;
+        for(Delivery d:data.reports)if(job.request.get("COMMANDID").equals(d.command) && !"ACKED".equals(d.state)
+            && Arrays.asList("TRANSFER","VEHICLE","CARRIER").contains(d.kind))return true;
+        return false;
+    }
     public synchronized Map<String,Object> status(){
         List<Map<String,Object>> reports=new ArrayList<>();
         List<Map<String,Object>> jobs=new ArrayList<>();
         for(Map.Entry<String,Job> entry:data.jobs.entrySet()){
-            Job j=entry.getValue();jobs.add(TransferService.map("commandId",entry.getKey(),"phase",j.phase,"control",j.control,"controlState",j.controlState,"paused",j.paused,"vehicle",j.vehicle,"nextReportIndex",j.next));
+            Job j=entry.getValue();jobs.add(TransferService.map("commandId",entry.getKey(),"phase",j.phase,"control",j.control,"controlState",j.controlState,"paused",j.paused,"vehicle",j.vehicle,"instanceId",j.instance,"controlGeneration",j.controlGeneration,"controlEvidence",j.controlEvidence,"nextReportIndex",j.next,"recoveryArmed",j.recoveryArmed,"recoveryReviewSource",j.recoveryReviewSource,"recoveryReviewNode",j.recoveryReviewNode,"recoveryState",j.recoveryState,"recoveryMission",j.recoveryMission,"recoveryNode",j.recoveryNode,"recoveryCommand",j.recoveryCommand,"recoveryDetail",j.recoveryDetail));
         }
         for(Delivery d:data.reports)if(!"ACKED".equals(d.state))reports.add(TransferService.map("dataId",d.id,"kind",d.kind,"ceid",d.ceid,"commandId",d.command,"state",d.state,"attempts",d.attempts,"error",d.error));
-        return TransferService.map("healthy",healthy,"tsc",data.tsc,"reports",reports,"jobCount",data.jobs.size(),"jobs",jobs,"cargoOperations",data.cargoOperations);
+        List<Map<String,Object>> rejected=new ArrayList<>();
+        for(int i=data.reports.size()-1;i>=0 && rejected.size()<20;i--){Delivery d=data.reports.get(i);if("COMMAND_REJECT".equals(d.kind))rejected.add(TransferService.map("dataId",d.id,"commandId",d.command,"command",d.operation,"hcack",d.result,"reason",d.detail,"tsc",d.outcome,"blockingId",d.port));}
+        List<Map<String,Object>> activeAlarms=new ArrayList<>();
+        for(Map.Entry<String,Delivery> entry:data.alarms.entrySet()){
+            Delivery a=entry.getValue();activeAlarms.add(TransferService.map("key",entry.getKey(),"alid",a.alarmId,"commandId",a.command,"vehicle",a.vehicle,"code",a.port,"source",a.operation,"text",a.text));
+        }
+        return TransferService.map("recentRejections",rejected,"healthy",healthy,"tsc",data.tsc,"reports",reports,"activeAlarms",activeAlarms,"jobCount",data.jobs.size(),"jobs",jobs,"cargoOperations",data.cargoOperations);
     }
     public synchronized void retry(long id){
         requireHealthy();

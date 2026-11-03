@@ -1,0 +1,2234 @@
+{
+  "summary": {
+    "version": "2.3.0",
+    "server": "192.168.0.45:5556",
+    "queryResponses": 311,
+    "failures": 0,
+    "transportSubmissions": 0,
+    "sessions": [
+      {
+        "start": "17:30:30.654",
+        "queries": 303,
+        "failures": 0
+      },
+      {
+        "start": "17:33:45.655",
+        "queries": 8,
+        "failures": 0
+      }
+    ],
+    "liveBurst": {
+      "rounds": 100,
+      "replies": 300,
+      "failures": 0,
+      "p95Ms": 230.8,
+      "maxMs": 545.8
+    },
+    "finalReconnect": [
+      {
+        "time": "17:36:35.428",
+        "ids": "25",
+        "result": "정상",
+        "latencyMs": 83.7,
+        "summary": "AGV 3건"
+      },
+      {
+        "time": "17:36:35.514",
+        "ids": "58",
+        "result": "정상",
+        "latencyMs": 168.2,
+        "summary": "관리 포트 10건"
+      },
+      {
+        "time": "17:36:35.584",
+        "ids": "23",
+        "result": "정상",
+        "latencyMs": 237.4,
+        "summary": "현재 운송 0건"
+      }
+    ],
+    "files": {
+      "KukaMcs.Core.dll": "bad9c0fd755ac72c3608fdf48b42489e624fa2552d87b3e5b2611e5e35770ebb",
+      "KukaVirtualMCS.dll": "65cb1255d72eff1c5ce9caf18ead7ba8dbb5409227bde188ef1791ded52a55ec"
+    }
+  },
+  "queries": [
+    {
+      "time": "17:30:51.655",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 92.7,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:30:51.717",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 151.9,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:30:51.782",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 215.6,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:14.920",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 74.3,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:14.989",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 141.6,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:15.057",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 206.6,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:15.151",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 80.9,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:15.220",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 147.4,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:15.290",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 216.2,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:15.385",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 82.1,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:15.470",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 164.1,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:15.566",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 257.8,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:15.697",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 120.1,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:15.769",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 189.3,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:15.824",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 242.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:15.922",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 79.9,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:15.986",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 141.7,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:16.061",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 214.6,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:16.251",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 148.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:16.587",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 479.4,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:16.657",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 545.8,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:16.771",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 99.3,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:16.829",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 149.9,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:16.895",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 210.8,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:16.972",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 74.2,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:17.034",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 131.9,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:17.103",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 192.6,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:17.217",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 77.7,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:17.293",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 152.0,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:17.370",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 227.1,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:17.459",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 81.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:17.531",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 150.8,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:17.600",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 217.7,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:17.674",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 72.3,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:17.758",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 154.0,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:17.832",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 226.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:17.906",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 71.4,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:17.971",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 134.8,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:18.040",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 201.8,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:18.115",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 72.4,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:18.185",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 140.1,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:18.261",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 213.6,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:18.358",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 88.5,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:18.433",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 162.2,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:18.504",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 230.8,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:18.572",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 67.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:18.638",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 130.7,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:18.706",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 197.2,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:18.782",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 74.5,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:18.852",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 142.9,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:18.927",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 216.7,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:19.017",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 88.8,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:19.081",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 151.7,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:19.147",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 215.9,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:19.219",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 70.2,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:19.286",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 135.1,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:19.361",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 208.4,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:19.448",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 86.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:19.518",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 154.5,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:19.594",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 229.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:19.669",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 73.3,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:19.744",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 146.5,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:19.819",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 219.1,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:19.888",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 68.4,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:19.957",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 134.9,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:20.024",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 200.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:20.099",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 73.4,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:20.166",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 139.2,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:20.233",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 204.3,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:20.305",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 71.7,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:20.377",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 141.9,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:20.456",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 219.6,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:20.534",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 76.7,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:20.599",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 140.3,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:20.674",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 214.1,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:20.741",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 66.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:20.809",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 132.4,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:20.877",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 199.2,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:20.955",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 76.7,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:21.032",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 152.3,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:21.102",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 220.6,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:21.176",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 73.5,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:21.254",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 149.8,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:21.323",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 217.6,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:21.391",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 67.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:21.456",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 130.2,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:21.520",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 193.3,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:21.590",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 68.8,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:21.659",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 135.8,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:21.725",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 200.7,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:21.802",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 76.4,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:21.870",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 142.8,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:21.940",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 211.3,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:22.027",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 86.3,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:22.105",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 162.7,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:22.179",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 235.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:22.253",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 73.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:22.342",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 160.5,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:22.421",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 238.2,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:22.494",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 71.1,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:22.563",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 137.8,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:22.634",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 207.9,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:22.709",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 74.1,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:22.784",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 147.2,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:22.856",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 218.2,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:22.924",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 67.2,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:22.989",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 129.9,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:23.054",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 194.3,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:23.127",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 71.9,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:23.194",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 137.4,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:23.264",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 205.9,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:23.346",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 80.3,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:23.415",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 148.3,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:23.486",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 217.5,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:23.575",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 88.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:23.637",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 148.4,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:23.705",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 214.9,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:23.795",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 88.4,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:23.870",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 162.3,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:23.938",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 228.8,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:24.034",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 95.5,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:24.208",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 267.6,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:24.306",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 364.6,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:24.414",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 106.7,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:24.532",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 222.5,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:24.624",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 313.4,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:24.701",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 76.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:24.783",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 157.3,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:24.856",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 228.6,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:24.931",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 73.4,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:25.001",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 141.5,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:25.073",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 212.4,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:25.151",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 76.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:25.216",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 138.5,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:25.280",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 200.3,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:25.354",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 72.2,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:25.420",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 136.7,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:25.497",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 212.4,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:25.567",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 69.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:25.634",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 134.1,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:25.704",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 202.1,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:25.777",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 72.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:25.847",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 140.7,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:25.920",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 212.1,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:25.992",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 71.5,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:26.058",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 135.6,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:26.126",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 203.2,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:26.197",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 69.8,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:26.265",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 136.3,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:26.331",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 201.6,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:26.402",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 70.1,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:26.473",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 139.9,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:26.543",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 208.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:26.622",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 78.8,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:26.686",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 140.9,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:26.748",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 202.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:26.820",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 71.5,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:26.890",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 139.6,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:26.956",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 204.4,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:27.027",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 70.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:27.093",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 134.8,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:27.162",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 203.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:27.242",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 78.8,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:27.318",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 153.2,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:27.398",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 232.4,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:27.467",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 67.3,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:27.530",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 129.7,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:27.599",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 197.1,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:27.670",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 69.6,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:27.741",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 139.5,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:27.821",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 218.1,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:27.904",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 82.1,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:27.974",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 151.5,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:28.046",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 221.9,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:28.127",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 80.1,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:28.203",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 154.8,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:28.270",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 220.7,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:28.355",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 83.9,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:28.420",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 148.1,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:28.491",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 218.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:28.568",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 76.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:28.636",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 142.4,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:28.705",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 210.3,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:28.779",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 73.6,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:28.849",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 141.6,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:28.924",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 215.9,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:28.992",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 65.9,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:29.069",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 141.2,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:29.145",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 216.2,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:29.213",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 67.8,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:29.281",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 134.3,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:29.354",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 206.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:29.442",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 87.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:29.511",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 155.0,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:29.577",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 219.6,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:29.647",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 69.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:29.717",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 136.9,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:29.782",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 200.4,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:29.864",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 81.2,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:29.936",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 151.6,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:30.005",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 219.6,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:30.083",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 77.3,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:30.159",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 151.2,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:30.222",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 213.7,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:30.290",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 66.6,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:30.354",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 129.1,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:30.427",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 200.7,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:30.499",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 71.2,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:30.566",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 137.5,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:30.642",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 211.8,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:30.721",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 78.2,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:30.796",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 151.6,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:30.872",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 226.5,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:30.940",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 67.6,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:31.004",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 130.2,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:31.071",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 196.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:31.139",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 67.3,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:31.207",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 133.7,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:31.273",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 198.5,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:31.347",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 73.4,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:31.416",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 141.4,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:31.486",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 209.5,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:31.557",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 71.2,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:31.631",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 143.5,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:31.702",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 213.7,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:31.769",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 65.7,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:31.833",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 128.4,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:31.900",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 194.4,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:31.975",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 73.2,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:32.045",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 142.5,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:32.118",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 214.4,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:32.204",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 84.3,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:32.276",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 155.5,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:32.355",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 233.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:32.434",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 78.5,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:32.499",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 142.2,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:32.563",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 204.2,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:32.631",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 67.8,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:32.703",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 138.4,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:32.774",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 208.3,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:32.854",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 79.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:32.927",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 149.9,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:32.999",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 220.7,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:33.079",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 79.5,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:33.165",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 163.9,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:33.233",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 231.1,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:33.324",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 90.0,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:33.399",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 163.7,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:33.471",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 234.4,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:33.547",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 74.7,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:33.626",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 152.5,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:33.699",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 224.3,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:33.773",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 72.8,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:33.857",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 156.4,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:33.943",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 240.4,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:34.026",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 82.9,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:34.092",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 147.1,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:34.157",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 211.4,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:34.227",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 68.6,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:34.294",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 134.2,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:34.363",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 202.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:34.460",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 96.8,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:34.530",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 165.2,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:34.599",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 233.3,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:34.668",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 67.6,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:34.736",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 134.4,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:34.801",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 198.1,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:34.871",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 69.5,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:34.940",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 136.8,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:35.008",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 204.1,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:35.083",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 73.5,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:35.150",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 139.2,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:35.226",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 213.8,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:35.300",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 73.3,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:35.365",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 137.3,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:35.434",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 204.6,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:35.504",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 69.4,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:35.576",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 140.4,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:35.643",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 205.9,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:35.713",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 69.4,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:35.781",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 136.3,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:35.849",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 203.7,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:35.930",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 79.6,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:36.009",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 157.3,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:36.075",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 221.7,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:36.142",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 66.6,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:36.208",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 131.4,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:36.272",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 193.7,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:36.343",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 69.7,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:36.410",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 135.5,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:36.478",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 203.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:36.551",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 71.5,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:36.621",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 140.5,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:36.697",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 215.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:36.774",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 76.5,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:36.838",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 138.4,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:36.903",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 202.6,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:36.982",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 77.6,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:37.051",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 145.7,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:37.128",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 221.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:31:37.205",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 76.6,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:31:37.280",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 149.4,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:31:37.353",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 221.0,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:34:04.279",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 84.4,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:34:04.351",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 153.9,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:34:04.439",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 240.5,
+      "summary": "현재 운송 0건"
+    },
+    {
+      "time": "17:34:36.140",
+      "ids": "전체",
+      "result": "정상",
+      "latencyMs": 74.7,
+      "summary": "차량 알람 0건 / 제어 상태 1건 / 화물 3건 / 현재 운송 0건 / AGV 3건 / TSC 상태 1건 / 관리 포트 10건"
+    },
+    {
+      "time": "17:35:22.344",
+      "ids": "23,25,58,21",
+      "result": "정상",
+      "latencyMs": 108.2,
+      "summary": "현재 운송 0건 / AGV 3건 / 관리 포트 10건 / 화물 3건"
+    },
+    {
+      "time": "17:36:35.428",
+      "ids": "25",
+      "result": "정상",
+      "latencyMs": 83.7,
+      "summary": "AGV 3건"
+    },
+    {
+      "time": "17:36:35.514",
+      "ids": "58",
+      "result": "정상",
+      "latencyMs": 168.2,
+      "summary": "관리 포트 10건"
+    },
+    {
+      "time": "17:36:35.584",
+      "ids": "23",
+      "result": "정상",
+      "latencyMs": 237.4,
+      "summary": "현재 운송 0건"
+    }
+  ]
+}

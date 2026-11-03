@@ -60,7 +60,9 @@ public final class TransferTest {
         mock.start();
         try {
             FleetHttpClient http=new FleetHttpClient("http://127.0.0.1:"+mock.getAddress().getPort()+"/interfaces/api/amr/");
-            TransferService service=new TransferService(http);
+            // Transport/authentication test: facility data is explicitly supplied
+            // by FixtureRunner, rather than a connection to a live metadata RPC.
+            TransferService service=new TransferService((path,token,body)->http.post(path,token,body));
             check(Boolean.TRUE.equals(service.preview(request("PREVIEW"),"test-token").get("success")),"Preview accepted");
             check(submitted.get()==0,"Preview never submits");
             check(Boolean.FALSE.equals(service.submit(request("ONCE"),"test-token").get("completed")),"Acceptance is not completion");

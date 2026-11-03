@@ -1,0 +1,39 @@
+{
+  "containerCode": "SIM_CARGO_001",
+  "robotIds": [
+    "2"
+  ],
+  "orgId": "UNIVERSAL",
+  "missionData": [
+    {
+      "actionConfirm": false,
+      "position": "lay01-dist1-97",
+      "actionType": "UP_CONTAINER",
+      "type": "NODE_POINT",
+      "passStrategy": "AUTO",
+      "waitingMillis": 0,
+      "sequence": 1,
+      "actionInform": false
+    },
+    {
+      "actionConfirm": false,
+      "position": "lay01-dist1-97",
+      "actionType": "DOWN_CONTAINER",
+      "type": "NODE_POINT",
+      "passStrategy": "AUTO",
+      "waitingMillis": 0,
+      "sequence": 2,
+      "actionInform": false
+    }
+  ],
+  "robotType": "LIFT",
+  "missionCode": "LIFT_RECOVER_093501",
+  "containerModelCode": "SIM_TRAY_001",
+  "robotModels": [
+    "KMP1500I"
+  ],
+  "lockRobotAfterFinish": false,
+  "priority": 1,
+  "missionType": "RACK_MOVE",
+  "requestId": "LIFT_RECOVER_093501"
+}

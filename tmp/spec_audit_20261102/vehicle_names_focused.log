@@ -1,0 +1,6 @@
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11�� 02, 2026 3:42:31 ���� servostar.fleet.transfer.NativeHostService start
+INFO: Native SECS passive listener started on 4315, session 3000. Loaded ABORT wait policy configured for vehicles [].
+11�� 02, 2026 3:42:31 ���� servostar.fleet.transfer.NativeHostService receiveStatus
+WARNING: S1F3 snapshot unavailable; SVID=[25]; IllegalStateException; reason=VEHICLE_NAMES_UNAVAILABLE: Name changes await MCS disconnect, settled jobs, alarms and report ACKs; no empty success response
+PASS: 59 XML RobotID/VehicleID, leading zeros, bidirectional fields, Fleet payload IDs, durable ACK/alarm/work guards, malformed XML and real HSMS checks; fixtures/loopback only.

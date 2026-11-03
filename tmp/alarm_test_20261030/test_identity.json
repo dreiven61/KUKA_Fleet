@@ -1,0 +1,11 @@
+{
+  "clientTime": "2026-10-30T13:52:03.8210806+09:00",
+  "commandId": "509C5F51DD1D4D0EBC48DA0DAA007703",
+  "source": "PORT_90",
+  "dest": "PORT_97",
+  "carrier": "SIM_CARGO_001",
+  "forbiddenAreaId": 1,
+  "forbiddenAreaCode": "CODEX_ALARM_TEST_261030",
+  "initialCargoPort": "PORT_90",
+  "messageLogBytes": 57282
+}
