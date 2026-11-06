@@ -1,0 +1,237 @@
+{
+  "checkedKst": "2026-11-06T11:40:21+09:00",
+  "scope": "local fixtures/loopback; no live Fleet calls or motions",
+  "deliveredJarHashBefore": "42ede447c33fae4923590e7012d87358662bd7d5df07a33e1ce4b213051d1dab",
+  "deliveredJarHashAfter": "42ede447c33fae4923590e7012d87358662bd7d5df07a33e1ce4b213051d1dab",
+  "results": [
+    {
+      "check": "compile_production",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\compile_production.log",
+      "passes": []
+    },
+    {
+      "check": "compile_tests",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\compile_tests.log",
+      "passes": []
+    },
+    {
+      "check": "ColdStartCatalogTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\ColdStartCatalogTest.log",
+      "passes": [
+        "PASS: 13 fresh-loader journal-before-catalog startup, deferred replay, captured completion and duplicate checks; no Fleet calls."
+      ]
+    },
+    {
+      "check": "DynamicCatalogTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\DynamicCatalogTest.log",
+      "passes": [
+        "PASS: 25 dynamic Fleet catalog, multi-map gRPC/HTTP, numeric/string IDs, changed roster, model selection, outage and no-mutation checks; loopback only."
+      ]
+    },
+    {
+      "check": "VehicleNamesTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\VehicleNamesTest.log",
+      "passes": [
+        "PASS: 59 XML RobotID/VehicleID, leading zeros, bidirectional fields, Fleet payload IDs, durable ACK/alarm/work guards, malformed XML and real HSMS checks; fixtures/loopback only."
+      ]
+    },
+    {
+      "check": "TransferTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\TransferTest.log",
+      "passes": [
+        "PASS: 37 validation, wire-format, auth, preview, deduplication and uncertain-outcome checks; loopback mock only."
+      ]
+    },
+    {
+      "check": "ReportingTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\ReportingTest.log",
+      "passes": [
+        "PASS: 84 reporting checks; captured WCS replay, final-state fixtures, duplicates, gaps, cancellation and restart. No live calls."
+      ]
+    },
+    {
+      "check": "VehicleLifecycleTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\VehicleLifecycleTest.log",
+      "passes": [
+        "PASS: 101 vehicle lifecycle checks; actual callback replay and mock queries only."
+      ]
+    },
+    {
+      "check": "DynamicDispatchTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\DynamicDispatchTest.log",
+      "passes": [
+        "PASS: 47 automatic dispatch checks; robots 1/2/3, correlation, release and restart. No live calls."
+      ]
+    },
+    {
+      "check": "WorkPortsTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\WorkPortsTest.log",
+      "passes": [
+        "PASS: 1172 work-port checks across 90 routes; callback replay and mock final-state checks, no live actions."
+      ]
+    },
+    {
+      "check": "StatusMonitorTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\StatusMonitorTest.log",
+      "passes": [
+        "PASS: 16 status monitor checks. Loopback RPC and mock transport only; no Fleet calls."
+      ]
+    },
+    {
+      "check": "NativeHostTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\NativeHostTest.log",
+      "passes": [
+        "PASS: 71 native SECS acceptance/control/alarm/restart/ACK checks; local fixtures and loopback sockets only."
+      ]
+    },
+    {
+      "check": "PauseResumeTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\PauseResumeTest.log",
+      "passes": [
+        "PASS: 78 pause/resume identity, actual-state, restart and HSMS checks; no live Fleet calls."
+      ]
+    },
+    {
+      "check": "CarriedPauseResumeTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\CarriedPauseResumeTest.log",
+      "passes": [
+        "PASS: 29 carried pause/resume query-failure, repeat-cycle and persisted recovery checks; no live Fleet commands."
+      ]
+    },
+    {
+      "check": "HandlingControlTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\HandlingControlTest.log",
+      "passes": [
+        "PASS: 62 lift admission, loaded travel and confirmed abort/report/release/restart checks; local fixtures only."
+      ]
+    },
+    {
+      "check": "HandlingWireTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\HandlingWireTest.log",
+      "passes": [
+        "PASS: 8 HSMS lift rejection, abort alarm ACK/retry, report ordering and release checks; loopback only."
+      ]
+    },
+    {
+      "check": "LoadedRecoveryTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\LoadedRecoveryTest.log",
+      "passes": [
+        "PASS: 45 loaded ABORT standby, return ownership, durability and lifecycle checks; fixtures only."
+      ]
+    },
+    {
+      "check": "HistoricalRecoveryTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\HistoricalRecoveryTest.log",
+      "passes": [
+        "PASS: 77 explicit historical ABORT recovery, auth, preview, ownership and no-replay checks; fixtures only."
+      ]
+    },
+    {
+      "check": "CarriedCompletionTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\CarriedCompletionTest.log",
+      "passes": [
+        "PASS: 52 real carried-return callback, completion catch-up, identity and no-replay checks; captured replay and fixtures only."
+      ]
+    },
+    {
+      "check": "RetainedCompletionTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\RetainedCompletionTest.log",
+      "passes": [
+        "PASS: 22 retained completion, omitted-null API, active-work, context and no-replay checks; no live Fleet calls."
+      ]
+    },
+    {
+      "check": "CargoTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\CargoTest.log",
+      "passes": [
+        "PASS: 58 inventory/scan/multi-carrier/no-replay checks; mock Fleet only."
+      ]
+    },
+    {
+      "check": "RejectionTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\RejectionTest.log",
+      "passes": [
+        "PASS: 36 HCACK/rejection reason, no-mutation and durable report checks."
+      ]
+    },
+    {
+      "check": "WorkflowAlarmTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\WorkflowAlarmTest.log",
+      "passes": [
+        "PASS: 57 captured workflow warning set/hold/clear, identity, aggregation, persistence and real loopback HSMS ACK checks; no live Fleet calls."
+      ]
+    },
+    {
+      "check": "SelectedStatusTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\SelectedStatusTest.log",
+      "passes": [
+        "PASS: 107 S1F3/4 snapshot, current-work union, pending-ACK duplicate guards and independent HSMS query checks; fixtures/loopback only."
+      ]
+    },
+    {
+      "check": "CanonicalIdentityTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\CanonicalIdentityTest.log",
+      "passes": [
+        "PASS: 13 canonical PortID/VehicleID admission, status and report checks."
+      ]
+    },
+    {
+      "check": "PluginLoadTest",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\PluginLoadTest.log",
+      "passes": [
+        "PASS: isolated gRPC runtime, transport provider and WCS stub loaded; no RPC sent.",
+        "PASS: packaged vehicle snapshot executes with private RCS protobuf classes unavailable.",
+        "PASS: actual packaged historical journal constructs before Fleet catalog without changing history or allowing transport.",
+        "PASS: isolated catalog initialization, metadata protobuf decoding and unavailable-map RPC execute without linkage errors.",
+        "PASS: actual packaged XML VehicleID parser executes in isolated plugin loader; no Fleet connection.",
+        "PASS: SBP/PF4J loaded packaged JAR, started child context, registered eleven transfer and four native administrative routes. WCS connection disabled in test.",
+        "PASS: plugin stop removed its routes."
+      ]
+    },
+    {
+      "check": "dotnet_tests",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\dotnet_tests.log",
+      "passes": [
+        "PASS: 34 PC cargo/scan/history checks; no Fleet connection.",
+        "PASS: 37 HCACK/CPACK and rejection diagnostic checks.",
+        "PASS: 25 loaded recovery request, ownership and event checks; local only.",
+        "PASS: 409 checks; loopback HSMS only. No actual Fleet connection or transport."
+      ]
+    },
+    {
+      "check": "package_integrity",
+      "exitCode": 0,
+      "log": "C:\\work\\KUKA\\KUKA_Fleet\\tmp\\secs_audit_20261106\\package_integrity.log",
+      "passes": [
+        "PASS: final JAR package: 13175257 bytes, 7765 entries, 7720 baseline runtime files identical; SHA256 42ede447c33fae4923590e7012d87358662bd7d5df07a33e1ce4b213051d1dab"
+      ]
+    }
+  ]
+}

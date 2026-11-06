@@ -1,0 +1,2 @@
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+PASS: 25 dynamic Fleet catalog, multi-map gRPC/HTTP, numeric/string IDs, changed roster, model selection, outage and no-mutation checks; loopback only.

@@ -1,0 +1,10 @@
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11월 06, 2026 11:39:29 오전 servostar.fleet.transfer.WcsStatusMonitor watchTransport
+INFO: WCS status transport ready; progress/completion still require observed events
+11월 06, 2026 11:39:29 오전 servostar.fleet.transfer.WcsStatusMonitor lost
+WARNING: WCS status subscription lost (UNAVAILABLE); incomplete commands blocked; reconnect in 5 seconds
+11월 06, 2026 11:39:34 오전 servostar.fleet.transfer.WcsStatusMonitor watchTransport
+INFO: WCS status transport ready; progress/completion still require observed events
+11월 06, 2026 11:39:34 오전 servostar.fleet.transfer.WcsStatusMonitor lost
+WARNING: WCS status subscription lost (UNAVAILABLE); incomplete commands blocked; reconnect in 5 seconds
+PASS: 16 status monitor checks. Loopback RPC and mock transport only; no Fleet calls.

@@ -1,0 +1,8 @@
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+Note: C:\work\KUKA\KUKA_Fleet\SECS\fleet_transfer_plugin\src\servostar\fleet\transfer\NativeHostService.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: C:\work\KUKA\KUKA_Fleet\SECS\fleet_transfer_plugin\src\servostar\fleet\transfer\TransferJournal.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+3 warnings

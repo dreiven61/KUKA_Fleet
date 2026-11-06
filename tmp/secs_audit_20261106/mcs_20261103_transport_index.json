@@ -1,0 +1,144 @@
+{
+  "log": "C:\\Users\\dreiv\\AppData\\Local\\ServoStar\\KukaVirtualMCS\\logs\\messages_20261103.log",
+  "transfers": [
+    {
+      "header": "[09:01:09.861] TX  운송 요청",
+      "serverVersion": "1.5.0",
+      "ascii": [
+        "",
+        "TRANSFER",
+        "COMMANDINFO",
+        "COMMANDID",
+        "139FC66A2FF047A7934401C777C74E17",
+        "PRIORITY",
+        "TRANSFERINFO",
+        "CARRIERID",
+        "SIM_CARGO_001",
+        "SOURCEPORT",
+        "PORT_98",
+        "DESTPORT",
+        "PORT_89"
+      ]
+    },
+    {
+      "header": "[09:01:48.606] TX  운송 요청",
+      "serverVersion": "1.5.0",
+      "ascii": [
+        "",
+        "TRANSFER",
+        "COMMANDINFO",
+        "COMMANDID",
+        "4861E31C0BBE4AC988BE70E5398BB122",
+        "PRIORITY",
+        "TRANSFERINFO",
+        "CARRIERID",
+        "SIM_CARGO_002",
+        "SOURCEPORT",
+        "PORT_98",
+        "DESTPORT",
+        "PORT_89"
+      ]
+    },
+    {
+      "header": "[09:06:47.823] TX  운송 요청",
+      "serverVersion": "1.5.0",
+      "ascii": [
+        "",
+        "TRANSFER",
+        "COMMANDINFO",
+        "COMMANDID",
+        "6C4C7FFCE0B44E07B6EF8830D6C364BB",
+        "PRIORITY",
+        "TRANSFERINFO",
+        "CARRIERID",
+        "SIM_CARGO_002",
+        "SOURCEPORT",
+        "PORT_89",
+        "DESTPORT",
+        "PORT_98"
+      ]
+    },
+    {
+      "header": "[09:07:16.356] TX  운송 요청",
+      "serverVersion": "1.5.0",
+      "ascii": [
+        "",
+        "TRANSFER",
+        "COMMANDINFO",
+        "COMMANDID",
+        "789A3D6098EB4CCCB2ADCFD1A70CD2C5",
+        "PRIORITY",
+        "TRANSFERINFO",
+        "CARRIERID",
+        "SIM_CARGO_002",
+        "SOURCEPORT",
+        "AMR_AGV001",
+        "DESTPORT",
+        "PORT_98"
+      ]
+    },
+    {
+      "header": "[10:38:36.338] TX  운송 요청",
+      "serverVersion": "1.5.0",
+      "ascii": [
+        "",
+        "TRANSFER",
+        "COMMANDINFO",
+        "COMMANDID",
+        "C53CCD7A61BF41708B41C991634822E5",
+        "PRIORITY",
+        "TRANSFERINFO",
+        "CARRIERID",
+        "SIM_CARGO_001",
+        "SOURCEPORT",
+        "SECS_ST_97",
+        "DESTPORT",
+        "SECS_ST_89"
+      ]
+    }
+  ],
+  "completions": [
+    {
+      "header": "[09:02:19.796] RX  정상 완료 보고 · Result 0 · PORT_89",
+      "serverVersion": "1.5.0",
+      "ascii": [
+        "4861E31C0BBE4AC988BE70E5398BB122",
+        "SIM_CARGO_002",
+        "PORT_98",
+        "PORT_89",
+        "PORT_89"
+      ],
+      "result": [
+        "0"
+      ]
+    },
+    {
+      "header": "[09:07:40.385] RX  정상 완료 보고 · Result 0 · PORT_98",
+      "serverVersion": "1.5.0",
+      "ascii": [
+        "789A3D6098EB4CCCB2ADCFD1A70CD2C5",
+        "SIM_CARGO_002",
+        "AMR_AGV001",
+        "PORT_98",
+        "PORT_98"
+      ],
+      "result": [
+        "0"
+      ]
+    },
+    {
+      "header": "[10:39:05.058] RX  정상 완료 보고 · Result 0 · SECS_ST_89",
+      "serverVersion": "1.5.0",
+      "ascii": [
+        "C53CCD7A61BF41708B41C991634822E5",
+        "SIM_CARGO_001",
+        "SECS_ST_97",
+        "SECS_ST_89",
+        "SECS_ST_89"
+      ],
+      "result": [
+        "0"
+      ]
+    }
+  ]
+}

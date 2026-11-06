@@ -1,0 +1,42 @@
+[
+  {
+    "path": "tmp/reconnect_test_20261030/integration_run1/results.json",
+    "exists": true,
+    "sha256": "b07b76fdbabe787fb5708bf19813898a6532cbab94b5f3fe85c9fd2726821c4b"
+  },
+  {
+    "path": "tmp/reconnect_test_20261030/burst.results.json",
+    "exists": true,
+    "sha256": "ed6f6a2ad0d2944d99a5d805c2bd9b341a3ebdddcebb37650d95396ca6f71b3b"
+  },
+  {
+    "path": "tmp/reconnect_test_20261030/mcs_ui_2.3.0_results.json",
+    "exists": true,
+    "sha256": "9fe8f88c213fc517637bc9eb03a36ea0a88ab401a25923af35b63a6f4b6cdd9e"
+  },
+  {
+    "path": "tmp/alarm_test_20261030/live_1.2.3_summary.json",
+    "exists": true,
+    "sha256": "a718ecbc0adbf50f92a293292281e94b8f35c3ba78f0066ba0ede0d14ab59969"
+  },
+  {
+    "path": "tmp/spec_audit_20261102/live_1.4.1_initial_query.results.json",
+    "exists": true,
+    "sha256": "15810f9db2b0522f18b3ca29c361df819405efbd0cc87360c732d4caaa040053"
+  },
+  {
+    "path": "tmp/spec_audit_20261102/live_1.4.1_burst.results.json",
+    "exists": true,
+    "sha256": "934c5b883235e371dd06af2467b0ed7b6ae5a8a1a2e550552d9b126da1bf1f93"
+  },
+  {
+    "path": "tmp/lift_cancel_20261030/drop_early_valid/result.json",
+    "exists": true,
+    "sha256": "25aceba72f8361ff0a82dda717c598436728a6ccd0dc40b114daa30b75036f73"
+  },
+  {
+    "path": "tmp/lift_cancel_20261030/pickup_early/result.json",
+    "exists": true,
+    "sha256": "2f9d19f0af3ba6fc8f2d8bd7d011edeb71ffddeafd126b480d1b8c582265c629"
+  }
+]

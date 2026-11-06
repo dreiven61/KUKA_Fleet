@@ -1,0 +1,14 @@
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11월 06, 2026 11:40:00 오전 servostar.fleet.transfer.WorkflowAlarmMonitor poll
+WARNING: Workflow alarm query unconfirmed for 509C5F51DD1D4D0EBC48DA0DAA007703: IOException
+11월 06, 2026 11:40:00 오전 servostar.fleet.transfer.WorkflowAlarmMonitor poll
+WARNING: Workflow alarm query unconfirmed for A2C35A4C7C6B49D1B31D15EE27A52A45: IOException
+11월 06, 2026 11:40:00 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:40:00 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:40:00 오전 servostar.fleet.transfer.NativeHostService start
+INFO: Native SECS passive listener started on 2094, session 3000. Loaded ABORT wait policy configured for vehicles [].
+PASS: 57 captured workflow warning set/hold/clear, identity, aggregation, persistence and real loopback HSMS ACK checks; no live Fleet calls.

@@ -1,0 +1,11 @@
+11월 06, 2026 11:39:52 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:39:52 오전 servostar.fleet.transfer.NativeHostService start
+INFO: Native SECS passive listener started on 2090, session 3000. Loaded ABORT wait policy configured for vehicles [].
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11월 06, 2026 11:39:52 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=PAUSE COMMANDID= HCACK=2 REASON=LIFT_OPERATION_ACTIVE:UP_CONTAINER TSC=AUTO BLOCKING=TR_TEST_001
+11월 06, 2026 11:39:52 오전 servostar.fleet.transfer.NativeHostService deliver
+WARNING: Report DATAID 4 blocked by host ACK; explicit report retry required
+PASS: 8 HSMS lift rejection, abort alarm ACK/retry, report ordering and release checks; loopback only.

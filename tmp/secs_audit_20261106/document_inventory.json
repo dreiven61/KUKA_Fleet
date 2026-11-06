@@ -1,0 +1,756 @@
+[
+  {
+    "file": "SECS\\fleet_transfer_plugin\\README_적용순서.md",
+    "lines": 146,
+    "chars": 8969,
+    "links": [
+      {
+        "line": 3,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\fleet_transfer_plugin\\..\\native_host\\PACKAGE_REPAIR_1.5.2_20261103.md",
+        "exists": true
+      },
+      {
+        "line": 7,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\fleet_transfer_plugin\\..\\native_host\\ROBOT_NAME_XML_1.5.0_적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 9,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\fleet_transfer_plugin\\..\\native_host\\PLUGIN_1.4.0_시작실패_1.4.1_수정_20261102.md",
+        "exists": true
+      },
+      {
+        "line": 21,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\fleet_transfer_plugin\\..\\native_host\\SECS_사양대조_동적Fleet_20261102.md",
+        "exists": true
+      },
+      {
+        "line": 25,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\fleet_transfer_plugin\\..\\native_host\\RECONNECT_1.3.0_시험결과_20261030.md",
+        "exists": true
+      },
+      {
+        "line": 29,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\fleet_transfer_plugin\\..\\native_host\\WORKFLOW_ALARM_1.2.3_적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 29,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\fleet_transfer_plugin\\..\\native_host\\ALARM_1.2.3_실제시험결과_20261030.md",
+        "exists": true
+      },
+      {
+        "line": 33,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\fleet_transfer_plugin\\..\\native_host\\LOADED_ABORT_1.2.0_적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 39,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\fleet_transfer_plugin\\..\\native_host\\PAUSE_RESUME_1.1.3_적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 43,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\fleet_transfer_plugin\\..\\native_host\\CANCEL_1.1.2_적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 45,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\fleet_transfer_plugin\\..\\native_host\\5556_전환방법.md",
+        "exists": true
+      },
+      {
+        "line": 51,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\fleet_transfer_plugin\\..\\native_host\\화물입출고_적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 51,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\fleet_transfer_plugin\\..\\native_host\\적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 57,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\fleet_transfer_plugin\\..\\native_host\\적용방법.md",
+        "exists": true
+      }
+    ],
+    "sha256": "fed8c54589677ae27c2bb5a11519d057852051d4784483b04440a8ec3958b530"
+  },
+  {
+    "file": "SECS\\fleet_transfer_plugin\\REPORTING_0.2.1.md",
+    "lines": 17,
+    "chars": 1065,
+    "links": [],
+    "sha256": "710e123eb4c58b554070cf6d843d4026ba0cfbf7e2d0796959d5f6b6e2376c08"
+  },
+  {
+    "file": "SECS\\fleet_transfer_plugin\\REPORTING_0.2.2.md",
+    "lines": 28,
+    "chars": 1311,
+    "links": [],
+    "sha256": "75edf38d6e4ca4166810632980de451854d91e1d2ab4cca30b598c2a504df64a"
+  },
+  {
+    "file": "SECS\\fleet_transfer_plugin\\test\\fixtures\\return_6894_README.md",
+    "lines": 7,
+    "chars": 889,
+    "links": [],
+    "sha256": "cd2133f28022af99666b68a828d77e517b6aac1fe9f47beda609438d62d6fc49"
+  },
+  {
+    "file": "SECS\\fleet_transfer_plugin\\test\\fixtures\\status_transition_20261102_README.md",
+    "lines": 10,
+    "chars": 532,
+    "links": [],
+    "sha256": "91acb85fb65b20c43fbab90639656ad5f1efe347640c4ab938086db1af3881ae"
+  },
+  {
+    "file": "SECS\\fleet_transfer_plugin\\test\\fixtures\\workflow_warning_20261030_README.md",
+    "lines": 7,
+    "chars": 1045,
+    "links": [],
+    "sha256": "5d1881649984a2b5942d286ab83ad2dab0df212688096b70ee69013f63d50a57"
+  },
+  {
+    "file": "SECS\\native_host\\5556_전환방법.md",
+    "lines": 134,
+    "chars": 5320,
+    "links": [],
+    "sha256": "4381fb772188e759549fbfde8ee62a49bf50b2ac6dc54afa02d9751b147ab103"
+  },
+  {
+    "file": "SECS\\native_host\\ALARM_1.2.3_실제시험결과_20261030.md",
+    "lines": 36,
+    "chars": 2357,
+    "links": [
+      {
+        "line": 24,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\WORKFLOW_ALARM_1.2.3_적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 28,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\..\\..\\tmp\\alarm_test_20261030\\live_1.2.3_summary.json",
+        "exists": true
+      },
+      {
+        "line": 29,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\..\\..\\tmp\\alarm_test_20261030\\live_1.2.3_workflow_6901_messages.log",
+        "exists": true
+      },
+      {
+        "line": 30,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\..\\..\\tmp\\alarm_test_20261030\\live_1.2.3_workflow_6902_messages.log",
+        "exists": true
+      },
+      {
+        "line": 31,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\..\\..\\tmp\\alarm_test_20261030\\final_1.2.3_live_state.json",
+        "exists": true
+      },
+      {
+        "line": 32,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\..\\fleet_transfer_plugin\\build\\validation_1.2.3.json",
+        "exists": true
+      },
+      {
+        "line": 36,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\..\\..\\tmp\\alarm_test_20261030\\plugin_1.2.3_started.jpg",
+        "exists": true
+      }
+    ],
+    "sha256": "1e9249dee08e64078a6d206be8b705e6540d23a9f709ece2204701b1e4809adf"
+  },
+  {
+    "file": "SECS\\native_host\\CANCEL_1.1.2_적용방법.md",
+    "lines": 39,
+    "chars": 1772,
+    "links": [],
+    "sha256": "8607012c6b52a5f259bf5890c42a84105a83f1dce028a143be1acea2f03ecbbe"
+  },
+  {
+    "file": "SECS\\native_host\\CANONICAL_ID_1.5.1_2.4.0_적용방법.md",
+    "lines": 38,
+    "chars": 2213,
+    "links": [
+      {
+        "line": 3,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\PACKAGE_REPAIR_1.5.2_20261103.md",
+        "exists": true
+      }
+    ],
+    "sha256": "bbf07125afa1854fa73eb782bcf718ca6ab6a6534b604e19f9c72ec58f40748e"
+  },
+  {
+    "file": "SECS\\native_host\\CARRIED_COMPLETION_1.2.2_적용방법.md",
+    "lines": 42,
+    "chars": 2565,
+    "links": [],
+    "sha256": "f6c8ea0676263689f07ce07cb5b495d72fcef11492b4ce6133690f4497680591"
+  },
+  {
+    "file": "SECS\\native_host\\HCACK_1.1.4_적용방법.md",
+    "lines": 80,
+    "chars": 3556,
+    "links": [],
+    "sha256": "f38adb243a8475c79985449844f325b475d7870a18b42c76e0592cd6b99e0364"
+  },
+  {
+    "file": "SECS\\native_host\\HISTORICAL_ABORT_1.2.1_복구방법.md",
+    "lines": 64,
+    "chars": 3683,
+    "links": [],
+    "sha256": "990a3d7ea0982147e9c29f9394749d2a3245a53a6e9680fed681f9a5a9a82c86"
+  },
+  {
+    "file": "SECS\\native_host\\LOADED_ABORT_1.2.0_적용방법.md",
+    "lines": 98,
+    "chars": 5097,
+    "links": [],
+    "sha256": "c6886aaa38ae691aac9662ff9977c4be7234c152e68faf3947e4274f240a10ce"
+  },
+  {
+    "file": "SECS\\native_host\\ONBOARD_CONTROL_API_REVIEW_20261103.md",
+    "lines": 234,
+    "chars": 10094,
+    "links": [],
+    "sha256": "5508a59840405954bbb6af53a97cc1cd49b6d7c56de51a71e0cc5cffa7e7d28a"
+  },
+  {
+    "file": "SECS\\native_host\\PACKAGE_REPAIR_1.5.2_20261103.md",
+    "lines": 26,
+    "chars": 1331,
+    "links": [
+      {
+        "line": 26,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\CANONICAL_ID_1.5.1_2.4.0_적용방법.md",
+        "exists": true
+      }
+    ],
+    "sha256": "18a0fab292c80a42e57c355dbe2357f418c6f98ae43b4e2b3a6303ad58af1163"
+  },
+  {
+    "file": "SECS\\native_host\\PAUSE_LIFT_1.1.7_적용방법.md",
+    "lines": 65,
+    "chars": 4501,
+    "links": [
+      {
+        "line": 3,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\리프트_FORCE_시뮬레이션_시험결과_20261030.md",
+        "exists": true
+      }
+    ],
+    "sha256": "2efe53df6badcc4c476645efdcb1543a3dc79443d4d62b413a3693d8763ae71b"
+  },
+  {
+    "file": "SECS\\native_host\\PAUSE_RESUME_1.1.3_적용방법.md",
+    "lines": 46,
+    "chars": 2343,
+    "links": [],
+    "sha256": "b6a5684a9b09458e234fca583d4d15c08f72eab2b9c3d930150a14fe7e254dc0"
+  },
+  {
+    "file": "SECS\\native_host\\PAUSE_RESUME_1.1.5_적용방법.md",
+    "lines": 50,
+    "chars": 2305,
+    "links": [],
+    "sha256": "9a5112cc9294743172ea78739e70837e36e4170338742343b73bc6adc6f8b58a"
+  },
+  {
+    "file": "SECS\\native_host\\PAUSE_RESUME_1.1.6_적용방법.md",
+    "lines": 42,
+    "chars": 1701,
+    "links": [],
+    "sha256": "a8306482d343776204b409b894b87cf3f2edf062c32229e565552553646666a3"
+  },
+  {
+    "file": "SECS\\native_host\\PLUGIN_1.3.0_중복등록_복구_20261102.md",
+    "lines": 38,
+    "chars": 2193,
+    "links": [
+      {
+        "line": 33,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\..\\..\\tmp\\plugin_state_20261102\\before_status.json",
+        "exists": true
+      },
+      {
+        "line": 34,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\..\\..\\tmp\\plugin_state_20261102\\after_status.json",
+        "exists": true
+      },
+      {
+        "line": 35,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\..\\..\\tmp\\plugin_state_20261102\\final_status.json",
+        "exists": true
+      },
+      {
+        "line": 36,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\..\\..\\tmp\\plugin_state_20261102\\mcs_status_queries.txt",
+        "exists": true
+      },
+      {
+        "line": 37,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\..\\..\\tmp\\plugin_state_20261102\\plugin_1.3.0_repaired.jpg",
+        "exists": true
+      }
+    ],
+    "sha256": "144209b04dc8fced51bb8f6f5ceb1e8ea992fcf184a0eedc72ea25dc3863da2f"
+  },
+  {
+    "file": "SECS\\native_host\\PLUGIN_1.4.0_시작실패_1.4.1_수정_20261102.md",
+    "lines": 62,
+    "chars": 3560,
+    "links": [],
+    "sha256": "fdc5fa7354778543bba6032124356578683a6e9bb2d9b4b4d7abc0a493754e38"
+  },
+  {
+    "file": "SECS\\native_host\\RECONNECT_1.3.0_시험결과_20261030.md",
+    "lines": 52,
+    "chars": 3947,
+    "links": [],
+    "sha256": "5f0dd50109621aaae9da79ca11c4d2f80a7dd34dbc941d0a5ea7bf4e880c3292"
+  },
+  {
+    "file": "SECS\\native_host\\ROBOT_NAME_XML_1.5.0_적용방법.md",
+    "lines": 65,
+    "chars": 3904,
+    "links": [],
+    "sha256": "6fb249342d117966ca0c187736d3e7a57a2392d685e85f65d468a71fbb3a02e6"
+  },
+  {
+    "file": "SECS\\native_host\\SECS_사양대조_동적Fleet_20261102.md",
+    "lines": 44,
+    "chars": 3795,
+    "links": [],
+    "sha256": "e7e3c1944f7972e2a2caff50d25777b84217cf58f1df910311fe912e722afe4c"
+  },
+  {
+    "file": "SECS\\native_host\\STATUS_QUERY_오류원인분석_20261102.md",
+    "lines": 83,
+    "chars": 3799,
+    "links": [],
+    "sha256": "83a957cd4bb550553db7a3949e3bd4b8c1ed05801bb8e8d60cbf32645b635315"
+  },
+  {
+    "file": "SECS\\native_host\\WORKFLOW_ALARM_1.2.3_적용방법.md",
+    "lines": 42,
+    "chars": 2975,
+    "links": [],
+    "sha256": "ab6b1aa58f8acae31006b783f2f120972a00155a464faa89182dee3ff6ae9b6d"
+  },
+  {
+    "file": "SECS\\native_host\\검증결과.md",
+    "lines": 49,
+    "chars": 2363,
+    "links": [],
+    "sha256": "c4a56bd4b7e0de328da8e670675778eb36ea0065ff99b8d1d70d94285d5efa39"
+  },
+  {
+    "file": "SECS\\native_host\\리프트_FORCE_시뮬레이션_시험결과_20261030.md",
+    "lines": 57,
+    "chars": 2912,
+    "links": [],
+    "sha256": "a681733245ba1377f5e345c55951122f7ee35155c17b168cd4ce4eb4325c9e69"
+  },
+  {
+    "file": "SECS\\native_host\\적용방법.md",
+    "lines": 171,
+    "chars": 8443,
+    "links": [
+      {
+        "line": 3,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\5556_전환방법.md",
+        "exists": true
+      },
+      {
+        "line": 7,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\화물입출고_적용방법.md",
+        "exists": true
+      }
+    ],
+    "sha256": "d34c4549a84bb8d10609bc5711de06eb5dae3ff14da8a2dcaa79ca55b9ff2fc8"
+  },
+  {
+    "file": "SECS\\native_host\\진단_20261028_제어실패_화물불일치.md",
+    "lines": 62,
+    "chars": 3362,
+    "links": [],
+    "sha256": "2f6d8f97be26e23a916e674f36e01be8795455ddaf6991e00f68de0445804ab8"
+  },
+  {
+    "file": "SECS\\native_host\\화물입출고_적용방법.md",
+    "lines": 74,
+    "chars": 5093,
+    "links": [
+      {
+        "line": 12,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\5556_전환방법.md",
+        "exists": true
+      },
+      {
+        "line": 65,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\native_host\\A 판독ID,A CarrierLoc,U2 IDReadStatus",
+        "exists": false
+      }
+    ],
+    "sha256": "9a6ab27012043ae89bd5f7944f39e0b6658639748602860316498fecc7f324db"
+  },
+  {
+    "file": "SECS\\native_transfer\\KUKA_연계확인_문의초안.md",
+    "lines": 33,
+    "chars": 2039,
+    "links": [],
+    "sha256": "a1662ca8b89837cbff549a2610627e17066b825034e3781cea07246ffcae30d4"
+  },
+  {
+    "file": "SECS\\native_transfer\\manual_api\\20261026_추가확인결과.md",
+    "lines": 52,
+    "chars": 3153,
+    "links": [
+      {
+        "line": 16,
+        "target": "C:\\work\\KUKA\\SECS\\native_transfer\\manual_api\\graph_station_links_verified.json",
+        "exists": false
+      }
+    ],
+    "sha256": "12175c3d3959499f1cde88b8f951906e0ed05a4944e0bdcb085d3fad10d8ba21"
+  },
+  {
+    "file": "SECS\\native_transfer\\manual_api\\API_수동등록방법.md",
+    "lines": 129,
+    "chars": 4255,
+    "links": [],
+    "sha256": "cf30823a8f456e1237ace0a76f12319e92020d0c4afd79fcb21912c6f6f6ebde"
+  },
+  {
+    "file": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "lines": 171,
+    "chars": 9611,
+    "links": [
+      {
+        "line": 3,
+        "target": "C:\\work\\KUKA\\SECS\\native_transfer\\manual_api\\20261026_추가확인결과.md",
+        "exists": false
+      },
+      {
+        "line": 10,
+        "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\station\\v1alpha1\\manage_station_data_command.proto",
+        "exists": false
+      },
+      {
+        "line": 11,
+        "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\station\\v1alpha1\\station.proto",
+        "exists": false
+      },
+      {
+        "line": 11,
+        "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\station\\v1alpha1\\station_capacity.proto",
+        "exists": false
+      },
+      {
+        "line": 11,
+        "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\station\\v1alpha1\\station_compartment.proto",
+        "exists": false
+      },
+      {
+        "line": 12,
+        "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\graph\\v1alpha1\\station_property.proto",
+        "exists": false
+      },
+      {
+        "line": 13,
+        "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\graph\\v1alpha1\\topology_node.proto",
+        "exists": false
+      },
+      {
+        "line": 13,
+        "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\graph\\v1alpha1\\graph_property.proto",
+        "exists": false
+      },
+      {
+        "line": 14,
+        "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\graph\\v1alpha1\\graph_editor_service.proto",
+        "exists": false
+      },
+      {
+        "line": 15,
+        "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\order\\v1alpha1\\transfer_order.proto",
+        "exists": false
+      },
+      {
+        "line": 15,
+        "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\order\\v1alpha1\\station_specification.proto",
+        "exists": false
+      },
+      {
+        "line": 40,
+        "target": "C:\\work\\KUKA\\SECS\\native_transfer\\manual_api\\insert_station_89.json",
+        "exists": false
+      },
+      {
+        "line": 69,
+        "target": "C:\\work\\KUKA\\SECS\\native_transfer\\manual_api\\station_data_registered.json",
+        "exists": false
+      },
+      {
+        "line": 109,
+        "target": "C:\\work\\KUKA\\SECS\\native_transfer\\manual_api\\map_station_links.reference.json",
+        "exists": false
+      },
+      {
+        "line": 145,
+        "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\payload\\v1alpha1\\payload.proto",
+        "exists": false
+      },
+      {
+        "line": 145,
+        "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\order\\v1alpha1\\payload_specification.proto",
+        "exists": false
+      },
+      {
+        "line": 157,
+        "target": "C:\\work\\KUKA\\SECS\\native_transfer\\manual_api\\registration_verification.json",
+        "exists": false
+      },
+      {
+        "line": 157,
+        "target": "C:\\work\\KUKA\\SECS\\native_transfer\\manual_api\\graph_station_links_verified.json",
+        "exists": false
+      }
+    ],
+    "sha256": "af28b0f63ab0b6a7349b67971bd1678833712eb72e2a8943234b4c208777e543"
+  },
+  {
+    "file": "SECS\\native_transfer\\manual_api\\ECS_TRANSFER_운송연결_검토.md",
+    "lines": 64,
+    "chars": 2817,
+    "links": [],
+    "sha256": "010a9c9dfd616ec8d64981da9e1fd2f7fa13f96676f8d2257e34b4c6a42c04ee"
+  },
+  {
+    "file": "SECS\\native_transfer\\manual_api\\ECS_객체배열_검증결과_20261027.md",
+    "lines": 68,
+    "chars": 3589,
+    "links": [],
+    "sha256": "3a007dd56b18980b57212f5e7eb3df8e0b3c3d765c7c2797b167bbe58d502e1e"
+  },
+  {
+    "file": "SECS\\native_transfer\\README.md",
+    "lines": 71,
+    "chars": 5490,
+    "links": [],
+    "sha256": "aa908f8b2413fd8da284c54176d06da76f99d060a42e1acd13ffaec6b8511df8"
+  },
+  {
+    "file": "SECS\\native_transfer\\Station_등록방법.md",
+    "lines": 37,
+    "chars": 1773,
+    "links": [],
+    "sha256": "4b2234635842ed3c68001aed7ce5931557c3ac0bfe4e8291864e3a1ced168bd3"
+  },
+  {
+    "file": "SECS\\native_transfer\\TRANSFER_진행절차.md",
+    "lines": 120,
+    "chars": 5399,
+    "links": [],
+    "sha256": "2e3c65357b72684d89d9856cbdfcc17354858731bcc9417a9f698b8b9c3e5203"
+  },
+  {
+    "file": "SECS\\reporting\\CEID208_송수신확인_20261027.md",
+    "lines": 12,
+    "chars": 735,
+    "links": [],
+    "sha256": "98c3f616886003f67a101d28c345f179efaa40cdf09b3ac7eace6a13c59c5e92"
+  },
+  {
+    "file": "SECS\\reporting\\IBSEM_진행완료이상보고_매핑.md",
+    "lines": 92,
+    "chars": 7072,
+    "links": [],
+    "sha256": "284a2762f3dd86dee1d02ba54468bacb549d41db6e83b2414fd31c9e53d12633"
+  },
+  {
+    "file": "SECS\\reporting\\README_다음단계.md",
+    "lines": 40,
+    "chars": 2604,
+    "links": [
+      {
+        "line": 5,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\reporting\\Reports06_자동배차_적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 11,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\reporting\\Reports04_적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 15,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\SECS\\reporting\\Reports03_적용방법.md",
+        "exists": true
+      }
+    ],
+    "sha256": "b13aee39df61ced4ce8821a18cfaa09b4adf783285148e5a81433caa2b42acf7"
+  },
+  {
+    "file": "SECS\\reporting\\Reports03_적용방법.md",
+    "lines": 39,
+    "chars": 2957,
+    "links": [],
+    "sha256": "9d5c3b5efce25ae0492a326abd0c8d8fe8a57ed3559aed0be96b4d9e691ab10e"
+  },
+  {
+    "file": "SECS\\reporting\\Reports04_적용방법.md",
+    "lines": 38,
+    "chars": 2685,
+    "links": [],
+    "sha256": "7ec2ed3040aada7e92bd7eb758d73cd62f3eb5f59cfe15b533c9b3544f78c848"
+  },
+  {
+    "file": "SECS\\reporting\\Reports06_자동배차_적용방법.md",
+    "lines": 47,
+    "chars": 3219,
+    "links": [],
+    "sha256": "24dc9e6072b664c6853ea447d505f697190a37019c00872a296d4731d1253416"
+  },
+  {
+    "file": "SECS\\reporting\\Reports07_전체작업포트_적용방법.md",
+    "lines": 44,
+    "chars": 2684,
+    "links": [],
+    "sha256": "4e7cb7e7b4f62da7a2e7d76c647c0e768b84cf4a460fc465fcbb00ebf4574be7"
+  },
+  {
+    "file": "VirtualMCS\\README.md",
+    "lines": 228,
+    "chars": 18440,
+    "links": [
+      {
+        "line": 3,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\SECS\\native_host\\PACKAGE_REPAIR_1.5.2_20261103.md",
+        "exists": true
+      },
+      {
+        "line": 16,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\SECS\\native_host\\CANONICAL_ID_1.5.1_2.4.0_적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 59,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\SECS\\native_host\\ROBOT_NAME_XML_1.5.0_적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 61,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\SECS\\native_host\\PLUGIN_1.4.0_시작실패_1.4.1_수정_20261102.md",
+        "exists": true
+      },
+      {
+        "line": 63,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\SECS\\native_host\\SECS_사양대조_동적Fleet_20261102.md",
+        "exists": true
+      },
+      {
+        "line": 79,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\SECS\\native_host\\ALARM_1.2.3_실제시험결과_20261030.md",
+        "exists": true
+      },
+      {
+        "line": 83,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\SECS\\native_host\\LOADED_ABORT_1.2.0_적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 93,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\SECS\\native_host\\PAUSE_LIFT_1.1.7_적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 103,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\SECS\\native_host\\HCACK_1.1.4_적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 112,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\SECS\\native_host\\5556_전환방법.md",
+        "exists": true
+      },
+      {
+        "line": 113,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\SECS\\native_host\\화물입출고_적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 125,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\SECS\\native_host\\화물입출고_적용방법.md",
+        "exists": true
+      },
+      {
+        "line": 133,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\SECS\\native_host\\적용방법.md",
+        "exists": true
+      }
+    ],
+    "sha256": "503c4599da5149defdef3717233f3b686035131e68266ee54d0688e5f5f23056"
+  },
+  {
+    "file": "VirtualMCS\\STATUS_QUERY_2.3.0_시험결과_20261030.md",
+    "lines": 44,
+    "chars": 2057,
+    "links": [
+      {
+        "line": 26,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\SECS\\native_host\\RECONNECT_1.3.0_시험결과_20261030.md",
+        "exists": true
+      },
+      {
+        "line": 40,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\tmp\\reconnect_test_20261030\\mcs_ui_2.3.0_live.log",
+        "exists": true
+      },
+      {
+        "line": 41,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\tmp\\reconnect_test_20261030\\mcs_ui_2.3.0_results.json",
+        "exists": true
+      },
+      {
+        "line": 42,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\tmp\\reconnect_test_20261030\\mcs_ui_final_server_status.json",
+        "exists": true
+      },
+      {
+        "line": 43,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\tmp\\reconnect_test_20261030\\mcs_2.3.0_publish.log",
+        "exists": true
+      },
+      {
+        "line": 44,
+        "target": "C:\\work\\KUKA\\KUKA_Fleet\\VirtualMCS\\..\\tmp\\reconnect_test_20261030\\mcs_status_2.3.0.png",
+        "exists": true
+      }
+    ],
+    "sha256": "b6222315daa43e55b31c4b9d4c50300550524e8d038529a0625d95c679e05566"
+  },
+  {
+    "file": "MES_TEST\\README.md",
+    "lines": 35,
+    "chars": 1844,
+    "links": [],
+    "sha256": "32b7658f538db9559dbb73844360b7493bd047bd417b52fc9a34a7411a388a5d"
+  },
+  {
+    "file": "MES_TEST\\secs_bridge\\README.md",
+    "lines": 115,
+    "chars": 5692,
+    "links": [],
+    "sha256": "7d1be239bd6c09c593fd7987384a71b69c976e338a634e74988b91829979d8a4"
+  },
+  {
+    "file": "SIMULATION\\README.md",
+    "lines": 32,
+    "chars": 1815,
+    "links": [],
+    "sha256": "e7b6a0323b31992de699fcdf44146fe27c4edbb55957b398c749f0ebe2e867d2"
+  }
+]

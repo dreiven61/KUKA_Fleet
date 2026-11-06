@@ -1,0 +1,1 @@
+PASS: 13 fresh-loader journal-before-catalog startup, deferred replay, captured completion and duplicate checks; no Fleet calls.

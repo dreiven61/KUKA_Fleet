@@ -1,0 +1,6 @@
+{
+  "scope": "127.0.0.1 fixture only; no live Fleet",
+  "javaExitCode": 0,
+  "dotnetExitCode": 0,
+  "passed": true
+}

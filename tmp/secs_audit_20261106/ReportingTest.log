@@ -1,0 +1,4 @@
+11¿ù 06, 2026 11:39:26 ¿ÀÀü com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 84 reporting checks; captured WCS replay, final-state fixtures, duplicates, gaps, cancellation and restart. No live calls.

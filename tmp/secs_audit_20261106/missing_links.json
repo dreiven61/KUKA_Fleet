@@ -1,0 +1,116 @@
+[
+  {
+    "document": "SECS\\native_transfer\\manual_api\\20261026_추가확인결과.md",
+    "line": 16,
+    "target": "C:\\work\\KUKA\\SECS\\native_transfer\\manual_api\\graph_station_links_verified.json",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 3,
+    "target": "C:\\work\\KUKA\\SECS\\native_transfer\\manual_api\\20261026_추가확인결과.md",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 10,
+    "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\station\\v1alpha1\\manage_station_data_command.proto",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 11,
+    "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\station\\v1alpha1\\station.proto",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 11,
+    "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\station\\v1alpha1\\station_capacity.proto",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 11,
+    "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\station\\v1alpha1\\station_compartment.proto",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 12,
+    "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\graph\\v1alpha1\\station_property.proto",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 13,
+    "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\graph\\v1alpha1\\topology_node.proto",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 13,
+    "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\graph\\v1alpha1\\graph_property.proto",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 14,
+    "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\graph\\v1alpha1\\graph_editor_service.proto",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 15,
+    "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\order\\v1alpha1\\transfer_order.proto",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 15,
+    "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\order\\v1alpha1\\station_specification.proto",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 40,
+    "target": "C:\\work\\KUKA\\SECS\\native_transfer\\manual_api\\insert_station_89.json",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 69,
+    "target": "C:\\work\\KUKA\\SECS\\native_transfer\\manual_api\\station_data_registered.json",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 109,
+    "target": "C:\\work\\KUKA\\SECS\\native_transfer\\manual_api\\map_station_links.reference.json",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 145,
+    "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\payload\\v1alpha1\\payload.proto",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 145,
+    "target": "C:\\work\\KUKA\\tmp\\native_secs_inspect\\protos\\apis\\kuka\\mobilerobotics\\order\\v1alpha1\\payload_specification.proto",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 157,
+    "target": "C:\\work\\KUKA\\SECS\\native_transfer\\manual_api\\registration_verification.json",
+    "exists": false
+  },
+  {
+    "document": "SECS\\native_transfer\\manual_api\\API_필드매핑.md",
+    "line": 157,
+    "target": "C:\\work\\KUKA\\SECS\\native_transfer\\manual_api\\graph_station_links_verified.json",
+    "exists": false
+  }
+]

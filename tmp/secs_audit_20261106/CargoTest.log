@@ -1,0 +1,24 @@
+11월 06, 2026 11:39:58 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:39:58 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:39:58 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:39:58 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:39:58 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11월 06, 2026 11:39:58 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:39:58 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=OTHER_CARGO HCACK=6 REASON=CARRIER_NOT_REGISTERED TSC=AUTO BLOCKING=
+11월 06, 2026 11:39:58 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=WRONG_PORT HCACK=3 REASON=CARRIER_NOT_AT_PORT_OR_CARRIED TSC=AUTO BLOCKING=
+PASS: 58 inventory/scan/multi-carrier/no-replay checks; mock Fleet only.

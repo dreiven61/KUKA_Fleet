@@ -1,0 +1,4 @@
+11¿ù 06, 2026 11:39:27 ¿ÀÀü com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 101 vehicle lifecycle checks; actual callback replay and mock queries only.

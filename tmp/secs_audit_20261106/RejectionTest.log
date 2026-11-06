@@ -1,0 +1,53 @@
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11월 06, 2026 11:39:59 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:39:59 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=2 REASON=TSC_NOT_AUTO TSC=PAUSING BLOCKING=OLD_JOB
+11월 06, 2026 11:39:59 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:39:59 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=2 REASON=TSC_NOT_AUTO TSC=PAUSED BLOCKING=OLD_JOB
+11월 06, 2026 11:39:59 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:39:59 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=2 REASON=TSC_NOT_AUTO TSC=RESUMING BLOCKING=OLD_JOB
+11월 06, 2026 11:39:59 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:39:59 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=2 REASON=TSC_NOT_AUTO TSC=UNCERTAIN BLOCKING=OLD_JOB
+11월 06, 2026 11:39:59 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:39:59 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=6 REASON=CARRIER_NOT_REGISTERED TSC=AUTO BLOCKING=
+11월 06, 2026 11:39:59 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:39:59 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=3 REASON=CARRIER_NOT_AT_PORT_OR_CARRIED TSC=AUTO BLOCKING=
+11월 06, 2026 11:39:59 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:39:59 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=2 REASON=DESTINATION_OCCUPIED TSC=AUTO BLOCKING=
+11월 06, 2026 11:39:59 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:39:59 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=TR_TEST_001 HCACK=5 REASON=DUPLICATE_COMMAND_ID TSC=AUTO BLOCKING=TR_TEST_001
+11월 06, 2026 11:39:59 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=ABORT COMMANDID=TR_TEST_001 HCACK=2 REASON=ABORT_BEFORE_PICKUP_USE_CANCEL TSC=AUTO BLOCKING=TR_TEST_001
+11월 06, 2026 11:39:59 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=CANCEL COMMANDID=TR_TEST_001 HCACK=2 REASON=CANCEL_AFTER_PICKUP_USE_ABORT TSC=AUTO BLOCKING=TR_TEST_001
+11월 06, 2026 11:39:59 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=CANCEL COMMANDID=MISSING HCACK=6 REASON=COMMAND_NOT_FOUND TSC=AUTO BLOCKING=MISSING
+11월 06, 2026 11:39:59 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=RESUME COMMANDID= HCACK=2 REASON=RESUME_REQUIRES_PAUSED TSC=PAUSING BLOCKING=
+11월 06, 2026 11:39:59 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+PASS: 36 HCACK/rejection reason, no-mutation and durable report checks.

@@ -1,0 +1,15 @@
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+11월 06, 2026 11:40:07 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:40:07 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=NEW_ID HCACK=2 REASON=CARRIER_HAS_PENDING_TRANSFER TSC=AUTO BLOCKING=OLD
+11월 06, 2026 11:40:07 오전 servostar.fleet.transfer.NativeHostEngine reject
+WARNING: SECS reject RCMD=TRANSFER COMMANDID=OLD HCACK=5 REASON=DUPLICATE_COMMAND_ID TSC=AUTO BLOCKING=OLD
+11월 06, 2026 11:40:07 오전 servostar.fleet.transfer.NativeHostService start
+INFO: Native SECS passive listener started on 2097, session 3000. Loaded ABORT wait policy configured for vehicles [].
+11월 06, 2026 11:40:08 오전 servostar.fleet.transfer.NativeHostService deliver
+WARNING: Report DATAID 1 blocked by host ACK; explicit report retry required
+11월 06, 2026 11:40:08 오전 servostar.fleet.transfer.NativeHostService receiveStatus
+WARNING: S1F3 snapshot unavailable; SVID=[23]; IllegalStateException; reason=Status query unavailable: jobQuery; no empty success response
+PASS: 107 S1F3/4 snapshot, current-work union, pending-ACK duplicate guards and independent HSMS query checks; fixtures/loopback only.

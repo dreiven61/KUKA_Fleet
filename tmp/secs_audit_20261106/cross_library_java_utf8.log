@@ -1,0 +1,25 @@
+11월 06, 2026 11:41:01 오전 com.google.protobuf.TextFormat$Parser checkUnknownFields
+WARNING: Input contains unknown fields and/or extensions:
+21:1:	kuka.wcs.grpc.mission.WcsMissionStatusResponse.49
+11월 06, 2026 11:41:01 오전 servostar.fleet.transfer.NativeHostService start
+INFO: Native SECS passive listener started on 2135, session 3000. Loaded ABORT wait policy configured for vehicles [].
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+PASS: Java equipment -> Secs4Net: 14 acknowledged reports, one submit.
+Exception in thread "Thread-34" java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.ExecutorCompletionService$QueueingFuture@6c5c63c2[Not completed, task = java.util.concurrent.Executors$RunnableAdapter@53f5d1a5[Wrapped task = java.util.concurrent.FutureTask@5ffd2533[Not completed, task = com.kuka.ecs.common.transport.secs.hsmsss.AbstractHsmsSsPassiveCommunicator$$Lambda/0x000001b326124b68@76b98708]]] rejected from java.util.concurrent.ThreadPoolExecutor@22ef9844[Shutting down, pool size = 9, active threads = 9, queued tasks = 0, completed tasks = 5]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2081)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:841)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1376)
+	at java.base/java.util.concurrent.ExecutorCompletionService.submit(ExecutorCompletionService.java:186)
+	at java.base/java.util.concurrent.AbstractExecutorService.doInvokeAny(AbstractExecutorService.java:178)
+	at java.base/java.util.concurrent.AbstractExecutorService.invokeAny(AbstractExecutorService.java:225)
+	at com.kuka.ecs.common.transport.secs.AbstractBaseCommunicator.executeInvokeAny(AbstractBaseCommunicator.java:47)
+	at com.kuka.ecs.common.transport.secs.hsmsss.AbstractHsmsSsPassiveCommunicator.completionAction(AbstractHsmsSsPassiveCommunicator.java:225)
+	at com.kuka.ecs.common.transport.secs.hsmsss.AbstractHsmsSsPassiveCommunicator.access$000(AbstractHsmsSsPassiveCommunicator.java:41)
+	at com.kuka.ecs.common.transport.secs.hsmsss.AbstractHsmsSsPassiveCommunicator$1.completed(AbstractHsmsSsPassiveCommunicator.java:132)
+	at com.kuka.ecs.common.transport.secs.hsmsss.AbstractHsmsSsPassiveCommunicator$1.completed(AbstractHsmsSsPassiveCommunicator.java:108)
+	at java.base/sun.nio.ch.Invoker.invokeUnchecked(Invoker.java:129)
+	at java.base/sun.nio.ch.Invoker$2.run(Invoker.java:221)
+	at java.base/sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:113)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
