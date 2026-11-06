@@ -16,12 +16,14 @@ import static com.kuka.ecs.common.transport.secs.secs2.Secs2.*;
  * SECS library supplied with this Fleet installation. Legacy ECS is untouched. */
 public final class NativeHostService implements AutoCloseable {
     static final int DEFAULT_PORT=5556;
+    static final String VERSION="1.5.8";
     private static final Logger LOG=Logger.getLogger(NativeHostService.class.getName());
     private final TransferService service;
     private final TransferService.FleetClient client;
     private final WcsStatusMonitor monitor;
     private final ScheduledExecutorService ticker=Executors.newSingleThreadScheduledExecutor(r->daemon(r,"servostar-native-state"));
     private final ScheduledExecutorService alarmTicker=Executors.newSingleThreadScheduledExecutor(r->daemon(r,"servostar-workflow-alarms"));
+    private final ScheduledExecutorService vehicleTicker=Executors.newSingleThreadScheduledExecutor(r->daemon(r,"servostar-vehicle-installations"));
     private final ExecutorService commands=Executors.newSingleThreadExecutor(r->daemon(r,"servostar-native-commands"));
     private final ExecutorService statusRequests=Executors.newSingleThreadExecutor(r->daemon(r,"servostar-selected-status"));
     private final ExecutorService deliveries=Executors.newSingleThreadExecutor(r->daemon(r,"servostar-native-reports"));
@@ -29,10 +31,12 @@ public final class NativeHostService implements AutoCloseable {
     private HsmsSsCommunicator equipment;
     private NativeHostEngine engine;
     private SelectedStatusService selectedStatus;
+    private PortBuzzer buzzer;
     private volatile boolean communicating,closed;
     // Admission reports must not overtake their S2F50/S2F42 response attempt.
     private volatile boolean replying;
     private long nextOrdinaryPoll=System.nanoTime();
+    private String vehiclePollError="";
     private String token="";
     private int maxAttempts=5;
     private static Thread daemon(Runnable r,String n){Thread t=new Thread(r,n);t.setDaemon(true);return t;}
@@ -76,6 +80,7 @@ public final class NativeHostService implements AutoCloseable {
         int fallback=((Number)cfg.getOrDefault("genericTerminalResult",9000)).intValue();if(fallback<1 || fallback>65535)throw new IllegalArgumentException("Generic terminal result range");
         Path journal=Paths.get(String.valueOf(cfg.getOrDefault("journal","/opt/nav/robot/bin/Log/interface/servostar-secs-state.json")));
         engine=new NativeHostEngine(service,client,new HostState(journal),token,alarms,failures,fallback);
+        buzzer=new PortBuzzer(cfg.getOrDefault("portBuzzers",Collections.emptyMap()));
         WorkPorts.publicationGuard((next,commit)->{synchronized(engine.state){
             if(!engine.vehicleNames.preservesPortNamespace(next))throw new IllegalStateException("Fleet port aliases conflict with accepted MCS VehicleID names");
             boolean unsettled=engine.state.data.jobs.values().stream().anyMatch(j->engine.state.unsettled(j));
@@ -118,6 +123,18 @@ public final class NativeHostService implements AutoCloseable {
             if(closed)return;
             try{engine.pollWorkflowAlarms();}catch(Exception ex){LOG.warning("Workflow alarms await confirmation: "+ex.getClass().getSimpleName());}
         },1,1,TimeUnit.SECONDS);
+        VehicleInstallationMonitor vehicleInstallations=new VehicleInstallationMonitor(client,token,engine.state,engine.vehicleNames);
+        vehicleTicker.scheduleWithFixedDelay(()->{
+            if(closed)return;
+            try{
+                vehicleInstallations.poll();
+                vehiclePollError="";
+            }catch(Exception unavailable){
+                String reason=unavailable.getClass().getSimpleName();
+                if(!reason.equals(vehiclePollError))LOG.warning("Vehicle installation snapshot unavailable: "+reason);
+                vehiclePollError=reason;
+            }
+        },0,2,TimeUnit.SECONDS);
         deliveries.execute(()->deliver());
         catalogTicker.scheduleWithFixedDelay(()->{
             if(closed)return;
@@ -148,21 +165,36 @@ public final class NativeHostService implements AutoCloseable {
             if(m.sessionId()!=equipment.sessionId())return;
             if(m.getStream()==2 && (m.getFunction()==41 || m.getFunction()==49) && !m.wbit())return;
             int s=m.getStream(),f=m.getFunction();Secs2 reply=null;int replyFunction=f+1;
-            if(s==1 && f==13){HostProtocol.listOf(m.secs2(),0,"BODY");refreshVehicleNames();reply=list(binary((byte)0),list(ascii("FLEET"),ascii("1.5.2")));}
-            else if(s==1 && f==1)reply=list(ascii("FLEET"),ascii("1.5.2"));
-            else if(s==1 && f==17)reply=binary((byte)0);
-            else if(s==2 && f==49){
-                if(!communicating)reply=HostProtocol.ack(2);
+            if(s==1 && f==13){HostProtocol.listOf(m.secs2(),0,"BODY");refreshVehicleNames();reply=list(binary((byte)0),list(ascii("FLEET"),ascii(VERSION)));}
+            else if(s==1 && f==1)reply=list(ascii("FLEET"),ascii(VERSION));
+            else if(s==1 && (f==15 || f==17)){
+                if(!m.wbit())return;
+                reply=binary((byte)changeHostMode(f==15,m.secs2()));
+            }else if(s==5 && f==5){
+                if(!m.wbit())return;
+                try{
+                    if(!communicating)throw new IllegalStateException("Establish communication first");
+                    reply=engine.alarmList(m.secs2());
+                }catch(Exception unavailable){
+                    replyFunction=0;
+                    reply=Secs2.empty();
+                }
+            }else if(s==2 && f==49){
+                if(!hostCanCommand())reply=HostProtocol.ack(2);
                 else if(!refreshAvailable())reply=HostProtocol.ack(2);
                 else try{reply=engine.transfer(HostProtocol.transfer(m.secs2(),engine.vehicleNames));}
                 catch(HostProtocol.ParameterError ex){reply=HostProtocol.ack(ex);}
             }else if(s==2 && f==41){
-                if(!communicating)reply=HostProtocol.ack(2);
+                if(!hostCanCommand())reply=HostProtocol.ack(2);
                 else try{
                     HostProtocol.listOf(m.secs2(),2,"BODY");String command=HostProtocol.asciiField(m.secs2().get(0),"RCMD");
                     Map<String,Secs2> p=HostProtocol.pairs(m.secs2().get(1),"PARAMETERS");String id="";
                     if(HostProtocol.cargoCommand(command)){
                         reply=engine.cargo(command,HostProtocol.cargoParameters(command,p));
+                    }else if("UPDATE".equals(command)){
+                        reply=update(p);
+                    }else if("BUZZER".equals(command)){
+                        reply=buzzer(p);
                     }else {
                     if("CANCEL".equals(command) || "ABORT".equals(command)){
                         if(p.size()!=1 || !p.containsKey("COMMANDID"))throw new HostProtocol.ParameterError("COMMANDID",1);
@@ -177,6 +209,52 @@ public final class NativeHostService implements AutoCloseable {
             if(s==1 && f==13)synchronized(engine.state){communicating=true;}
         }catch(Exception ex){LOG.warning("Native SECS request failed; no command retry: "+ex.getClass().getSimpleName());}
         finally{replying=false;}
+    }
+
+    private boolean hostCanCommand(){
+        synchronized(engine.state){return communicating && !engine.state.hostOffline;}
+    }
+
+    private int changeHostMode(boolean offline,Secs2 body){
+        if(!communicating || !body.equals(Secs2.empty()))return offline?2:1;
+        synchronized(engine.state){
+            if(engine.state.hostOffline==offline)return 0;
+            if(engine.state.data.reports.size()>=20000)return offline?2:1;
+            HostState.Delivery report=new HostState.Delivery();
+            report.kind="TSC";
+            report.ceid=offline?1:3;
+            report.key="host-mode:"+engine.state.data.sequence;
+            engine.state.add(report);
+            engine.state.save();
+            engine.state.hostOffline=offline;
+            return 0;
+        }
+    }
+
+    private Secs2 update(Map<String,Secs2> fields)throws Exception{
+        String id=HostProtocol.requiredAscii(fields,"COMMANDID");
+        if(!id.matches("[A-Za-z0-9_-]{1,32}"))throw new HostProtocol.ParameterError("COMMANDID",2);
+        int priority=HostProtocol.updatePriority(fields);
+        String destination=fields.containsKey("DESTPORT")?HostProtocol.requiredAscii(fields,"DESTPORT"):"";
+        if(!destination.isEmpty() && !WorkPorts.identifier(destination,64))throw new HostProtocol.ParameterError("DESTPORT",2);
+        int expected=fields.containsKey("DESTPORT")?3:2;
+        if(fields.size()!=expected)throw new HostProtocol.ParameterError("PARAMETERS",1);
+        return destination.isEmpty()?engine.updatePriority(id,priority,monitor::updatePriority)
+            :engine.updateDestination(id,priority,destination,monitor::redirectDestination,monitor::updatePriority);
+    }
+
+    private Secs2 buzzer(Map<String,Secs2> fields)throws Exception{
+        String requested=HostProtocol.requiredAscii(fields,"PORTID");
+        if(fields.size()!=1)throw new HostProtocol.ParameterError("PARAMETERS",1);
+        if(!WorkPorts.identifier(requested,64))throw new HostProtocol.ParameterError("PORTID",2);
+        try{WorkPorts.requireFresh();}catch(IllegalStateException unavailable){return HostProtocol.ack(2);}
+        synchronized(engine.state){
+            engine.state.requireHealthy();
+            if(!WorkPorts.contains(requested))return HostProtocol.ack(6);
+            String port=WorkPorts.canonical(requested);
+            try{return HostProtocol.ack(buzzer.pulse(port,WorkPorts.node(port))?0:2);}
+            catch(java.io.IOException uncertain){throw new NativeHostEngine.UncertainCommand();}
+        }
     }
     private boolean refreshAvailable(){
         try{WorkPorts.refresh(client,token);refreshVehicleNames();engine.vehicleNames.requireReady();return true;}
@@ -214,7 +292,7 @@ public final class NativeHostService implements AutoCloseable {
     private void auth(String supplied){
         if(token.isEmpty() || supplied==null || !java.security.MessageDigest.isEqual(token.getBytes(java.nio.charset.StandardCharsets.UTF_8),supplied.getBytes(java.nio.charset.StandardCharsets.UTF_8)))throw new SecurityException("Native SECS authorization rejected");
     }
-    public Map<String,Object> status(String supplied){auth(supplied);return TransferService.map("enabled",engine!=null,"version","1.5.2","communicating",communicating,"catalog",WorkPorts.status(),"robotNames",engine==null?Collections.emptyMap():engine.vehicleNames.status(),"loadedAbortWaitNodes",engine==null?Collections.emptyMap():engine.recoveryStatus(),"state",engine==null?Collections.emptyMap():engine.state.status());}
+    public Map<String,Object> status(String supplied){auth(supplied);return TransferService.map("enabled",engine!=null,"version",VERSION,"communicating",communicating,"catalog",WorkPorts.status(),"robotNames",engine==null?Collections.emptyMap():engine.vehicleNames.status(),"loadedAbortWaitNodes",engine==null?Collections.emptyMap():engine.recoveryStatus(),"state",engine==null?Collections.emptyMap():engine.state.status());}
     public Map<String,Object> refreshCatalog(String supplied)throws Exception{auth(supplied);WorkPorts.refresh(client,token);if(engine!=null){refreshVehicleNames();engine.vehicleNames.requireReady();}return WorkPorts.status();}
     public Map<String,Object> recoverLoadedAbort(String supplied,String id,String carrier,String vehicle,String source,String wait,boolean apply)throws Exception {
         auth(supplied);
@@ -224,7 +302,7 @@ public final class NativeHostService implements AutoCloseable {
     }
     public Map<String,Object> retry(String supplied,long id){auth(supplied);if(engine==null)throw new IllegalStateException("Native SECS disabled");engine.state.retry(id);return TransferService.map("success",true,"dataId",id);}
     public void close(){
-        closed=true;communicating=false;monitor.setObserver(null);ticker.shutdownNow();alarmTicker.shutdownNow();catalogTicker.shutdownNow();commands.shutdownNow();statusRequests.shutdownNow();deliveries.shutdownNow();WorkPorts.publicationGuard((next,commit)->commit.run());
+        closed=true;communicating=false;monitor.setObserver(null);ticker.shutdownNow();alarmTicker.shutdownNow();vehicleTicker.shutdownNow();catalogTicker.shutdownNow();commands.shutdownNow();statusRequests.shutdownNow();deliveries.shutdownNow();WorkPorts.publicationGuard((next,commit)->commit.run());
         if(equipment!=null)try{equipment.close();}catch(Exception ex){LOG.warning("SECS close: "+ex.getClass().getSimpleName());}
     }
 }

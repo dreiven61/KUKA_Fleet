@@ -24,9 +24,9 @@ async Task Wait(Func<bool> condition, string name)
     Check(condition(), name);
 }
 TransferRequest Req(string id, string from = "PORT_97", string to = "PORT_89") => new(id, "SIM_CARGO_001", from, to, 1);
-SecsMessage Event(uint ceid, TransferRequest r, uint result = 0, string? location = null) => new(6, 11, true)
+SecsMessage Event(uint ceid, TransferRequest r, uint result = 0, string? location = null, uint dataId = 0) => new(6, 11, true)
 {
-    SecsItem = L(U4(0), U2((ushort)ceid), L(L(U2(2), L(A(r.CommandId), L(L(L(A(r.CarrierId), A(r.SourcePort), A(r.DestPort)), A(location ?? r.DestPort))), U2((ushort)result)))))
+    SecsItem = L(U4(dataId), U2((ushort)ceid), L(L(U2(2), L(A(r.CommandId), L(L(L(A(r.CarrierId), A(r.SourcePort), A(r.DestPort)), A(location ?? r.DestPort))), U2((ushort)result)))))
 };
 SecsMessage Vehicle(uint ceid, TransferRequest r, string robot = "1", string? port = null) => new(6, 11, true)
 {
@@ -115,6 +115,7 @@ await using var equipment = new HsmsConnection(options, silent);
 using var eqGem = new SecsGem(options, equipment, silent);
 using var cts = new CancellationTokenSource();
 var received = new TaskCompletionSource<TransferRequest>(TaskCreationOptions.RunContinuationsAsynchronously);
+var updateRequests = new System.Collections.Concurrent.ConcurrentQueue<(string Id, ushort Priority, string Destination)>();
 bool dropReply = false;
 var serverLoop = Task.Run(async () =>
 {
@@ -134,6 +135,11 @@ var serverLoop = Task.Run(async () =>
                 received.TrySetResult(new(b[3][0][1][0][1].GetString(), b[3][1][1][0][1].GetString(), b[3][1][1][1][1].GetString(), b[3][1][1][2][1].GetString(), b[3][0][1][1][1].FirstValue<ushort>()));
                 if (dropReply) continue;
             }
+            if (primary.S == 2 && primary.F == 41 && primary.SecsItem![0].GetString() == "UPDATE")
+            {
+                var fields = primary.SecsItem[1].Items.ToDictionary(pair => pair[0].GetString(), pair => pair[1]);
+                updateRequests.Enqueue((fields["COMMANDID"].GetString(), fields["PRIORITY"].FirstValue<ushort>(), fields["DESTPORT"].GetString()));
+            }
             await incoming.TryReplyAsync(reply, cts.Token);
         }
     }
@@ -149,6 +155,17 @@ await Wait(() => client.Communicating, "HSMS select plus automatic S1F13/S1F14 h
 await Wait(() => client.RecentStatusResults.Count >= 3, "Automatic startup status requests complete after COMMACK0");
 Check(logs.Count(l => l.Direction == "TX" && l.Stream == 1 && l.Function == 3) == 3, "Automatic startup sends AGV/port/work exactly once");
 Check(!received.Task.IsCompleted && wireStore.Snapshot().Count == 0, "Status startup never submits a transport");
+foreach (ushort ceid in new ushort[] { 608, 609 })
+{
+    using var lifecycle = new SecsMessage(6, 11, true)
+    {
+        SecsItem = L(U4((uint)ceid), U2(ceid), L(L(U2(5), L(A("AGV002"), A(""), L(), L()))))
+    };
+    using var reply = await eqGem.SendAsync(lifecycle, cts.Token);
+    Check(Protocol.Ack(reply, 6, 12) == 0, $"Acknowledge RPTID5 vehicle installation change {ceid}");
+    Check(logs.Any(l => l.Ceid == ceid && l.Text.Contains("AGV002")), $"Lifecycle wire log names the vehicle for {ceid}");
+}
+Check(wireStore.Snapshot().Count == 0, "Installation changes do not create transport jobs");
 await SelectedStatusTests.WireTests(client, Check);
 Check(logs.Where(l=>l.Direction=="RX" && l.Stream==1 && l.Function==4).Any(l=>l.Text.Contains("[EnhancedVehicles]") && l.Text.Contains("[VehicleID]")), "Wire logger correlates S1F4 to its S1F3 VehicleID schema by SystemBytes");
 Check(logs.Where(l=>l.Direction=="RX" && l.Stream==1 && l.Function==4).Any(l=>l.Text.Contains("[EnhancedTransfers]") && l.Text.Contains("[CommandID]")), "Wire logger labels current-work CommandID without changing its value");
@@ -158,10 +175,51 @@ Check(await received.Task.WaitAsync(TimeSpan.FromSeconds(3)) == wireRequest, "Re
 Check(wireStore.Snapshot()[0].Phase == JobPhase.Acknowledged, "Legacy S2F50 is only acknowledged");
 Check(logs.Any(l => l.IsWorkMessage && l.MessageType == "S2F49" && l.CommandId == wireRequest.CommandId), "Transfer row has structured command correlation");
 await Wait(() => logs.Any(l => l.MessageType == "S2F50" && l.CommandId == wireRequest.CommandId), "Secondary response retains request COMMANDID");
+var updateResults = new System.Collections.Concurrent.ConcurrentQueue<TransferReport>();
+client.UpdateReported += updateResults.Enqueue;
+var updateAck = await client.SendPriorityUpdateAsync(wireRequest.CommandId, 90);
+Check(updateAck.Code == 4 && client.IsUpdatePending(wireRequest.CommandId), "UPDATE acceptance leaves final result pending");
+Check(updateRequests.TryDequeue(out var update) && update == (wireRequest.CommandId, 90, ""), "S2F41 carries exact ID, U2 priority and empty destination");
+try { await client.SendPriorityUpdateAsync(wireRequest.CommandId, 91); throw new Exception("Pending UPDATE sent twice"); }
+catch (InvalidOperationException) { Check(updateRequests.IsEmpty, "Pending UPDATE cannot write again"); }
+using (var completeUpdate = Event(212, wireRequest, dataId: 500))
+using (var ack = await eqGem.SendAsync(completeUpdate, cts.Token))
+    Check(Protocol.Ack(ack, 6, 12) == 0, "UPDATE completion receives S6F12 ACK0");
+await Wait(() => updateResults.Any(r => r.Ceid == 212) && !client.IsUpdatePending(wireRequest.CommandId), "CEID 212 publishes confirmed result separately from HCACK");
+await client.SendPriorityUpdateAsync(wireRequest.CommandId, 80);
+using (var duplicate = Event(212, wireRequest, dataId: 500))
+using (var ack = await eqGem.SendAsync(duplicate, cts.Token))
+    Check(Protocol.Ack(ack, 6, 12) == 0, "Repeated report still receives ACK0");
+Check(client.IsUpdatePending(wireRequest.CommandId), "An earlier DATAID does not settle the next UPDATE");
+using (var failUpdate = Event(213, wireRequest, dataId: 501))
+using (var ack = await eqGem.SendAsync(failUpdate, cts.Token))
+    Check(Protocol.Ack(ack, 6, 12) == 0, "UPDATE failure receives S6F12 ACK0");
+await Wait(() => updateResults.Any(r => r.Ceid == 213) && !client.IsUpdatePending(wireRequest.CommandId), "CEID 213 releases the pending UPDATE");
+Check(wireStore.Snapshot()[0].Phase == JobPhase.Acknowledged && wireStore.Snapshot()[0].LastCeid is null, "UPDATE results leave transport state intact");
+Check(updateRequests.TryDequeue(out _), "Second priority request was sent");
+var redirectedRequest = wireRequest with { DestPort = "PORT_84" };
 foreach (var (ceid, portName) in new (uint, string?)[] { (208,null), (604,null), (601,wireRequest.SourcePort),
-    (211,null), (602,null), (301,null), (603,null), (605,null), (601,wireRequest.DestPort),
+    (211,null), (602,null), (301,null), (603,null), (605,null), (601,redirectedRequest.DestPort),
     (606,null), (302,null), (607,null), (610,null), (207,null) })
 {
+    if (ceid == 601 && portName == redirectedRequest.DestPort)
+    {
+        var destinationAck = await client.SendDestinationUpdateAsync(wireRequest.CommandId, 80, redirectedRequest.DestPort);
+        Check(destinationAck.Code == 4 && updateRequests.TryDequeue(out var destinationUpdate)
+            && destinationUpdate == (wireRequest.CommandId, 80, redirectedRequest.DestPort), "Destination UPDATE carries the same command and current priority with new DESTPORT");
+        Check(logs.Any(l => l.Direction == "TX" && l.Summary == $"목적지 UPDATE 요청 · DESTPORT={redirectedRequest.DestPort}"),
+            "Wire log distinguishes a destination UPDATE and shows the exact new port");
+        Check(wireStore.Snapshot()[0].Request.DestPort == wireRequest.DestPort, "HCACK does not change the recorded destination");
+        using (var stale = Event(212, wireRequest, dataId: 502))
+        using (var ack = await eqGem.SendAsync(stale, cts.Token))
+            Check(Protocol.Ack(ack, 6, 12) == 0 && client.IsUpdatePending(wireRequest.CommandId), "Success for the old destination cannot settle a pending reroute");
+        using (var confirmed = Event(212, redirectedRequest, dataId: 503))
+        using (var ack = await eqGem.SendAsync(confirmed, cts.Token))
+            Check(Protocol.Ack(ack, 6, 12) == 0, "Confirmed destination update is acknowledged");
+        await Wait(() => !client.IsUpdatePending(wireRequest.CommandId)
+            && wireStore.Snapshot()[0].Request.DestPort == redirectedRequest.DestPort, "CEID 212 switches the local job to the new destination");
+        wireRequest = redirectedRequest;
+    }
     using var report = ceid >= 600 ? Vehicle(ceid, wireRequest, port:portName) : ceid is 301 or 302 ? Carrier(ceid,wireRequest) : Event(ceid, wireRequest);
     using var reply = await eqGem.SendAsync(report, cts.Token);
     Check(Protocol.Ack(reply, 6, 12) == 0, $"Automatic correlated S6F12 for CEID {ceid}");
@@ -186,6 +244,22 @@ foreach(uint ceid in new uint[]{601,604,605,610})
 using (var malformed = new SecsMessage(6,11,true) { SecsItem=L(U4(0),U2(603),L(L(U2(5),L(A("1"),A(vehicleRequest.CommandId),L(),L(A(vehicleRequest.CarrierId)))))) })
 using (var reply = await eqGem.SendAsync(malformed,cts.Token)) Check(Protocol.Ack(reply,6,12)==1,"Malformed RPTID5 gets negative ACK and cannot advance job");
 Check(wireStore.Snapshot().Single(j=>j.Request.CommandId==vehicleRequest.CommandId).Phase==JobPhase.Sending,"Rejected vehicle reports never change local phase");
+var reassignmentStore = new JobStore(Path.Combine(root, "source-reassignment.jsonl"));
+var reassignmentRequest = Req("SOURCE_REASSIGNMENT");
+reassignmentStore.Reserve(reassignmentRequest);
+reassignmentStore.Acknowledge(reassignmentRequest.CommandId, 4);
+using (var started = Event(208, reassignmentRequest)) reassignmentStore.Report(Protocol.ParseReport(started)!);
+Check(reassignmentStore.ReportVehicle(new(604, "3", reassignmentRequest.CommandId, reassignmentRequest.SourcePort, reassignmentRequest.CarrierId)),
+    "Tentative source vehicle is tracked");
+reassignmentStore.Disconnected();
+Check(reassignmentStore.ReportVehicle(new(610, "3", reassignmentRequest.CommandId, reassignmentRequest.SourcePort, reassignmentRequest.CarrierId))
+    && reassignmentStore.Snapshot()[0].VehicleId is null, "Pre-pickup source release permits a new assignment after reconnect");
+Check(reassignmentStore.ReportVehicle(new(604, "1", reassignmentRequest.CommandId, reassignmentRequest.SourcePort, reassignmentRequest.CarrierId))
+    && reassignmentStore.Snapshot()[0].VehicleId == "1", "Actual source owner replaces the tentative vehicle");
+using (var pickup = Event(211, reassignmentRequest)) reassignmentStore.Report(Protocol.ParseReport(pickup)!);
+Check(!reassignmentStore.ReportVehicle(new(610, "1", reassignmentRequest.CommandId, reassignmentRequest.SourcePort, reassignmentRequest.CarrierId))
+    && !reassignmentStore.ReportVehicle(new(604, "2", reassignmentRequest.CommandId, reassignmentRequest.SourcePort, reassignmentRequest.CarrierId)),
+    "Loaded transport keeps the confirmed vehicle binding");
 wireStore.Release(vehicleRequest.CommandId);
 var arrivals=wireStore.History(wireRequest.CommandId).Where(j=>j.LastCeid==601).ToArray();
 Check(arrivals.Length==2 && arrivals[0].VehiclePort==wireRequest.SourcePort && arrivals[1].VehiclePort==wireRequest.DestPort,"Two CEID601 arrivals retain separate ports and timeline records");

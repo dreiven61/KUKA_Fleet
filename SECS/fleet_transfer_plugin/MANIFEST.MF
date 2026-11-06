@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Plugin-Id: SERVOSTAR-MES-TRANSFER
-Plugin-Version: 1.5.2
+Plugin-Version: 1.5.8
 Plugin-Dependencies: STANDARD-API@2.15.5
 Plugin-Class: servostar.fleet.transfer.TransferPlugin
 Plugin-Provider: ServoStar (custom test plugin)

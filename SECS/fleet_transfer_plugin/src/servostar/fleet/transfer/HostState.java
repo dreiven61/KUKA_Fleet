@@ -16,6 +16,7 @@ public final class HostState {
         public int next;
         public long controlGeneration;
         public String controlEvidence="";
+        public String lastRedirect="";
         public boolean paused;
         public boolean recoveryArmed;
         public String recoveryReviewSource="", recoveryReviewNode="";
@@ -25,6 +26,7 @@ public final class HostState {
     public static final class Delivery {
         public long id;
         public String key="", kind="", command="", vehicle="", port="", location="", text="", state="PENDING", error="";
+        public String destination="";
         public int ceid, result, category, attempts;
         public long alarmId;
         public boolean set;
@@ -37,6 +39,7 @@ public final class HostState {
     }
     public static final class Data {
         public Map<String,String> vehicleNames=new LinkedHashMap<>();
+        public Map<String,Boolean> vehicleInstallations;
         public Map<String,Job> jobs=new LinkedHashMap<>();
         public List<Delivery> reports=new ArrayList<>();
         public Set<String> reportKeys=new LinkedHashSet<>();
@@ -49,11 +52,15 @@ public final class HostState {
     private final Path file;
     private final ObjectMapper json=new ObjectMapper();
     private boolean healthy=true;
+    boolean hostOffline;
     public HostState(Path file)throws IOException {
         this.file=file;
         if(file!=null && Files.exists(file) && Files.size(file)>32*1024*1024)throw new IOException("SECS journal exceeds review limit");
         data=file!=null && Files.exists(file)?json.readValue(file.toFile(),Data.class):new Data();
         if(data.jobs.size()>1000 || data.cargoOperations.size()>1000 || data.reports.size()>20000 || data.sequence<1)throw new IOException("Invalid SECS journal");
+        for(Delivery report:data.reports){
+            if("TSC".equals(report.kind) && (report.ceid==1 || report.ceid==3))hostOffline=report.ceid==1;
+        }
         for(CargoOperation op:data.cargoOperations.values()) {
             if(!"MUTATING".equals(op.phase) && !"PREPARING".equals(op.phase))continue;
             op.phase="MUTATING".equals(op.phase)?"UNCERTAIN":"REJECTED";
@@ -102,14 +109,14 @@ public final class HostState {
         for(Map.Entry<String,Job> entry:data.jobs.entrySet()){
             Job j=entry.getValue();jobs.add(TransferService.map("commandId",entry.getKey(),"phase",j.phase,"control",j.control,"controlState",j.controlState,"paused",j.paused,"vehicle",j.vehicle,"instanceId",j.instance,"controlGeneration",j.controlGeneration,"controlEvidence",j.controlEvidence,"nextReportIndex",j.next,"recoveryArmed",j.recoveryArmed,"recoveryReviewSource",j.recoveryReviewSource,"recoveryReviewNode",j.recoveryReviewNode,"recoveryState",j.recoveryState,"recoveryMission",j.recoveryMission,"recoveryNode",j.recoveryNode,"recoveryCommand",j.recoveryCommand,"recoveryDetail",j.recoveryDetail));
         }
-        for(Delivery d:data.reports)if(!"ACKED".equals(d.state))reports.add(TransferService.map("dataId",d.id,"kind",d.kind,"ceid",d.ceid,"commandId",d.command,"state",d.state,"attempts",d.attempts,"error",d.error));
+        for(Delivery d:data.reports)if(!"ACKED".equals(d.state))reports.add(TransferService.map("dataId",d.id,"kind",d.kind,"ceid",d.ceid,"commandId",d.command,"vehicle",d.vehicle,"state",d.state,"attempts",d.attempts,"error",d.error));
         List<Map<String,Object>> rejected=new ArrayList<>();
         for(int i=data.reports.size()-1;i>=0 && rejected.size()<20;i--){Delivery d=data.reports.get(i);if("COMMAND_REJECT".equals(d.kind))rejected.add(TransferService.map("dataId",d.id,"commandId",d.command,"command",d.operation,"hcack",d.result,"reason",d.detail,"tsc",d.outcome,"blockingId",d.port));}
         List<Map<String,Object>> activeAlarms=new ArrayList<>();
         for(Map.Entry<String,Delivery> entry:data.alarms.entrySet()){
             Delivery a=entry.getValue();activeAlarms.add(TransferService.map("key",entry.getKey(),"alid",a.alarmId,"commandId",a.command,"vehicle",a.vehicle,"code",a.port,"source",a.operation,"text",a.text));
         }
-        return TransferService.map("recentRejections",rejected,"healthy",healthy,"tsc",data.tsc,"reports",reports,"activeAlarms",activeAlarms,"jobCount",data.jobs.size(),"jobs",jobs,"cargoOperations",data.cargoOperations);
+        return TransferService.map("recentRejections",rejected,"healthy",healthy,"tsc",data.tsc,"controlState",hostOffline?3:5,"reports",reports,"activeAlarms",activeAlarms,"jobCount",data.jobs.size(),"jobs",jobs,"cargoOperations",data.cargoOperations,"vehicleInstallations",data.vehicleInstallations==null?null:new LinkedHashMap<>(data.vehicleInstallations));
     }
     public synchronized void retry(long id){
         requireHealthy();

@@ -10,7 +10,8 @@ import static com.kuka.ecs.common.transport.secs.secs2.Secs2.*;
 final class SelectedStatusService {
     // SDK MobileRobotStatus wire values. No dependency on another plugin's
     // private robot protobuf classloader: REST provides these numeric values.
-    private static final int DEPARTURE=1,OFFLINE=2,IDLE=3,EXECUTING=4,CHARGING=5,UPDATING=6,ABNORMAL=7;
+    static final int DEPARTURE=1;
+    private static final int OFFLINE=2,IDLE=3,EXECUTING=4,CHARGING=5,UPDATING=6,ABNORMAL=7;
     static final int[] ALL={3,17,21,23,25,46,58};
     private static final Set<String> ACTIVE=new HashSet<>(Arrays.asList("10","20","25","28","50","60"));
     private final TransferService.FleetClient client;
@@ -72,7 +73,7 @@ final class SelectedStatusService {
             state.requireHealthy();
             if(live && System.nanoTime()>deadline)throw new IllegalStateException("Status snapshot too old; query again");
             Map<Integer,Secs2> values=new HashMap<>();
-            values.put(3,alarms());values.put(17,uint2(5));values.put(46,uint2(tsc(state.data.tsc)));
+            values.put(3,alarms());values.put(17,uint2(state.hostOffline?3:5));values.put(46,uint2(tsc(state.data.tsc)));
             if(live){
                 Map<String,Map<String,Object>> byRobot=index(robots,"robotId"),byCargo=index(cargo,"containerCode");
                 if(needRobots)for(String id:byRobot.keySet())if(!WorkPorts.identifier(id,32))throw new IllegalStateException("Invalid Fleet VehicleID");
@@ -145,7 +146,7 @@ final class SelectedStatusService {
         List<Secs2> values=new ArrayList<>();
         for(Map.Entry<String,Map<String,Object>> entry:robots.entrySet()){
             String id=entry.getKey();Map<String,Object> r=entry.getValue();
-            int status=number(r,"status",1,7);
+            int status=robotStatus(r);
             boolean down=status==OFFLINE || status==ABNORMAL || status==DEPARTURE || status==UPDATING;
             int vehicleState=status==DEPARTURE?1:2;
             boolean busy=!text(r,"missionCode").isEmpty() || !text(r,"rcsMissionCode").isEmpty()
@@ -217,6 +218,7 @@ final class SelectedStatusService {
         String text=required(row,key);if(!text.matches("[0-9]+"))throw new IllegalStateException("Invalid numeric "+key);
         int n=Integer.parseInt(text);if(n<min || n>max)throw new IllegalStateException("Range "+key);return n;
     }
+    static int robotStatus(Map<String,Object> row){return number(row,"status",1,7);}
     private static String required(Map<String,Object> row,String key){String s=text(row,key);if(s.isEmpty())throw new IllegalStateException("Missing "+key);return s;}
     private static String text(Map<String,Object> row,String key){Object v=row.get(key);return v==null?"":v.toString();}
 }

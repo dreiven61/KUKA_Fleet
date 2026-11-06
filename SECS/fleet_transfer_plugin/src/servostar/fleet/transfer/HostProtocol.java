@@ -61,6 +61,23 @@ final class HostProtocol {
         return r;
     }
     static Secs2 ack(int code){return list(binary((byte)code),list());}
+    static String requiredAscii(Map<String,Secs2> fields,String key)throws Exception{
+        if(!fields.containsKey(key))throw new ParameterError(key,1);
+        return asciiField(fields.get(key),key);
+    }
+    // SKI 99 is highest. Use Fleet priorities 1 through 99 in reverse order.
+    static int fleetPriority(int skiPriority){return 100-skiPriority;}
+
+    static int updatePriority(Map<String,Secs2> fields)throws Exception{
+        String key=fields.containsKey("PRIORTY")?"PRIORTY":"PRIORITY";
+        if(fields.containsKey("PRIORTY") && fields.containsKey("PRIORITY"))throw new ParameterError("PRIORITY",2);
+        Secs2 value=fields.get(key);
+        if(value==null)throw new ParameterError(key,1);
+        if(value.secs2Item()!=Secs2Item.UINT2 || value.size()!=1)throw new ParameterError(key,3);
+        int priority=value.getInt(0);
+        if(priority<1 || priority>99)throw new ParameterError(key,2);
+        return priority;
+    }
     static Secs2 ack(ParameterError e){if("RCMD".equals(e.field) && e.code==1)return ack(1);return list(binary((byte)3),list(list(ascii(e.field),binary((byte)e.code))));}
     static Secs2 event(long id,int ceid,int report,Secs2 value){return list(uint4(id),uint2(ceid),report==0?list():list(list(uint2(report),value)));}
     static boolean cargoCommand(String command){return Arrays.asList("CARRIER_QUERY","CARRIER_IN","CARRIER_OUT","CARRIER_SCAN_TEST","CARRIER_VERIFY").contains(command);}
@@ -106,10 +123,12 @@ final class HostProtocol {
         if("ALARM".equals(d.kind))return list(binary((byte)(d.category|(d.set?128:0))),uint4(d.alarmId),ascii(d.text));
         if("UNIT".equals(d.kind))return event(d.id,d.ceid,6,list(ascii(names.vehicle(d.vehicle)),uint4(d.alarmId),ascii(d.text)));
         if("TSC".equals(d.kind))return event(d.id,d.ceid,0,list());
+        if("VEHICLE_INSTALLATION".equals(d.kind))return event(d.id,d.ceid,5,list(ascii(d.vehicle),ascii(""),list(),list()));
         Map<String,Object> r=j.request;
         if("VEHICLE".equals(d.kind))return event(d.id,d.ceid,5,list(ascii(names.vehicle(d.vehicle)),ascii(d.command),list(ascii(names.location(d.port))),list(ascii((String)r.get("CARRIERID")))));
         if("CARRIER".equals(d.kind))return event(d.id,d.ceid,3,list(ascii(names.vehicle(d.vehicle)),ascii((String)r.get("CARRIERID")),ascii(reportLocation(d,names)),ascii(d.command)));
-        return event(d.id,d.ceid,2,list(ascii(d.command),list(list(list(ascii((String)r.get("CARRIERID")),ascii(names.location((String)r.get("SOURCEPORT"))),ascii(names.location((String)r.get("DESTPORT")))),ascii(reportLocation(d,names)))),uint2(d.result)));
+        String destination=d.destination.isEmpty()?(String)r.get("DESTPORT"):d.destination;
+        return event(d.id,d.ceid,2,list(ascii(d.command),list(list(list(ascii((String)r.get("CARRIERID")),ascii(names.location((String)r.get("SOURCEPORT"))),ascii(names.location(destination))),ascii(reportLocation(d,names)))),uint2(d.result)));
     }
     private static String reportLocation(HostState.Delivery d,VehicleNames names){return !d.vehicle.isEmpty() && d.vehicle.equals(d.location)?names.vehicle(d.vehicle):names.location(d.location);}
 }

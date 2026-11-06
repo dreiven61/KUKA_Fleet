@@ -91,6 +91,17 @@ public sealed class JobStore
         });
         return matched;
     }
+    internal void ReportUpdatedDestination(TransferReport report)
+    {
+        Update(report.CommandId, job =>
+        {
+            if (!job.IsPending || job.Request.CarrierId != report.CarrierId || job.Request.SourcePort != report.SourcePort
+                || job.Request.DestPort == report.DestPort || job.Request.SourcePort == report.DestPort
+                || !System.Text.RegularExpressions.Regex.IsMatch(report.DestPort, @"\A[A-Za-z0-9_.:-]{1,64}\z")) return job;
+            return job with { Request = job.Request with { DestPort = report.DestPort }, LastCeid = report.Ceid,
+                Detail = $"목적지 변경 완료 · {job.Request.DestPort} → {report.DestPort}" };
+        });
+    }
     public bool ReportVehicle(VehicleReport report)
     {
         bool matched = false;
@@ -98,11 +109,20 @@ public sealed class JobStore
         {
             string port = report.Ceid is 602 or 603 or 604 or 605 ? job.Request.SourcePort : job.Request.DestPort;
             bool interruptedRelease = report.Ceid == 610 && (job.Phase is JobPhase.Canceled or JobPhase.Aborted || job.PendingControl is "CANCEL" or "ABORT");
-            bool validPort = report.Ceid == 601 || interruptedRelease ? report.TransferPort == job.Request.SourcePort || report.TransferPort == job.Request.DestPort : report.TransferPort == port;
+            bool beforePickup = job.Phase is JobPhase.Acknowledged or JobPhase.Initiated
+                || job.Phase == JobPhase.Uncertain && (job.LastCeid is 208 or 604
+                    || job.LastCeid == 601 && job.VehiclePort == job.Request.SourcePort);
+            bool pickupRelease = report.Ceid == 610 && report.TransferPort == job.Request.SourcePort
+                && job.SourceVehicleId.Length == 0 && WorkPorts.SourceVehicle(job.Request.SourcePort).Length == 0
+                && job.PendingControl.Length == 0 && beforePickup;
+            bool validPort = report.Ceid == 601 || interruptedRelease || pickupRelease ? report.TransferPort == job.Request.SourcePort || report.TransferPort == job.Request.DestPort : report.TransferPort == port;
             if (report.Ceid is not (601 or 602 or 603 or 604 or 605 or 606 or 607 or 610) || !ValidVehicle(job, report.VehicleId)
                 || report.CarrierId != job.Request.CarrierId || !validPort) return job;
             matched = true;
             if (!job.IsPending) return job;
+            if (pickupRelease)
+                return job with { VehicleId = null, VehiclePort = null, LastCeid = report.Ceid,
+                    Detail = $"픽업 전 차량 배차 해제 · {report.VehicleId}" };
             // A drop-completed vehicle report is not a transport-completed report.
             var phase = report.Ceid == 604 || report.Ceid == 601 && report.TransferPort == job.Request.SourcePort ? job.Phase : JobPhase.Transferring;
             if (job.PendingControl.Length != 0 || job.Phase == JobPhase.Paused) phase = job.Phase;

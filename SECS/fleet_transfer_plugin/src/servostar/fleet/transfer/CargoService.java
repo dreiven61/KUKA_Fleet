@@ -76,16 +76,21 @@ final class CargoService {
     /** Include jobs from ECS/manual clients, not only jobs owned by our host.
      * Filter each documented nonterminal state to avoid truncating old history. */
     void assertNoFleetWork(String carrier,String place,String token)throws Exception {
+        assertNoFleetWork(carrier,place,token,"");
+    }
+    void assertNoFleetWork(String carrier,String place,String token,String ownCommand)throws Exception {
         for(String status:Arrays.asList("10","20","25","28","50","60")) {
             Map<String,Object> r=client.post("jobQuery",token,TransferService.map("status",Integer.parseInt(status),"limit",1000));
             if(!NativeHostEngine.ok(r) || !(r.get("data") instanceof List) || ((List<?>)r.get("data")).size()>=1000)throw new IllegalStateException("Active job query unavailable or truncated");
             for(Object item:(List<?>)r.get("data")) {
                 if(!(item instanceof Map))throw new IllegalStateException("Invalid job response");
                 Map<?,?> job=(Map<?,?>)item;
+                if(ownCommand.equals(job.get("jobCode")))continue;
                 String actual=String.valueOf(job.get("status"));
                 if(Arrays.asList("30","31","35").contains(actual))continue;
-                if(carrier.equals(job.get("containerCode")) || WorkPorts.node(place).equals(job.get("targetCellCode"))
-                    || WorkPorts.node(place).equals(job.get("beginCellCode")))throw new Rejected("FLEET_ACTIVE_OR_WARNING_JOB");
+                if(carrier.equals(job.get("containerCode")) || WorkPorts.sameNode(place,String.valueOf(job.get("targetCellCode")))
+                    || WorkPorts.sameNode(place,String.valueOf(job.get("beginCellCode")))
+                    || WorkPorts.sameNode(place,String.valueOf(job.get("finalNodeCode"))))throw new Rejected("FLEET_ACTIVE_OR_WARNING_JOB");
             }
         }
     }

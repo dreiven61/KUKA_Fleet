@@ -111,7 +111,7 @@ public final class HistoricalRecoveryTest {
         check(controller.recoverLoadedAbort("fixture",body(true)).getStatusCodeValue()==200 && api.job.recoveryArmed && api.fleet.mutations==0,"HTTP explicit review durably arms only");
         check(controller.recoverLoadedAbort("fixture",body(true)).getStatusCodeValue()==409,"HTTP duplicate never resets");
         Map<String,Object> status=service.status("fixture");
-        check(status.get("version").equals("1.5.2") && ((Map<?,?>)status.get("loadedAbortWaitNodes")).get("2").equals(WAIT),"Actual runtime version and loaded mapping exposed");
+        check(status.get("version").equals(NativeHostService.VERSION) && ((Map<?,?>)status.get("loadedAbortWaitNodes")).get("2").equals(WAIT),"Actual runtime version and loaded mapping exposed");
         ((Map<?,?>)status.get("loadedAbortWaitNodes")).clear();
         check(service.status("fixture").toString().contains(WAIT),"Status cannot mutate live mapping");
         System.out.println("PASS: "+checks+" explicit historical ABORT recovery, auth, preview, ownership and no-replay checks; fixtures only.");

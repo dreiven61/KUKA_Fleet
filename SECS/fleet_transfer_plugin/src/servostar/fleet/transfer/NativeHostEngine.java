@@ -3,6 +3,7 @@ package servostar.fleet.transfer;
 import java.util.*;
 import java.util.logging.Logger;
 import com.kuka.ecs.common.transport.secs.secs2.*;
+import static com.kuka.ecs.common.transport.secs.secs2.Secs2.*;
 
 /** Native host business boundary. HTTP acknowledgement never means robot completion.
  * All mutations are serialized; received WCS facts and outbound reports are durable. */
@@ -21,6 +22,9 @@ public final class NativeHostEngine {
     private final WorkflowAlarmMonitor workflowAlarms;
     private static final int[] CEIDS={208,604,601,211,602,301,603,605,601,606,302,607,610,207};
     private static final String[] STAGES={"","assigned","arrived-source","transfer-started","pickup-started","pickup-completed","pickup-completed","departed-source","arrived-dest","drop-started","completed","completed","unassigned","completed"};
+    private static final String PENDING_PRIORITY="_pendingPriorityUpdate";
+    @FunctionalInterface interface PriorityWriter {boolean write(String commandId,int fleetPriority);}
+    @FunctionalInterface interface DestinationWriter {boolean write(String commandId,String node);}
     public NativeHostEngine(TransferService service,TransferService.FleetClient client,HostState state,String token,
             Map<String,Map<String,Object>> alarms,Map<String,Integer> failures,int genericFailure){
         this.service=service;this.client=client;this.state=state;this.token=token;this.alarmMap=alarms;this.failures=failures;this.genericFailure=genericFailure;
@@ -35,6 +39,32 @@ public final class NativeHostEngine {
         synchronized(state){state.requireHealthy();authenticate();return recovery.review(id,carrier,vehicle,source,wait,apply);}
     }
     static boolean ok(Map<String,Object> r){return r!=null && Boolean.TRUE.equals(r.get("success")) && (r.get("code")==null || "0".equals(String.valueOf(r.get("code"))));}
+
+    Secs2 alarmList(Secs2 body)throws Exception {
+        if(body.secs2Item()!=Secs2Item.LIST)throw new IllegalArgumentException("S5F5 requires an ALID list");
+        Set<Long> ids=new HashSet<>();
+        for(Secs2 item:body){
+            if(item.secs2Item()!=Secs2Item.UINT4 || item.size()!=1)throw new IllegalArgumentException("ALID must be U4");
+            ids.add(item.getLong(0));
+        }
+        synchronized(state){
+            state.requireHealthy();
+            Map<Long,Secs2> rows=new TreeMap<>();
+            for(Map<String,Object> definition:alarmMap.values()){
+                long id=((Number)definition.get("alid")).longValue();
+                rows.put(id,alarmRow(id,((Number)definition.get("category")).intValue(),text(definition,"text")));
+            }
+            for(HostState.Delivery alarm:state.data.reports){
+                if("ALARM".equals(alarm.kind))rows.putIfAbsent(alarm.alarmId,alarmRow(alarm.alarmId,alarm.category,alarm.text));
+            }
+            for(HostState.Delivery alarm:state.data.alarms.values())
+                rows.put(alarm.alarmId,alarmRow(alarm.alarmId,alarm.category|128,alarm.text));
+            if(!ids.isEmpty())rows.keySet().retainAll(ids);
+            return list(new ArrayList<>(rows.values()));
+        }
+    }
+
+    private static Secs2 alarmRow(long id,int alcd,String text){return list(binary((byte)alcd),uint4(id),ascii(text));}
     private void authenticate()throws Exception {if(!ok(client.post("robotQuery",token,Collections.<String,Object>emptyMap())))throw new SecurityException("Fleet authentication unavailable");}
     /** Custom inventory commands. Never auto-register a carrier on TRANSFER. */
     public synchronized Secs2 cargo(String command,Map<String,String> p)throws Exception {
@@ -95,7 +125,7 @@ public final class NativeHostEngine {
     }
     private void ensureCargoFree(Map<String,String> p){
         for(HostState.Job job:state.data.jobs.values())if(!terminal(job.phase) &&
-            (p.get("CARRIERID").equals(job.request.get("CARRIERID")) || p.get("PORT").equals(job.request.get("SOURCEPORT")) || p.get("PORT").equals(job.request.get("DESTPORT"))))
+            (p.get("CARRIERID").equals(job.request.get("CARRIERID")) || reservesPort(job,p.get("PORT"))))
             throw new CargoService.Rejected("ACTIVE_OR_UNCERTAIN_TRANSFER");
         for(HostState.CargoOperation other:state.data.cargoOperations.values())if(!p.get("REQUESTID").equals(other.request.get("REQUESTID")) &&
             "UNCERTAIN".equals(other.phase) && (p.get("CARRIERID").equals(other.request.get("CARRIERID")) || p.get("PORT").equals(other.request.get("PORT"))))
@@ -136,6 +166,12 @@ public final class NativeHostEngine {
             for(HostState.CargoOperation op:state.data.cargoOperations.values())if("UNCERTAIN".equals(op.phase) &&
                 (request.get("CARRIERID").equals(op.request.get("CARRIERID")) || request.get("SOURCEPORT").equals(op.request.get("PORT")) || request.get("DESTPORT").equals(op.request.get("PORT"))))return reject("TRANSFER",id,2,"UNCERTAIN_INVENTORY_OPERATION",op.request.get("REQUESTID"));
             for(HostState.Job j:state.data.jobs.values())if(j.request.get("CARRIERID").equals(request.get("CARRIERID")) && state.unsettled(j))return reject("TRANSFER",id,2,"CARRIER_HAS_PENDING_TRANSFER",(String)j.request.get("COMMANDID"));
+            for(HostState.Job j:state.data.jobs.values()){
+                TransferJournal.Redirect redirect=unreportedRedirect(j);
+                if(redirect!=null && !"FAILED".equals(redirect.outcome)
+                    && (redirect.port.equals(request.get("SOURCEPORT")) || redirect.port.equals(request.get("DESTPORT"))))
+                    return reject("TRANSFER",id,2,"PORT_HAS_PENDING_DESTINATION_UPDATE",text(j.request,"COMMANDID"));
+            }
             HostState.Job parent;
             try{parent=recovery.ready(request);if(parent!=null)recovery.verifyReady(parent,request);}
             catch(CargoService.Rejected ex){return reject("TRANSFER",id,2,safeCode(ex.getMessage()),"");}
@@ -144,7 +180,7 @@ public final class NativeHostEngine {
             if(parent!=null){parent.recoveryState="CLAIMED";parent.recoveryCommand=id;job.vehicle=parent.vehicle;}
             state.data.jobs.put(id,job);state.save();
             try {
-                Map<String,Object> reply=service.submit(request,token);
+                Map<String,Object> reply=service.submitFromHost(request,token);
                 job.phase=ok(reply)?"ACTIVE":"REJECTED";
                 if(ok(reply)){queue(job,"TRANSFER",208,parent==null?(String)job.request.get("SOURCEPORT"):job.vehicle,0,"normal:0");job.next=1;}
                 else restoreRecovery(parent);
@@ -166,6 +202,183 @@ public final class NativeHostEngine {
     private void restoreRecovery(HostState.Job parent){if(parent!=null){parent.recoveryState="READY";parent.recoveryCommand="";}}
     private static String safeCode(Object value){String v=String.valueOf(value).replaceAll("[^A-Za-z0-9_:-]","_");return v.substring(0,Math.min(v.length(),80));}
     static boolean terminal(String phase){return Arrays.asList("COMPLETED","CANCELED","ABORTED","FAILED","REJECTED").contains(phase);}
+
+    synchronized Secs2 updatePriority(String id,int priority,PriorityWriter writer){
+        synchronized(state){
+            state.requireHealthy();
+            HostState.Job job=state.data.jobs.get(id);
+            if(job==null)return HostProtocol.ack(6);
+            if(!"ACTIVE".equals(job.phase) || !job.control.isEmpty() || state.data.reports.size()>=20000)
+                return HostProtocol.ack(2);
+            if(unreportedRedirect(job)!=null)return HostProtocol.ack(5);
+
+            int fleetPriority=HostProtocol.fleetPriority(priority);
+            boolean pending=job.request.containsKey(PENDING_PRIORITY);
+            if(pending && !Integer.valueOf(priority).equals(job.request.get(PENDING_PRIORITY)))
+                return HostProtocol.ack(5);
+            if(pending){
+                if(!confirmPriority(job,priority))throw new UncertainCommand();
+                return HostProtocol.ack(0);
+            }
+            Map<?,?> row;
+            try{row=updateJobRow(job);}
+            catch(Exception unavailable){return failUpdate(job,"PRIORITY_QUERY_UNAVAILABLE");}
+            if(!job.vehicle.isEmpty() || !waitingForDispatch(row))
+                return failUpdate(job,"JOB_NOT_WAITING_FOR_DISPATCH");
+            if(String.valueOf(fleetPriority).equals(String.valueOf(row.get("workflowPriority")))){
+                finishPriority(job,priority);
+                return HostProtocol.ack(0);
+            }
+
+            job.request.put(PENDING_PRIORITY,priority);
+            state.save();
+            boolean accepted;
+            try{accepted=writer.write(id,fleetPriority);}
+            catch(RuntimeException unavailable){throw new UncertainCommand();}
+            if(!accepted){
+                job.request.remove(PENDING_PRIORITY);
+                return failUpdate(job,"FLEET_PRIORITY_REJECTED");
+            }
+            return HostProtocol.ack(confirmPriority(job,priority)?0:4);
+        }
+    }
+
+    synchronized Secs2 updateDestination(String id,int priority,String destination,DestinationWriter writer,PriorityWriter priorityWriter)throws Exception{
+        synchronized(state){
+            state.requireHealthy();
+            HostState.Job job=state.data.jobs.get(id);
+            if(job==null)return HostProtocol.ack(6);
+            if(state.data.reports.size()>=20000)return HostProtocol.ack(2);
+            settleDestination(job);
+            if(unreportedRedirect(job)!=null || job.request.containsKey(PENDING_PRIORITY))return HostProtocol.ack(5);
+            try{WorkPorts.requireFresh();}
+            catch(IllegalStateException unavailable){return failUpdate(job,"DESTINATION_CATALOG_UNAVAILABLE");}
+            if(WorkPorts.samePort(destination,text(job.request,"DESTPORT")))return updatePriority(id,priority,priorityWriter);
+            if(!"ACTIVE".equals(job.phase) || !job.control.isEmpty() || job.paused || !"AUTO".equals(state.data.tsc)
+                || service.journal==null || job.next>=9 || job.vehicle.isEmpty() || job.instance.isEmpty())
+                return failUpdate(job,"JOB_NOT_IN_LOADED_TRAVEL");
+            if(!String.valueOf(priority).equals(text(job.request,"PRIORITY")))
+                return failUpdate(job,"DESTINATION_UPDATE_REQUIRES_CURRENT_PRIORITY");
+            return WorkPorts.withCurrent(()->redirectDestination(job,destination,writer));
+        }
+    }
+
+    private Secs2 redirectDestination(HostState.Job job,String destination,DestinationWriter writer)throws Exception{
+        String id=text(job.request,"COMMANDID"),carrier=text(job.request,"CARRIERID");
+        String oldPort=text(job.request,"DESTPORT");
+        if(!WorkPorts.contains(destination) || WorkPorts.samePort(destination,text(job.request,"SOURCEPORT")))
+            return failUpdate(job,"INVALID_NEW_DESTINATION");
+        String port=WorkPorts.canonical(destination);
+        for(HostState.Job other:state.data.jobs.values())
+            if(other!=job && !terminal(other.phase) && reservesPort(other,port))
+                return failUpdate(job,"DESTINATION_RESERVED");
+        for(HostState.CargoOperation op:state.data.cargoOperations.values())
+            if("UNCERTAIN".equals(op.phase) && port.equals(op.request.get("PORT")))
+                return failUpdate(job,"DESTINATION_HAS_UNCERTAIN_INVENTORY");
+        try{
+            CargoService cargo=new CargoService(client);
+            List<Map<String,Object>> inventory=cargo.query(token);
+            Map<String,Object> current=CargoService.find(inventory,carrier);
+            if(current==null || !WorkPorts.eligibleRobots(job.vehicle,port,CargoService.str(current,"containerModelCode")).contains(job.vehicle))
+                return failUpdate(job,"DESTINATION_NOT_COMPATIBLE");
+            for(Map<String,Object> row:inventory)
+                if(WorkPorts.samePort(port,CargoService.port(row)))return failUpdate(job,"DESTINATION_OCCUPIED");
+            cargo.assertNoFleetWork(carrier,port,token,id);
+            Map<?,?> row=updateJobRow(job);
+            Map<String,Object> robots=client.readStatus("robotQuery",token,TransferService.map("robotId",job.vehicle));
+            if(row==null || !WorkPorts.sameNode(oldPort,String.valueOf(row.get("targetCellCode")))
+                || !ControlStateVerifier.loadedTravel(job,oldPort,row,robots))
+                return failUpdate(job,"JOB_NOT_IN_LOADED_TRAVEL");
+        }catch(CargoService.Rejected rejected){return failUpdate(job,rejected.getMessage());}
+        catch(Exception unavailable){return failUpdate(job,"DESTINATION_PREFLIGHT_UNAVAILABLE");}
+
+        TransferJournal.Redirect intent=new TransferJournal.Redirect(UUID.randomUUID().toString(),port,WorkPorts.node(port),"");
+        if(!service.journal.beginRedirect(id,job.instance,job.vehicle,intent))return failUpdate(job,"LOADED_TRAVEL_NOT_OBSERVED");
+        try{
+            if(!writer.write(id,intent.node))service.journal.rejectRedirect(id,intent.id);
+        }catch(RuntimeException | java.io.IOException uncertain){
+            LOG.warning("SECS destination UPDATE outcome pending for "+id+"; waiting for WCS evidence");
+        }
+        TransferJournal.Redirect result=settleDestination(job);
+        return HostProtocol.ack(result!=null && "FAILED".equals(result.outcome)?2:4);
+    }
+
+    private TransferJournal.Redirect unreportedRedirect(HostState.Job job){
+        if(service.journal==null)return null;
+        TransferJournal.Redirect r=service.journal.redirect(text(job.request,"COMMANDID"));
+        return r==null || r.id.equals(job.lastRedirect)?null:r;
+    }
+
+    private boolean reservesPort(HostState.Job job,String port){
+        if(port.equals(job.request.get("SOURCEPORT")) || port.equals(job.request.get("DESTPORT")))return true;
+        TransferJournal.Redirect r=unreportedRedirect(job);
+        return r!=null && !"FAILED".equals(r.outcome) && port.equals(r.port);
+    }
+
+    private TransferJournal.Redirect settleDestination(HostState.Job job){
+        TransferJournal.Redirect r=unreportedRedirect(job);
+        if(r==null || r.outcome.isEmpty())return r;
+        boolean applied="APPLIED".equals(r.outcome);
+        if(applied){
+            // Keep already queued legacy reports stable across a route change.
+            String old=text(job.request,"DESTPORT");
+            for(HostState.Delivery report:state.data.reports)
+                if("TRANSFER".equals(report.kind) && report.command.equals(job.request.get("COMMANDID")) && report.destination.isEmpty())
+                    report.destination=old;
+            job.request.put("DESTPORT",r.port);
+        }
+        queue(job,"TRANSFER",applied?212:213,job.vehicle,0,"redirect:"+r.id);
+        job.lastRedirect=r.id;
+        state.save();
+        return r;
+    }
+
+    private static boolean waitingForDispatch(Map<?,?> row){
+        if(row==null)return false;
+        String status=String.valueOf(row.get("status"));
+        Object vehicle=row.get("robotId");
+        // Fleet can enter status 20 while the job is still waiting for a robot.
+        return ("10".equals(status) || "20".equals(status)) && (vehicle==null || "".equals(vehicle));
+    }
+
+    private Map<?,?> updateJobRow(HostState.Job job)throws Exception{
+        String id=text(job.request,"COMMANDID");
+        Map<String,Object> result=client.readStatus("jobQuery",token,TransferService.map("jobCode",id,"limit",2));
+        if(!ok(result) || !(result.get("data") instanceof List))throw new IllegalStateException("Fleet job query unavailable");
+        List<?> rows=(List<?>)result.get("data");
+        if(rows.size()!=1 || !(rows.get(0) instanceof Map))return null;
+        Map<?,?> row=(Map<?,?>)rows.get(0);
+        String instance=String.valueOf(row.get("workflowId"));
+        if(!id.equals(row.get("jobCode")) || !job.request.get("CARRIERID").equals(row.get("containerCode"))
+            || !instance.matches("[1-9][0-9]*") || !job.instance.isEmpty() && !job.instance.equals(instance))return null;
+        if(job.instance.isEmpty()){job.instance=instance;state.save();}
+        return row;
+    }
+
+    private boolean confirmPriority(HostState.Job job,int priority){
+        Map<?,?> row;
+        try{row=updateJobRow(job);}catch(Exception unavailable){return false;}
+        if(row==null || !String.valueOf(HostProtocol.fleetPriority(priority)).equals(String.valueOf(row.get("workflowPriority"))))return false;
+        finishPriority(job,priority);
+        return true;
+    }
+
+    private void finishPriority(HostState.Job job,int priority){
+        queue(job,"TRANSFER",212,updateLocation(job),0,"update:"+state.data.sequence);
+        job.request.put("PRIORITY",priority);
+        job.request.remove(PENDING_PRIORITY);
+        state.save();
+    }
+
+    private Secs2 failUpdate(HostState.Job job,String reason){
+        queue(job,"TRANSFER",213,updateLocation(job),0,"update:"+state.data.sequence);
+        return reject("UPDATE",text(job.request,"COMMANDID"),2,reason,"");
+    }
+
+    private static String updateLocation(HostState.Job job){
+        return job.location.isEmpty()?text(job.request,"SOURCEPORT"):job.location;
+    }
+
     public synchronized Secs2 control(String command,String id)throws Exception {
         state.requireHealthy();
         try{authenticate();}catch(SecurityException ex){return reject(command,id,2,"FLEET_AUTHENTICATION_FAILED","");}
@@ -272,7 +485,16 @@ public final class NativeHostEngine {
             HostState.Job j=state.data.jobs.get(id);if(j==null || terminal(j.phase))return;
             if(!j.request.get("CARRIERID").equals(event.get("carrierId")))return;
             String instance=text(event,"instanceId");if(instance.isEmpty())return;
-            if(!j.instance.isEmpty() && !j.instance.equals(instance) || !j.vehicle.isEmpty() && !j.vehicle.equals(vehicle))return;
+            if(!j.instance.isEmpty() && !j.instance.equals(instance))return;
+            if(!j.vehicle.isEmpty() && !j.vehicle.equals(vehicle)){
+                Map<String,Object> bound=service.journal==null?Collections.emptyMap()
+                    :service.journal.stage(TransferService.normalize(request(j)),"arrived-source");
+                if(j.next<=2 && j.control.isEmpty() && !j.paused
+                    && Boolean.TRUE.equals(bound.get("success")) && vehicle.equals(text(bound,"robotId"))
+                    && j.vehicle.equals(text(bound,"sourceReassignedFrom"))
+                    && TransferJournal.sourceArrival(j.request,j.instance,event))reassignSourceVehicle(j,vehicle);
+                else return;
+            }
             String response=text(event,"responseId");if(response.isEmpty() || !j.responses.add(response))return;
             if(j.responses.size()>10000)throw new IllegalStateException("Callback review capacity");
             j.instance=instance;j.vehicle=vehicle;
@@ -293,6 +515,18 @@ public final class NativeHostEngine {
             state.save();
         }
     }
+    private void reassignSourceVehicle(HostState.Job job,String vehicle){
+        String previous=job.vehicle;
+        if(job.next>=2){
+            HostState.Delivery released=queue(job,"VEHICLE",610,text(job.request,"SOURCEPORT"),0,"source-reassign-release:"+state.data.sequence);
+            released.vehicle=previous;released.port=text(job.request,"SOURCEPORT");
+            job.vehicle=vehicle;
+            HostState.Delivery assigned=queue(job,"VEHICLE",604,text(job.request,"SOURCEPORT"),0,"source-reassign-assign:"+state.data.sequence);
+            assigned.port=text(job.request,"SOURCEPORT");
+        }
+        job.vehicle=vehicle;
+        state.save();
+    }
     /** Strip our durable observation fields before passing the six-field API contract. */
     private Map<String,Object> request(HostState.Job j){
         Map<String,Object> r=new LinkedHashMap<>();for(String k:Arrays.asList("COMMANDID","PRIORITY","REPLACE","CARRIERID","SOURCEPORT","DESTPORT"))r.put(k,j.request.get(k));return r;
@@ -301,6 +535,9 @@ public final class NativeHostEngine {
         synchronized(state){
             state.requireHealthy();
             for(HostState.Job j:state.data.jobs.values()){
+                settleDestination(j);
+                Object pendingPriority=j.request.get(PENDING_PRIORITY);
+                if(pendingPriority instanceof Integer)confirmPriority(j,(Integer)pendingPriority);
                 if(!"ACTIVE".equals(j.phase))continue;
                 // A failed task callback can accompany a deliberate FORCE
                 // interruption. It does not replace CANCEL_COMPLETED proof or
@@ -322,6 +559,7 @@ public final class NativeHostEngine {
                 // between fourteen reports hide real progress during control.
                 for(int ready=0;ready<CEIDS.length;ready++){
                     if(j.next>=CEIDS.length)break;
+                    if(j.next>=8 && unreportedRedirect(j)!=null)break;
                     // FROM=AMR already owns the cargo. No new source arrival,
                     // pickup or CarrierInstalled reports are fabricated.
                     if(!WorkPorts.vehicle((String)j.request.get("SOURCEPORT")).isEmpty() && Arrays.asList(2,4,5,6).contains(j.next)){
@@ -329,7 +567,10 @@ public final class NativeHostEngine {
                     }
                     Map<String,Object> status=j.next==0?TransferService.map("success",true):service.stageForHost(request(j),token,STAGES[j.next]);
                     if(!Boolean.TRUE.equals(status.get("success")))break;
-                    if(status.get("robotId")!=null && !status.get("robotId").toString().isEmpty())j.vehicle=status.get("robotId").toString();
+                    String vehicle=text(status,"robotId");
+                    if(j.next<=2 && !j.vehicle.isEmpty() && !j.vehicle.equals(vehicle)
+                        && !text(status,"sourceReassignedFrom").isEmpty())reassignSourceVehicle(j,vehicle);
+                    if(!vehicle.isEmpty())j.vehicle=vehicle;
                     int ceid=CEIDS[j.next];String source=(String)j.request.get("SOURCEPORT"),dest=(String)j.request.get("DESTPORT");
                     String port=j.next<8?source:dest;
                     String kind=ceid==301||ceid==302?"CARRIER":ceid>=600?"VEHICLE":"TRANSFER";
@@ -460,7 +701,9 @@ public final class NativeHostEngine {
         throw new IllegalStateException("Cargo not at a recognized port or confirmed vehicle");
     }
     private HostState.Delivery queue(HostState.Job j,String kind,int ceid,String location,int result,String suffix){
-        HostState.Delivery d=new HostState.Delivery();d.command=(String)j.request.get("COMMANDID");d.vehicle=j.vehicle;d.kind=kind;d.ceid=ceid;d.location=location;d.result=result;d.key=d.command+":"+suffix;state.add(d);return d;
+        HostState.Delivery d=new HostState.Delivery();d.command=(String)j.request.get("COMMANDID");d.vehicle=j.vehicle;d.kind=kind;d.ceid=ceid;d.location=location;d.result=result;d.key=d.command+":"+suffix;
+        if("TRANSFER".equals(kind))d.destination=text(j.request,"DESTPORT");
+        state.add(d);return d;
     }
     private void tsc(int ceid){HostState.Delivery d=new HostState.Delivery();d.key="tsc:"+state.data.sequence;d.kind="TSC";d.ceid=ceid;state.add(d);}
     // Test-profile ALID900002, never presented as an official SKI mapping.

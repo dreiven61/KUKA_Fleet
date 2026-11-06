@@ -43,8 +43,8 @@ public final class DynamicDispatchTest {
             }finally{Files.deleteIfExists(disk);}
         }
         TransferJournal mixed=VehicleLifecycleTest.newJournal(norm);
-        for(int i=0;i<trace.size();i++){Map<String,Object> e=new LinkedHashMap<>(trace.get(i));e.put("robotId",i==0?"2":"3");mixed.observe(e);}
-        check("STATUS_UNCERTAIN".equals(mixed.stage(norm,"completed").get("code")),"Vehicle changes require review, never combine callbacks");
+        for(int i=0;i<trace.size();i++){Map<String,Object> e=new LinkedHashMap<>(trace.get(i));e.put("robotId",i<=4?"2":"3");mixed.observe(e);}
+        check("STATUS_UNCERTAIN".equals(mixed.stage(norm,"completed").get("code")),"Vehicle changes after pickup require review, never combine loaded callbacks");
         System.out.println("PASS: "+checks+" automatic dispatch checks; robots 1/2/3, correlation, release and restart. No live calls.");
     }
 }

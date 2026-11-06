@@ -24,8 +24,10 @@ public sealed record TransferRequest(string CommandId, string CarrierId, string 
 public sealed record TransferReport(uint Ceid, string CommandId, string CarrierId, string SourcePort, string DestPort, string CarrierLocation, uint ResultCode);
 public sealed record VehicleReport(uint Ceid, string VehicleId, string CommandId, string TransferPort, string CarrierId)
 {
+    public bool IsInstallation => Ceid is 608 or 609;
     public string EventText => Ceid switch { 601 => "차량 도착", 604 => "차량 할당", 605 => "차량 출발", 610 => "차량 해제",
-        602 => "픽업 시작", 603 => "픽업 완료", 606 => "드롭 시작", 607 => "드롭 완료", _ => "차량 이벤트" };
+        602 => "픽업 시작", 603 => "픽업 완료", 606 => "드롭 시작", 607 => "드롭 완료",
+        608 => "차량 설치", 609 => "차량 제거", _ => "차량 이벤트" };
 }
 public sealed record CarrierReport(uint Ceid, string VehicleId, string CarrierId, string CarrierLocation, string CommandId)
 {
@@ -52,10 +54,23 @@ public static class Protocol
         if (!targeted && commandId is not null) throw new ArgumentException("PAUSE/RESUME은 운송 시스템 단위 명령입니다.");
         return new(2, 41, true) { Name = command, SecsItem = L(A(command), targeted ? L(L(A("COMMANDID"), A(commandId!))) : L()) };
     }
+    public static SecsMessage PriorityUpdate(string commandId, ushort priority) => Update(commandId, priority);
+    public static SecsMessage Update(string commandId, ushort priority, string destination = "")
+    {
+        if (!System.Text.RegularExpressions.Regex.IsMatch(commandId, @"\A[A-Za-z0-9_-]{1,32}\z")) throw new ArgumentException("유효한 COMMANDID가 필요합니다.");
+        if (priority is < 1 or > 99) throw new ArgumentException("우선순위는 1~99입니다.");
+        if (destination.Length != 0) CargoRequest.Identifier(destination, "DESTPORT");
+        return new(2, 41, true)
+        {
+            Name = "UPDATE",
+            SecsItem = L(A("UPDATE"), L(L(A("COMMANDID"), A(commandId)), L(A("PRIORITY"), U2(priority)), L(A("DESTPORT"), A(destination))))
+        };
+    }
     public static string EventText(uint ceid) => ceid switch
     {
         201 => "강제중단 완료", 202 => "강제중단 실패", 203 => "강제중단 시작", 204 => "취소 완료", 205 => "취소 실패", 206 => "취소 시작",
         207 => "운송 완료", 208 => "작업 시작", 209 => "운송 일시중지", 210 => "운송 재개", 211 => "운송 진행",
+        212 => "명령 업데이트 완료", 213 => "명령 업데이트 실패",
         103 => "시스템 재개 완료", 105 => "시스템 일시중지 완료", 107 => "시스템 일시중지 시작", _ => "이벤트"
     };
     public static UnitAlarmReport? ParseUnitAlarm(SecsMessage message)
@@ -111,6 +126,14 @@ public static class Protocol
         {
             if (report.Format != SecsFormat.List || report.Count != 2 || Number(report[0]) != 5) continue;
             Item v = report[1];
+            if (ceid is 608 or 609)
+            {
+                if (v.Format != SecsFormat.List || v.Count != 4 || v[0].Format != SecsFormat.ASCII || v[0].Count == 0
+                    || v[1].Format != SecsFormat.ASCII || v[2].Format != SecsFormat.List || v[3].Format != SecsFormat.List
+                    || v[2].Items.Any(i => i.Format != SecsFormat.ASCII) || v[3].Items.Any(i => i.Format != SecsFormat.ASCII))
+                    throw new FormatException("CEID 608/609는 차량 ID, 명령 ID, 포트 목록, 화물 목록이 필요합니다.");
+                return new(ceid, v[0].GetString(), v[1].GetString(), "", "");
+            }
             if (ceid is not (601 or 602 or 603 or 604 or 605 or 606 or 607 or 610) || v.Format != SecsFormat.List || v.Count != 4
                 || v[2].Format != SecsFormat.List || v[2].Count != 1 || v[3].Format != SecsFormat.List || v[3].Count != 1)
                 throw new FormatException("RPTID 5는 CEID 601~607/610의 차량·명령·포트·화물 목록이어야 합니다.");

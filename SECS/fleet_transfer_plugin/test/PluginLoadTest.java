@@ -57,6 +57,10 @@ public final class PluginLoadTest {
             if(manager.getPlugin(id).getDescriptor().getDependencies().stream().noneMatch(d->"STANDARD-API".equals(d.getPluginId())))
                 throw new AssertionError("Missing STANDARD-API dependency");
             ClassLoader pluginLoader=manager.getPluginClassLoader(id);
+            java.lang.reflect.Field advertisedVersion=pluginLoader.loadClass("servostar.fleet.transfer.NativeHostService").getDeclaredField("VERSION");
+            advertisedVersion.setAccessible(true);
+            if(!manager.getPlugin(id).getDescriptor().getVersion().equals(advertisedVersion.get(null)))
+                throw new AssertionError("SECS/status version differs from packaged Plugin-Version");
             if(pluginLoader.loadClass("io.grpc.Channel").getClassLoader()!=pluginLoader)
                 throw new AssertionError("gRPC runtime missing from the isolated custom plugin");
             Class<?> builderType=pluginLoader.loadClass("io.grpc.ManagedChannelBuilder");

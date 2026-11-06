@@ -26,6 +26,8 @@ public sealed partial class McsClient : IAsyncDisposable
     private Task? _receiver;
     private readonly SemaphoreSlim _lifecycle = new(1, 1);
     private readonly SemaphoreSlim _transfer = new(1, 1);
+    private readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _pendingUpdates = new(StringComparer.Ordinal);
+    private readonly System.Collections.Concurrent.ConcurrentDictionary<string, uint> _lastUpdateReport = new(StringComparer.Ordinal);
     public JobStore Jobs { get; }
     public CargoStore? Cargo { get; }
     public event Action<CargoSnapshot>? InventoryReceived;
@@ -169,6 +171,35 @@ public sealed partial class McsClient : IAsyncDisposable
         }
         finally { _transfer.Release(); }
     }
+    public event Action<TransferReport>? UpdateReported;
+    public event Action<CommandRejection>? CommandRejected;
+    public bool IsUpdatePending(string commandId) => _pendingUpdates.ContainsKey(commandId);
+
+    public Task<CommandAcknowledgement> SendPriorityUpdateAsync(string commandId, ushort priority) => SendUpdateAsync(commandId, priority);
+    public Task<CommandAcknowledgement> SendDestinationUpdateAsync(string commandId, ushort currentPriority, string destination)
+    {
+        CargoRequest.Identifier(destination, "DESTPORT");
+        return SendUpdateAsync(commandId, currentPriority, destination);
+    }
+
+    private async Task<CommandAcknowledgement> SendUpdateAsync(string commandId, ushort priority, string destination = "")
+    {
+        if (!await _transfer.WaitAsync(0).ConfigureAwait(false)) throw new InvalidOperationException("다른 명령을 전송 중입니다.");
+        try
+        {
+            var (gem, token) = Session(true);
+            using var message = Protocol.Update(commandId, priority, destination);
+            if (!_pendingUpdates.TryAdd(commandId, destination))
+                throw new InvalidOperationException("기존 UPDATE의 결과를 기다리는 중입니다.");
+            using var reply = await gem.SendAsync(message, token).ConfigureAwait(false);
+            var ack = CommandAcknowledgement.Parse(reply, 42);
+            // A lost or ambiguous response leaves the original attempt pending.
+            if (ack.Code is 1 or 2 or 3 or 6) _pendingUpdates.TryRemove(commandId, out _);
+            return ack;
+        }
+        finally { _transfer.Release(); }
+    }
+
     private async Task ReceiveAsync(SecsGem gem, CancellationToken token)
     {
         try
@@ -179,20 +210,42 @@ public sealed partial class McsClient : IAsyncDisposable
                 try
                 {
                     SecsMessage? reply;
+                    TransferReport? updateResult = null;
+                    string? freshUpdateCommand = null;
+                    uint updateDataId = 0;
                     if (message.S == 6 && message.F == 11)
                     {
                         try
                         {
                             TransferReport? report = Protocol.ParseReport(message);
-                            if (report is not null)
+                            if (report is { Ceid: 212 or 213 })
+                            {
+                                updateDataId = Protocol.Number(message.SecsItem![0]);
+                                bool fresh = updateDataId == 0 || !_lastUpdateReport.TryGetValue(report.CommandId, out uint lastId)
+                                    || updateDataId > lastId;
+                                bool matches = report.Ceid != 212 || !_pendingUpdates.TryGetValue(report.CommandId, out var destination)
+                                    || destination.Length == 0 || destination == report.DestPort;
+                                if (fresh) freshUpdateCommand = report.CommandId;
+                                if (fresh && matches)
+                                {
+                                    if (report is { Ceid: 212, ResultCode: 0 }) Jobs.ReportUpdatedDestination(report);
+                                    updateResult = report;
+                                }
+                                Log("EVENT", $"{Protocol.EventText(report.Ceid)} · CEID={report.Ceid} · COMMANDID={report.CommandId} · DESTPORT={report.DestPort}");
+                            }
+                            else if (report is not null)
                             {
                                 bool matched = Jobs.Report(report);
                                 Log("EVENT", $"CEID={report.Ceid}, COMMANDID={report.CommandId}, Result={report.ResultCode}, Location={report.CarrierLocation}" + (matched ? "" : " (로컬 작업과 불일치/미등록)"));
                             }
                             else if (Protocol.ParseVehicleReport(message) is { } vehicle)
                             {
-                                bool matched = Jobs.ReportVehicle(vehicle);
-                                Log("EVENT", $"{vehicle.EventText}, CEID={vehicle.Ceid}, COMMANDID={vehicle.CommandId}, AMR={vehicle.VehicleId}, Port={vehicle.TransferPort}" + (matched ? "" : " (로컬 작업과 불일치/미등록)"));
+                                if (vehicle.IsInstallation) Log("EVENT", $"{vehicle.EventText}, CEID={vehicle.Ceid}, AMR={vehicle.VehicleId}");
+                                else
+                                {
+                                    bool matched = Jobs.ReportVehicle(vehicle);
+                                    Log("EVENT", $"{vehicle.EventText}, CEID={vehicle.Ceid}, COMMANDID={vehicle.CommandId}, AMR={vehicle.VehicleId}, Port={vehicle.TransferPort}" + (matched ? "" : " (로컬 작업과 불일치/미등록)"));
+                                }
                             }
                             else if (Protocol.ParseCarrierReport(message) is { } carrier)
                             {
@@ -208,6 +261,7 @@ public sealed partial class McsClient : IAsyncDisposable
                             {
                                 Jobs.Rejection(rejection);
                                 Log("REJECT", rejection.Summary);
+                                CommandRejected?.Invoke(rejection);
                             }
                             else if (CargoProtocol.Result(message) is { } result)
                             {
@@ -244,6 +298,12 @@ public sealed partial class McsClient : IAsyncDisposable
                     else if (message.S == 1 && message.F == 1) reply = new(1, 2, false) { SecsItem = L() };
                     else reply = null;
                     using (reply) if (message.ReplyExpected) await incoming.TryReplyAsync(reply, token).ConfigureAwait(false);
+                    if (freshUpdateCommand is not null && updateDataId != 0) _lastUpdateReport[freshUpdateCommand] = updateDataId;
+                    if (updateResult is not null)
+                    {
+                        _pendingUpdates.TryRemove(updateResult.CommandId, out _);
+                        UpdateReported?.Invoke(updateResult);
+                    }
                 }
                 catch (Exception ex) { Log("ERROR", "수신 처리/ACK 실패: " + ex.Message); }
             }
@@ -316,12 +376,13 @@ public sealed partial class McsClient : IAsyncDisposable
                     {
                         command = report.CommandId; ceid = report.Ceid;
                         string phase = ceid switch { 208 => "작업 시작 보고", 211 => "운송 진행 보고", 207 when report.ResultCode == 0 => "정상 완료 보고", 207 => "비정상 종료 보고", _ => Protocol.EventText(ceid.Value) + " 보고" };
-                        summary = $"{phase} · Result {report.ResultCode} · {report.CarrierLocation}";
+                        summary = report.Ceid is 212 or 213 ? phase : $"{phase} · Result {report.ResultCode} · {report.CarrierLocation}";
                     }
                     else if (Protocol.ParseVehicleReport(message) is { } vehicle)
                     {
                         command = vehicle.CommandId; ceid = vehicle.Ceid;
-                        summary = $"{vehicle.EventText} 보고 · AMR {vehicle.VehicleId} · {vehicle.TransferPort}";
+                        summary = $"{vehicle.EventText} 보고 · AMR {vehicle.VehicleId}";
+                        if (!vehicle.IsInstallation) summary += " · " + vehicle.TransferPort;
                     }
                     else if (Protocol.ParseCarrierReport(message) is { } carrier)
                     {
@@ -336,7 +397,17 @@ public sealed partial class McsClient : IAsyncDisposable
                     else if (Protocol.ParseUnitAlarm(message) is { } alarm) { ceid = alarm.Ceid; summary = $"알람 {(alarm.Ceid == 702 ? "발생" : "해제")} · AMR {alarm.UnitId} · ALID {alarm.AlarmId}"; }
                     else { ceid = Protocol.Number(message.SecsItem![1]); summary = Protocol.EventText(ceid.Value) + " 보고"; }
                 }
-                else if (message.S == 2 && message.F == 41) {summary = message.SecsItem![0].GetString() + " 요청"; foreach (var pair in message.SecsItem[1].Items) if (pair[0].GetString() is "COMMANDID" or "REQUESTID") command = pair[1].GetString();}
+                else if (message.S == 2 && message.F == 41)
+                {
+                    string remoteCommand = message.SecsItem![0].GetString();
+                    var fields = message.SecsItem[1].Items.ToDictionary(pair => pair[0].GetString(), pair => pair[1]);
+                    summary = remoteCommand + " 요청";
+                    if (fields.TryGetValue("COMMANDID", out var commandId)) command = commandId.GetString();
+                    else if (fields.TryGetValue("REQUESTID", out var requestId)) command = requestId.GetString();
+                    if (remoteCommand == "UPDATE" && fields.TryGetValue("DESTPORT", out var destination))
+                        summary = destination.GetString().Length == 0 ? "우선순위 UPDATE 요청"
+                            : $"목적지 UPDATE 요청 · DESTPORT={destination.GetString()}";
+                }
                 else if (message.S == 2 && message.F == 42) summary = "제어 응답 · " + CommandAcknowledgement.Parse(message, 42).Summary;
                 else if (message.S == 6 && message.F == 12) summary = $"이벤트 ACK · ACKC6 {Protocol.Number(message.SecsItem!)}";
                 else if (message.S == 5 && message.F == 1) summary = "알람 보고";

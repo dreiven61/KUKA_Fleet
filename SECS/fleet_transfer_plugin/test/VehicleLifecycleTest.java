@@ -38,7 +38,7 @@ public final class VehicleLifecycleTest {
             TransferJournal invalid=newJournal(norm);
             for(int i=0;i<trace.size();i++) {
                 Map<String,Object> e=new LinkedHashMap<>(trace.get(i));
-                if(bad.equals("robot") && i>0)e.put("robotId","2");
+                if(bad.equals("robot") && i>1)e.put("robotId","2");
                 if(bad.equals("cargo"))e.put("carrierId","OTHER");
                 if(bad.equals("failure"))e.put("success",false);
                 if(bad.equals("nextNode") && "MOVE_BEGIN".equals(e.get("status")))e.put("nextNode","lay01-dist1-999");

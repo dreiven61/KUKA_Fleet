@@ -20,11 +20,41 @@ public final class TransferJournal {
         final Map<String,Object> request;
         boolean accepted, uncertain, pickup, pickupCompleted, dropStarted, drop, completed, canceled;
         boolean assigned, sourceArrived, sourceDeparted, destArrived;
+        boolean redirected;
         boolean carriedReady, carryLiftActive;
         String robotId="", instance="", pickupTime="", completeTime="", lastStatus="";
         String sourceNode="", sourceVehicle="", destNode="";
+        String sourceReassignedFrom="";
+        Redirect redirect;
         final Set<String> responses = new HashSet<>();
         Entry(Map<String,Object> request) { this.request = new LinkedHashMap<>(request); }
+    }
+    static final class Redirect {
+        final String id, port, node, outcome;
+        Redirect(String id,String port,String node,String outcome){
+            this.id=id;this.port=port;this.node=node;this.outcome=outcome;
+        }
+    }
+
+    synchronized Redirect redirect(String commandId){
+        if(!restoreIfReady() || !storageHealthy)return null;
+        Entry e=entries.get(commandId);
+        return e==null?null:e.redirect;
+    }
+
+    synchronized boolean beginRedirect(String commandId,String instance,String vehicle,Redirect intent)throws IOException{
+        if(!available())return false;
+        Entry e=entries.get(commandId);
+        if(e==null || !e.accepted || e.uncertain || e.canceled || e.completed
+            || !loaded(e) || !e.sourceDeparted || e.destArrived || e.dropStarted
+            || !e.instance.equals(instance) || !e.robotId.equals(vehicle)
+            || e.redirect!=null && e.redirect.outcome.isEmpty())return false;
+        record(TransferService.map("kind","REDIRECT","commandId",commandId,"id",intent.id,"port",intent.port,"node",intent.node));
+        return true;
+    }
+
+    synchronized void rejectRedirect(String commandId,String id)throws IOException{
+        record(TransferService.map("kind","REDIRECT_REJECTED","commandId",commandId,"id",id));
     }
     public TransferJournal(Path file) throws IOException {
         this.file=file;
@@ -79,7 +109,9 @@ public final class TransferJournal {
         if(!restoreIfReady())return result(false,"CATALOG_NOT_READY",null);
         Entry e=entries.get(request.get("COMMANDID"));
         if(e==null) return result(false,"UNKNOWN_COMMAND",null);
-        if(!e.request.equals(request)) return result(false,"COMMAND_CONTEXT_MISMATCH",null);
+        // Priority changes do not change the correlated carrier or route.
+        for(String field:Arrays.asList("COMMANDID","CARRIERID","SOURCEPORT","DESTPORT","REPLACE"))
+            if(!Objects.equals(e.request.get(field),request.get(field)))return result(false,"COMMAND_CONTEXT_MISMATCH",null);
         if(!storageHealthy || e.uncertain) return result(false,"STATUS_UNCERTAIN",e);
         if(e.canceled) return result(false,"CANCELED",e);
         boolean observed;
@@ -110,7 +142,8 @@ public final class TransferJournal {
             "robotId",e==null?"":e.robotId,
             // ECS serializes mapped string fields with JSON quotes; expose a numeric ID too.
             "vehicleId",legacyVehicleId(e==null?"":e.robotId),
-            "lastStatus",e==null?"":e.lastStatus);
+            "lastStatus",e==null?"":e.lastStatus,"redirected",e!=null && e.redirected,
+            "sourceReassignedFrom",e==null?"":e.sourceReassignedFrom);
     }
     private static Object legacyVehicleId(String id){
         if(id.isEmpty())return 0;
@@ -134,7 +167,11 @@ public final class TransferJournal {
     }
     private static void validateRecord(Map<String,Object> record)throws IOException{
         Object kind=record.get("kind");
-        if(!Arrays.asList("RESERVE","ACCEPTED","GAP","EVENT").contains(kind))throw new IOException("Unknown journal record");
+        if(!Arrays.asList("RESERVE","ACCEPTED","GAP","EVENT","REDIRECT","REDIRECT_REJECTED").contains(kind))throw new IOException("Unknown journal record");
+        if("REDIRECT".equals(kind) || "REDIRECT_REJECTED".equals(kind)){
+            for(String key:("REDIRECT".equals(kind)?Arrays.asList("commandId","id","port","node"):Arrays.asList("commandId","id")))
+                if(text(record,key).isEmpty())throw new IOException("Invalid redirect record");
+        }
         if("RESERVE".equals(kind)){
             if(!(record.get("request") instanceof Map))throw new IOException("Invalid journal reservation");
             Map<?,?> req=(Map<?,?>)record.get("request");
@@ -174,6 +211,13 @@ public final class TransferJournal {
         }
         if("GAP".equals(kind)) { for(Entry e:entries.values()) if(!e.completed) e.uncertain=true; return; }
         if("ACCEPTED".equals(kind)) { Entry e=entries.get(record.get("commandId")); if(e!=null)e.accepted=true; return; }
+        if("REDIRECT".equals(kind) || "REDIRECT_REJECTED".equals(kind)){
+            Entry e=entries.get(record.get("commandId"));
+            if(e==null)throw new IllegalArgumentException("Redirect without reservation");
+            if("REDIRECT".equals(kind))e.redirect=new Redirect(text(record,"id"),text(record,"port"),text(record,"node"),"");
+            else if(e.redirect!=null && e.redirect.id.equals(record.get("id")))settleRedirect(e,false);
+            return;
+        }
         if(!"EVENT".equals(kind)) throw new IllegalArgumentException("Unknown journal record");
         Map<String,Object> v=(Map<String,Object>)record.get("event");
         Entry e=entries.get(v.get("commandId")); if(e==null)return;
@@ -189,16 +233,38 @@ public final class TransferJournal {
         if(!e.instance.equals(instance)) {e.uncertain=true;return;}
         String status=text(v,"status"); e.lastStatus=status;
         if(e.completed || e.canceled) return;
+        if("TASK_COMPLETED".equals(status) && Boolean.FALSE.equals(v.get("success"))
+            && vehicle.equals(e.robotId) && ((Number)v.get("manualCompleteFlag")).intValue()==0)
+            settleRedirect(e,false);
         if(!Boolean.TRUE.equals(v.get("success")) || !"0".equals(text(v,"resultCode"))) return;
         if(((Number)v.get("manualCompleteFlag")).intValue()!=0) {e.uncertain=true;return;}
-        if("CANCEL_COMPLETED".equals(status)) {e.canceled=true;return;}
         if(e.robotId.isEmpty()) e.robotId=vehicle;
-        else if(!e.robotId.equals(vehicle)) {e.uncertain=true;return;}
+        else if(!e.robotId.equals(vehicle)) {
+            // Fleet can replace its tentative MOVE_BEGIN vehicle before source
+            // arrival. A successful arrival for this exact workflow binds the
+            // actual pickup owner. Loaded ownership remains fixed.
+            if(!e.uncertain && e.assigned && !e.sourceArrived && !e.pickup && !carriedSource(e)
+                && sourceArrival(e.request,e.instance,v)){
+                e.sourceReassignedFrom=e.robotId;
+                e.robotId=vehicle;
+            }else {e.uncertain=true;return;}
+        }
         if(!e.sourceVehicle.isEmpty() && !e.sourceVehicle.equals(vehicle)){e.uncertain=true;return;}
+        if("CANCEL_COMPLETED".equals(status)) {settleRedirect(e,false);e.canceled=true;return;}
         String source=e.sourceNode.isEmpty()?node((String)e.request.get("SOURCEPORT")):e.sourceNode;
         String dest=e.destNode.isEmpty()?node((String)e.request.get("DESTPORT")):e.destNode;
         int sequence=((Number)v.get("sequence")).intValue();
         String current=text(v,"currentNode"), action=text(v,"actionType");
+        if(e.redirect!=null && e.redirect.outcome.isEmpty() && sequence>=2){
+            if(("MOVE_BEGIN".equals(status) && e.redirect.node.equals(text(v,"nextNode")))
+                || ("MOVE_END".equals(status) && e.redirect.node.equals(current))){
+                settleRedirect(e,true);
+                dest=e.destNode;
+            }else if(("ACTION_BEGIN".equals(status) || "ACTION_END".equals(status))
+                && "DOWN_CONTAINER".equals(action) && dest.equals(current)){
+                settleRedirect(e,false);
+            }
+        }
         // No vehicle is pinned in submitMission. A
         // successful, correlated WCS move toward the source carries the actual robot.
         if("MOVE_BEGIN".equals(status) && sequence==1 && source.equals(text(v,"nextNode"))) e.assigned=true;
@@ -208,7 +274,8 @@ public final class TransferJournal {
         if("MOVE_BEGIN".equals(status) && sequence==2 && source.equals(current) && dest.equals(text(v,"nextNode"))) {
             if(e.assigned && e.sourceArrived && loaded(e)) e.sourceDeparted=true; else e.uncertain=true;
         }
-        if("MOVE_END".equals(status) && sequence==2 && dest.equals(current)) {
+        boolean deliveryNode=(sequence==2 || e.redirected && sequence>2) && dest.equals(current);
+        if("MOVE_END".equals(status) && deliveryNode) {
             if(e.sourceDeparted) e.destArrived=true; else e.uncertain=true;
         }
         if("ACTION_BEGIN".equals(status) && "UP_CONTAINER".equals(action) && sequence==1 && source.equals(current)) {
@@ -225,18 +292,40 @@ public final class TransferJournal {
             else if(e.pickup) e.pickupCompleted=true;
             else e.uncertain=true;
         }
-        if("ACTION_BEGIN".equals(status) && "DOWN_CONTAINER".equals(action) && sequence==2 && dest.equals(current)) {
+        if("ACTION_BEGIN".equals(status) && "DOWN_CONTAINER".equals(action) && deliveryNode) {
             if(loaded(e)) e.dropStarted=true;
             else e.uncertain=true;
         }
-        if("ACTION_END".equals(status) && "DOWN_CONTAINER".equals(action) && sequence==2 && dest.equals(current)) e.drop=true;
-        if("TASK_COMPLETED".equals(status) && sequence==2 && dest.equals(current)
+        if("ACTION_END".equals(status) && "DOWN_CONTAINER".equals(action) && deliveryNode) e.drop=true;
+        if("TASK_COMPLETED".equals(status) && deliveryNode
                 && dest.equals(text(v,"carrierLocation")) && !text(v,"endTime").isEmpty()) {
             // Normal work requires observed pickup; a carried source requires
             // its preflight identity and observed loaded-context confirmation.
             if((carriedSource(e)?e.carriedReady:e.pickup) && e.drop) {e.completed=true;e.completeTime=text(v,"endTime");}
             else e.uncertain=true;
         }
+    }
+    static boolean sourceArrival(Map<String,Object> request,String instance,Map<String,Object> event){
+        Object sequence=event.get("sequence");
+        String source=text(request,"SOURCEPORT");
+        return WorkPorts.contains(source) && request.get("COMMANDID").equals(event.get("commandId"))
+            && request.get("CARRIERID").equals(event.get("carrierId")) && instance.equals(event.get("instanceId"))
+            && "MOVE_END".equals(event.get("status")) && sequence instanceof Number && ((Number)sequence).intValue()==1
+            && Boolean.TRUE.equals(event.get("success")) && "0".equals(text(event,"resultCode"))
+            && "0".equals(text(event,"manualCompleteFlag")) && !text(event,"endTime").isEmpty()
+            && WorkPorts.node(source).equals(event.get("currentNode"))
+            && WorkPorts.node(source).equals(event.get("carrierLocation"));
+    }
+    private static void settleRedirect(Entry e,boolean applied){
+        Redirect r=e.redirect;
+        if(r==null || !r.outcome.isEmpty())return;
+        if(applied){
+            e.request.put("DESTPORT",r.port);
+            e.destNode=r.node;
+            e.destArrived=false;
+            e.redirected=true;
+        }
+        e.redirect=new Redirect(r.id,r.port,r.node,applied?"APPLIED":"FAILED");
     }
     static String node(String port) { return WorkPorts.node(port); }
     private static String text(Map<String,Object> m,String key) { Object v=m.get(key);return v==null?"":v.toString(); }

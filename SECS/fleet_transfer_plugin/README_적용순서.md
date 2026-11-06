@@ -1,6 +1,28 @@
-# 로컬 빌드: 플러그인1.5.2 / Virtual MCS2.4.0 — 기존5556 유지
+# 로컬 빌드 · 플러그인 1.5.8 / Virtual MCS 2.4.6
 
-현재 Import 대상은 `build/servostar-mes-transfer-1.5.2.jar`다. 1.5.0 기능·전체 런타임과 PortID/VehicleID 통일 수정을 포함한다. 최종 1.5.1은 설명문 변경 후 수동 재패키징에서 라이브러리가 빠져 125KB가 된 오류가 있어 `.jar.invalid`로 분리했다. [패키징 원인·수정·검증 방법](../native_host/PACKAGE_REPAIR_1.5.2_20261103.md). MCS는 2.4.0을 그대로 사용한다. Import는 사용자가 직접 진행하며 저널과 설정은 유지한다.
+현재 Import 파일은 `build/servostar-mes-transfer-1.5.8.jar`다. Fleet 작업 상태가 10 또는 20이고 차량이 미배정이면 SECS 우선순위 UPDATE를 허용한다. 신규 SECS 운송과 UPDATE는 같은 우선순위 변환을 적용한다. SECS의 99는 Fleet의 1로 전달된다.
+
+1.5.7은 WCS의 픽업 전 임시 배차 변경을 반영한다. 같은 COMMANDID·화물·workflow의 정상 출발지 도착 사실이 확인된 경우에 한해 차량을 다시 연결하고, 기존 차량 해제와 실제 차량 할당을 보고한다. 적재 이후 차량 변경은 허용하지 않는다. 저장된 전체 WCS 기록으로 완료를 재구성할 수 있는 기존 작업도 같은 방식으로 추적한다.
+
+## 1.5.6 배포 이력
+
+1.5.6은 상태 API와 S1F14/S1F2의 버전 표기를 실제 패키지 버전과 일치시키고, UPDATE 거부 사유를 CEID 9003으로 보고한다. 1.5.5 패키지는 상태 응답 문자열이 1.5.4로 남아 있었으므로 그 응답만으로 적용 여부를 판정할 수 없다.
+
+## 1.5.5 배포 이력
+
+1.5.5는 적재 후 하역 포트로 주행 중인 SECS 이송의 `S2F41 UPDATE / DESTPORT`를 처리한다. Fleet이 같은 작업과 차량의 새 목적지 주행을 보고하면 `CEID 212`를 보낸다. 목적지 변경 요청에는 해당 작업의 현재 우선순위를 넣는다. [Virtual MCS 시험 순서](../../VirtualMCS/README.md)
+
+## 1.5.4 배포 이력
+
+1.5.4는 Fleet 차량의 지도 삽입과 제거를 감지해 `S6F11 / CEID 608·609 / RPTID 5`로 보고한다. Virtual MCS 2.4.1에서 수신과 ACK를 지원한다. [적용 순서와 확인 방법](../native_host/VEHICLE_INSTALLATION_1.5.4.md)
+
+## 1.5.3 배포 이력
+
+1.5.3은 OFFLINE/ONLINE 전환, S5F5/S5F6 알람 목록, 배차 대기 작업의 UPDATE 우선순위 변경, Modbus TCP 포트 BUZZER를 추가한다. 서버 반영과 현장 설비 검증은 별도다. [1.5.3 적용과 시험 범위](../native_host/HOST_COMMANDS_1.5.3.md)
+
+## 1.5.2 배포 이력
+
+이전 배포본 `build/servostar-mes-transfer-1.5.2.jar`는 1.5.0 기능·전체 런타임과 PortID/VehicleID 통일 수정을 포함한다. 최종 1.5.1은 설명문 변경 후 수동 재패키징에서 라이브러리가 빠져 125KB가 된 오류가 있어 `.jar.invalid`로 분리했다. [패키징 원인·수정·검증 방법](../native_host/PACKAGE_REPAIR_1.5.2_20261103.md). MCS는 2.4.0을 사용한다. Import는 사용자가 직접 진행하며 저널과 설정은 유지한다.
 
 아래 내용은 이전 버전 기록이다.
 

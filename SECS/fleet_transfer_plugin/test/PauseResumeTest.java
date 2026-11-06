@@ -166,7 +166,7 @@ public final class PauseResumeTest {
         ConcurrentMap<Integer,AtomicInteger> counts=new ConcurrentHashMap<>();
         try {
             server.start();peer=NativeHostTest.peer(port,counts,ConcurrentHashMap.newKeySet(),new AtomicBoolean(false),new AtomicBoolean(false));
-            check(peer.send(1,13,true,list()).get().secs2().get(1).get(1).getAscii().equals("1.5.2"),"Wire reports new version");
+            check(peer.send(1,13,true,list()).get().secs2().get(1).get(1).getAscii().equals(NativeHostService.VERSION),"Wire reports new version");
             check(NativeHostTest.ack(peer.send(2,49,true,NativeHostTest.transferBody("TR_TEST_001")).get().secs2())==4,"Wire transfer accepted");
             java.lang.reflect.Field f=NativeHostService.class.getDeclaredField("engine");f.setAccessible(true);
             NativeHostEngine live=(NativeHostEngine)f.get(server);h.journal.observe(h.trace.get(0));live.observe(h.trace.get(0));

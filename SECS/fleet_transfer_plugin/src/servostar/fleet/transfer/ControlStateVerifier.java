@@ -57,6 +57,14 @@ final class ControlStateVerifier {
             && rcs.contains("-"+expected.instance+"-")?expected.vehicle:"";
     }
 
+    static boolean loadedTravel(HostState.Job job,String oldPort,Map<?,?> row,Map<String,Object> robots){
+        Map<?,?> robot=single(robots);
+        return robot!=null && job.vehicle.equals(text(row,"robotId")) && "20".equals(text(row,"status"))
+            && "0".equals(text(row,"warnFlag")) && job.vehicle.equals(carriedLocation(job,robots))
+            && text(robot,"rcsMissionCode").startsWith("W-") && "9".equals(text(robot,"rcsMissionStatus"))
+            && !text(robot,"nodeCode").isEmpty() && !WorkPorts.sameNode(oldPort,text(robot,"nodeCode"));
+    }
+
     static boolean handlingStep(HostState.Job expected,Map<String,Object> robots) {
         Map<?,?> robot=single(robots);
         if(robot==null || !expected.vehicle.equals(text(robot,"robotId")))

@@ -15,7 +15,7 @@ public final class TransferService {
         default Map<String,Object> facilitySnapshot(String authorization)throws Exception{return null;}
     }
     private final FleetClient client;
-    private final TransferJournal journal;
+    final TransferJournal journal;
     private final Set<String> submitted = Collections.newSetFromMap(new ConcurrentHashMap<String,Boolean>());
     public TransferService(FleetClient client) { this(client,null); }
     public TransferService(FleetClient client, TransferJournal journal) { this.client=client; this.journal=journal; }
@@ -33,12 +33,21 @@ public final class TransferService {
     }
 
     public Map<String,Object> submit(Map<String,Object> request, String token) throws Exception {
+        return submit(request,token,false);
+    }
+
+    Map<String,Object> submitFromHost(Map<String,Object> request, String token) throws Exception {
+        return submit(request,token,true);
+    }
+
+    private Map<String,Object> submit(Map<String,Object> request,String token,boolean skiPriority)throws Exception{
         try{authenticate(token);}catch(SecurityException ex){throw ex;}catch(Exception ex){throw new PreSubmissionException(ex);}
         try{WorkPorts.refresh(client,token);}catch(Exception ex){throw new PreSubmissionException(ex);}
-        return WorkPorts.withCurrent(()->submitScanned(request,token));
+        return WorkPorts.withCurrent(()->submitScanned(request,token,skiPriority));
     }
-    private Map<String,Object> submitScanned(Map<String,Object> request,String token)throws Exception{
+    private Map<String,Object> submitScanned(Map<String,Object> request,String token,boolean skiPriority)throws Exception{
         Map<String,Object> mission = buildMission(request);
+        if(skiPriority)mission.put("priority",HostProtocol.fleetPriority((int)mission.get("priority")));
         String commandId = (String) mission.get("missionCode");
         // Queries fail before any mission POST. Never invent a container from
         // an upstream expectation, or use a stale hardcoded model for new IDs.
@@ -108,7 +117,7 @@ public final class TransferService {
                 || !noActiveWork(token,state.get("robotId")))return map("success",false,"code","RETAINED_COMPLETION_NOT_CONFIRMED");
             state.put("completionEvidence","RETAINED_WCS_TERMINAL_AND_CURRENT_RELEASE");return state;
         }
-        if(!confirmedComplete(jobs,cargo,normalized,state.get("instanceId"),state.get("robotId")))
+        if(!confirmedComplete(jobs,cargo,normalized,state.get("instanceId"),state.get("robotId"),Boolean.TRUE.equals(state.get("redirected"))))
             return map("success",false,"code","FINAL_STATE_NOT_CONFIRMED");
         if("unassigned".equals(stage)) {
             Map<String,Object> robots=client.post("robotQuery",token,map("robotId",state.get("robotId")));
@@ -156,7 +165,7 @@ public final class TransferService {
     }
     @SuppressWarnings("unchecked")
     private static boolean confirmedComplete(Map<String,Object> jobs,Map<String,Object> cargo,
-            Map<String,Object> req,Object instance,Object vehicle) {
+            Map<String,Object> req,Object instance,Object vehicle,boolean redirected) {
         if(!NativeHostEngine.ok(jobs) || !NativeHostEngine.ok(cargo)) return false;
         Object list=jobs.get("data"), containers=cargo.get("data");
         if(!(list instanceof List) || !(containers instanceof List))return false;
@@ -169,7 +178,7 @@ public final class TransferService {
                 || !req.get("CARRIERID").equals(job.get("containerCode"))
                 || !String.valueOf(instance).equals(String.valueOf(job.get("workflowId")))
                 || job.get("completeTime")==null || job.get("completeTime").toString().trim().isEmpty()
-                || !destination.equals(job.get("finalNodeCode")) || !destination.equals(job.get("targetCellCode")))return false;
+                || !redirected && (!destination.equals(job.get("finalNodeCode")) || !destination.equals(job.get("targetCellCode"))))return false;
         return confirmedDelivered(cargo,req);
     }
     private static boolean confirmedDelivered(Map<String,Object> cargo,Map<String,Object> req){

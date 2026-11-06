@@ -15,12 +15,12 @@ New-Item -ItemType Directory -Force -Path $classes,$testClasses | Out-Null
 $sources = @(Get-ChildItem -LiteralPath (Join-Path $PSScriptRoot 'src') -Recurse -Filter '*.java' | ForEach-Object FullName)
 & "$JavaHome\bin\javac.exe" --release 8 -Xlint:-options -encoding UTF-8 -proc:none -cp "$SdkJar;$SecsJar" -d $classes @sources
 if ($LASTEXITCODE -ne 0) { throw 'Compile failed' }
-$jarPath = Join-Path $output 'servostar-mes-transfer-1.5.2.jar'
+$jarPath = Join-Path $output 'servostar-mes-transfer-1.5.8.jar'
 & "$JavaHome\bin\jar.exe" cfm $jarPath (Join-Path $PSScriptRoot 'MANIFEST.MF') -C $classes .
 if ($LASTEXITCODE -ne 0) { throw 'Packaging failed' }
 python (Join-Path $PSScriptRoot 'package_runtime.py') $SdkJar $jarPath $SecsJar
 if ($LASTEXITCODE -ne 0) { throw 'Runtime packaging failed' }
-$taskPackageAuditArgs = @($jarPath, '--version', '1.5.2')
+$taskPackageAuditArgs = @($jarPath, '--version', '1.5.8')
 $taskPackageBaseline = Join-Path $output 'servostar-mes-transfer-1.5.0.jar'
 if (Test-Path -LiteralPath $taskPackageBaseline) { $taskPackageAuditArgs += @('--baseline', $taskPackageBaseline) }
 python (Join-Path $PSScriptRoot 'verify_package.py') @taskPackageAuditArgs
@@ -29,23 +29,25 @@ $taskPackagedHash = (Get-FileHash -LiteralPath $jarPath -Algorithm SHA256).Hash
 $tests = @(Get-ChildItem -LiteralPath (Join-Path $PSScriptRoot 'test') -Filter '*.java' | ForEach-Object FullName)
 & "$JavaHome\bin\javac.exe" -encoding UTF-8 -proc:none -cp "$SdkJar;$SecsJar;$classes" -d $testClasses @tests
 if ($LASTEXITCODE -ne 0) { throw 'Test compile failed' }
-& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$classes;$testClasses" servostar.fleet.transfer.ColdStartCatalogTest $PSScriptRoot
+& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.ColdStartCatalogTest $PSScriptRoot
 if ($LASTEXITCODE -ne 0) { throw 'Cold-start journal/catalog ordering tests failed' }
-& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.DynamicCatalogTest
+& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.DynamicCatalogTest
 if ($LASTEXITCODE -ne 0) { throw 'Dynamic facility catalog tests failed' }
 & "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.VehicleNamesTest $PSScriptRoot
 if ($LASTEXITCODE -ne 0) { throw 'RobotID/VehicleID XML mapping tests failed' }
-& "$JavaHome\bin\java.exe" '-Dlog4j2.disable.jmx=true' -cp "$SdkJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.TransferTest $jarPath
+& "$JavaHome\bin\java.exe" '-Dlog4j2.disable.jmx=true' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.TransferTest $jarPath
 if ($LASTEXITCODE -ne 0) { throw 'Tests failed' }
-& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.ReportingTest $PSScriptRoot
+& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.ReportingTest $PSScriptRoot
 if ($LASTEXITCODE -ne 0) { throw 'Reporting tests failed' }
-& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.VehicleLifecycleTest $PSScriptRoot
+& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.VehicleLifecycleTest $PSScriptRoot
 if ($LASTEXITCODE -ne 0) { throw 'Vehicle lifecycle tests failed' }
-& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.DynamicDispatchTest $PSScriptRoot
+& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.SourceReassignmentTest $PSScriptRoot
+if ($LASTEXITCODE -ne 0) { throw 'Captured source-vehicle reassignment and destination update tests failed' }
+& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.DynamicDispatchTest $PSScriptRoot
 if ($LASTEXITCODE -ne 0) { throw 'Dynamic dispatch tests failed' }
-& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.WorkPortsTest $PSScriptRoot
+& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.WorkPortsTest $PSScriptRoot
 if ($LASTEXITCODE -ne 0) { throw 'Work port tests failed' }
-& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.StatusMonitorTest
+& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.StatusMonitorTest
 if ($LASTEXITCODE -ne 0) { throw 'Status monitor tests failed' }
 & "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.NativeHostTest $PSScriptRoot
 if ($LASTEXITCODE -ne 0) { throw 'Native HSMS/control tests failed' }
@@ -75,6 +77,10 @@ if ($LASTEXITCODE -ne 0) { throw 'Captured workflow warning and HSMS alarm trans
 if ($LASTEXITCODE -ne 0) { throw 'S1F3 status snapshot and pending-report duplicate guard tests failed' }
 & "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.CanonicalIdentityTest
 if ($LASTEXITCODE -ne 0) { throw 'Canonical wire identity tests failed' }
+& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.HostCommandsWireTest $PSScriptRoot
+if ($LASTEXITCODE -ne 0) { throw 'Host mode, alarm list, update and buzzer interoperability tests failed' }
+& "$JavaHome\bin\java.exe" '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' -cp "$SdkJar;$SecsJar;$classes;$testClasses" servostar.fleet.transfer.FixtureRunner servostar.fleet.transfer.VehicleInstallationWireTest
+if ($LASTEXITCODE -ne 0) { throw 'Vehicle installation/removal reporting tests failed' }
 & "$JavaHome\bin\java.exe" '-Dlog4j2.disable.jmx=true' '-Dlog4j2.loggerContextFactory=org.apache.logging.log4j.simple.SimpleLoggerContextFactory' '-Dservostar.transfer.offlineTest=true' -cp "$SdkJar;$testClasses" servostar.fleet.transfer.PluginLoadTest $jarPath $SdkJar
 if ($LASTEXITCODE -ne 0) { throw 'Plugin load test failed' }
 if ((Get-FileHash -LiteralPath $jarPath -Algorithm SHA256).Hash -cne $taskPackagedHash) { throw 'JAR changed after packaging; isolated validation is no longer valid' }

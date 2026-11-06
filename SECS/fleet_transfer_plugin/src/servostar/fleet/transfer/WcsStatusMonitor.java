@@ -1,5 +1,7 @@
 package servostar.fleet.transfer;
 
+import com.google.protobuf.BoolValue;
+import com.google.protobuf.UnknownFieldSet;
 import com.kuka.wcs.grpc.mission.*;
 import io.grpc.*;
 import io.grpc.stub.*;
@@ -7,12 +9,12 @@ import java.util.concurrent.*;
 import java.util.Map;
 import java.util.logging.Logger;
 
-/** Independent read-only broadcast subscription; no WCS ack, dispatch or robot action. */
+/** WCS status subscription and queue priority operation over the same transport. */
 public final class WcsStatusMonitor implements AutoCloseable {
     private final TransferJournal journal;
     private final String host;
     private final int port;
-    private ManagedChannel channel;
+    private volatile ManagedChannel channel;
     private final ScheduledExecutorService reconnect=Executors.newSingleThreadScheduledExecutor(r->{
         Thread t=new Thread(r,"servostar-status-reconnect");t.setDaemon(true);return t;
     });
@@ -27,8 +29,33 @@ public final class WcsStatusMonitor implements AutoCloseable {
     WcsStatusMonitor(TransferJournal journal,String host,int port) {this.journal=journal;this.host=host;this.port=port;}
     public synchronized void start() {
         if(Boolean.getBoolean("servostar.transfer.offlineTest")) return;
-        channel=ManagedChannelBuilder.forTarget("dns:///"+host+":"+port).usePlaintext().build();
+        channel=ManagedChannelBuilder.forTarget("dns:///"+host+":"+port).usePlaintext().disableRetry().build();
         enqueue(()->subscribe());
+    }
+    boolean updatePriority(String commandId,int fleetPriority) {
+        ManagedChannel current=channel;
+        if(closed || current==null)throw new IllegalStateException("WCS channel unavailable");
+        WcsMissionGrpcResponse result=WcsMissionServiceGrpc.newBlockingStub(current)
+            .withDeadlineAfter(2,TimeUnit.SECONDS)
+            .updatePriorityOfMission(WcsUpdatePriorityOfMissionRequest.newBuilder()
+                .setTaskCode(commandId).setPriority(fleetPriority).build());
+        return result.getSuccess() && (result.getResultCode().isEmpty() || "0".equals(result.getResultCode()));
+    }
+    boolean redirectDestination(String commandId,String node) {
+        ManagedChannel current=channel;
+        if(closed || current==null)throw new IllegalStateException("WCS channel unavailable");
+        NodeGto target=NodeGto.newBuilder().setSequence(2).setCode(node)
+            .setType(NodeTypeGto.NODE_POINT).setPassStrategy(PassStrategyGto.AUTO)
+            .addActionOnArrived(ActionGto.newBuilder().setSequence(1).setType(ActionTypeGto.DOWN_CONTAINER)).build();
+        // Field 3 is redirectForAllSituation in Fleet 2.15.1's WCS proto.
+        // STANDARD-API 2.15.5 predates this field. Send its BoolValue on the wire.
+        UnknownFieldSet options=UnknownFieldSet.newBuilder().addField(3,UnknownFieldSet.Field.newBuilder()
+            .addLengthDelimited(BoolValue.of(true).toByteString()).build()).build();
+        WcsMissionGrpcResponse result=WcsMissionServiceGrpc.newBlockingStub(current)
+            .withDeadlineAfter(2,TimeUnit.SECONDS)
+            .redirectMission(WcsRedirectMissionRequest.newBuilder().setTaskCode(commandId)
+                .addRedirectNode(target).mergeUnknownFields(options).build());
+        return result.getSuccess() && (result.getResultCode().isEmpty() || "0".equals(result.getResultCode()));
     }
     private synchronized void subscribe() {
         if(closed)return;

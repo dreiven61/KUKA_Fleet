@@ -34,6 +34,7 @@ public final class NativeHostTest {
         final TransferService.FleetClient client=this::post;
         final List<Map<String,Object>> trace;
         volatile int submits,controls;volatile boolean carried,negative,lost,controlNegative,controlLost;
+        volatile Object submittedPriority;
         volatile Integer rcsState;volatile boolean activeControlJob;
         volatile String cargoNode="SECS_ST_89",lastMode="";
         volatile String robotNode="lay01-dist1-97",missionCode="TR_TEST_001",rcsCode="W-TEST-6837-1";
@@ -46,7 +47,7 @@ public final class NativeHostTest {
             if(!TOKEN.equals(token))throw new SecurityException();
             if(path.equals("robotQuery"))return TransferService.map("success",true,"code","0","data",Arrays.asList(TransferService.map("robotId","1","status",3,"occupyStatus",0,"containerCode",carried?"SIM_CARGO_001":"","nodeCode",robotNode,
                 "missionCode",missionCode,"rcsMissionCode",rcsCode,"rcsMissionStatus",rcsState,"liftStatus",carried?1:0)));
-            if(path.equals("submitMission")){submits++;if(lost)throw new java.io.IOException("response lost");return TransferService.map("success",!negative,"code",negative?"FAIL":"0");}
+            if(path.equals("submitMission")){submits++;submittedPriority=body.get("priority");if(lost)throw new java.io.IOException("response lost");return TransferService.map("success",!negative,"code",negative?"FAIL":"0");}
             if(path.equals("containerQuery") || path.equals("containerQueryAll"))return TransferService.map("success",true,"code","0","data",Arrays.asList(TransferService.map("containerCode","SIM_CARGO_001","nodeCode",cargoNode,"isCarry",carried?1:0,"inMapStatus",1,"containerModelCode","SIM_TRAY_001")));
             if(path.equals("jobQuery"))return TransferService.map("success",true,"data",Arrays.asList(TransferService.map("jobCode","TR_TEST_001","workflowId",6837,"robotId","1","containerCode","SIM_CARGO_001","status",activeControlJob?20:30,"warnFlag",0,"completeTime","observed-time","finalNodeCode","lay01-dist1-97","targetCellCode","lay01-dist1-97")));
             if(Arrays.asList("missionCancel","pauseMission","recoverMission").contains(path)){controls++;lastMode=String.valueOf(body.get("cancelMode"));if(controlLost)throw new java.io.IOException("Control response lost");return TransferService.map("success",!controlNegative,"code",controlNegative?"FAIL":"0");}
@@ -70,6 +71,9 @@ public final class NativeHostTest {
         check(HostProtocol.transfer(transferBody("TR_TEST_001",true)).equals(request),"Legacy Virtual MCS REPLACE=0 remains compatible with same durable request identity");
         Harness normal=new Harness(root,null);
         check(ack(normal.engine.transfer(request))==4,"Actual API acceptance -> HCACK4");
+        check(Integer.valueOf(99).equals(normal.submittedPriority)
+            && "1".equals(normal.state.data.jobs.get("TR_TEST_001").request.get("PRIORITY")),
+            "Initial SECS priority is converted only at the Fleet boundary");
         check(ack(normal.engine.transfer(request))==5 && normal.submits==1,"Duplicate -> HCACK5, one submit");
         check(normal.count(207)==0,"No early completion");
         for(Map<String,Object> e:normal.trace)normal.observe(e);normal.cargoNode="SECS_ST_97";
